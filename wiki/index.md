@@ -6,7 +6,7 @@
 - 工具：[工具指南](../tools/README.md)。未初始化时运行 `python tools/test-suite.py --scope tools` 和 `python tools/test-suite.py --scope docs`。
 - XML：[模式](implementation/xml-patterns.md)、[Catalog 规则](implementation/xml-patterns/catalog-rules.md)。
 - Galaxy：[语法陷阱](implementation/galaxy-gotchas.md)、[语言参考](reference/galaxy-language.md)。
-- 本地化：[规则](implementation/localization.md)、[翻译契约](design/sc2-translation.md)。
+- 本地化：[规则](implementation/localization.md)。
 - 触发器：[概述](reference/triggers-overview.md)、[地图接线](implementation/per-map-setup.md)。
 - Bank：[约定](implementation/bank-system.md)、[接口](reference/galaxy-bank.md)。
 - 项目初始化：[指南](guides/project-initialization.md)。

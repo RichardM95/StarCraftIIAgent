@@ -8,6 +8,8 @@ import os
 import re
 import shutil
 import sqlite3
+import tempfile
+import uuid
 import xml.etree.ElementTree as ET
 from collections import Counter, defaultdict, deque
 from dataclasses import dataclass, field
@@ -16,13 +18,18 @@ from pathlib import Path
 from typing import Iterable
 from xml.sax.saxutils import escape
 
-from sc2_dependencies import build_dependency_graph
+from sc2_publication import publish_directory, staged_directory
+from sc2_dependencies import build_dependency_graph, resolve_dependency_root, dependency_state, RECURSION_DISABLED
 from sc2_catalog_inputs import catalog_xml_inputs, index_inputs, inventory, save_manifest
 from sc2_paths import find_project_mods, load_project_config, resolve_configured_path
 
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_OUT = ROOT / "sc2-catalog-graph-out"
+BUILD_MOD_DIR = None
+BUILD_MODS_DIR = None
+ALLOW_INCOMPLETE_DEPENDENCIES = False
+DEPENDENCY_STATE = {"status": "complete", "problems": []}
 
 CATALOG_PREFIX = {
     "Abil": "CAbil",
@@ -178,11 +185,15 @@ def object_node_id(catalog_family: str, object_id: str) -> str:
 @lru_cache(maxsize=1)
 def find_local_mods() -> tuple[Path, ...]:
     """Return the primary mod followed by active local component dependencies."""
-    primary_mods = find_project_mods(ROOT)
+    global DEPENDENCY_STATE
+    config = load_project_config(ROOT)
+    primary_mods = find_project_mods(ROOT, BUILD_MOD_DIR, config=config)
+    DEPENDENCY_STATE = {"status": "complete", "problems": []}
     if not primary_mods:
+        if config or BUILD_MOD_DIR:
+            raise ValueError("Configured or explicit project source is missing or invalid")
         return ()
     primary = primary_mods[0].resolve(strict=False)
-    config = load_project_config(ROOT)
     project = config.get("project", {})
     recursive = (
         project.get("resolve_dependencies_recursive", True)
@@ -190,16 +201,16 @@ def find_local_mods() -> tuple[Path, ...]:
         else True
     )
     if not recursive:
+        DEPENDENCY_STATE = {"status": "partial", "problems": [RECURSION_DISABLED]}
+        if not ALLOW_INCOMPLETE_DEPENDENCIES:
+            raise ValueError(RECURSION_DISABLED + "; use --allow-incomplete-dependencies for partial investigation")
         return (primary,)
 
-    paths = config.get("paths", {})
-    configured_mods = paths.get("mods_dir") if isinstance(paths, dict) else None
-    mods_dir = (
-        resolve_configured_path(ROOT, configured_mods)
-        if isinstance(configured_mods, str) and configured_mods.strip()
-        else primary.parent
-    )
+    mods_dir = resolve_dependency_root(ROOT, primary, config, BUILD_MODS_DIR)
     graph = build_dependency_graph(primary, mods_dir)
+    DEPENDENCY_STATE = dependency_state(graph)
+    if DEPENDENCY_STATE["status"] == "partial" and not ALLOW_INCOMPLETE_DEPENDENCIES:
+        raise ValueError("Incomplete active dependencies: " + "; ".join(DEPENDENCY_STATE["problems"]))
     dependencies = sorted(
         (
             Path(node["path"]).resolve(strict=False)
@@ -491,8 +502,9 @@ def shortest_reachable(start: str, out_edges: dict[str, list[Edge]], max_depth: 
     return found
 
 
-def write_json(out_dir: Path, nodes: dict[str, dict], edges: list[Edge], definitions: dict[tuple[str, str], list[Definition]]) -> None:
+def write_json(out_dir: Path, nodes: dict[str, dict], edges: list[Edge], definitions: dict[tuple[str, str], list[Definition]], build_id: str | None = None) -> None:
     data = {
+        "build_id": build_id,
         "nodes": sorted(nodes.values(), key=lambda n: n["id"]),
         "edges": [edge.__dict__ for edge in edges],
     }
@@ -521,7 +533,7 @@ def write_json(out_dir: Path, nodes: dict[str, dict], edges: list[Edge], definit
     (out_dir / "unresolved-local-references.json").write_text(json.dumps(unresolved, indent=2, ensure_ascii=False), encoding="utf-8")
 
 
-def write_sqlite(out_dir: Path, nodes: dict[str, dict], edges: list[Edge]) -> None:
+def write_sqlite(out_dir: Path, nodes: dict[str, dict], edges: list[Edge], build_id: str | None = None) -> None:
     db_path = out_dir / "catalog.sqlite"
     tmp_path = out_dir / "catalog.sqlite.tmp"
     if tmp_path.exists():
@@ -531,6 +543,8 @@ def write_sqlite(out_dir: Path, nodes: dict[str, dict], edges: list[Edge]) -> No
     try:
         conn.execute("PRAGMA journal_mode=OFF")
         conn.execute("PRAGMA synchronous=OFF")
+        conn.execute("CREATE TABLE metadata(key TEXT PRIMARY KEY, value TEXT)")
+        conn.execute("INSERT INTO metadata VALUES ('build_id', ?)", (build_id,))
         conn.executescript(
             """
             CREATE TABLE nodes (
@@ -636,8 +650,6 @@ def write_sqlite(out_dir: Path, nodes: dict[str, dict], edges: list[Edge]) -> No
     finally:
         conn.close()
 
-    if db_path.exists():
-        db_path.unlink()
     tmp_path.replace(db_path)
 
 
@@ -682,9 +694,7 @@ def md_link_for_node(nid: str) -> str:
 
 def write_summaries(out_dir: Path, nodes: dict[str, dict], edges: list[Edge], definitions: dict[tuple[str, str], list[Definition]], max_pages: int) -> None:
     summaries = out_dir / "summaries"
-    if summaries.exists():
-        shutil.rmtree(summaries)
-    (summaries / "objects").mkdir(parents=True)
+    (summaries / "objects").mkdir(parents=True, exist_ok=True)
 
     out = outgoing(edges)
     inc = incoming(edges)
@@ -828,34 +838,59 @@ def write_summaries(out_dir: Path, nodes: dict[str, dict], edges: list[Edge], de
 
 
 def main() -> int:
+    global BUILD_MOD_DIR, BUILD_MODS_DIR, ALLOW_INCOMPLETE_DEPENDENCIES
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--mod-dir", help="Explicit primary component for investigation")
+    parser.add_argument("--mods-dir", help="Explicit dependency Mods root")
+    parser.add_argument("--allow-incomplete-dependencies", action="store_true", help="Build an explicitly marked partial investigation index; never validates effective values")
     parser.add_argument("--out", default=str(DEFAULT_OUT), help="Output directory")
     parser.add_argument("--max-object-pages", type=int, default=350, help="Maximum generated local object summary pages")
     parser.add_argument("--sqlite-only", action="store_true", help="Refresh only the SQLite query index; skip JSON, GraphML, and summary pages")
     args = parser.parse_args()
 
+    BUILD_MOD_DIR, BUILD_MODS_DIR = args.mod_dir, args.mods_dir
+    ALLOW_INCOMPLETE_DEPENDENCIES = args.allow_incomplete_dependencies
+    find_local_mods.cache_clear()
+    try:
+        find_local_mods()
+    except ValueError as exc:
+        print(f"ERROR: {exc}")
+        return 1
+    if DEPENDENCY_STATE["status"] == "partial":
+        print("WARNING: PARTIAL investigation index: " + "; ".join(DEPENDENCY_STATE["problems"]))
     out_dir = Path(args.out)
     if not out_dir.is_absolute():
         out_dir = ROOT / out_dir
-    out_dir.mkdir(parents=True, exist_ok=True)
-
-    indexed_files = index_inputs(ROOT, find_local_mods())
+    out_dir = out_dir.resolve()
+    out_dir.parent.mkdir(parents=True, exist_ok=True)
+    mods = find_local_mods()
+    indexed_files = index_inputs(ROOT, mods)
     input_inventory = inventory(indexed_files)
-    nodes, edges, definitions = build_graph()
-    if not args.sqlite_only:
-        write_json(out_dir, nodes, edges, definitions)
-    write_sqlite(out_dir, nodes, edges)
-    if not args.sqlite_only:
-        write_graphml(out_dir, nodes, edges)
-        write_summaries(out_dir, nodes, edges, definitions, args.max_object_pages)
-    for indexed_path in indexed_files:
-        stat = indexed_path.stat()
-        before = input_inventory[indexed_path.resolve(strict=False).as_posix()]
-        if stat.st_size != before["size"] or stat.st_mtime_ns != before["mtime_ns"]:
-            raise RuntimeError(f"Index input changed during build: {indexed_path}")
-    save_manifest(out_dir / "catalog.sqlite", input_inventory)
-    if not args.sqlite_only:
-        save_manifest(out_dir / "graph.json", input_inventory)
+    selection = {"workspace_root": str(ROOT.resolve()), "primary": str(mods[0]) if mods else None,
+                 "mods_dir": DEPENDENCY_STATE.get("mods_dir"),
+                 "recursive": load_project_config(ROOT).get("project", {}).get("resolve_dependencies_recursive", True),
+                 "explicit": bool(BUILD_MOD_DIR or BUILD_MODS_DIR)}
+    if mods and not selection["mods_dir"]:
+        selection["mods_dir"] = str(resolve_dependency_root(ROOT, mods[0], load_project_config(ROOT), BUILD_MODS_DIR))
+    build_id = uuid.uuid4().hex
+    with staged_directory(out_dir) as stage:
+        if out_dir.exists():
+            shutil.copytree(out_dir, stage, dirs_exist_ok=True)
+        nodes, edges, definitions = build_graph()
+        if not args.sqlite_only:
+            write_json(stage, nodes, edges, definitions, build_id=build_id)
+        write_sqlite(stage, nodes, edges, build_id=build_id)
+        if not args.sqlite_only:
+            write_graphml(stage, nodes, edges)
+            write_summaries(stage, nodes, edges, definitions, args.max_object_pages)
+        if inventory(index_inputs(ROOT, mods)) != input_inventory:
+            raise RuntimeError("Index inputs changed during build; previous index was preserved")
+        save_manifest(stage / "catalog.sqlite", input_inventory, dependencies=DEPENDENCY_STATE,
+                      build_id=build_id, selection=selection)
+        if not args.sqlite_only:
+            save_manifest(stage / "graph.json", input_inventory, dependencies=DEPENDENCY_STATE,
+                          build_id=build_id, selection=selection)
+        publish_directory(stage, out_dir, "catalog-index")
 
     print(f"nodes: {len(nodes)}")
     print(f"edges: {len(edges)}")
@@ -866,7 +901,7 @@ def main() -> int:
         print(f"unresolved local object refs: {len(unresolved)}")
     else:
         print("SQLite query index refreshed; other generated reports were not regenerated")
-    print(f"output: {out_dir.relative_to(ROOT)}")
+    print(f"output: {out_dir}")
     return 0
 
 

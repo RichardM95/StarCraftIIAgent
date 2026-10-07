@@ -2,7 +2,7 @@
 """Shared project-path discovery for SC2 validation tools.
 
 Project paths normally come from ``agent-config.json``.  Environment variables
-and sibling-layout discovery remain fallbacks for portable or one-off use.
+and sibling-layout discovery are fallbacks only when no primary project is configured. Explicit CLI paths override configuration.
 """
 from __future__ import annotations
 
@@ -113,6 +113,35 @@ def find_project_mods(
         return [path] if path.is_dir() else []
 
     config = load_project_config(repo_root) if config is None else config
+
+    project = config.get("project", {})
+    source_mode = project.get("source_mode", "in_place") if isinstance(project, Mapping) else "in_place"
+    if source_mode == "workspace_copy":
+        source = _config_value(config, "project", "source_mod")
+        if not source:
+            return []
+        path = resolve_configured_path(repo_root, source)
+        return [path] if path.is_dir() and path.suffix.casefold() == ".sc2mod" else []
+    if source_mode != "in_place":
+        return []
+
+    configured_primary = _config_value(config, "project", "primary_mod")
+    if isinstance(project, Mapping) and "primary_mod" in project:
+        if not configured_primary:
+            return []
+        configured_root = _config_value(config, "paths", "mods_dir")
+        if not configured_root:
+            return []
+        root = resolve_configured_path(repo_root, configured_root)
+        relative = Path(configured_primary)
+        if relative.is_absolute() or relative.suffix.casefold() != ".sc2mod":
+            return []
+        path = (root / relative).resolve(strict=False)
+        try:
+            path.relative_to(root)
+        except ValueError:
+            return []
+        return [path] if path.is_dir() else []
 
     mod_name = (
         primary_name

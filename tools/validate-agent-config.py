@@ -84,7 +84,8 @@ def main() -> int:
                 primary_path = None
             if primary_path is not None and primary_path.suffix.casefold() != ".sc2mod":
                 failures.append("project.primary_mod must end with .SC2Mod")
-            if primary_path is not None and not primary_path.is_dir():
+            if (project.get("source_mode", "in_place") != "workspace_copy"
+                    and primary_path is not None and not primary_path.is_dir()):
                 failures.append(f"project.primary_mod directory not found: {primary_path}")
 
     recursive = project.get("resolve_dependencies_recursive", True)
@@ -94,11 +95,17 @@ def main() -> int:
     source_mode = project.get("source_mode", "in_place")
     if source_mode not in {"in_place", "workspace_copy"}:
         failures.append("project.source_mode must be 'in_place' or 'workspace_copy'")
-    if source_mode == "workspace_copy" and primary_path is not None:
-        try:
-            primary_path.relative_to(REPO_ROOT.resolve(strict=False))
-        except ValueError:
-            failures.append("workspace_copy source must stay inside the workspace")
+    if source_mode == "workspace_copy":
+        source_mod = project.get("source_mod")
+        if not isinstance(source_mod, str) or not source_mod.strip():
+            failures.append("project.source_mod is required in workspace_copy mode")
+            primary_path = None
+        else:
+            primary_path = resolve_configured_path(REPO_ROOT, source_mod)
+            if primary_path.suffix.casefold() != ".sc2mod":
+                failures.append("project.source_mod must end with .SC2Mod")
+            if not primary_path.is_dir():
+                failures.append(f"project.source_mod directory not found: {primary_path}")
 
     validation = config.get("validation", {})
     if not isinstance(validation, Mapping):

@@ -93,6 +93,28 @@ class ProjectModDiscoveryTests(unittest.TestCase):
             [],
         )
 
+    @patch.object(Path, "is_dir", autospec=True, return_value=True)
+    def test_workspace_copy_requires_explicit_source_without_installed_fallback(self, _is_dir):
+        config = {"paths": {"mods_dir": "installed"}, "project": {
+            "source_mode": "workspace_copy", "primary_mod": "Main.SC2Mod"}}
+        repo = Path("C:/workspace/agent")
+        self.assertEqual(find_project_mods(repo, config=config, env={}), [])
+        for source in ("source/Main.SC2Mod", "D:/sources/Main.SC2Mod"):
+            config["project"]["source_mod"] = source
+            expected = sc2_paths.resolve_configured_path(repo, source)
+            self.assertEqual(find_project_mods(repo, config=config, env={}), [expected])
+        config["project"]["source_mod"] = "source/not-a-mod"
+        self.assertEqual(find_project_mods(repo, config=config, env={}), [])
+        self.assertEqual(find_project_mods(repo, "explicit.SC2Mod", config=config),
+                         [(repo / "explicit.SC2Mod").resolve()])
+
+    @patch.object(Path, "is_dir", autospec=True, return_value=False)
+    def test_missing_workspace_source_never_falls_back(self, _is_dir):
+        self.assertEqual(find_project_mods(Path("C:/workspace/agent"), env={}, config={
+            "project": {"source_mode": "workspace_copy", "source_mod": "missing.SC2Mod",
+                        "primary_mod": "Main.SC2Mod"},
+            "paths": {"mods_dir": "installed"}}), [])
+
     def test_no_config_does_not_guess_a_project(self) -> None:
         self.assertEqual(
             find_project_mods(Path("C:/workspace/agent"), env={}, config={}),

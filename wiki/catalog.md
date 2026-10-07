@@ -1,7 +1,6 @@
 # Wiki 页面清单
 
 - [design/README.md](design/README.md)
-- [design/sc2-translation.md](design/sc2-translation.md)
 - [guides/editor-handoff.md](guides/editor-handoff.md)
 - [guides/multi-pc-setup.md](guides/multi-pc-setup.md)
 - [guides/project-initialization.md](guides/project-initialization.md)

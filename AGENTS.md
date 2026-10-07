@@ -6,7 +6,7 @@
 
 > **项目初始化规则：** 当用户给出主 `.SC2Mod` Components 文件夹路径并要求初始化或选择项目时，直接运行 `python tools/init-project.py "<主Mod文件夹路径>"`。该工具负责推导 SC2/Mods/Maps 路径、递归解析依赖并写入 `agent-config.json`；不要要求用户手工编辑 JSON。仅当目录不是标准 `<StarCraft II>/Mods/<Name>.SC2Mod` 布局且无法推导时，才询问缺失路径。初始化后检查“模组身份”是否与所选项目相符，不要猜测 Bank、Library ID 或代码前缀。
 
-> **编辑规则：** 初始化后遵循 `agent-config.json` 的 `project.source_mode`。`in_place` 直接编辑配置的主模组；`workspace_copy` 编辑工作区副本并通过 `tools/deploy-mod.py` 部署。绝不编辑 `publish/`。
+> **编辑规则：** 初始化后遵循 `agent-config.json` 的 `project.source_mode`。`in_place` 直接编辑配置的主模组；`workspace_copy` 编辑 `project.source_mod` 指定的副本（相对工作区或绝对路径，缺失时停止写入）并通过 `tools/deploy-mod.py` 部署。绝不编辑 `publish/`。
 >
 > **Galaxy 编辑规则：** 从当前项目的 Triggers 核对手写源码入口和 include 顺序，仅修改手写源码；绝不直接编辑 `Lib*.galaxy`、`MapScript.galaxy` 或其他编译输出。
 >
@@ -76,7 +76,7 @@
 
 ## 工具故障恢复
 
-若 patch helper 或工具报告 `os error 206` 或字符串替换错误，遵循 `wiki/implementation/agent-context-efficiency.md` 中的恢复指南。使用精确文本替换、保留编码/换行、运行 `python tools/test-suite.py` 验证。
+若 patch helper 或工具报告 `os error 206` 或字符串替换错误，遵循 `wiki/implementation/agent-context-efficiency.md` 中的恢复指南。使用精确文本替换、保留编码/换行、按受影响范围运行 `python tools/test-suite.py --scope tools|docs|mod` 或对应回归。
 
 ## 关键规则（任何代码变更前必须知道）
 
@@ -88,7 +88,7 @@ SC2 链接器会在地图未调用 GUI action 时静默丢弃模组库。在模�
 
 ### Catalog 和 XML 编写
 - 写 XML 前运行 `python tools/sc2-catalog-query.py`；需要字段形状或案例时精确查询 `DataEditorXML/*.txt` 或 `python tools/sc2-reference-query.py`。字段名和 ID 区分大小写。组件样例不代表活动依赖。
-- 提交变更前运行 `python tools/test-suite.py`。
+- 模组源变更验证实际目标组件；工具与文档改动使用对应 scope 或具体回归，跨模块调整按主入口执行综合验收。
 - Editor 保存通过后，运行 `python tools/audit-gamestrings-anchors.py --locale zhCN --fill` 恢复当前模组缺失的玩家面向字符串锚点；其他项目传其实际语言。
 
 ### SC2 Modding XML 规则
@@ -115,3 +115,19 @@ SC2 链接器会在地图未调用 GUI action 时静默丢弃模组库。在模�
 
 - **绝不**在项目模组作为外部 override 激活时打开地图 — 会加载模组版本而非原版
 - **添加依赖：** Map → Modules → Dependencies → `<ModName>.SC2Mod`
+
+## 独立工作区与按需执行
+
+本目录是独立的 StarCraftIIAgent 开发工作区，Git、忽略规则、工具、技能与开发资料由本目录维护。用户相对输入以本工作区为基准；开发项目由 agent-config.json 定位，project.source_mod 的相对路径也以本工作区为基准。
+
+| 请求 | 执行与验证 |
+|---|---|
+| 查询、解释、只读调查 | 定向读取必要证据并直接回答，无需维护验收 |
+| 文档或局部工具修改 | 检查相关链接、技能入口或具体回归；使用 --scope docs 或 tools |
+| 模组/地图修改 | 核对有效值后编辑实际源，验证受影响组件；使用 --scope mod 和明确目标 |
+| 共享工具调整或完整测试 | 运行工具、文档及实际目标所需检查；无活动项目时分别执行 tools 与 docs |
+| 部署、恢复 | 用户请求或已授权任务确实需要时执行，保留路径保护与恢复能力 |
+
+同一任务复用未变化的规则和证据；源文件、配置或实现变化后复核相关部分，保留索引新鲜度与发布前检查。相同输入与实现下已通过的检查不重复运行，专项交付说明验证范围。信息足够时直接执行，复杂且存在实质选择的任务再形成计划。
+
+本工作区专注模组与地图开发，不提供整项目汉化、翻译知识库、自动 UI 文本提取或百科生成。开发所需 GameStrings/ObjectStrings 键维护、字符串锚点与编码检查仍由 sc2-localization 技能和本地工具负责。

@@ -17,9 +17,9 @@
 先读取 `agent-config.json` 的 `project.source_mode`：
 
 - `in_place`：配置的 `paths.mods_dir/<primary_mod>` 就是唯一权威源。直接编辑并验证该目录；`deploy-mod.py` 只报告安全的 no-op。不要创建另一份可编辑模组副本。
-- `workspace_copy`：工作区内的主模组副本是唯一权威源。先运行 `python tools/deploy-mod.py --dry-run` 核对方向，再部署到SC2目录；禁止反向从部署目录覆盖工作区源。
+- `workspace_copy`：`project.source_mod` 指定的主模组副本是唯一权威源；路径相对工作区或为绝对路径，缺失时停止写入。先运行 `python tools/deploy-mod.py --dry-run` 核对方向，再部署到SC2目录；禁止反向从部署目录覆盖工作区源。
 
-部署方式由初始化后的项目配置决定。
+部署方式由初始化后的项目配置决定。自动部署保留 `project.primary_mod` 子目录；显式 `--source` 按文件夹名部署。先核对 dry-run 的完整目标路径。已配置源缺失时停止，不寻找同名旧副本。
 
 ---
 

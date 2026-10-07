@@ -1,6 +1,6 @@
 ---
 name: sc2-tools-validation
-description: StarCraft II mod development tooling for the AeonOfIhanrii campaign. Use when running pre-flight tests, XML schema validation, Galaxy syntax checks, catalog queries, mod deployment, or playtest bug extraction. Covers all tools/ CLI commands and when to use each.
+description: StarCraft II mod development tooling for the active project. Use when running pre-flight tests, XML schema validation, Galaxy syntax checks, catalog queries, mod deployment, or playtest bug extraction. Covers all tools/ CLI commands and when to use each.
 ---
 
 # SC2 Tools & Validation
@@ -14,7 +14,7 @@ Load this skill when running any tool from the `tools/` directory: pre-flight te
 | If you need to... | Run this command |
 |---|---|
 | **Initialize/select project from one Mod path** | `python tools/init-project.py "<primary.SC2Mod>"` |
-| **Verify edits before commit** | `python tools/test-suite.py [--mod-dir <path>] [--primary-only]` |
+| **Verify target mod edits** | `python tools/test-suite.py [--mod-dir <path>] [--primary-only]` |
 | **Check only tools, docs, or mod** | `python tools/test-suite.py --scope tools|docs|mod` |
 | **Validate GameData XML & Galaxy** | `python tools/validate-mod.py` |
 | **Inspect recursive mod dependencies** | `python tools/inspect-mod-dependencies.py` |
@@ -33,7 +33,7 @@ Load this skill when running any tool from the `tools/` directory: pre-flight te
 ### `init-project.py` (default project setup entry)
 Pass the primary Components `.SC2Mod` folder path. The tool infers the standard SC2 layout, recursively validates local component dependencies, and atomically writes `agent-config.json` only after checks pass. Use `--dry-run` to preview; use explicit directory options only for nonstandard layouts. Do not make users manually edit JSON or enumerate dependencies.
 
-### `test-suite.py` (always run before commit)
+### `test-suite.py` (select the affected scope)
 Unified pre-flight suite. It reads `agent-config.json`, resolves the configured primary mod, prints both the config and exact target, and fails if no mod is found. It follows `validation.include_dependencies` and `validation.exclude_mods`; use `--primary-only`, `--include-dependencies`, or repeatable `--exclude-mod` for one-run overrides. Runs:
 - tool unit tests
 - `validate-agent-config.py` — portable config, primary-mod, and recursive component-dependency checks
@@ -42,7 +42,7 @@ Unified pre-flight suite. It reads `agent-config.json`, resolves the configured 
 - `audit-gamestrings-anchors.py` — localization anchor checks
 - `check-doc-links.py` — broken Markdown links
 
-**Always run before committing or handing off to the SC2 Editor.**
+Use `--scope tools|docs|mod` or a focused regression for local changes. Validate actual component edits before Editor handoff. Cross-module changes and full acceptance follow [workspace execution levels](../../AGENTS.md#独立工作区与按需执行). Read-only queries do not require this suite.
 
 ### `validate-mod.py`
 Comprehensive static checks:
@@ -90,7 +90,7 @@ Read-only, bounded search of `DataEditorXML/SC2GameDataComponents/`. Use `compon
 ### `deploy-mod.py` (and `deploy-mod.ps1`)
 - Reads `project.source_mode` from `agent-config.json`.
 - In `in_place` mode the configured Mod under `paths.mods_dir` is already the authoritative source, so deployment is an explicit no-op; edit and validate that source directly.
-- In `workspace_copy` mode the workspace component folder is authoritative and deployment copies outward to `paths.mods_dir`. Never copy changes back from the deployed target as a normal workflow.
+- In `workspace_copy` mode `project.source_mod` (workspace-relative or absolute) is authoritative; missing or invalid paths stop writes. The configured source and deployment copies outward to `paths.mods_dir`. Never copy changes back from the deployed target as a normal workflow.
 - Copies the `.SC2Mod` component folder to `paths.mods_dir` from `agent-config.json` (overridable with `--mods-dir`); it never rewrites generated `Lib*.galaxy`
 - Use `--dry-run` before deployment; a source already equal to the destination is treated as a safe no-op
 
@@ -114,7 +114,7 @@ VS Code workspace settings (`.vscode/settings.json`) bind `Base.SC2Data/GameData
 If a patch helper or tool reports `os error 206` or string replacement errors:
 - Use exact text replacement
 - Preserve encoding/newlines
-- Run `python tools/test-suite.py` to verify
+- Run the affected scope or regression to verify
 
 ## Reference
 
@@ -158,7 +158,7 @@ Replace example paths with the actual target.
 - Do not present a zero-exit run as Editor or packaged-runtime acceptance — the suite remains a static rule set.
 
 ### Database Caveats
-- Default catalog queries stop when indexed inputs are newer than `catalog.sqlite`; rebuild before current-data queries. `--allow-stale` permits explicit historical inspection. `reference_export` is a TXT reference source, while `active_component_dependency` comes from the resolved component chain. Cross-check current XML, dependency declarations, and source path.
+- Default catalog queries check manifest additions, removals and changed inputs even without an active mod. Missing/invalid configured sources block current-data queries; rebuild only after repairing configuration. `--allow-stale` permits explicit historical inspection and prints a historical-only warning. `reference_export` is a TXT reference source, while `active_component_dependency` comes from the resolved component chain. Cross-check current XML, dependency declarations, and source path.
 - Refresh with `python tools/build-sc2-catalog-graph.py --sqlite-only` when the query index is missing or stale. Verify its input config covers the target mod first. Do not rebuild for a single sample lookup.
 - Search the component snapshot only for a question the graph and selected dumps do not answer; keep source, component, family, area, and result limit narrow.
 - `audit-gamestrings-anchors.py --fill --mod-dir '<ActualPath>'` rewrites localization files. After Editor save, use it to restore anchors and review the diff.
@@ -174,3 +174,17 @@ Replace example paths with the actual target.
 ### Source Caveats (from `source-caveats.md`)
 - **Localization tool:** Use the existing `audit-gamestrings-anchors.py`; documentation tool references are checked automatically by `check-doc-links.py` so removed legacy commands do not reappear unnoticed.
 - **Validation scope:** Older tool versions silently passed when no mod was scanned. Current tools share `sc2_paths.py`, accept/propagate `--mod-dir`, and fail closed when discovery finds no target.
+
+## Dependency completeness and deployment safety
+
+All investigation tools use the shared dependency-root resolver. A configured editing source keeps configured Mods; a one-off explicit component uses its own Mods ancestor. If neither applies, pass `--mods-dir` to inspection/build or the test suite. Never silently use another installation's same-name mod.
+
+Current catalog builds/queries stop for missing or damaged component dependencies. `--allow-incomplete-dependencies` permits explicitly marked partial read-only investigation; the v3 manifest stores problems and each query repeats the warning. It does not authorize effective-value confirmation, source writes or dependency validation. `--allow-stale` is independent historical permission. Rebuild old/missing manifests and include the actual component-list info file.
+
+Deployment preserves no-op for identical paths and rejects both ancestor/descendant overlaps before dry-run, cleaning or copying.
+
+Disabling `project.resolve_dependencies_recursive` retains only primary-component results and is a partial scope; both building and querying require `--allow-incomplete-dependencies`, with an explicit configuration-disabled warning.
+
+Index artifacts and manifests bind the same build_id; identity mismatch always stops. Every index path checks its recorded selection. Legacy history requires explicit permission and never overrides partial-dependency permission. Builds stage the complete output before publication; SQLite-only retains previous JSON/reports and manual extras.
+
+Deployment stages clean replacements or merge copies, checks source stability and copied bytes, and retains one owned previous version. Publication rollback failures preserve all surviving diagnostic paths; do not remove them automatically or treat the new version as accepted.

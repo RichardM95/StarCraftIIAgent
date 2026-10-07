@@ -13,7 +13,7 @@ import time
 from collections.abc import Mapping
 from pathlib import Path
 
-from sc2_dependencies import build_dependency_graph
+from sc2_dependencies import build_dependency_graph, resolve_dependency_root, dependency_problems
 from sc2_paths import (
     config_path,
     find_project_mods,
@@ -45,25 +45,15 @@ def dependency_validation_targets(
     primary_mod: Path,
     config: Mapping[str, object],
     exclusions: set[str],
+    explicit_mods: str | None = None,
 ) -> tuple[list[Path], list[str]]:
     """Resolve active component dependencies selected for static validation."""
-    paths = config.get("paths", {})
-    configured_mods = paths.get("mods_dir") if isinstance(paths, Mapping) else None
-    mods_dir = (
-        resolve_configured_path(REPO_ROOT, configured_mods)
-        if isinstance(configured_mods, str) and configured_mods.strip()
-        else primary_mod.parent
-    )
     try:
-        primary_mod.resolve(strict=False).relative_to(mods_dir.resolve(strict=False))
-    except ValueError:
-        # A one-off explicit --mod-dir may belong to another SC2 installation.
-        mods_dir = primary_mod.parent
+        mods_dir = resolve_dependency_root(REPO_ROOT, primary_mod, config, explicit_mods)
+    except ValueError as exc:
+        return [], [str(exc)]
     graph = build_dependency_graph(primary_mod, mods_dir)
-    problems = list(graph["errors"])
-    problems.extend(
-        f"missing dependency: {edge['target_name']}" for edge in graph["missing"]
-    )
+    problems = dependency_problems(graph)
     primary_key = str(primary_mod.resolve(strict=False)).casefold()
     targets: list[Path] = []
     for key, node in graph["nodes"].items():
@@ -109,7 +99,7 @@ def main() -> int:
         "--mod-dir",
         help=(
             "Explicit .SC2Mod component directory. If omitted, discover the "
-            "primary mod from agent-config.json, then environment/layout fallbacks."
+            "primary mod strictly from agent-config.json; environment/layout fallbacks apply only without a configured primary."
         ),
     )
     parser.add_argument(
@@ -118,6 +108,7 @@ def main() -> int:
         default="all",
         help="Run the full suite or only tool, documentation, or mod checks.",
     )
+    parser.add_argument("--mods-dir", help="Explicit dependency Mods root for a one-off component")
     dependency_group = parser.add_mutually_exclusive_group()
     dependency_group.add_argument(
         "--include-dependencies",
@@ -165,7 +156,7 @@ def main() -> int:
         requested = args.mod_dir or "the configured primary project mod"
         print(f"ERROR: Could not find {requested}.")
         print(
-            "Pass --mod-dir or correct agent-config.json (SC2_MODS_PATH is a fallback)."
+            "Pass --mod-dir or correct agent-config.json (SC2_MODS_PATH is only a fallback without a configured primary)."
         )
         return 2
     mod_dir = str(mods[0])
@@ -182,7 +173,7 @@ def main() -> int:
     dependency_problems: list[str] = []
     if include_dependencies:
         dependency_targets, dependency_problems = dependency_validation_targets(
-            mods[0], config, exclusions
+            mods[0], config, exclusions, args.mods_dir
         )
 
     print("=" * 60)

@@ -7,7 +7,7 @@
 你需要准备：战役构想、任意格式的设计文档、可用的 SC2 编辑器，以及战役地图或模组。  
 本套件提供：智能体规则（`AGENTS.md`）、预飞行检查与 schema 校验工具（`tools/`）、节省上下文的 catalog 查询工具、完整的 wiki 知识库（`wiki/`）和 `DataEditorXML/` 参考导出。
 
-> **当前工作区已经配置为** **Legacy of the Ihanrii** 战役。路径和主模组定义在 `agent-config.json`，模组身份定义在 `AGENTS.md`。下文同时说明当前项目和通用模板的配置流程。
+> 当前工作区为 **SC2ModAgent**，尚未选择活动项目。通过 [SC2AgentHub](../sc2-agent-hub/AGENTS.md) 统一入口，或独立打开本目录后提供主 Components 模组路径。项目身份须从当前配置和组件证据核对。
 
 如果只需要完成首次安装或选择一个已有项目，请直接参阅[项目初始化配置](wiki/guides/project-initialization.md)。
 

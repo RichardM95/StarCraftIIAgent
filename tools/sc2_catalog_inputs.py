@@ -5,8 +5,11 @@ import hashlib
 import json
 from pathlib import Path
 
+from sc2_dependencies import find_info_component
+
 
 MANIFEST_SUFFIX = ".inputs.json"
+MANIFEST_VERSION = 3
 LOCALIZATION_NAMES = ("GameStrings.txt", "ObjectStrings.txt", "TriggerStrings.txt")
 
 
@@ -32,6 +35,9 @@ def index_inputs(root: Path, mods: tuple[Path, ...] | list[Path]) -> list[Path]:
             path = mod / name
             if path.is_file():
                 files.append(path)
+        info, _errors = find_info_component(mod)
+        if info is not None:
+            files.append(info)
         locale = mod / "enUS.SC2Data" / "LocalizedData"
         files.extend(path for name in LOCALIZATION_NAMES if (path := locale / name).is_file())
     return sorted(set(files), key=lambda path: str(path).casefold())
@@ -61,11 +67,32 @@ def inventory(paths: list[Path]) -> dict[str, dict[str, int | str]]:
     return result
 
 
-def save_manifest(index_path: Path, files: dict[str, dict[str, int | str]]) -> None:
+def save_manifest(index_path: Path, files: dict[str, dict[str, int | str]], *,
+                  dependencies: dict | None = None, build_id: str | None = None,
+                  selection: dict | None = None) -> None:
     path = manifest_path(index_path)
     temporary = path.with_name(path.name + ".tmp")
-    temporary.write_text(json.dumps({"version": 1, "files": files}, indent=2, ensure_ascii=False), encoding="utf-8")
+    temporary.write_text(json.dumps({"version": MANIFEST_VERSION, "files": files,
+                                "dependencies": dependencies or {"status": "complete", "problems": []},
+                                "build_id": build_id, "selection": selection},
+                               indent=2, ensure_ascii=False), encoding="utf-8")
     temporary.replace(path)
+
+
+def read_manifest(index_path: Path) -> dict:
+    path = manifest_path(index_path)
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+        state = data.setdefault("dependencies", {"status": "complete", "problems": []})
+        if (data.get("version") not in {1, 2, MANIFEST_VERSION} or not isinstance(data.get("files"), dict)
+                or state.get("status") not in {"complete", "partial"}
+                or not isinstance(state.get("problems"), list)
+                or not all(isinstance(item, str) for item in state["problems"])
+                or bool(state["problems"]) != (state["status"] == "partial")):
+            raise ValueError("Unsupported input/dependency manifest")
+        return data
+    except (OSError, ValueError, AttributeError, TypeError) as exc:
+        raise ValueError(f"Catalog manifest requires rebuild: {path} ({exc})") from exc
 
 
 def changed_input(
@@ -78,7 +105,7 @@ def changed_input(
     try:
         manifest = json.loads(path.read_text(encoding="utf-8"))
         old = manifest["files"]
-        if manifest["version"] != 1 or not isinstance(old, dict):
+        if manifest["version"] != MANIFEST_VERSION or not isinstance(old, dict):
             return path
     except (OSError, ValueError, KeyError, TypeError):
         return path

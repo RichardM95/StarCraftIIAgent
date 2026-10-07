@@ -187,6 +187,8 @@ D:\Games\StarCraft II\Mods\Experimental.SC2Mod
 | `mods_dir` | 存放 `.SC2Mod` 组件文件夹的目录 |
 | `campaign_maps_dir` | 存放战役 `.SC2Map` 组件文件夹的目录；纯 Mod 初始化时尚不存在只会产生警告 |
 | `primary_mod` | 相对于 `mods_dir` 的主模组组件目录，包含 `.SC2Mod` 后缀；允许位于 `Mods` 子目录 |
+| `source_mode` | `in_place` 使用配置主模组；`workspace_copy` 使用 `source_mod` 指定的副本 |
+| `source_mod` | 副本模式必填；相对本工作区或绝对路径；缺失或无效时停止写入和自动发现，不退回安装目录 |
 | `resolve_dependencies_recursive` | 是否从主 Mod 开始递归解析所有本地依赖 Mod；初始化时应保持 `true` |
 | `validation.include_dependencies` | 预检是否静态验证本地活动依赖的 XML/Galaxy；建议保持 `true` |
 | `validation.exclude_mods` | 有意暂缓验证的组件 Mod 文件夹名列表；必须显式记录，避免静默漏扫 |
@@ -325,3 +327,9 @@ python tools/test-suite.py --mod-dir "<完整或工作区相对的模组路径>"
 - 递归依赖图中没有缺失的本地组件 Mod 或组件元数据错误。
 - `validate-agent-config.py` 通过。
 - `test-suite.py` 显示正确的目标；任何剩余失败均作为项目缺陷处理，而不是路径配置问题。
+
+## 临时依赖调查与索引状态
+
+临时检查其他安装的嵌套组件时，依赖根来自该组件自己的 Mods 祖先；非标准布局使用 `inspect-mod-dependencies.py --mods-dir "<依赖Mods>"` 或预检套件同名参数。配置工作区副本仍使用项目配置的安装依赖根。
+
+缺失或损坏依赖默认阻断当前索引。`--allow-incomplete-dependencies`仅用于部分只读调查，构建保存部分状态，每次查询重复标记；它不能代替修复依赖或当前有效值确认。旧索引清单需重建，真实info文件来自ComponentList声明。

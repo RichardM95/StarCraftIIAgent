@@ -13,6 +13,7 @@ from unittest.mock import patch
 
 TOOLS = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(TOOLS))
+from index_fixture import stamp
 from sc2_catalog_inputs import changed_input, index_inputs, inventory, save_manifest
 
 SPEC = importlib.util.spec_from_file_location("catalog_query_freshness_tool", TOOLS / "sc2-catalog-query.py")
@@ -66,9 +67,10 @@ class CatalogFreshnessTests(unittest.TestCase):
             game_data.mkdir(parents=True)
             catalog = game_data / "UnitData.xml"
             catalog.write_text('<Catalog><CUnit id="Marine"/></Catalog>', encoding="utf-8")
+            stamp(database, root, [mod], recursive=False)
             os.utime(database, (1000, 1000))
             os.utime(catalog, (2000, 2000))
-            args = argparse.Namespace(db=str(database), graph=str(root / "graph.json"), allow_stale=False)
+            args = argparse.Namespace(db=str(database), graph=str(root / "graph.json"), allow_stale=False, allow_incomplete_dependencies=True)
             with (
                 patch.object(QUERY, "ROOT", root),
                 patch.object(QUERY, "DEFAULT_DB", database),
@@ -76,7 +78,7 @@ class CatalogFreshnessTests(unittest.TestCase):
                 patch.object(QUERY, "load_project_config", return_value={"project": {"resolve_dependencies_recursive": False}}),
             ):
                 initial_store = QUERY.SqliteCatalogStore(database)
-                self.assertEqual(catalog, QUERY.stale_default_index_input(initial_store))
+                self.assertEqual(catalog, QUERY.stale_default_index_input(initial_store, allow_incomplete_dependencies=True))
                 initial_store.close()
                 with self.assertRaises(SystemExit):
                     QUERY.load_store(args)

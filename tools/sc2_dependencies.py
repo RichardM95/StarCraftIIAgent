@@ -6,9 +6,55 @@ import re
 import xml.etree.ElementTree as ET
 from pathlib import Path, PurePosixPath
 from typing import Any
+from collections.abc import Mapping
 
+from sc2_paths import resolve_configured_path
+
+
+RECURSION_DISABLED = "Recursive dependency resolution is disabled by project configuration; only the primary component is available"
 
 FILE_REF_RE = re.compile(r"(?:^|,)\s*file:([^,]+)", re.IGNORECASE)
+
+
+def resolve_dependency_root(repo_root: Path, primary: Path, config: Mapping,
+                            explicit_mods: str | None = None) -> Path:
+    """Use an override, the configured editing source, or the explicit mod's Mods ancestor."""
+    primary = primary.resolve(strict=False)
+    if explicit_mods:
+        root = resolve_configured_path(repo_root, explicit_mods)
+        if not root.is_dir():
+            raise ValueError(f"Explicit Mods directory not found: {root}")
+        return root
+    paths = config.get("paths", {})
+    configured = paths.get("mods_dir") if isinstance(paths, Mapping) else None
+    project = config.get("project", {})
+    if isinstance(configured, str) and configured.strip():
+        root = resolve_configured_path(repo_root, configured)
+        source = project.get("source_mod") if isinstance(project, Mapping) else None
+        is_copy = isinstance(project, Mapping) and project.get("source_mode") == "workspace_copy"
+        if primary.is_relative_to(root) or (is_copy and isinstance(source, str)
+                and resolve_configured_path(repo_root, source) == primary):
+            return root
+    for ancestor in primary.parents:
+        if ancestor.name.casefold() == "mods":
+            return ancestor
+    raise ValueError(f"Cannot infer dependency Mods root for {primary}; pass --mods-dir")
+
+
+class IncompleteDependenciesError(ValueError):
+    """Current dependency completeness cannot be waived by historical-index permission."""
+
+
+def dependency_problems(graph: dict) -> list[str]:
+    return list(graph.get("errors", [])) + [
+        f"missing dependency: {edge['target_name']} (declared by {edge['source']})"
+        for edge in graph.get("missing", [])]
+
+
+def dependency_state(graph: dict) -> dict:
+    problems = dependency_problems(graph)
+    return {"status": "partial" if problems else "complete", "problems": problems,
+            "mods_dir": graph.get("mods_dir"), "primary": graph.get("primary")}
 
 
 def _path_key(path: Path) -> str:

@@ -10,8 +10,8 @@ from collections import Counter, defaultdict, deque
 from pathlib import Path
 from typing import Iterable
 
-from sc2_dependencies import build_dependency_graph
-from sc2_catalog_inputs import changed_input, index_inputs, manifest_path
+from sc2_dependencies import build_dependency_graph, resolve_dependency_root, dependency_state, IncompleteDependenciesError, RECURSION_DISABLED
+from sc2_catalog_inputs import changed_input, index_inputs, manifest_path, read_manifest
 from sc2_paths import find_project_mods, load_project_config, resolve_configured_path
 
 
@@ -158,7 +158,7 @@ class CatalogStore:
 class SqliteCatalogStore(CatalogStore):
     def __init__(self, path: Path):
         self.path = path
-        self.conn = sqlite3.connect(path)
+        self.conn = sqlite3.connect(path.resolve().as_uri() + "?mode=ro", uri=True)
         self.conn.row_factory = sqlite3.Row
 
     def close(self) -> None:
@@ -266,6 +266,7 @@ class JsonCatalogStore(CatalogStore):
             raise SystemExit(f"missing graph: {path}. Run `python tools/build-sc2-catalog-graph.py` first.")
         self.path = path
         data = json.loads(path.read_text(encoding="utf-8"))
+        self.build_id = data.get("build_id")
         self.nodes = {node["id"]: node for node in data.get("nodes", [])}
         self.edges = data.get("edges", [])
         self.outgoing: dict[str, list[dict]] = defaultdict(list)
@@ -323,64 +324,36 @@ class JsonCatalogStore(CatalogStore):
         return rows
 
 
-def stale_default_index_input(store: CatalogStore, *, verify_hashes: bool = False) -> Path | None:
+def stale_default_index_input(store: CatalogStore, *, verify_hashes: bool = False, allow_incomplete_dependencies: bool = False) -> Path | None:
     """Find a changed default-index input, including added or removed files."""
     if not isinstance(store, (SqliteCatalogStore, JsonCatalogStore)):
         return None
-    expected = DEFAULT_DB if isinstance(store, SqliteCatalogStore) else DEFAULT_GRAPH
-    if store.path.resolve(strict=False) != expected.resolve(strict=False):
-        return None
-    try:
-        mods = find_project_mods(ROOT)
-    except ValueError:
-        return None
-    if not mods:
-        return None
-
-    config = load_project_config(ROOT)
-    project = config.get("project", {})
-    recursive = (
-        project.get("resolve_dependencies_recursive", True)
-        if isinstance(project, dict)
-        else True
-    )
-    if recursive:
-        paths = config.get("paths", {})
-        configured_mods = paths.get("mods_dir") if isinstance(paths, dict) else None
-        mods_dir = (
-            resolve_configured_path(ROOT, configured_mods)
-            if isinstance(configured_mods, str) and configured_mods.strip()
-            else mods[0].parent
-        )
-        graph = build_dependency_graph(mods[0], mods_dir)
-        mods = [Path(node["path"]) for node in graph["nodes"].values()]
-
-    if manifest_path(store.path).is_file():
-        return changed_input(store.path, index_inputs(ROOT, mods), verify_hashes=verify_hashes)
-
-    index_mtime = store.path.stat().st_mtime
-    candidates: list[Path] = []
-    for directory in (ROOT / "DataEditorXML", ROOT / "XMLFromDependenciesWeDontUse"):
-        if directory.is_dir():
-            candidates.extend(directory.glob("*.txt"))
-    for mod_dir in mods:
-        candidates.extend((mod_dir / "Base.SC2Data" / "GameData").glob("*.xml"))
-        candidates.extend((mod_dir / "enUS.SC2Data" / "LocalizedData").glob("*Strings.txt"))
-        candidates.extend(
-            path
-            for path in (
-                mod_dir / "ComponentList.SC2Components",
-                mod_dir / "DocumentInfo",
-            )
-            if path.is_file()
-        )
-    for path in candidates:
-        try:
-            if path.stat().st_mtime > index_mtime:
-                return path
-        except OSError:
-            continue
-    return None
+    manifest = read_manifest(store.path)
+    if manifest.get("version") != 3:
+        return manifest_path(store.path)
+    selection = manifest["selection"]
+    workspace = Path(selection["workspace_root"])
+    if not workspace.is_dir():
+        raise ValueError("Recorded index workspace is missing: " + str(workspace))
+    primary = Path(selection["primary"]) if selection.get("primary") else None
+    mods = []
+    if primary:
+        if not primary.is_dir():
+            raise ValueError("Recorded index primary component is missing: " + str(primary))
+        mods = [primary]
+        if not selection.get("recursive", True):
+            if not allow_incomplete_dependencies:
+                raise IncompleteDependenciesError(RECURSION_DISABLED)
+            print("WARNING: PARTIAL current dependency investigation: " + RECURSION_DISABLED, file=sys.stderr)
+        else:
+            graph = build_dependency_graph(primary, Path(selection["mods_dir"]))
+            state = dependency_state(graph)
+            if state["status"] == "partial":
+                if not allow_incomplete_dependencies:
+                    raise IncompleteDependenciesError("Incomplete active dependencies: " + "; ".join(state["problems"]))
+                print("WARNING: PARTIAL current dependency investigation: " + "; ".join(state["problems"]), file=sys.stderr)
+            mods = [Path(node["path"]) for node in graph["nodes"].values()]
+    return changed_input(store.path, index_inputs(workspace, mods), verify_hashes=verify_hashes)
 
 
 def load_store(args: argparse.Namespace) -> CatalogStore:
@@ -396,18 +369,58 @@ def load_store(args: argparse.Namespace) -> CatalogStore:
             store = SqliteCatalogStore(DEFAULT_DB)
         else:
             store = JsonCatalogStore(graph_path)
-    stale_input = stale_default_index_input(store, verify_hashes=getattr(args, "verify_input_hashes", False))
-    if stale_input is not None:
-        message = f"Catalog index is stale; changed input: {stale_input}"
+    allow_partial = getattr(args, "allow_incomplete_dependencies", False)
+    def reject(message):
+        if isinstance(store, SqliteCatalogStore):
+            store.close()
+        raise SystemExit(message)
+    if isinstance(store, SqliteCatalogStore):
+        try:
+            row = store.conn.execute("SELECT value FROM metadata WHERE key='build_id'").fetchone()
+            artifact_id = row[0] if row else None
+        except sqlite3.Error:
+            artifact_id = None
+    else:
+        artifact_id = store.build_id
+    try:
+        manifest = read_manifest(store.path)
+    except ValueError as exc:
+        if artifact_id or not args.allow_stale:
+            reject("Index/manifest integrity cannot be verified; rebuild required: " + str(exc))
+        print("WARNING: Historical legacy index only; no verified manifest: " + str(exc), file=sys.stderr)
+        return store
+    state = manifest["dependencies"]
+    if state["status"] == "partial":
+        if not allow_partial:
+            reject("Partial dependency index requires --allow-incomplete-dependencies: " + "; ".join(state["problems"]))
+        print("WARNING: PARTIAL dependency index, investigation only: " + "; ".join(state["problems"]), file=sys.stderr)
+    if manifest["version"] != 3:
+        if artifact_id:
+            reject("Bound index is paired with a legacy manifest; rebuild required")
+        if not args.allow_stale:
+            reject("Legacy manifest requires rebuild; --allow-stale permits historical inspection only")
+        print("WARNING: Historical legacy index only; build identity is unverified; rebuild required", file=sys.stderr)
+        return store
+    selection = manifest.get("selection")
+    if (not isinstance(artifact_id, str) or not artifact_id or artifact_id != manifest.get("build_id")
+            or not isinstance(selection, dict) or not isinstance(selection.get("workspace_root"), str)
+            or (selection.get("primary") and not selection.get("mods_dir"))):
+        reject("Index/manifest build_id or input identity mismatch; rebuild required (cannot be waived by --allow-stale)")
+    print("Index scope: " + str(selection.get("primary") or "reference-only") + " [build_id=" + artifact_id + "]", file=sys.stderr)
+    try:
+        stale_input = stale_default_index_input(store, verify_hashes=getattr(args, "verify_input_hashes", False),
+                                                allow_incomplete_dependencies=allow_partial)
+        message = f"Catalog index is stale; changed input: {stale_input}" if stale_input is not None else None
+    except IncompleteDependenciesError as exc:
+        reject(str(exc) + "; use --allow-incomplete-dependencies only for partial investigation")
+    except ValueError as exc:
+        message = f"Cannot verify current catalog index: {exc}"
+    if message:
         if args.allow_stale:
-            print(f"WARNING: {message}", file=sys.stderr)
+            print("WARNING: Historical inspection only. " + message, file=sys.stderr)
         else:
-            if isinstance(store, SqliteCatalogStore):
-                store.close()
-            raise SystemExit(
-                f"{message}\nRun python tools/build-sc2-catalog-graph.py --sqlite-only, "
-                "or pass --allow-stale only for historical inspection."
-            )
+            reject(message + "\nRebuild the selected index, or pass --allow-stale only for historical inspection")
+
     return store
 
 
@@ -821,7 +834,8 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--graph", default=str(DEFAULT_GRAPH), help="Fallback path to sc2-catalog-graph-out/graph.json")
     parser.add_argument("--db", default=str(DEFAULT_DB), help="Preferred path to sc2-catalog-graph-out/catalog.sqlite")
-    parser.add_argument("--allow-stale", action="store_true", help="Permit historical inspection of an outdated default index")
+    parser.add_argument("--allow-incomplete-dependencies", action="store_true", help="Explicitly permit marked partial dependency investigation; independent of --allow-stale")
+    parser.add_argument("--allow-stale", action="store_true", help="Permit explicitly marked historical inspection when the default index is outdated or current project configuration cannot be verified")
     parser.add_argument("--verify-input-hashes", action="store_true", help="Hash indexed inputs to detect same-size edits with restored timestamps")
     sub = parser.add_subparsers(dest="command", required=True)
 

@@ -27,3 +27,11 @@ agent-config.json
 
 # Workspace reset recovery archive
 .workspace-recovery/
+
+# Generated validation reports and staged publication/previous versions
+reports/
+**/.*.stage-*/
+**/.*.sc2-previous/
+**/.*.sc2-previous.owner.json
+**/.*.sc2-retired-*/
+**/.*.sc2-publish.lock/

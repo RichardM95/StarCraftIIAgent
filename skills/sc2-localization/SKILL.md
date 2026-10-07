@@ -92,7 +92,7 @@ Distilled from `references/localization.md`. Duplicates with sections above omit
 
 ### Anchor Coverage Caveats
 - The source example uses `enUS.SC2Data/LocalizedData/`; the actual task may target `zhCN` or another locale. Mirror the project's locale folders.
-- `audit-gamestrings-anchors.py` currently hard-codes the `enUS` path and only scans direct `GameData/*.xml` anchors. `zhCN` and other languages plus indirect anchors need a separate manual check — a zero-error report does not prove all languages are complete.
+- Use `audit-gamestrings-anchors.py --locale <actual-locale>` and its current `--help`. Review indirect runtime references separately; a zero-error static report does not prove packaged runtime coverage.
 - Editor may move editor-facing text into `ObjectStrings.txt`; that migration does NOT satisfy runtime references still pointing at `GameStrings.txt`. After save, run the anchor audit with explicit `--mod-dir`, restore with `--fill`, and manually review the actual copy.
 
 ### ObjectStrings Coverage Scope
@@ -113,7 +113,7 @@ Fourth localization file, alongside `GameStrings.txt` / `ObjectStrings.txt` / `T
 
 External tool for manual localization work and diagnostics. GitHub: <https://github.com/VoVanRusLvSC2/Localization-Editor-SC2-KSP>. CLI install path documented in [PR #1](https://github.com/VoVanRusLvSC2/Localization-Editor-SC2-KSP/pull/1/files).
 
-If the user does not already have the tool installed, recommend installing it before bulk translation work. The desktop application is useful even without the CLI.
+This skill covers localization keys, anchors and file-format diagnostics for development. Whole-project translation is outside this workspace. KSP is an optional existing desktop diagnostic.
 
 #### CLI Diagnostics
 
@@ -148,7 +148,7 @@ If the user asks to fix localization errors, perform this workflow end-to-end ra
 
 - **Add a missing key:** `Unit/Name/MyUnit=My Unit`
 - **Fix a blank value:** `DocInfo/PatchNote003=Fixed an issue where the unit icon was missing.`
-- **Fix a malformed line:** ensure exactly one `=` per entry — `Unit/Name/MyUnit My Unit` → `Unit/Name/MyUnit=My Unit`
+- **Fix a malformed line:** split at the first `=`; preserve any `=` characters in the value — `Unit/Name/MyUnit My Unit` → `Unit/Name/MyUnit=My Unit`
 - **Remove duplicate keys:** keep one canonical entry per key, delete duplicates.
 
 ### Writing Guidance
@@ -160,4 +160,4 @@ If the user asks to fix localization errors, perform this workflow end-to-end ra
 
 ### Terminology Consistency
 
-Prefer terminology consistency across `GameStrings.txt`, `ObjectStrings.txt`, and UI-facing strings. Use the localization tool for bulk translation but review machine-generated SC2 terminology manually.
+Prefer terminology consistency across `GameStrings.txt`, `ObjectStrings.txt`, and UI-facing strings. Use the sibling localization workflow for bulk translation, with its project context and review requirements.

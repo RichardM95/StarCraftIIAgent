@@ -1,6 +1,6 @@
-# 星际争霸2专用智能体
+# StarCraftIIAgent — 星际Ⅱ模组开发智能体
 
-> 星际争霸2自定义战役开发智能体。统一知识库 + 29 个技能（10 根 + 13 galaxy + 6 sc2data），完全自包含。
+> 星际争霸2自定义战役开发智能体。统一知识库 + 29 个技能（10 根 + 13 galaxy + 6 sc2data），开发规则、工具与资料均在本目录维护。
 >
 > **作者：扯蛋虾米**。参见 [AUTHORS.md](AUTHORS.md)。
 
@@ -42,7 +42,7 @@
 ## 文件结构
 
 ```
-E:\Program Files (x86)\StarCraftIIAgent\
+./StarCraftIIAgent/
 ├── README.md                          ← 本文件（中文使用说明）
 ├── AUTHORS.md                         ← 统一作者声明
 ├── AGENT.md                            ← 智能体身份与系统提示词
@@ -295,8 +295,8 @@ AI 会：
 
 以下规则不可协商，违反会导致编译/链接/游戏运行失败：
 
-1. **编辑范围：** 只编辑当前工作区文件。绝不编辑 `publish/` 文件夹。
-2. **Galaxy 源真值：** 编辑 `*.SC2Mod/Base.SC2Data/Scripts/` 下的模块化脚本或主脚本 `Epi_Main.galaxy`。绝不编辑 `publish/` 或编译输出。`Epi_Main.galaxy` 必须出现在 `include "Lib67AA1763_h"` 之后。
+1. **编辑范围：** 按当前配置 `source_mode` 选择实际编辑源。绝不编辑 `publish/` 文件夹。
+2. **Galaxy 源真值：** 从当前 Triggers 核对手写源码和 include 顺序，只修改手写源码或可编辑触发器。具体Library、Bank及前缀来自项目证据，绝不手改生成Galaxy。
 3. **地图调用必须用 GUI 动作：** 地图调用必须使用 GUI 动作，不能用 Custom Script。SC2 链接器会在地图未调用 GUI 动作时静默丢弃模组库。
 4. **目录/XML：** 写 XML 前先运行 `python tools/sc2-catalog-query.py` 或 grep `DataEditorXML/`。字段名和 ID 区分大小写。提交前运行 `python tools/test-suite.py`。
 5. **XML 仅 ASCII：** XML 注释和属性值只用 ASCII 字符。
@@ -321,7 +321,7 @@ AI 会：
 
 ### 工具报告 `os error 206` 或字符串替换错误
 
-参考 `wiki/implementation/agent-context-efficiency.md` 中的恢复指南。使用精确文本替换、保留编码/换行、运行 `python tools/test-suite.py` 验证。
+参考 `wiki/implementation/agent-context-efficiency.md` 中的恢复指南。使用精确文本替换、保留编码/换行、按受影响范围运行 `python tools/test-suite.py --scope tools|docs|mod` 或对应回归。
 
 ### 编辑器打开地图加载了模组而非原版
 
@@ -339,3 +339,20 @@ AI 会：
 3. `skills/` 目录下有 10 个根技能子目录 + `skills/galaxy/`（13 个）+ `skills/sc2data/`（6 个）
 4. `wiki/index.md` 存在
 5. `tools/test-suite.py` 可执行（Python 3.x 已安装）
+
+## 独立使用
+
+在 AI 工具中打开本目录，读取 [AGENTS.md](AGENTS.md) 与 [项目入口技能](skills/sc2-project-entry/SKILL.md)。无需安装其他智能体工作区。
+
+```text
+选择 ../StarCraft II/Mods/MyCampaign.SC2Mod 作为开发项目。
+调查 Unit:MyMarine 的武器、生产条件及升级影响，本次只读。
+```
+
+```text
+将当前项目 Unit:MyMarine 的未升级基础生命调整为120。
+核对本地覆盖、父对象和活动依赖，只修改实际开发源并验证相关组件。
+暂不部署，给出编辑器与游戏验证步骤。
+```
+
+按需执行与验收见 [工作区规则](AGENTS.md#独立工作区与按需执行)。本工作区提供开发所需本地化键维护和字符串锚点检查；完整汉化、翻译知识库、自动 UI 文本提取及百科产品不属于本工作区能力。
