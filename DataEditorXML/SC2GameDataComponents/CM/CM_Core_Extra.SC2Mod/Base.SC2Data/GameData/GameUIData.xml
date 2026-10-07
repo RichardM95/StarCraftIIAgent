@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CGameUI id="Dflt">
+        <HotkeyInfoArray index="HeroSelect2" Category="Hotkey/Category/13/CommanderAbility" Name="UI/Hotkey/Name/05/CommanderAbility4" Tooltip="UI/Hotkey/Tooltip/CommanderAbility4"/>
+        <HotkeyInfoArray index="HeroSelect3" Category="Hotkey/Category/13/CommanderAbility" Name="UI/Hotkey/Name/06/CommanderAbility5" Tooltip="UI/Hotkey/Tooltip/CommanderAbility5"/>
+        <HotkeyInfoArray index="HeroSelect4" Category="Hotkey/Category/13/CommanderAbility" Name="UI/Hotkey/Name/07/CommanderAbility6" Tooltip="UI/Hotkey/Tooltip/CommanderAbility6"/>
+        <HotkeyInfoArray index="HeroSelect5" Category="Hotkey/Category/13/CommanderAbility" Name="UI/Hotkey/Name/08/CommanderAbility7" Tooltip="UI/Hotkey/Tooltip/CommanderAbility7"/>
+        <HotkeyInfoArray index="HeroSelect6" Category="Hotkey/Category/13/CommanderAbility" Name="UI/Hotkey/Name/09/CommanderAbility8" Tooltip="UI/Hotkey/Tooltip/CommanderAbility8"/>
+        <HotkeyInfoArray index="HeroSelect7" Category="Hotkey/Category/13/CommanderAbility" Name="UI/Hotkey/Name/10/CommanderAbility9" Tooltip="UI/Hotkey/Tooltip/CommanderAbility9"/>
+    </CGameUI>
+</Catalog>

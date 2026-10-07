@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CEffectDamage id="HybridLarvaDamage" parent="DU_WEAP">
+        <Amount value="15"/>
+        <Death value="Eviscerate"/>
+    </CEffectDamage>
+    <CEffectDamage id="HybridMayflyWeaponDamage" parent="DU_WEAP">
+        <EditorCategories value="Race:Protoss"/>
+        <Kind value="Ranged"/>
+        <Amount value="5"/>
+    </CEffectDamage>
+    <CEffectCreatePersistent id="HybridMayflyWeaponPersistent">
+        <EditorCategories value="Race:Protoss"/>
+        <WhichLocation Value="TargetUnit"/>
+        <TimeScaleSource Value="Caster"/>
+        <Flags index="Channeled" value="1"/>
+        <Flags index="PersistUntilDestroyed" value="1"/>
+        <InitialEffect value="HybridMayflyWeaponDamage"/>
+        <PeriodicEffectArray value="HybridMayflyWeaponDamage"/>
+        <PeriodicPeriodArray value="0.25"/>
+    </CEffectCreatePersistent>
+    <CEffectCreatePersistent id="MutatorHybridNukeDetonateSmall2s">
+        <EditorCategories value="Race:Terran"/>
+        <ExpireDelay value="2"/>
+        <ExpireEffect value="HybridNukeDamageSmall"/>
+    </CEffectCreatePersistent>
+    <CActorModel id="HybridSmallWarpInEffect" parent="ModelAnimationStyleOneShotNoOrphan">
+        <Host Subject="_Selectable"/>
+        <HostSiteOps Ops="SOpAttachOrigin SOpForwardScopeLaunch"/>
+    </CActorModel>
+    <CActorUnit id="HybridLarva" parent="GenericUnitStandardNoAutoSoundLinks" unitName="HybridLarva">
+        <Aliases value="_UnitHuge"/>
+        <On Terms="Behavior.HybridSingularity.On" Send="ModelSwap HybridZergBlackDeath"/>
+        <On Terms="Behavior.HybridSingularity.On" Send="$Birth"/>
+        <On Terms="Behavior.HybridZerg_WarpIn.On" Send="SetOpacity"/>
+        <On Terms="Behavior.HybridZerg_WarpIn.Off" Send="SetOpacity 1.000000"/>
+        <AnimBlendTime value="0.200000"/>
+        <DeathArray index="Normal" ModelLink="HybridLarvaDeath" SoundLink="HybridZerg_Death"/>
+        <DeathActorSound value="Hybrid_Dominator_Void_Death"/>
+        <PortraitModel value="HybridZergPortrait"/>
+        <BarOffset value="120"/>
+        <BarWidth value="66"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\Wireframe-Hybrid-Viper.dds"/>
+        </GroupIcon>
+        <GroupSoundArray index="Birth" value="HybridABirth"/>
+        <GroupSoundArray index="Ready" value="HybridAReady"/>
+        <GroupSoundArray index="Help" value="HybridAHelp"/>
+        <GroupSoundArray index="What" value="HybridAWhat"/>
+        <GroupSoundArray index="Yes" value="HybridAYes"/>
+        <GroupSoundArray index="Attack" value="HybridAYes"/>
+        <GroupSoundArray index="Pissed" value="HybridAPissed"/>
+        <GroupSoundArray index="Board" value="HybridLarva_GroupBoard"/>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-zerg-groundcarapace-level0.dds"/>
+        <SoundArray index="Birth" value="HybridCBirth"/>
+        <SoundArray index="Ready" value="HybridCReady"/>
+        <SoundArray index="Help" value="HybridCHelp"/>
+        <SoundArray index="What" value="HybridCWhat"/>
+        <SoundArray index="Yes" value="HybridCYes"/>
+        <SoundArray index="Attack" value="HybridCYes"/>
+        <SoundArray index="Pissed" value="HybridCPissed"/>
+        <SoundArray index="Movement" value="HybridCMovement"/>
+        <SoundArray index="Turning" value="HybridCTurning"/>
+        <SoundArray index="Board" value="HybridCBoard"/>
+        <SoundArray index="Click" value="HybridCClick"/>
+        <SoundArray index="ClickError" value="HybridCClickError"/>
+        <SoundArray index="Highlight" value="HybridCHighlight"/>
+        <UnitIcon value="Assets\Textures\BTN-Unit-xelnaga-viper.dds"/>
+        <UnitKillRank Text="UnitKillRank/H05SHybrid"/>
+        <Wireframe>
+            <Image value="Assets\Textures\Wireframe-Hybrid-Viper.dds"/>
+        </Wireframe>
+    </CActorUnit>
+    <CActorUnit id="HybridMayfly" parent="GenericUnitStandardNoAutoSoundLinks" unitName="HybridMayfly">
+        <Aliases value="_UnitHuge"/>
+        <Remove Terms="WeaponStart.*.AttackStart" Send="AnimBracketStart Attack Attack"/>
+        <On Terms="Abil.HybridNemesisStream.SourceChannelStart" Send="$Spell PlayForever"/>
+        <On Terms="Abil.HybridNemesisStream.SourceChannelStop" Send="AnimClear Spell"/>
+        <On Terms="WeaponStart.*.AttackStart" Send="AnimBracketStart Attack Work,Start Work"/>
+        <EventDataFootprint index="0" Model="QueenFootprint"/>
+        <DeathArray index="Normal" ModelLink="HybridMayflyDeath" SoundLink="" VoiceLink="Hybrid_Zerg_Death"/>
+        <DeathCustoms ModelLink="ZergLargeUnitDeathLow" Name="AntiGravZerg"/>
+        <PortraitModel value="HybridNemesisPortrait"/>
+        <WalkAnimMoveSpeed value="1.7031"/>
+        <BarOffset value="75"/>
+        <ErrorArray Error="CantSeeBuildLocation" Sound="Alert_ZergBuildError" GroupSound="Alert_ZergBuildError"/>
+        <ErrorArray Error="CantSeeLandLocation" Sound="Alert_ZergBuildError" GroupSound="Alert_ZergBuildError"/>
+        <ErrorArray Error="CantBuildLocationInvalid" Sound="Alert_ZergBuildError" GroupSound="Alert_ZergBuildError"/>
+        <ErrorArray Error="CantLandLocationInvalid" Sound="Alert_ZergBuildError" GroupSound="Alert_ZergBuildError"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\wireframe-protoss-hybridnemesis.dds"/>
+        </GroupIcon>
+        <GroupSoundArray index="What" value="Queen_GroupWhat"/>
+        <GroupSoundArray index="Yes" value="Queen_GroupYes"/>
+        <GroupSoundArray index="Attack" value="Queen_GroupAttack"/>
+        <GroupSoundArray index="Board" value="Queen_GroupBoard"/>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-zerg-ancillaryarmor.dds"/>
+        <MovementHerdNode value="HerdNode_ZergQueens"/>
+        <ShieldArmorIcon value="Assets\Textures\btn-upgrade-protoss-shieldslevel2.dds"/>
+        <SoundArray index="Birth" value="HybridDBirth"/>
+        <SoundArray index="Ready" value="HybridZerg_Roar"/>
+        <SoundArray index="Help" value="QueenHelp"/>
+        <SoundArray index="What" value="QueenWhat"/>
+        <SoundArray index="Yes" value="QueenYes"/>
+        <SoundArray index="Attack" value="HybridF_Attack_vox"/>
+        <SoundArray index="Pissed" value="Queen_Pissed"/>
+        <SoundArray index="Movement" value="zQueen_moveLoop"/>
+        <SoundArray index="Turning" value="Queen_Turning"/>
+        <SoundArray index="Board" value="Queen_Board"/>
+        <SoundArray index="Click" value="Queen_Click"/>
+        <SoundArray index="ClickError" value="Queen_ClickError"/>
+        <SoundArray index="Highlight" value="Queen_Highlight"/>
+        <UnitFlags index="StandAnimBirthVariation" value="0"/>
+        <UnitKillRank Text="UnitKillRank/H05SHybrid"/>
+        <Wireframe>
+            <Image value="Assets\Textures\wireframe-protoss-hybridnemesis.dds"/>
+        </Wireframe>
+        <WireframeShield>
+            <Image value="Assets\Textures\wireframe-protoss-hybridnemesis-shield01.dds"/>
+            <Image value="Assets\Textures\wireframe-protoss-hybridnemesis-shield02.dds"/>
+            <Image value="Assets\Textures\wireframe-protoss-hybridnemesis-shield03.dds"/>
+        </WireframeShield>
+    </CActorUnit>
+    <CActorSound id="HybridMayflyDeathSound" parent="SoundOneShot">
+        <On Terms="UnitDeath.HybridMayfly; PassChance 25.000000" Send="Create"/>
+        <Sound value="Hybrid_Nemesis_Death_Vanish"/>
+        <Layers Sound="Primal_ZergFlyer_Hit">
+            <Chance value="100"/>
+            <Pitch value="0.000000,0.000000"/>
+            <PlayDelay value="0,0"/>
+            <Volume value="0.000000,0.000000"/>
+        </Layers>
+        <Layers Sound="Hybrid_Nemesis_Death_Missile">
+            <Chance value="100"/>
+            <Pitch value="0.000000,0.000000"/>
+            <PlayDelay value="0,0"/>
+            <Volume value="0.000000,0.000000"/>
+        </Layers>
+    </CActorSound>
+    <CActorAction id="HybridMayflyWeaponAttack" parent="GenericAttackBase">
+        <On Terms="Effect.HybridMayflyWeaponPersistent.Start" Send="Create"/>
+        <On Terms="Effect.HybridMayflyWeaponDamage.Start; FromEffectTreeDescendant" Send="ActionDamage"/>
+        <On Terms="Effect.HybridMayflyWeaponPersistent.Stop" Send="Destroy"/>
+        <LaunchSiteOps Ops="SOpAttachWeapon"/>
+        <Beam value="HybridMayflyWeaponBeam"/>
+        <ImpactSiteOps Ops="SOpAttachHarness SOpAttachVolumeNoVizEnhance SOpForwardLaunchGuide"/>
+        <AcquisitionYawHalfArc value="10.000000"/>
+        <ActionFlags index="AlignedImpactsAndDamages" value="1"/>
+        <ActionFlags index="LaunchForceSite" value="1"/>
+        <Lifetime value="-1.000000"/>
+    </CActorAction>
+    <CActorBeamSimple id="HybridMayflyWeaponBeam" parent="BeamSimpleAnimationStyleContinuous">
+        <On Terms="Effect.HybridMayflyWeaponPersistent.Stop; At Effect" Send="AnimBracketStop BSD"/>
+        <ModelFlags index="AutomateGlobalLoops" value="1"/>
+    </CActorBeamSimple>
+    <CActorSound id="HybridMayflyWeaponLoopSound" parent="SoundContinuous">
+        <On Terms="Effect.HybridMayflyWeaponPersistent.Start; At Caster" Send="Create"/>
+        <On Terms="Effect.HybridMayflyWeaponPersistent.Stop" Send="Destroy"/>
+        <Sound value="HybridNemesisWeaponLoop"/>
+    </CActorSound>
+    <CActorSound id="HybridMayflyWeaponStartSound" parent="SoundOneShot">
+        <On Terms="Effect.HybridMayflyWeaponPersistent.Start; At Target" Send="Create"/>
+        <Sound value="HybridNemesisWeaponStart"/>
+    </CActorSound>
+    <CActorSound id="HybridMayflyWeaponStopSound" parent="SoundOneShot">
+        <On Terms="Effect.HybridMayflyWeaponPersistent.Stop; At Caster" Send="Create"/>
+        <Sound value="HybridNemesisWeaponEnd"/>
+    </CActorSound>
+    <CActorSound id="HybridMayflyWeaponVx01Sound" parent="SoundOneShot">
+        <On Terms="Effect.HybridMayflyWeaponPersistent.Start; At Caster" Send="Create"/>
+        <Sound value="HybridNemesisWeapon_Vx_01"/>
+    </CActorSound>
+    <CActorSound id="HybridMayflyWeaponVx02Sound" parent="SoundOneShot">
+        <On Terms="Effect.HybridMayflyWeaponPersistent.Stop; At Caster" Send="Create"/>
+        <Sound value="HybridNemesisWeapon_Vx_02"/>
+    </CActorSound>
+    <CModel id="HybridSmallWarpInEffect" parent="OneShotSpellFX">
+        <Model value="Assets\Effects\Zerg\HybridWarpOut\HybridWarpOut.m3"/>
+        <EditorCategories value="Race:Zerg"/>
+        <Events>
+            <Anim value="Stand"/>
+            <Name value="HybridWarpIn"/>
+            <Type value="Sound"/>
+            <Time value="0.010000"/>
+            <Payload value="Hybrid_WarpIn"/>
+        </Events>
+        <ScaleMax value="0.750000,0.750000,0.750000"/>
+        <ScaleMin value="0.750000,0.750000,0.750000"/>
+    </CModel>
+    <CModel id="HybridLarva" parent="Unit" Race="Protoss">
+        <Model value="Assets\Units\Zerg\HybridZerg\HybridZerg.m3"/>
+        <Events>
+            <Anim value="Attack,00"/>
+            <Name value="HybridSounds"/>
+            <Type value="Sound"/>
+            <Time value="0.100000"/>
+            <Payload value="HybridViper_AttackLaunch"/>
+        </Events>
+        <Events>
+            <Anim value="Attack,00"/>
+            <Name value="HybridSounds"/>
+            <Type value="Sound"/>
+            <Time value="0.200000"/>
+            <Payload value="HybridViper_AttackLaunch"/>
+        </Events>
+        <Events>
+            <Anim value="Attack,00"/>
+            <Name value="HybridSounds"/>
+            <Type value="Sound"/>
+            <Time value="0.390000"/>
+            <Payload value="HybridViper_AttackImpact"/>
+        </Events>
+        <Events>
+            <Anim value="Attack,00"/>
+            <Name value="HybridSounds"/>
+            <Type value="Sound"/>
+            <Time value="0.530000"/>
+            <Payload value="HybridViper_AttackImpact"/>
+        </Events>
+        <Flags index="AutoUnload" value="1"/>
+        <Occlusion value="Show"/>
+        <PlanetPanelCamera value="Star2CameraHigher16"/>
+        <Radius value="1.000000"/>
+        <ScaleMax value="0.450000,0.450000,0.450000"/>
+        <ScaleMin value="0.450000,0.450000,0.450000"/>
+        <SelectionRadius value="1.000000"/>
+        <ShadowRadius value="1.000000"/>
+        <TechPurchaseCamera value="Star2CameraHigher16"/>
+        <UnitGlossaryCamera value="Star2CameraHigher16"/>
+    </CModel>
+    <CModel id="HybridLarvaDeath" parent="UnitDeath" Race="Zerg">
+        <Model value="Assets\Units\Zerg\HybridZergDeathEx1\HybridZergDeathEx1.m3"/>
+        <LowQualityModel value="ZergLargeUnitDeathLow"/>
+        <SelectionRadius value="0.625000"/>
+        <ShadowRadius value="0.625000"/>
+    </CModel>
+    <CModel id="HybridMayfly" parent="Unit" Race="Zerg">
+        <Model value="Assets\Units\Protoss\Hybrid_Nemesis\Hybrid_Nemesis.m3"/>
+        <Occlusion value="Show"/>
+        <PlanetPanelCamera value="Star2CameraLow08"/>
+        <Radius value="1.000000"/>
+        <ScaleMax value="0.750000,0.750000,0.750000"/>
+        <ScaleMin value="0.750000,0.750000,0.750000"/>
+        <SelectionOffset value="0.000000,0.000000,-0.400000"/>
+        <SelectionRadius value="1.000000"/>
+        <ShadowRadius value="1.000000"/>
+        <SquibTypeDefault value="Flesh"/>
+        <TechPurchaseCamera value="Star2CameraLow08"/>
+        <UnitGlossaryCamera value="Star2CameraLow08"/>
+    </CModel>
+    <CModel id="HybridMayflyDeath" parent="UnitDeath" Race="Zerg">
+        <Model value="Assets\Units\Protoss\Hybrid_Nemesis_Death\Hybrid_Nemesis_Death.m3"/>
+        <LowQualityModel value="ZergLargeUnitDeathLow"/>
+        <Events>
+            <Anim value="Death,00"/>
+            <Name value="HybridNemesisDeathSound"/>
+            <Type value="Actor"/>
+            <Time value="3.017000"/>
+            <Payload value="HybridNemesisDeathSound"/>
+        </Events>
+        <Events>
+            <Anim value="Death,00"/>
+            <Name value="Uni_DeathFXAcid"/>
+            <Type value="Sound"/>
+            <Time value="0.021000"/>
+            <Payload value="Uni_DeathFXAcid"/>
+        </Events>
+        <Events>
+            <Anim value="Death,00"/>
+            <Name value="Uni_DeathFXAcid"/>
+            <Type value="Sound"/>
+            <Time value="3.004000"/>
+            <Payload value="Uni_DeathFXAcid"/>
+        </Events>
+        <Events>
+            <Anim value="Death,00"/>
+            <Name value="Hybrid_Nemesis_DeathScreams"/>
+            <Type value="Sound"/>
+            <Time value="0.011000"/>
+            <Payload value="Hybrid_Nemesis_DeathScreams"/>
+        </Events>
+        <Events>
+            <Anim value="Death,00"/>
+            <Name value="Hybrid_Nemesis_DeathScreams"/>
+            <Type value="Sound"/>
+            <Time value="0.810000"/>
+            <Payload value="Hybrid_Nemesis_DeathScreams"/>
+        </Events>
+        <Events>
+            <Anim value="Death,00"/>
+            <Name value="Hybrid_Nemesis_DeathScreams"/>
+            <Type value="Sound"/>
+            <Time value="1.607000"/>
+            <Payload value="Hybrid_Nemesis_DeathScreams"/>
+        </Events>
+        <Events>
+            <Anim value="Death,00"/>
+            <Name value="Hybrid_Nemesis_DeathScreams"/>
+            <Type value="Sound"/>
+            <Time value="2.389000"/>
+            <Payload value="Hybrid_Nemesis_DeathScreams"/>
+        </Events>
+        <Occlusion value="Show"/>
+    </CModel>
+    <CModel id="HybridMayflyWeaponBeam" parent="PersistentSpellFX">
+        <Model value="Assets\Effects\Protoss\HybridEnergizeBeamLarge\HybridEnergizeBeamLarge.m3"/>
+        <EditorCategories value="Race:Protoss"/>
+        <RadiusLoose value="1.000000"/>
+        <ScaleMax value="0.750000,0.750000,0.750000"/>
+        <ScaleMin value="0.750000,0.750000,0.750000"/>
+    </CModel>
+    <CWeaponLegacy id="HybridLarva">
+        <Options index="Melee" value="1"/>
+        <Icon value="Assets\Textures\btn-upgrade-zerg-meleeattacks-level0.dds"/>
+        <DisplayEffect value="HybridLarvaDamage"/>
+        <TargetFilters value="Ground,Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="1.2"/>
+        <Period value="1"/>
+        <DamagePoint value="0.5"/>
+        <Effect value="HybridLarvaDamage"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="HybridMayflyWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Icon value="Assets\Textures\btn-ability-protoss-oraclepulsarcannonon.dds"/>
+        <DisplayEffect value="HybridMayflyWeaponDamage"/>
+        <TargetFilters value="Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <MinScanRange value="6.5"/>
+        <Range value="6"/>
+        <Period value="0.25"/>
+        <Effect value="HybridMayflyWeaponPersistent"/>
+        <LegacyOptions index="CanRetargetWhileChanneling" value="1"/>
+    </CWeaponLegacy>
+    <CUnit id="HybridLarva">
+        <DeathRevealRadius value="3"/>
+        <Mob value="Campaign"/>
+        <FlagArray index="UseLineOfSight" value="1"/>
+        <FlagArray index="ArmySelect" value="1"/>
+        <PlaneArray index="Ground" value="1"/>
+        <Collide index="Ground" value="1"/>
+        <Collide index="ForceField" value="1"/>
+        <Collide index="Small" value="1"/>
+        <Attributes index="Light" value="1"/>
+        <Attributes index="Biological" value="1"/>
+        <Attributes index="Heroic" value="1"/>
+        <LifeStart value="450"/>
+        <LifeMax value="450"/>
+        <LifeRegenRate value="0.2734"/>
+        <LifeArmorName value="Unit/LifeArmorName/HybridArmor"/>
+        <Speed value="2.8125"/>
+        <Acceleration value="6.25"/>
+        <LateralAcceleration value="46"/>
+        <Sight value="9"/>
+        <Food value="-3"/>
+        <CostResource index="Minerals" value="150"/>
+        <AttackTargetPriority value="20"/>
+        <AbilArray Link="stop"/>
+        <AbilArray Link="attack"/>
+        <AbilArray Link="move"/>
+        <BehaviorArray Link="AllUnitBehaviorController"/>
+        <BehaviorArray Link="HybridUnitDummy"/>
+        <WeaponArray Link="HybridLarva"/>
+        <CardLayouts>
+            <LayoutButtons Face="Move" Type="AbilCmd" AbilCmd="move,Move" Row="0" Column="0"/>
+            <LayoutButtons Face="Stop" Type="AbilCmd" AbilCmd="stop,Stop" Row="0" Column="1"/>
+            <LayoutButtons Face="MoveHoldPosition" Type="AbilCmd" AbilCmd="move,HoldPos" Row="0" Column="2"/>
+            <LayoutButtons Face="Attack" Type="AbilCmd" AbilCmd="attack,Execute" Row="0" Column="4"/>
+            <LayoutButtons Face="MovePatrol" Type="AbilCmd" AbilCmd="move,Patrol" Row="0" Column="3"/>
+        </CardLayouts>
+        <Radius value="0.75"/>
+        <SeparationRadius value="1"/>
+        <InnerRadius value="0.5"/>
+        <CargoSize value="4"/>
+        <SubgroupPriority value="15"/>
+        <MinimapRadius value="1"/>
+        <EditorCategories value="ObjectType:Unit,ObjectFamily:Campaign"/>
+        <GlossaryCategory value="Unit/Category/HybridUnits"/>
+        <GlossaryPriority value="110"/>
+        <!--HotkeyCategory value="Unit/Category/MutatorUnits"/-->
+    </CUnit>
+    <CUnit id="HybridMayfly">
+        <DeathRevealRadius value="3"/>
+        <Race value="Zerg"/>
+        <FlagArray index="ArmySelect" value="1"/>
+        <PlaneArray index="Air" value="1"/>
+        <Collide index="Flying" value="1"/>
+        <Attributes index="Light" value="1"/>
+        <Attributes index="Biological" value="1"/>
+        <Attributes index="Heroic" value="1"/>
+        <LifeStart value="200"/>
+        <LifeMax value="200"/>
+        <LifeRegenRate value="0.2734"/>
+        <LifeArmorName value="Unit/LifeArmorName/HybridArmor"/>
+        <ShieldsStart value="150"/>
+        <ShieldsMax value="150"/>
+        <ShieldRegenDelay value="10"/>
+        <ShieldRegenRate value="2"/>
+        <ShieldArmorName value="Unit/ShieldArmorName/HybridMayflyShields"/>
+        <Mover value="Fly"/>
+        <Speed value="2.7968"/>
+        <SpeedMultiplierCreep value="1.2221"/>
+        <Acceleration value="1.0625"/>
+        <LateralAcceleration value="46"/>
+        <StationaryTurningRate value="360"/>
+        <TurningRate value="360"/>
+        <Sight value="9"/>
+        <Height value="4"/>
+        <VisionHeight value="4"/>
+        <Food value="-3"/>
+        <CostCategory value="Army"/>
+        <CostResource index="Minerals" value="150"/>
+        <AttackTargetPriority value="20"/>
+        <AbilArray Link="stop"/>
+        <AbilArray Link="attack"/>
+        <AbilArray Link="move"/>
+        <BehaviorArray Link="AllUnitBehaviorController"/>
+        <BehaviorArray Link="HybridUnitDummy"/>
+        <WeaponArray Link="HybridMayflyWeapon"/>
+        <CardLayouts>
+            <LayoutButtons Face="Move" Type="AbilCmd" AbilCmd="move,Move" Row="0" Column="0"/>
+            <LayoutButtons Face="Stop" Type="AbilCmd" AbilCmd="stop,Stop" Row="0" Column="1"/>
+            <LayoutButtons Face="MoveHoldPosition" Type="AbilCmd" AbilCmd="move,HoldPos" Row="0" Column="2"/>
+            <LayoutButtons Face="MovePatrol" Type="AbilCmd" AbilCmd="move,Patrol" Row="0" Column="3"/>
+            <LayoutButtons Face="Attack" Type="AbilCmd" AbilCmd="attack,Execute" Row="0" Column="4"/>
+        </CardLayouts>
+        <Radius value="1"/>
+        <SeparationRadius value="1.25"/>
+        <InnerRadius value="0.5"/>
+        <CargoSize value="2"/>
+        <ScoreResult value="BuildOrder"/>
+        <SubgroupPriority value="18"/>
+        <MinimapRadius value="1.25"/>
+        <EditorCategories value="ObjectType:Unit,ObjectFamily:Campaign"/>
+        <TacticalAIThink value="AIThinkHybridNemesis"/>
+        <AIEvalFactor value="0.55"/>
+        <KillDisplay value="Always"/>
+        <RankDisplay value="Always"/>
+        <Fidget>
+            <ChanceArray index="Anim" value="50"/>
+            <ChanceArray index="Idle" value="50"/>
+        </Fidget>
+        <TauntDuration index="Dance" value="5"/>
+        <!--HotkeyCategory value="Unit/Category/MutatorUnits"/-->
+    </CUnit>
+</Catalog>

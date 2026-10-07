@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CWeaponLegacy id="TychusSkullCrusher">
+        <EditorCategories value="Race:Terran"/>
+        <Icon value="Assets\Textures\btn-upgrade-terran-infantryweaponslevel0.dds"/>
+        <DisplayEffect value="TychusSkullCrusherDamage"/>
+        <TargetFilters value="Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <MinScanRange value="13"/>
+        <Range value="13"/>
+        <Period value="2.5"/>
+        <DamagePoint value="0.05"/>
+        <Effect value="TychusSkullCrusherDamage"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="SIInfestedCivilian">
+        <Effect value="SIInfestedCivilianWeaponSet"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="ArtanisPrestigeMeleeWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Options index="Melee" value="1"/>
+        <Icon value="Assets\Textures\btn-upgrade-protoss-groundweaponslevel0.dds"/>
+        <DisplayEffect value="ArtanisPrestigeMeleeWeaponDamage"/>
+        <DisplayAttackCount value="2"/>
+        <TargetFilters value="Ground,Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="0"/>
+        <Period value="1"/>
+        <DamagePoint value="0.2"/>
+        <Effect value="ArtanisPrestigeMeleeWeaponCP"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="ArtanisPrestigeAirWeapon">
+        <EditorCategories value="Race:Protoss"/>
+        <Icon value="Assets\Textures\btn-upgrade-protoss-groundweaponslevel0.dds"/>
+        <DisplayEffect value="ArtanisPrestigeAirDamage"/>
+        <TargetFilters value="Air,Visible;Ground,Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="4"/>
+        <Period value="1"/>
+        <DamagePoint value="0.2"/>
+        <Effect value="ArtanisPrestigeAirLM"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="CommanderPrestigeKaraxSuperArmyColossusChargedBeam">
+        <EditorCategories value="Race:Protoss"/>
+        <Options index="Disabled" value="1"/>
+        <Options index="Hidden" value="1"/>
+        <Options index="OnlyFireWhileInAttackOrder" value="0"/>
+        <Options index="OnlyFireAtAttackOrderTarget" value="0"/>
+        <Options index="LinkedCooldown" value="0"/>
+        <Icon value="Assets\Textures\btn-upgrade-protoss-groundweaponslevel0.dds"/>
+        <DisplayEffect value="ColossusTaldarimDamage"/>
+        <DisplayAttackCount value="1"/>
+        <TargetFilters value="Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <AcquirePrioritization value="ByDistanceFromTarget"/>
+        <MinScanRange value="11.5"/>
+        <Range value="11"/>
+        <Arc value="90"/>
+        <Period value="2.5"/>
+        <DamagePoint value="0.2"/>
+        <Effect value="ColossusTaldarimLM"/>
+        <AllowedMovement value="Moving"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="HyperionVoidCoopMotionWeapon">
+        <EditorCategories value="Race:Terran"/>
+        <Options index="OnlyFireWhileInAttackOrder" value="0"/>
+        <Options index="OnlyFireAtAttackOrderTarget" value="0"/>
+        <Options index="ContinuousScan" value="1"/>
+        <Icon value="Assets\Textures\btn-upgrade-terran-shipweaponslevel0.dds"/>
+        <DisplayEffect value="HyperionVoidCoopMotionWeaponDamage"/>
+        <TargetFilters value="Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <MinScanRange value="10.5"/>
+        <Range value="10"/>
+        <Arc value="360"/>
+        <Period value="0.1"/>
+        <Effect value="HyperionVoidCoopMotionWeaponLM"/>
+        <AllowedMovement value="Moving"/>
+        <RandomDelayMax value="0"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="CommanderPrestigeKaraxSuperArmyShadowCannon">
+        <EditorCategories value="Race:Protoss"/>
+        <Icon value="Assets\Textures\btn-upgrade-protoss-groundweaponslevel0.dds"/>
+        <DisplayEffect value="ImmortalShakurasShadowCannonDamage"/>
+        <TargetFilters value="Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <MinScanRange value="13.5"/>
+        <Range value="13"/>
+        <Arc value="360"/>
+        <Period value="5"/>
+        <Effect value="ImmortalShakurasShadowCannonInitialCP"/>
+        <AllowedMovement value="Moving"/>
+    </CWeaponLegacy>
+    <CWeaponLegacy id="XelNagaKerriganLight">
+        <EditorCategories value="Race:Zerg"/>
+        <Icon value="Assets\Textures\btn-weapon-xelnagakerrigan-chainreaction.dds"/>
+        <DisplayEffect value="XelNagaKerriganLightDamage"/>
+        <TargetFilters value="Visible;Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <MinScanRange value="8"/>
+        <Range value="6"/>
+        <Marker>
+            <MatchFlags index="Id" value="1"/>
+        </Marker>
+        <Period value="1.5"/>
+        <Effect value="XelNagaKerriganLightSet"/>
+    </CWeaponLegacy>
+</Catalog>

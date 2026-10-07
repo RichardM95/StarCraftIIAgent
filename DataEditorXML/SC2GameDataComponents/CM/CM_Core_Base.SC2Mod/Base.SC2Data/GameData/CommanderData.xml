@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CCommander id="Abathur">
+        <UserReference value="PlayerCommanders;ZergAbathur"/>
+        <ProductId value="0"/>
+    </CCommander>
+    <CCommander id="Alarak">
+        <UserReference value="PlayerCommanders;ProtossAlarak"/>
+        <ProductId value="0"/>
+    </CCommander>
+    <CCommander id="Artanis">
+        <UserReference value="PlayerCommanders;ProtossArtanis"/>
+    </CCommander>
+    <CCommander id="Dehaka">
+        <UserReference value="PlayerCommanders;ZergDehaka"/>
+        <ProductId value="0"/>
+    </CCommander>
+    <CCommander id="Horner">
+        <UserReference value="PlayerCommanders;TerranHorner"/>
+        <ProductId value="0"/>
+    </CCommander>
+    <CCommander id="Karax">
+        <UserReference value="PlayerCommanders;ProtossKarax"/>
+        <ProductId value="0"/>
+    </CCommander>
+    <CCommander id="Kerrigan">
+        <UserReference value="PlayerCommanders;ZergKerrigan"/>
+    </CCommander>
+    <CCommander id="Mengsk">
+        <UserReference value="PlayerCommanders;TerranMengsk"/>
+        <ProductId value="0"/>
+        <ConsoleSkin value="ConsoleTerran_Imperial"/>
+    </CCommander>
+    <CCommander id="Nova">
+        <UserReference value="PlayerCommanders;TerranNova"/>
+        <ProductId value="0"/>
+    </CCommander>
+    <CCommander id="Raynor">
+        <UserReference value="PlayerCommanders;TerranRaynor"/>
+    </CCommander>
+    <CCommander id="Swann">
+        <UserReference value="PlayerCommanders;TerranSwann"/>
+        <ProductId value="0"/>
+    </CCommander>
+    <CCommander id="Vorazun">
+        <UserReference value="PlayerCommanders;ProtossVorazun"/>
+        <ConsoleSkin value="ConsoleProtoss_Nerazim"/>
+        <ProductId value="0"/>
+    </CCommander>
+    <CCommander id="Zagara">
+        <UserReference value="PlayerCommanders;ZergZagara"/>
+        <ProductId value="0"/>
+    </CCommander>
+    <CCommander id="Stukov">
+        <UserReference value="PlayerCommanders;ZergStukov"/>
+        <ProductId value="0"/>
+    </CCommander>
+    <CCommander id="Fenix">
+        <UserReference value="PlayerCommanders;ProtossFenix"/>
+        <ProductId value="0"/>
+    </CCommander>
+    <CCommander id="Stetmann">
+        <UserReference value="PlayerCommanders;ZergStetmann"/>
+        <ProductId value="0"/>
+    </CCommander>
+    <CCommander id="Tychus">
+        <UserReference value="PlayerCommanders;TerranTychus"/>
+        <ProductId value="0"/>
+    </CCommander>
+    <CCommander id="Zeratul">
+        <UserReference value="PlayerCommanders;ProtossZeratul"/>
+        <ProductId value="0"/>
+    </CCommander>
+</Catalog>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CGame id="Dflt">
+        <TriggerLibs Id="COTF" IncludePath="LibCOTF"/>
+        <TriggerLibs Id="COUI" IncludePath="LibCOUI"/>
+        <TriggerLibs Id="COMU" IncludePath="LibCOMU"/>
+        <TriggerLibs Id="COMI" IncludePath="LibCOMI"/>
+        <TriggerLibs Id="COOC" IncludePath="LibCOOC"/>
+    </CGame>
+</Catalog>

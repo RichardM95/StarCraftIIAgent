@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CEffectCreatePersistent id="ImbalycMutator_OldLegendryOverlord_NukeCP">
+        <EditorCategories value=""/>
+        <PeriodCount value="80"/>
+        <PeriodicEffectArray value="ImbalycMutator_OldLegendryOverlord_NukeRA"/>
+        <PeriodicEffectArray value="ImbalycMutator_OldLegendryOverlord_NukeRABig"/>
+        <PeriodicPeriodArray value="0.05"/>
+    </CEffectCreatePersistent>
+    <CEffectRandomPointInCircle id="ImbalycMutator_OldLegendryOverlord_NukeRABig">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetPoint"/>
+        <Effect value="ImbalycMutator_OldLegendryOverlord_NukeLM"/>
+        <Radius value="6"/>
+    </CEffectRandomPointInCircle>
+    <CEffectEnumArea id="ImbalycMutator_OldLegendryOverlord_NukeSA">
+        <EditorCategories value="Race:Zerg"/>
+        <ImpactLocation Value="TargetPoint"/>
+        <SearchFilters value="-;Self,Player,Ally,Stasis,Dead,Hidden,Invulnerable"/>
+        <AreaArray Radius="7"/>
+    </CEffectEnumArea>
+    <CEffectCreatePersistent id="ImbalycMutator_OldLegendryOverlord_NukeInit">
+        <EditorCategories value=""/>
+        <InitialDelay value="6"/>
+        <InitialEffect value="ImbalycMutator_OldLegendryOverlord_NukeCP"/>
+    </CEffectCreatePersistent>
+    <CEffectDamage id="ImbalycMutator_OldLegendryOverlord_NukeLMDamage" parent="DU_WEAP">
+        <EditorCategories value="Race:Zerg"/>
+        <Kind value="Splash"/>
+        <Amount value="50"/>
+    </CEffectDamage>
+    <CEffectEnumArea id="ImbalycMutator_OldLegendryOverlord_NukeLMSA">
+        <SearchFilters value="-;Player,Ally,Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <AreaArray Radius="2" Effect="ImbalycMutator_OldLegendryOverlord_NukeLMDamage"/>
+    </CEffectEnumArea>
+    <CEffectLaunchMissile id="ImbalycMutator_OldLegendryOverlord_NukeLM">
+        <EditorCategories value="Race:Zerg"/>
+        <LaunchLocation Value="TargetPoint"/>
+        <ImpactLocation Value="TargetPoint"/>
+        <LaunchOffset value="0,1,30"/>
+        <ImpactEffect value="ImbalycMutator_OldLegendryOverlord_NukeLMSA"/>
+        <AmmoUnit value="ImbalycMutator_OldLegendryOverlord_NukeLM"/>
+        <Movers Link="ImbalycMutator_OldLegendryOverlordNukeLM"/>
+    </CEffectLaunchMissile>
+    <CEffectDamage id="CrushAtmosphere">
+        <ImpactLocation Value="TargetUnit"/>
+        <Flags index="Kill" value="1"/>
+        <Flags index="NoKillCredit" value="1"/>
+        <Death value="Blast"/>
+    </CEffectDamage>
+    <CEffectRandomPointInCircle id="ImbalycMutator_OldLegendryOverlord_NukeRA">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetPoint"/>
+        <Effect value="ImbalycMutator_OldLegendryOverlord_NukeLM"/>
+        <Radius value="4"/>
+    </CEffectRandomPointInCircle>
+    <CEffectDamage id="ImbalycMutator_SuicideAttack">
+        <EditorCategories value=""/>
+    </CEffectDamage>
+    <CEffectApplyBehavior id="SCCImbalyc_InfestorEggA">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <Behavior value="SCCImbalyc_InfestorEggB"/>
+    </CEffectApplyBehavior>
+    <CEffectCreateUnit id="SCCImbalyc_InfestorEggCU2">
+        <SpawnEffect value="ImbalycMutator_SuicideAttack"/>
+        <SpawnUnit value="SIInfestedTrooper"/>
+        <SpawnCount value="2"/>
+    </CEffectCreateUnit>
+    <CEffectCreateUnit id="SCCImbalyc_InfestorEggCU3">
+        <SpawnEffect value="ImbalycMutator_SuicideAttack"/>
+        <SpawnUnit value="SIInfestedCivilian"/>
+        <SpawnCount value="4"/>
+    </CEffectCreateUnit>
+    <CEffectDamage id="SCCImbalyc_InfestorEggSuicide">
+        <EditorCategories value=""/>
+        <Flags index="Kill" value="1"/>
+    </CEffectDamage>
+    <CEffectCreateUnit id="SCCImbalyc_InfestorEggCU">
+        <SpawnEffect value="ImbalycMutator_SuicideAttack"/>
+        <SpawnUnit value="SIInfestedCivilian"/>
+    </CEffectCreateUnit>
+</Catalog>

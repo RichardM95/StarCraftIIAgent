@@ -1,0 +1,664 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CEmoticon id="ahoot">
+        <Hidden value="0"/>
+    </CEmoticon>
+    <CEmoticon id="apple">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="axiom">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="baited">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="bleedpurple">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="bowler">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="browncat">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="bwegg">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="cake"/>
+    <CEmoticon id="cantlook">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="carbotderpfestor"/>
+    <CEmoticon id="carbothightemplar"/>
+    <CEmoticon id="carbotlarva"/>
+    <CEmoticon id="carbotmule"/>
+    <CEmoticon id="carbotoverlordunimpressed"/>
+    <CEmoticon id="carbotprobegift"/>
+    <CEmoticon id="carbotreaperbomber"/>
+    <CEmoticon id="carbotsentrylolkr"/>
+    <CEmoticon id="carbotsurrender"/>
+    <CEmoticon id="carbotzergling"/>
+    <CEmoticon id="cheese">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="cheesemouse">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="classicterran">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="cmonbruh">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="contaminated">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="cool"/>
+    <CEmoticon id="creep">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="cutealarak"/>
+    <CEmoticon id="dehaka"/>
+    <CEmoticon id="devil"/>
+    <CEmoticon id="drill">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="dropperlord">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="failfish">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="fingerscrossed">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="gameheart">
+        <Hidden value="0"/>
+    </CEmoticon>
+    <CEmoticon id="gg"/>
+    <CEmoticon id="glhf"/>
+    <CEmoticon id="glzerg">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="goldtrophy"/>
+    <CEmoticon id="hammer">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="hard">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="hfprotoss">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="infested"/>
+    <CEmoticon id="joker">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="juicebox">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="kappaross">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="kitty">
+        <Hidden value="0"/>
+    </CEmoticon>
+    <CEmoticon id="lobster">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="lying">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="minerals"/>
+    <CEmoticon id="mule">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="myheart">
+        <Hidden value="0"/>
+    </CEmoticon>
+    <CEmoticon id="nosee">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="nuke"/>
+    <CEmoticon id="nwezpz">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="ohmydog">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="pancakes">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="pepper">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="pie">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="pliers">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="poo"/>
+    <CEmoticon id="prestige100">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="prestige300">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="prestige600">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="prestige900">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="protoss"/>
+    <CEmoticon id="pylon"/>
+    <CEmoticon id="rainbow"/>
+    <CEmoticon id="redpsi"/>
+    <CEmoticon id="rocks">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="rush">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="salute">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="scantipede">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="screwdriver">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="shake">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="shovel">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="silly"/>
+    <CEmoticon id="skull">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="smooch">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="speechless"/>
+    <CEmoticon id="stinkycheese">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="strawberry">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="survivor">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="symbiote"/>
+    <CEmoticon id="teatime">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="theart"/>
+    <CEmoticon id="thinking"/>
+    <CEmoticon id="thumbtack">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="tophat">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="tychus">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="urubu">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="vipertongue">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="warpprism">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="wtf">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="zerg"/>
+    <CEmoticon id="angry"/>
+    <CEmoticon id="artifact">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="babyrage">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="banana">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="bluelaser">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="broccoli">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="bunker"/>
+    <CEmoticon id="bwhydralisk">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="canisterrifle">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="carbotadjutant"/>
+    <CEmoticon id="carbotdronegift"/>
+    <CEmoticon id="carbothydralisk"/>
+    <CEmoticon id="carbotmarine"/>
+    <CEmoticon id="carbotmutalisk"/>
+    <CEmoticon id="carbotoverseer"/>
+    <CEmoticon id="carbotpyloncool"/>
+    <CEmoticon id="carbotscvgift"/>
+    <CEmoticon id="carbotstarhappy"/>
+    <CEmoticon id="carbotwidowminegg"/>
+    <CEmoticon id="carbotzerglingsleep"/>
+    <CEmoticon id="cheeseburger">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="cherries">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="classiczerg">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="coffee">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="cookie">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="coolcat">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="croissant">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="cutemissile">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="dehakaclaw"/>
+    <CEmoticon id="donut">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="drone"/>
+    <CEmoticon id="exhaust">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="feelsgood">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="fistbump">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="garlic">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="ghost"/>
+    <CEmoticon id="glprotoss">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="gminerals"/>
+    <CEmoticon id="goodgary">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="handok">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="hearts"/>
+    <CEmoticon id="hfterran">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="infestedadjutant"/>
+    <CEmoticon id="jthursday">
+        <Hidden value="0"/>
+    </CEmoticon>
+    <CEmoticon id="junkbot">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="keppa">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="koi">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="locust"/>
+    <CEmoticon id="medivac">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="mochi">
+        <Hidden value="0"/>
+    </CEmoticon>
+    <CEmoticon id="mushroom">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="nerd"/>
+    <CEmoticon id="nospeak">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="nwace">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="nwwallez">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="onion">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="party"/>
+    <CEmoticon id="pheart"/>
+    <CEmoticon id="pineapple">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="pointleft">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="potato">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="prestige1000">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="prestige400">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="prestige700">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="prestige91">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="purifier"/>
+    <CEmoticon id="qq">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="random"/>
+    <CEmoticon id="residentsleeper">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="rofl"/>
+    <CEmoticon id="sad"/>
+    <CEmoticon id="saw">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="scared"/>
+    <CEmoticon id="scv"/>
+    <CEmoticon id="shark">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="shrimp">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="simulant">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="slaproof">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="snipe"/>
+    <CEmoticon id="steak">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="stinkytofu">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="stukov"/>
+    <CEmoticon id="swarmqueen">
+        <Hidden value="0"/>
+    </CEmoticon>
+    <CEmoticon id="taldarim"/>
+    <CEmoticon id="terran"/>
+    <CEmoticon id="theilluminati">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="thumbsdown"/>
+    <CEmoticon id="toast"/>
+    <CEmoticon id="tuna">
+        <Hidden value="0"/>
+    </CEmoticon>
+    <CEmoticon id="uhaveapackage">
+        <Hidden value="0"/>
+    </CEmoticon>
+    <CEmoticon id="vice">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="voidray">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="whatsthis">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="wutface">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="zheart"/>
+    <CEmoticon id="applause">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="arya">
+        <Hidden value="0"/>
+    </CEmoticon>
+    <CEmoticon id="badgary">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="baneling"/>
+    <CEmoticon id="bongo">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="brokenheart">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="business">
+        <Hidden value="0"/>
+    </CEmoticon>
+    <CEmoticon id="bwmutalisk">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="cannon"/>
+    <CEmoticon id="carbotcannon"/>
+    <CEmoticon id="carbotexecutor"/>
+    <CEmoticon id="carbotinfestedterranlaugh"/>
+    <CEmoticon id="carbotmarinecptsalute"/>
+    <CEmoticon id="carbotoraclegg"/>
+    <CEmoticon id="carbotprobecheese"/>
+    <CEmoticon id="carbotraynor"/>
+    <CEmoticon id="carbotsentrylol"/>
+    <CEmoticon id="carbotstarshock"/>
+    <CEmoticon id="carbotzealotrage"/>
+    <CEmoticon id="carrot">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="cheesehand">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="classicprotoss">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="cloak"/>
+    <CEmoticon id="coffeetime"/>
+    <CEmoticon id="cookierat">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="cowboy">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="crowbar">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="dead">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="depot"/>
+    <CEmoticon id="doubleproxy">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="drool">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="explode">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="fenix"/>
+    <CEmoticon id="flex"/>
+    <CEmoticon id="gas"/>
+    <CEmoticon id="gift">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="glterran">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="goldenage">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="grapes">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="happy"/>
+    <CEmoticon id="heyguys">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="hfzerg">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="inlove"/>
+    <CEmoticon id="jtrain">
+        <Hidden value="0"/>
+    </CEmoticon>
+    <CEmoticon id="kappa">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="kiss"/>
+    <CEmoticon id="lemon">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="lul">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="mic">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="muffin">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="mustache">
+        <Hidden value="0"/>
+    </CEmoticon>
+    <CEmoticon id="nohear">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="npc">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="nwallkill">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="nyontal"/>
+    <CEmoticon id="overlord"/>
+    <CEmoticon id="peace">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="pickaxe">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="pizza">
+        <Hidden value="0"/>
+    </CEmoticon>
+    <CEmoticon id="pointright">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="pray">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="prestige200">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="prestige500">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="prestige800">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="probe"/>
+    <CEmoticon id="purplerain">
+        <Hidden value="0"/>
+    </CEmoticon>
+    <CEmoticon id="rainbarf">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="reaper">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="rip">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="royal">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="salty">
+        <Hidden value="0"/>
+    </CEmoticon>
+    <CEmoticon id="sc2"/>
+    <CEmoticon id="scream">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="seethis">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="shield">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="sick">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="skeleton">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="sleepy"/>
+    <CEmoticon id="sombrero">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="stim">
+        <Hidden value="0"/>
+    </CEmoticon>
+    <CEmoticon id="stovepipe">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="surprised"/>
+    <CEmoticon id="sword">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="tancho">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="terranturtle">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="thething">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="thumbsup"/>
+    <CEmoticon id="toasted">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="twitch">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="unity">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="viper">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="warpin">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="wrench">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="zeratul">
+        <RequiredReward value=""/>
+    </CEmoticon>
+    <CEmoticon id="zipped"/>
+</Catalog>

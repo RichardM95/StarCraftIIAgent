@@ -1,0 +1,559 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CSound id="HyperionVoidCoopLightningStormLaunchSound" parent="Spell">
+        <EditorCategories value="Race:Terran"/>
+        <AssetArray File="Assets\Sounds\Spell_ElectricFieldGenerator_00.wav" FacialGroup=""/>
+        <Pitch value="-1.000000,1.000000"/>
+        <Volume value="4.000000,5.000000"/>
+        <VolumeRolloffPoints Distance="21.225071"/>
+        <VolumeRolloffPoints Distance="39.316238" Volume="-96.000000"/>
+    </CSound>
+    <CSound id="ArtanisPrestigeMeleeAttackImpact" parent="Combat">
+        <EditorCategories value="Race:Protoss"/>
+        <AssetArray File="Assets\Sounds\Protoss\SharedEffects\Attacks\Protoss_AttackImpactMediumSlice0.wav"/>
+        <AssetArray File="Assets\Sounds\Protoss\SharedEffects\Attacks\Protoss_AttackImpactMediumSlice1.wav"/>
+        <AssetArray File="Assets\Sounds\Protoss\SharedEffects\Attacks\Protoss_AttackImpactMediumSlice2.wav"/>
+        <AssetArray File="Assets\Sounds\Protoss\SharedEffects\Attacks\Protoss_AttackImpactMediumSlice3.wav"/>
+        <Flags index="VariationFallback" value="0"/>
+        <DupeMaximumMethod value="Replace"/>
+        <DupeMuteCount value="4"/>
+        <DupePrioritization value="Oldest"/>
+        <Pitch value="-1.000000,1.000000"/>
+        <Volume value="-8.000000,-6.000000"/>
+    </CSound>
+    <CSound id="ArtanisPrestigeMeleeAttackLaunch" parent="Combat">
+        <EditorCategories value="Race:Protoss"/>
+        <AssetArray File="Assets\Sounds\Artanis_PsiBladeAttackLaunch01.wav" FacialGroup=""/>
+        <AssetArray File="Assets\Sounds\Artanis_PsiBladeAttackLaunch02.wav" FacialGroup=""/>
+        <AssetArray File="Assets\Sounds\Artanis_PsiBladeAttackLaunch03.wav" FacialGroup=""/>
+        <AssetArray File="Assets\Sounds\Artanis_PsiBladeAttackLaunch04.wav" FacialGroup=""/>
+        <AssetArray File="Assets\Sounds\Artanis_PsiBladeAttackLaunch05.wav" FacialGroup=""/>
+        <AssetArray File="Assets\Sounds\Artanis_PsiBladeAttackLaunch06.wav" FacialGroup=""/>
+        <AssetArray File="Assets\Sounds\Artanis_PsiBladeAttackLaunch07.wav" FacialGroup=""/>
+        <AssetArray File="Assets\Sounds\Artanis_PsiBladeAttackLaunch08.wav" FacialGroup=""/>
+        <AssetArray File="Assets\Sounds\Artanis_PsiBladeAttackLaunch09.wav" FacialGroup=""/>
+        <Flags index="Purgable" value="0"/>
+        <DupeMaximumMethod value="Replace"/>
+        <DupeMuteCount value="6"/>
+        <DupePrioritization value="Oldest"/>
+        <Pitch value="-0.500000,0.500000"/>
+        <Volume value="-11.000000,-7.000000"/>
+    </CSound>
+    <CSound id="ArtanisPrestigeAirAttackImpact" parent="Combat">
+        <AssetArray File="Assets\Sounds\ArtanisVoid_PsionicAssaultImpact01.wav" FacialGroup=""/>
+        <AssetArray File="Assets\Sounds\ArtanisVoid_PsionicAssaultImpact02.wav" FacialGroup=""/>
+        <AssetArray File="Assets\Sounds\ArtanisVoid_PsionicAssaultImpact03.wav" FacialGroup=""/>
+        <AssetArray File="Assets\Sounds\ArtanisVoid_PsionicAssaultImpact04.wav" FacialGroup=""/>
+        <AssetArray File="Assets\Sounds\ArtanisVoid_PsionicAssaultImpact05.wav" FacialGroup=""/>
+        <AssetArray File="Assets\Sounds\ArtanisVoid_PsionicAssaultImpact06.wav" FacialGroup=""/>
+        <AssetArray File="Assets\Sounds\ArtanisVoid_PsionicAssaultImpact07.wav" FacialGroup=""/>
+        <DupeMuteCount value="4"/>
+        <Pitch value="-1.000000,1.000000"/>
+        <Volume value="-1.000000,-1.000000"/>
+    </CSound>
+    <CSound id="ArtanisPrestigeAirAttackLaunch" parent="Combat">
+        <AssetArray File="Assets\Sounds\PsionicOrb_Launch_01.wav" FacialGroup=""/>
+        <AssetArray File="Assets\Sounds\PsionicOrb_Launch_02.wav" FacialGroup=""/>
+        <AssetArray File="Assets\Sounds\PsionicOrb_Launch_07.wav" Volume="1.000000,1.000000" FacialGroup=""/>
+        <DupeMaximumMethod value="Replace"/>
+        <DupeMuteCount value="3"/>
+        <DupePrioritization value="Oldest"/>
+        <Pitch value="2.000000,5.000000"/>
+        <Volume value="-4.000000,-4.000000"/>
+    </CSound>
+    <CSound id="ArtanisPrestigeAttack" parent="ProtossAck_Void">
+        <AssetArray TemplateParam="ArtanisVoid_Attack00"/>
+        <AssetArray TemplateParam="ArtanisVoid_Attack01"/>
+        <AssetArray TemplateParam="ArtanisVoid_Attack02"/>
+        <AssetArray TemplateParam="ArtanisVoid_Attack03"/>
+        <AssetArray TemplateParam="ArtanisVoid_Attack04"/>
+        <AssetArray TemplateParam="ArtanisVoid_Attack05"/>
+        <AssetArray TemplateParam="ArtanisVoid_Attack06"/>
+        <Flags index="NeedsUpdate" value="1"/>
+        <Flags index="NeedsTTS" value="1"/>
+        <DupeWait value="4000,4000"/>
+    </CSound>
+    <CSound id="ArtanisPrestigeHelp" parent="ProtossHelp">
+        <AssetArray TemplateParam="ArtanisVoid_Help00"/>
+        <Flags index="NeedsUpdate" value="1"/>
+        <Flags index="NeedsTTS" value="1"/>
+    </CSound>
+    <CSound id="ArtanisPrestigePissed" parent="ProtossPissed">
+        <AssetArray TemplateParam="ArtanisVoid_Pissed00"/>
+        <AssetArray TemplateParam="ArtanisVoid_Pissed01"/>
+        <AssetArray TemplateParam="ArtanisVoid_Pissed02"/>
+        <AssetArray TemplateParam="ArtanisVoid_Pissed03"/>
+        <AssetArray TemplateParam="ArtanisVoid_Pissed04"/>
+        <AssetArray TemplateParam="ArtanisVoid_Pissed05"/>
+        <AssetArray TemplateParam="ArtanisVoid_Pissed06"/>
+        <Flags index="NeedsUpdate" value="1"/>
+        <Flags index="NeedsTTS" value="1"/>
+    </CSound>
+    <CSound id="ArtanisPrestigeReady" parent="ProtossReady">
+        <AssetArray TemplateParam="ArtanisVoid_Ready00"/>
+        <Flags index="NeedsUpdate" value="1"/>
+        <Flags index="NeedsTTS" value="1"/>
+    </CSound>
+    <CSound id="ArtanisPrestigeWhat" parent="ProtossAck_Void">
+        <AssetArray TemplateParam="ArtanisVoid_What00"/>
+        <AssetArray TemplateParam="ArtanisVoid_What01"/>
+        <AssetArray TemplateParam="ArtanisVoid_What02"/>
+        <AssetArray TemplateParam="ArtanisVoid_What03"/>
+        <AssetArray TemplateParam="ArtanisVoid_What04"/>
+        <AssetArray TemplateParam="ArtanisVoid_What05"/>
+        <AssetArray TemplateParam="ArtanisVoid_What06"/>
+        <Flags index="NeedsUpdate" value="1"/>
+        <Flags index="NeedsTTS" value="1"/>
+    </CSound>
+    <CSound id="ArtanisPrestigeYes" parent="ProtossAck_Void">
+        <AssetArray TemplateParam="ArtanisVoid_Yes00"/>
+        <AssetArray TemplateParam="ArtanisVoid_Yes01"/>
+        <AssetArray TemplateParam="ArtanisVoid_Yes02"/>
+        <AssetArray TemplateParam="ArtanisVoid_Yes03"/>
+        <AssetArray TemplateParam="ArtanisVoid_Yes04"/>
+        <AssetArray TemplateParam="ArtanisVoid_Yes05"/>
+        <Flags index="NeedsUpdate" value="1"/>
+        <Flags index="NeedsTTS" value="1"/>
+        <DupeWait value="4000,4000"/>
+    </CSound>
+    <CSound id="ArtanisPrestigeDeathFX" parent="Combat">
+        <EditorCategories value="Race:Protoss"/>
+        <AssetArray File="Assets\Sounds\Artanis_Death01.wav" FacialGroup=""/>
+        <AssetArray File="Assets\Sounds\Artanis_Death02.wav" FacialGroup=""/>
+        <AssetArray File="Assets\Sounds\Artanis_Death03.wav" FacialGroup=""/>
+        <DupeDestroyCount value="3"/>
+        <Pitch value="-1.000000,1.000000"/>
+        <Volume value="2.000000,2.000000"/>
+        <VolumeRolloffPoints Distance="15.000000"/>
+        <VolumeRolloffPoints Distance="30.000000" Volume="-96.000000"/>
+    </CSound>
+    <CSound id="HyperionVoidCoopMotionAttackImpact" parent="Spell">
+        <EditorCategories value="Race:Terran"/>
+        <AssetArray File="Assets\Sounds\Terran\SharedEffects\Explosions\Terran_ExplosionSmall0.wav" Pitch="-3.000000,3.000000"/>
+        <AssetArray File="Assets\Sounds\Terran\SharedEffects\Explosions\Terran_ExplosionSmall1.wav" Pitch="-3.000000,3.000000"/>
+        <AssetArray File="Assets\Sounds\Terran\SharedEffects\Explosions\Terran_ExplosionSmall2.wav" Pitch="-3.000000,3.000000"/>
+        <AssetArray File="Assets\Sounds\Terran\SharedEffects\Explosions\Terran_ExplosionSmall3.wav" Pitch="-3.000000,3.000000"/>
+        <AssetArray File="Assets\Sounds\Terran\SharedEffects\Explosions\Terran_ExplosionSmall4.wav" Pitch="-3.000000,3.000000"/>
+        <AssetArray File="Assets\Sounds\Terran\SharedEffects\Explosions\Terran_ExplosionSmall5.wav" Pitch="-3.000000,3.000000"/>
+        <AssetArray File="Assets\Sounds\Terran\SharedEffects\Explosions\Terran_ExplosionSmall6.wav" Pitch="-3.000000,3.000000"/>
+        <AssetArray File="Assets\Sounds\Terran\SharedEffects\Explosions\Terran_ExplosionSmall7.wav" Pitch="-3.000000,3.000000"/>
+        <AssetArray File="Assets\Sounds\Terran\SharedEffects\Explosions\Terran_ExplosionSmall8.wav" Pitch="-3.000000,3.000000"/>
+        <AssetArray File="Assets\Sounds\Terran\SharedEffects\Explosions\Terran_ExplosionSmall9.wav" Pitch="-3.000000,3.000000"/>
+        <Category value="Combat"/>
+        <DupeDestroyCount value="6"/>
+        <DupeMuteCount value="6"/>
+        <Volume value="-9.000000,-9.000000"/>
+    </CSound>
+    <CSound id="HyperionVoidCoopMotionAttackLaunch" parent="Combat">
+        <EditorCategories value="Race:Terran"/>
+        <AssetArray File="Assets\Sounds\Terran\Battlecruiser\Battlecruiser_AttackLaunch0.wav"/>
+        <AssetArray File="Assets\Sounds\Terran\Battlecruiser\Battlecruiser_AttackLaunch1.wav"/>
+        <AssetArray File="Assets\Sounds\Terran\Battlecruiser\Battlecruiser_AttackLaunch2.wav"/>
+        <DupeDestroyCount value="12"/>
+        <DupeMaximumMethod value="Replace"/>
+        <DupeMuteCount value="12"/>
+        <Pitch value="3.860000,5.180000"/>
+        <Volume value="-3.100000,-2.520000"/>
+    </CSound>
+    <CSound id="HyperionVoidCoopYamatoCannonAttackChargeSoundP4" parent="Spell">
+        <EditorCategories value="Race:Terran"/>
+        <AssetArray File="Assets\Sounds\Terran\Battlecruiser\Battlecruiser_YamatoAttackCharge0.wav"/>
+        <Volume value="-0.920000,-0.920000"/>
+    </CSound>
+    <CSound id="HyperionVoidCoopYamatoCannonAttackImpactP4" parent="Spell">
+        <EditorCategories value="Race:Terran"/>
+        <AssetArray File="Assets\Sounds\Terran\SharedEffects\Explosions\Terran_ExplosionMedium0.wav" Pitch="-3.000000,3.000000"/>
+        <AssetArray File="Assets\Sounds\Terran\SharedEffects\Explosions\Terran_ExplosionMedium1.wav" Pitch="-3.000000,3.000000"/>
+        <AssetArray File="Assets\Sounds\Terran\SharedEffects\Explosions\Terran_ExplosionMedium2.wav" Pitch="-3.000000,3.000000"/>
+        <AssetArray File="Assets\Sounds\Terran\SharedEffects\Explosions\Terran_ExplosionMedium3.wav" Pitch="-3.000000,3.000000"/>
+        <AssetArray File="Assets\Sounds\Terran\SharedEffects\Explosions\Terran_ExplosionMedium4.wav" Pitch="-3.000000,3.000000"/>
+        <AssetArray File="Assets\Sounds\Terran\SharedEffects\Explosions\Terran_ExplosionMedium5.wav" Pitch="-3.000000,3.000000"/>
+        <AssetArray File="Assets\Sounds\Terran\SharedEffects\Explosions\Terran_ExplosionMedium6.wav" Pitch="-3.000000,3.000000"/>
+        <AssetArray File="Assets\Sounds\Terran\SharedEffects\Explosions\Terran_ExplosionMedium7.wav" Pitch="-3.000000,3.000000"/>
+        <AssetArray File="Assets\Sounds\Terran\SharedEffects\Explosions\Terran_ExplosionMedium8.wav" Pitch="-3.000000,3.000000"/>
+        <AssetArray File="Assets\Sounds\Terran\SharedEffects\Explosions\Terran_ExplosionMedium9.wav" Pitch="-3.000000,3.000000"/>
+        <Category value="Combat"/>
+        <DupeDestroyCount value="8"/>
+        <DupeMaximumMethod value="Replace"/>
+        <DupeMuteCount value="8"/>
+    </CSound>
+    <CSound id="HyperionVoidCoopYamatoCannonAttackLaunchP4" parent="Spell">
+        <EditorCategories value="Race:Terran"/>
+        <AssetArray File="Assets\Sounds\Terran\Battlecruiser\Battlecruiser_YamatoAttackLaunch0.wav"/>
+        <Volume value="-0.920000,-0.500000"/>
+    </CSound>
+    <CSound id="HyperionVoidCoopMovementP4" parent="Movement">
+        <EditorCategories value="Race:Terran"/>
+        <AssetArray File="Assets\Sounds\Terran\Battlecruiser\Battlecruiser_Movement0.wav"/>
+        <AssetArray File="Assets\Sounds\Terran\Battlecruiser\Battlecruiser_Movement1.wav"/>
+        <AssetArray File="Assets\Sounds\Terran\Battlecruiser\Battlecruiser_Movement2.wav"/>
+        <AssetArray File="Assets\Sounds\Terran\Battlecruiser\Battlecruiser_Movement3.wav"/>
+        <AssetArray File="Assets\Sounds\Terran\Battlecruiser\Battlecruiser_Movement4.wav"/>
+        <DupeDestroyCount value="4"/>
+        <Pitch value="-4.000000,-3.000000"/>
+        <SustainFade index="1" Time="0" Volume="0.000000"/>
+        <SustainFade Time="500" Volume="-96.000000"/>
+        <Volume value="-8.000000,-6.000000"/>
+        <VolumeRolloffFadeBlend value="Logarithmic"/>
+    </CSound>
+    <CSound id="KaraxPrestigeSOAProxyPylonVisualWarpInSound" parent="Spell">
+        <EditorCategories value="Race:Protoss"/>
+        <AssetArray File="Assets\Sounds\Protoss\SharedEffects\Construction\Protoss_BuildingWarpIn0.wav"/>
+    </CSound>
+    <CSound id="HyperionVoidCoopAttackP4" parent="TerranAck">
+        <AssetArray File="LocalizedData\Sounds\VO\RaynorBattleCruiser_Attack00.ogg" FacialAnim="Raynor_Attack00"/>
+        <AssetArray File="LocalizedData\Sounds\VO\RaynorBattleCruiser_Attack01.ogg" FacialAnim="Raynor_Attack01"/>
+        <AssetArray File="LocalizedData\Sounds\VO\RaynorBattleCruiser_Attack02.ogg" FacialAnim="Raynor_Attack02"/>
+        <AssetArray File="LocalizedData\Sounds\VO\RaynorBattleCruiser_Attack03.ogg" FacialAnim="Raynor_Attack03"/>
+        <Flags index="VariationFallback" value="0"/>
+        <Volume value="-1.000000,-1.000000"/>
+    </CSound>
+    <CSound id="HyperionVoidCoopHelpP4" parent="TerranAck">
+        <AssetArray File="LocalizedData\Sounds\VO\RaynorBattleCruiser_Help00.ogg" FacialAnim="Raynor_Help00"/>
+        <AssetArray File="LocalizedData\Sounds\VO\RaynorBattleCruiser_Help01.ogg" FacialAnim="Raynor_Help01"/>
+        <AssetArray File="LocalizedData\Sounds\VO\RaynorBattleCruiser_Help02.ogg" FacialAnim="Raynor_Help02"/>
+        <Flags index="VariationFallback" value="0"/>
+        <Category value="Alert"/>
+        <Volume value="-1.000000,-1.000000"/>
+    </CSound>
+    <CSound id="HyperionVoidCoopPissedP4" parent="Pissed">
+        <EditorCategories value="Race:Terran"/>
+        <AssetArray File="LocalizedData\Sounds\VO\RaynorBattleCruiser_Pissed00.ogg" FacialAnim="Raynor_Pissed00"/>
+        <AssetArray File="LocalizedData\Sounds\VO\RaynorBattleCruiser_Pissed01.ogg" FacialAnim="Raynor_Pissed01"/>
+        <AssetArray File="LocalizedData\Sounds\VO\RaynorBattleCruiser_Pissed02.ogg" FacialAnim="Raynor_Pissed02"/>
+        <AssetArray File="LocalizedData\Sounds\VO\RaynorBattleCruiser_Pissed03.ogg" FacialAnim="Raynor_Pissed03"/>
+        <AssetArray File="LocalizedData\Sounds\VO\RaynorBattleCruiser_Pissed04.ogg" FacialAnim="Raynor_Pissed04"/>
+        <AssetArray File="LocalizedData\Sounds\VO\RaynorBattleCruiser_Pissed05.ogg" FacialAnim="Raynor_Pissed05"/>
+        <AssetArray File="LocalizedData\Sounds\VO\RaynorBattleCruiser_Pissed07.ogg" FacialAnim="Raynor_Pissed07"/>
+        <AssetArray File="LocalizedData\Sounds\VO\RaynorBattleCruiser_Pissed08.ogg" FacialAnim="Raynor_Pissed08"/>
+        <AssetArray File="LocalizedData\Sounds\VO\RaynorBattleCruiser_Pissed09.ogg" FacialAnim="Raynor_Pissed09"/>
+        <AssetArray File="LocalizedData\Sounds\VO\RaynorBattleCruiser_Pissed10.ogg" FacialAnim="Raynor_Pissed10"/>
+        <AssetArray File="LocalizedData\Sounds\VO\RaynorBattleCruiser_Pissed11.ogg" FacialAnim="Raynor_Pissed11"/>
+        <Flags index="Download" value="1"/>
+        <Flags index="VariationFallback" value="0"/>
+        <Volume value="-1.000000,-1.000000"/>
+    </CSound>
+    <CSound id="HyperionVoidCoopReadyP4" parent="Ready">
+        <EditorCategories value="Race:Terran"/>
+        <AssetArray File="LocalizedData\Sounds\VO\RaynorBattleCruiser_Ready00.ogg" FacialAnim="Raynor_Ready00"/>
+        <Flags index="VariationFallback" value="0"/>
+        <Volume value="-1.000000,-1.000000"/>
+    </CSound>
+    <CSound id="HyperionVoidCoopWhatP4" parent="TerranAck">
+        <AssetArray File="LocalizedData\Sounds\VO\RaynorBattleCruiser_What00.ogg" FacialAnim="Raynor_What00"/>
+        <AssetArray File="LocalizedData\Sounds\VO\RaynorBattleCruiser_What01.ogg" FacialAnim="Raynor_What01"/>
+        <AssetArray File="LocalizedData\Sounds\VO\RaynorBattleCruiser_What02.ogg" FacialAnim="Raynor_What02"/>
+        <AssetArray File="LocalizedData\Sounds\VO\RaynorBattleCruiser_What03.ogg" FacialAnim="Raynor_What03"/>
+        <AssetArray File="LocalizedData\Sounds\VO\RaynorBattleCruiser_What04.ogg" FacialAnim="Raynor_What04"/>
+        <Flags index="VariationFallback" value="0"/>
+        <Volume value="-1.000000,-1.000000"/>
+    </CSound>
+    <CSound id="HyperionVoidCoopYesP4" parent="TerranAck" Portrait="RaynorMarinePortrait" Speaker="Raynor">
+        <AssetArray File="LocalizedData\Sounds\VO\RaynorBattleCruiser_Yes05.ogg" Volume="-2.000000,-2.000000" FacialAnim="Raynor_Yes05"/>
+        <AssetArray File="LocalizedData\Sounds\VO\RaynorBattleCruiser_Yes06.ogg" Volume="-2.000000,-2.000000" FacialAnim="Raynor_Yes06"/>
+        <AssetArray File="LocalizedData\Sounds\VO\RaynorBattleCruiser_Attack04.ogg" FacialAnim="Raynor_Attack04"/>
+        <AssetArray File="LocalizedData\Sounds\VO\RaynorBattleCruiser_Pissed06.ogg" Volume="-2.000000,-2.000000" FacialAnim="Raynor_Pissed06"/>
+        <Flags index="VariationFallback" value="0"/>
+    </CSound>
+    <CSound id="CommanderPrestigeAbathurEssenceShiftEnd" parent="Spell">
+        <AssetArray File="Assets\Sounds\Kerrigan_Teleport_End00.wav" FacialGroup=""/>
+        <PanLevel value="0.900000"/>
+        <Pitch value="-0.200000,0.200000"/>
+        <Spread value="20.000000"/>
+        <Volume value="2.000000,2.000000"/>
+    </CSound>
+    <CSound id="CommanderPrestigeAbathurEssenceShiftStart" parent="Spell">
+        <AssetArray File="Assets\Sounds\Kerrigan_Teleport_Start00.wav" FacialGroup=""/>
+        <PanLevel value="0.900000"/>
+        <Pitch value="-0.200000,0.200000"/>
+        <Spread value="20.000000"/>
+        <Volume value="2.000000,2.000000"/>
+    </CSound>
+    <CSound id="XelNagaKerriganAttack" parent="ZergAck_KerriganE03">
+        <AssetArray TemplateParam="KerriganEpilogue_Attack00"/>
+        <AssetArray TemplateParam="KerriganEpilogue_Attack01"/>
+        <AssetArray TemplateParam="KerriganEpilogue_Attack02"/>
+        <AssetArray TemplateParam="KerriganEpilogue_Attack03"/>
+        <AssetArray TemplateParam="KerriganEpilogue_Attack04"/>
+        <AssetArray TemplateParam="KerriganEpilogue_Attack05"/>
+        <AssetArray TemplateParam="KerriganEpilogue_Attack06"/>
+        <DupeWait value="4000,4000"/>
+    </CSound>
+    <CSound id="XelNagaKerriganCreepTeleportVO" parent="ZergAck_KerriganE03">
+        <AssetArray File="LocalizedData\Sounds\VO\Zerg\KerriganEpilogue_Yes00.ogg" FacialGroup=""/>
+        <Chance value="0"/>
+    </CSound>
+    <CSound id="XelNagaKerriganHelp" parent="ZergHelp_KerriganE03">
+        <AssetArray TemplateParam="KerriganEpilogue_Help00"/>
+    </CSound>
+    <CSound id="XelNagaKerriganPissed" parent="ZergPissed_KerriganE03">
+        <AssetArray TemplateParam="KerriganEpilogue_Pissed00"/>
+        <AssetArray TemplateParam="KerriganEpilogue_Pissed01"/>
+        <AssetArray TemplateParam="KerriganEpilogue_Pissed02"/>
+        <AssetArray TemplateParam="KerriganEpilogue_Pissed03"/>
+        <AssetArray TemplateParam="KerriganEpilogue_Pissed04"/>
+        <AssetArray TemplateParam="KerriganEpilogue_Pissed05"/>
+        <AssetArray TemplateParam="KerriganEpilogue_Pissed06"/>
+        <AssetArray TemplateParam="KerriganEpilogue_Pissed07"/>
+    </CSound>
+    <CSound id="XelNagaKerriganQuantumRayVO" parent="ZergAck_KerriganE03">
+        <AssetArray TemplateParam="KerriganEpilogue_Yes00"/>
+        <AssetArray TemplateParam="KerriganEpilogue_Yes01"/>
+        <AssetArray TemplateParam="KerriganEpilogue_Yes02"/>
+        <AssetArray TemplateParam="KerriganEpilogue_Yes03"/>
+        <AssetArray TemplateParam="KerriganEpilogue_Yes04"/>
+        <AssetArray TemplateParam="KerriganEpilogue_Yes05"/>
+        <Chance value="25"/>
+    </CSound>
+    <CSound id="XelNagaKerriganReady" parent="ZergReady_KerriganE03">
+        <AssetArray TemplateParam="KerriganEpilogue_Ready00"/>
+    </CSound>
+    <CSound id="XelNagaKerriganWhat" parent="ZergAck_KerriganE03">
+        <AssetArray TemplateParam="KerriganEpilogue_What00"/>
+        <AssetArray TemplateParam="KerriganEpilogue_What01"/>
+        <AssetArray TemplateParam="KerriganEpilogue_What02"/>
+        <AssetArray TemplateParam="KerriganEpilogue_What03"/>
+        <AssetArray TemplateParam="KerriganEpilogue_What04"/>
+        <AssetArray TemplateParam="KerriganEpilogue_What05"/>
+        <AssetArray TemplateParam="KerriganEpilogue_What06"/>
+    </CSound>
+    <CSound id="XelNagaKerriganYes" parent="ZergAck_KerriganE03">
+        <AssetArray TemplateParam="KerriganEpilogue_Yes00"/>
+        <AssetArray TemplateParam="KerriganEpilogue_Yes01"/>
+        <AssetArray TemplateParam="KerriganEpilogue_Yes02"/>
+        <AssetArray TemplateParam="KerriganEpilogue_Yes03"/>
+        <AssetArray TemplateParam="KerriganEpilogue_Yes04"/>
+        <AssetArray TemplateParam="KerriganEpilogue_Yes05"/>
+        <DupeWait value="4000,4000"/>
+    </CSound>
+    <CSound id="XelNagaKerriganCreepTeleportEnd" parent="Spell">
+        <AssetArray File="Assets\Sounds\Kerrigan_Teleport_End00.wav" FacialGroup=""/>
+        <PanLevel value="0.900000"/>
+        <Pitch value="-0.200000,0.200000"/>
+        <Spread value="20.000000"/>
+        <Volume value="2.000000,2.000000"/>
+    </CSound>
+    <CSound id="XelNagaKerriganCreepTeleportStart" parent="Spell">
+        <AssetArray File="Assets\Sounds\Kerrigan_Teleport_Start00.wav" FacialGroup=""/>
+        <PanLevel value="0.900000"/>
+        <Pitch value="-0.200000,0.200000"/>
+        <Spread value="20.000000"/>
+        <Volume value="2.000000,2.000000"/>
+    </CSound>
+    <CSound id="XelNagaKerriganExtinctionShockwaveExplosionDistant" parent="Spell">
+        <AssetArray File="Assets\Sounds\KerriganEpilogue03_Extinction_ShockwaveExplosion_Distant_LR.wav" FacialGroup=""/>
+        <Category value="Foley"/>
+        <PanLevel value="0.900000"/>
+        <Pitch value="-0.200000,0.200000"/>
+        <Spread value="30.000000"/>
+        <VolumeRolloffPoints Distance="10.000000" Volume="-96.000000"/>
+        <VolumeRolloffPoints Distance="35.000000"/>
+    </CSound>
+    <CSound id="XelNagaKerriganExtinctionVoxDistant" parent="Spell">
+        <AssetArray File="Assets\Sounds\KerriganEpilogue03_Extinction_VoxDistant.wav" FacialGroup=""/>
+        <Category value="Voice"/>
+        <OffsetFadeIn Volume="-96.000000"/>
+        <OffsetFadeIn Time="100"/>
+        <PanLevel value="0.750000"/>
+        <Spread value="30.000000"/>
+        <VolumeRolloffPoints Distance="10.000000" Volume="-96.000000"/>
+        <VolumeRolloffPoints Distance="35.000000"/>
+    </CSound>
+    <CSound id="XelNagaKerriganExtinctionChargeLoop" parent="Spell">
+        <AssetArray File="Assets\Sounds\Kerrigan_Extinction_ChargeLoop01.wav" FacialGroup=""/>
+        <LoopCount value="-1"/>
+        <OffsetFadeIn Volume="-96.000000"/>
+        <OffsetFadeIn Time="100"/>
+        <PanLevel value="0.900000"/>
+        <Pitch value="0.000000,0.300000"/>
+        <Spread value="20.000000"/>
+    </CSound>
+    <CSound id="XelNagaKerriganExtinctionChargeUp" parent="Spell">
+        <AssetArray File="Assets\Sounds\Kerrigan_Extinction_ChargeUp01.wav" FacialGroup=""/>
+        <PanLevel value="0.900000"/>
+        <Pitch value="0.000000,0.300000"/>
+        <Spread value="20.000000"/>
+    </CSound>
+    <CSound id="XelNagaKerriganExtinctionShockwaveExplosion" parent="Spell">
+        <AssetArray File="Assets\Sounds\Kerrigan_Extinction_ShockwaveExplosion_LR.wav" FacialGroup=""/>
+        <Category value="Foley"/>
+        <PanLevel value="0.500000"/>
+        <Pitch value="-1.000000,1.000000"/>
+        <Spread value="45.000000"/>
+        <VolumeRolloffPoints Distance="10.000000"/>
+        <VolumeRolloffPoints Distance="35.000000" Volume="-96.000000"/>
+    </CSound>
+    <CSound id="XelNagaKerriganExtinctionShockwaveLFE" parent="Spell">
+        <AssetArray File="Assets\Sounds\Kerrigan_Extinction_LFE_long01.wav" FacialGroup=""/>
+        <Category value="Foley"/>
+        <Pitch value="-1.000000,1.000000"/>
+        <SpeakerMix index="FrontLeft" value="0.000000"/>
+        <SpeakerMix index="FrontRight" value="0.000000"/>
+        <SpeakerMix index="Center" value="0.000000"/>
+        <SpeakerMix index="LFE" value="1.000000"/>
+        <SpeakerMix index="BackLeft" value="0.000000"/>
+        <SpeakerMix index="BackRight" value="0.000000"/>
+        <SpeakerMix index="SideLeft" value="0.000000"/>
+        <SpeakerMix index="SideRight" value="0.000000"/>
+        <Spread value="10.000000"/>
+        <Volume value="-4.000000,-4.000000"/>
+        <VolumeRolloffPoints Distance="10.000000"/>
+        <VolumeRolloffPoints Distance="30.000000" Volume="-96.000000"/>
+    </CSound>
+    <CSound id="XelNagaKerriganExtinctionStart" parent="Spell">
+        <AssetArray File="Assets\Sounds\Kerrigan_Extinction_Start01.wav" FacialGroup=""/>
+        <Category value="Foley"/>
+        <PanLevel value="0.900000"/>
+        <Pitch value="-1.000000,1.000000"/>
+        <Spread value="10.000000"/>
+        <Volume value="-1.000000,-1.000000"/>
+        <VolumeRolloffPoints Distance="10.000000"/>
+        <VolumeRolloffPoints Distance="30.000000" Volume="-96.000000"/>
+        <CategoryDuckingLocal value="Kerrigan_Extinction_Shockwave"/>
+    </CSound>
+    <CSound id="XelNagaKerriganExtinctionVoxEffortEnd" parent="Spell">
+        <AssetArray File="Assets\Sounds\Kerrigan_Extinction_VoxEffort01.wav" Offset="85000,85000" FacialGroup=""/>
+        <AssetArray File="Assets\Sounds\Kerrigan_Extinction_VoxEffort02.wav" Offset="80000,80000" FacialGroup=""/>
+        <AssetArray File="Assets\Sounds\Kerrigan_Extinction_VoxEffort03.wav" Offset="80000,80000" FacialGroup=""/>
+        <Category value="Voice"/>
+        <OffsetFadeIn Volume="-96.000000"/>
+        <OffsetFadeIn Time="100"/>
+        <PanLevel value="0.750000"/>
+        <Spread value="30.000000"/>
+        <VolumeRolloffPoints Distance="10.000000"/>
+        <VolumeRolloffPoints Distance="30.000000" Volume="-96.000000"/>
+    </CSound>
+    <CSound id="XelNagaKerriganExtinctionVoxEffortStart" parent="Spell">
+        <AssetArray File="Assets\Sounds\Kerrigan_Extinction_VoxEffort01.wav" FacialGroup=""/>
+        <AssetArray File="Assets\Sounds\Kerrigan_Extinction_VoxEffort02.wav" FacialGroup=""/>
+        <AssetArray File="Assets\Sounds\Kerrigan_Extinction_VoxEffort03.wav" FacialGroup=""/>
+        <Category value="Voice"/>
+        <PanLevel value="0.750000"/>
+        <PlayDelay value="3250,3250"/>
+        <Spread value="30.000000"/>
+        <Volume value="-13.000000,-13.000000"/>
+        <VolumeRolloffPoints Distance="10.000000"/>
+        <VolumeRolloffPoints Distance="20.000000" Volume="-96.000000"/>
+    </CSound>
+    <CSound id="XelNagaKerriganCelestialRadiance" parent="Spell">
+        <AssetArray File="Assets\Sounds\KerriganEpilogue03_CelestialRadiance01.wav" FacialGroup=""/>
+        <AssetArray File="Assets\Sounds\KerriganEpilogue03_CelestialRadiance02.wav" FacialGroup=""/>
+        <AssetArray File="Assets\Sounds\KerriganEpilogue03_CelestialRadiance03.wav" FacialGroup=""/>
+        <PanLevel value="0.800000"/>
+        <Pitch value="-0.200000,0.200000"/>
+        <Spread value="30.000000"/>
+    </CSound>
+    <CSound id="XelNagaKerriganQuantumRayBeamLoop" parent="Spell">
+        <AssetArray File="Assets\Sounds\Doodad_ZoneOfAnnihilation_Beam_04.wav"/>
+        <LoopCount value="-1"/>
+        <OffsetFadeIn Volume="-96.000000"/>
+        <OffsetFadeIn Time="100"/>
+        <Pitch value="-0.300000,0.300000"/>
+        <PlayDelay value="100,100"/>
+        <Spread value="10.000000"/>
+        <Volume value="-2.000000,-2.000000"/>
+    </CSound>
+    <CSound id="XelNagaKerriganQuantumRayBeamSizzleLoop" parent="Spell">
+        <AssetArray File="Assets\Sounds\Kerrigan_QuantumRay_BeamLoop01.wav" FacialGroup=""/>
+        <LoopCount value="-1"/>
+        <OffsetFadeIn Volume="-96.000000"/>
+        <OffsetFadeIn Time="100"/>
+        <Pitch value="-0.300000,0.300000"/>
+        <PlayDelay value="100,100"/>
+        <Spread value="10.000000"/>
+    </CSound>
+    <CSound id="XelNagaKerriganQuantumRayChargeUp" parent="Spell">
+        <AssetArray File="Assets\Sounds\Kerrigan_QuantumRay_End02.wav" FacialGroup=""/>
+        <Pitch value="-1.000000,1.000000"/>
+        <Spread value="10.000000"/>
+        <Volume value="2.000000,2.000000"/>
+    </CSound>
+    <CSound id="XelNagaKerriganQuantumRayEnd" parent="Spell">
+        <AssetArray File="Assets\Sounds\Kerrigan_QuantumRay_End01.wav" FacialGroup=""/>
+        <Pitch value="-1.000000,1.000000"/>
+        <Spread value="10.000000"/>
+        <Volume value="2.000000,2.000000"/>
+    </CSound>
+    <CSound id="XelNagaKerriganQuantumRayStart" parent="Spell">
+        <AssetArray File="Assets\Sounds\Kerrigan_QuantumRay_Start01.wav" FacialGroup=""/>
+        <Pitch value="-1.000000,1.000000"/>
+        <Spread value="10.000000"/>
+        <Volume value="2.000000,2.000000"/>
+    </CSound>
+    <CSound id="XelNagaKerriganLightAttackLaunch" parent="Combat">
+        <EditorCategories value="Race:Zerg"/>
+        <AssetArray File="Assets\Sounds\Spell_Kerrigan_chain0.wav" FacialGroup=""/>
+        <AssetArray File="Assets\Sounds\Spell_Kerrigan_chain2.wav" FacialGroup=""/>
+        <AssetArray File="Assets\Sounds\Spell_Kerrigan_chain3.wav" FacialGroup=""/>
+        <AssetArray File="Assets\Sounds\Spell_Kerrigan_chain4.wav" FacialGroup=""/>
+        <AssetArray File="Assets\Sounds\Spell_Kerrigan_chain6.wav" FacialGroup=""/>
+        <AssetArray File="Assets\Sounds\Spell_Kerrigan_chain7.wav" FacialGroup=""/>
+        <AssetArray File="Assets\Sounds\Spell_Kerrigan_chain8.wav" FacialGroup=""/>
+        <Category value="Spell"/>
+        <Pitch value="-1.000000,1.000000"/>
+        <Volume value="0.000000,1.000000"/>
+    </CSound>
+    <CSound id="ResurgenceCharge" parent="Spell">
+        <EditorCategories value="Race:Protoss"/>
+        <AssetArray File="Assets\Sounds\Artanis_ResurgenceCharge00.wav" FacialGroup=""/>
+        <DupeMuteCount value="3"/>
+        <Pitch value="-1.000000,1.000000"/>
+    </CSound>
+    <CSound id="ResurgenceExplode" parent="Spell">
+        <EditorCategories value="Race:Protoss"/>
+        <AssetArray File="Assets\Sounds\Artanis_ResurgenceExplosion.wav" FacialGroup=""/>
+        <DupeMuteCount value="3"/>
+        <Pitch value="-1.000000,1.000000"/>
+        <Spread value="30.000000"/>
+        <Volume value="3.000000,3.000000"/>
+    </CSound>
+    <CSound id="LightningDashStrikeImpact" parent="Spell">
+        <AssetArray File="Assets\Sounds\ExplosionPunch_SparseRockDebris1.wav" FacialGroup=""/>
+        <AssetArray File="Assets\Sounds\ExplosionPunch_SparseRockDebris2.wav" Weight="21" FacialGroup=""/>
+        <AssetArray File="Assets\Sounds\ExplosionPunch_SparseRockDebris3.wav" FacialGroup=""/>
+        <AssetArray File="Assets\Sounds\ExplosionPunch_SparseRockDebris4.wav" FacialGroup=""/>
+        <AssetArray File="Assets\Sounds\ExplosionPunch_SparseRockDebris5.wav" FacialGroup=""/>
+        <DupeMaximumMethod value="Replace"/>
+        <DupeMuteCount value="3"/>
+        <DupePrioritization value="Oldest"/>
+        <Pitch value="-1.000000,1.000000"/>
+        <Select value="Random"/>
+        <Volume value="-4.000000,-4.000000"/>
+    </CSound>
+    <CSound id="LightningDash2" parent="Spell">
+        <EditorCategories value="Race:Protoss"/>
+        <AssetArray File="Assets\Sounds\Artanis_LightningDashB01.wav" FacialGroup=""/>
+        <AssetArray File="Assets\Sounds\Artanis_LightningDashB02.wav" FacialGroup=""/>
+        <Chance value="50"/>
+        <DupeMaximumMethod value="Replace"/>
+        <DupeMuteCount value="6"/>
+        <DupePrioritization value="Oldest"/>
+        <Pitch value="-1.000000,1.000000"/>
+        <Volume value="-1.000000,-1.000000"/>
+    </CSound>
+    <CSound id="LightningDash" parent="Spell">
+        <EditorCategories value="Race:Protoss"/>
+        <AssetArray File="Assets\Sounds\Artanis_LightningStrike00.wav" FacialGroup=""/>
+        <AssetArray File="Assets\Sounds\Artanis_LightningStrike01.wav" FacialGroup=""/>
+        <AssetArray File="Assets\Sounds\Artanis_LightningStrike02.wav" FacialGroup=""/>
+        <AssetArray File="Assets\Sounds\Artanis_LightningStrike03.wav" FacialGroup=""/>
+        <AssetArray File="Assets\Sounds\Artanis_LightningStrike04.wav" FacialGroup=""/>
+        <DupeMaximumMethod value="Replace"/>
+        <DupeMuteCount value="6"/>
+        <DupePrioritization value="Oldest"/>
+        <Pitch value="-1.000000,1.000000"/>
+    </CSound>
+    <CSound id="AstralWind" parent="Spell">
+        <EditorCategories value="Race:Protoss"/>
+        <AssetArray File="Assets\Sounds\Artanis_AstralWind00.wav" FacialGroup=""/>
+        <AssetArray File="Assets\Sounds\Artanis_AstralWind01.wav" FacialGroup=""/>
+        <AssetArray File="Assets\Sounds\Artanis_AstralWind02.wav" FacialGroup=""/>
+        <AssetArray File="Assets\Sounds\Artanis_AstralWind03.wav" FacialGroup=""/>
+        <Pitch value="-1.000000,1.000000"/>
+        <Volume value="-1.000000,-1.000000"/>
+    </CSound>
+    <CSound id="HyperionVoidCoopLevelUp" parent="Spell">
+        <EditorCategories value="Race:Terran"/>
+        <AssetArray File="Assets\Sounds\Spell_ProtossShuttleWarp.wav" FacialGroup=""/>
+    </CSound>
+</Catalog>

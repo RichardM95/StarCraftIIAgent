@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CActorModel id="ImbalycMutator_OldLegendryOverlord_Nuke">
+        <FogVisibility value="Visible"/>
+        <On Terms="Effect.ImbalycMutator_OldLegendryOverlord_NukeInit.Start" Send="Create"/>
+        <On Terms="ActorCreation" Send="$Stand 0 -1.000000 -1.000000 6.000000 AsDuration"/>
+        <On Terms="Effect.ImbalycMutator_OldLegendryOverlord_NukeInit.Stop" Send="Destroy"/>
+        <On Terms="ActorCreation" Send="SetOpacity 0.200000 6.000000"/>
+        <HostSiteOps Ops="SOpShadow"/>
+        <Model value="ImbalycMutator_OldLegendryOverlordNuke"/>
+    </CActorModel>
+    <CActorAction id="ImbalycMutator_OldLegendryOverlord_NukeLM" parent="GenericAttack" effectImpact="ImbalycMutator_OldLegendryOverlord_NukeLMSA" effectLaunch="ImbalycMutator_OldLegendryOverlord_NukeLM">
+        <LaunchSiteOps Ops="SOpTargetPointStationary ImbalycMutator_OldLegendryOverlord_NukeLMOffset"/>
+        <ImpactMap index="None" Model="ImbalycMutator_OldLegendryOverlordNukeLMImpact" Sound="ImbalycMutator_OldLegendryOverlordNukeLMImpact"/>
+    </CActorAction>
+    <CActorMissile id="ImbalycMutator_OldLegendryOverlord_NukeLMMissile" parent="GenericAttackMissile" unitName="ImbalycMutator_OldLegendryOverlord_NukeLM">
+        <On Terms="ActorCreation" Send="Create BileLauncher_AttackLaunch_AS"/>
+        <On Terms="ActorCreation" Send="Create BileLauncher_AttackLaunch2_AS"/>
+    </CActorMissile>
+    <CActorModel id="ImbalycMutator_OldHero6ABIL3Model" parent="ModelAddition">
+        <On Terms="Behavior.ImbalycMutator_OldHero6ABIL3.On" Send="Create"/>
+        <On Terms="Behavior.ImbalycMutator_OldHero6ABIL3.Off" Send="AnimBracketStop BSD"/>
+        <On Terms="ActorCreation" Send="SetScale 1.400000 0.400000"/>
+        <On Terms="UnitDeath" Send="Destroy"/>
+        <On Terms="ActorCreation" Send="SetScale 1.400000 0.400000"/>
+        <On Terms="ActorCreation; ValidateUnit IsHyperionVoidCoop" Send="SetScale 0.900000"/>
+        <HostSiteOps Ops="SOpAttachCenter"/>
+        <AutoScaleFactor value="1.500000"/>
+    </CActorModel>
+    <CActorSiteOpLocalOffset id="ImbalycMutator_OldLegendryOverlord_NukeLMOffset">
+        <LocalOffset value="0.000000,0.000000,30.000000"/>
+    </CActorSiteOpLocalOffset>
+    <CActorUnit id="SCCImbalyc_InfestorEgg" parent="GenericUnitStandard" unitName="SCCImbalyc_InfestorEgg">
+        <Aliases value="_UnitLarge"/>
+        <DeathArray index="Normal" ModelLink="ZergSmallUnitDeath" SoundLink="BlightBringer_LrgEgg_Death"/>
+        <PortraitModel value="EggPortrait"/>
+        <BarOffset value="80"/>
+        <BarWidth value="160"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\Wireframe-Zerg-Egg.dds"/>
+        </GroupIcon>
+        <HeroIcon value="Assets\Textures\btn-unit-zerg-egg.dds"/>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-zerg-groundcarapace-level0.dds"/>
+        <UnitIcon value="Assets\Textures\btn-unit-zerg-egg.dds"/>
+        <Wireframe>
+            <Image value="Assets\Textures\Wireframe-Zerg-Egg.dds"/>
+        </Wireframe>
+        <Scale value="1.500000"/>
+        <MinimapIcon value="Assets\Textures\pingboss1.dds"/>
+        <MinimapIconScale value="0.180000"/>
+        <MinimapIconTintColor value="255,255,0,0"/>
+    </CActorUnit>
+    <!-- Hybrid Dominator Void -->
+    <CActorUnit id="HybridDominatorVoid">
+        <On Terms="Abil.VoidPlasmaBlast.SourcePrepStart" Send="AnimPlay Channel Stand,Channel"/>
+        <On Terms="Abil.VoidPlasmaBlast.SourcePrepStop" Send="$Spell NonLooping"/>
+        <On Terms="Abil.VoidPlasmaBlast.SourcePrepStop" Send="AnimClear Channel"/>
+        <On Terms="Abil.VoidPsiStorm.SourceCastStart" Send="$Spell NonLooping"/>
+    </CActorUnit>
+    <CActorUnit id="ImbalycMutator_OldHero6summon" parent="GenericBurrowerStandard" unitSound="InfestedCivilian" unitName="InfestedExploder">
+        <Aliases value="_UnitSmall"/>
+        <Macros value="UnloadDropAnim"/>
+        <Macros value="ZergBurrowStandardAnimMacro"/>
+        <Macros value="ZergSmallBurrowEffects"/>
+        <On index="69" Terms="UnitBirth.ImbalycMutator_OldHero6summon" Send="Create"/>
+        <On index="70" Terms="UnitBirth.ImbalycMutator_OldHero6summon" Send="AnimBracketStart Birth Birth Stand {} ClosingFull,OpeningPlayForever,Instant,DontResetOnUnhide"/>
+        <On Terms="ActorCreation" Send="Create StukovCoopSpawnVolatileTerranBirthModel"/>
+        <On Terms="ActorCreation" Send="Create StukovCoopSpawnVolatileTerransImpactSound"/>
+        <On Terms="Behavior.Precursor.Off" Send="Create StukovCoopSpawnVolatileTerranBirthModel"/>
+        <On Terms="Behavior.Precursor.Off" Send="Create StukovCoopSpawnVolatileTerransImpactSound"/>
+        <On Terms="ActorCreation" Send="$Birth"/>
+        <Model value="InfestedFatBomber_Civilian"/>
+        <ModelFlags index="OutlineEmitter" value="1"/>
+        <BuildModel value="InfestedFatBomber_Civilian"/>
+        <DeathArray index="Normal" ModelLink="InfestedFatBomber_Civilian_Death" SoundLink="InfestedCivilian_Explode"/>
+        <PlacementModel value="InfestedFatBomber_Civilian"/>
+        <PortraitModel value="InfestedExploderPortrait"/>
+        <WalkAnimMoveSpeed value="1.8007"/>
+        <BarOffset value="45"/>
+        <BarWidth value="36"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\Wireframe-Zerg-Infestedcolonist.dds"/>
+        </GroupIcon>
+        <GroupSoundArray index="Birth" value="InfestedTerranBirth"/>
+        <GroupSoundArray index="Ready" value="InfestedTerranReady"/>
+        <GroupSoundArray index="Help" value="InfestedTerranHelp"/>
+        <GroupSoundArray index="What" value="InfestedTerranWhat"/>
+        <GroupSoundArray index="Yes" value="InfestedTerranYes"/>
+        <GroupSoundArray index="Attack" value="InfestedTerranYes"/>
+        <GroupSoundArray index="Pissed" value="InfestedTerranPissed"/>
+        <GroupSoundArray index="Board" value="InfestedCivilian_GroupBoard"/>
+        <HeroIcon value="Assets\Textures\btn-unit-zerg-infestedcolonist.dds"/>
+        <HighlightTooltip value="Unit/Name/ImbalycMutator_OldHero6summon"/>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-zerg-groundcarapace-level0.dds"/>
+        <SoundArray index="Birth" value="InfestedTerranBirth"/>
+        <SoundArray index="Ready" value="InfestedTerranReady"/>
+        <SoundArray index="Help" value="InfestedTerranHelp"/>
+        <SoundArray index="What" value="InfestedTerranWhat"/>
+        <SoundArray index="Yes" value="InfestedTerranYes"/>
+        <SoundArray index="Attack" value="InfestedTerranYes"/>
+        <SoundArray index="Pissed" value="InfestedTerranPissed"/>
+        <SoundArray index="Movement" value="InfestedTerranMovement"/>
+        <SoundArray index="Turning" value="InfestedTerranCampaignTurning"/>
+        <SoundArray index="Board" value="InfestedTerranCampaignBoard"/>
+        <SoundArray index="Click" value="InfestedTerranCampaignClick"/>
+        <SoundArray index="ClickError" value="InfestedTerranCampaignClickError"/>
+        <SoundArray index="Highlight" value="InfestedTerranCampaignHighlight"/>
+        <UnitIcon value="Assets\Textures\btn-unit-zerg-infestedcolonist.dds"/>
+        <Wireframe>
+            <Image value="Assets\Textures\Wireframe-Zerg-Infestedcolonist.dds"/>
+        </Wireframe>
+    </CActorUnit>
+    <CActorMissile id="ImbalycMutator_OldLegendry_QueenParasiteLM" parent="GenericAttackMissile" unitName="ImbalycMutator_OldLegendry_QueenParasiteLM">
+        <Model value="QueenClassicParasiteMissile"/>
+    </CActorMissile>
+    <CActorModelMaterial id="TheSecondComingGhastHasBeenRevivedAddon" parent="GlazeParent">
+        <On Terms="Behavior.TheSecondComingGhastHasBeenRevived.On" Send="Create"/>
+        <On Terms="ActorCreation" Send="ModelMaterialApplyTo ::Main"/>
+        <On Terms="Behavior.TheSecondComingGhastHasBeenRevived.Off" Send="AnimBracketStop BSD"/>
+        <On Terms="AnimDone; AnimName Death" Send="ModelMaterialRemoveFrom ::Main"/>
+    </CActorModelMaterial>
+    <CActorModel id="TheSecondComingGhastAddon" parent="ModelAnimationStyleContinuous">
+        <Inherits index="CloakEffect" value="1"/>
+        <Inherits index="Visibility" value="1"/>
+        <On Terms="Behavior.TheSecondComingGhastWaitForRevive.On" Send="Create"/>
+        <On Terms="Behavior.TheSecondComingGhastWaitForRevive.Off" Send="AnimBracketStop BSD"/>
+        <On Terms="Behavior.TheSecondComingGhastWaitForRevive.On" Target="_Selectable" Send="SetTintColor {255,255,255 0.250000} 0.500000"/>
+        <On Terms="Behavior.TheSecondComingGhastWaitForRevive.Off" Target="_Selectable" Send="ClearTintColor 0.500000"/>
+        <Host Subject="_Selectable"/>
+        <HostSiteOps Ops="SOpAttachCenter"/>
+        <AutoScaleFactor value="1.000000"/>
+    </CActorModel>
+    <CActorModel id="CrushAtmosphere" parent="ModelAnimationStyleOneShot">
+        <On Terms="Effect.CrushAtmosphere.Start" Send="Create"/>
+    </CActorModel>
+</Catalog>

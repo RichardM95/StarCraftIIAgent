@@ -1,0 +1,606 @@
+﻿Abil/Name/AssaultModeMengsk=突击模式
+Abil/Name/BarracksMengskAddOns=附属建筑
+Abil/Name/BarracksMengskLand=着陆
+Abil/Name/BarracksMengskLiftOff=升空
+Abil/Name/CommandCenterMengskLand=着陆(指挥中心)
+Abil/Name/CommandCenterMengskLiftOff=起飞
+Abil/Name/CommandCenterMengskTrain=训练(指挥中心)
+Abil/Name/EngineeringBayMengskResearch=研发(工程站)
+Abil/Name/FactoryMengskAddOns=附属建筑
+Abil/Name/FactoryMengskLand=着陆
+Abil/Name/FactoryMengskLiftOff=升空
+Abil/Name/FighterModeMengsk=战机模式
+Abil/Name/FusionCoreMengskResearch=研发
+Abil/Name/GhostAcademyMengskResearch=幽灵军校研究
+Abil/Name/GhostMengskHoldFire=停火
+Abil/Name/GhostMengskWeaponsFree=自由射击
+Abil/Name/MedivacMengskDoubleBeamHeal=双重射线治疗
+Abil/Name/MedivacMengskHeal=治疗
+Abil/Name/MedivacMengskSpeedBoost=应急推进器
+Abil/Name/SiegeModeMengsk=攻城模式
+Abil/Name/SnipeMengsk=狙杀
+Abil/Name/StarportMengskAddOns=附属建筑
+Abil/Name/StarportMengskLand=着陆
+Abil/Name/StarportMengskLiftOff=升空
+Abil/Name/StarportMengskTrain=训练(星港)
+Abil/Name/TerranBuildMengsk=建造
+Abil/Name/UnsiegeMengsk=取消攻城模式
+Abil/Name/VehicleAfterburnersMengsk=载具后燃充能
+Behavior/Name/ArtilleryMengskCloudSickness=辐射打击
+Behavior/Name/ArtilleryMengskFear=恐惧
+Behavior/Name/BattlecruiserMengskBonusRange=战场辅助瞄准系统
+Behavior/Name/EMPMengskDecloak=EMP反隐形
+Behavior/Name/GhostMengskHoldFire=停火
+Behavior/Name/GhostMengskHoldFireB=停火
+Behavior/Name/GhostMengskIrradiate=迷宫式隐形迷彩
+Behavior/Name/GhostMengskSuperCloak=迷宫式隐形迷彩
+Behavior/Name/MarauderMengskAbsorb=壁垒屏障
+Behavior/Name/MarauderMengskAttackSpeedBoost=高端强化剂
+Behavior/Name/MarauderMengskShrapnelSlow=减速
+Behavior/Name/MedivacMengskSpeedBoost=后燃充能已激活
+Behavior/Name/PropagandaBlastMengsk=已接受教导
+Behavior/Name/ThorMengskArmorAuraTarget=壁垒场
+Behavior/Name/VehicleAfterburnersMengsk=后燃推进系统
+Behavior/Name/VikingMengskAirAttackDamage=战术调整
+Behavior/Name/VikingMengskCheatDeath=不死鸟协议
+Behavior/Name/VikingMengskGroundAttackDamage=战术调整
+Behavior/RankName/MengskRank0=军阶: 0
+Behavior/RankName/MengskRank1=军阶: 1
+Behavior/RankName/MengskRank2=军阶: 2
+Behavior/RankName/MengskRank3=军阶: 3
+Behavior/Tooltip/ArtilleryMengskCloudSickness=该单位因辐射打击而患病，正在承受持续性伤害。
+Behavior/Tooltip/ArtilleryMengskFear=该单位因陷入恐惧而乱跑。
+Behavior/Tooltip/BattlecruiserMengskBonusRange=奥古斯格勒的骄傲武器射程+<d ref="Behavior,BattlecruiserMengskBonusRange,Modification.RangedWeaponRange"/>
+Behavior/Tooltip/EMPMengskDecloak=目标刚刚遭受过EMP震爆，短时间内无法隐形。
+Behavior/Tooltip/GhostMengskEMPStun=震慑与敬畏
+Behavior/Tooltip/GhostMengskIrradiate=被点燃的单位。所有在点燃区域内或者附近的生物单位都会受到伤害。
+Behavior/Tooltip/GhostMengskSuperCloak=该单位免疫任何伤害。
+Behavior/Tooltip/MarauderMengskAbsorb=激活后，该“壁垒屏障”会阻挡一切受到的伤害，最多<d ref="Behavior,MarauderMengskAbsorb,DamageResponse.ModifyLimit"/>点。
+Behavior/Tooltip/MarauderMengskAttackSpeedBoost=该单位在“高端强化剂”效果的影响下攻击速度变得更快了。
+Behavior/Tooltip/MarauderMengskShrapnelSlow=移动速度降低。
+Behavior/Tooltip/MarauderMengskSlamSlow=该单位的攻击和移动速度降低了。
+Behavior/Tooltip/MedivacMengskSpeedBoost=该单位的移动速度提高<d ref="(Behavior,MedivacMengskSpeedBoost,Modification.MoveSpeedMultiplier-1)*100"/>%。
+Behavior/Tooltip/PropagandaBlastMengsk=该单位的攻击和移动速度获得了提高。
+Behavior/Tooltip/SiegeTankMengskSlowHeroic=目标在短时间内的移动速度降低。
+Behavior/Tooltip/SiegeTankMengskStun=震慑与敬畏
+Behavior/Tooltip/ThorMengskArmorAuraTarget=一台黑色战锤正给予该单位+<d ref="Behavior,ThorMengskArmorAuraTarget,Modification.LifeArmorBonus"/>护甲。
+Behavior/Tooltip/VehicleAfterburnersMengsk=该单位的移动速度已提高。
+Behavior/Tooltip/VikingMengskAirAttackDamage=该单位的对空伤害提高了。
+Behavior/Tooltip/VikingMengskCheatDeath=激活后，天空之怒可以阻挡一切受到的伤害，最多<d ref="Behavior,VikingMengskCheatDeath,DamageResponse.ModifyLimit"/>点。
+Behavior/Tooltip/VikingMengskGroundAttackDamage=该单位的对地伤害提高了。
+Button/Name/ArmoryMengsk=建造军械库
+Button/Name/ArtilleryMengsk=建造大地碎裂炮
+Button/Name/ArtilleryMengskBombardment=轰炸
+Button/Name/ArtilleryMengskExperimentalStrike=辐射打击
+Button/Name/ArtilleryMengskExperimentalStrikeLocked=辐射打击
+Button/Name/ArtilleryMengskExperimentalStrikePassive=辐射打击
+Button/Name/ArtilleryMengskExperimentalStrikePassiveLocked=辐射打击
+Button/Name/ArtilleryMengskExperimentalStrikePassiveUpgraded=辐射打击
+Button/Name/ArtilleryMengskExperimentalStrikeUpgraded=辐射打击
+Button/Name/ArtilleryMengskLoad=装载
+Button/Name/ArtilleryMengskPassive=大地碎裂炮
+Button/Name/ArtilleryMengskRange=大气层加速剂
+Button/Name/ArtilleryMengskRangeLocked=大气层加速剂
+Button/Name/ArtilleryMengskRangeResearch=研究大气层加速剂
+Button/Name/ArtilleryMengskRangeResearchLocked=研究大气层加速剂
+Button/Name/ArtilleryMengskUnloadAll=全部卸载
+Button/Name/AssaultModeMengsk=突击模式
+Button/Name/BarracksMengsk=建造兵营
+Button/Name/BattlecruiserMengsk=建造奥古斯格勒的骄傲
+Button/Name/BattlecruiserMengskHyperjump=战术跳跃
+Button/Name/BattlecruiserMengskImperialMandateGeneration=帝国的力量
+Button/Name/BattlecruiserMengskRangeAura=战场辅助瞄准系统
+Button/Name/BattlecruiserMengskRangeAuraLocked=战场辅助瞄准系统
+Button/Name/BattlecruiserMengskRangeAuraResearch=研究战场辅助瞄准系统
+Button/Name/BattlecruiserMengskRangeAuraResearchLocked=研究战场辅助瞄准系统
+Button/Name/BattlecruiserMengskVeterancy=帝国皇家卫队
+Button/Name/BlimpMengskTopbarRegen=放大电波
+Button/Name/BlimpMengskTopbarRegenLocked=放大电波
+Button/Name/BlimpMengskTopbarRegenResearch=研究放大电波
+Button/Name/BlimpMengskTopbarRegenResearchLocked=研究放大电波
+Button/Name/BuildArtilleryMengskLocked=建造大地碎裂炮
+Button/Name/BuildArtilleryMengskPassiveLocked=大地碎裂炮
+Button/Name/BuildBattlecruiserMengskLocked=建造奥古斯格勒的骄傲
+Button/Name/BuildThorMengskLocked=建造黑色战锤
+Button/Name/BunkerDepotMengskDrop=强制征召
+Button/Name/BunkerDepotMengskLoad=装载
+Button/Name/BunkerDepotMengskRange=瞄准辅助射击孔
+Button/Name/BunkerDepotMengskRangeLocked=瞄准辅助射击孔
+Button/Name/BunkerDepotMengskRangeResearch=研究瞄准辅助射击孔
+Button/Name/BunkerDepotMengskRangeResearchLocked=研究瞄准辅助射击孔
+Button/Name/BunkerDepotMengskUnloadAll=全部卸载
+Button/Name/BunkerMengsk=建造补给地堡
+Button/Name/BunkerMengskSalvage=回收
+Button/Name/CommandCenterMengsk=建造征兵中心
+Button/Name/CommanderPrestigeMengskArmamentStabilizersLocked=研究火炮稳定器
+Button/Name/CommanderPrestigeMengskMedivacLocked=建造帝国仲裁机
+Button/Name/CommanderPrestigeMengskNuclearAnnihilationLocked=核弹天劫
+Button/Name/EngineeringBayMengsk=建造工程站
+Button/Name/FactoryMengsk=建造重工厂
+Button/Name/FighterModeMengsk=战机模式
+Button/Name/FusionCoreMengsk=建造聚变芯体
+Button/Name/GatherMengsk=采集
+Button/Name/GhostAcademyMengsk=建造皇家军校
+Button/Name/GhostMengsk=训练元首鬼影
+Button/Name/GhostMengskEMP=EMP震爆
+Button/Name/GhostMengskEMPLongStun=EMP震爆
+Button/Name/GhostMengskGuidedStrike=至尊战术飞弹
+Button/Name/GhostMengskGuidedStrikeLocked=至尊战术飞弹
+Button/Name/GhostMengskGuidedStrikeRessearch=研究至尊战术飞弹
+Button/Name/GhostMengskGuidedStrikeRessearchLocked=研究至尊战术飞弹
+Button/Name/GhostMengskHoldFire=停火
+Button/Name/GhostMengskImperialMandateGeneration=帝国的力量
+Button/Name/GhostMengskIrradiate=焰能爆燃
+Button/Name/GhostMengskIrradiateBigDamage=焰能爆燃
+Button/Name/GhostMengskSuperCloak=迷宫式隐形迷彩
+Button/Name/GhostMengskVeterancy=帝国皇家卫队
+Button/Name/HealMengsk=治疗
+Button/Name/IgniteAfterburnersMengsk=后燃推进系统
+Button/Name/InstantTrooperMengskTransform=研究战场征用
+Button/Name/MarauderMengsk=训练壁垒卫士
+Button/Name/MarauderMengskAttackSpeedBoost=高端强化剂
+Button/Name/MarauderMengskAttackSpeedBoostLocked=高端强化剂
+Button/Name/MarauderMengskImperialMandateGeneration=帝国的力量
+Button/Name/MarauderMengskShield=壁垒屏障
+Button/Name/MarauderMengskSlow=失能弹
+Button/Name/MarauderMengskSlowLocked=失能弹
+Button/Name/MarauderMengskSlowResearch=研究失能弹
+Button/Name/MarauderMengskSlowResearchLocked=研究失能弹
+Button/Name/MarauderMengskVeterancy=帝国皇家卫队
+Button/Name/MaraurderMengskShield=壁垒屏障
+Button/Name/MechTransformationSpeedMengsk=研究智能伺服器
+Button/Name/MedivacMengsk=建造帝国仲裁机
+Button/Name/MedivacMengskDoubleHealBeam=双通道复苏器
+Button/Name/MedivacMengskDoubleHealBeamResearch=研究双通道复苏器
+Button/Name/MedivacMengskPermanentCloak=散点帷幕
+Button/Name/MedivacMengskPermanentCloakResearch=研究散点帷幕
+Button/Name/MedivacMengskSiegeTankAirlift=火炮稳定器
+Button/Name/MedivacMengskSiegeTankAirliftLocked=火炮稳定器
+Button/Name/MedivacMengskSiegeTankAirliftResearch=研究火炮稳定器
+Button/Name/MedivacMengskSiegeTankAirliftResearchLocked=研究火炮稳定器
+Button/Name/MengskAbilityAttackDamageLocked=战术调整
+Button/Name/MengskAbilitySpecializeAALocked=装备冰雹发射器
+Button/Name/MengskAbilitySpecializeFlamethrowerLocked=装备CPO-7火蜥火焰喷射器
+Button/Name/MengskStructureArmorResearch=研究精钢强化装甲
+Button/Name/MengskTrooperArmorLevel1=升级帝国装甲等级1
+Button/Name/MengskTrooperArmorLevel2=升级帝国装甲等级2
+Button/Name/MengskTrooperArmorLevel3=升级帝国装甲等级3
+Button/Name/MengskTrooperWeaponsLevel1=升级帝国武器等级1
+Button/Name/MengskTrooperWeaponsLevel2=升级帝国武器等级2
+Button/Name/MengskTrooperWeaponsLevel3=升级帝国武器等级3
+Button/Name/MengskZergCalldown=战争恶犬
+Button/Name/MengskZergCalldownLevel1=战争恶犬
+Button/Name/MengskZergCalldownLevel2=战争恶犬
+Button/Name/MengskZergCalldownLevel3=战争恶犬
+Button/Name/MengskZergCalldownLevel4=战争恶犬 (等级4)
+Button/Name/MissileTurretMengsk=建造导弹塔
+Button/Name/MissileTurretMengskPassive=导弹塔
+Button/Name/MorphtoRavenMengsk=取消爱国者模式
+Button/Name/MorphtoRavenMengskSieged=爱国者模式
+Button/Name/NuclearAnnihilationMengsk=核弹天劫
+Button/Name/NuclearAnnihilationMengskLocked=核弹天劫
+Button/Name/NukeCalldownMengsk=战术飞弹打击
+Button/Name/NukeMengskArm=为发射井装填战术飞弹
+Button/Name/PropagandaBlastMengsk=教导
+Button/Name/RavenMengsk=建造帝国见证者
+Button/Name/RefineryMengsk=建造精炼厂
+Button/Name/RoyalGuardMengsk=帝国皇家卫队
+Button/Name/RoyalGuardMengskImperialMandateGenerationLocked=帝国的力量
+Button/Name/SCVMengsk=征召帝国劳工
+Button/Name/SCVMengskAdvancedConstruction=工作人员
+Button/Name/SCVMengskEnlist=工地报道
+Button/Name/SCVMengskEnlistCC=工地召唤
+Button/Name/SetArtilleryMengskRallyPoint=设置大地碎裂炮集结点
+Button/Name/SetCommandCenterRallyPointLaborer=设置劳工集结点
+Button/Name/SetCommandCenterRallyPointTrooper=设置冲锋队集结点
+Button/Name/SetSupplyBunkerRallyPoint=设置补给地堡集结点
+Button/Name/SiegeModeMengsk=攻城模式
+Button/Name/SiegeTankMengsk=建造冲击分队
+Button/Name/SiegeTankMengskAirlift=火炮稳定器
+Button/Name/SiegeTankMengskImperialMandateGeneration=帝国的力量
+Button/Name/SiegeTankMengskStun=震慑与敬畏
+Button/Name/SiegeTankMengskVeterancy=帝国皇家卫队
+Button/Name/SnipeMengsk=狙击弹
+Button/Name/StarportMengsk=建造星港
+Button/Name/StructureArmorMengsk=精钢强化装甲
+Button/Name/StructureArmorMengskResearch=研究精钢强化装甲
+Button/Name/ThorMengsk=建造黑色战锤
+Button/Name/ThorMengskArmorAura=壁垒场
+Button/Name/ThorMengskArmorAuraLocked=壁垒场
+Button/Name/ThorMengskArmorAuraResearch=研究壁垒场
+Button/Name/ThorMengskArmorAuraResearchLocked=研究壁垒场
+Button/Name/ThorMengskImperialMandateGeneration=帝国的力量
+Button/Name/ThorMengskSiege=掩护射击模式
+Button/Name/ThorMengskUnsiege=行进模式
+Button/Name/ThorMengskVeterancy=帝国皇家卫队
+Button/Name/TrooperMengsk=征召冲锋队
+Button/Name/TrooperMengskBuild=建造战斗建筑
+Button/Name/TrooperMengskDropTrain=冲锋队高空轨道空投舱
+Button/Name/TrooperMengskDropTrainResearch=研究冲锋队高空轨道空投舱
+Button/Name/TrooperMengskEnlist=战斗报道
+Button/Name/TrooperMengskEnlistCC=战斗召唤
+Button/Name/TrooperMengskImperialMandateGeneration=人民的意志
+Button/Name/TrooperMengskImperialMandateGenerationLocked=人民的意志
+Button/Name/TrooperMengskSpecializeAA=装备冰雹发射器
+Button/Name/TrooperMengskSpecializeFlamethrower=装备CPO-7火蜥火焰喷射器
+Button/Name/TrooperMengskSpecializeImproved=装备B-2大口径轻机枪
+Button/Name/UnsiegeMengsk=坦克模式
+Button/Name/VikingMengskAttackDamage=战术调整
+Button/Name/VikingMengskCheatDeath=不死鸟协议
+Button/Name/VikingMengskCheatDeathLocked=不死鸟协议
+Button/Name/VikingMengskDodge=闪避机动
+Button/Name/VikingMengskDodgeLocked=闪避机动
+Button/Name/VikingMengskFighter=建造天空之怒
+Button/Name/VikingMengskImperialMandateGeneration=帝国的力量
+Button/Name/VikingMengskSpeed=亚萨涡轮机
+Button/Name/VikingMengskSpeedLocked=亚萨涡轮机
+Button/Name/VikingMengskSpeedResearch=研究亚萨涡轮机
+Button/Name/VikingMengskSpeedResearchLocked=研究亚萨涡轮机
+Button/Name/VikingMengskVeterancy=帝国皇家卫队
+Button/Name/WeaponsFreeMengsk=自由射击
+Button/Name/YamatoGunMengsk=大和炮
+Button/Tooltip/AbilLockedLevel05=该技能将在指挥官等级5时解锁。
+Button/Tooltip/AbilLockedLevel08=该技能将在指挥官等级8时解锁。
+Button/Tooltip/ArmoryMengsk=为重工厂和星港单位提供升级方案。<n/><n/><c val="ffff8a">开启：</c><n/>- 可以在重工厂中建造黑色战锤
+Button/Tooltip/ArtilleryMengsk=随机轰炸附近一处目标位置，对区域内的地面单位造成伤害。在顶部面板中开启“辐射打击”能力。<n/><n/><c val="#ColorAttackInfo">可以对地。</c>
+Button/Tooltip/ArtilleryMengskBombardment=轰炸目标位置，朝该位置附近随机投掷弹头，对敌方地面单位造成<d ref="Effect,ArtilleryMengskBombardmentDamage,Amount"/>点伤害。
+Button/Tooltip/ArtilleryMengskExperimentalStrike=为你所有的大地碎裂炮装填试验性弹头，瞄准地图上的任意位置进行发射。弹头随机落在目标位置附近，使整个区域浸泡在充满辐射的生化材料中，任何进入其中的敌人每秒承受<d ref="Effect,ArtilleryMengskExperimentalStrikePeriodicDamage,Amount" player="current" precision="1"/>点伤害。受到影响的单位无法隐形。
+Button/Tooltip/ArtilleryMengskExperimentalStrikePassive=该建筑可以装填一枚试验性弹头，瞄准地图上的任意位置进行发射。弹头会随机落在目标位置附近，使整个区域浸泡在充满辐射的生化材料中，任何进入其中的敌人每秒承受<d ref="Effect,ArtilleryMengskExperimentalStrikePeriodicDamage,Amount" player="current" precision ="1"/>点伤害。在顶部面板激活该技能。
+Button/Tooltip/ArtilleryMengskExperimentalStrikePassiveUpgraded=该建筑可以装填一枚试验性弹头，瞄准地图上的任意位置进行发射。弹头会随机落在目标位置附近，致使敌人因陷入恐惧而乱跑。受影响的区域变成一片辐射区，任何进入其中的敌人每秒承受<d ref="Effect,ArtilleryMengskExperimentalStrikePeriodicDamage,Amount" player="current"/>点伤害。在顶部面板激活该技能。
+Button/Tooltip/ArtilleryMengskExperimentalStrikeUpgraded=为你所有的大地碎裂炮装填试验性弹头，瞄准地图上的任意位置进行发射。弹头随机落在目标位置附近，不仅会让敌人因陷入恐惧而乱跑还会使整个区域浸泡在充满辐射的生化材料中，任何进入其中的敌人每秒承受<d ref="Effect,ArtilleryMengskExperimentalStrikePeriodicDamage,Amount" player="current"/>点伤害。受到影响的单位无法隐形。
+Button/Tooltip/ArtilleryMengskLoad=将劳工和冲锋队员装载进大地碎裂炮。每装载一名额外的劳工就会使大地碎裂炮的轰炸频率变得更快一些。
+Button/Tooltip/ArtilleryMengskPassive=工程站允许你建造大地碎裂炮。
+Button/Tooltip/ArtilleryMengskRange=使大地碎裂炮的轰炸技能的射程增加+<d ref="$UpgradeEffectArrayValue:ArtilleryMengskRange:Weapon,ArtilleryMengskBombardment,Range$"/>。
+Button/Tooltip/ArtilleryMengskRangeResearch=使<c val="ffff8a">大地碎裂炮</c>的轰炸技能的射程增加+<d ref="$UpgradeEffectArrayValue:ArtilleryMengskRange:Weapon,ArtilleryMengskBombardment,Range$"/>。
+Button/Tooltip/ArtilleryMengskUnloadAll=卸载所有单位。
+Button/Tooltip/AssaultModeMengsk=使天空之怒变形为机甲模式。在该模式下，天空之怒可以在地面行走，但只能攻击地面目标。
+Button/Tooltip/BarracksMengsk=皇家卫队步兵训练设施。<n/><n/><c val="ffff8a">开启：</c><n/>- 壁垒卫士
+Button/Tooltip/BarracksMengskFlying=兵营必须着陆才能开始训练部队。
+Button/Tooltip/BattlecruiserMengsk=强大的皇家卫队战舰。可以使用大和炮与战术跳跃。在星港中建造。<n/><n/><c val="#ColorAttackInfo">可以对地和对空。</c>
+Button/Tooltip/BattlecruiserMengskHyperjump=折跃到目标位置。战列巡航舰折跃期间处于无敌状态。
+Button/Tooltip/BattlecruiserMengskImperialMandateGeneration=<c val="#ColorAttackInfo">皇家卫队</c>基于他们的补给消耗和<c val="#ColorAttackInfo">军阶</c>来增加<c val="#ColorAttackInfo">帝国支持度</c>。每隔<d ref="Effect,TopbarMengskBonusRegenFactorDummy,Amount"/>秒，每1点帝国支持度产生1点<c val="#ColorAttackInfo">天命皇权</c>。<n/><n/>该单位正在增加<c val="#ColorAttackInfo"><d ref="$BehaviorStackCount:MengskVeterancyBattlecruiserMengsk$*Unit,BattlecruiserMengsk,Food*(-1)*Effect,RoyalGuardMengskTopbarRegenDummy,Amount*Effect,MasteryMengskRoyalGuardImperialMandateRegenerationFactorDummy,Amount" player="current" precision="0"/>点帝国支持度</c>。
+Button/Tooltip/BattlecruiserMengskRangeAura=使附近的友方地面远程单位的射程增加+<d ref="Behavior,BattlecruiserMengskBonusRange,Modification.RangedWeaponRange"/>。
+Button/Tooltip/BattlecruiserMengskRangeAuraResearch=允许<c val="ffff8a">奥古斯格勒的骄傲</c>给予附近友方地面远程单位+<d ref="Behavior,BattlecruiserMengskBonusRange,Modification.RangedWeaponRange"/>射程。
+Button/Tooltip/BattlecruiserMengskRank1=<n/><c val="ffff8a">级别1：</c>大和炮和战术跳跃拥有额外一次充能。
+Button/Tooltip/BattlecruiserMengskRank1Preview=<n/><c val="777777">级别1：</c>大和炮和战术跳跃拥有额外一次充能。
+Button/Tooltip/BattlecruiserMengskRank2=<n/><c val="ffff8a">级别2：</c>大和炮对目标周围一片区域范围造成伤害。
+Button/Tooltip/BattlecruiserMengskRank2Preview=<n/><c val="777777">级别2：</c>大和炮对目标周围一片区域范围造成伤害。
+Button/Tooltip/BattlecruiserMengskRank3=<n/><c val="ffff8a">级别3：</c>大和炮发射额外<d ref="Effect,BattlecruiserMengskYamatoMultiple,ValidateMax"/>次，会选择新目标。
+Button/Tooltip/BattlecruiserMengskRank3Preview=<n/><c val="777777">级别3：</c>大和炮发射额外<d ref="Effect,BattlecruiserMengskYamatoMultiple,ValidateMax"/>次，会选择新目标。
+Button/Tooltip/BlimpMengskTopbarRegen=“接受教导的劳工和冲锋队员”增加帝国支持度的速度提高两倍。
+Button/Tooltip/BlimpMengskTopbarRegenResearch=<c val="ffff8a">帝国见证者</c>的“教导”技能产生“帝国支持度”的速度提高两倍。
+Button/Tooltip/BunkerDepotMengsk=可以提供补给的防御性建筑。<n/>充足的补给可以让你制造更多的单位。<n/>冲锋队员可在地堡内战斗。<n/><n/><c val="#ColorAttackInfo">加成：地堡内的单位射程+<d ref="Behavior,BunkerMengskWeaponRangeBonus,Modification.WeaponRange"/>。</c>
+Button/Tooltip/BunkerDepotMengskDrop=空投一个补给地堡，里面有<d ref="Abil,BunkerMengskTransport,TotalCargoSpace"/>名不幸的冲锋队员在值守。
+Button/Tooltip/BunkerDepotMengskLoad=将劳工和冲锋队员载入补给地堡。
+Button/Tooltip/BunkerDepotMengskRange=使补给地堡中的单位的射程进一步增加+<d ref="$UpgradeEffectArrayValue:BunkerDepotMengskRange:Behavior,BunkerMengskWeaponRangeBonus,Modification.WeaponRange$"/>。
+Button/Tooltip/BunkerDepotMengskRangeResearch=使<c val="ffff8a">补给地堡</c>内单位的射程进一步增加+<d ref="$UpgradeEffectArrayValue:BunkerDepotMengskRange:Behavior,BunkerMengskWeaponRangeBonus,Modification.WeaponRange$"/>。
+Button/Tooltip/BunkerDepotMengskUnloadAll=卸载所有单位。
+Button/Tooltip/BunkerMengsk=可以提供补给的防御性建筑。<n/>充足的补给可以让你制造更多的单位。<n/>冲锋队员可在地堡内战斗。<n/><n/><c val="#ColorAttackInfo">加成：地堡内的单位射程+1。</c>
+Button/Tooltip/BunkerMengskSalvage=回收该建筑，将其移除并返还<d ref="Effect,SalvageSharedMengsk,SalvageFactor.Resource[Minerals]*(-100)"/>%建造所花费的晶体矿及高能瓦斯数量。回收过程需要<d ref="Behavior,SalvageSharedMengsk,Duration"/>秒。警告：回收过程一旦开始便无法取消。
+Button/Tooltip/CommandCenterMengsk=基础建筑，用于接收采集到的资源和转化帝国劳工与帝国冲锋队。自体可以升空。<n/><n/><c val="ffff8a">开启：</c><n/>- 帝国劳工<n/>- 帝国冲锋队<n/>- 劳工和冲锋队员可以建造补给地堡
+Button/Tooltip/CommandCenterMengskFlying=基础建筑。着陆后才能接受采集到的资源、生产单位或使用技能。
+Button/Tooltip/CommanderPrestigeMengskArmamentStabilizersLocked=该科技被指挥官威望锁定。
+Button/Tooltip/CommanderPrestigeMengskContaminatedStrikeUpgrade=<n/><n/><s val="Coop_Prestige_Tooltip">威望：</s>辐射打击的恐惧效果持续时间延长<s val="Coop_Prestige_Tooltip"><d ref="$UpgradeEffectArrayValue:CommanderPrestigeMengskArtillery:Behavior,ArtilleryMengskFear,Duration$/Behavior,ArtilleryMengskFear,Duration*100" player="0"/></s>%，并且其持续性伤害效果会使其受到的伤害提高<s val="Coop_Prestige_Tooltip"><d ref="$UpgradeEffectArrayValue:CommanderPrestigeMengskArtillery:Behavior,ArtilleryMengskCloudSickness,DamageResponse.ModifyFraction$*100"/></s>%。
+Button/Tooltip/CommanderPrestigeMengskMedivacLocked=该单位被指挥官威望锁定。
+Button/Tooltip/CommanderPrestigeMengskNuclearAnnihilationLocked=该技能被指挥官威望锁定。
+Button/Tooltip/CommanderPrestigeMengskRoyalGuardUpgrade=<n/><n/><s val="Coop_Prestige_Tooltip">威望：</s>经验获取提高<s val="Coop_Prestige_Tooltip"><d ref="$UpgradeEffectArrayValue:CommanderPrestigeMengskRoyalGuard:Effect,MengskRoyalGuardExperienceGainDummy,Amount$"/></s>%。
+Button/Tooltip/CommanderPrestigeMengskTrooperMandateUpgrade=<n/><n/><s val="Coop_Prestige_Tooltip">威望：</s>该单位在进驻大地碎裂炮时会提供帝国支持度。
+Button/Tooltip/CommanderPrestigeMengskTrooperWeaponsUpgrade=<n/><n/><s val="Coop_Prestige_Tooltip">威望：</s>装备精良的冲锋队员在死后不会丢掉武器，而会启动武器的自毁机制。
+Button/Tooltip/EngineeringBayMengsk=为帝国冲锋队和建筑提供升级方案。<n/><n/><c val="ffff8a">开启：</c><n/>- 劳工和冲锋队员可以建造导弹塔<n/>- 劳工和冲锋队员可以建造大地碎裂炮
+Button/Tooltip/FactoryMengsk=皇家卫队战车生产设施。<n/><n/><c val="ffff8a">开启：</c><n/>- 冲击分队
+Button/Tooltip/FactoryMengskFlying=重工厂必须着陆才能开始生产单位。
+Button/Tooltip/FighterModeMengsk=将天空之怒变形为战机模式。在该模式下，天空之怒只能攻击空中目标。
+Button/Tooltip/FusionCoreMengsk=为星港单位提供升级方案。<n/><n/><c val="ffff8a">开启：</c><n/>- 可以在星港中建造奥古斯格勒的骄傲
+Button/Tooltip/GatherMengsk=命令劳工从指定的晶体矿脉或瓦斯气泉上采集资源。
+Button/Tooltip/GhostAcademyMengsk=为壁垒卫士和元首鬼影提供升级方案。可以为元首鬼影建造战术飞弹。<n/><n/><c val="ffff8a">开启：</c><n/>- 可以在兵营中训练元首鬼影
+Button/Tooltip/GhostMengsk=皇家卫队特工。可以使用“焰能爆燃”和“EMP震爆”。可以对“皇家军校”中建造并发射的战术飞弹进行制导。<n/><n/><c val="#ColorAttackInfo">可以对空和对地。</c>
+Button/Tooltip/GhostMengskEMP=对目标区域内所有敌方单位的护盾造成<d ref="Effect,GhostMengskEMPDamage,ShieldBonus"/>点伤害，并耗尽其能量。击晕机械单位<d ref="Effect,GhostMengskEMPStunShortAB,Duration"/>秒。隐形的单位在被击中后将会暴露<d ref="Behavior,EMPMengskDecloak,Duration"/>秒。
+Button/Tooltip/GhostMengskEMPLongStun=对目标区域内所有敌方单位的护盾造成<d ref="Effect,GhostMengskEMPDamage,ShieldBonus"/>点伤害，并耗尽其能量。击晕机械单位<d ref="Effect,GhostMengskEMPStunLongAB,Duration"/>秒。隐形的单位在被击中后将会暴露<d ref="Behavior,EMPMengskDecloak,Duration"/>秒。
+Button/Tooltip/GhostMengskGuidedStrike=战术飞弹打击不再需要引导。
+Button/Tooltip/GhostMengskGuidedStrikeRessearch=<c val="ffff8a">元首鬼影</c>不再需要引导战术飞弹打击。
+Button/Tooltip/GhostMengskHoldFire=命令选中的单位收起武器，并在收到攻击命令前避免同敌人交火。收到停火命令的单位在受到攻击时会逃走。
+Button/Tooltip/GhostMengskImperialMandateGeneration=<c val="#ColorAttackInfo">皇家卫队</c>基于他们的补给消耗和<c val="#ColorAttackInfo">军阶</c>来增加<c val="#ColorAttackInfo">帝国支持度</c>。每隔<d ref="Effect,TopbarMengskBonusRegenFactorDummy,Amount"/>秒，每1点帝国支持度产生1点<c val="#ColorAttackInfo">天命皇权</c>。<n/><n/>该单位正在增加<c val="#ColorAttackInfo"><d ref="$BehaviorStackCount:MengskVeterancyGhostMengsk$*Unit,GhostMengsk,Food*(-1)*Effect,RoyalGuardMengskTopbarRegenDummy,Amount*Effect,MasteryMengskRoyalGuardImperialMandateRegenerationFactorDummy,Amount" player="current" precision="0"/>点帝国支持度</c>。
+Button/Tooltip/GhostMengskIrradiate=使一个目标生物敌人燃烧<d ref="Behavior,GhostMengskIrradiate,Duration"/>秒，每秒对其以及附近的生物敌人造成<d ref="Effect,GhostMengskIrradiateSmallDamage,Amount"/>点伤害。
+Button/Tooltip/GhostMengskIrradiateBigDamage=使一个目标生物敌人燃烧<d ref="Behavior,GhostMengskIrradiate,Duration"/>秒，每秒对其以及附近的生物敌人造成<d ref="Effect,GhostMengskIrradiateBigDamage,Amount"/>点伤害。
+Button/Tooltip/GhostMengskRank1=<n/><c val="ffff8a">1级军阶：</c>获得迷宫式隐形迷彩能力。
+Button/Tooltip/GhostMengskRank1Preview=<n/><c val="777777">1级军阶：</c>获得迷宫式隐形迷彩能力。
+Button/Tooltip/GhostMengskRank2=<n/><c val="ffff8a">2级军阶：</c>使焰能爆燃的周期性伤害提高<d ref="(Effect,GhostMengskIrradiateBigDamage,Amount/Effect,GhostMengskIrradiateSmallDamage,Amount-1)*100" precision="0"/>%。EMP震爆的击晕持续时间延长<d time="[d ref='Effect,GhostMengskEMPStunLongAB,Duration-Effect,GhostMengskEMPStunShortAB,Duration'/]" precision="0"/>。
+Button/Tooltip/GhostMengskRank2Preview=<n/><c val="777777">2级军阶：</c>使焰能爆燃的周期性伤害提高<d ref="(Effect,GhostMengskIrradiateBigDamage,Amount/Effect,GhostMengskIrradiateSmallDamage,Amount-1)*100" precision="0"/>%。EMP震爆的击晕持续时间延长<d time="[d ref='Effect,GhostMengskEMPStunLongAB,Duration-Effect,GhostMengskEMPStunShortAB,Duration'/]" precision="0"/>。
+Button/Tooltip/GhostMengskRank3=<n/><c val="ffff8a">3级军阶：</c>目标死亡时，焰能爆燃对附近的敌人造成<d ref="Effect,GhostMengskIrradiateDeathDamage,Amount"/>点伤害。EMP震爆会抽空目标的所有能量并对其造成等量伤害。
+Button/Tooltip/GhostMengskRank3Preview=<n/><c val="777777">3级军阶：</c>目标死亡时，焰能爆燃对附近的敌人造成<d ref="Effect,GhostMengskIrradiateDeathDamage,Amount"/>点伤害。EMP震爆会抽空目标的所有能量并对其造成等量伤害。
+Button/Tooltip/GhostMengskSuperCloak=使元首鬼影在受到攻击后的<d ref="Behavior,GhostMengskSuperCloak,Duration"/>秒内免受任何伤害。该效果每<d ref="Behavior,GhostMengskSuperCloakController,DamageResponse.Cost.Cooldown.TimeUse"/>秒只能生效一次。
+Button/Tooltip/HealMengsk=治疗一名友方生物目标。<n/><n/>每<d ref="1/Effect,MedivacMengskHealLevel1,DrainVitalCostFactor"/>点能量<c val="f078ff">治疗<d ref="Effect,MedivacMengskHealLevel1,RechargeVitalRate[0]"/>点生命值。</c>
+Button/Tooltip/HydraliskMengsk=“仔细检查一下约束装置，务必要做到绝对安全。你们会发现这头刺蛇极其野蛮好斗，我可不想损失任何一位实习生。谢丽尔这周不会再允许我更换任何配件了。“<n/><n/>- 萨索里安博士对着一头早期的刺蛇实验对象说道<n/><n/><c val="ffff8a">可以对空和对地。</c>
+Button/Tooltip/IgniteAfterburnersMengsk=该单位的移动速度提高<d ref="(Behavior,MedivacMengskSpeedBoost,Modification.MoveSpeedMultiplier-1)*100"/>%，持续<d ref="Behavior,MedivacMengskSpeedBoost,Duration"/>秒。
+Button/Tooltip/InstantTrooperMengskTransform=允许<c val="ffff8a">劳工</c>和<c val="ffff8a">冲锋队员</c>在战场上直接切换模式。
+Button/Tooltip/MarauderMengsk=皇家卫队重型突击步兵。<n/><n/><c val="#ColorAttackInfo">可以对地。</c>
+Button/Tooltip/MarauderMengskAttackSpeedBoost=攻击速度提高<d ref="(Behavior,MarauderMengskAttackSpeedBoost,Modification.AttackSpeedMultiplier-1)*100"/>%，持续<d ref="Behavior,MarauderMengskAttackSpeedBoost,Duration"/>秒。
+Button/Tooltip/MarauderMengskImperialMandateGeneration=<c val="#ColorAttackInfo">皇家卫队</c>基于他们的补给消耗和<c val="#ColorAttackInfo">军阶</c>来增加<c val="#ColorAttackInfo">帝国支持度</c>。每隔<d ref="Effect,TopbarMengskBonusRegenFactorDummy,Amount"/>秒，每1点帝国支持度产生1点<c val="#ColorAttackInfo">天命皇权</c>。<n/><n/>该单位正在增加<c val="#ColorAttackInfo"><d ref="$BehaviorStackCount:MengskVeterancyMarauderMengsk$*Unit,MarauderMengsk,Food*(-1)*Effect,RoyalGuardMengskTopbarRegenDummy,Amount*Effect,MasteryMengskRoyalGuardImperialMandateRegenerationFactorDummy,Amount" player="current" precision="0"/>点帝国支持度</c>。
+Button/Tooltip/MarauderMengskRank1=<n/><c val="ffff8a">1级军阶：</c>获得壁垒屏障能力。
+Button/Tooltip/MarauderMengskRank1Preview=<n/><c val="777777">1级军阶：</c>获得壁垒屏障能力。
+Button/Tooltip/MarauderMengskRank2=<n/><c val="ffff8a">2级军阶：</c>攻击时制造一个锥形的弹片冲击范围，对目标身后的敌人造成<d ref="Effect,MarauderMengskShrapnelDamage,Amount/Effect,PunisherGrenadesMengskU,Amount*100" precision="0"/>%伤害。
+Button/Tooltip/MarauderMengskRank2Preview=<n/><c val="777777">2级军阶：</c>攻击时制造一个锥形的弹片冲击范围，对目标身后的敌人造成<d ref="Effect,MarauderMengskShrapnelDamage,Amount/Effect,PunisherGrenadesMengskU,Amount*100" precision="0"/>%伤害。
+Button/Tooltip/MarauderMengskRank3=<n/><c val="ffff8a">3级军阶：</c>获得高端强化剂能力。
+Button/Tooltip/MarauderMengskRank3Preview=<n/><c val="777777">3级军阶：</c>获得高端强化剂能力。
+Button/Tooltip/MarauderMengskShield=给予壁垒卫士一个护盾，吸收<d ref="Behavior,MarauderMengskAbsorb,DamageResponse.ModifyLimit"/>点伤害。当护盾受到致命伤害时，它将释放一道能量脉冲，击退周围的地面单位。该护盾每<d ref="Behavior,MarauderMengskAbsorbReapplicator,Cost.Cooldown.TimeUse"/>秒刷新回满。
+Button/Tooltip/MarauderMengskSlow=被壁垒卫士击中的单位将被临时减速。<n/><n/><c val="#ColorAttackInfo">巨型单位对此免疫。</c>
+Button/Tooltip/MarauderMengskSlowResearch=允许<c val="ffff8a">壁垒卫士</c>的攻击可以减速敌人。
+Button/Tooltip/MasteryMengskRoyalGuardCostAppend=<n/><n/><c val="FFFF8A">精通：</c>费用降低<c val="FFFF8A"><d ref="Effect,MasteryMengskRoyalGuardCostDisplayDummy,Amount" player="current"/></c>%。
+Button/Tooltip/MasteryMengskRoyalGuardExperienceGainRateAppend=<n/><n/><c val="FFFF8A">精通：</c>获得的经验值提高<c val="FFFF8A"><d ref="Effect,MasteryMengskRoyalGuardExperienceGainRateDisplayDummy,Amount" player="current"/></c>%。
+Button/Tooltip/MasteryMengskRoyalGuardImperialMandateRegenerationAppend=<n/><n/><c val="FFFF8A">精通：</c>皇家卫队提供的帝国支持度增加<c val="FFFF8A"><d ref="Effect,MasteryMengskRoyalGuardImperialMandateRegenerationDisplayDummy,Amount" player="current"/></c>%。
+Button/Tooltip/MasteryMengskRoyalGuardMengskRanks=<n/><n/><c val="ffff8a">该单位每升一级军阶将会解锁新的技能或被动加成效果。</c><n/>
+Button/Tooltip/MasteryMengskStartingImperialMandateAppend=<n/><n/><c val="FFFF8A">精通：</c>起始天命皇权增加<c val="FFFF8A"><d ref="Effect,MasteryMengskStartingImperialMandateDisplayDummy,Amount" player="current"/></c>点。
+Button/Tooltip/MasteryMengskTopBarPowerAppend=<n/><n/><c val="FFFF8A">精通：</c>持续性伤害提高<c val="FFFF8A"><d ref="Effect,MasteryMengskTopPanelPowerDisplayDummy,Amount" player="current"/></c>%。
+Button/Tooltip/MasteryMengskTopPanelPowerAppend=<n/><n/><c val="FFFF8A">精通：</c>持续性伤害提高<c val="FFFF8A"><d ref="Effect,MasteryMengskTopPanelPowerDisplayDummy,Amount" player="current"/></c>%。
+Button/Tooltip/MasteryMengskTopPanelPowerNuclearAppend=<n/><n/><c val="FFFF8A">精通：</c>造成的伤害提高<c val="FFFF8A"><d ref="Effect,MasteryMengskTopPanelPowerDisplayDummy,Amount" player="current"/></c>%。
+Button/Tooltip/MasteryMengskTopPanelPowerZergAppend=<n/><n/><c val="FFFF8A">精通：</c>异虫奴仆造成的伤害提高<c val="FFFF8A"><d ref="Effect,MasteryMengskTopPanelPowerDisplayDummy,Amount" player="current"/></c>%。
+Button/Tooltip/MasteryMengskTrooperImperialMandateRegenerationAppend=<n/><n/><c val="FFFF8A">精通：</c>“接受教导的劳工和冲锋队员”提供的帝国支持度增加<c val="FFFF8A"><d ref="Effect,MasteryMengskTrooperImperialMandateRegenerationDisplayDummy,Amount" player="current"/></c>%。
+Button/Tooltip/MasteryRaynorMarauderMengskStimDurationAppend=<n/><n/><c val="FFFF8A">精通：</c>持续时间延长<c val="FFFF8A"><d ref="Effect,MasteryRaynorStimDurationDisplayDummy,Amount" precision="1"/></c>秒。
+Button/Tooltip/MasteryRaynorStimMengskDurationAppend=<n/><n/><c val="FFFF8A">精通：</c>持续时间延长<c val="FFFF8A"><d ref="Effect,MasteryRaynorStimDurationDisplayDummy,Amount" precision="1"/></c>秒。
+Button/Tooltip/MechTransformationSpeedMengsk=缩短<c val="ffff8a">冲击分队</c>, <c val="ffff8a">黑色战锤</c>和<c val="ffff8a">天空之怒</c>的变形时间。
+Button/Tooltip/MedivacMengsk=空中运输单位。治疗附近的生物单位。可以使用后燃推进系统。
+Button/Tooltip/MedivacMengskDoubleHealBeam=允许帝国仲裁机可以同时治疗两个目标。
+Button/Tooltip/MedivacMengskDoubleHealBeamResearch=允许<c val="ffff8a">帝国仲裁机</c>可以同时治疗两个目标。
+Button/Tooltip/MedivacMengskPermanentCloak=允许帝国仲裁机永久隐形，并且可以为自身提供一个护盾，吸收<d ref="$UpgradeEffectArrayValue:MedivacMengskPermanentCloak:Unit,MedivacMengsk,ShieldsMax$"/>点伤害。
+Button/Tooltip/MedivacMengskPermanentCloakResearch=允许<c val="ffff8a">帝国仲裁机</c>永久隐形，并且可以为自身提供一个护盾，吸收<d ref="$UpgradeEffectArrayValue:MedivacMengskPermanentCloak:Unit,MedivacMengsk,ShieldsMax$"/>点伤害。
+Button/Tooltip/MedivacMengskSiegeTankAirlift=允许攻城模式下的冲击分队在被帝国仲裁机吊挂时可以朝空中目标开火，只是开火间隔较长。
+Button/Tooltip/MedivacMengskSiegeTankAirliftResearch=允许攻城模式下的<c val="ffff8a">冲击分队</c>在被<c val="ffff8a">帝国仲裁机</c>吊挂时可以朝空中目标开火，只是开火间隔较长。
+Button/Tooltip/MengskStructureArmorResearch=提高<c val="ffff8a">补给地堡</c>, <c val="ffff8a">导弹塔</c>, and <c val="ffff8a">大地碎裂炮</c>的生命值与护甲。
+Button/Tooltip/MengskTrooperArmorLevel1=升级帝国冲锋队、帝国舰船以及异虫奴仆的护甲。
+Button/Tooltip/MengskTrooperArmorLevel2=进一步升级帝国冲锋队、帝国舰船以及异虫奴仆的护甲。
+Button/Tooltip/MengskTrooperArmorLevel3=最大化升级帝国冲锋队、帝国舰船以及异虫奴仆的护甲。
+Button/Tooltip/MengskTrooperWeaponsLevel1=升级帝国冲锋队、帝国舰船以及异虫奴仆造成的伤害。
+Button/Tooltip/MengskTrooperWeaponsLevel2=进一步升级帝国冲锋队、帝国舰船以及异虫奴仆造成的伤害。
+Button/Tooltip/MengskTrooperWeaponsLevel3=最大化升级帝国冲锋队、帝国舰船以及异虫奴仆造成的伤害。
+Button/Tooltip/MengskZergCalldown=在目标位置部署<d ref="Effect,ZerglingMengskSpawnCP,PeriodCount" player="current"/>只跳虫奴仆，持续<d ref="Behavior,MengskZergTimedLife,Duration" player="current" precision="1"/>秒。异虫奴仆会四处寻找攻击最近的敌人。<n/><n/><c val="ffff8a">部署基于天命皇权值的额外数量的异虫奴仆。</c><n/>
+Button/Tooltip/MengskZergCalldownLevel2Off=<n/><c val="777777"><d ref="Abil,MengskZergCalldownLevel2,Cost[0].Vital[Energy]"/>%: 部署<d ref="Effect,HydraliskMengskSpawnCP,PeriodCount" player="current"/>只额外的刺蛇。</c>
+Button/Tooltip/MengskZergCalldownLevel2On=<n/><c val="ffff8a"><d ref="Abil,MengskZergCalldownLevel2,Cost[0].Vital[Energy]"/>%: 部署<d ref="Effect,HydraliskMengskSpawnCP,PeriodCount" player="current"/>只额外的刺蛇。</c>
+Button/Tooltip/MengskZergCalldownLevel3Locked=<n/><c val="ff0000"><d ref="Abil,MengskZergCalldownLevel3,Cost[0].Vital[Energy]"/>%: 指挥官7级时解锁。</c><n/><c val="ff0000"><d ref="Abil,MengskZergCalldownLevel4,Cost[0].Vital[Energy]"/>%: 指挥官7级时解锁。</c>
+Button/Tooltip/MengskZergCalldownLevel3Off=<n/><c val="777777"><d ref="Abil,MengskZergCalldownLevel3,Cost[0].Vital[Energy]"/>%: 部署<d ref="Effect,MutaliskMengskSpawnCP,PeriodCount" player="current"/>只额外的异龙。</c>
+Button/Tooltip/MengskZergCalldownLevel3On=<n/><c val="ffff8a"><d ref="Abil,MengskZergCalldownLevel3,Cost[0].Vital[Energy]"/>%: 部署<d ref="Effect,MutaliskMengskSpawnCP,PeriodCount" player="current"/>只额外的异龙。</c>
+Button/Tooltip/MengskZergCalldownLevel4Off=<n/><c val="777777"><d ref="Abil,MengskZergCalldownLevel4,Cost[0].Vital[Energy]"/>%: 部署<d ref="Effect,UltraliskMengskSpawnCP,PeriodCount" player="current"/>只额外的雷兽。</c>
+Button/Tooltip/MengskZergCalldownLevel4On=<n/><c val="ffff8a"><d ref="Abil,MengskZergCalldownLevel4,Cost[0].Vital[Energy]"/>%: 部署<d ref="Effect,UltraliskMengskSpawnCP,PeriodCount" player="current"/>只额外的雷兽。</c>
+Button/Tooltip/MissileTurretMengsk=防空建筑。<n/><n/><c val="#ColorAttackInfo">可以对空。</c><n/><c val="FFE303">侦测单位</c>
+Button/Tooltip/MissileTurretMengsk2=防空建筑。<n/><n/><c val="#ColorAttackInfo">可以对空。</c><n/><c val="FFE303">侦测单位</c>
+Button/Tooltip/MissileTurretMengskPassive=工程站使你能建造导弹塔。
+Button/Tooltip/MorphtoRavenMengsk=取消教导并恢复“帝国见证者”的移动能力。
+Button/Tooltip/MorphtoRavenMengskSieged=给予“帝国见证者”可以教导附近盟友的能力，但会使其丧失移动能力。
+Button/Tooltip/MutaliskMengsk=项目科学家们曾要求异龙的栖息巢要足够大，以便研究它们的自然习性。后来多处设施越来越对不断增长的工作人员失踪数字感到忧心忡忡。<n/><n/><c val="ffff8a">可以对地和对空。</c>
+Button/Tooltip/NuclearAnnihilationMengsk=发射仿佛无穷无尽的<d ref="Effect,NuclearAnnihilationMengskSmallNukeDummyCP,PeriodCount" player="current"/>枚战术飞弹，地毯式轰炸目标区域，每一枚飞弹对一个小范围区域造成<d ref="Effect,NuclearAnnihilationMengskSmallNukeDamage,Amount" player = "current"/>(+<d ref="Effect,NuclearAnnihilationMengskSmallNukeDamage,AttributeBonus[Structure]"/>对建筑)点伤害，最后还有一枚核子飞弹尾随其后，对一个大范围区域造成<d ref="Effect,NuclearAnnihilationMengskDamage,Amount" player = "current"/>(+<d ref="Effect,NuclearAnnihilationMengskDamage,AttributeBonus[Structure]"/>对建筑)点伤害。
+Button/Tooltip/NukeCalldownMengsk=朝目标位置发起一轮战术飞弹打击。战术飞弹需要<d ref="Effect,GhostMengskNukeCP,InitialDelay + Effect,GhostMengskNukeCP,ExpireDelay + Effect,GhostMengskNukeDetonateCP,InitialDelay"/>秒才能落地，但它们能对小范围内的敌人造成最多<d ref="Effect,GhostMengskNukeDamage,Amount"/> (+<d ref="Effect,GhostMengskNukeDamage,AttributeBonus[Structure]"/>对建筑) 点伤害。<n/><n/>在皇家军校购买充能。
+Button/Tooltip/NukeMengskArm=给发射井装填战术飞弹。<n/><n/>战术飞弹需要<d ref="Effect,GhostMengskNukeCP,InitialDelay + Effect,GhostMengskNukeCP,ExpireDelay + Effect,GhostMengskNukeDetonateCP,InitialDelay"/>秒才能落地，但它们能对小范围内的敌人造成最多<d ref="Effect,GhostMengskNukeDamage,Amount"/> (+<d ref="Effect,GhostMengskNukeDamage,AttributeBonus[Structure]"/>对建筑) 点伤害。<n/><n/>使用元首鬼影来指定目标。
+Button/Tooltip/PropagandaBlastMengsk=使附近友方单位的移动和攻击速度提高<d ref="(Behavior,PropagandaBlastMengsk,Modification.AttackSpeedMultiplier-1)*100"/>%。
+Button/Tooltip/PropagandaBlastMengskUpgraded=使附近友方单位的移动和攻击速度提高<d ref="(Behavior,PropagandaBlastMengsk,Modification.AttackSpeedMultiplier-1)*100"/>%。“接受教导的劳工和冲锋队员”提供<c val="#ColorAttackInfo">帝国支持度</c>，可以增加<c val="#ColorAttackInfo">天命皇权</c>的产生速度。
+Button/Tooltip/RaiseMengsk=升起建筑，阻止地面单位出入。
+Button/Tooltip/RavenMengsk=空中支援单位。可以使用“爱国者模式”，教导附近的盟友。<n/><n/><c val="FFE303">侦测单位</c>
+Button/Tooltip/RavenMengskSieged=空中支援单位。<n/><n/><c val="FFE303">侦测单位</c>
+Button/Tooltip/RefineryMengsk=建造在瓦斯气泉上，用于采集高能瓦斯。
+Button/Tooltip/ResearchLockedLevel05=该升级将在指挥官等级5时解锁。
+Button/Tooltip/RoyalGuardMengsk=消灭敌方单位可以给予附近<c val="ffff8a">皇家卫队</c>经验值。如果敌人死亡时附近没有皇家卫队，经验值将会被分给在任务中的所有皇家卫队单位。经验值允许该单位获得<c val="ffff8a">军阶</c>，可以提高其伤害、护甲以及生命值。
+Button/Tooltip/RoyalGuardMengskEnergy=消灭敌方单位可以给予附近<c val="ffff8a">皇家卫队</c>经验值。如果敌人死亡时附近没有皇家卫队，经验值将会被分给在任务中的所有皇家卫队单位。经验值允许该单位获得<c val="ffff8a">军阶</c>，可以提高其伤害、护甲、生命值、能量值以及能量回复。
+Button/Tooltip/RoyalGuardMengskRank3Locked=<n/><c val="ff0000">3级军阶：指挥官15级时解锁。</c>
+Button/Tooltip/RoyalGuardMengskRanks=<n/><n/><c val="ffff8a">该单位每升一级军阶将会解锁新的技能或被动加成效果。</c><n/>
+Button/Tooltip/RoyalGuardMengskTopBarEnergy=该单位会基于其补给消耗和军阶产生天命皇权。
+Button/Tooltip/SCVMengsk=基础工作单位。用于采集资源、建造人类建筑和修理。可以切换成冲锋队员。<n/><n/><c val="#ColorAttackInfo">可以对地。</c>
+Button/Tooltip/SCVMengskAdvancedConstruction=多个劳工和冲锋队员可以建造同一个建筑，缩短其建造时间。
+Button/Tooltip/SCVMengskEnlist=命令冲锋队在最近的征兵中心或者补给地堡处换上一身劳工服。
+Button/Tooltip/SCVMengskEnlistCC=命令附近的冲锋队在征兵中心或者补给地堡处换上一身劳工服。
+Button/Tooltip/SetArtilleryMengskRallyPoint=派遣未被装载的劳工和冲锋队员前往指定点。
+Button/Tooltip/SetCommandCenterRallyPointLaborer=派遣被征召的劳工前往指定点。集结点设在晶体矿脉或精炼厂的劳工会自动开始采集。
+Button/Tooltip/SetCommandCenterRallyPointTrooper=派遣被征召的冲锋队员前往指定点。
+Button/Tooltip/SetSupplyBunkerRallyPoint=派遣未被装载的劳工和冲锋队员前往指定点。
+Button/Tooltip/SiegeModeMengsk=部署为攻城模式。在该模式下，冲击分队有着非常远的射程，可以造成范围性伤害。冲击分队在该模式下无法移动或攻击近距离的目标。
+Button/Tooltip/SiegeTankMengsk=皇家卫队重型坦克。可以切换成攻城模式，提供远程火力支援。<n/><n/><c val="FFFF8A">可以对地。</c>
+Button/Tooltip/SiegeTankMengskAirlift=允许攻城模式下的冲击分队在被帝国仲裁机吊挂时可以攻击空中单位。
+Button/Tooltip/SiegeTankMengskImperialMandateGeneration=<c val="#ColorAttackInfo">皇家卫队</c>基于他们的补给消耗和<c val="#ColorAttackInfo">军阶</c>来增加<c val="#ColorAttackInfo">帝国支持度</c>。每隔<d ref="Effect,TopbarMengskBonusRegenFactorDummy,Amount"/>秒，每1点帝国支持度产生1点<c val="#ColorAttackInfo">天命皇权</c>。<n/><n/>该单位正在增加<c val="#ColorAttackInfo"><d ref="$BehaviorStackCount:MengskVeterancySiegeTankMengsk$*Unit,SiegeTankMengsk,Food*(-1)*Effect,RoyalGuardMengskTopbarRegenDummy,Amount*Effect,MasteryMengskRoyalGuardImperialMandateRegenerationFactorDummy,Amount" player="current" precision="0"/>点帝国支持度</c>。
+Button/Tooltip/SiegeTankMengskRank1=<n/><c val="ffff8a">1级军阶：</c>获得震撼与敬畏能力。
+Button/Tooltip/SiegeTankMengskRank1Preview=<n/><c val="777777">1级军阶：</c>获得震撼与敬畏能力。
+Button/Tooltip/SiegeTankMengskRank2=<n/><c val="ffff8a">2级军阶：</c>攻城模式下的视野和攻击射程增加2。
+Button/Tooltip/SiegeTankMengskRank2Preview=<n/><c val="777777">2级军阶：</c>攻城模式下的视野和攻击射程增加2。
+Button/Tooltip/SiegeTankMengskRank3=<n/><c val="ffff8a">3级军阶：</c>攻城攻击的范围扩大<d ref="(Effect,SiegeTankMengskSiegedImprovedAoEBlast,AreaArray[2].Radius/Effect,SiegeTankMengskSiegedBlast,AreaArray[2].Radius-1)*100" precision="0"/>%。
+Button/Tooltip/SiegeTankMengskRank3Preview=<n/><c val="777777">3级军阶：</c>攻城攻击的范围扩大<d ref="(Effect,SiegeTankMengskSiegedImprovedAoEBlast,AreaArray[2].Radius/Effect,SiegeTankMengskSiegedBlast,AreaArray[2].Radius-1)*100" precision="0"/>%。
+Button/Tooltip/SiegeTankMengskSieged=皇家卫队重型坦克。可切换成坦克模式，提供机动坦克火力支援。<n/><n/><c val="#ColorAttackInfo">可以对地。</c>
+Button/Tooltip/SiegeTankMengskStun=在攻城模式下，该单位的攻击现在会击晕敌方单位<d ref="Behavior,SiegeTankMengskStun,Duration"/>秒。在每个单位身上每<d ref="Behavior,SiegeTankMengskStunImmunity,Duration"/>秒只能生效一次。<n/><n/><c val="#ColorAttackInfo">巨型单位会被减速。</c>
+Button/Tooltip/SnipeMengsk=精准的一击，造成<d ref="Effect,SnipeDamage,Amount"/>点伤害（对灵能单位造成总计<d ref="Effect,SnipeDamage,Amount + Effect,SnipeDamage,AttributeBonus[5]"/>点伤害）。无视护甲。<n/><n/><c val="#ColorAttackInfo">只能对目标生物单位使用。</c>
+Button/Tooltip/SnipeMengskNovaGhost=精准的一击，造成<d ref="Effect,SnipeDamage,Amount"/>点伤害。无视护甲。<n/><n/><c val="#ColorAttackInfo">只能对生物单位使用。</c>
+Button/Tooltip/StarportMengsk=帝国和皇家卫队空中单位生产设施。<n/><n/><c val="ffff8a">开启：</c><n/>- 帝国仲裁机<n/>- 帝国见证者<n/>- 天空之怒
+Button/Tooltip/StarportMengskFlying=星港只有在降落后才能开始制造单位。
+Button/Tooltip/StructureArmorMengsk=提高该建筑的生命值与护甲。
+Button/Tooltip/StructureArmorMengskResearch=提高<c val="ffff8a">补给地堡</c>, <c val="ffff8a">导弹塔</c>以及<c val="ffff8a">大地碎裂炮</c>的生命值与护甲。
+Button/Tooltip/ThorMengsk=皇家卫队重型攻击机甲。可以使用“掩护射击模式”。<n/><n/><c val="#ColorAttackInfo">可以对空和对地。</c>
+Button/Tooltip/ThorMengskArmorAura=附近的其它友方地面单位获得+<d ref="Behavior,ThorMengskArmorAuraTarget,Modification.LifeArmorBonus"/>护甲。
+Button/Tooltip/ThorMengskArmorAuraResearch=<c val="ffff8a">黑色战锤</c>为附近的友方地面单位提供+<d ref="Behavior,ThorMengskArmorAuraTarget,Modification.LifeArmorBonus"/>护甲。
+Button/Tooltip/ThorMengskImperialMandateGeneration=<c val="#ColorAttackInfo">皇家卫队</c>基于他们的补给消耗和<c val="#ColorAttackInfo">军阶</c>来增加<c val="#ColorAttackInfo">帝国支持度</c>。每隔<d ref="Effect,TopbarMengskBonusRegenFactorDummy,Amount"/>秒，每1点帝国支持度产生1点<c val="#ColorAttackInfo">天命皇权</c>。<n/><n/>该单位正在增加<c val="#ColorAttackInfo"><d ref="$BehaviorStackCount:MengskVeterancyThorMengsk$*Unit,ThorMengsk,Food*(-1)*Effect,RoyalGuardMengskTopbarRegenDummy,Amount*Effect,MasteryMengskRoyalGuardImperialMandateRegenerationFactorDummy,Amount" player="current" precision="0"/>点帝国支持度</c>。
+Button/Tooltip/ThorMengskRank1=<n/><c val="ffff8a">1级军阶：</c>掩护射击模式的效果范围扩大<d ref="(Effect,ThorMengskSiegeTargetLargeAoESearch,AreaArray[0].Radius/Effect,ThorMengskSiegeTargetSearch,AreaArray[0].Radius-1)*100" precision="0"/>%。
+Button/Tooltip/ThorMengskRank1Preview=<n/><c val="777777">1级军阶：</c>掩护射击模式的效果范围扩大<d ref="(Effect,ThorMengskSiegeTargetLargeAoESearch,AreaArray[0].Radius/Effect,ThorMengskSiegeTargetSearch,AreaArray[0].Radius-1)*100" precision="0"/>%。
+Button/Tooltip/ThorMengskRank2=<n/><c val="ffff8a">2级军阶：</c>掩护射击模式的射程增加<d ref="Abil,ThorMengskSiegeTargetedIncreasedRange,Range[0]-Abil,ThorMengskSiegeTargeted,Range[0]"/>。
+Button/Tooltip/ThorMengskRank2Preview=<n/><c val="777777">2级军阶：</c>掩护射击模式的射程增加<d ref="Abil,ThorMengskSiegeTargetedIncreasedRange,Range[0]-Abil,ThorMengskSiegeTargeted,Range[0]"/>。
+Button/Tooltip/ThorMengskRank3=<n/><c val="ffff8a">3级军阶：</c>掩护射击模式下的攻击速度提高<d ref="(Behavior,ThorMengskSiegeAttackRate,Modification.AttackSpeedMultiplier-1)*100" precision="0"/>%。
+Button/Tooltip/ThorMengskRank3Preview=<n/><c val="777777">3级军阶：</c>掩护射击模式下的攻击速度提高<d ref="(Behavior,ThorMengskSiegeAttackRate,Modification.AttackSpeedMultiplier-1)*100" precision="0"/>%。
+Button/Tooltip/ThorMengskSiege=部署为掩护射击模式。在该模式下，黑色战锤对空中单位造成范围伤害。黑色战锤在该模式下无法移动。
+Button/Tooltip/ThorMengskSieged=无机动能力的皇家卫队重型攻击机甲。可对空中单位造成大量范围伤害。可以切换为行进模式，提供机动支援。<n/><n/><c val="#ColorAttackInfo">可以对空。</c>
+Button/Tooltip/ThorMengskUnsiege=转换回行进模式。黑色战锤在该模式下可以移动。
+Button/Tooltip/TrooperMengsk=通用型步兵。可以装备多种武器以应对不同战况。可以切换成一身劳工服。<n/><n/><c val="#ColorAttackInfo">可以对地和对空。</c>
+Button/Tooltip/TrooperMengskAA=专业对空攻击手。可以切换为劳工。<n/><n/><c val="#ColorAttackInfo">可以对地和对空。</c>
+Button/Tooltip/TrooperMengskBuild=一列各种战斗建筑的名单。
+Button/Tooltip/TrooperMengskDropTrain=劳工和冲锋队员会被直接输送至该建筑的集结点所在处。
+Button/Tooltip/TrooperMengskDropTrainResearch=允许<c val="ffff8a">帝国劳工</c>和<c val="ffff8a">帝国冲锋队</c>可以被直接输送至征兵中心的集结点所在处。
+Button/Tooltip/TrooperMengskEnlist=命令劳工在最近的征兵中心或者补给地堡处换上一身冲锋队军服。
+Button/Tooltip/TrooperMengskEnlistCC=命令附近的劳工在征兵中心或者补给地堡处换上一身冲锋队军服。
+Button/Tooltip/TrooperMengskFlamethrower=专业反步兵攻击手。可以切换为劳工。<n/><n/><c val="#ColorAttackInfo">可以对地和对空。</c>
+Button/Tooltip/TrooperMengskImperialMandateGeneration=该单位被帝国见证者教导后，其提供的<c val="#ColorAttackInfo">帝国支持度</c>增加<c val="FFFF8A"><d ref="Effect,PropagandaMengskTopbarRegenDummy,Amount*Effect,MasteryMengskTrooperImperialMandateRegenerationFactorDummy,Amount" player="current" precision="0"/></c>点。每隔<d ref="Effect,TopbarMengskBonusRegenFactorDummy,Amount"/>秒，每1点帝国支持度产生1点<c val="#ColorAttackInfo">天命皇权</c>。
+Button/Tooltip/TrooperMengskImproved=升级后的通用型步兵。可以切换为劳工。<n/><n/><c val="#ColorAttackInfo">可以对地和对空。</c>
+Button/Tooltip/TrooperMengskSpecializeAA=给冲锋队装备更强力的武器，尤其擅长对付空中重甲单位。该单位死亡时，其所装备的武器会掉落在地上，可以被其他帝国冲锋队员拾取。<n/><n/><c val="#ColorAttackInfo">可以对地和对空。</c>
+Button/Tooltip/TrooperMengskSpecializeFlamethrower=给冲锋队装备更强力的武器，尤其擅长对付地面轻型单位。该单位死亡时，其所装备的武器会掉落在地上，可以被其他帝国冲锋队员拾取。<n/><n/><c val="FFFF8A">可以对地。</c>
+Button/Tooltip/TrooperMengskSpecializeImproved=给冲锋队装备更强力的武器，能有效对付所有类型的敌方单位。该单位死亡时，其所装备的武器会掉落在地上，可以被其他帝国冲锋队员拾取。<n/><n/><c val="#ColorAttackInfo">可以对地和对空。</c>
+Button/Tooltip/TrooperMengskWeaponRefundText=<s val="Kicker_Minerals">+<d ref="Effect,TrooperMengskWeaponRefund,Resources[0]"/> </s><IMG path="Assets\Textures\icon-mineral-terran.dds" alignment="absolutemiddle" height="28" width="28"/>
+Button/Tooltip/UltraliskMengsk=“爬到上面去，把机械装置放在它脑袋附近的脊背上。对，就是这样。还有，赫伯特——你手上注意点，千万不要引起那头野兽的警觉。要是把它激怒了，我们可没办法让它平静下来，否则晚上大家就别想睡了。“<n/><n/>- 萨索里安博士对一位实验室助理说<n/><n/><c val="ffff8a">可以对地。</c>
+Button/Tooltip/UnsiegeMengsk=转换回坦克模式。在该模式下，冲击分队可以移动但只能造成很少的伤害。
+Button/Tooltip/VikingMengskAssault=坚固的火力支援单位。进入战机模式后可攻击空中单位。<n/><n/><c val="#ColorAttackInfo">可以对地。</c>
+Button/Tooltip/VikingMengskAttackDamage=变形后，该单位的攻击伤害提高<d ref="(Behavior,VikingMengskAirAttackDamage,DamageResponse.ModifyFraction-1)*100"/>%，持续<d ref="Behavior,VikingMengskAirAttackDamage,Duration"/>秒。该效果每<d ref="Behavior,VikingMengskAttackDamageCooldown,Cost.Cooldown.TimeUse"/>秒只能生效一次。
+Button/Tooltip/VikingMengskCheatDeath=该单位承受致命伤害时，天空之怒变形为战机模式并且临时获得一个屏障，吸收<d ref="Behavior,VikingMengskCheatDeath,DamageResponse.ModifyLimit"/>点伤害，持续<d ref="Behavior,VikingMengskCheatDeath,Duration"/>秒。只能每<d ref="Behavior,VikingMengskCheatDeathCooldown,Cost.Cooldown.TimeUse"/>秒生效一次。
+Button/Tooltip/VikingMengskDodge=该单位有<d ref="Behavior,VikingMengskFighterDodge,DamageResponse.Chance*100"/>%的几率闪避攻击。.
+Button/Tooltip/VikingMengskFighter=坚固的皇家卫队支援型飞行器。装填了威力强大的反主力舰对空飞弹。可以切换至突击模式来攻击地面单位。<n/><n/><c val="#ColorAttackInfo">可以对空。</c>
+Button/Tooltip/VikingMengskImperialMandateGeneration=<c val="#ColorAttackInfo">皇家卫队</c>基于他们的补给消耗和<c val="#ColorAttackInfo">军阶</c>来增加<c val="#ColorAttackInfo">帝国支持度</c>。每隔<d ref="Effect,TopbarMengskBonusRegenFactorDummy,Amount"/>秒，每1点帝国支持度产生1点<c val="#ColorAttackInfo">天命皇权</c>。<n/><n/>该单位正在增加<c val="#ColorAttackInfo"><d ref="$BehaviorStackCount:MengskVeterancyVikingMengsk$*Unit,VikingMengskFighter,Food*(-1)*Effect,RoyalGuardMengskTopbarRegenDummy,Amount*Effect,MasteryMengskRoyalGuardImperialMandateRegenerationFactorDummy,Amount" player="current" precision="0"/>点帝国支持度</c>。
+Button/Tooltip/VikingMengskRank1=<n/><c val="ffff8a">1级军阶：</c>对巨型目标造成加成伤害。
+Button/Tooltip/VikingMengskRank1Preview=<n/><c val="777777">1级军阶：</c>对巨型目标造成加成伤害。
+Button/Tooltip/VikingMengskRank2=<n/><c val="ffff8a">2级军阶：</c>获得战术调整能力。
+Button/Tooltip/VikingMengskRank2Preview=<n/><c val="777777">2级军阶：</c>获得战术调整能力。
+Button/Tooltip/VikingMengskRank3=<n/><c val="ffff8a">3级军阶：</c>获得闪避机动和不死鸟协议两种能力。
+Button/Tooltip/VikingMengskRank3Preview=<n/><c val="777777">3级军阶：</c>获得闪避机动和不死鸟协议两种能力。
+Button/Tooltip/VikingMengskSpeed=移动速度提高<d ref="$UpgradeEffectArrayValue:VikingMengskSpeed:Unit,VikingMengskFighter,Speed$/Unit,VikingMengskFighter,Speed*100" player="0"/>%。
+Button/Tooltip/VikingMengskSpeedResearch=<c val="ffff8a">天空之怒</c>的移动速度提高<d ref="$UpgradeEffectArrayValue:VikingMengskSpeed:Unit,VikingMengskFighter,Speed$/Unit,VikingMengskFighter,Speed*100" player="0"/>%。
+Button/Tooltip/WeaponsFreeMengsk=命令选中的单位自由射击。单位会对射程内的敌人发起攻击并照例进行追击。
+Button/Tooltip/YamatoGunMengsk=使用一门毁灭性的等离子火炮轰炸目标，造成<d ref="Effect,BattlecruiserMengskYamatoDamage,Amount"/>点伤害。
+Button/Tooltip/ZerglingMengsk=在阿克图尔斯·蒙斯克统治期间，由塞伯鲁斯计划中最具天赋的科学家所组成的一批秘密骨干被赋予了一项特殊任务——从被隔离的玛古罗虫群中获取若干异虫变种以用于实验。跳虫就是其中获取的第一批标本。<n/><n/><c val="FFFF8A">可以对地。</c>
+DocInfo/DescLong=包含了阿克图尔斯·蒙斯克的Mod
+DocInfo/Name=CM_Core_Commander_Mengsk
+Effect/Name/ATALaserBatteryMengskLM=空对空激光炮组
+Effect/Name/ATALaserBatteryMengskU=空对空激光炮组
+Effect/Name/ATSLaserBatteryMengskLM=空对地激光炮组
+Effect/Name/ATSLaserBatteryMengskU=空对地激光炮组
+Effect/Name/BattlecruiserMengskAttackSwitch=BattlecruiserMengskAttackSwitch
+Effect/Name/C10CanisterRifleMengsk=C-10型霰弹步枪
+Effect/Name/MengskTopBarEnergyRegenTrooperDummy=MengskTopBarEnergyRegenTrooperDummy
+MasteryMengskStartingImperialMandateAppend=<n/><n/><c val="FFFF8A">精通：</c>起始天命皇权增加<c val="FFFF8A"><d ref="Effect,MasteryMengskStartingImperialMandateDisplayDummy,Amount" player="current"/></c>。
+Race/Name/TerM=人类蒙斯克
+RequirementNode/Tooltip/CountBehaviorArtilleryMengskCargoGlobalCompleteOnly2675143439=已装填的大地碎裂炮
+RequirementNode/Tooltip/CountBehaviorPropagandaBlastMengskCompleteOnlyAtUnit1474688104=接受了帝国见证者的教导
+RequirementNode/Tooltip/CountUnitAlias_BarracksMengskCompleteOnly92025031TechTreeCheat=兵营
+RequirementNode/Tooltip/CountUnitAlias_CommandCenterMengskCompleteOnly1787385606TechTreeCheat=征兵中心
+RequirementNode/Tooltip/CountUnitAlias_FactoryMengskCompleteOnly3975202633TechTreeCheat=重工厂
+RequirementNode/Tooltip/CountUnitAlias_StarportMengskCompleteOnly880601908TechTreeCheat=星港
+RequirementNode/Tooltip/CountUnitArtilleryMengskCompleteOnly2292951859TechTreeCheat=大地碎裂炮
+RequirementNode/Tooltip/CountUnitEngineeringBayMengskCompleteOnly1938945142TechTreeCheat=工程站
+RequirementNode/Tooltip/CountUnitFusionCoreMengskCompleteOnly203485344TechTreeCheat=聚变芯体
+RequirementNode/Tooltip/CountUnitGhostAcademyMengskCompleteOnly2782960886=皇家军校
+RequirementNode/Tooltip/CountUnitNukeMengskCompleteOnly3727871538=在皇家军校中建造战术飞弹
+RequirementNode/Tooltip/CountUpgradeArtilleryMengskRangeCompleteOnly3576403734=在工程站中研究大气层加速剂
+RequirementNode/Tooltip/CountUpgradeBattlecruiserMengskRangeAuraCompleteOnly2725800310=在聚变芯体中研究战场辅助瞄准系统
+RequirementNode/Tooltip/CountUpgradeBlimpMengskTopbarRegenCompleteOnly3221082208=在聚变芯体中研究放大电波
+RequirementNode/Tooltip/CountUpgradeBunkerDepotMengskRangeCompleteOnly3144739092=在工程站中研究瞄准辅助射击孔
+RequirementNode/Tooltip/CountUpgradeGhostMengskGuidedStrikeCompleteOnly989769884=在皇家军校中研究至尊战术飞弹
+RequirementNode/Tooltip/CountUpgradeMarauderMengskSlowCompleteOnly2342204682=在皇家军校中研究失能弹
+RequirementNode/Tooltip/CountUpgradeMedivacMengskDoubleHealBeamCompleteOnly269547913=在聚变芯体中研究双通道复苏器
+RequirementNode/Tooltip/CountUpgradeMedivacMengskPermanentCloakCompleteOnly511910073=在聚变芯体中研究散点帷幕
+RequirementNode/Tooltip/CountUpgradeMedivacMengskSiegeTankAirliftCompleteOnly4291057663=在军械库中研究火炮稳定器
+RequirementNode/Tooltip/CountUpgradeMedivacMengskSiegeTankAirliftQueuedOrBetter4291057663=在军械库中研究火炮稳定器
+RequirementNode/Tooltip/CountUpgradeMengskStructureArmorCompleteOnly2054151329=在工程站中研究精钢强化装甲
+RequirementNode/Tooltip/CountUpgradeThorMengskArmorAuraCompleteOnly618094651=在军械库中研究壁垒场
+RequirementNode/Tooltip/CountUpgradeTrooperMengskDropTrainCompleteOnly480319619=在工程站中研究冲锋队高空轨道空投舱
+RequirementNode/Tooltip/CountUpgradeTrooperMengskInstantTransformCompleteOnly1095005716=在工程站中研究战场征用
+RequirementNode/Tooltip/CountUpgradeVikingMengskSpeedCompleteOnly1841791773=在聚变芯体中研究亚萨涡轮机
+RequirementNode/Tooltip/Eq1349852341CountUpgradeMengskTrooperArmorsLevel2CompleteOnly1=帝国装甲等级2
+RequirementNode/Tooltip/Eq2456287108CountUpgradeMengskTrooperArmorsLevel1CompleteOnly1=帝国装甲等级1
+RequirementNode/Tooltip/Eq3878729167CountUpgradeMengskTrooperWeaponsLevel2CompleteOnly1=帝国武器等级2
+RequirementNode/Tooltip/Eq843366628CountUpgradeMengskTrooperWeaponsLevel1CompleteOnly1=帝国武器等级1
+RequirementNode/Tooltip/GTE1737461815CountBehaviorArtilleryMengskCargoCompleteOnlyAtUnit1=劳工已加载
+RequirementNode/Tooltip/Not2895527276CountUnitNukeMengskQueuedOrBetterAtUnit=该皇家军校没有战术飞弹
+RequirementNode/Tooltip/Or3593657712GTECountBehaviorMengskVeterancyGhostMengskCompleteOnlyAtUnit2GTECountBehaviorMengskVeterancyGhostMengskCappedCompleteOnlyAtUnit2=1级军阶
+RequirementNode/Tooltip/Or3593657712GTECountBehaviorMengskVeterancyMarauderMengskCompleteOnlyAtUnit2GTECountBehaviorMengskVeterancyMarauderMengskCappedCompleteOnlyAtUnit2=1级军阶
+RequirementNode/Tooltip/Or3593657712GTECountBehaviorMengskVeterancySiegeTankMengskCompleteOnlyAtUnit2GTECountBehaviorMengskVeterancySiegeTankMengskCappedCompleteOnlyAtUnit2=1级军阶
+RequirementNode/Tooltip/Or3604015190GTECountBehaviorMengskVeterancyMarauderMengskCompleteOnlyAtUnit4GTECountBehaviorMengskVeterancyMarauderMengskCappedCompleteOnlyAtUnit4=3级军阶
+RequirementNode/Tooltip/Or4116208132GTECountBehaviorMengskVeterancyMarauderMengskCompleteOnlyAtUnit3GTECountBehaviorMengskVeterancyMarauderMengskCappedCompleteOnlyAtUnit3=2级军阶
+RequirementNode/Tooltip/Or4116208132GTECountBehaviorMengskVeterancyVikingMengskCompleteOnlyAtUnit3GTECountBehaviorMengskVeterancyVikingMengskCappedCompleteOnlyAtUnit3=2级军阶
+RequirementNode/Tooltip/Or858529743GTECountBehaviorMengskVeterancyVikingMengskCompleteOnlyAtUnit4GTECountBehaviorMengskVeterancyVikingMengskCappedCompleteOnlyAtUnit4=3级军阶
+TrooperOrLaborer=必须以冲锋队员或劳工为目标。
+UI/MengskTopBarEnergyAddendum=<n/><n/><c val="ffff8a">精通：</c>起始天命皇权增加<c val="ffff8a"><d ref="Effect,MasteryMengskStartingImperialMandateDisplayDummy,Amount" player="current"/></c>点。</c>
+UI/MengskTopBarEnergyDesc=天命皇权可以解锁应急能力。<n/><n/>你的天命皇权会以每<d time="[d ref='Effect,TopbarMengskBonusRegenFactorDummy,Amount'/]" player="current" precision="0"/>生成<d ref="Unit,CoopCasterMengsk,EnergyRegenRate+Effect,MengskTopBarEnergyRegenRoyalGuardDummy,Amount+Effect,MengskTopBarEnergyRegenTrooperDummy,Amount" player="current" precision="0"/>点的速度产生。
+UI/MengskTopBarEnergyName=天命皇权
+UI/MengskTopBarEnergyRegenRoyalGuardAddendum=<n/><n/><c val="ffff8a">精通：</c>皇家卫队提供的帝国支持度增加<c val="ffff8a"><d ref="Effect,MasteryMengskRoyalGuardImperialMandateRegenerationDisplayDummy,Amount" player="current"/></c>%。</c>
+UI/MengskTopBarEnergyRegenRoyalGuardDesc=皇家卫队提供的帝国支持度每<d time="[d ref='Effect,TopbarMengskBonusRegenFactorDummy,Amount'/]" player="current" precision="0"/>使你的天命皇权增加<d ref="Effect,MengskTopBarEnergyRegenRoyalGuardDummy,Amount" player="current" precision="0"/>点。
+UI/MengskTopBarEnergyRegenRoyalGuardName=帝国的力量
+UI/MengskTopBarEnergyRegenTrooperAddendum=<n/><n/><c val="ffff8a">精通：</c>“接受教导的劳工和冲锋队员”提供的帝国支持度增加<c val="ffff8a"><d ref="Effect,MasteryMengskTrooperImperialMandateRegenerationDisplayDummy,Amount" player="current"/></c>%。</c>
+UI/MengskTopBarEnergyRegenTrooperDesc=你的“接受教导的劳工和冲锋队员”提供的帝国支持度每<d time="[d ref='Effect,TopbarMengskBonusRegenFactorDummy,Amount'/]" player="current" precision="0"/>使你的天命皇权增加<d ref="Effect,MengskTopBarEnergyRegenTrooperDummy,Amount" player="current" precision="0"/>点。
+UI/MengskTopBarEnergyRegenTrooperName=人民的意志
+UI/TeamColor01=红色
+Unit/Category/MengskUnits=人类 - 帝国
+Unit/Name/ATALaserBatteryMengskLMWeapon=空对空激光炮组 蒙斯克
+Unit/Name/ATSLaserBatteryMengskLMWeapon=空对地激光炮组 蒙斯克
+Unit/Name/ArmoryMengsk=军械库
+Unit/Name/ArtilleryMengsk=大地碎裂炮
+Unit/Name/BarracksMengsk=兵营
+Unit/Name/BattlecruiserMengsk=奥古斯特格勒的骄傲
+Unit/Name/BunkerDepotMengsk=补给地堡
+Unit/Name/CommandCenterMengsk=征兵中心
+Unit/Name/CoopCasterMengsk=合作任务施法者 蒙斯克
+Unit/Name/EMPMengskWeapon=EMP蒙斯克
+Unit/Name/EngineeringBayMengsk=工程站
+Unit/Name/FactoryMengsk=重工厂
+Unit/Name/FusionCoreMengsk=聚变芯体
+Unit/Name/GhostAcademyMengsk=皇家军校
+Unit/Name/GhostMengsk=元首鬼影
+Unit/Name/HydraliskMengsk=刺蛇奴仆
+Unit/Name/MarauderMengsk=壁垒卫士
+Unit/Name/MedivacMengsk=帝国仲裁机
+Unit/Name/MissileTurretMengsk=导弹塔
+Unit/Name/MutaliskMengsk=异龙奴仆
+Unit/Name/NukeMengsk=战术飞弹
+Unit/Name/PunisherGrenadesMengskLMWeapon=惩罚者榴弹 蒙斯克
+Unit/Name/RavenMengsk=帝国见证者
+Unit/Name/RefineryMengsk=精炼厂
+Unit/Name/SCVMengsk=帝国劳工
+Unit/Name/SiegeTank=攻城坦克
+Unit/Name/SiegeTankMengsk=冲击分队
+Unit/Name/SiegeTankMengskSieged=攻城坦克
+Unit/Name/StarportMengsk=星港
+Unit/Name/ThorMengsk=黑色战锤
+Unit/Name/ThorMengskAAWeapon=雷神 蒙斯克 空空
+Unit/Name/TrooperMengsk=帝国冲锋队
+Unit/Name/TrooperMengskAA=帝国 火箭筒 冲锋队
+Unit/Name/TrooperMengskFlamethrower=帝国 火焰器 冲锋队
+Unit/Name/TrooperMengskImproved=帝国 突击手 冲锋队
+Unit/Name/TrooperMengskWeaponAAPickup=冰雹发射器
+Unit/Name/TrooperMengskWeaponFlamethrowerPickup=CPO-7火蜥火焰喷射器
+Unit/Name/TrooperMengskWeaponImprovedPickup=B-2大口径轻机枪
+Unit/Name/UltraliskMengsk=雷兽奴仆
+Unit/Name/VikingFighter=维京
+Unit/Name/VikingMengskFighter=天空之怒
+Unit/Name/ZerglingMengsk=跳虫奴仆
+Upgrade/Name/ArtilleryMengskRange=大气层加速剂
+Upgrade/Name/BattlecruiserMengskRangeAura=战场辅助瞄准系统
+Upgrade/Name/BlimpMengskTopbarRegen=放大电波
+Upgrade/Name/BunkerDepotMengskRange=瞄准辅助射击孔
+Upgrade/Name/GhostMengskGuidedStrike=至尊战术飞弹
+Upgrade/Name/MarauderMengskSlow=失能弹
+Upgrade/Name/MechTransformationSpeedMengsk=智能伺服器
+Upgrade/Name/MedivacMengskDoubleHealBeam=双通道复苏器
+Upgrade/Name/MedivacMengskPermanentCloak=散点帷幕
+Upgrade/Name/MedivacMengskSiegeTankAirlift=火炮稳定器
+Upgrade/Name/MengskCommander=蒙斯克
+Upgrade/Name/MengskStructureArmor=精钢强化装甲
+Upgrade/Name/MengskTrooperArmorsLevel1=帝国装甲等级1
+Upgrade/Name/MengskTrooperArmorsLevel2=帝国装甲等级2
+Upgrade/Name/MengskTrooperArmorsLevel3=帝国装甲等级3
+Upgrade/Name/MengskTrooperWeaponsLevel1=帝国武器等级1
+Upgrade/Name/MengskTrooperWeaponsLevel2=帝国武器等级2
+Upgrade/Name/MengskTrooperWeaponsLevel3=帝国武器等级3
+Upgrade/Name/ThorMengskArmorAura=壁垒场
+Upgrade/Name/TrooperMengskDropTrain=冲锋队高空轨道空投舱
+Upgrade/Name/VikingMengskSpeed=亚萨涡轮机
+Weapon/Name/ArtilleryMengskBombardment=轰炸
+Weapon/Name/C10CanisterRifleMengsk=C-10型霰弹步枪
+Weapon/Name/FusionCutterMengsk=熔枪
+Weapon/Name/JavelinMissileLaunchersMengsk=标枪导弹发射筒
+Weapon/Name/LanzerTorpedoesMengsk=兰泽尔飞雷
+Weapon/Name/MedivacMengskSiegeTankAirlift=MedivacMengskSiegeTankAirlift
+Weapon/Name/MissileTurretMengskMissile=长箭飞弹
+Weapon/Name/MutaliskMengskGlaiveWurm=刃虫
+Weapon/Name/NeedleSpinesMengsk=骨针
+Weapon/Name/PunisherGrenadesMengsk=惩罚者榴弹
+Weapon/Name/SiegeTankMengsk=90毫米口径火炮
+Weapon/Name/SiegeTankMengskSieged=穿冲震击炮
+Weapon/Name/SwitchLaserBatteryMengsk=激光炮组
+Weapon/Name/ThorMengskSieged=地狱火齐射
+Weapon/Name/ThorsHammerMengsk=雷神之锤
+Weapon/Name/TrooperMengsk=费罗马SMG
+Weapon/Name/TrooperMengskFlamethrower=CPO-7火蜥火焰喷射器
+Weapon/Name/TrooperMengskImproved=B-2大口径轻机枪
+Weapon/Name/TrooperMengskRocket=冰雹发射器
+Weapon/Name/TwinGatlingCannonMengks=格林机关炮
+Weapon/Name/UltraliskMengskKaiserBlades=巨刃
+Weapon/Name/VikingMengskAir=兰泽尔飞雷
+Weapon/Name/VikingMengskAirMassive=兰泽尔飞雷
+Weapon/Name/VikingMengskGround=格林机关炮
+Weapon/Name/VikingMengskGroundMassive=格林机关炮
+Weapon/Name/ZerglingMengskClaws=利爪

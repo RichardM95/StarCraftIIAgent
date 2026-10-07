@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CUnit id="NovaAIDummyCaster">
+        <Race value="Terr"/>
+        <FlagArray index="Invulnerable" value="1"/>
+        <LifeStart value="500000"/>
+        <LifeMax value="500000"/>
+        <EditorCategories value="ObjectType:Other"/>
+    </CUnit>
+    <CUnit id="CreepTumor">
+        <AbilArray Link="AutoCreepOn"/>
+        <AbilArray Link="AutoCreepOff"/>
+        <CardLayouts index="0">
+            <LayoutButtons Face="TurnOnAutoCreep" Type="AbilCmd" AbilCmd="AutoCreepOn,Execute" Row="1" Column="4"/>
+            <LayoutButtons Face="TurnOffAutoCreep" Type="AbilCmd" AbilCmd="AutoCreepOff,Execute" Row="1" Column="4"/>
+        </CardLayouts>
+    </CUnit>
+    <CUnit id="CreepTumorBurrowed">
+        <AbilArray Link="AutoCreepOn"/>
+        <AbilArray Link="AutoCreepOff"/>
+        <CardLayouts index="0">
+            <LayoutButtons Face="TurnOnAutoCreep" Type="AbilCmd" AbilCmd="AutoCreepOn,Execute" Row="1" Column="4"/>
+            <LayoutButtons Face="TurnOffAutoCreep" Type="AbilCmd" AbilCmd="AutoCreepOff,Execute" Row="1" Column="4"/>
+        </CardLayouts>
+        <BehaviorArray Link="AutoCreepTumorSpread"/>
+    </CUnit>
+    <CUnit id="CreepTumorUsed">
+        <AbilArray Link="AutoCreepOn"/>
+        <AbilArray Link="AutoCreepOff"/>
+        <CardLayouts index="0">
+            <LayoutButtons Face="TurnOnAutoCreep" Type="AbilCmd" AbilCmd="AutoCreepOn,Execute" Row="1" Column="4"/>
+            <LayoutButtons Face="TurnOffAutoCreep" Type="AbilCmd" AbilCmd="AutoCreepOff,Execute" Row="1" Column="4"/>
+        </CardLayouts>
+    </CUnit>
+    <CUnit id="CreepTumorQueenNoCreep">
+        <AbilArray Link="AutoCreepOn"/>
+        <AbilArray Link="AutoCreepOff"/>
+        <CardLayouts index="0">
+            <LayoutButtons Face="TurnOnAutoCreep" Type="AbilCmd" AbilCmd="AutoCreepOn,Execute" Row="1" Column="4"/>
+            <LayoutButtons Face="TurnOffAutoCreep" Type="AbilCmd" AbilCmd="AutoCreepOff,Execute" Row="1" Column="4"/>
+        </CardLayouts>
+    </CUnit>
+    <CUnit id="CreepTumorZagara">
+        <AbilArray Link="AutoCreepOn"/>
+        <AbilArray Link="AutoCreepOff"/>
+        <CardLayouts index="0">
+            <LayoutButtons Face="TurnOnAutoCreep" Type="AbilCmd" AbilCmd="AutoCreepOn,Execute" Row="1" Column="4"/>
+            <LayoutButtons Face="TurnOffAutoCreep" Type="AbilCmd" AbilCmd="AutoCreepOff,Execute" Row="1" Column="4"/>
+        </CardLayouts>
+    </CUnit>
+    <CUnit id="CreepTumorQueen">
+        <AbilArray Link="AutoCreepOn"/>
+        <AbilArray Link="AutoCreepOff"/>
+        <CardLayouts index="0">
+            <LayoutButtons Face="TurnOnAutoCreep" Type="AbilCmd" AbilCmd="AutoCreepOn,Execute" Row="1" Column="4"/>
+            <LayoutButtons Face="TurnOffAutoCreep" Type="AbilCmd" AbilCmd="AutoCreepOff,Execute" Row="1" Column="4"/>
+        </CardLayouts>
+    </CUnit>
+</Catalog>

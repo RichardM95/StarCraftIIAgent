@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CUnit id="ImbalycMutator_OldLegendryOverlord_NukeLM" parent="MISSILE_INVULNERABLE">
+        <Race value="Zerg"/>
+        <Mover value="ImbalycMutator_OldLegendryOverlordNukeLM"/>
+        <EditorCategories value="ObjectType:Projectile,ObjectFamily:FactionEvolved"/>
+    </CUnit>
+    <CUnit id="ImbalycMutator_HybridUpgradeNarud_Missile" parent="MISSILE_INVULNERABLE">
+        <ReviveType value="HybirdUpgradeNarud_Missile"/>
+        <Mover value="MissileDefault"/>
+        <EditorCategories value="ObjectType:Projectile,ObjectFamily:Campaign"/>
+        <SelectAlias value="HybirdUpgradeNarud_Missile"/>
+        <SubgroupAlias value="HybirdUpgradeNarud_Missile"/>
+        <AIEvaluateAlias value="HybirdUpgradeNarud_Missile"/>
+    </CUnit>
+    <CUnit id="SCCImbalyc_InfestorEgg">
+        <DeathRevealRadius value="3"/>
+        <Race value="Zerg"/>
+        <FlagArray index="UseLineOfSight" value="1"/>
+        <FlagArray index="NoScore" value="1"/>
+        <FlagArray index="AILifetime" value="1"/>
+        <FlagArray index="Unstoppable" value="1"/>
+        <PlaneArray index="Ground" value="1"/>
+        <Collide index="Ground" value="1"/>
+        <Collide index="ForceField" value="1"/>
+        <Collide index="Locust" value="1"/>
+        <Collide index="Small" value="1"/>
+        <Attributes index="Biological" value="1"/>
+        <Attributes index="Structure" value="1"/>
+        <LifeStart value="250"/>
+        <LifeMax value="250"/>
+        <LifeArmor value="5"/>
+        <LifeRegenRate value="0.2734"/>
+        <LifeArmorName value="Unit/LifeArmorName/ZergGroundArmor"/>
+        <TurningRate value="719.4726"/>
+        <Sight value="5"/>
+        <AttackTargetPriority value="10"/>
+        <DamageDealtXP value="1"/>
+        <DamageTakenXP value="1"/>
+        <KillXP value="10"/>
+        <BehaviorArray Link="SCCImbalyc_InfestorEgg"/>
+        <BehaviorArray Link="SCCImbalyc_InfestorEggA"/>
+        <Radius value="1.5"/>
+        <SubgroupPriority value="1"/>
+        <EditorCategories value="ObjectType:Unit,ObjectFamily:Campaign"/>
+        <FogVisibility value="Dimmed"/>
+    </CUnit>
+    <CUnit id="ImbalycMutator_OldLegendry_QueenParasiteLM" parent="MISSILE_INVULNERABLE">
+        <Race value="Zerg"/>
+        <Mover value="MissileDefault"/>
+        <EditorCategories value="ObjectType:Projectile,ObjectFamily:Campaign"/>
+    </CUnit>
+</Catalog>

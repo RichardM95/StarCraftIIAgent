@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CEmoticonPack id="BlizzCon2018_TwitchDrop">
+        <RequiredRewardArray index="0" removed="1"/>
+        <RequiredRewardArray index="1" removed="1"/>
+        <RequiredRewardArray index="2" removed="1"/>
+        <RequiredRewardArray index="3" removed="1"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="CarbotProtoss">
+        <RequiredRewardArray index="0" removed="1"/>
+        <RequiredRewardArray index="1" removed="1"/>
+        <RequiredRewardArray index="2" removed="1"/>
+        <RequiredRewardArray index="3" removed="1"/>
+        <RequiredRewardArray index="4" removed="1"/>
+        <RequiredRewardArray index="5" removed="1"/>
+        <RequiredRewardArray index="6" removed="1"/>
+        <RequiredRewardArray index="7" removed="1"/>
+        <RequiredRewardArray index="8" removed="1"/>
+        <RequiredRewardArray index="9" removed="1"/>
+        <RequiredRewardArray index="10" removed="1"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="CarbotTerran">
+        <RequiredRewardArray index="0" removed="1"/>
+        <RequiredRewardArray index="1" removed="1"/>
+        <RequiredRewardArray index="2" removed="1"/>
+        <RequiredRewardArray index="3" removed="1"/>
+        <RequiredRewardArray index="4" removed="1"/>
+        <RequiredRewardArray index="5" removed="1"/>
+        <RequiredRewardArray index="6" removed="1"/>
+        <RequiredRewardArray index="7" removed="1"/>
+        <RequiredRewardArray index="8" removed="1"/>
+        <RequiredRewardArray index="9" removed="1"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="CarbotZerg">
+        <RequiredRewardArray index="0" removed="1"/>
+        <RequiredRewardArray index="1" removed="1"/>
+        <RequiredRewardArray index="2" removed="1"/>
+        <RequiredRewardArray index="3" removed="1"/>
+        <RequiredRewardArray index="4" removed="1"/>
+        <RequiredRewardArray index="5" removed="1"/>
+        <RequiredRewardArray index="6" removed="1"/>
+        <RequiredRewardArray index="7" removed="1"/>
+        <RequiredRewardArray index="8" removed="1"/>
+        <RequiredRewardArray index="9" removed="1"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="CommanderAbathur">
+        <RequiredRewardArray index="0" removed="1"/>
+        <RequiredRewardArray index="1" removed="1"/>
+        <RequiredRewardArray index="2" removed="1"/>
+        <RequiredCommander value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="CommanderAlarak">
+        <RequiredRewardArray index="0" removed="1"/>
+        <RequiredRewardArray index="1" removed="1"/>
+        <RequiredRewardArray index="2" removed="1"/>
+        <RequiredRewardArray index="3" removed="1"/>
+        <RequiredCommander value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="CommanderDehaka">
+        <RequiredCommander value=""/>
+        <RequiredRewardArray index="0" removed="1"/>
+        <RequiredRewardArray index="1" removed="1"/>
+        <RequiredRewardArray index="2" removed="1"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="CommanderFenix">
+        <RequiredRewardArray index="0" removed="1"/>
+        <RequiredRewardArray index="1" removed="1"/>
+        <RequiredRewardArray index="2" removed="1"/>
+        <RequiredCommander value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="CommanderHorner">
+        <RequiredCommander value=""/>
+        <RequiredRewardArray index="0" removed="1"/>
+        <RequiredRewardArray index="1" removed="1"/>
+        <RequiredRewardArray index="2" removed="1"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="CommanderMengsk">
+        <RequiredCommander value="()"/>
+        <RequiredRewardArray index="0" value=""/>
+        <RequiredRewardArray index="1" removed="1"/>
+        <RequiredRewardArray index="2" removed="1"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="CommanderNova">
+        <RequiredRewardArray index="0" removed="1"/>
+        <RequiredRewardArray index="1" removed="1"/>
+        <RequiredRewardArray index="2" removed="1"/>
+        <RequiredCommander value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="CommanderStetmann">
+        <RequiredCommander value="()"/>
+        <RequiredRewardArray index="0" value=""/>
+        <RequiredRewardArray index="1" removed="1"/>
+        <RequiredRewardArray index="2" removed="1"/>
+        <RequiredRewardArray index="3" removed="1"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="CommanderStukov">
+        <RequiredRewardArray index="0" removed="1"/>
+        <RequiredRewardArray index="1" removed="1"/>
+        <RequiredRewardArray index="2" removed="1"/>
+        <RequiredCommander value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="CommanderTychus">
+        <RequiredCommander value="()"/>
+        <RequiredRewardArray index="0" value=""/>
+        <RequiredRewardArray index="1" removed="1"/>
+        <RequiredRewardArray index="2" removed="1"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="CommanderZeratul">
+        <RequiredCommander value="()"/>
+        <RequiredRewardArray index="0" value=""/>
+        <RequiredRewardArray index="1" removed="1"/>
+        <RequiredRewardArray index="2" removed="1"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="HeartOfTheSwarm">
+        <RequiredCampaign Campaign="()"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="LegacyOfTheVoid">
+        <RequiredCampaign Campaign="()"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="NationWars">
+        <RequiredRewardArray index="0" value=""/>
+        <RequiredRewardArray index="1" removed="1"/>
+        <RequiredRewardArray index="2" removed="1"/>
+        <RequiredRewardArray index="3" removed="1"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="NovaDLC1">
+        <RequiredCampaign Campaign="()"/>
+    </CEmoticonPack>
+    <!-- END WAR CHEST -->
+    <CEmoticonPack id="PrestigePack">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <!-- Total Biscuit Tribute -->
+    <CEmoticonPack id="TotalBiscuitTribute_EmoticonPack">
+        <RequiredRewardArray index="0" removed="1"/>
+        <RequiredRewardArray index="1" removed="1"/>
+        <RequiredRewardArray index="2" removed="1"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="Twitch20thAnniversary">
+        <RequiredRewardArray index="0" removed="1"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="TwitchPrime2019">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChest2Protoss">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChest2Terran">
+        <RequiredRewardArray index="0" removed="1"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChest2Zerg">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChest3Protoss">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChest3Terran">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChest3Zerg">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChest4Protoss">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChest4Terran">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChest4Zerg">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChest5Protoss">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChest5Terran">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChest5Zerg">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChest6Protoss">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChest6Terran">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChest6Zerg">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestFree_ClassicProtossWhatsThis">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestFree_ClassicTerranNPC">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestFree_ClassicZergSlapRoof">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestFree_CoffeeJuiceBox">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestFree_DonutPancakes">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestFree_PieCookie">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestProtoss">
+        <RequiredRewardArray index="0" removed="1"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestProtoss_Banana">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestProtoss_Bowler">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestProtoss_Cheese">
+        <RequiredRewardArray index="0" removed="1"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestProtoss_CookieRat">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestProtoss_Crowbar">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestProtoss_DoubleProxy">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestProtoss_GLHFProtoss">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestProtoss_Gift">
+        <RequiredRewardArray index="0" removed="1"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestProtoss_GoldenAge">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestProtoss_GrapesMushroom">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestProtoss_HearNoEvil">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestProtoss_Muffin">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestProtoss_Onion">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestProtoss_Screwdriver">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestProtoss_SeeNoEvil">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestProtoss_Shrimp">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestProtoss_SpeakNoEvil">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestProtoss_Survivor">
+        <RequiredRewardArray index="0" removed="1"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestProtoss_Tancho">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestProtoss_Urubu">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestProtoss_WarpIn">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestProtoss_WarpPrism">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestTerran">
+        <RequiredRewardArray index="0" removed="1"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestTerran_Applause">
+        <RequiredRewardArray index="0" removed="1"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestTerran_Apple">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestTerran_Baited">
+        <RequiredRewardArray index="0" removed="1"/>
+    </CEmoticonPack>
+    <!-- War Chest Season 6 -->
+    <CEmoticonPack id="WarChestTerran_Broccoli">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <!-- War Chest Season 5 -->
+    <CEmoticonPack id="WarChestTerran_BrownCat">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <!-- War Chest Season 4 -->
+    <CEmoticonPack id="WarChestTerran_CanisterRifle">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestTerran_CantLook">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestTerran_Cheeseburger">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestTerran_CherriesGarlic">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestTerran_Cowboy">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestTerran_Dead">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestTerran_Drill">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestTerran_Explode">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <!-- War Chest Season 1 -->
+    <CEmoticonPack id="WarChestTerran_FeelsGoodMarine">
+        <RequiredRewardArray index="0" removed="1"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestTerran_FistBump">
+        <RequiredRewardArray index="0" removed="1"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestTerran_GLHFTerran">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestTerran_Hardcore">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestTerran_Joker">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestTerran_Junkbot">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestTerran_Koi">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <!-- War Chest Season 2 -->
+    <CEmoticonPack id="WarChestTerran_Lying">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <!-- War Chest Season 3 -->
+    <CEmoticonPack id="WarChestTerran_Medivac">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestTerran_Mule">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestTerran_Peace">
+        <RequiredRewardArray index="0" removed="1"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestTerran_PickaxeShovelSaw">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestTerran_PointLeft">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestTerran_PointRight">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestTerran_Potato">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestTerran_QQ">
+        <RequiredRewardArray index="0" removed="1"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestTerran_RaynorSkull">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestTerran_ShieldSword">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestTerran_Sick">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestTerran_Skeleton">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestTerran_Sombrero">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestTerran_Steak">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestTerran_Thumbtack">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestTerran_Toasted">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestTerran_Turtle">
+        <RequiredRewardArray index="0" removed="1"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestTerran_WTF">
+        <RequiredRewardArray index="0" removed="1"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestZerg">
+        <RequiredRewardArray index="0" removed="1"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestZerg_BWEgg">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestZerg_BWHydralisk">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestZerg_BWMutalisk">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestZerg_Carrot">
+        <RequiredRewardArray index="0" removed="1"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestZerg_CheeseMouse">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestZerg_Creep">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestZerg_Croissant">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestZerg_Drool">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestZerg_Dropperlord">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestZerg_FingersCrossed">
+        <RequiredRewardArray index="0" removed="1"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestZerg_GLHFZerg">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestZerg_Hammer">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestZerg_Kappa">
+        <RequiredRewardArray index="0" removed="1"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestZerg_LemonPepper">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestZerg_Lobster">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestZerg_Pineapple">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestZerg_PliersVice">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestZerg_RestInPieces">
+        <RequiredRewardArray index="0" removed="1"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestZerg_Rush">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestZerg_Salute">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestZerg_Scantipede">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestZerg_Scream">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestZerg_Shark">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestZerg_Simulant">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestZerg_StinkyTofu">
+        <RequiredRewardArray index="0" removed="1"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestZerg_Stovepipe">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestZerg_Strawberry">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestZerg_TeaTime">
+        <RequiredRewardArray index="0" removed="1"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WarChestZerg_Wrench">
+        <RequiredRewardArray index="0" value=""/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WingsOfLiberty">
+        <RequiredCampaign Campaign="()"/>
+    </CEmoticonPack>
+</Catalog>

@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CRequirement id="BuildInfestedCivilianStructure">
+        <NodeArray index="Use" Link="Or1569788332LTCountUnitSICivilianStructureInProgressOrBetter1AndCountUpgradeCommanderPrestigeStukovLeftNoDeadCompleteOnlyLTCountUnitSICivilianStructureInProgressOrBetter3"/>
+    </CRequirement>
+    <CRequirement id="HaveAberrationArmorAuraStukovLeftNoDead">
+        <EditorCategories value="Race:Zerg,TechType:Upgrade"/>
+        <NodeArray index="Use" Link="CountUpgradeAberrationArmorAuraCompleteOnly1178490739"/>
+        <NodeArray index="Show" Link="CountUpgradeCommanderPrestigeStukovLeftNoDeadCompleteOnly"/>
+    </CRequirement>
+    <CRequirement id="HaveCommanderPrestigeStukovLeftNoDead">
+        <EditorCategories value="Race:Zerg,TechType:Upgrade"/>
+        <NodeArray index="Use" Link="OrCountUnitSICivilianStructureFlyingCompleteOnlyCountUnitSICivilianStructureCompleteOnly"/>
+        <NodeArray index="Show" Link="CountUpgradeCommanderPrestigeStukovLeftNoDeadCompleteOnly"/>
+    </CRequirement>
+    <CRequirement id="HaveZerglingArmorShredStukovLeftNoDead">
+        <EditorCategories value="Race:Zerg,TechType:Upgrade"/>
+        <NodeArray index="Use" Link="CountUpgradeZerglingArmorShredCompleteOnly3167936120"/>
+        <NodeArray index="Show" Link="CountUpgradeCommanderPrestigeStukovLeftNoDeadQueuedOrBetter"/>
+    </CRequirement>
+    <CRequirement id="HaveSIVolatileInfestedExplodeHealStukovLeftNoDead">
+        <EditorCategories value="Race:Zerg,TechType:Upgrade"/>
+        <NodeArray index="Use" Link="CountUpgradeSIVolatileInfestedExplodeHealCompleteOnly3068251394"/>
+        <NodeArray index="Show" Link="CountUpgradeCommanderPrestigeStukovLeftNoDeadQueuedOrBetter"/>
+    </CRequirement>
+    <CRequirement id="IsSICivilianStructureRooted">
+        <NodeArray index="Use" Link="CountUnitSICivilianStructureCompleteOnlyAtUnit1344415123"/>
+        <NodeArray index="Show" Link="NotCountUpgradeCommanderPrestigeStukovLeftNoDeadCompleteOnly"/>
+    </CRequirement>
+    <CRequirement id="LearnAberrationArmorAuraStukovLeftNoDead">
+        <EditorCategories value="Race:Zerg,TechType:Upgrade"/>
+        <NodeArray index="Use" Link="CountUpgradeSIBarracksTrainInfestedCivilianLevel3CompleteOnly3048850846TechTreeCheat"/>
+        <NodeArray index="Show" Link="AndCountUpgradeCommanderPrestigeStukovLeftNoDeadCompleteOnlyNotCountUpgradeAberrationArmorAuraQueuedOrBetter"/>
+    </CRequirement>
+    <CRequirement id="CommanderPrestigeStukovLeftNoDeadLearnSIBarracksTrainInfestedCivilianLevel2">
+        <NodeArray index="Show" Link="NotCountUpgradeSIBarracksTrainInfestedCivilianLevel2QueuedOrBetter"/>
+    </CRequirement>
+    <CRequirement id="CommanderPrestigeStukovLeftNoDeadLearnSIBarracksTrainInfestedCivilianLevel3">
+        <NodeArray index="Use" Link="CountUpgradeSIBarracksTrainInfestedCivilianLevel2CompleteOnly"/>
+        <NodeArray index="Show" Link="AndNotCountUpgradeSIBarracksTrainInfestedCivilianLevel3QueuedOrBetter"/>
+    </CRequirement>
+    <CRequirement id="CommanderPrestigeStukovLeftNoDeadLearnSIBarracksTrainInfestedCivilianLevel4">
+        <NodeArray index="Use" Link="CountUpgradeSIBarracksTrainInfestedCivilianLevel3CompleteOnly"/>
+        <NodeArray index="Show" Link="AndNotCountUpgradeSIBarracksTrainInfestedCivilianLevel4QueuedOrBetter"/>
+    </CRequirement>
+    <CRequirement id="LearnZerglingArmorShredStukovLeftNoDead">
+        <EditorCategories value="Race:Zerg,TechType:Upgrade"/>
+        <NodeArray index="Use" Link="CountUpgradeSIBarracksTrainInfestedCivilianLevel2CompleteOnly1189261887TechTreeCheat"/>
+        <NodeArray index="Show" Link="AndNotCountUpgradeZerglingArmorShredQueuedOrBetterCountUpgradeCommanderPrestigeStukovLeftNoDeadQueuedOrBetter"/>
+    </CRequirement>
+    <CRequirement id="LearnSIVolatileInfestedExplodeHealStukovLeftNoDead">
+        <EditorCategories value="Race:Zerg,TechType:Upgrade"/>
+        <NodeArray index="Use" Link="CountUpgradeSIBarracksTrainInfestedCivilianLevel2CompleteOnly1189261887"/>
+        <NodeArray index="Show" Link="AndNotCountUpgradeSIVolatileInfestedExplodeHealQueuedOrBetterCountUpgradeCommanderPrestigeStukovLeftNoDeadQueuedOrBetter"/>
+    </CRequirement>
+    <CRequirement id="CommanderPrestigeAbahur4HaveGlialReconstitution">
+        <EditorCategories value="Race:Zerg,TechType:Upgrade"/>
+        <NodeArray index="Use" Link="CountUpgradeGlialReconstitutionCompleteOnly76844448"/>
+        <NodeArray index="Show" Link="CountUpgradeCommanderPrestigeAbathur4CompleteOnly"/>
+    </CRequirement>
+    <CRequirement id="CommanderPrestigeAbahur4Show">
+        <EditorCategories value="Race:Zerg,TechType:Upgrade"/>
+        <NodeArray index="Show" Link="CountUpgradeCommanderPrestigeAbathur4CompleteOnly"/>
+    </CRequirement>
+    <CRequirement id="CommanderPrestigeAbahur4HaveHotSRoachDamage">
+        <NodeArray index="Use" Link="CountUpgradeHotSRoachDamageCompleteOnly2822298903"/>
+        <NodeArray index="Show" Link="CountUpgradeCommanderPrestigeAbathur4CompleteOnly"/>
+    </CRequirement>
+    <CRequirement id="CommanderPrestigeAbahur4HaveHotSRoachShield">
+        <NodeArray index="Use" Link="CountUpgradeHotSRoachShieldCompleteOnly2806997148"/>
+        <NodeArray index="Show" Link="AndCountUpgradeCommanderPrestigeAbathur4CompleteOnlyLT4CountUpgradeCommanderLevelCompleteOnly"/>
+    </CRequirement>
+    <CRequirement id="CommanderPrestigeAbahur4HaveOrganicCarapace">
+        <NodeArray index="Use" Link="CountUpgradeTunnelingClawsCompleteOnly615034983TechTreeCheat"/>
+        <NodeArray index="Show" Link="CountUpgradeCommanderPrestigeAbathur4CompleteOnly"/>
+    </CRequirement>
+    <CRequirement id="CommanderPrestigeAbahur4HaveHotSRapidRegeneration">
+        <NodeArray index="Use" Link="CountUpgradeHotSRapidRegenerationCompleteOnly3817045586TechTreeCheat"/>
+        <NodeArray index="Show" Link="CountUpgradeCommanderPrestigeAbathur4CompleteOnly"/>
+    </CRequirement>
+    <CRequirement id="CommanderPrestigeAbahur4HaveHotSExplosiveGlaive">
+        <NodeArray index="Use" Link="CountUpgradeMutaliskSunderingGlaveCompleteOnly355255440"/>
+        <NodeArray index="Show" Link="AndCountUpgradeCommanderPrestigeAbathur4CompleteOnlyLT10CountUpgradeCommanderLevelCompleteOnly"/>
+    </CRequirement>
+    <CRequirement id="BiomassBuffEmptyVisibleAbathur4">
+        <NodeArray index="Show" Link="AndCountUpgradeAbathurCommanderCompleteOnlyCountUpgradeCommanderPrestigeAbathur4CompleteOnlyOrEqCountBehaviorBiomassBuff1CompleteOnlyAtUnit0EqCountBehaviorBiomassBuff10CompleteOnlyAtUnit0EqCountBehaviorBiomassBuff100CompleteOnlyAtUnit0"/>
+    </CRequirement>
+    <CRequirement id="BiomassBuffVisibleAbathur4">
+        <NodeArray index="Show" Link="AndCountUpgradeCommanderPrestigeAbathur4CompleteOnlyOrGTCountBehaviorBiomassBuff1CompleteOnlyAtUnit0GTCountBehaviorBiomassBuff10CompleteOnlyAtUnit0GTCountBehaviorBiomassBuff100CompleteOnlyAtUnit0"/>
+    </CRequirement>
+    <CRequirement id="BrutaliskMorphAvailable">
+        <NodeArray index="Use" Link="AndOr2240178058CountUpgradeCommanderPrestigeAbathurUltEvoCompleteOnlyAndNotCountUpgradeCommanderPrestigeAbathurUltEvoCompleteOnlyLTCountUnitAlias_BrutaliskQueuedOrBetter3Or1528817496AndCountUpgradeCom853834415"/>
+        <NodeArray index="Show" Link="AndCountUpgradeAbathurCommanderCompleteOnlyNotCountUpgradeCommanderPrestigeAbathurBiomassCompleteOnlyNotCountUpgradeCommanderPrestigeAbathur4CompleteOnly"/>
+    </CRequirement>
+    <CRequirement id="CommanderPrestigeAbahur4WithMaxBiomass">
+        <EditorCategories value="Race:Zerg,TechType:Upgrade"/>
+        <NodeArray index="Use" Link="AndCountUpgradeCommanderPrestigeAbathur4CompleteOnlyGTCountBehaviorBiomassBuff100CompleteOnlyAtUnit0"/>
+        <NodeArray index="Show" Link="CountUpgradeCommanderPrestigeAbathur4CompleteOnly"/>
+    </CRequirement>
+    <CRequirement id="CommanderPrestigeRaynor4">
+        <NodeArray index="Show" Link="CountUpgradeCommanderPrestigeRaynor4CompleteOnly"/>
+    </CRequirement>
+    <CRequirement id="CommanderPrestigeRaynor4CalldownHyperion">
+        <NodeArray index="Use" Link="Or750862857NotCountUpgradeCommanderPrestigeRaynor4CompleteOnlyAndCountUpgradeCommanderPrestigeRaynor4CompleteOnlyCountUnitAlias_StarportCompleteOnlyLTCountUnitHyperionVoidCoopP4CompleteOnly1"/>
+    </CRequirement>
+    <CRequirement id="HaveAbathurImpalerDeepTunnel">
+        <NodeArray index="Use" Link="CountUpgradeAbathurDeepTunnelCompleteOnly896593563TechTreeCheat"/>
+        <NodeArray index="Show" Link="NotOrCountUpgradeCommanderPrestigeAbathurDeepTunnelCompleteOnlyCountUpgradeCommanderPrestigeAbathur4CompleteOnly"/>
+    </CRequirement>
+    <CRequirement id="HaveAbathurImpalerDeepTunnelImproved">
+        <NodeArray index="Use" Link="OrCountUpgradeAbathurDeepTunnelCompleteOnly896593563TechTreeCheatAndCountUpgradeCommanderPrestigeAbathur4CompleteOnlyGTCountBehaviorBiomassBuff100CompleteOnlyAtUnit0"/>
+        <NodeArray index="Show" Link="AndOrCountUpgradeCommanderPrestigeAbathurDeepTunnelCompleteOnlyCountUpgradeCommanderPrestigeAbathur4CompleteOnlyLTE9CountUpgradeCommanderLevelCompleteOnly"/>
+    </CRequirement>
+    <CRequirement id="HaveAbathurImpalerDeepTunnelImprovedP4">
+        <EditorCategories value="Race:Zerg,TechType:Unit"/>
+        <NodeArray index="Use" Link="OrCountUpgradeAbathurDeepTunnelCompleteOnly896593563TechTreeCheatAndCountUpgradeCommanderPrestigeAbathur4CompleteOnlyGTCountBehaviorBiomassBuff100CompleteOnlyAtUnit0"/>
+        <NodeArray index="Show" Link="AndCountUpgradeCommanderPrestigeAbathur4CompleteOnlyLTE9CountUpgradeCommanderLevelCompleteOnly"/>
+    </CRequirement>
+    <CRequirement id="P4LearnDehakaPrimalArmor1">
+        <NodeArray index="Show" Link="EqCountUpgradeDehakaPrimalArmorLevel1QueuedOrBetter0"/>
+    </CRequirement>
+    <CRequirement id="P4LearnDehakaPrimalArmor2">
+        <NodeArray index="Use" Link="CountUpgradeDehakaPrimalArmorLevel1CompleteOnly"/>
+        <NodeArray index="Show" Link="EqCountUpgradeDehakaPrimalArmorLevel2QueuedOrBetter0"/>
+    </CRequirement>
+    <CRequirement id="P4LearnDehakaPrimalArmor3">
+        <NodeArray index="Use" Link="CountUpgradeDehakaPrimalArmorLevel2CompleteOnly"/>
+        <NodeArray index="Show" Link="EqCountUpgradeDehakaPrimalArmorLevel3QueuedOrBetter0"/>
+    </CRequirement>
+    <CRequirement id="P4LearnDehakaPrimalWeapons1">
+        <NodeArray index="Show" Link="EqCountUpgradeDehakaPrimalWeaponsLevel1QueuedOrBetter0"/>
+    </CRequirement>
+    <CRequirement id="P4LearnDehakaPrimalWeapons2">
+        <NodeArray index="Use" Link="CountUpgradeDehakaPrimalWeaponsLevel1CompleteOnly"/>
+        <NodeArray index="Show" Link="EqCountUpgradeDehakaPrimalWeaponsLevel2QueuedOrBetter0"/>
+    </CRequirement>
+    <CRequirement id="P4LearnDehakaPrimalWeapons3">
+        <NodeArray index="Use" Link="CountUpgradeDehakaPrimalWeaponsLevel2CompleteOnly"/>
+        <NodeArray index="Show" Link="EqCountUpgradeDehakaPrimalWeaponsLevel3QueuedOrBetter0"/>
+    </CRequirement>
+    <CRequirement id="P4DehakaDakrunBuild">
+        <NodeArray index="Use" Link="LT2528870634CountUnitDehakaDakrunStructureQueuedOrBetter1"/>
+    </CRequirement>
+    <CRequirement id="P4DehakaGlevigBuild">
+        <NodeArray index="Use" Link="LT2528870634CountUnitDehakaGlevigStructureQueuedOrBetter1"/>
+    </CRequirement>
+    <CRequirement id="P4DehakaMurvarBuild">
+        <NodeArray index="Use" Link="LT2528870634CountUnitDehakaMurvarStructureQueuedOrBetter1"/>
+    </CRequirement>
+    <CRequirement id="HasArtanisHardenedShield">
+        <EditorCategories value="Race:Protoss,TechType:Upgrade"/>
+        <NodeArray index="Use" Link="CountUpgradeArtanisHardenedShieldCompleteOnly1513199048"/>
+    </CRequirement>
+    <CRequirement id="HaveHyperionTacticalCommandSystem">
+        <NodeArray index="Show" Link="CountUpgradeHyperionTacticalCommandSystemCompleteOnly"/>
+    </CRequirement>
+    <CRequirement id="HaveVoidCoopHeroicFortitude">
+        <NodeArray index="Show" Link="CountUpgradeVoidCoopHeroicFortitudeCompleteOnly"/>
+    </CRequirement>
+    <CRequirement id="HaveUltimateWeapon">
+        <EditorCategories value="Race:Terran,TechType:Upgrade"/>
+        <NodeArray index="Use" Link="CountUpgradeHyperionUltimateWeaponCompleteOnly"/>
+    </CRequirement>
+    <CRequirement id="HaveCommanderPrestigeAbathur4">
+        <EditorCategories value="Race:Protoss,TechType:Ability"/>
+        <NodeArray index="Use" Link="CountUpgradeCommanderPrestigeAbathur4CompleteOnly"/>
+    </CRequirement>
+    <CRequirement id="HaveCommanderPrestigeDehaka4">
+        <NodeArray index="Show" Link="CountUpgradeCommanderPrestigeDehaka4CompleteOnly"/>
+    </CRequirement>
+    <CRequirement id="HaveKaraxBuildingUpgradeEnableTransport">
+        <EditorCategories value="Race:Protoss,TechType:Ability"/>
+        <NodeArray index="Show" Link="AndNotCountBehaviorKaraxBuildingUpgradeTransportCompleteOnlyAtUnitCountUpgradeCommanderPrestigeKarax4CompleteOnly"/>
+    </CRequirement>
+    <CRequirement id="HaveKaraxBuildingUpgradeEnableWeaponShieldBattery">
+        <EditorCategories value="Race:Protoss,TechType:Ability"/>
+        <NodeArray index="Show" Link="AndCountUpgradeCommanderPrestigeKarax4CompleteOnlyLTCountBehaviorKaraxBuildingUpgradeWeaponShieldBatteryCompleteOnlyAtUnit10"/>
+    </CRequirement>
+    <CRequirement id="HaveKaraxBuildingUpgradeEnableWeaponKhaydarinMonolith">
+        <EditorCategories value="Race:Protoss,TechType:Ability"/>
+        <NodeArray index="Show" Link="AndCountUpgradeCommanderPrestigeKarax4CompleteOnlyLTCountBehaviorKaraxBuildingUpgradeWeaponKhaydarinMonolithCompleteOnlyAtUnit10"/>
+    </CRequirement>
+    <CRequirement id="HaveKaraxBuildingUpgradeTransport">
+        <EditorCategories value="Race:Protoss,TechType:Ability"/>
+        <NodeArray index="Show" Link="CountBehaviorKaraxBuildingUpgradeTransportCompleteOnlyAtUnit"/>
+    </CRequirement>
+    <CRequirement id="HaveKaraxBuildingUpgradeEnableWeapon">
+        <EditorCategories value="Race:Protoss,TechType:Ability"/>
+        <NodeArray index="Show" Link="AndCountUpgradeCommanderPrestigeKarax4CompleteOnlyLTCountBehaviorKaraxBuildingUpgradeWeaponCompleteOnlyAtUnit10"/>
+    </CRequirement>
+    <CRequirement id="HaveBattlecruiserEnableSpecializations">
+        <EditorCategories value="Race:Terran,TechType:Upgrade"/>
+        <NodeArray index="Use" Link="CountUpgradeBattlecruiserEnableSpecializationsCompleteOnly"/>
+    </CRequirement>
+    <CRequirement id="HaveRaynorCommanderHyperionAdvancedTargetingSystemsP4">
+        <NodeArray index="Use" Link="And1444893453CountUpgradeRaynorCommanderHyperionAdvancedTargetingSystemsCompleteOnlyCountUpgradeHyperionTacticalCommandSystemCompleteOnly"/>
+    </CRequirement>
+    <CRequirement id="HaveHyperionRepair">
+        <EditorCategories value="Race:Terran,TechType:Upgrade"/>
+        <NodeArray index="Use" Link="CountUpgradeHyperionRepairCompleteOnly1993632571"/>
+    </CRequirement>
+    <CRequirement id="HaveK5ChainLightning2">
+        <NodeArray index="Show" Link="CountUpgradeK5ChainLightningCompleteOnly"/>
+    </CRequirement>
+    <CRequirement id="LearnHyperjumpEngine">
+        <EditorCategories value="Race:Protoss,TechType:Ability"/>
+        <NodeArray index="Show" Link="NotCountUpgradeHyperjumpEngineQueuedOrBetter"/>
+    </CRequirement>
+    <CRequirement id="LearnArtanisHardenedShield">
+        <EditorCategories value="Race:Protoss,TechType:Ability"/>
+        <NodeArray index="Use" Link="CountUnitTwilightCouncilCompleteOnly"/>
+        <NodeArray index="Show" Link="AndCountUpgradeArtanisCommanderCompleteOnlyNotCountUpgradeArtanisHardenedShieldQueuedOrBetterCountUpgradeCommanderPrestigeArtanis4CompleteOnly"/>
+    </CRequirement>
+    <CRequirement id="HaveHyperjumpEngine">
+        <EditorCategories value="Race:Protoss,TechType:Ability"/>
+        <NodeArray index="Use" Link="CountUpgradeHyperjumpEngineQueuedOrBetter"/>
+    </CRequirement>
+    <CRequirement id="LearnHyperionTacticalCommandSystem">
+        <EditorCategories value="Race:Protoss,TechType:Ability"/>
+        <NodeArray index="Show" Link="NotCountUpgradeHyperionTacticalCommandSystemQueuedOrBetter"/>
+    </CRequirement>
+    <CRequirement id="LearnUltimateWeapon">
+        <EditorCategories value="Race:Protoss,TechType:Ability"/>
+        <NodeArray index="Use" Link="CountUpgradeBattlecruiserEnableSpecializationsQueuedOrBetter1873221433"/>
+        <NodeArray index="Show" Link="NotCountUpgradeHyperionUltimateWeaponQueuedOrBetter"/>
+    </CRequirement>
+    <CRequirement id="LearnHyperionRepair">
+        <EditorCategories value="Race:Protoss,TechType:Ability"/>
+        <NodeArray index="Show" Link="NotCountUpgradeHyperionRepairQueuedOrBetter"/>
+    </CRequirement>
+    <CRequirement id="LeviathanMorphAvailable">
+        <NodeArray index="Use" Link="AndOr1853099161CountUpgradeCommanderPrestigeAbathurUltEvoCompleteOnlyAndNotCountUpgradeCommanderPrestigeAbathurUltEvoCompleteOnlyLTCountUnitHotSLeviathanQueuedOrBetter24414874533Or1528817496AndCountUp3327226461"/>
+        <NodeArray index="Show" Link="AndCountUpgradeAbathurCommanderCompleteOnlyNotCountUpgradeCommanderPrestigeAbathurBiomassCompleteOnlyNotCountUpgradeCommanderPrestigeAbathur4CompleteOnly"/>
+    </CRequirement>
+    <CRequirement id="ResurgenceReviveOffCooldown">
+        <EditorCategories value="Race:Protoss,TechType:Ability"/>
+        <NodeArray index="Show" Link="NotCountBehaviorResurgenceDisableCompleteOnlyAtUnit"/>
+    </CRequirement>
+</Catalog>

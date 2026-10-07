@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CValidatorPlayerRequirement id="HaveZerglingArmorShredStukovLeftNoDead">
+        <Find value="1"/>
+        <Value value="HaveZerglingArmorShredStukovLeftNoDead"/>
+    </CValidatorPlayerRequirement>
+    <CValidatorPlayerRequirement id="HaveCommanderPrestigeRaynor4">
+        <WhichPlayer Value="Creator"/>
+        <Find value="1"/>
+        <UnitSelectionNotRequired value="1"/>
+        <Value value="CommanderPrestigeRaynor4"/>
+    </CValidatorPlayerRequirement>
+    <CValidatorPlayerRequirement id="HaveK5Cooldowns">
+        <Find value="1"/>
+        <Value value="HaveK5Cooldowns"/>
+    </CValidatorPlayerRequirement>
+    <CValidatorPlayerRequirement id="NotHaveK5Cooldowns">
+        <Value value="HaveK5Cooldowns"/>
+    </CValidatorPlayerRequirement>
+    <CValidatorPlayerRequirement id="NotHaveK5ChainLightning">
+        <Value value="HaveK5ChainLightning"/>
+    </CValidatorPlayerRequirement>
+    <CValidatorPlayerRequirement id="HaveVoidCoopHeroicFortitude">
+        <Find value="1"/>
+        <Value value="HaveVoidCoopHeroicFortitude"/>
+    </CValidatorPlayerRequirement>
+    <CValidatorPlayerRequirement id="HaveNoCommanderPrestigeRaynor4">
+        <WhichPlayer Value="Creator"/>
+        <UnitSelectionNotRequired value="1"/>
+        <Value value="CommanderPrestigeRaynor4"/>
+    </CValidatorPlayerRequirement>
+    <CValidatorPlayerRequirement id="HaveHyperionTacticalCommandSystem">
+        <WhichPlayer Value="Creator"/>
+        <Find value="1"/>
+        <UnitSelectionNotRequired value="1"/>
+        <Value value="HaveHyperionTacticalCommandSystem"/>
+    </CValidatorPlayerRequirement>
+    <CValidatorPlayerRequirement id="HaveHyperjumpEngine">
+        <WhichPlayer Value="Creator"/>
+        <Find value="1"/>
+        <UnitSelectionNotRequired value="1"/>
+        <Value value="HaveHyperjumpEngine"/>
+    </CValidatorPlayerRequirement>
+    <CValidatorPlayerRequirement id="HaveHyperionRepair">
+        <WhichPlayer Value="Creator"/>
+        <Find value="1"/>
+        <UnitSelectionNotRequired value="1"/>
+        <Value value="HaveHyperionRepair"/>
+    </CValidatorPlayerRequirement>
+    <CValidatorPlayerRequirement id="HaveUltimateWeapon">
+        <WhichPlayer Value="Creator"/>
+        <Find value="1"/>
+        <UnitSelectionNotRequired value="1"/>
+        <Value value="HaveUltimateWeapon"/>
+    </CValidatorPlayerRequirement>
+    <CValidatorPlayerRequirement id="HaveCommanderPrestigeAbathur4">
+        <Find value="1"/>
+        <Value value="HaveCommanderPrestigeAbathur4"/>
+    </CValidatorPlayerRequirement>
+    <CValidatorPlayerRequirement id="HasArtanisHardenedShield">
+        <Find value="1"/>
+        <Value value="HasArtanisHardenedShield"/>
+    </CValidatorPlayerRequirement>
+    <CValidatorPlayerRequirement id="HaveCommanderPrestigeDehaka4">
+        <WhichPlayer Value="Creator"/>
+        <Find value="1"/>
+        <UnitSelectionNotRequired value="1"/>
+        <Value value="HaveCommanderPrestigeDehaka4"/>
+    </CValidatorPlayerRequirement>
+    <CValidatorPlayerRequirement id="HaveBattlecruiserEnableSpecializations">
+        <Find value="1"/>
+        <Value value="HaveBattlecruiserEnableSpecializations"/>
+    </CValidatorPlayerRequirement>
+    <CValidatorPlayerRequirement id="HaveRaynorCommanderHyperionAdvancedTargetingSystemsP4">
+        <Find value="1"/>
+        <Value value="HaveRaynorCommanderHyperionAdvancedTargetingSystemsP4"/>
+    </CValidatorPlayerRequirement>
+    <CValidatorPlayerRequirement id="HaveK5ChainLightning">
+        <Find value="1"/>
+        <Value value="HaveK5ChainLightning"/>
+    </CValidatorPlayerRequirement>
+    <CValidatorPlayerRequirement id="NotHaveVoidCoopHeroicFortitude">
+        <Value value="HaveVoidCoopHeroicFortitude"/>
+    </CValidatorPlayerRequirement>
+    <CValidatorCombine id="LightningDashCheck">
+        <Type value="And"/>
+        <CombineArray value="TargetIsPathable"/>
+        <CombineArray value="HasVision"/>
+        <CombineArray value="LightningDashRangeCheck"/>
+    </CValidatorCombine>
+    <CValidatorLocationCompareRange id="LightningDashRangeCheck">
+        <ResultFailed value="TargetIsOutOfRange"/>
+        <WhichLocation Value="SourceUnit"/>
+        <Compare value="LT"/>
+        <Range value="8"/>
+        <Value Value="TargetPoint"/>
+    </CValidatorLocationCompareRange>
+    <CValidatorCombine id="NotBrutalisknorAbathurP4">
+        <Type value="And"/>
+        <CombineArray value="NotBrutalisk"/>
+        <CombineArray value="NotHaveCommanderPrestigeAbathur4"/>
+    </CValidatorCombine>
+    <CValidatorCombine id="NotLeviathannorAbathurP4">
+        <Type value="And"/>
+        <CombineArray value="NotHotSLeviathan"/>
+        <CombineArray value="NotHaveCommanderPrestigeAbathur4"/>
+    </CValidatorCombine>
+    <CValidatorPlayerRequirement id="NotHaveCommanderPrestigeAbathur4">
+        <WhichPlayer Value="Creator"/>
+        <UnitSelectionNotRequired value="1"/>
+        <Value value="HaveCommanderPrestigeAbathur4"/>
+    </CValidatorPlayerRequirement>
+    <CValidatorUnitCompareChargeUsed id="HyperionAdvancedPDDUsed">
+        <ResultFailed value="Error,VultureMineMax"/>
+        <Compare value="GT"/>
+        <ChargeLink value="Abil/HyperionAdvancedPDD"/>
+        <Location value="Unit"/>
+    </CValidatorUnitCompareChargeUsed>
+    <CValidatorUnitCompareBehaviorCount id="HaveHyperionVoidCoopDamageAuraMechaStim">
+        <Behavior value="HyperionVoidCoopDamageAuraMechaStim"/>
+        <RequireCasterUnit Value="Caster"/>
+        <Compare value="GT"/>
+    </CValidatorUnitCompareBehaviorCount>
+</Catalog>

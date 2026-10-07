@@ -1,0 +1,936 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema targetNamespace="http://www.hiveworkshop.com/SC2Layout.xsd"
+    elementFormDefault="qualified"
+    xmlns="http://www.hiveworkshop.com/SC2Layout.xsd"
+    xmlns:sc2l="http://www.hiveworkshop.com/SC2Layout.xsd"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+    <!-- Root node -->
+    <xs:element name="Desc" type="Desc"/>
+
+
+
+    <!-- Attribute restriction definitions -->
+    <xs:simpleType name="ConstantVal">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="#{1,2}([a-zA-Z0-9])+"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="Side">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Top"/>
+            <xs:enumeration value="Left"/>
+            <xs:enumeration value="Right"/>
+            <xs:enumeration value="Bottom"/>
+        </xs:restriction>
+    </xs:simpleType>  
+    <xs:simpleType name="Blend">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Add"/>
+            <xs:enumeration value="Alpha"/>
+            <xs:enumeration value="Darken"/>
+            <xs:enumeration value="Lighten"/>
+            <xs:enumeration value="Multiply"/>
+            <xs:enumeration value="Normal"/>
+            <xs:enumeration value="Subtract"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="BooleanBase">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="true"/>
+            <xs:enumeration value="false"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="Boolean">
+        <xs:union memberTypes="sc2l:ConstantVal sc2l:BooleanBase"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="UnsignedInteger">
+        <xs:union memberTypes="sc2l:ConstantVal xs:unsignedInt"/>
+    </xs:simpleType>
+    
+    <xs:simpleType name="Integer">
+        <xs:union memberTypes="sc2l:ConstantVal xs:int"/>
+    </xs:simpleType>
+    
+    <xs:simpleType name="FloatBase">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[+|-]{0,1}[0-9]{1,6}([.][0-9]{1,6}){0,1}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="Float">
+        <xs:union memberTypes="sc2l:ConstantVal sc2l:FloatBase"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="Float3Base">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[+|-]{0,1}[0-9]{1,6}([.][0-9]{1,6}){0,1},[ ]*[+|-]{0,1}[0-9]{1,6}([.][0-9]{1,6}){0,1},[ ]*[+|-]{0,1}[0-9]{1,6}([.][0-9]{1,6}){0,1}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="Float3">
+        <xs:union memberTypes="sc2l:ConstantVal sc2l:Float3Base"/>
+    </xs:simpleType>
+    
+    <xs:simpleType name="Color3Base">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="(([0-9])|([1-9][0-9])|(1[0-9][0-9])|(2[0-4][0-9])|(25[0-5])),[ ]*(([0-9])|([1-9][0-9])|(1[0-9][0-9])|(2[0-4][0-9])|(25[0-5])),[ ]*(([0-9])|([1-9][0-9])|(1[0-9][0-9])|(2[0-4][0-9])|(25[0-5]))"/>
+            <xs:pattern value="[a-fA-F0-9]{6}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="Color3">
+        <xs:union memberTypes="sc2l:ConstantVal sc2l:Color3Base"/>
+    </xs:simpleType>
+    
+    <xs:simpleType name="ColorSingleBase">
+        <xs:restriction base="xs:int">
+            <xs:minInclusive value="0"/>
+            <xs:maxInclusive value="255"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ColorSingle">
+        <xs:union memberTypes="sc2l:ConstantVal sc2l:ColorSingleBase"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="TexCoordBase">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[0-1]{1}[.][0-9]{1,6}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="TexCoord">
+        <xs:union memberTypes="sc2l:ConstantVal sc2l:TexCoordBase"/>
+    </xs:simpleType>
+    
+    <xs:simpleType name="FrameType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="AchievementFrame"/>
+            <xs:enumeration value="ActiveQueueButton"/>
+            <xs:enumeration value="ActiveQueuePanel"/>
+            <xs:enumeration value="AIButton"/>
+            <xs:enumeration value="AlertDisplay"/>
+            <xs:enumeration value="AlertPanel"/>
+            <xs:enumeration value="AlertItem"/>
+            <xs:enumeration value="AlliancePanel"/>
+            <xs:enumeration value="AllianceSlot"/>
+            <xs:enumeration value="BattleReportDifficultyButton"/>
+            <xs:enumeration value="BattleReportListBoxItem"/>
+            <xs:enumeration value="BattleReportPanel"/>
+            <xs:enumeration value="BattleUI"/>
+            <xs:enumeration value="BehaviorBar"/>
+            <xs:enumeration value="BehaviorIcon"/>
+            <xs:enumeration value="BlockedPlayerItem"/>
+            <xs:enumeration value="Board"/>
+            <xs:enumeration value="BoardItem"/>
+            <xs:enumeration value="BoardRow"/>
+            <xs:enumeration value="Button"/>
+            <xs:enumeration value="CampaignPanel"/>
+            <xs:enumeration value="CargoButton"/>
+            <xs:enumeration value="CashPanel"/>
+            <xs:enumeration value="ChallengeCategoryFrame"/>
+            <xs:enumeration value="ChallengeFrame"/>
+            <xs:enumeration value="ChallengeInfoFrame"/>
+            <xs:enumeration value="ChallengeListBoxItem"/>
+            <xs:enumeration value="ChallengeMapInfoPanel"/>
+            <xs:enumeration value="ChallengePanel"/>
+            <xs:enumeration value="CharacterSheetPanel"/>
+            <xs:enumeration value="CharacterSheetCategoryListBoxItem"/>
+            <xs:enumeration value="CharacterSheetMercenaryFrame"/>
+            <xs:enumeration value="CharacterSheetPurchaseFrame"/>
+            <xs:enumeration value="CharacterSheetResearchFrame"/>
+            <xs:enumeration value="CharacterSheetResearchCategoryFrame"/>
+            <xs:enumeration value="CharacterSheetSummaryFrame"/>
+            <xs:enumeration value="ChatBar"/>
+            <xs:enumeration value="ChatRecipientListBoxItem"/>
+            <xs:enumeration value="ChatRecipientListBoxTooltip"/>
+            <xs:enumeration value="ChatRecipientTooltip"/>
+            <xs:enumeration value="CheckBox"/>
+            <xs:enumeration value="CinematicTextPanel"/>
+            <xs:enumeration value="CommandButton"/>
+            <xs:enumeration value="CommandPanel"/>
+            <xs:enumeration value="CommandPanelAI"/>
+            <xs:enumeration value="CommandTooltip"/>
+            <xs:enumeration value="ConfirmationDialog"/>
+            <xs:enumeration value="ConsolePanel"/>
+            <xs:enumeration value="ContextMenu"/>
+            <xs:enumeration value="ContextMenuListBoxItem"/>
+            <xs:enumeration value="ControlGroupButton"/>
+            <xs:enumeration value="ControlGroupPanel"/>
+            <xs:enumeration value="ConversationPanel"/>
+            <xs:enumeration value="CountdownLabel"/>
+            <xs:enumeration value="CreditsPanel"/>
+            <xs:enumeration value="DifficultyLevelButton"/>
+            <xs:enumeration value="DifficultyLevelFrame"/>
+            <xs:enumeration value="DifficultyPulldown"/>
+            <xs:enumeration value="DifficultySelectionDialog"/>
+            <xs:enumeration value="EditBox"/>
+            <xs:enumeration value="EditBoxConfirmationDialog"/>
+            <xs:enumeration value="EditBoxDialog"/>
+            <xs:enumeration value="EquipmentIcon"/>
+            <xs:enumeration value="ExitDialog"/>
+            <xs:enumeration value="FileListBox"/>
+            <xs:enumeration value="FileListBoxItem"/>
+            <xs:enumeration value="FilePanelListBoxItem"/>
+            <xs:enumeration value="FlashFrame"/>
+            <xs:enumeration value="Frame"/>
+            <xs:enumeration value="GameButton"/>
+            <xs:enumeration value="GameMenuDialog"/>
+            <xs:enumeration value="GameMenuDialogHotkeysPanel"/>
+            <xs:enumeration value="GameMenuDialogMainPanel"/>
+            <xs:enumeration value="GameMenuDialogOptionsPanel"/>
+            <xs:enumeration value="GameMenuDialogReplayPanel"/>
+            <xs:enumeration value="GameMenuDialogRestartPanel"/>
+            <xs:enumeration value="GameMenuDialogSavePanel"/>
+            <xs:enumeration value="GameplayOptionsPanel"/>
+            <xs:enumeration value="GameUI"/>
+            <xs:enumeration value="GlueUI"/>
+            <xs:enumeration value="GraphicsOptionsPanel"/>
+            <xs:enumeration value="HelpMenuDialog"/>
+            <xs:enumeration value="HelpMenuDialogListBoxItem"/>
+            <xs:enumeration value="HelpPanel"/>
+            <xs:enumeration value="HelpPanelListBoxItem"/>
+            <xs:enumeration value="HeroButton"/>
+            <xs:enumeration value="HeroFrame"/>
+            <xs:enumeration value="HeroPanel"/>
+            <xs:enumeration value="HotkeyConfig"/>
+            <xs:enumeration value="HotkeyCreateProfileDialog"/>
+            <xs:enumeration value="HotkeyDialog"/>
+            <xs:enumeration value="HotkeyGlobalPanel"/>
+            <xs:enumeration value="HotkeyGridPanel"/>
+            <xs:enumeration value="HotkeyListBoxItem"/>
+            <xs:enumeration value="HotkeyNavPanel"/>
+            <xs:enumeration value="HotkeyNavPanelListBoxItem"/>
+            <xs:enumeration value="HotkeyOptionsPanel"/>
+            <xs:enumeration value="HotkeyRacialPanel"/>
+            <xs:enumeration value="HotkeyTreeViewItem"/>
+            <xs:enumeration value="HotkeyUnboundListBoxItem"/>
+            <xs:enumeration value="HotkeyUnboundPanel"/>
+            <xs:enumeration value="IdleButton"/>
+            <xs:enumeration value="Image"/>
+            <xs:enumeration value="InfoPaneAIGroup"/>
+            <xs:enumeration value="InfoPaneAIPlayer"/>
+            <xs:enumeration value="InfoPaneCargo"/>
+            <xs:enumeration value="InfoPaneGroup"/>
+            <xs:enumeration value="InfoPaneHero"/>
+            <xs:enumeration value="InfoPaneProgress"/>
+            <xs:enumeration value="InfoPaneQueue"/>
+            <xs:enumeration value="InfoPaneUnit"/>
+            <xs:enumeration value="InfoPanel"/>
+            <xs:enumeration value="InputMethodCandidateList"/>
+            <xs:enumeration value="InputMethodCompositionFrame"/>
+            <xs:enumeration value="InputMethodLanguageFrame"/>
+            <xs:enumeration value="InputOptionsPanel"/>
+            <xs:enumeration value="InventoryContainer"/>
+            <xs:enumeration value="InventoryPanel"/>
+            <xs:enumeration value="Label"/>
+            <xs:enumeration value="LeaderPanel"/>
+            <xs:enumeration value="LeaderPanelAPMFrame"/>
+            <xs:enumeration value="LeaderPanelArmyFrame"/>
+            <xs:enumeration value="LeaderPanelIconFrame"/>
+            <xs:enumeration value="LeaderPanelIncomeFrame"/>
+            <xs:enumeration value="LeaderPanelProductionFrame"/>
+            <xs:enumeration value="LeaderPanelResourceFrame"/>
+            <xs:enumeration value="LeaderPanelSpendingFrame"/>
+            <xs:enumeration value="LeaderPanelUnitFrame"/>
+            <xs:enumeration value="LeaderPanelUnitIcon"/>
+            <xs:enumeration value="LeaderPanelUnitsLostFrame"/>
+            <xs:enumeration value="ListBox"/>
+            <xs:enumeration value="LoadGameDialog"/>
+            <xs:enumeration value="LoadingBar"/>
+            <xs:enumeration value="MapInfoPanel"/>
+            <xs:enumeration value="MenuBar"/>
+            <xs:enumeration value="MercenaryFrame"/>
+            <xs:enumeration value="MercenaryPanel"/>
+            <xs:enumeration value="MessageDisplay"/>
+            <xs:enumeration value="MessageLogDialog"/>
+            <xs:enumeration value="Minimap"/>
+            <xs:enumeration value="MinimapPanel"/>
+            <xs:enumeration value="MinimapPanelTooltip"/>
+            <xs:enumeration value="MissionTimePanel"/>
+            <xs:enumeration value="Model"/>
+            <xs:enumeration value="MovieFrame"/>
+            <xs:enumeration value="MovingFrame"/>
+            <xs:enumeration value="MultiplayerLoadingPanel"/>
+            <xs:enumeration value="MultiplayerLoadingPanelPlayerFrame"/>
+            <xs:enumeration value="ObjectivePanel"/>
+            <xs:enumeration value="ObjectivePanelListBox"/>
+            <xs:enumeration value="ObjectivePanelListBoxItem"/>
+            <xs:enumeration value="ObserverPanel"/>
+            <xs:enumeration value="ObserverPreviewFrame"/>
+            <xs:enumeration value="OptionsDialog"/>
+            <xs:enumeration value="PageButton"/>
+            <xs:enumeration value="PausePanel"/>
+            <xs:enumeration value="PlanetFrame"/>
+            <xs:enumeration value="PlanetPanel"/>
+            <xs:enumeration value="PlayerNameFrame"/>
+            <xs:enumeration value="PlayerStatFrame"/>
+            <xs:enumeration value="PlayerStatPanel"/>
+            <xs:enumeration value="Portrait"/>
+            <xs:enumeration value="PortraitPanel"/>
+            <xs:enumeration value="ProgressBar"/>
+            <xs:enumeration value="ProgressButton"/>
+            <xs:enumeration value="Pulldown"/>
+            <xs:enumeration value="PurchaseCategoryFrame"/>
+            <xs:enumeration value="PurchaseGroupFrame"/>
+            <xs:enumeration value="PurchaseItemFrame"/>
+            <xs:enumeration value="PurchasePanel"/>
+            <xs:enumeration value="PylonButton"/>
+            <xs:enumeration value="QueueButton"/>
+            <xs:enumeration value="RecentlyPurchasedListBoxItem"/>
+            <xs:enumeration value="RecipientTooltip"/>
+            <xs:enumeration value="ReplayFilePanel"/>
+            <xs:enumeration value="ReplayFilePanelListBoxItem"/>
+            <xs:enumeration value="ReplayPanel"/>
+            <xs:enumeration value="ResearchCategoryFrame"/>
+            <xs:enumeration value="ResearchItemFrame"/>
+            <xs:enumeration value="ResearchPanel"/>
+            <xs:enumeration value="ResearchTierFrame"/>
+            <xs:enumeration value="ResourceFrame"/>
+            <xs:enumeration value="ResourcePanel"/>
+            <xs:enumeration value="ResourceRequestAlertItem"/>
+            <xs:enumeration value="ResourceRequestAlertPanel"/>
+            <xs:enumeration value="RevealPanel"/>
+            <xs:enumeration value="SaveFilePanel"/>
+            <xs:enumeration value="SaveFilePanelListBoxItem"/>
+            <xs:enumeration value="SaveReplayDialog"/>
+            <xs:enumeration value="ScoreOver0"/>
+            <xs:enumeration value="ScoreOver1"/>
+            <xs:enumeration value="ScoreOverA"/>
+            <xs:enumeration value="ScreenBackground"/>
+            <xs:enumeration value="ScreenChallenge"/>
+            <xs:enumeration value="ScreenCredits"/>
+            <xs:enumeration value="ScreenLoading"/>
+            <xs:enumeration value="ScreenMovie"/>
+            <xs:enumeration value="ScreenReplay"/>
+            <xs:enumeration value="ScreenSingle"/>
+            <xs:enumeration value="ScrollBar"/>
+            <xs:enumeration value="SkirmishPanel"/>
+            <xs:enumeration value="Slider"/>
+            <xs:enumeration value="SocialManagementListBoxItem"/>
+            <xs:enumeration value="SocialManagementPanel"/>
+            <xs:enumeration value="SocialOptionsPanel"/>
+            <xs:enumeration value="SoundOptionsPanel"/>
+            <xs:enumeration value="Spinner"/>
+            <xs:enumeration value="StandardDialog"/>
+            <xs:enumeration value="StandardTooltip"/>
+            <xs:enumeration value="StereoscopicOptionsPanel"/>
+            <xs:enumeration value="SubtitleDisplay"/>
+            <xs:enumeration value="SubtitlePanel"/>
+            <xs:enumeration value="SystemAlertListBoxItem"/>
+            <xs:enumeration value="SystemAlertPanel"/>
+            <xs:enumeration value="SystemInfoBatteryFrame"/>
+            <xs:enumeration value="SystemInfoFramerateFrame"/>
+            <xs:enumeration value="SystemInfoLocalTimeFrame"/>
+            <xs:enumeration value="SystemInfoPanel"/>
+            <xs:enumeration value="SystemInfoTooltip"/>
+            <xs:enumeration value="SystemInfoWifiFrame"/>
+            <xs:enumeration value="TalkerPanel"/>
+            <xs:enumeration value="TalkerItem"/>
+            <xs:enumeration value="TeamResourcePanel"/>
+            <xs:enumeration value="TeamResourceRequestFrame"/>
+            <xs:enumeration value="TeamResourceSlot"/>
+            <xs:enumeration value="TechGlossaryPanel"/>
+            <xs:enumeration value="TechGlossaryUnitButton"/>
+            <xs:enumeration value="TechTreeEntryFrame"/>
+            <xs:enumeration value="TechTreePanel"/>
+            <xs:enumeration value="TechTreeConnectorFrame"/>
+            <xs:enumeration value="TechTreeStructureFrame"/>
+            <xs:enumeration value="TechTreeUnitFrame"/>
+            <xs:enumeration value="TextCrawlPanel"/>
+            <xs:enumeration value="ThreeButtonDialog"/>
+            <xs:enumeration value="TimedConfirmationDialog"/>
+            <xs:enumeration value="TimedDialog"/>
+            <xs:enumeration value="TimePanel"/>
+            <xs:enumeration value="TimerWindow"/>
+            <xs:enumeration value="TipAlertListBoxItem"/>
+            <xs:enumeration value="TipAlertMovingFrame"/>
+            <xs:enumeration value="TipAlertPanel"/>
+            <xs:enumeration value="Tooltip"/>
+            <xs:enumeration value="TreeView"/>
+            <xs:enumeration value="TriggerDialogFrame"/>
+            <xs:enumeration value="TriggerWindowPanel"/>
+            <xs:enumeration value="UnitModelFrame"/>
+            <xs:enumeration value="UnitSummary"/>
+            <xs:enumeration value="UnitTypeButton"/>
+            <xs:enumeration value="UnitWireframe"/>
+            <xs:enumeration value="VictoryPanel"/>
+            <xs:enumeration value="VictoryPanelStatisticListBoxItem"/>
+            <xs:enumeration value="VideoOptionsPanel"/>
+            <xs:enumeration value="VoiceOptionsPanel"/>
+            <xs:enumeration value="WaitingPlayerListBoxItem"/>
+            <xs:enumeration value="WaitingForPlayersDialog"/>
+            <xs:enumeration value="WaitingForUsersDialog"/>
+            <xs:enumeration value="WaitingForServerDialog"/>
+            <xs:enumeration value="WarningTimerPanel"/>
+            <xs:enumeration value="WorldPanel"/>
+            <xs:enumeration value="WorldTooltip"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="Layer">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="0"/>
+            <xs:enumeration value="1"/>
+            <xs:enumeration value="2"/>
+            <xs:enumeration value="3"/>
+            <xs:enumeration value="4"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="TextureTypeVal">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="NineSlice"/>
+            <xs:enumeration value="None"/>
+            <xs:enumeration value="Normal"/>
+            <xs:enumeration value="Border"/>
+            <xs:enumeration value="HorizontalBorder"/>
+            <xs:enumeration value="EndCap"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="Pos">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Max"/>
+            <xs:enumeration value="Mid"/>
+            <xs:enumeration value="Min"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="Project">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Orthographic"/>
+            <xs:enumeration value="Perspective"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+
+
+    <!-- Desc definition -->
+    <xs:complexType name="Desc">
+        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:choice minOccurs="0">
+              <xs:element name="Include" type="Include" minOccurs="0" maxOccurs="unbounded"/>
+              <xs:element name="Constant" type="Constant" minOccurs="0" maxOccurs="unbounded"/>
+              <xs:element name="Frame" type="Frame" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:choice>
+        </xs:sequence>
+        <xs:attribute name="locked" type="sc2l:Boolean" use="optional"/>
+    </xs:complexType>
+
+
+
+    <!-- Desc element definitions -->
+    <xs:complexType name="Constant">
+        <xs:attribute name="name" type="xs:string" use="required"/>
+        <xs:attribute name="val" type="xs:string" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="Frame">
+        <xs:choice minOccurs="0">
+            <xs:element name="AcceptsMouse" type="AcceptsMouse"/>
+            <xs:element name="Anchor" type="Anchor"/>
+            <xs:element name="Animating" type="Animating"/>
+            <xs:element name="AnimDuration" type="AnimDuration"/>
+            <xs:element name="AnimColumns" type="AnimColumns"/>
+            <xs:element name="AnimCount" type="AnimCount"/>
+            <xs:element name="Alpha" type="Alpha"/>
+            <xs:element name="AlternateTime" type="AlternateTime"/>
+            <xs:element name="ArrowHoverImage" type="ArrowHoverImage"/>
+            <xs:element name="ArrowImage" type="ArrowImage"/>
+            <xs:element name="AutoSizeFillBar" type="AutoSizeFillBar"/>
+            <xs:element name="BackgroundImage" type="BackgroundImage"/>
+            <xs:element name="BatchImages" type="BatchImages"/>
+            <xs:element name="BatchText" type="BatchText"/>
+            <xs:element name="BlendMode" type="BlendMode"/>
+            <xs:element name="Button" type="Button"/>
+            <xs:element name="Camera" type="Camera"/>
+            <xs:element name="CheckImage" type="CheckImage"/>
+            <xs:element name="CheckSound" type="CheckSound"/>
+            <xs:element name="ClickOnContextMenu" type="ClickOnContextMenu"/>
+            <xs:element name="ClickSound" type="ClickSound"/>
+            <xs:element name="Color" type="Color"/>
+            <xs:element name="ColorStep" type="ColorStep"/>
+            <xs:element name="CollapseLayout" type="CollapseLayout"/>
+            <xs:element name="CompositionLabel" type="CompositionLabel"/>
+            <xs:element name="Continuous" type="Continuous"/>
+            <xs:element name="DecrementButton" type="DecrementButton"/>
+            <xs:element name="DefaultIcon" type="DefaultIcon"/>
+            <xs:element name="Desaturated" type="Desaturated"/>
+            <xs:element name="DesaturateOnDisable" type="DesaturateOnDisable"/>
+            <xs:element name="DesaturationColor" type="DesaturationColor"/>
+            <xs:element name="DescFlags" type="DescFlags"/>
+            <xs:element name="DisabledAlpha" type="DisabledAlpha"/>
+            <xs:element name="Enabled" type="Enabled"/>
+            <xs:element name="FadeDuration" type="FadeDuration"/>
+            <xs:element name="File" type="File"/>
+            <xs:element name="FillBarImage" type="FillBarImage"/>
+            <xs:element name="FillBar2Image" type="FillBar2Image"/>
+            <xs:element name="FillContainer" type="FillContainer"/>
+            <xs:element name="FillInset" type="FillInset"/>
+            <xs:element name="FolderIcon" type="FolderIcon"/>
+            <xs:element name="Frame" type="Frame"/>
+            <xs:element name="Height" type="Height"/>
+            <xs:element name="HoverImage" type="HoverImage"/>
+            <xs:element name="HoverSound" type="HoverSound"/>
+            <xs:element name="HighlightAlpha" type="HighlightAlpha"/>
+            <xs:element name="HighlightColor" type="HighlightColor"/>
+            <xs:element name="HighlightImage" type="HighlightImage"/>
+            <xs:element name="HighlightInsets" type="HighlightInsets"/>
+            <xs:element name="HighlightOnFocus" type="HighlightOnFocus"/>
+            <xs:element name="HighlightOnHover" type="HighlightOnHover"/>
+            <xs:element name="HitTestFrame" type="HitTestFrame"/>
+            <xs:element name="Image" type="Image"/>
+            <xs:element name="IncrementButton" type="IncrementButton"/>
+            <xs:element name="IncrementSound" type="IncrementSound"/>
+            <xs:element name="Insets" type="Insets"/>
+            <xs:element name="Inverted" type="Inverted"/>
+            <xs:element name="ItemClickSound" type="ItemClickSound"/>
+            <xs:element name="ItemContainer" type="ItemContainer"/>
+            <xs:element name="ItemDesc" type="ItemDesc"/>
+            <xs:element name="ItemGap" type="ItemGap"/>
+            <xs:element name="ItemHeight" type="ItemHeight"/>
+            <xs:element name="ItemIndent" type="ItemIndent"/>
+            <xs:element name="Label" type="Label"/>
+            <xs:element name="LanguageLabel" type="LanguageLabel"/>
+            <xs:element name="LayerColor" type="LayerColor"/>
+            <xs:element name="LayerCount" type="LayerCount"/>
+            <xs:element name="LayerVisible" type="LayerVisible"/>
+            <xs:element name="ManagedAnim" type="ManagedAnim"/>
+            <xs:element name="MaxMessages" type="MaxMessages"/>
+            <xs:element name="MaxWidth" type="MaxWidth"/>
+            <xs:element name="MaxValue" type="MaxValue"/>
+            <xs:element name="Menu" type="Menu"/>
+            <xs:element name="MenuHiddenSound" type="MenuHiddenSound"/>
+            <xs:element name="MenuMaxHeight" type="MenuMaxHeight"/>
+            <xs:element name="MenuMinWidth" type="MenuMinWidth"/>
+            <xs:element name="MenuShownSound" type="MenuShownSound"/>
+            <xs:element name="MessageDuration" type="MessageDuration"/>
+            <xs:element name="MinValue" type="MinValue"/>
+            <xs:element name="MinWidth" type="MinWidth"/>
+            <xs:element name="Model" type="Model"/>
+            <xs:element name="NormalImage" type="NormalImage"/>
+            <xs:element name="Options" type="Options"/>
+            <xs:element name="Orientation" type="Orientation"/>
+            <xs:element name="Projection" type="Projection"/>
+            <xs:element name="RenderPriority" type="RenderPriority"/>
+            <xs:element name="RenderType" type="RenderType"/>
+            <xs:element name="RequiredDefines" type="RequiredDefines"/>
+            <xs:element name="Rotation" type="Rotation"/>
+            <xs:element name="SelectedImage" type="SelectedImage"/>
+            <xs:element name="ScrollBar" type="ScrollBar"/>
+            <xs:element name="Shortcut" type="Shortcut"/>
+            <xs:element name="StateCount" type="StateCount"/>
+            <xs:element name="StepValue" type="StepValue"/>
+            <xs:element name="Style" type="Style"/>
+            <xs:element name="Text" type="Text"/>
+            <xs:element name="Texture" type="Texture"/>
+            <xs:element name="TextureCoords" type="TextureCoords"/>
+            <xs:element name="TextureType" type="TextureType"/>
+            <xs:element name="Tiled" type="Tiled"/>
+            <xs:element name="Tooltip" type="Tooltip"/>
+            <xs:element name="TooltipAnchorPosition" type="TooltipAnchorPosition"/>
+            <xs:element name="TooltipDelayed" type="TooltipDelayed"/>
+            <xs:element name="TooltipFrame" type="TooltipFrame"/>
+            <xs:element name="TopToBottom" type="TopToBottom"/>
+            <xs:element name="Unclipped" type="Unclipped"/>
+            <xs:element name="UpIcon" type="UpIcon"/>
+            <xs:element name="UpString" type="UpString"/>
+            <xs:element name="UseAlternateTime" type="UseAlternateTime"/>
+            <xs:element name="UseScrollBar" type="UseScrollBar"/>
+            <xs:element name="ValueChangeSound" type="ValueChangeSound"/>
+            <xs:element name="Visible" type="Visible"/>
+            <xs:element name="Width" type="Width"/>
+            <xs:element name="WriteOutText" type="WriteOutText"/>
+            <xs:element name="WriteOutTextDuration" type="WriteOutTextDuration"/>
+        </xs:choice>
+        <xs:attribute name="type" type="sc2l:FrameType" use="required"/>
+        <xs:attribute name="name" type="xs:string"  use="required"/>
+        <xs:attribute name="template" type="xs:string" use="optional"/>
+        <xs:attribute name="file" type="xs:string" use="optional"/>
+    </xs:complexType>
+    <xs:complexType name="Include">
+        <xs:attribute name="path" type="xs:string" use="required"/>
+    </xs:complexType>
+
+
+
+    <!-- Frame element definitions-->
+    <xs:complexType name="AcceptsMouse">
+        <xs:attribute name="val" type="sc2l:Boolean" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="Anchor">
+        <xs:attribute name="relative" type="xs:string" use="required"/>
+        <xs:attribute name="side" type="sc2l:Side"/>
+        <xs:attribute name="pos" type="sc2l:Pos"/>
+        <xs:attribute name="offset" type="sc2l:Integer"/>
+    </xs:complexType>
+    <xs:complexType name="Animating">
+        <xs:attribute name="val" type="sc2l:Boolean" use="required"/>
+        <xs:attribute name="layer" type="sc2l:Layer"/>
+    </xs:complexType>
+    <xs:complexType name="AnimDuration">
+        <xs:attribute name="val" type="sc2l:Integer" use="required"/>
+        <xs:attribute name="layer" type="sc2l:Layer"/>
+    </xs:complexType>
+    <xs:complexType name="AnimColumns">
+        <xs:attribute name="val" type="sc2l:Integer" use="required"/>
+        <xs:attribute name="layer" type="sc2l:Layer"/>
+    </xs:complexType>
+    <xs:complexType name="AnimCount">
+        <xs:attribute name="val" type="sc2l:Integer" use="required"/>
+        <xs:attribute name="layer" type="sc2l:Layer"/>
+    </xs:complexType>
+    <xs:complexType name="Alpha">
+        <xs:attribute name="val" type="sc2l:ColorSingle" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="AlternateTime">
+        <xs:attribute name="val" type="sc2l:Boolean" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="ArrowHoverImage">
+        <xs:attribute name="val" type="xs:string" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="ArrowImage">
+        <xs:attribute name="val" type="xs:string" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="AutoSizeFillBar">
+        <xs:attribute name="val" type="xs:string" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="BackgroundImage">
+        <xs:attribute name="val" type="xs:string" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="BatchImages">
+        <xs:attribute name="val" type="sc2l:Boolean" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="BatchText">
+        <xs:attribute name="val" type="sc2l:Boolean" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="BlendMode">
+        <xs:attribute name="val" type="sc2l:Blend" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="Button">
+        <xs:attribute name="val" type="xs:string" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="Camera">
+        <xs:attribute name="position" type="sc2l:Float3" use="required"/>
+        <xs:attribute name="target" type="sc2l:Float3" use="required"/>
+        <xs:attribute name="fov" type="sc2l:Float" use="required"/>
+        <xs:attribute name="minz" type="sc2l:Float" use="required"/>
+        <xs:attribute name="maxz" type="sc2l:Float" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="CheckImage">
+        <xs:attribute name="val" type="xs:string" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="CheckSound">
+        <xs:attribute name="val" type="xs:string" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="ClickOnContextMenu">
+        <xs:attribute name="val" type="sc2l:Boolean" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="ClickSound">
+        <xs:attribute name="val" type="xs:string" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="Color">
+        <xs:attribute name="val" type="sc2l:Color3" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="ColorStep">
+        <xs:attribute name="val" type="sc2l:Color3" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="CollapseLayout">
+        <xs:attribute name="val" type="sc2l:Boolean" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="CompositionLabel">
+        <xs:attribute name="val" type="xs:string" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="Continuous">
+        <xs:attribute name="val" type="sc2l:Boolean" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="DecrementButton">
+        <xs:attribute name="val" type="xs:string" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="DefaultIcon">
+        <xs:attribute name="val" type="xs:string" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="Desaturated">
+        <xs:attribute name="val" type="sc2l:Boolean" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="DesaturateOnDisable">
+        <xs:attribute name="val" type="sc2l:Boolean" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="DesaturationColor">
+        <xs:attribute name="val" type="sc2l:Color3" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="DescFlags">
+        <xs:attribute name="val" type="xs:string" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="DisabledAlpha">
+        <xs:attribute name="val" type="sc2l:ColorSingle" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="Enabled">
+        <xs:attribute name="val" type="sc2l:Boolean" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="FadeDuration">
+        <xs:attribute name="val" type="sc2l:Integer" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="File">
+        <xs:attribute name="val" type="xs:string" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="FillBarImage">
+        <xs:attribute name="val" type="xs:string" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="FillBar2Image">
+        <xs:attribute name="val" type="xs:string" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="FillContainer">
+        <xs:attribute name="val" type="xs:string" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="FillInset">
+        <xs:attribute name="val" type="sc2l:Float" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="FolderIcon">
+        <xs:attribute name="val" type="xs:string" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="Height">
+        <xs:attribute name="val" type="sc2l:UnsignedInteger" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="HoverImage">
+        <xs:attribute name="val" type="xs:string" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="HoverSound">
+        <xs:attribute name="val" type="xs:string" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="HighlightAlpha">
+        <xs:attribute name="val" type="sc2l:ColorSingle" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="HighlightColor">
+        <xs:attribute name="val" type="sc2l:Color3" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="HighlightImage">
+        <xs:attribute name="val" type="xs:string" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="HighlightInsets">
+        <xs:attribute name="top" type="sc2l:Integer" use="required"/>
+        <xs:attribute name="left" type="sc2l:Integer" use="required"/>
+        <xs:attribute name="bottom" type="sc2l:Integer" use="required"/>
+        <xs:attribute name="right" type="sc2l:Integer" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="HighlightOnFocus">
+        <xs:attribute name="val" type="sc2l:Boolean" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="HighlightOnHover">
+        <xs:attribute name="val" type="sc2l:Boolean" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="HitTestFrame">
+        <xs:attribute name="val" type="xs:string" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="Image">
+        <xs:attribute name="val" type="xs:string" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="IncrementSound">
+        <xs:attribute name="val" type="xs:string" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="IncrementButton">
+        <xs:attribute name="val" type="xs:string" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="Insets">
+        <xs:attribute name="top" type="sc2l:Integer" use="required"/>
+        <xs:attribute name="left" type="sc2l:Integer" use="required"/>
+        <xs:attribute name="bottom" type="sc2l:Integer" use="required"/>
+        <xs:attribute name="right" type="sc2l:Integer" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="ItemClickSound">
+        <xs:attribute name="val" type="xs:string" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="Inverted">
+        <xs:attribute name="val" type="sc2l:Boolean" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="ItemContainer">
+        <xs:attribute name="val" type="xs:string" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="ItemDesc">
+        <xs:attribute name="val" type="xs:string" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="ItemGap">
+        <xs:attribute name="val" type="sc2l:Integer" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="ItemHeight">
+        <xs:attribute name="val" type="sc2l:Integer" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="ItemIndent">
+        <xs:attribute name="val" type="sc2l:Integer" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="Label">
+        <xs:attribute name="val" type="xs:string" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="LanguageLabel">
+        <xs:attribute name="val" type="xs:string" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="LayerColor">
+        <xs:attribute name="val" type="sc2l:Color3" use="required"/>
+        <xs:attribute name="layer" type="sc2l:Layer"/>
+    </xs:complexType>
+    <xs:complexType name="LayerCount">
+        <xs:attribute name="val" type="sc2l:Layer" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="LayerVisible">
+        <xs:attribute name="val" type="sc2l:Boolean" use="required"/>
+        <xs:attribute name="layer" type="sc2l:Layer"/>
+    </xs:complexType>
+    <xs:complexType name="ManagedAnim">
+        <xs:attribute name="val" type="sc2l:Boolean" use="required"/>
+        <xs:attribute name="layer" type="sc2l:Layer"/>
+    </xs:complexType>
+    <xs:complexType name="MaxMessages">
+        <xs:attribute name="val" type="sc2l:Integer" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="MaxWidth">
+        <xs:attribute name="val" type="sc2l:Integer" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="MaxValue">
+        <xs:attribute name="val" type="sc2l:Float" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="Menu">
+        <xs:attribute name="val" type="xs:string" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="MenuHiddenSound">
+        <xs:attribute name="val" type="xs:string" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="MenuMaxHeight">
+        <xs:attribute name="val" type="sc2l:Integer" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="MenuMinWidth">
+        <xs:attribute name="val" type="sc2l:Integer" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="MenuShownSound">
+        <xs:attribute name="val" type="xs:string" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="MessageDuration">
+        <xs:attribute name="val" type="sc2l:Integer" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="MinValue">
+        <xs:attribute name="val" type="sc2l:Float" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="MinWidth">
+        <xs:attribute name="val" type="sc2l:Integer" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="Model">
+        <xs:all minOccurs="0">
+            <xs:element name="Position" type="Position"/>
+            <xs:element name="Scale" type="Scale"/>
+        </xs:all>
+        <xs:attribute name="val" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="NormalImage">
+        <xs:attribute name="val" type="xs:string" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="Options">
+        <xs:attribute name="val" type="xs:string" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="Orientation">
+        <xs:attribute name="val" type="xs:string" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="Projection">
+        <xs:attribute name="val" type="sc2l:Project" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="RenderPriority">
+        <xs:attribute name="val" type="sc2l:Integer" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="RenderType">
+        <xs:attribute name="val" type="xs:string" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="RequiredDefines">
+        <xs:attribute name="val" type="xs:string" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="Rotation">
+        <xs:attribute name="val" type="sc2l:Float" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="SelectedImage">
+        <xs:attribute name="val" type="xs:string" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="ScrollBar">
+        <xs:attribute name="val" type="xs:string" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="Shortcut">
+        <xs:attribute name="val" type="xs:string" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="StateCount">
+        <xs:attribute name="val" type="sc2l:Integer" use="required"/>
+        <xs:attribute name="layer" type="sc2l:Layer"/>
+    </xs:complexType>
+    <xs:complexType name="StepValue">
+        <xs:attribute name="val" type="sc2l:Float" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="Style">
+        <xs:attribute name="val" type="xs:string" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="Text">
+        <xs:attribute name="val" type="xs:string" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="Texture">
+        <xs:attribute name="val" type="xs:string" use="required"/>
+        <xs:attribute name="layer" type="sc2l:Layer"/>
+    </xs:complexType>
+    <xs:complexType name="TextureCoords">
+        <xs:attribute name="top" type="sc2l:TexCoord" use="required"/>
+        <xs:attribute name="left" type="sc2l:TexCoord" use="required"/>
+        <xs:attribute name="bottom" type="sc2l:TexCoord" use="required"/>
+        <xs:attribute name="right" type="sc2l:TexCoord" use="required"/>
+        <xs:attribute name="layer" type="sc2l:Layer"/>
+    </xs:complexType>
+    <xs:complexType name="TextureType">
+        <xs:attribute name="val" type="sc2l:TextureTypeVal" use="required"/>
+        <xs:attribute name="layer" type="sc2l:Layer"/>
+    </xs:complexType>
+    <xs:complexType name="Tiled">
+        <xs:attribute name="val" type="sc2l:Boolean" use="required"/>
+        <xs:attribute name="layer" type="sc2l:Layer"/>
+    </xs:complexType>
+    <xs:complexType name="Tooltip">
+        <xs:attribute name="val" type="xs:string" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="TooltipAnchorPosition">
+        <xs:attribute name="val" type="xs:string" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="TooltipDelayed">
+        <xs:attribute name="val" type="sc2l:Boolean" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="TooltipFrame">
+        <xs:attribute name="val" type="xs:string" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="TopToBottom">
+        <xs:attribute name="val" type="sc2l:Boolean" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="Unclipped">
+        <xs:attribute name="val" type="sc2l:Boolean" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="UpIcon">
+        <xs:attribute name="val" type="xs:string" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="UpString">
+        <xs:attribute name="val" type="xs:string" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="UseAlternateTime">
+        <xs:attribute name="val" type="sc2l:Boolean" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="UseScrollBar">
+        <xs:attribute name="val" type="sc2l:Boolean" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="ValueChangeSound">
+        <xs:attribute name="val" type="xs:string" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="Visible">
+        <xs:attribute name="val" type="sc2l:Boolean" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="Width">
+        <xs:attribute name="val" type="sc2l:UnsignedInteger"/>
+    </xs:complexType>
+    <xs:complexType name="WriteOutText">
+        <xs:attribute name="val" type="sc2l:Boolean" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="WriteOutTextDuration">
+        <xs:attribute name="val" type="sc2l:Integer" use="required"/>
+    </xs:complexType>
+
+
+
+    <!-- Model element definitions-->
+    <xs:complexType name="Position">
+        <xs:attribute name="val" type="sc2l:Float3" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="Scale">
+        <xs:attribute name="val" type="sc2l:Float3" use="required"/>
+    </xs:complexType>
+</xs:schema>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CFootprint id="ProtossHeroReviveBeacon">
+        <Layers index="Check">
+            <Sets index="0">
+                <Negative index="GroundNoSpawn" value="1"/>
+                <Negative index="NoBuild" value="0"/>
+                <Negative index="NoCreep" value="1"/>
+                <Negative index="Dense" value="1"/>
+            </Sets>
+            <Rows value="xx"/>
+            <Rows value="xx"/>
+        </Layers>
+        <Layers index="Place">
+            <Sets index="0">
+                <Positive index="GroundNoSpawn" value="0"/>
+                <Positive index="Dense" value="1"/>
+            </Sets>
+            <Rows value="xx"/>
+            <Rows value="xx"/>
+        </Layers>
+        <Shape>
+            <Radius value="1.4143"/>
+            <Offsets value="-1,-1;1,-1;-1,1;1,1"/>
+            <Borders value="0,2,1;1,0,1;2,3,1;3,1,1"/>
+        </Shape>
+    </CFootprint>
+    <CFootprint id="XelNagaKerriganReviveBeacn">
+        <Layers index="Check">
+            <Sets index="0">
+                <Negative index="GroundNoSpawn" value="1"/>
+                <Negative index="NoBuild" value="0"/>
+                <Negative index="NoCreep" value="1"/>
+                <Negative index="Dense" value="1"/>
+            </Sets>
+            <Rows value="xx"/>
+            <Rows value="xx"/>
+        </Layers>
+        <Layers index="Place">
+            <Sets index="0">
+                <Positive index="GroundNoSpawn" value="0"/>
+                <Positive index="Dense" value="1"/>
+            </Sets>
+            <Rows value="xx"/>
+            <Rows value="xx"/>
+        </Layers>
+        <Shape>
+            <Radius value="1.4143"/>
+            <Offsets value="-1,-1;1,-1;-1,1;1,1"/>
+            <Borders value="0,2,1;1,0,1;2,3,1;3,1,1"/>
+        </Shape>
+    </CFootprint>
+</Catalog>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CRewardVoicePack id="VoicePackCommanderMengskFull" parent="VoicePackTerranBase" thumbnail="Mengsk" voicepack="Mengsk" license="Mengsk" prefix="MengskA">
+        <ReplacementArray index="28" Catalog="Sound" From="e_cmdNotEnoughFood" To="TrooperMengsk_NeedMoreFood"/>
+    </CRewardVoicePack>
+</Catalog>

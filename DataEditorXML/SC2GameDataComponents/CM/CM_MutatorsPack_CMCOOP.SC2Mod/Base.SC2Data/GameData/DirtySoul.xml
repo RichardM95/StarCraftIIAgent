@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CEffectSet id="TheSecondComingGhastWaitForReviveSet">
+        <EffectArray value="TheSecondComingGhastWaitForReviveRB"/>
+        <EffectArray value="TheSecondComingGhastWanderRB"/>
+        <EffectArray value="TheSecondComingGhastHasBeenRevivedAB"/>
+    </CEffectSet>
+    <CEffectSet id="TheSecondComingGhastFakeDeath"/>
+    <CEffectSet id="TheSecondComingGhastSet">
+        <EffectArray value="FullHealCaster"/>
+        <EffectArray value="TheSecondComingGhastWaitForReviveAB"/>
+        <EffectArray value="TheSecondComingGhastWanderAB"/>
+        <EffectArray value="TheSecondComingGhastRB"/>
+        <EffectArray value="TheSecondComingGhastFakeDeath"/>
+    </CEffectSet>
+    <CEffectApplyBehavior id="TheSecondComingGhastWaitForReviveAB">
+        <Behavior value="TheSecondComingGhastWaitForRevive"/>
+        <WhichUnit Value="Caster"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="TheSecondComingGhastWanderAB">
+        <Behavior value="TheSecondComingGhastWander"/>
+        <WhichUnit Value="Caster"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="TheSecondComingGhastHasBeenRevivedAB">
+        <Behavior value="TheSecondComingGhastHasBeenRevived"/>
+        <WhichUnit Value="Caster"/>
+    </CEffectApplyBehavior>
+    <CEffectRemoveBehavior id="TheSecondComingGhastRB">
+        <BehaviorLink value="TheSecondComingGhast"/>
+        <WhichUnit Value="Caster"/>
+    </CEffectRemoveBehavior>
+    <CEffectRemoveBehavior id="TheSecondComingGhastWaitForReviveRB">
+        <BehaviorLink value="TheSecondComingGhastWaitForRevive"/>
+        <WhichUnit Value="Caster"/>
+    </CEffectRemoveBehavior>
+    <CEffectRemoveBehavior id="TheSecondComingGhastWanderRB">
+        <BehaviorLink value="TheSecondComingGhastWander"/>
+        <WhichUnit Value="Caster"/>
+    </CEffectRemoveBehavior>
+    <CBehaviorBuff id="TheSecondComingGhastHasBeenRevived">
+        <BehaviorFlags index="Permanent" value="1"/>
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification>
+            <UnifiedDamageDealtFraction index="Spell" value="0.3"/>
+            <UnifiedDamageDealtFraction index="Melee" value="0.3"/>
+            <UnifiedDamageDealtFraction index="Ranged" value="0.3"/>
+            <UnifiedDamageDealtFraction index="Splash" value="0.3"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="TheSecondComingGhastWaitForRevive">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DamageResponse ModifyFraction="0" ModifyMinimumDamage="1">
+            <Chance value="1"/>
+        </DamageResponse>
+        <Duration value="120"/>
+        <Modification SightMaximum="0" MoveSpeedMultiplier="0.6">
+            <ModifyFlags index="DisableAbils" value="1"/>
+            <ModifyFlags index="DisableWeapons" value="1"/>
+            <ModifyFlags index="EnableMove" value="1"/>
+            <StateFlags index="Invulnerable" value="1"/>
+            <StateFlags index="SuppressCloak" value="1"/>
+            <StateFlags index="SuppressDetection" value="1"/>
+            <StateFlags index="Unselectable" value="1"/>
+            <StateFlags index="Untargetable" value="1"/>
+        </Modification>
+        <FinalEffect value="TheSecondComingGhastWaitForReviveSet"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="TheSecondComingGhast">
+        <BehaviorFlags index="Permanent" value="1"/>
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DamageResponse>
+            <Fatal value="1"/>
+            <Handled value="TheSecondComingGhastSet"/>
+            <ModifyFraction value="0"/>
+            <ModifyMinimumDamage value="1"/>
+            <Chance value="1"/>
+        </DamageResponse>
+        <Modification>
+            <BehaviorLinkDisableArray value="MutatorMasterController"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorWander id="TheSecondComingGhastWander">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Range value="10"/>
+        <Delay value="2"/>
+        <MinimumRange value="4"/>
+    </CBehaviorWander>
+</Catalog>

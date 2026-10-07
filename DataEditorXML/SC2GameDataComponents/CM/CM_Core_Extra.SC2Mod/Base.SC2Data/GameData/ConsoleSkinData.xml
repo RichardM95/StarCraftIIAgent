@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CConsoleSkin id="ConsoleTerran_Imperial">
+        <!-- <ProductId value="48752"/> -->
+    </CConsoleSkin>
+    <CConsoleSkin id="ConsoleTerran_Nova"/>
+    <CConsoleSkin id="ConsoleZerg_Abathur"/>
+    <CConsoleSkin id="ConsoleZerg_Mecha"/>
+    <CConsoleSkin id="ConsoleZerg_Zagara"/>
+    <CConsoleSkin id="TestConsoleSkin">
+        <ProductId value="47030"/>
+        <ReleaseDate value="12/20/2018"/>
+        <MinimapPanelImage value="Assets/Textures/ui_console_panel_minimap_tyrador.dds"/>
+        <InfoPanelImage value="Assets/Textures/ui_console_panel_unitinfo_tyrador.dds"/>
+        <CommandPanelImage value="Assets/Textures/ui_console_panel_command_tyrador.dds"/>
+        <SkinId value="Tyrador"/>
+    </CConsoleSkin>
+</Catalog>

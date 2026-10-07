@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CEffectCreateUnit id="KaraxPhaseSturctureShieldBatteryCU">
+        <WhichLocation Value="TargetPoint"/>
+        <CreateFlags index="DropOff" value="0"/>
+        <CreateFlags index="OffsetByRadius" value="0"/>
+        <CreateFlags index="UseFood" value="0"/>
+        <SpawnEffect value="KaraxPhaseSturctureShieldBatteryTeleportSet"/>
+        <SpawnUnit value="PhaseCannonDummy"/>
+    </CEffectCreateUnit>
+    <CEffectApplyBehavior id="KaraxPhaseSturctureShieldBatterySuppressDetectionAB">
+        <EditorCategories value="Race:Zerg"/>
+        <WhichUnit Value="Caster"/>
+        <Behavior value="KaraxPhaseSturctureShieldBatterySuppressDetection"/>
+    </CEffectApplyBehavior>
+    <CEffectTeleport id="KaraxPhaseSturctureShieldBatteryTeleport">
+        <EditorCategories value="Race:Zerg"/>
+        <WhichUnit Effect="NydusDestroyerDeepTunnelCU" Value="Caster"/>
+        <ClearQueuedOrders value="0"/>
+        <TargetLocation Effect="NydusDestroyerDeepTunnelTeleportSet" Value="TargetPoint"/>
+        <TeleportFlags index="TestFog" value="0"/>
+    </CEffectTeleport>
+    <CEffectSet id="KaraxPhaseSturctureShieldBatteryTeleportSet">
+        <EffectArray value="KaraxPhaseSturctureShieldBatterySuppressDetectionAB"/>
+        <EffectArray value="KaraxPhaseSturctureShieldBatteryTeleport"/>
+        <TargetLocationType value="Point"/>
+    </CEffectSet>
+    <CEffectCreateUnit id="KaraxPhaseSturctureKhaydarinMonolithCU">
+        <WhichLocation Value="TargetPoint"/>
+        <CreateFlags index="DropOff" value="0"/>
+        <CreateFlags index="OffsetByRadius" value="0"/>
+        <CreateFlags index="UseFood" value="0"/>
+        <SpawnEffect value="KaraxPhaseSturctureKhaydarinMonolithTeleportSet"/>
+        <SpawnUnit value="PhaseCannonDummy"/>
+    </CEffectCreateUnit>
+    <CEffectApplyBehavior id="KaraxPhaseSturctureKhaydarinMonolithSuppressDetectionAB">
+        <EditorCategories value="Race:Zerg"/>
+        <WhichUnit Value="Caster"/>
+        <Behavior value="KaraxPhaseSturctureKhaydarinMonolithSuppressDetection"/>
+    </CEffectApplyBehavior>
+    <CEffectTeleport id="KaraxPhaseSturctureKhaydarinMonolithTeleport">
+        <EditorCategories value="Race:Zerg"/>
+        <WhichUnit Effect="NydusDestroyerDeepTunnelCU" Value="Caster"/>
+        <ClearQueuedOrders value="0"/>
+        <TargetLocation Effect="NydusDestroyerDeepTunnelTeleportSet" Value="TargetPoint"/>
+        <TeleportFlags index="TestFog" value="0"/>
+    </CEffectTeleport>
+    <CEffectSet id="KaraxPhaseSturctureKhaydarinMonolithTeleportSet">
+        <EffectArray value="KaraxPhaseSturctureKhaydarinMonolithSuppressDetectionAB"/>
+        <EffectArray value="KaraxPhaseSturctureKhaydarinMonolithTeleport"/>
+        <TargetLocationType value="Point"/>
+    </CEffectSet>
+    <CAbilEffectTarget id="KaraxPhaseSturctureShieldBattery">
+        <EditorCategories value="Race:Protoss,AbilityorEffectType:Units"/>
+        <Effect index="0" value="KaraxPhaseSturctureShieldBatteryCU"/>
+        <Cost>
+            <Cooldown TimeUse="60"/>
+        </Cost>
+        <Range value="500"/>
+        <Arc value="360"/>
+        <CastIntroTime value="1"/>
+        <CastOutroTime value="0"/>
+        <FinishTime value="1"/>
+        <ShowProgressArray index="Cast" value="1"/>
+        <ShowProgressArray index="Finish" value="1"/>
+        <UninterruptibleArray index="Cast" value="1"/>
+        <UninterruptibleArray index="Finish" value="1"/>
+        <ProgressButtonArray index="Cast" value="KaraxPhaseSturctureShieldBattery"/>
+        <ProgressButtonArray index="Channel" value="KaraxPhaseSturctureShieldBattery"/>
+        <ProgressButtonArray index="Finish" value="KaraxPhaseSturctureShieldBattery"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="KaraxPhaseSturctureShieldBattery"/>
+        <PlaceUnit value="PhaseCannonDummy"/>
+    </CAbilEffectTarget>
+    <CAbilEffectTarget id="KaraxPhaseSturctureKhaydarinMonolith">
+        <EditorCategories value="Race:Protoss,AbilityorEffectType:Units"/>
+        <Effect index="0" value="KaraxPhaseSturctureKhaydarinMonolithCU"/>
+        <Cost>
+            <Cooldown TimeUse="60"/>
+        </Cost>
+        <Range value="500"/>
+        <Arc value="360"/>
+        <CastIntroTime value="1"/>
+        <CastOutroTime value="0"/>
+        <FinishTime value="1"/>
+        <ShowProgressArray index="Cast" value="1"/>
+        <ShowProgressArray index="Finish" value="1"/>
+        <UninterruptibleArray index="Cast" value="1"/>
+        <UninterruptibleArray index="Finish" value="1"/>
+        <ProgressButtonArray index="Cast" value="KaraxPhaseSturctureKhaydarinMonolith"/>
+        <ProgressButtonArray index="Channel" value="KaraxPhaseSturctureKhaydarinMonolith"/>
+        <ProgressButtonArray index="Finish" value="KaraxPhaseSturctureKhaydarinMonolith"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="KaraxPhaseSturctureKhaydarinMonolith"/>
+        <PlaceUnit value="PhaseCannonDummy"/>
+    </CAbilEffectTarget>
+    <CButton id="KaraxPhaseSturctureShieldBattery">
+        <Icon value="Assets\Textures\btn-building-protoss-shieldbattery.dds"/>
+        <AlertIcon value="Assets\Textures\btn-building-protoss-shieldbattery.dds"/>
+        <Hotkey value="Button/Hotkey/KaraxPhaseSturctureCannon"/>
+        <EditorCategories value="Race:Protoss"/>
+        <HotkeyAlias value="KaraxPhaseSturctureCannon"/>
+    </CButton>
+    <CButton id="KaraxPhaseSturctureKhaydarinMonolith">
+        <Icon value="Assets\Textures\btn-upgrade-karax-newunitkhaydarinmonolith.dds"/>
+        <AlertIcon value="Assets\Textures\btn-upgrade-karax-newunitkhaydarinmonolith.dds"/>
+        <Hotkey value="Button/Hotkey/KaraxPhaseSturctureCannon"/>
+        <EditorCategories value="Race:Protoss"/>
+        <HotkeyAlias value="KaraxPhaseSturctureCannon"/>
+    </CButton>
+    <CBehaviorBuff id="KaraxPhaseSturctureShieldBatterySuppressDetection">
+        <InfoFlags index="Hidden" value="1"/>
+        <Duration value="1"/>
+        <Modification>
+            <StateFlags index="SuppressDetection" value="1"/>
+            <BehaviorLinkDisableArray value="Detector11"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="KaraxPhaseSturctureKhaydarinMonolithSuppressDetection">
+        <InfoFlags index="Hidden" value="1"/>
+        <Duration value="1"/>
+        <Modification>
+            <StateFlags index="SuppressDetection" value="1"/>
+            <BehaviorLinkDisableArray value="Detector11"/>
+        </Modification>
+    </CBehaviorBuff>
+</Catalog>

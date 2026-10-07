@@ -1,0 +1,180 @@
+# Trae 智能体配置 — 星际争霸2专用智能体
+# 本文件定义 TraeCode 中 SC2 智能体的接口、技能路由与知识源引用。
+# 所有内容位于本目录下，路径均为相对路径（基于智能体根目录）。
+
+interface:
+  display_name: "星际争霸2战役开发智能体"
+  author: "扯蛋虾米"
+  short_description: "SC2 自定义战役开发专家：Galaxy 脚本、XML 数据、Actor、触发器、Bank、本地化、工具校验"
+  default_prompt: "先读取 AGENT.md 和 AGENTS.md。若我提供主 .SC2Mod Components 文件夹路径并要求初始化或选择项目，直接运行 tools/init-project.py 一步配置；否则读取 agent-config.json 解析工作区、SC2、Mods、地图与主模组路径。加载 sc2-project-entry 技能获取任务路由与工具速查，再根据我的任务路由到对应深技能并实现。"
+
+# 智能体身份定义文件
+identity_file: "../AGENT.md"
+
+# 知识源配置（扁平化，全部位于根目录下）
+knowledge_sources:
+  # 工作区规则入口
+  workspace_rules:
+    entry: "AGENTS.md"
+    description: "仓库级硬性规则、模组身份、关键规则"
+
+  # 战役领域文档
+  wiki:
+    root: "wiki"
+    task_router: "wiki/index.md"
+    catalog: "wiki/catalog.md"
+    description: "wiki 设计/实现/参考文档"
+
+  # Python 工具链
+  tools:
+    root: "tools"
+    description: "预飞行测试套件、静态校验器、catalog 查询工具"
+
+  # 大型查询源
+  large_lookup:
+    data_editor_xml: "DataEditorXML/"
+    catalog_graph: "sc2-catalog-graph-out/"
+    triggers_native: "wiki/reference/triggers-native/"
+
+  # 统一技能库（29 个技能 = 10 根 + 13 galaxy + 6 sc2data）
+  skills:
+    root: "skills"
+    root_skills:
+      - name: sc2-project-entry
+        path: "skills/sc2-project-entry/SKILL.md"
+        purpose: "统一入口：模组身份、硬性规则、文件布局、任务路由、工具速查、实现流程"
+        load: "first"
+      - name: sc2-catalog-xml
+        path: "skills/sc2-catalog-xml/SKILL.md"
+        purpose: "Catalog XML 路由器：schema 规则、父对象继承、效果链、子技能路由"
+        load: "on-demand"
+      - name: sc2-galaxy-scripting
+        path: "skills/sc2-galaxy-scripting/SKILL.md"
+        purpose: "Galaxy 脚本路由器：语法约束、源真值、模块化脚本、子技能路由"
+        load: "on-demand"
+      - name: sc2-actor-system
+        path: "skills/sc2-actor-system/SKILL.md"
+        purpose: "Actor 系统：事件、术语、消息、父对象、单位提取"
+        load: "on-demand"
+      - name: sc2-map-triggers
+        path: "skills/sc2-map-triggers/SKILL.md"
+        purpose: "地图触发器 XML 与 GUI 动作接线"
+        load: "on-demand"
+      - name: sc2-bank-system
+        path: "skills/sc2-bank-system/SKILL.md"
+        purpose: "Bank 存档：schema 版本、section 设计、战役持久化"
+        load: "on-demand"
+      - name: sc2-localization
+        path: "skills/sc2-localization/SKILL.md"
+        purpose: "本地化文件：GameStrings、ObjectStrings、TriggerStrings、GameHotkeys、KSP CLI"
+        load: "on-demand"
+      - name: sc2-tools-validation
+        path: "skills/sc2-tools-validation/SKILL.md"
+        purpose: "工具链：预飞行测试、XML schema 校验、Galaxy 语法检查"
+        load: "on-demand"
+      - name: sc2-editor-handoff
+        path: "skills/sc2-editor-handoff/SKILL.md"
+        purpose: "编辑器交接：验收、组件保存、游戏测试、6阶段生命周期"
+        load: "on-demand"
+      - name: sc2-attack-wave-scaling
+        path: "skills/sc2-attack-wave-scaling/SKILL.md"
+        purpose: "攻击波缩放：GUI 难度修饰符包装、AI 性格波迁移"
+        load: "on-demand"
+        script: "skills/sc2-attack-wave-scaling/scripts/wrap_attack_wave_counts.py"
+    galaxy_subskills:
+      root: "skills/galaxy"
+      items:
+        - { name: galaxy-language-fundamentals,  purpose: "核心语法、类型、结构体、数组、控制流" }
+        - { name: galaxy-code-organization,      purpose: "文件结构、include 顺序、模块化布局" }
+        - { name: galaxy-math-strings-conversion, purpose: "数学、字符串、类型转换、颜色、位运算" }
+        - { name: galaxy-units-and-groups,        purpose: "单位创建、属性、XP/升级、单位组、订单" }
+        - { name: galaxy-points-regions-geometry, purpose: "点、区域、几何、寻路" }
+        - { name: galaxy-players-and-alliances,  purpose: "玩家、联盟、race、资源、相机、难度" }
+        - { name: galaxy-actor-and-visuals,      purpose: "ActorSend、AttachModelToUnit、PlayAnimation" }
+        - { name: galaxy-sound-camera-environment, purpose: "声音、音乐、相机、cinematic、天气、光照" }
+        - { name: galaxy-ui-and-dialogs,         purpose: "Dialog、XML frame、hero/upgrade panels、HUD、SSF" }
+        - { name: galaxy-triggers-and-functions, purpose: "TriggerExecute、event registration、async" }
+        - { name: galaxy-game-systems,           purpose: "Bank save/load、spawner、wave、hero revive、tech tree" }
+        - { name: galaxy-ai-and-techtree,        purpose: "AI 行为、科技树、wave difficulty scaling" }
+        - { name: galaxy-debug-data-catalog,     purpose: "调试、Data Table、Catalog runtime、UserData" }
+      load: "on-demand-after-sc2-galaxy-scripting"
+    sc2data_subskills:
+      root: "skills/sc2data"
+      items:
+        - { name: sc2data-units-abilities,       purpose: "CUnit / CAbil* / CMover / CTurret XML" }
+        - { name: sc2data-behaviors-validators,  purpose: "CBehavior* / CValidator* XML" }
+        - { name: sc2data-effects-weapons,       purpose: "CEffect* / CWeapon / CUpgrade / damage chain XML" }
+        - { name: sc2data-actors-visuals,         purpose: "CActor* XML（Unit/Action/Model/Beam/Sound）" }
+        - { name: sc2data-wizards,               purpose: ".BlizWiz XML 文件、wizard 模板" }
+        - { name: sc2data-units-reference,            purpose: "单位 catalog 参考（editor IDs、races、18 个 co-op 指挥官）" }
+      load: "on-demand-after-sc2-catalog-xml"
+
+# 模组身份（当前配置）
+mod_identity:
+  campaign: "Legacy of the Ihanrii (AeonOfIhanrii)"
+  mod_file: "AeonOfIhanrii"
+  library_id: "67AA1763"
+  library_name: "LegacyoftheIhanrii"
+  compiled_galaxy: "Lib67AA1763.galaxy"
+  script_block: "Epi_Main"
+  bank_name: "AeonOfIhanriiBank"
+  galaxy_function_prefix: "libEpi_"
+  galaxy_global_prefix: "libEpi_g_"
+  path_config: "agent-config.json"
+  primary_mod_folder: "<paths.mods_dir>/AeonOfIhanrii.SC2Mod"
+  custom_script: "<paths.mods_dir>/AeonOfIhanrii.SC2Mod/Base.SC2Data/Epi_Main.galaxy"
+
+# 关键文件位置（相对路径基于本智能体根目录）
+key_paths:
+  agent_config: "agent-config.json"
+  agents_md: "AGENTS.md"
+  agent_md: "AGENT.md"
+  wiki_index: "wiki/index.md"
+  wiki_catalog: "wiki/catalog.md"
+  wiki_log: "wiki/log.md"
+  wiki_design: "wiki/design/"
+  wiki_implementation: "wiki/implementation/"
+  wiki_reference: "wiki/reference/"
+  wiki_guides: "wiki/guides/"
+  tools: "tools/"
+  schemas: "tools/schemas/sc2-xsd/"
+  data_editor_xml: "DataEditorXML/"
+  catalog_graph: "sc2-catalog-graph-out/"
+  design_document: "DesignDocument.md"
+  publish: "publish/"
+  skills_root: "skills/"
+
+# 大型查询源（按需 grep/查询，不全量阅读）
+large_lookup_sources:
+  - path: "DataEditorXML/"
+    method: "grep with specific ID or term"
+  - path: "sc2-catalog-graph-out/"
+    method: "query with tools/sc2-catalog-query.py"
+  - path: "wiki/reference/triggers-native/"
+    method: "native function signatures lookup"
+  - path: "git log -n <N> -- <path>"
+    method: "historical provenance"
+
+# 工具命令速查（相对路径基于本智能体根目录）
+tool_quickref:
+  init_project: "python tools/init-project.py \"<primary.SC2Mod>\""
+  pre_flight: "python tools/test-suite.py"
+  validate: "python tools/validate-mod.py"
+  catalog_query: "python tools/sc2-catalog-query.py <cmd>"
+  rebuild_graph: "python tools/build-sc2-catalog-graph.py"
+  deploy: "python tools/deploy-mod.py"
+  anchor_fill: "python tools/audit-gamestrings-anchors.py --fill"
+  audit_cards: "python tools/audit-actor-and-card-integrity.py"
+  audit_skills: "python tools/audit-skill-frontmatter.py"
+  extract_bugs: "python tools/extract-playtest-bugreport.py"
+  check_links: "python tools/check-doc-links.py"
+  attack_wave_check: "python skills/sc2-attack-wave-scaling/scripts/wrap_attack_wave_counts.py \"<map_triggers_path>\""
+  attack_wave_apply: "python skills/sc2-attack-wave-scaling/scripts/wrap_attack_wave_counts.py \"<map_triggers_path>\" --apply"
+  attack_wave_verify: "python skills/sc2-attack-wave-scaling/scripts/wrap_attack_wave_counts.py \"<map_triggers_path>\" --check"
+
+# 智能体无法完成的操作（需 SC2 编辑器 GUI）
+editor_only:
+  - "打开和保存 Blizzard 地图（需要 SC2 账号登录）"
+  - "地形、区域、装饰物、寻路"
+  - "过场动画和电影"
+  - "将模组/地图保存为 Components（用户操作）"

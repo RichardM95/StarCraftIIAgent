@@ -1,0 +1,485 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CEffectDamage id="VoidSpaceDamagePeriodDamage01">
+        <EditorCategories value=""/>
+        <Amount value="1"/>
+    </CEffectDamage>
+    <CEffectDamage id="VoidSpaceDamagePeriodDamage02">
+        <EditorCategories value=""/>
+        <Amount value="1"/>
+        <VitalFractionMax index="Life" value="0.01"/>
+        <VitalFractionMax index="Shields" value="0.01"/>
+    </CEffectDamage>
+    <CEffectEnumArea id="VoidSpaceDamageSearch">
+        <EditorCategories value="Race:Protoss"/>
+        <LaunchLocation Value="SourceUnitOrPoint"/>
+        <SearchFilters value="-;Player,Ally,Neutral,Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <AreaArray Radius="4" Effect="VoidSpaceDamageSet"/>
+    </CEffectEnumArea>
+    <CEffectSet id="VoidSpaceDamageSet">
+        <ValidatorArray value="TargetIsAnyCommanderOrControled"/>
+        <EditorCategories value=""/>
+        <EffectArray value="VoidSpaceDamagePeriodDamage01"/>
+        <EffectArray value="VoidSpaceDamagePeriodDamage02"/>
+    </CEffectSet>
+    <CEffectSwitch id="VoidSpaceDamageSwitch">
+        <CaseArray Validator="MutatorPropagateMassiveDamage" Effect="MutatorPropagateMassiveDamageC3"/>
+        <CaseDefault value="VoidSpaceUnitStateSuicide"/>
+    </CEffectSwitch>
+    <CEffectApplyForce id="VoidSpaceForce">
+        <EditorCategories value="Race:Protoss"/>
+        <WhichLocation Value="TargetPoint"/>
+        <WhichUnit Effect="VoidSpaceForceImpactSet"/>
+        <Amount value="-0.5"/>
+    </CEffectApplyForce>
+    <CEffectApplyBehavior id="VoidSpaceForceAB">
+        <EditorCategories value="Race:Protoss"/>
+        <Behavior value="VoidSpaceForce"/>
+    </CEffectApplyBehavior>
+    <CEffectSet id="VoidSpaceForceImpactSet">
+        <ValidatorArray value="TargetIsAnyCommanderOrControled"/>
+        <EditorCategories value=""/>
+        <EffectArray value="VoidSpaceForceAB"/>
+        <EffectArray value="VoidSpaceForceOffsetCP"/>
+        <EffectArray value="VoidSpaceForceKnockbackAB"/>
+    </CEffectSet>
+    <CEffectApplyBehavior id="VoidSpaceForceKnockbackAB">
+        <Behavior value="VoidSpaceUnitEffectKnockback"/>
+        <Flags index="UseDuration" value="1"/>
+        <Duration value="0.125"/>
+    </CEffectApplyBehavior>
+    <CEffectCreatePersistent id="VoidSpaceForceOffsetCP">
+        <EditorCategories value="Race:Protoss"/>
+        <OffsetVectorStartLocation Effect="VoidSpaceForceSearch" Value="TargetPoint"/>
+        <InitialEffect value="VoidSpaceForce"/>
+        <InitialOffset value="0.2,0.2,0"/>
+    </CEffectCreatePersistent>
+    <CEffectEnumArea id="VoidSpaceForceSearch">
+        <EditorCategories value="Race:Protoss"/>
+        <LaunchLocation Value="SourceUnitOrPoint"/>
+        <SearchFilters value="-;Player,Ally,Neutral,Structure,Missile,Stasis,Dead,Hidden,Invulnerable,Unstoppable"/>
+        <AreaArray Radius="4" Effect="VoidSpaceForceImpactSet"/>
+    </CEffectEnumArea>
+    <CEffectApplyBehavior id="VoidSpaceUnitStateAbilityDisibleAB">
+        <EditorCategories value="Race:Protoss"/>
+        <Behavior value="VoidSpaceUnitStateAbilityDisible"/>
+    </CEffectApplyBehavior>
+    <CEffectDamage id="VoidSpaceUnitStateAlertDummyDamage">
+        <EditorCategories value="Race:Protoss"/>
+        <ResponseFlags index="Acquire" value="1"/>
+        <ResponseFlags index="Flee" value="1"/>
+        <Visibility value="Visible"/>
+        <Flags index="Notification" value="1"/>
+        <Flags index="NoBehaviorResponse" value="1"/>
+    </CEffectDamage>
+    <CEffectApplyForce id="VoidSpaceUnitStateForcePeriod">
+        <EditorCategories value="Race:Protoss"/>
+        <WhichLocation Effect="VoidSpaceUnitStateSourceCP" Value="TargetPoint"/>
+        <Amount value="-2"/>
+    </CEffectApplyForce>
+    <CEffectDamage id="VoidSpaceUnitStateKillForceFiled">
+        <ValidatorArray value="TargetIsForceField"/>
+        <EditorCategories value="Race:Protoss"/>
+        <Marker Link="Effect/VortexKillForcefield"/>
+        <Flags index="Kill" value="1"/>
+    </CEffectDamage>
+    <CEffectEnumArea id="VoidSpaceUnitStateSearch">
+        <EditorCategories value="Race:Protoss"/>
+        <SearchFilters value="-;Player,Ally,Neutral,Structure,Missile,Dead,Hidden,Invulnerable"/>
+        <AreaArray Radius="2" Effect="VoidSpaceUnitStateSet"/>
+    </CEffectEnumArea>
+    <CEffectSet id="VoidSpaceUnitStateSet">
+        <ValidatorArray value="TargetIsAnyCommanderOrControled"/>
+        <EditorCategories value="Race:Protoss"/>
+        <EffectArray value="VoidSpaceUnitStateKillForceFiled"/>
+        <EffectArray value="VoidSpaceUnitStateSetUnburrow"/>
+        <EffectArray value="VoidSpaceUnitStateAlertDummyDamage"/>
+        <EffectArray value="VoidSpaceUnitStateSetUnsiege"/>
+        <EffectArray value="VoidSpaceUnitStateAbilityDisibleAB"/>
+    </CEffectSet>
+    <CEffectIssueOrder id="VoidSpaceUnitStateSetUnburrow">
+        <EditorCategories value="Race:Protoss"/>
+        <Marker Link="Effect/Vortex"/>
+        <Abil value="BurrowZerglingUp"/>
+    </CEffectIssueOrder>
+    <CEffectIssueOrder id="VoidSpaceUnitStateSetUnsiege">
+        <EditorCategories value="Race:Protoss"/>
+        <Marker Link="Effect/Vortex"/>
+        <Abil value="Unsiege"/>
+    </CEffectIssueOrder>
+    <CEffectCreatePersistent id="VoidSpaceUnitStateSourceCP">
+        <EditorCategories value="Race:Protoss"/>
+        <WhichLocation Value="SourceUnitOrPoint"/>
+        <PeriodCount value="2"/>
+        <PeriodicEffectArray value="VoidSpaceUnitStateSearch"/>
+        <PeriodicPeriodArray value="0.0625"/>
+    </CEffectCreatePersistent>
+    <CEffectDamage id="VoidSpaceUnitStateSuicide">
+        <EditorCategories value=""/>
+        <Flags index="Kill" value="1"/>
+        <Death value="Squish"/>
+    </CEffectDamage>
+    <CActorUnit id="VoidSpace" parent="GenericUnitStandardNoAutoSoundLinks" unitName="VoidSpace">
+        <EditorCategories value=""/>
+        <On index="35" Terms="UnitFidget" Send="AnimPlay Fidget Fidget"/>
+        <On index="36" Terms="UnitMovementUpdate.*.Walk" Send="AnimClear Fidget"/>
+        <On index="37" Terms="UnitDetectedByViewer.*.On; ValidateUnit IsHallucination" Target="_HallucinationTinter" Send="Signal HallucinationTintOn"/>
+        <On index="38" Terms="UnitDetectedByViewer.*.Off; ValidateUnit IsHallucination" Send="Signal HallucinationTintOff"/>
+        <On index="39" Terms="UnitDeathCustomize; ValidateUnit NotStructure; IsStatus InAir 1" Target="" Send="DeathCustomize AntiGravGeneric"/>
+        <On index="40" Terms="UnitDeathCustomize; ValidateUnit IsProtossUnit; IsStatus InAir 1" Send="DeathCustomize AntiGravProtoss"/>
+        <On index="41" Terms="UnitDeathCustomize; ValidateUnit IsTerranUnit; IsStatus InAir 1" Send="DeathCustomize AntiGravTerran"/>
+        <On index="42" Terms="UnitDeathCustomize; ValidateUnit IsZergUnit; IsStatus InAir 1" Send="DeathCustomize AntiGravZerg"/>
+        <On index="43" Terms="UnitDeathCustomize; ValidateUnit IsVortexed" Send="DeathCustomize Vortex"/>
+        <On index="44" Terms="UnitDeathCustomize; ValidateUnit HasForceLowDeathProtoss" Send="DeathCustomize AntiGravProtoss"/>
+        <On index="45" Terms="UnitDeathCustomize; ValidateUnit HasForceLowDeathZerg" Send="DeathCustomize AntiGravZerg"/>
+        <On index="46" Terms="UnitDeathCustomize; ValidateUnit HasForceLowDeathTerran" Send="DeathCustomize AntiGravTerran"/>
+        <On index="47" Terms="Behavior.PhoenixAntiGrav.On" Send="ModelSuddenMotionStart"/>
+        <On index="48" Terms="Behavior.PhoenixAntiGrav.Off" Send="ModelSuddenMotionStop"/>
+        <On index="49" Terms="Behavior.ForceLowDeath.On" Send="DeathCustomsEnablePhysics 0"/>
+        <On index="50" Terms="UnitTaunt.*.Start; Taunt" Send="AnimPlay Cheer Stand,Victory"/>
+        <On index="51" Terms="UnitTaunt.*.Stop; Taunt" Send="AnimClear Cheer"/>
+        <On index="52" Terms="UnitTaunt.*.Start; Taunt Dance" Send="AnimPlay Dance Stand,Dance"/>
+        <On index="53" Terms="UnitTaunt.*.Stop; Taunt Dance" Send="AnimClear Dance"/>
+        <On index="54" Terms="UnitTaunt.*.Start; Taunt Tease" Send="AnimPlay Taunt Taunt"/>
+        <On index="55" Terms="UnitTaunt.*.Stop; Taunt Tease" Send="AnimClear Taunt"/>
+        <On index="56" Terms="ActorCreation" Send="StatusSet InAir 0"/>
+        <On index="57" Terms="UnitHeightUpdate.*.Lift" Send="StatusSet InAir 1"/>
+        <On index="58" Terms="UnitHeightUpdate.*.Land" Send="StatusSet InAir 0"/>
+        <On index="59" Terms="BuildCoachHover.*.On" Send="TimerKill DelayUnhighlight"/>
+        <On index="60" Send="SetTintColor 0,255,0 0.100000"/>
+        <On index="61" Terms="BuildCoachHover.*.Off" Send="TimerSet 0.300000 DelayUnhighlight"/>
+        <On index="62" Terms="TimerExpired; TimerName DelayUnhighlight" Send="SetTintColor 255,255,255 0.500000"/>
+        <On index="63" Terms="Abil.attack.ReadyStart" Send="AnimGroupApply Ready"/>
+        <On index="64" Terms="WeaponStart.*.AttackStart" Send="AnimBracketStart Attack Attack"/>
+        <On index="65" Terms="WeaponStart.*.AttackStart; AnimPlaying Birth" Send="AnimClear Birth"/>
+        <On index="66" Terms="WeaponStop.*.AttackStop" Send="AnimBracketStop Attack"/>
+        <On index="67" Terms="Abil.attack.ReadyStop" Send="AnimGroupRemove Ready"/>
+        <On index="68" Terms="Behavior.VoidSpaceCreation.Off" Send="Create MutatorVoidWorld"/>
+        <On Terms="Behavior.VoidSpaceCreation.Off" Send="Create VoidSpaceModel2"/>
+        <On Terms="Behavior.VoidSpaceCreation.Off" Send="Create VoidSpaceModel3"/>
+        <On Terms="Behavior.VoidSpaceCreation.Off" Send="Create VoidSpaceModel4"/>
+        <On Terms="Behavior.VoidSpaceCreation.Off" Send="Create VoidSpaceModel5"/>
+        <On Terms="Behavior.VoidSpaceCreation.Off" Send="Create VoidSpaceModel6"/>
+        <On Terms="Behavior.VoidSpaceCreation.Off" Send="Create SoundEmitter Doodad_Void_Rift_Static"/>
+        <On Terms="Behavior.VoidSpaceCreation.Off" Send="Create VoidNebulaStorm_LoopSound"/>
+        <On Terms="Behavior.VoidSpaceCreation.Off" Send="Create VoidNebulaStorm_Lightning_LoopSound"/>
+        <On Terms="Behavior.VoidSpaceCreation.Off" Send="Create VoidRiftSoundLoop"/>
+        <On Terms="Behavior.VoidSpaceCreation.Off" Send="Create VoidSliver_Birth_AS"/>
+        <On Terms="Behavior.VoidSpaceCreation.Off" Send="Create VoidSentryBlackHoleBirthSound"/>
+        <On Terms="ActorCreation" Send="AnimBaselineStop"/>
+        <On Terms="ActorCreation" Send="TimerSet 5.000000 Birth"/>
+        <On Terms="TimerExpired; TimerName Birth" Send="$Birth 0 0.000000 -1.000000 3.250000 AsDuration"/>
+        <On Terms="AnimDone; AnimName Birth" Send="$Stand PlayForever"/>
+        <On Terms="ActorCreation" Send="Create VoidSpaceAsh"/>
+        <HostSiteOps Ops="PlanetCrackerPurifierMothershipModelRotator"/>
+        <WalkAnimMoveSpeed value="1.3281"/>
+        <HighlightTooltip value=""/>
+        <MinimapIconScale value="0.750000"/>
+        <UnitFlags index="SuppressDefaultStatusBar" value="1"/>
+        <MinimapIcon value="Assets\Textures\ui_ingame_coop_minimap_blackhole.dds"/>
+    </CActorUnit>
+    <CActorModel id="VoidSpaceAsh" parent="ModelAddition">
+        <Aliases index="0" removed="1"/>
+        <Inherits index="BaseModelScale" value="0"/>
+        <Inherits index="CastShadows" value="0"/>
+        <Inherits index="CloakEffect" value="0"/>
+        <Inherits index="CreepEngulfment" value="0"/>
+        <Inherits index="Decal" value="0"/>
+        <Inherits index="ModelMaterials" value="0"/>
+        <Inherits index="Opacity" value="0"/>
+        <Inherits index="Scale" value="0"/>
+        <Inherits index="TeamColor" value="0"/>
+        <Inherits index="TimeScale" value="0"/>
+        <Inherits index="TintColor" value="0"/>
+        <Inherits index="Visibility" value="0"/>
+        <Inherits index="WarpGroup" value="0"/>
+        <AcceptedTransfers index="Position" value="0"/>
+        <AcceptedTransfers index="Rotation" value="0"/>
+        <On index="0" Terms="ActorCreation" Send="AnimBracketStart BSD Birth Stand Death OpeningPlayForever"/>
+        <On Terms="ActorCreation" Send="SetTintColor {174,0,0 3.000000}"/>
+        <HostSiteOps Ops="SOpShadow"/>
+        <ModelFlags index="AllowHitTest" value="0"/>
+    </CActorModel>
+    <CActorSimple id="VoidSpaceKillShrinker">
+        <Supporter Subject="_Unit"/>
+        <On Terms="ActorCreation" Target="::Main" Send="AnimSetPausedAll"/>
+        <On Terms="ActorCreation" Target="::Main" Send="SetScale 0.010000 1.250000 Vortex"/>
+        <On Terms="Behavior.VoidSpaceUnitStateAbilityDisible.On" Send="Create"/>
+        <On Terms="Behavior.VoidSpaceUnitStateAbilityDisible.Off" Send="Destroy"/>
+        <On Terms="Behavior.VoidSpaceUnitStateAbilityDisible.Off" Target="::Main" Send="ClearScale 0.000000 Vortex"/>
+        <On Terms="Behavior.VoidSpaceUnitStateAbilityDisible.Off" Target="::Main" Send="AnimSetPausedAll 0"/>
+    </CActorSimple>
+    <CActorModel id="VoidSpaceModel1" parent="ModelAddition">
+        <Aliases index="0" removed="1"/>
+        <Inherits index="BaseModelScale" value="0"/>
+        <Inherits index="CastShadows" value="0"/>
+        <Inherits index="CloakEffect" value="0"/>
+        <Inherits index="CreepEngulfment" value="0"/>
+        <Inherits index="Decal" value="0"/>
+        <Inherits index="ModelMaterials" value="0"/>
+        <Inherits index="Opacity" value="0"/>
+        <Inherits index="Scale" value="0"/>
+        <Inherits index="TeamColor" value="0"/>
+        <Inherits index="TimeScale" value="0"/>
+        <Inherits index="TintColor" value="0"/>
+        <Inherits index="Visibility" value="0"/>
+        <Inherits index="WarpGroup" value="0"/>
+        <On index="0" Terms="ActorCreation" Send="AnimBracketStart BSD Birth Stand Death OpeningPlayForever"/>
+        <On Terms="ActorCreation" Send="SetScale 0.500000"/>
+        <On Terms="ActorCreation" Send="SetScale 1.000000 3.000000"/>
+        <HostSiteOps Ops="SOpShadow"/>
+    </CActorModel>
+    <CActorModel id="VoidSpaceModel2" parent="ModelAddition">
+        <Aliases index="0" removed="1"/>
+        <Inherits index="BaseModelScale" value="0"/>
+        <Inherits index="CastShadows" value="0"/>
+        <Inherits index="CloakEffect" value="0"/>
+        <Inherits index="CreepEngulfment" value="0"/>
+        <Inherits index="Decal" value="0"/>
+        <Inherits index="ModelMaterials" value="0"/>
+        <Inherits index="Opacity" value="0"/>
+        <Inherits index="Scale" value="0"/>
+        <Inherits index="TeamColor" value="0"/>
+        <Inherits index="TimeScale" value="0"/>
+        <Inherits index="TintColor" value="0"/>
+        <Inherits index="Visibility" value="0"/>
+        <Inherits index="WarpGroup" value="0"/>
+        <On index="0" Terms="ActorCreation" Send="AnimPlay BSD Birth"/>
+        <On Terms="AnimDone; AnimName BSD" Send="AnimPlay BSD Birth"/>
+        <HostSiteOps Ops="SOpShadow UnknownActor622422336"/>
+        <Scale value="0.900000"/>
+    </CActorModel>
+    <CActorModel id="VoidSpaceModel3" parent="ModelAddition">
+        <Aliases index="0" removed="1"/>
+        <Inherits index="BaseModelScale" value="0"/>
+        <Inherits index="CastShadows" value="0"/>
+        <Inherits index="CloakEffect" value="0"/>
+        <Inherits index="CreepEngulfment" value="0"/>
+        <Inherits index="Decal" value="0"/>
+        <Inherits index="ModelMaterials" value="0"/>
+        <Inherits index="Opacity" value="0"/>
+        <Inherits index="Scale" value="0"/>
+        <Inherits index="TeamColor" value="0"/>
+        <Inherits index="TimeScale" value="0"/>
+        <Inherits index="TintColor" value="0"/>
+        <Inherits index="Visibility" value="0"/>
+        <Inherits index="WarpGroup" value="0"/>
+        <On index="0" Terms="ActorCreation" Send="AnimBracketStart BSD Birth Stand Death OpeningPlayForever"/>
+        <On Terms="ActorCreation" Send="SetScale 0.500000"/>
+        <On Terms="ActorCreation" Send="SetScale 1.000000 5.000000"/>
+        <HostSiteOps Ops="SOpShadow"/>
+    </CActorModel>
+    <CActorModel id="VoidSpaceModel4" parent="ModelAddition">
+        <Aliases index="0" removed="1"/>
+        <Inherits index="BaseModelScale" value="0"/>
+        <Inherits index="CastShadows" value="0"/>
+        <Inherits index="CloakEffect" value="0"/>
+        <Inherits index="CreepEngulfment" value="0"/>
+        <Inherits index="Decal" value="0"/>
+        <Inherits index="ModelMaterials" value="0"/>
+        <Inherits index="Opacity" value="0"/>
+        <Inherits index="Scale" value="0"/>
+        <Inherits index="TeamColor" value="0"/>
+        <Inherits index="TimeScale" value="0"/>
+        <Inherits index="TintColor" value="0"/>
+        <Inherits index="Visibility" value="0"/>
+        <Inherits index="WarpGroup" value="0"/>
+        <On index="0" Terms="ActorCreation" Send="AnimBracketStart BSD Birth Stand Death OpeningPlayForever"/>
+        <On Terms="ActorCreation" Send="SetScale 0.500000"/>
+        <On Terms="ActorCreation" Send="SetScale 1.000000 4.000000"/>
+        <HostSiteOps Ops="SOpShadow"/>
+    </CActorModel>
+    <CActorModel id="VoidSpaceModel5" parent="ModelAddition">
+        <Aliases index="0" removed="1"/>
+        <Inherits index="BaseModelScale" value="0"/>
+        <Inherits index="CastShadows" value="0"/>
+        <Inherits index="CloakEffect" value="0"/>
+        <Inherits index="CreepEngulfment" value="0"/>
+        <Inherits index="Decal" value="0"/>
+        <Inherits index="ModelMaterials" value="0"/>
+        <Inherits index="Opacity" value="0"/>
+        <Inherits index="Scale" value="0"/>
+        <Inherits index="TeamColor" value="0"/>
+        <Inherits index="TimeScale" value="0"/>
+        <Inherits index="TintColor" value="0"/>
+        <Inherits index="Visibility" value="0"/>
+        <Inherits index="WarpGroup" value="0"/>
+        <On index="0" Terms="ActorCreation" Send="AnimBracketStart BSD Birth Stand Death OpeningPlayForever"/>
+        <On Terms="ActorCreation" Send="SetScale 0.500000"/>
+        <On Terms="ActorCreation" Send="SetScale 1.000000 3.000000"/>
+        <HostSiteOps Ops="SOpShadow"/>
+    </CActorModel>
+    <CActorModel id="VoidSpaceModel6" parent="ModelAddition">
+        <Aliases index="0" removed="1"/>
+        <Inherits index="BaseModelScale" value="0"/>
+        <Inherits index="CastShadows" value="0"/>
+        <Inherits index="CloakEffect" value="0"/>
+        <Inherits index="CreepEngulfment" value="0"/>
+        <Inherits index="Decal" value="0"/>
+        <Inherits index="ModelMaterials" value="0"/>
+        <Inherits index="Opacity" value="0"/>
+        <Inherits index="Scale" value="0"/>
+        <Inherits index="TeamColor" value="0"/>
+        <Inherits index="TimeScale" value="0"/>
+        <Inherits index="TintColor" value="0"/>
+        <Inherits index="Visibility" value="0"/>
+        <Inherits index="WarpGroup" value="0"/>
+        <On index="0" Terms="ActorCreation" Send="AnimBracketStart BSD Birth Stand Death OpeningPlayForever"/>
+        <On Terms="ActorCreation" Send="SetScale 0.500000"/>
+        <On Terms="ActorCreation" Send="SetScale 1.000000 3.000000"/>
+        <HostSiteOps Ops="SOpShadow"/>
+    </CActorModel>
+    <CModel id="VoidSpace" parent="ImpactFX">
+        <Model value="Assets\Effects\Protoss\Taldarim_Mothership_Black_Hole\Taldarim_Mothership_Black_Hole.m3"/>
+        <AnimSpeed value="0.850000"/>
+        <EditorCategories value="Race:Protoss"/>
+        <ScaleMax value="0.800000,0.800000,0.350000"/>
+        <ScaleMin value="0.800000,0.800000,0.350000"/>
+    </CModel>
+    <CModel id="VoidSpaceAsh" parent="PersistentSpellFX">
+        <Model value="Assets\Doodads\CharAshWeather1\CharAshWeather1.m3"/>
+        <AnimSpeed value="0.500000"/>
+        <EditorCategories value="Race:Terran"/>
+        <ScaleMax value="1.100000,1.100000,1.100000"/>
+        <ScaleMin value="1.100000,1.100000,1.100000"/>
+    </CModel>
+    <CModel id="VoidSpaceModel1" parent="PersistentSpellFX">
+        <Model value="Assets\Doodads\Void_Nebula_Storm\Void_Nebula_Storm.m3"/>
+        <EditorCategories value="Race:Terran"/>
+        <ScaleMax value="0.750000,0.750000,0.660000"/>
+        <ScaleMin value="0.750000,0.750000,0.660000"/>
+    </CModel>
+    <CModel id="VoidSpaceModel2" parent="PersistentSpellFX">
+        <Model value="Assets\Effects\Other\PhysicsImpactRockLarge\PhysicsImpactRockLarge.m3"/>
+        <AnimSpeed value="3.000000"/>
+        <EditorCategories value="Race:Terran"/>
+        <ScaleMax value="3.000000,3.000000,3.000000"/>
+        <ScaleMin value="3.000000,3.000000,3.000000"/>
+    </CModel>
+    <CModel id="VoidSpaceModel3" parent="PersistentSpellFX">
+        <Model value="Assets\Doodads\PurificationDesert_Blast_Splats\PurificationDesert_Blast_Splats_03.m3"/>
+        <EditorCategories value="Race:Terran"/>
+        <ScaleMax value="3.000000,3.000000,3.000000"/>
+        <ScaleMin value="3.000000,3.000000,3.000000"/>
+    </CModel>
+    <CModel id="VoidSpaceModel4" parent="PersistentSpellFX">
+        <Model value="Assets\Doodads\Void_Hole\Void_Hole.m3"/>
+        <EditorCategories value="Race:Terran"/>
+        <ScaleMax value="0.000500,0.000500,0.000500"/>
+        <ScaleMin value="0.000500,0.000500,0.000500"/>
+    </CModel>
+    <CModel id="VoidSpaceModel5" parent="PersistentSpellFX">
+        <Model value="Assets\Doodads\TheVoid_DeathCloud_Intense\TheVoid_DeathCloud_Intense.m3"/>
+        <EditorCategories value="Race:Terran"/>
+        <ScaleMax value="0.700000,0.700000,0.350000"/>
+        <ScaleMin value="0.700000,0.700000,0.350000"/>
+    </CModel>
+    <CModel id="VoidSpaceModel6" parent="PersistentSpellFX">
+        <Model value="Assets\Splats\Shakuras_Obelisk_Splat\Shakuras_Obelisk_Splat.m3"/>
+        <EditorCategories value="Race:Terran"/>
+        <ScaleMax value="0.250000,0.250000,0.250000"/>
+        <ScaleMin value="0.250000,0.250000,0.250000"/>
+    </CModel>
+    <CUnit id="VoidSpace">
+        <Race value="Prot"/>
+        <FlagArray index="Turnable" value="0"/>
+        <FlagArray index="Unselectable" value="1"/>
+        <FlagArray index="Untargetable" value="1"/>
+        <FlagArray index="Invulnerable" value="1"/>
+        <FlagArray index="ArmySelect" value="1"/>
+        <Attributes index="MapBoss" value="1"/>
+        <Speed value="0.5"/>
+        <Acceleration value="100"/>
+        <Height value="0.1"/>
+        <AbilArray Link="move"/>
+        <BehaviorArray Link="VoidSpaceForceSource"/>
+        <BehaviorArray Link="VoidSpaceUnitStateSource"/>
+        <BehaviorArray Link="VoidSpaceDamageSource"/>
+        <BehaviorArray Link="VoidSpaceSelfTimeSuicide"/>
+        <BehaviorArray Link="VoidSpaceCreation"/>
+        <CardLayouts>
+            <LayoutButtons Face="Move" Type="AbilCmd" AbilCmd="move,Move" Row="0" Column="0"/>
+        </CardLayouts>
+        <Radius value="0"/>
+        <MinimapRadius value="0"/>
+        <EditorCategories value="ObjectFamily:Campaign,ObjectType:Unit"/>
+    </CUnit>
+    <CBehaviorBuff id="VoidSpaceCreation">
+        <InfoFlags index="Hidden" value="1"/>
+        <Duration value="5"/>
+        <Modification MoveSpeedMultiplier="0.02">
+            <BehaviorLinkDisableArray value="VoidSpaceForceSource"/>
+            <BehaviorLinkDisableArray value="VoidSpaceUnitStateSource"/>
+            <BehaviorLinkDisableArray value="VoidSpaceDamageSource"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="VoidSpaceDamageSource">
+        <InfoFlags index="Hidden" value="1"/>
+        <Period value="0.5"/>
+        <PeriodicEffect value="VoidSpaceDamageSearch"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="VoidSpaceForce">
+        <Alignment value="Negative"/>
+        <InfoFlags index="Hidden" value="1"/>
+        <InfoIcon value="Assets\Textures\btn-ability-protoss-blackhole.dds"/>
+        <EditorCategories value="Race:Protoss,AbilityorEffectType:Units"/>
+        <Duration value="0.225"/>
+        <Period value="0.5"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="VoidSpaceForceSource">
+        <InfoFlags index="Hidden" value="1"/>
+        <Period value="0.25"/>
+        <PeriodicEffect value="VoidSpaceForceSearch"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="VoidSpaceSelfTimeSuicide">
+        <Duration value="120"/>
+        <FinalEffect value="Suicide"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="VoidSpaceUnitEffectKnockback">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="Race:Zerg,AbilityorEffectType:Units"/>
+        <Duration value="2"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="VoidSpaceUnitStateAbilityDisible">
+        <Alignment value="Negative"/>
+        <InfoFlags index="Hidden" value="1"/>
+        <InfoIcon value="Assets\Textures\btn-ability-protoss-blackhole.dds"/>
+        <EditorCategories value="Race:Protoss,AbilityorEffectType:Units"/>
+        <Duration value="1.5"/>
+        <InitialEffect value="VoidSpaceUnitStateForcePeriod"/>
+        <RefreshEffect value="VoidSpaceUnitStateForcePeriod"/>
+        <ExpireEffect value="VoidSpaceUnitStateSuicide"/>
+        <Modification MoveSpeedMaximum="0" MoveSpeedMultiplier="2">
+            <ModifyFlags index="Detected" value="1"/>
+            <StateFlags index="Invulnerable" value="1"/>
+            <StateFlags index="SuppressAttack" value="1"/>
+            <StateFlags index="SuppressCloak" value="1"/>
+            <StateFlags index="SuppressCollision" value="1"/>
+            <StateFlags index="SuppressCombat" value="1"/>
+            <StateFlags index="SuppressDetection" value="1"/>
+            <StateFlags index="SuppressPassenger" value="1"/>
+            <StateFlags index="SuppressLifeRegen" value="1"/>
+            <StateFlags index="SuppressShieldsRegen" value="1"/>
+            <StateFlags index="SuppressEnergyRegen" value="1"/>
+            <StateFlags index="Uncommandable" value="1"/>
+            <StateFlags index="Unselectable" value="1"/>
+            <StateFlags index="Untargetable" value="1"/>
+            <AbilClassEnableArray index="CAbilMorph" value="1"/>
+            <AbilLinkEnableArray value="BroodLordQueue2"/>
+            <AbilLinkEnableArray value="BroodLordHangar"/>
+            <AbilLinkDisableArray value="MorphToOverseer"/>
+            <AbilLinkDisableArray value="MorphToBroodLord"/>
+            <BehaviorClassDisableArray index="CBehaviorPowerSource" value="1"/>
+            <BehaviorLinkEnableArray value="ReaperJump"/>
+            <BehaviorLinkDisableArray value="CloakField"/>
+            <BehaviorLinkDisableArray value="AreaDenialTank"/>
+        </Modification>
+        <Replace value="FarthestDistance"/>
+        <ReplaceLocation Effect="VoidSpaceUnitStateSourceCP" Value="TargetPoint"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="VoidSpaceUnitStateSource">
+        <InfoFlags index="Hidden" value="1"/>
+        <Period value="0.126"/>
+        <PeriodicEffect value="VoidSpaceUnitStateSourceCP"/>
+    </CBehaviorBuff>
+</Catalog>

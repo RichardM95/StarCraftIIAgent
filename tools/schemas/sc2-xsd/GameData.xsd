@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xs:complexType name="Catalog">
+    <xs:attribute name="path" use="required" type="xs:string" />
+  </xs:complexType>
+  
+  <xs:element name="Includes">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Catalog" type="Catalog" />
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

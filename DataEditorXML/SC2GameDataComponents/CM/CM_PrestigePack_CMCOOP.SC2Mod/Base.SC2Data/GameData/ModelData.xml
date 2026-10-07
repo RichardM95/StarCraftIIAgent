@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CModel id="CommanderTychusRaynorSniper" parent="Unit" Race="Terran">
+        <Model value="Assets\Units\Terran\MarineRaynorHEV\MarineRaynorHEV.m3"/>
+        <Radius value="0.450000"/>
+        <ScaleMax value="1.800000,1.800000,1.800000"/>
+        <ScaleMin value="1.800000,1.800000,1.800000"/>
+        <SquibTypeDefault value="Flesh"/>
+    </CModel>
+    <CModel id="CommanderTychusRaynorSniperAttackImpact" parent="ImpactFX">
+        <Model value="Assets\Effects\Terran\GhostWeaponImpact\GhostWeaponImpact.m3"/>
+        <EditorCategories value="Race:Terran"/>
+    </CModel>
+    <CModel id="CommanderTychusRaynorSniperAttackLaunch" parent="LaunchFX">
+        <Model value="Assets\Effects\Terran\GhostWeaponLaunch\GhostWeaponLaunch.m3"/>
+        <EditorCategories value="Race:Terran"/>
+    </CModel>
+    <CModel id="CommanderTychusRaynorPortrait" parent="FXAPortrait" Race="Terran">
+        <Model value="Assets\Portraits\Terran\RaynorMarinePortrait\RaynorMarinePortrait.m3"/>
+        <RequiredAnims value="Assets\Portraits\Terran\RaynorMarinePortrait_RequiredAnims\RaynorMarinePortrait_RequiredAnims.m3a"/>
+        <RequiredAnims value="Assets\StoryModeCharacters\Terran\SM_RaynorMarine_FacialAnims\SM_RaynorMarine_FacialAnims.m3a"/>
+        <FacialController value="LocalizedData\Facial\RaynorMarinePortrait.fxa"/>
+        <Flags index="Download" value="1"/>
+        <Image value="Assets\Textures\RaynorMarinePortrait_Static.dds"/>
+        <Lighting value="RaynorMarinePortrait"/>
+    </CModel>
+    <CModel id="TychusRaynorSnipeSplat" parent="Splat">
+        <Model value="Assets\Effects\Terran\LaserSightSplat\LaserSightSplat.m3"/>
+        <EditorCategories value="Race:Terran"/>
+    </CModel>
+    <CModel id="TychusRaynorSnipeBeam" parent="PersistentSpellFX">
+        <Model value="Assets\Effects\Terran\GhostSnipeBeam\GhostSnipeBeam.m3"/>
+        <EditorCategories value="Race:Terran"/>
+        <Lighting value=""/>
+        <ScaleMax value="1.800000,1.800000,1.800000"/>
+        <ScaleMin value="1.800000,1.800000,1.800000"/>
+    </CModel>
+    <CModel id="TychusRaynorSnipeBigBloodImpact" parent="ImpactFX">
+        <Model value="Assets\Effects\Other\BloodTargetImpact\BloodTargetImpact.m3"/>
+        <EditorCategories value="Race:Terran"/>
+        <Lighting value=""/>
+        <ScaleMax value="3.500000,3.500000,3.500000"/>
+        <ScaleMin value="3.500000,3.500000,3.500000"/>
+    </CModel>
+    <CModel id="TychusRaynorSnipeLaunchSquib" parent="LaunchFX">
+        <Model value="Assets\Effects\Terran\MarineWeaponLaunch\MarineWeaponLaunch.m3"/>
+        <EditorCategories value="Race:Terran"/>
+        <ScaleMax value="2.000000,2.000000,2.000000"/>
+        <ScaleMin value="2.000000,2.000000,2.000000"/>
+        <SelectionRadius value="0.250000"/>
+        <ShadowRadius value="0.250000"/>
+    </CModel>
+    <CModel id="SICocoonInfestedSolder" parent="RacePersistentSpellFX" Race="Zerg">
+        <Model value="Assets\Effects\Zerg\Stukov_BarracksEgg\Stukov_BarracksEgg.m3"/>
+        <SelectionLayer value="2"/>
+        <SquibTypeDefault value="Flesh"/>
+    </CModel>
+    <CModel id="CommanderPrestigeArtanisInspireLaunch">
+        <Model value="Assets\Effects\Protoss\Envision\Envision.m3"/>
+        <Flags index="Download" value="0"/>
+    </CModel>
+    <CModel id="HyperionVoidCoopLightningStormImpactModel" parent="ImpactFX">
+        <Model value="Assets\Effects\Terran\HyperionEMPImpact\HyperionEMPImpact.m3"/>
+        <EditorCategories value="Race:Terran"/>
+        <ScaleMax value="0.300000,0.300000,0.300000"/>
+        <ScaleMin value="0.300000,0.300000,0.300000"/>
+    </CModel>
+    <CModel id="HyperionVoidCoopLightningStormModel" parent="OneShotSpellFX">
+        <Model value="Assets\Effects\Terran\HyperionEMP\HyperionEMP.m3"/>
+        <EditorCategories value="Race:Terran"/>
+    </CModel>
+    <CModel id="ArtanisPrestigePortrait" parent="Portrait" Race="Protoss">
+        <Model value="Assets\Portraits\Protoss\ArtanisEx2Portrait\ArtanisEx2Portrait.m3"/>
+        <Flags index="Download" value="1"/>
+        <Image value="Assets\Textures\artanisportrait_static.dds"/>
+        <Lighting value="ArtanisEx2Portrait"/>
+    </CModel>
+    <CModel id="ArtanisPrestigeAirAttackImpact" parent="ImpactFX">
+        <Model value="Assets\Effects\Protoss\Artanis_BasicAirAttack_Impact\Artanis_BasicAirAttack_Impact.m3"/>
+    </CModel>
+    <CModel id="ArtanisPrestigeAirWeapon" parent="MissileFX">
+        <Model value="Assets\Effects\Protoss\Artanis_BasicAirAttack_Missile\Artanis_BasicAirAttack_Missile.m3"/>
+    </CModel>
+    <CModel id="ArtanisPrestige" parent="Unit" Race="Protoss">
+        <Model value="Assets\Units\Protoss\Artanis\Artanis.m3"/>
+        <Occlusion value="Show"/>
+        <PlanetPanelCamera value="Star2CameraHigher09"/>
+        <Radius value="0.675000"/>
+        <ShadowRadius value="1.093700"/>
+        <TechPurchaseCamera value="Star2CameraHigher09"/>
+        <UnitGlossaryCamera value="Star2CameraHigher09"/>
+        <ScaleMax value="1.250000,1.250000,1.250000"/>
+        <ScaleMin value="1.250000,1.250000,1.250000"/>
+    </CModel>
+    <CModel id="ArtanisPrestigeDeath" parent="UnitDeath" Race="Protoss">
+        <Model value="Assets\Units\Protoss\Artanis_Death\Artanis_Death.m3"/>
+        <LowQualityModel value="ProtossLargeUnitDeathLow"/>
+        <Occlusion value="Show"/>
+    </CModel>
+    <CModel id="AbathurAirUnitOutOfCombatRegen" parent="PersistentSpellFX">
+        <Model value="Assets\Effects\Zerg\MendBuff\MendBuff.m3"/>
+        <EditorCategories value="Race:Terran"/>
+    </CModel>
+    <CModel id="HyperionVoidCoopP4" parent="Unit" Race="Terran">
+        <Model value="Assets\Models\Unit_Eyeser_Raynor_Hyperion.m3"/>
+        <Radius value="2.000000"/>
+        <SelectionRadius value="1.250000"/>
+    </CModel>
+    <CModel id="HyperionVoidCoopHyperjumpImpactP4">
+        <Model value="Assets\Models\Effect_Eyeser_Raynor_Hyperion_Jump_In.m3"/>
+    </CModel>
+    <CModel id="HyperionVoidCoopHyperjumpLaunchP4">
+        <Model value="Assets\Models\Effect_Eyeser_Raynor_Hyperion_Jump_Out.m3"/>
+    </CModel>
+    <CModel id="HyperionVoidCoopYamatoCannonImpactP4" parent="ImpactFX">
+        <Model value="Assets\Effects\Terran\YamatoMissileImpact\YamatoMissileImpact.m3"/>
+        <EditorCategories value="Race:Terran"/>
+        <ScaleMax value="0.750000,0.750000,0.750000"/>
+        <ScaleMin value="0.750000,0.750000,0.750000"/>
+    </CModel>
+    <CModel id="GlazeKaraxBuffDamage" parent="Glaze">
+        <Model value="Assets\Effects\Glaze\Glaze_Nova_Buff_Damage\Glaze_Nova_Buff_Damage.m3"/>
+        <EditorCategories value="Race:Terran"/>
+    </CModel>
+    <CModel id="HyperionMotionAttackImpact" parent="ImpactFX">
+        <Model value="Assets\Effects\Terran\BattlecruiserMissileImpact\BattlecruiserMissileImpact.m3"/>
+        <EditorCategories value="Race:Terran"/>
+    </CModel>
+    <CModel id="HyperionMotionAttackLaunch" parent="LaunchFX">
+        <Model value="Assets\Effects\Terran\BattleCruiserPlasmaLaunch\BattleCruiserPlasmaLaunch.m3"/>
+        <EditorCategories value="Race:Terran"/>
+    </CModel>
+    <CModel id="HyperionVoidCoopMotionWeapon" parent="MissileFX">
+        <Model value="Assets\Effects\Terran\BattleCruiserMissile\BattleCruiserMissile.m3"/>
+        <EditorCategories value="Race:Terran"/>
+        <ScaleMax value="1.100000,1.100000,1.100000"/>
+        <ScaleMin value="1.100000,1.100000,1.100000"/>
+    </CModel>
+    <CModel id="HyperionVoidCoopYamatoCannonChargeP4" parent="OneShotSpellFX">
+        <Model value="Assets\Effects\Terran\YamatoMissileCharge\YamatoMissileCharge.m3"/>
+        <EditorCategories value="Race:Terran"/>
+        <ScaleMax value="1.500000,1.500000,1.500000"/>
+        <ScaleMin value="1.500000,1.500000,1.500000"/>
+        <SelectionRadius value="0.333200"/>
+        <ShadowRadius value="0.333200"/>
+    </CModel>
+    <CModel id="HyperionVoidCoopYamatoCannonWeaponP4" parent="MissileFX">
+        <Model value="Assets\COOP\Mengsk\Effects\Battlecruiser_Mengsk_COOP_YamatoAoE\Battlecruiser_Mengsk_COOP_YamatoAoE.m3"/>
+        <EditorCategories value="Race:Terran"/>
+        <ScaleMax value="1.500000,1.500000,1.500000"/>
+        <ScaleMin value="1.500000,1.500000,1.500000"/>
+        <SelectionRadius value="0.333200"/>
+        <ShadowRadius value="0.333200"/>
+    </CModel>
+    <CModel id="CommanderPrestigeAbathurEssenceShiftImpactIn" parent="ImpactFX">
+        <Model value="Assets\Effects\Zerg\Void_Kerrigan_CreepTeleport_ImpactIn\Void_Kerrigan_CreepTeleport_ImpactIn.m3"/>
+        <EditorCategories value="Race:Protoss"/>
+    </CModel>
+    <CModel id="CommanderPrestigeAbathurEssenceShiftImpactOut" parent="ImpactFX">
+        <Model value="Assets\Effects\Zerg\Void_Kerrigan_CreepTeleport_ImpactOut\Void_Kerrigan_CreepTeleport_ImpactOut.m3"/>
+        <EditorCategories value="Race:Protoss"/>
+    </CModel>
+    <CModel id="XelNagaKerriganReviveBeacn" parent="Building_COOP" COOP="Stetmann" Race="Zerg">
+        <Model value="Assets\UI\Feedback\BeaconZerg\BeaconZerg.m3"/>
+        <Occlusion value="Show"/>
+        <PlanetPanelCamera value="Star2CameraHigher06"/>
+        <Radius value="1.250000"/>
+        <ScaleMax value="0.750000,0.750000,0.750000"/>
+        <ScaleMin value="0.750000,0.750000,0.750000"/>
+        <SelectionRadius value="1.500000"/>
+        <ShadowRadius value="1.000000"/>
+        <SquibTypeDefault value="Metal"/>
+    </CModel>
+    <CModel id="XelNagaKerriganReviveBeacnPortrait" parent="ZergBuildingPortraitBase">
+        <Model value="Assets\Portraits\Terran\TerranPortraitTransition\TerranPortraitTransition.m3"/>
+        <Image value="Assets\Textures\TerranPortraitTransition_Static.dds"/>
+    </CModel>
+    <CModel id="XelNagaKerrigan" parent="Unit" Race="Zerg">
+        <Model value="Assets\Units\Zerg\XelNaga_Kerrigan\XelNaga_Kerrigan.m3"/>
+        <Events>
+            <Anim value="Birth,00"/>
+            <Name value="KerriganEpilogue03_Birth_ImpactExplosion"/>
+            <Type value="Sound"/>
+            <Time value="1.850000"/>
+            <Payload value="KerriganEpilogue03_Birth_ImpactExplosion"/>
+        </Events>
+        <Events>
+            <Anim value="Birth,00"/>
+            <Name value="KerriganEpilogue03_Birth_Incoming"/>
+            <Type value="Sound"/>
+            <Time value="0.450000"/>
+            <Payload value="KerriganEpilogue03_Birth_Incoming"/>
+        </Events>
+        <Events>
+            <Anim value="Birth,00"/>
+            <Name value="KerriganEpilogue03_Vox_Birth"/>
+            <Type value="Sound"/>
+            <Time value="0.100000"/>
+            <Payload value="KerriganEpilogue03_Vox_Birth"/>
+        </Events>
+        <Events>
+            <Anim value="Birth,A,00"/>
+            <Name value="KerriganEpilogue03_Birth_ImpactExplosion"/>
+            <Type value="Sound"/>
+            <Time value="1.520000"/>
+            <Payload value="KerriganEpilogue03_Birth_ImpactExplosion"/>
+        </Events>
+        <Events>
+            <Anim value="Birth,A,00"/>
+            <Name value="KerriganEpilogue03_Birth_Incoming"/>
+            <Type value="Sound"/>
+            <Time value="0.100000"/>
+            <Payload value="KerriganEpilogue03_Birth_Incoming"/>
+        </Events>
+        <Events>
+            <Anim value="Birth,A,00"/>
+            <Name value="KerriganEpilogue03_Vox_Birth"/>
+            <Type value="Sound"/>
+            <Time value="0.010000"/>
+            <Payload value="KerriganEpilogue03_Vox_Birth"/>
+        </Events>
+        <Events>
+            <Anim value="Death,00"/>
+            <Name value="KerriganDeathStart"/>
+            <Type value="Sound"/>
+            <Time value="0.010000"/>
+        </Events>
+        <Events>
+            <Anim value="Death,00"/>
+            <Name value="KerriganVoxDeathPart1"/>
+            <Type value="Sound"/>
+            <Time value="0.010000"/>
+        </Events>
+        <Events>
+            <Anim value="Death,00"/>
+            <Name value="KerriganDeathPreExplosionStart"/>
+            <Type value="Sound"/>
+            <Time value="0.150000"/>
+        </Events>
+        <Events>
+            <Anim value="Death,00"/>
+            <Name value="KerriganVoxDeathPart2"/>
+            <Type value="Sound"/>
+            <Time value="0.730000"/>
+        </Events>
+        <Events>
+            <Anim value="Death,00"/>
+            <Name value="KerriganVoxDeathPart3"/>
+            <Type value="Sound"/>
+            <Time value="1.790000"/>
+        </Events>
+        <Events>
+            <Anim value="Attack,00"/>
+            <Name value="KerriganAttackImpact"/>
+            <Type value="Sound"/>
+            <Time value="0.250000"/>
+        </Events>
+        <Events>
+            <Anim value="Attack,01"/>
+            <Name value="KerriganAttackImpact"/>
+            <Type value="Sound"/>
+            <Time value="0.250000"/>
+        </Events>
+        <PlanetPanelCamera value="Star2CameraMid05"/>
+        <SelectionRadius value="0.750000"/>
+        <ShadowRadius value="0.750000"/>
+        <TechPurchaseCamera value="Star2CameraMid05"/>
+        <UnitGlossaryCamera value="Star2CameraMid05"/>
+    </CModel>
+    <CModel id="XelNagaKerriganPortrait" parent="FXAPortrait" Race="Zerg">
+        <Model value="Assets\Portraits\Zerg\XelNaga_Kerrigan_Portrait\XelNaga_Kerrigan_Portrait.m3"/>
+        <FacialController value="LocalizedData\Facial\XelNaga_Kerrigan.fxa"/>
+        <Image value="Assets\Textures\XelnagaKerriganportrait_static.dds"/>
+    </CModel>
+    <CModel id="XelNagaKerriganCreepTeleportImpactIn" parent="ImpactFX">
+        <Model value="Assets\Effects\Zerg\Void_Kerrigan_CreepTeleport_ImpactIn\Void_Kerrigan_CreepTeleport_ImpactIn.m3"/>
+        <EditorCategories value="Race:Protoss"/>
+    </CModel>
+    <CModel id="XelNagaKerriganCreepTeleportImpactOut" parent="ImpactFX">
+        <Model value="Assets\Effects\Zerg\Void_Kerrigan_CreepTeleport_ImpactOut\Void_Kerrigan_CreepTeleport_ImpactOut.m3"/>
+        <EditorCategories value="Race:Protoss"/>
+    </CModel>
+    <CModel id="XelNagaKerriganExtinctionImpact" parent="OneShotSpellFX">
+        <Model value="Assets\Effects\Zerg\Void_Kerrigan_Extinction_Impact\Void_Kerrigan_Extinction_Impact.m3"/>
+        <EditorCategories value="Race:Protoss"/>
+        <SelectionRadius value="2.000000"/>
+        <ShadowRadius value="2.000000"/>
+    </CModel>
+    <CModel id="XelNagaKerriganExtinctionPulse" parent="OneShotSpellFX">
+        <Model value="Assets\Effects\Zerg\Void_Kerrigan_Extinction_Charge\Void_Kerrigan_Extinction_Charge.m3"/>
+        <EditorCategories value="Race:Zerg"/>
+        <SelectionRadius value="2.000000"/>
+        <ShadowRadius value="2.000000"/>
+    </CModel>
+    <CModel id="XelNagaKerriganExtinctionShockwave" parent="OneShotSpellFX">
+        <Model value="Assets\Effects\Zerg\Void_Kerrigan_Extinction\Void_Kerrigan_Extinction.m3"/>
+        <EditorCategories value="Race:Protoss"/>
+        <SelectionRadius value="2.000000"/>
+        <ShadowRadius value="2.000000"/>
+    </CModel>
+    <CModel id="XelNagaKerriganCelestialRadianceImpactModel" parent="OneShotSpellFX">
+        <Model value="Assets\Effects\Zerg\MendImpact\MendImpact.m3"/>
+        <EditorCategories value="Race:Zerg"/>
+        <ScaleMax value="2.600000,2.600000,1.300000"/>
+        <ScaleMin value="2.600000,2.600000,1.300000"/>
+    </CModel>
+    <CModel id="XelNagaKerriganCelestialRadianceMendBuff" parent="PersistentSpellFX">
+        <Model value="Assets\Effects\Zerg\MendBuff\MendBuff.m3"/>
+        <EditorCategories value="Race:Terran"/>
+    </CModel>
+    <CModel id="XelNagaKerriganQuantumRayBeam" parent="MissileFX">
+        <Model value="Assets\Effects\Zerg\Void_Kerrigan_QuantumRay\Void_Kerrigan_QuantumRay.m3"/>
+        <EditorCategories value="Race:Zerg"/>
+    </CModel>
+    <CModel id="XelNagaKerriganQuantumRayCharge" parent="PersistentSpellFX">
+        <Model value="Assets\Effects\Zerg\Void_Kerrigan_QuantumRay_Charge\Void_Kerrigan_QuantumRay_Charge.m3"/>
+        <EditorCategories value="Race:Zerg"/>
+    </CModel>
+    <CModel id="XelNagaKerriganQuantumRayHandCharge" parent="PersistentSpellFX">
+        <Model value="Assets\Effects\Zerg\Void_Kerrigan_QuantumRay_Hand_Charge\Void_Kerrigan_QuantumRay_Hand_Charge.m3"/>
+        <EditorCategories value="Race:Zerg"/>
+    </CModel>
+    <CModel id="ProtossHeroReviveBeacon" parent="Building_COOP" COOP="Stetmann" Race="Zerg">
+        <Model value="Assets\UI\Feedback\BeaconProtoss\BeaconProtoss.m3"/>
+        <Occlusion value="Show"/>
+        <PlanetPanelCamera value="Star2CameraHigher06"/>
+        <Radius value="1.250000"/>
+        <ScaleMax value="0.750000,0.750000,0.750000"/>
+        <ScaleMin value="0.750000,0.750000,0.750000"/>
+        <SelectionRadius value="1.500000"/>
+        <ShadowRadius value="1.000000"/>
+        <SquibTypeDefault value="Metal"/>
+    </CModel>
+    <CModel id="ProtossHeroReviveBeaconPortrait" parent="ZergBuildingPortraitBase">
+        <Model value="Assets\Portraits\Terran\TerranPortraitTransition\TerranPortraitTransition.m3"/>
+        <Image value="Assets\Textures\TerranPortraitTransition_Static.dds"/>
+    </CModel>
+    <CModel id="HyperionVoidCoopP4Portrait" parent="FXAPortrait" Race="Terran">
+        <Model value="Assets\Portraits\Terran\RaynorMarinePortrait\RaynorMarinePortrait.m3"/>
+        <RequiredAnims value="Assets\Portraits\Terran\RaynorMarinePortrait_RequiredAnims\RaynorMarinePortrait_RequiredAnims.m3a"/>
+        <RequiredAnims value="Assets\StoryModeCharacters\Terran\SM_RaynorMarine_FacialAnims\SM_RaynorMarine_FacialAnims.m3a"/>
+        <FacialController value="LocalizedData\Facial\RaynorMarinePortrait.fxa"/>
+        <Flags index="Download" value="1"/>
+        <Image value="Assets\Textures\RaynorMarinePortrait_Static.dds"/>
+        <Lighting value="RaynorMarinePortrait"/>
+    </CModel>
+    <CModel id="ResurgenceChargeModel" parent="OneShotSpellFX">
+        <Model value="Assets\Effects\Protoss\Artanis_Resurgence\Artanis_Resurgence.m3"/>
+        <EditorCategories value="Race:Protoss"/>
+        <RadiusLoose value="1.000000"/>
+    </CModel>
+    <CModel id="LightningDashImpact" parent="ImpactFX">
+        <Model value="Assets\Effects\Protoss\PsiStormImpact\PsiStormImpact.m3"/>
+    </CModel>
+    <CModel id="LightningDashIn" parent="OneShotSpellFX">
+        <Model value="Assets\Effects\Protoss\Artanis_LightningDash\Artanis_LightningDash.m3"/>
+        <EditorCategories value="Race:Protoss"/>
+    </CModel>
+    <CModel id="AstralWindCastModel" parent="OneShotSpellFX">
+        <Model value="Assets\Effects\Protoss\Artanis_AstralWinds\Artanis_AstralWinds.m3"/>
+        <EditorCategories value="Race:Protoss"/>
+    </CModel>
+    <CModel id="AstralWindImpactModel" parent="OneShotSpellFX">
+        <Model value="Assets\Effects\Protoss\Artanis_AstralWinds_Impact\Artanis_AstralWinds_Impact.m3"/>
+        <EditorCategories value="Race:Protoss"/>
+    </CModel>
+    <CModel id="LightningDashStun" parent="PersistentSpellFX">
+        <Model value="Assets\Effects\Neutral\Stun_Void\Stun_Void.m3"/>
+        <EditorCategories value="Race:Terran"/>
+    </CModel>
+    <CModel id="LightningDashCursorSplat" parent="UI">
+        <Model value="Assets\UI\ProtossCursorEx2\ProtossCursorEx2.m3"/>
+        <EditorCategories value="Race:Protoss"/>
+        <ScaleMax value="0.220000,0.220000,0.220000"/>
+        <ScaleMin value="0.220000,0.220000,0.220000"/>
+        <SelectionRadius value="2.500000"/>
+        <ShadowRadius value="2.500000"/>
+    </CModel>
+    <CModel id="ArtanisHardenedShield" parent="OneShotSpellFX_COOP" COOP="Stetmann" Race="Zerg">
+        <Model value="Assets\Effects\Protoss\DragoonForceShield\DragoonForceShield.m3"/>
+    </CModel>
+    <CModel id="ArtanisPowerVisual" parent="UI">
+        <Model value="Assets\UI\Feedback\Pylon_WarpIn_Radius\Pylon_WarpIn_Radius.m3"/>
+    </CModel>
+    <CModel id="KaraxPrestigeSOAProxyPylonVisualBeam" parent="PersistentSpellFX">
+        <Model value="Assets\Effects\Protoss\SOA_DeployPylon\SOA_DeployPylon.m3"/>
+    </CModel>
+    <CModel id="RavagerShield" parent="PersistentSpellFX">
+        <Model value="Assets\Effects\Zerg\AdaptivePlating\AdaptivePlating.m3"/>
+        <EditorCategories value="Race:Zerg"/>
+    </CModel>
+    <CModel id="HyperionVoidCoopLevelUp" parent="ImpactFX">
+        <Model value="Assets\Effects\Terran\HyperionLevelUp\HyperionLevelUp.m3"/>
+        <EditorCategories value="Race:Terran"/>
+        <ScaleMax value="1.200000,1.200000,1.200000"/>
+    </CModel>
+    <CModel id="XelNagaKerriganLight" parent="PersistentSpellFX">
+        <Model value="Assets\Effects\Zerg\Void_Kerrigan_Energy_Attack\Void_Kerrigan_Energy_Attack.m3"/>
+        <EditorCategories value="Race:Zerg"/>
+    </CModel>
+</Catalog>

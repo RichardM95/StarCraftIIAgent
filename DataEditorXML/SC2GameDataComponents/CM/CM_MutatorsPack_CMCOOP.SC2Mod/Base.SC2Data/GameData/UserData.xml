@@ -1,0 +1,1123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CUser id="CoopAIAttackWaveUnitLimits">
+        <Instances Id="SuperHybrid">
+            <Int>
+                <Field Id="LimitPerDifficulty"/>
+            </Int>
+            <Int>
+                <Field Id="LimitPerDifficulty" Index="1"/>
+            </Int>
+            <Int>
+                <Field Id="LimitPerDifficulty" Index="2"/>
+            </Int>
+            <Int Int="1">
+                <Field Id="LimitPerDifficulty" Index="3"/>
+            </Int>
+            <Int Int="1">
+                <Field Id="LimitPerDifficulty" Index="4"/>
+            </Int>
+            <Int Int="2">
+                <Field Id="LimitPerDifficulty" Index="5"/>
+            </Int>
+            <Unit Unit="ImbalycMutator_HybridUpgradeMorph">
+                <Field Id="UnitToLimit"/>
+            </Unit>
+        </Instances>
+    </CUser>
+    <CUser id="CoopAICommanderTiers">
+        <Instances Id="Amon&apos;s Creation Tier01">
+            <Fixed Fixed="0.5998">
+                <Field Id="PercentOfWaveBase"/>
+            </Fixed>
+            <Fixed Fixed="0.4">
+                <Field Id="PercentOfWaveBase" Index="1"/>
+            </Fixed>
+            <Unit Unit="HybridLarva">
+                <Field Id="PhaseUnits"/>
+            </Unit>
+            <Unit Unit="HybridMayfly">
+                <Field Id="PhaseUnits" Index="1"/>
+            </Unit>
+        </Instances>
+        <Instances Id="Amon&apos;s Creation Tier02">
+            <Fixed Fixed="0.2998">
+                <Field Id="PercentOfWaveBase" Index="2"/>
+            </Fixed>
+            <Fixed Fixed="0.3498">
+                <Field Id="PercentOfWaveBase" Index="1"/>
+            </Fixed>
+            <Fixed Fixed="0.3498">
+                <Field Id="PercentOfWaveBase"/>
+            </Fixed>
+            <Unit Unit="HybridLarva">
+                <Field Id="PhaseUnits"/>
+            </Unit>
+            <Unit Unit="HybridMayfly">
+                <Field Id="PhaseUnits" Index="1"/>
+            </Unit>
+            <Unit Unit="HybridDestroyer">
+                <Field Id="PhaseUnits" Index="2"/>
+            </Unit>
+        </Instances>
+        <Instances Id="Amon&apos;s Creation Tier03">
+            <Fixed Fixed="0.3498">
+                <Field Id="PercentOfWaveBase"/>
+            </Fixed>
+            <Fixed Fixed="0.3498">
+                <Field Id="PercentOfWaveBase" Index="1"/>
+            </Fixed>
+            <Fixed Fixed="0.2998">
+                <Field Id="PercentOfWaveBase" Index="2"/>
+            </Fixed>
+            <Unit Unit="HybridMayfly">
+                <Field Id="PhaseUnits"/>
+            </Unit>
+            <Unit Unit="HybridLarva">
+                <Field Id="PhaseUnits" Index="1"/>
+            </Unit>
+            <Unit Unit="HybridReaver">
+                <Field Id="PhaseUnits" Index="2"/>
+            </Unit>
+        </Instances>
+        <Instances Id="Amon&apos;s Creation Tier04">
+            <Fixed Fixed="0.4">
+                <Field Id="PercentOfWaveBase" Index="1"/>
+            </Fixed>
+            <Fixed Fixed="0.4">
+                <Field Id="PercentOfWaveBase"/>
+            </Fixed>
+            <Fixed Fixed="0.2">
+                <Field Id="PercentOfWaveBase" Index="2"/>
+            </Fixed>
+            <Unit Unit="HybridDestroyer">
+                <Field Id="PhaseUnits"/>
+            </Unit>
+            <Unit Unit="HybridReaver">
+                <Field Id="PhaseUnits" Index="1"/>
+            </Unit>
+            <Unit Unit="HybridNemesis">
+                <Field Id="PhaseUnits" Index="2"/>
+            </Unit>
+        </Instances>
+        <Instances Id="Amon&apos;s Creation Tier05">
+            <Fixed Fixed="0.5">
+                <Field Id="PhaseUnitsAlternateChance" Index="3"/>
+            </Fixed>
+            <Fixed Fixed="0.2">
+                <Field Id="PercentOfWaveBase"/>
+            </Fixed>
+            <Fixed Fixed="0.2">
+                <Field Id="PercentOfWaveBase" Index="1"/>
+            </Fixed>
+            <Fixed Fixed="0.2">
+                <Field Id="PercentOfWaveBase" Index="2"/>
+            </Fixed>
+            <Fixed Fixed="0.4">
+                <Field Id="PercentOfWaveBase" Index="3"/>
+            </Fixed>
+            <Unit Unit="HybridReaver">
+                <Field Id="PhaseUnits"/>
+            </Unit>
+            <Unit Unit="HybridDestroyer">
+                <Field Id="PhaseUnits" Index="1"/>
+            </Unit>
+            <Unit Unit="HybridNemesis">
+                <Field Id="PhaseUnits" Index="2"/>
+            </Unit>
+            <Unit Unit="HybridBehemoth">
+                <Field Id="PhaseUnits" Index="3"/>
+            </Unit>
+            <Unit Unit="HybridDominatorVoid">
+                <Field Id="PhaseUnitsAlternate" Index="3"/>
+            </Unit>
+        </Instances>
+        <Instances Id="Amon&apos;s Creation Tier06">
+            <Fixed Fixed="0.5">
+                <Field Id="PercentOfWaveBase" Index="1"/>
+            </Fixed>
+            <Fixed Fixed="0.5">
+                <Field Id="PercentOfWaveBase"/>
+            </Fixed>
+            <Unit Unit="HybridBehemoth">
+                <Field Id="PhaseUnits"/>
+            </Unit>
+            <Unit Unit="HybridDominatorVoid">
+                <Field Id="PhaseUnits" Index="1"/>
+            </Unit>
+        </Instances>
+        <Instances Id="Amon&apos;s Creation Tier07">
+            <Fixed Fixed="0.4">
+                <Field Id="PercentOfWaveBase"/>
+            </Fixed>
+            <Fixed Fixed="0.4">
+                <Field Id="PercentOfWaveBase" Index="1"/>
+            </Fixed>
+            <Fixed Fixed="0.2">
+                <Field Id="PercentOfWaveBase" Index="2"/>
+            </Fixed>
+            <Int Int="4">
+                <Field Id="minDifficulty" Index="2"/>
+            </Int>
+            <Unit Unit="HybridBehemoth">
+                <Field Id="PhaseUnits"/>
+            </Unit>
+            <Unit Unit="HybridDominatorVoid">
+                <Field Id="PhaseUnits" Index="1"/>
+            </Unit>
+            <Unit Unit="ImbalycMutator_HybridUpgradeMorph">
+                <Field Id="PhaseUnits" Index="2"/>
+            </Unit>
+        </Instances>
+    </CUser>
+    <CUser id="CoopAICommanders">
+        <Instances Id="Amon&apos;s Creation">
+            <Int>
+                <Field Id="Official"/>
+            </Int>
+            <Text Text="UserData/CoopAICommanders/Amon&apos;s Creation_Name">
+                <Field Id="Name"/>
+            </Text>
+            <Text Text="UserData/CoopAICommanders/Amon&apos;s Creation_RaceName">
+                <Field Id="RaceName"/>
+            </Text>
+            <Text Text="UserData/CoopAICommanders/Amon&apos;s Creation_Description">
+                <Field Id="Description"/>
+            </Text>
+            <User Type="CoopAICommanderTiers" Instance="Amon&apos;s Creation Tier01">
+                <Field Id="UnitTiers"/>
+            </User>
+            <User Type="CoopAICommanderTiers" Instance="Amon&apos;s Creation Tier02">
+                <Field Id="UnitTiers" Index="1"/>
+            </User>
+            <User Type="CoopAICommanderTiers" Instance="Amon&apos;s Creation Tier03">
+                <Field Id="UnitTiers" Index="2"/>
+            </User>
+            <User Type="CoopAICommanderTiers" Instance="Amon&apos;s Creation Tier04">
+                <Field Id="UnitTiers" Index="3"/>
+            </User>
+            <User Type="CoopAICommanderTiers" Instance="Amon&apos;s Creation Tier05">
+                <Field Id="UnitTiers" Index="4"/>
+            </User>
+            <User Type="CoopAICommanderTiers" Instance="Amon&apos;s Creation Tier06">
+                <Field Id="UnitTiers" Index="5"/>
+            </User>
+            <User Type="CoopAICommanderTiers" Instance="Amon&apos;s Creation Tier07">
+                <Field Id="UnitTiers" Index="6"/>
+            </User>
+        </Instances>
+    </CUser>
+    <CUser id="DvolutionTiers">
+        <Fields>
+            <Id value="UnitsToEvolveInto"/>
+            <Type value="Unit"/>
+            <Count value="8"/>
+            <EditorColumn value="1"/>
+        </Fields>
+        <Instances Id="[Default]"/>
+        <Instances Id="Tier01">
+            <Unit Unit="Zergling">
+                <Field Id="UnitsToEvolveInto"/>
+            </Unit>
+            <Unit Unit="Marine">
+                <Field Id="UnitsToEvolveInto" Index="1"/>
+            </Unit>
+            <Unit Unit="Baneling">
+                <Field Id="UnitsToEvolveInto" Index="2"/>
+            </Unit>
+        </Instances>
+        <Instances Id="Tier02">
+            <Unit Unit="Reaper">
+                <Field Id="UnitsToEvolveInto"/>
+            </Unit>
+            <Unit Unit="Zealot">
+                <Field Id="UnitsToEvolveInto" Index="1"/>
+            </Unit>
+            <Unit Unit="Roach">
+                <Field Id="UnitsToEvolveInto" Index="2"/>
+            </Unit>
+            <Unit Unit="Hellion">
+                <Field Id="UnitsToEvolveInto" Index="3"/>
+            </Unit>
+            <Unit Unit="WidowMine">
+                <Field Id="UnitsToEvolveInto" Index="4"/>
+            </Unit>
+            <Unit Unit="HellionTank">
+                <Field Id="UnitsToEvolveInto" Index="5"/>
+            </Unit>
+        </Instances>
+        <Instances Id="Tier03">
+            <Unit Unit="Marauder">
+                <Field Id="UnitsToEvolveInto"/>
+            </Unit>
+            <Unit Unit="Firebat">
+                <Field Id="UnitsToEvolveInto" Index="1"/>
+            </Unit>
+            <Unit Unit="Adept">
+                <Field Id="UnitsToEvolveInto" Index="2"/>
+            </Unit>
+            <Unit Unit="Sentry">
+                <Field Id="UnitsToEvolveInto" Index="3"/>
+            </Unit>
+            <Unit Unit="Hydralisk">
+                <Field Id="UnitsToEvolveInto" Index="4"/>
+            </Unit>
+        </Instances>
+        <Instances Id="Tier04">
+            <Unit Unit="Stalker">
+                <Field Id="UnitsToEvolveInto"/>
+            </Unit>
+            <Unit Unit="Dragoon">
+                <Field Id="UnitsToEvolveInto" Index="1"/>
+            </Unit>
+            <Unit Unit="Mutalisk">
+                <Field Id="UnitsToEvolveInto" Index="2"/>
+            </Unit>
+            <Unit Unit="Goliath">
+                <Field Id="UnitsToEvolveInto" Index="3"/>
+            </Unit>
+            <Unit Unit="HighTemplar">
+                <Field Id="UnitsToEvolveInto" Index="4"/>
+            </Unit>
+        </Instances>
+        <Instances Id="Tier05">
+            <Unit Unit="VikingAssault">
+                <Field Id="UnitsToEvolveInto"/>
+            </Unit>
+            <Unit Unit="WarHound">
+                <Field Id="UnitsToEvolveInto" Index="1"/>
+            </Unit>
+            <Unit Unit="Phoenix">
+                <Field Id="UnitsToEvolveInto" Index="2"/>
+            </Unit>
+            <Unit Unit="Infestor">
+                <Field Id="UnitsToEvolveInto" Index="3"/>
+            </Unit>
+            <Unit Unit="Banshee">
+                <Field Id="UnitsToEvolveInto" Index="4"/>
+            </Unit>
+            <Unit Unit="VikingFighter">
+                <Field Id="UnitsToEvolveInto" Index="6"/>
+            </Unit>
+            <Unit Unit="Scout">
+                <Field Id="UnitsToEvolveInto" Index="5"/>
+            </Unit>
+        </Instances>
+        <Instances Id="Tier06">
+            <Unit Unit="SiegeTank">
+                <Field Id="UnitsToEvolveInto"/>
+            </Unit>
+            <Unit Unit="Oracle">
+                <Field Id="UnitsToEvolveInto" Index="1"/>
+            </Unit>
+            <Unit Unit="Cyclone">
+                <Field Id="UnitsToEvolveInto" Index="2"/>
+            </Unit>
+            <Unit Unit="Ghost">
+                <Field Id="UnitsToEvolveInto" Index="3"/>
+            </Unit>
+            <Unit Unit="SwarmHostMP">
+                <Field Id="UnitsToEvolveInto" Index="4"/>
+            </Unit>
+            <Unit Unit="LurkerMP">
+                <Field Id="UnitsToEvolveInto" Index="5"/>
+            </Unit>
+            <Unit Unit="SiegeTankSieged">
+                <Field Id="UnitsToEvolveInto" Index="6"/>
+            </Unit>
+            <Unit Unit="LurkerMPBurrowed">
+                <Field Id="UnitsToEvolveInto" Index="7"/>
+            </Unit>
+        </Instances>
+        <Instances Id="Tier07">
+            <Unit Unit="Ravager">
+                <Field Id="UnitsToEvolveInto"/>
+            </Unit>
+            <Unit Unit="Immortal">
+                <Field Id="UnitsToEvolveInto" Index="1"/>
+            </Unit>
+            <Unit Unit="Archon">
+                <Field Id="UnitsToEvolveInto" Index="2"/>
+            </Unit>
+            <Unit Unit="VoidRay">
+                <Field Id="UnitsToEvolveInto" Index="3"/>
+            </Unit>
+            <Unit Unit="Disruptor">
+                <Field Id="UnitsToEvolveInto" Index="4"/>
+            </Unit>
+            <Unit Unit="Liberator">
+                <Field Id="UnitsToEvolveInto" Index="5"/>
+            </Unit>
+            <Unit Unit="LiberatorAG">
+                <Field Id="UnitsToEvolveInto" Index="6"/>
+            </Unit>
+        </Instances>
+        <Instances Id="Tier08">
+            <Unit Unit="BroodLord">
+                <Field Id="UnitsToEvolveInto"/>
+            </Unit>
+            <Unit Unit="Ultralisk">
+                <Field Id="UnitsToEvolveInto" Index="1"/>
+            </Unit>
+            <Unit Unit="Battlecruiser">
+                <Field Id="UnitsToEvolveInto" Index="2"/>
+            </Unit>
+            <Unit Unit="Thor">
+                <Field Id="UnitsToEvolveInto" Index="3"/>
+            </Unit>
+            <Unit Unit="Carrier">
+                <Field Id="UnitsToEvolveInto" Index="4"/>
+            </Unit>
+            <Unit Unit="Tempest">
+                <Field Id="UnitsToEvolveInto" Index="5"/>
+            </Unit>
+            <Unit Unit="Reaver">
+                <Field Id="UnitsToEvolveInto" Index="6"/>
+            </Unit>
+            <Unit Unit="Colossus">
+                <Field Id="UnitsToEvolveInto" Index="7"/>
+            </Unit>
+        </Instances>
+        <Instances Id="Tier09">
+            <Unit Unit="Loki">
+                <Field Id="UnitsToEvolveInto"/>
+            </Unit>
+            <Unit Unit="HybridNemesis">
+                <Field Id="UnitsToEvolveInto" Index="1"/>
+            </Unit>
+            <Unit Unit="HybridReaver">
+                <Field Id="UnitsToEvolveInto" Index="2"/>
+            </Unit>
+            <Unit Unit="HybridDestroyer">
+                <Field Id="UnitsToEvolveInto" Index="3"/>
+            </Unit>
+            <Unit Unit="Mothership">
+                <Field Id="UnitsToEvolveInto" Index="4"/>
+            </Unit>
+        </Instances>
+        <Instances Id="Tier10">
+            <Unit Unit="HybridBehemoth">
+                <Field Id="UnitsToEvolveInto"/>
+            </Unit>
+            <Unit Unit="HybridDominatorVoid">
+                <Field Id="UnitsToEvolveInto" Index="1"/>
+            </Unit>
+            <Unit Unit="Brutalisk">
+                <Field Id="UnitsToEvolveInto" Index="2"/>
+            </Unit>
+            <Unit Unit="Leviathan">
+                <Field Id="UnitsToEvolveInto" Index="3"/>
+            </Unit>
+        </Instances>
+    </CUser>
+    <!--修改这里可以指向你建的触发器，记得所有因子都需要被初始化-->
+    <CUser id="GlobalOptions">
+        <Instances Id="[Override]MutatorInitialEvent">
+            <String String="libMUTP_gt_CT_InitializeAll">
+                <Field Id="TriggerString"/>
+            </String>
+        </Instances>
+    </CUser>
+    <CUser id="MutatorAbsulteDefense">
+        <Fields Id="Polarity" Type="Int" EditorColumn="1"/>
+        <Fields>
+            <Id value="UnitType"/>
+            <Type value="GameLink"/>
+            <GameLinkType value="Unit"/>
+            <EditorColumn value="2"/>
+        </Fields>
+        <Fields>
+            <Id value="MapRequired"/>
+            <Type value="GameLink"/>
+            <GameLinkType value="Map"/>
+            <EditorColumn value="3"/>
+        </Fields>
+        <Instances Id="[Default]">
+            <GameLink GameLink="COOP_Placeholder">
+                <Field Id="MapRequired"/>
+            </GameLink>
+            <Int Int="1">
+                <Field Id="Polarity"/>
+            </Int>
+        </Instances>
+        <Instances Id="VoidThrasher">
+            <GameLink GameLink="VoidThrasher">
+                <Field Id="UnitType"/>
+            </GameLink>
+        </Instances>
+        <Instances Id="VoidShardAC">
+            <GameLink GameLink="VoidShardAC">
+                <Field Id="UnitType"/>
+            </GameLink>
+        </Instances>
+        <Instances Id="VoidSliverAC">
+            <GameLink GameLink="VoidSliverAC">
+                <Field Id="UnitType"/>
+            </GameLink>
+        </Instances>
+        <Instances Id="ACPirateCapitalShip">
+            <GameLink GameLink="ACPirateCapitalShip">
+                <Field Id="UnitType"/>
+            </GameLink>
+        </Instances>
+        <Instances Id="ZenithStone">
+            <GameLink GameLink="ZenithStone">
+                <Field Id="UnitType"/>
+            </GameLink>
+        </Instances>
+        <Instances Id="ArchAngelCoopAssault">
+            <GameLink GameLink="ArchAngelCoopAssault">
+                <Field Id="UnitType"/>
+            </GameLink>
+        </Instances>
+        <Instances Id="ArchAngelCoopFighter">
+            <GameLink GameLink="ArchAngelCoopFighter">
+                <Field Id="UnitType"/>
+            </GameLink>
+        </Instances>
+        <Instances Id="TrainCaboose">
+            <GameLink GameLink="Caboose">
+                <Field Id="UnitType"/>
+            </GameLink>
+        </Instances>
+        <Instances Id="TrainFreight">
+            <GameLink GameLink="FreightCar">
+                <Field Id="UnitType"/>
+            </GameLink>
+        </Instances>
+        <Instances Id="TrainEngine">
+            <GameLink GameLink="TarsonisEngine">
+                <Field Id="UnitType"/>
+            </GameLink>
+        </Instances>
+        <Instances Id="TrainEngineFast">
+            <GameLink GameLink="TarsonisEngineFast">
+                <Field Id="UnitType"/>
+            </GameLink>
+        </Instances>
+        <Instances Id="HybridDominatorCoopBoss">
+            <GameLink GameLink="HybridDominatorCoopBoss">
+                <Field Id="UnitType"/>
+            </GameLink>
+        </Instances>
+        <Instances Id="COOPTerrazineTank">
+            <GameLink GameLink="COOPTerrazineTank">
+                <Field Id="UnitType"/>
+            </GameLink>
+        </Instances>
+        <Instances Id="Blightbringer">
+            <GameLink GameLink="Blightbringer">
+                <Field Id="UnitType"/>
+            </GameLink>
+        </Instances>
+        <Instances Id="CybrosEscortTowerUp">
+            <GameLink GameLink="CybrosEscortTowerUp">
+                <Field Id="UnitType"/>
+            </GameLink>
+        </Instances>
+        <Instances Id="CybrosEscortTowerDown">
+            <GameLink GameLink="CybrosEscortTowerDown">
+                <Field Id="UnitType"/>
+            </GameLink>
+        </Instances>
+        <Instances Id="NovaEradicator">
+            <GameLink GameLink="NovaEradicator">
+                <Field Id="UnitType"/>
+            </GameLink>
+        </Instances>
+        <Instances Id="ACVirophage">
+            <GameLink GameLink="ACVirophage">
+                <Field Id="UnitType"/>
+            </GameLink>
+        </Instances>
+        <Instances Id="SlaynElemental">
+            <GameLink GameLink="SlaynElemental">
+                <Field Id="UnitType"/>
+            </GameLink>
+        </Instances>
+        <Instances Id="XelNagaConstruct">
+            <GameLink GameLink="XelNagaConstruct">
+                <Field Id="UnitType"/>
+            </GameLink>
+        </Instances>
+        <Instances Id="CODXelNagaConstruct">
+            <GameLink GameLink="CODXelNagaConstruct">
+                <Field Id="UnitType"/>
+            </GameLink>
+        </Instances>
+        <Instances Id="ProtossFrigate">
+            <GameLink GameLink="ProtossFrigate">
+                <Field Id="UnitType"/>
+            </GameLink>
+        </Instances>
+        <Instances Id="ProtossFrigateDocked">
+            <GameLink GameLink="ProtossFrigateDocked">
+                <Field Id="UnitType"/>
+            </GameLink>
+        </Instances>
+        <Instances Id="HybridLarva">
+            <GameLink GameLink="HybridLarva">
+                <Field Id="UnitType"/>
+            </GameLink>
+        </Instances>
+        <Instances Id="HybridMayfly">
+            <GameLink GameLink="HybridMayfly">
+                <Field Id="UnitType"/>
+            </GameLink>
+        </Instances>
+        <Instances Id="HybridNemesis">
+            <GameLink GameLink="HybridNemesis">
+                <Field Id="UnitType"/>
+            </GameLink>
+        </Instances>
+        <Instances Id="HybridReaver">
+            <GameLink GameLink="HybridReaver">
+                <Field Id="UnitType"/>
+            </GameLink>
+        </Instances>
+        <Instances Id="HybridDestroyer">
+            <GameLink GameLink="HybridDestroyer">
+                <Field Id="UnitType"/>
+            </GameLink>
+        </Instances>
+        <Instances Id="HybridBehemoth">
+            <GameLink GameLink="HybridBehemoth">
+                <Field Id="UnitType"/>
+            </GameLink>
+        </Instances>
+        <Instances Id="HybridDominatorVoid">
+            <GameLink GameLink="HybridDominatorVoid">
+                <Field Id="UnitType"/>
+            </GameLink>
+        </Instances>
+        <Instances Id="InfestableHut">
+            <GameLink GameLink="InfestableHut">
+                <Field Id="UnitType"/>
+            </GameLink>
+            <GameLink GameLink="AC_MeinhoffDayNight">
+                <Field Id="MapRequired"/>
+            </GameLink>
+        </Instances>
+        <Instances Id="InfestableColonistHut">
+            <GameLink GameLink="InfestableColonistHut">
+                <Field Id="UnitType"/>
+            </GameLink>
+            <GameLink GameLink="AC_MeinhoffDayNight">
+                <Field Id="MapRequired"/>
+            </GameLink>
+        </Instances>
+        <Instances Id="NovaInfestableColonistHut">
+            <GameLink GameLink="NovaInfestableColonistHut">
+                <Field Id="UnitType"/>
+            </GameLink>
+            <GameLink GameLink="AC_MeinhoffDayNight">
+                <Field Id="MapRequired"/>
+            </GameLink>
+        </Instances>
+        <Instances Id="JarbanInfestableColonistHut">
+            <GameLink GameLink="JarbanInfestibleColonistHut">
+                <Field Id="UnitType"/>
+            </GameLink>
+            <GameLink GameLink="AC_MeinhoffDayNight">
+                <Field Id="MapRequired"/>
+            </GameLink>
+        </Instances>
+        <Instances Id="InfestableBiodome">
+            <GameLink GameLink="InfestableBiodome">
+                <Field Id="UnitType"/>
+            </GameLink>
+            <GameLink GameLink="AC_MeinhoffDayNight">
+                <Field Id="MapRequired"/>
+            </GameLink>
+        </Instances>
+        <Instances Id="InfestableColonistBiodome">
+            <GameLink GameLink="InfestableColonistBiodome">
+                <Field Id="UnitType"/>
+            </GameLink>
+            <GameLink GameLink="AC_MeinhoffDayNight">
+                <Field Id="MapRequired"/>
+            </GameLink>
+        </Instances>
+        <Instances Id="InfestedMercHaven">
+            <GameLink GameLink="InfestedMercHaven">
+                <Field Id="UnitType"/>
+            </GameLink>
+            <GameLink GameLink="AC_MeinhoffDayNight">
+                <Field Id="MapRequired"/>
+            </GameLink>
+        </Instances>
+        <Instances Id="TerrazineHarvester">
+            <GameLink GameLink="TerrazineHarvester">
+                <Field Id="UnitType"/>
+            </GameLink>
+            <Int>
+                <Field Id="Polarity"/>
+            </Int>
+        </Instances>
+        <Instances Id="ResearchVessel">
+            <GameLink GameLink="ResearchVessel">
+                <Field Id="UnitType"/>
+            </GameLink>
+            <Int>
+                <Field Id="Polarity"/>
+            </Int>
+        </Instances>
+        <Instances Id="ResearchVesselLanded">
+            <GameLink GameLink="ResearchVesselLanded">
+                <Field Id="UnitType"/>
+            </GameLink>
+            <Int>
+                <Field Id="Polarity"/>
+            </Int>
+        </Instances>
+        <Instances Id="ColonistShip">
+            <GameLink GameLink="ColonistShip">
+                <Field Id="UnitType"/>
+            </GameLink>
+            <Int>
+                <Field Id="Polarity"/>
+            </Int>
+        </Instances>
+        <Instances Id="ColonistShipTHanson02A">
+            <GameLink GameLink="ColonistShipTHanson02A">
+                <Field Id="UnitType"/>
+            </GameLink>
+            <Int>
+                <Field Id="Polarity"/>
+            </Int>
+        </Instances>
+        <Instances Id="IndustrialShip">
+            <GameLink GameLink="IndustrialShip">
+                <Field Id="UnitType"/>
+            </GameLink>
+            <Int>
+                <Field Id="Polarity"/>
+            </Int>
+        </Instances>
+        <Instances Id="IndustrialShipFlying">
+            <GameLink GameLink="IndustrialShipFlying">
+                <Field Id="UnitType"/>
+            </GameLink>
+            <Int>
+                <Field Id="Polarity"/>
+            </Int>
+        </Instances>
+        <Instances Id="MegalithCutter">
+            <GameLink GameLink="MegalithCutter">
+                <Field Id="UnitType"/>
+            </GameLink>
+            <Int>
+                <Field Id="Polarity"/>
+            </Int>
+        </Instances>
+        <Instances Id="ArchAngelPnPAssault">
+            <GameLink GameLink="ArchAngelPnPAssault">
+                <Field Id="UnitType"/>
+            </GameLink>
+            <Int>
+                <Field Id="Polarity"/>
+            </Int>
+        </Instances>
+        <Instances Id="CybrosEscortDownloader">
+            <GameLink GameLink="CybrosEscortDownloader">
+                <Field Id="UnitType"/>
+            </GameLink>
+            <Int>
+                <Field Id="Polarity"/>
+            </Int>
+        </Instances>
+    </CUser>
+    <!--这是相互摧毁因子的一个非官方实现，添加了更多拓展的可能性。-->
+    <CUser id="MutatorHybridDeathNuke">
+        <Instances Id="MutatorHybridNukeDetonateSmall2s">
+            <GameLink GameLink="MutatorHybridNukeDetonateSmall2s">
+                <Field Id="NukeEffet"/>
+            </GameLink>
+            <GameLink GameLink="HybridMayfly">
+                <Field Id="UniyTypes"/>
+            </GameLink>
+            <GameLink GameLink="HybridMayfly">
+                <Field Id="UnitTypes"/>
+            </GameLink>
+            <GameLink GameLink="HybridLarva">
+                <Field Id="UnitTypes" Index="1"/>
+            </GameLink>
+            <Text Text="UserData/MutatorHybridDeathNuke/MutatorHybridNukeDetonateSmall2s_NukeType">
+                <Field Id="NukeType"/>
+            </Text>
+        </Instances>
+        <Instances Id="[Override]MutatorHybridNukeDetonateSmall1s">
+            <GameLink GameLink="HybridLarva">
+                <Field Id="UniyTypes" Index="1"/>
+            </GameLink>
+        </Instances>
+    </CUser>
+    <!--这里我将会对因子字段值进行一些基本的说明-->
+    <!--Name：因子名称-->
+    <!--Description：因子描述-->
+    <!--State：因子开启状态（这一项不需要更改）-->
+    <!--Icom：因子图标-->
+    <!--RandomAllowed：改为1则表示通过随机因子功能可以随机到此因子（会影响会乱工作室因子池）-->
+    <!--RandomAllowedFirst：仅在指挥官选择界面可以被随即功能随机到-->
+    <!--CustomAllowed：表示这个因子可以被玩家选择（保持默认即可，如果有开发到一半的因子可以改为0防止玩家选择）-->
+    <!--CustomAllowMultiple：表示这个因子可以被选择多次-->
+    <!--ListOrder：这表示在因子选择列表中因子排序的位置，一般从91开始排序，如果你引用了其他因子依赖项，则可能需要你自行调整-->
+    <!--Unfinished：这一项可以不用管，用于标注该因子未开发完成，但是仅标记这一项的话因子仍然可以被启用-->
+    <!--AllowInSolo：如果有你只希望在双人模式下可以启用的因子，将这项改为0（如极性不定）-->
+    <!--Type：因子类别，详情请见 Mutators - Mutator Type-->
+    <!--SelectState：因子选择状态（无需修改）-->
+    <!--SearchString：改条目为自动生成因子搜索文本，无需改动-->
+    <!--HasPlus：如果你为一个因子添加了一个强化版本，改成1，因子初始化的前两项填原始触发器，后两项填强化后的触发器，判断强化因子开启状态使用的是带有_EXT的函数-->
+    <CUser id="Mutators">
+        <Instances Id="AmonBloodDemon">
+            <Image Image="Assets\Textures\btn-ability-protoss-mindblast.dds">
+                <Field Id="MA - Icon"/>
+            </Image>
+            <Int>
+                <Field Id="MA - Random First Allowed"/>
+            </Int>
+            <Text Text="UserData/Mutators/AmonBloodDemon_MA - Name">
+                <Field Id="MA - Name"/>
+            </Text>
+            <Text Text="UserData/Mutators/AmonBloodDemon_MA - Description">
+                <Field Id="MA - Description"/>
+            </Text>
+            <User Type="MutatorType" Instance="ThirdParty">
+                <Field Id="MA - Type"/>
+            </User>
+        </Instances>
+        <Instances Id="GoldRush">
+            <Image Image="Assets\Textures\btn-tips-richminerals.dds">
+                <Field Id="MA - Icon"/>
+            </Image>
+            <Text Text="UserData/Mutators/GoldRush_MA - Name">
+                <Field Id="MA - Name"/>
+            </Text>
+            <Text Text="UserData/Mutators/GoldRush_MA - Description">
+                <Field Id="MA - Description"/>
+            </Text>
+            <User Type="MutatorType" Instance="ThirdParty">
+                <Field Id="MA - Type"/>
+            </User>
+        </Instances>
+        <Instances Id="BetrayalMoment">
+            <Image Image="Assets\Textures\ui_list_battlereports_buildabettermarine.dds">
+                <Field Id="MA - Icon"/>
+            </Image>
+            <Int>
+                <Field Id="MA - Allow In Solo"/>
+            </Int>
+            <Text Text="UserData/Mutators/BetrayalMoment_MA - Description">
+                <Field Id="MA - Description"/>
+            </Text>
+            <Text Text="UserData/Mutators/BetrayalMoment_MA - Name">
+                <Field Id="MA - Name"/>
+            </Text>
+            <User Type="MutatorType" Instance="ThirdParty">
+                <Field Id="MA - Type"/>
+            </User>
+        </Instances>
+        <Instances Id="HybridDisaster">
+            <Image Image="Assets\Textures\tip_hybridbehemoth.dds">
+                <Field Id="MA - Icon"/>
+            </Image>
+            <Int Int="1">
+                <Field Id="MA - Custom Allowed"/>
+            </Int>
+            <Text Text="UserData/Mutators/HybridDisaster_MA - Name">
+                <Field Id="MA - Name"/>
+            </Text>
+            <Text Text="UserData/Mutators/HybridDisaster_MA - Description">
+                <Field Id="MA - Description"/>
+            </Text>
+            <User Type="MutatorType" Instance="ThirdParty">
+                <Field Id="MA - Type"/>
+            </User>
+        </Instances>
+        <Instances Id="VoidSpace">
+            <Image Image="Assets\Textures\btn-ability-protoss-blackhole-redcolor.dds">
+                <Field Id="MA - Icon"/>
+            </Image>
+            <Text Text="UserData/Mutators/VoidSpace_MA - Name">
+                <Field Id="MA - Name"/>
+            </Text>
+            <Text Text="UserData/Mutators/VoidSpace_MA - Description">
+                <Field Id="MA - Description"/>
+            </Text>
+            <User Type="MutatorType" Instance="ThirdParty">
+                <Field Id="MA - Type"/>
+            </User>
+        </Instances>
+        <Instances Id="DirtySouls">
+            <Image Image="Assets\Textures\btn-ability-alarak-reliquaryofsouls.dds">
+                <Field Id="MA - Icon"/>
+            </Image>
+            <Text Text="UserData/Mutators/DirtySouls_MA - Name">
+                <Field Id="MA - Name"/>
+            </Text>
+            <Text Text="UserData/Mutators/DirtySouls_MA - Description">
+                <Field Id="MA - Description"/>
+            </Text>
+            <User Type="MutatorType" Instance="ThirdParty">
+                <Field Id="MA - Type"/>
+            </User>
+        </Instances>
+        <Instances Id="Endurance_Nexus_Coop">
+            <Image Image="3P_Endurance.dds">
+                <Field Id="MA - Icon"/>
+            </Image>
+            <Int Int="1">
+                <Field Id="MA - Custom Allowed"/>
+            </Int>
+            <Text Text="UserData/Mutators/Endurance_Nexus_Coop_MA - Description">
+                <Field Id="MA - Description"/>
+            </Text>
+            <Text Text="UserData/Mutators/Endurance_Nexus_Coop_MA - Name">
+                <Field Id="MA - Name"/>
+            </Text>
+            <User Type="MutatorType" Instance="ThirdParty">
+                <Field Id="MA - Type"/>
+            </User>
+        </Instances>
+        <Instances Id="CrushAtmosphere">
+            <Image Image="Assets\Textures\btn-upgrade-protoss-fenix-dragoonsolariteflare.dds">
+                <Field Id="MA - Icon"/>
+            </Image>
+            <Text Text="UserData/Mutators/CrushAtmosphere_MA - Name">
+                <Field Id="MA - Name"/>
+            </Text>
+            <Text Text="UserData/Mutators/CrushAtmosphere_MA - Description">
+                <Field Id="MA - Description"/>
+            </Text>
+            <User Type="MutatorType" Instance="ThirdParty">
+                <Field Id="MA - Type"/>
+            </User>
+        </Instances>
+        <Instances Id="IncreaseArmor">
+            <Image Image="Assets\Textures\btn-upgrade-swann-hellarmor.dds">
+                <Field Id="MA - Icon"/>
+            </Image>
+            <Text Text="UserData/Mutators/IncreaseArmor_MA - Name">
+                <Field Id="MA - Name"/>
+            </Text>
+            <Text Text="UserData/Mutators/IncreaseArmor_MA - Description">
+                <Field Id="MA - Description"/>
+            </Text>
+            <User Type="MutatorType" Instance="ThirdParty">
+                <Field Id="MA - Type"/>
+            </User>
+        </Instances>
+        <Instances Id="Devolve">
+            <Image Image="Assets\Textures\btn-ability-zeratul-avatarofessence-devolutionwave.dds">
+                <Field Id="MA - Icon"/>
+            </Image>
+            <Text Text="UserData/Mutators/Devolve_MA - Name">
+                <Field Id="MA - Name"/>
+            </Text>
+            <Text Text="UserData/Mutators/Devolve_MA - Description">
+                <Field Id="MA - Description"/>
+            </Text>
+            <User Type="MutatorType" Instance="ThirdParty">
+                <Field Id="MA - Type"/>
+            </User>
+        </Instances>
+        <Instances Id="Exhausted">
+            <Image Image="Assets\Textures\btn-upgrade-protoss-alarak-havoctargetlockbuffed.dds">
+                <Field Id="MA - Icon"/>
+            </Image>
+            <Text Text="UserData/Mutators/Exhausted_MA - Description">
+                <Field Id="MA - Description"/>
+            </Text>
+            <Text Text="UserData/Mutators/Exhausted_MA - Name">
+                <Field Id="MA - Name"/>
+            </Text>
+            <User Type="MutatorType" Instance="ThirdParty">
+                <Field Id="MA - Type"/>
+            </User>
+        </Instances>
+        <Instances Id="Blessing">
+            <Image Image="Assets\Textures\btn-ability-kerrigan-heroicfortitude.dds">
+                <Field Id="MA - Icon"/>
+            </Image>
+            <Int Int="1">
+                <Field Id="MA - Custom Allowed"/>
+            </Int>
+            <Text Text="UserData/Mutators/Blessing_MA - Name">
+                <Field Id="MA - Name"/>
+            </Text>
+            <Text Text="UserData/Mutators/Blessing_MA - Description">
+                <Field Id="MA - Description"/>
+            </Text>
+            <User Type="MutatorType" Instance="ThirdParty">
+                <Field Id="MA - Type"/>
+            </User>
+        </Instances>
+        <Instances Id="CarefullyCalculated">
+            <Image Image="Assets\Textures\btn-tips-resourcecaches.dds">
+                <Field Id="MA - Icon"/>
+            </Image>
+            <Text Text="UserData/Mutators/CarefullyCalculated_MA - Name">
+                <Field Id="MA - Name"/>
+            </Text>
+            <Text Text="UserData/Mutators/CarefullyCalculated_MA - Description">
+                <Field Id="MA - Description"/>
+            </Text>
+            <User Type="MutatorType" Instance="ThirdParty">
+                <Field Id="MA - Type"/>
+            </User>
+        </Instances>
+        <Instances Id="GreatUnity">
+            <Image Image="Assets\Textures\command_defend_ac.dds">
+                <Field Id="MA - Icon"/>
+            </Image>
+            <Int Int="1">
+                <Field Id="MA - Custom Allowed"/>
+            </Int>
+            <Text Text="UserData/Mutators/GreatUnity_MA - Name">
+                <Field Id="MA - Name"/>
+            </Text>
+            <Text Text="UserData/Mutators/GreatUnity_MA - Description">
+                <Field Id="MA - Description"/>
+            </Text>
+            <User Type="MutatorType" Instance="ThirdParty">
+                <Field Id="MA - Type"/>
+            </User>
+        </Instances>
+        <Instances Id="DeadlyNightmare">
+            <Image Image="Assets\Textures\btn-amonshardsarmor.dds">
+                <Field Id="MA - Icon"/>
+            </Image>
+            <Text Text="UserData/Mutators/DeadlyNightmare_MA - Description">
+                <Field Id="MA - Description"/>
+            </Text>
+            <Text Text="UserData/Mutators/DeadlyNightmare_MA - Name">
+                <Field Id="MA - Name"/>
+            </Text>
+            <User Type="MutatorType" Instance="ThirdParty">
+                <Field Id="MA - Type"/>
+            </User>
+        </Instances>
+        <Instances Id="PloughsOn">
+            <Image Image="Assets\Textures\btn-ability-mengsk-commandcenter-drafttroopers.dds">
+                <Field Id="MA - Icon"/>
+            </Image>
+            <Text Text="UserData/Mutators/PloughsOn_MA - Description">
+                <Field Id="MA - Description"/>
+            </Text>
+            <Text Text="UserData/Mutators/PloughsOn_MA - Name">
+                <Field Id="MA - Name"/>
+            </Text>
+            <User Type="MutatorType" Instance="ThirdParty">
+                <Field Id="MA - Type"/>
+            </User>
+        </Instances>
+        <Instances Id="ArmorFailure">
+            <Image Image="Assets\Textures\btn-ability-terran-ignorearmor.dds">
+                <Field Id="MA - Icon"/>
+            </Image>
+            <Int Int="1">
+                <Field Id="MA - Custom Allowed"/>
+            </Int>
+            <Text Text="UserData/Mutators/ArmorFailure_MA - Description">
+                <Field Id="MA - Description"/>
+            </Text>
+            <Text Text="UserData/Mutators/ArmorFailure_MA - Name">
+                <Field Id="MA - Name"/>
+            </Text>
+            <User Type="MutatorType" Instance="ThirdParty">
+                <Field Id="MA - Type"/>
+            </User>
+        </Instances>
+        <Instances Id="AbsuletlyDefense">
+            <Image Image="Assets\Textures\btn-ability-mengsk-trooper-willofthepeople.dds">
+                <Field Id="MA - Icon"/>
+            </Image>
+            <Int Int="1">
+                <Field Id="MA - Custom Allowed"/>
+            </Int>
+            <Text Text="UserData/Mutators/AbsuletlyDefense_MA - Name">
+                <Field Id="MA - Name"/>
+            </Text>
+            <Text Text="UserData/Mutators/AbsuletlyDefense_MA - Description">
+                <Field Id="MA - Description"/>
+            </Text>
+            <User Type="MutatorType" Instance="ThirdParty">
+                <Field Id="MA - Type"/>
+            </User>
+        </Instances>
+        <Instances Id="UnknownEnemy">
+            <Image Image="Assets\Textures\ui_tip_questionmark.dds">
+                <Field Id="MA - Icon"/>
+            </Image>
+            <Int Int="1">
+                <Field Id="MA - Custom Allowed"/>
+            </Int>
+            <Text Text="UserData/Mutators/UnknownEnemy_MA - Name">
+                <Field Id="MA - Name"/>
+            </Text>
+            <Text Text="UserData/Mutators/UnknownEnemy_MA - Description">
+                <Field Id="MA - Description"/>
+            </Text>
+            <User Type="MutatorType" Instance="ThirdParty">
+                <Field Id="MA - Type"/>
+            </User>
+        </Instances>
+        <Instances Id="OldLegendry1">
+            <Image Image="Assets\Textures\btn-unit-zerg-kerrigan.dds">
+                <Field Id="MA - Icon"/>
+            </Image>
+            <Text Text="UserData/Mutators/OldLegendry1_MA - Description">
+                <Field Id="MA - Description"/>
+            </Text>
+            <Text Text="UserData/Mutators/OldLegendry1_MA - Name">
+                <Field Id="MA - Name"/>
+            </Text>
+            <User Type="MutatorType" Instance="ThirdParty">
+                <Field Id="MA - Type"/>
+            </User>
+        </Instances>
+        <Instances Id="SourceOfInfestor">
+            <Image Image="Assets\Textures\btn-ability-zerg-stukov-infeststructureupgrade.dds">
+                <Field Id="MA - Icon"/>
+            </Image>
+            <Text Text="UserData/Mutators/SourceOfInfestor_MA - Name">
+                <Field Id="MA - Name"/>
+            </Text>
+            <Text Text="UserData/Mutators/SourceOfInfestor_MA - Description">
+                <Field Id="MA - Description"/>
+            </Text>
+            <User Type="MutatorType" Instance="ThirdParty">
+                <Field Id="MA - Type"/>
+            </User>
+        </Instances>
+        <Instances Id="DevastatingInfusion">
+            <Image Image="Assets\Textures\aiur_ancienttemple_hybridshadow_emiss.dds">
+                <Field Id="MA - Icon"/>
+            </Image>
+            <Text Text="UserData/Mutators/DevastatingInfusion_MA - Name">
+                <Field Id="MA - Name"/>
+            </Text>
+            <Text Text="UserData/Mutators/DevastatingInfusion_MA - Description">
+                <Field Id="MA - Description"/>
+            </Text>
+            <User Type="MutatorType" Instance="ThirdParty">
+                <Field Id="MA - Type"/>
+            </User>
+        </Instances>
+        <Instances Id="OldLegendry2">
+            <Image Image="Assets\Textures\btn-unit-protoss-archon-dark.dds">
+                <Field Id="MA - Icon"/>
+            </Image>
+            <Text Text="UserData/Mutators/OldLegendry2_MA - Description">
+                <Field Id="MA - Description"/>
+            </Text>
+            <Text Text="UserData/Mutators/OldLegendry2_MA - Name">
+                <Field Id="MA - Name"/>
+            </Text>
+            <User Type="MutatorType" Instance="ThirdParty">
+                <Field Id="MA - Type"/>
+            </User>
+        </Instances>
+    </CUser>
+    <CUser id="MutatorType"/>
+</Catalog>

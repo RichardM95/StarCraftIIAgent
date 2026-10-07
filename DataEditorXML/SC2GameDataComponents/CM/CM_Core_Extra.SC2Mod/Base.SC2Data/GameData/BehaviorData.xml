@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CBehaviorBuff id="AutoCreepTumorSpread">
+        <InfoFlags index="Hidden" value="1"/>
+        <BuffFlags index="DisableWhileUnderConstruction" value="1"/>
+        <Period value="20"/>
+        <PeriodicEffect value="AutoCreepTumorSpreadRB"/>
+    </CBehaviorBuff>
+</Catalog>

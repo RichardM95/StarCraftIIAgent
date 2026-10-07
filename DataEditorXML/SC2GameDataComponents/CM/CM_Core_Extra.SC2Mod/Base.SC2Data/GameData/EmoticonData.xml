@@ -1,0 +1,4476 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CEmoticon id="lunara_angry">
+        <Image TextureSheet="storm_emoji_lunara_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="lunara_cool">
+        <Image TextureSheet="storm_emoji_lunara_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="lunara_embarrassed">
+        <Image TextureSheet="storm_emoji_lunara_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="lunara_happy">
+        <Image TextureSheet="storm_emoji_lunara_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="lunara_inlove">
+        <Image TextureSheet="storm_emoji_lunara_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="lunara_rofl">
+        <Image TextureSheet="storm_emoji_lunara_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="lunara_sad">
+        <Image TextureSheet="storm_emoji_lunara_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="lunara_silly">
+        <Image TextureSheet="storm_emoji_lunara_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="lunara_speechless">
+        <Image TextureSheet="storm_emoji_lunara_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="lunara_surprised">
+        <Image TextureSheet="storm_emoji_lunara_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="greymane_angry">
+        <Image TextureSheet="storm_emoji_greymane_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="greymane_cool">
+        <Image TextureSheet="storm_emoji_greymane_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="greymane_embarrassed">
+        <Image TextureSheet="storm_emoji_greymane_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="greymane_happy">
+        <Image TextureSheet="storm_emoji_greymane_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="greymane_inlove">
+        <Image TextureSheet="storm_emoji_greymane_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="greymane_rofl">
+        <Image TextureSheet="storm_emoji_greymane_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="greymane_sad">
+        <Image TextureSheet="storm_emoji_greymane_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="greymane_silly">
+        <Image TextureSheet="storm_emoji_greymane_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="greymane_speechless">
+        <Image TextureSheet="storm_emoji_greymane_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="greymane_surprised">
+        <Image TextureSheet="storm_emoji_greymane_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="morales_angry">
+        <Image TextureSheet="storm_emoji_morales_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="morales_cool">
+        <Image TextureSheet="storm_emoji_morales_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="morales_embarrassed">
+        <Image TextureSheet="storm_emoji_morales_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="morales_happy">
+        <Image TextureSheet="storm_emoji_morales_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="morales_inlove">
+        <Image TextureSheet="storm_emoji_morales_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="morales_rofl">
+        <Image TextureSheet="storm_emoji_morales_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="morales_sad">
+        <Image TextureSheet="storm_emoji_morales_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="morales_silly">
+        <Image TextureSheet="storm_emoji_morales_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="morales_speechless">
+        <Image TextureSheet="storm_emoji_morales_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="morales_surprised">
+        <Image TextureSheet="storm_emoji_morales_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="falstad_angry">
+        <Image TextureSheet="storm_emoji_falstad_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="falstad_cool">
+        <Image TextureSheet="storm_emoji_falstad_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="falstad_embarrassed">
+        <Image TextureSheet="storm_emoji_falstad_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="falstad_happy">
+        <Image TextureSheet="storm_emoji_falstad_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="falstad_inlove">
+        <Image TextureSheet="storm_emoji_falstad_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="falstad_rofl">
+        <Image TextureSheet="storm_emoji_falstad_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="falstad_sad">
+        <Image TextureSheet="storm_emoji_falstad_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="falstad_silly">
+        <Image TextureSheet="storm_emoji_falstad_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="falstad_speechless">
+        <Image TextureSheet="storm_emoji_falstad_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="falstad_surprised">
+        <Image TextureSheet="storm_emoji_falstad_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="nazeebo_angry">
+        <Image TextureSheet="storm_emoji_nazeebo_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="nazeebo_cool">
+        <Image TextureSheet="storm_emoji_nazeebo_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="nazeebo_embarrassed">
+        <Image TextureSheet="storm_emoji_nazeebo_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="nazeebo_happy">
+        <Image TextureSheet="storm_emoji_nazeebo_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="nazeebo_inlove">
+        <Image TextureSheet="storm_emoji_nazeebo_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="nazeebo_rofl">
+        <Image TextureSheet="storm_emoji_nazeebo_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="nazeebo_sad">
+        <Image TextureSheet="storm_emoji_nazeebo_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="nazeebo_silly">
+        <Image TextureSheet="storm_emoji_nazeebo_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="nazeebo_speechless">
+        <Image TextureSheet="storm_emoji_nazeebo_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="nazeebo_surprised">
+        <Image TextureSheet="storm_emoji_nazeebo_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="rehgar_angry">
+        <Image TextureSheet="storm_emoji_rehgar_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="rehgar_cool">
+        <Image TextureSheet="storm_emoji_rehgar_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="rehgar_embarrassed">
+        <Image TextureSheet="storm_emoji_rehgar_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="rehgar_happy">
+        <Image TextureSheet="storm_emoji_rehgar_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="rehgar_inlove">
+        <Image TextureSheet="storm_emoji_rehgar_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="rehgar_rofl">
+        <Image TextureSheet="storm_emoji_rehgar_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="rehgar_sad">
+        <Image TextureSheet="storm_emoji_rehgar_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="rehgar_silly">
+        <Image TextureSheet="storm_emoji_rehgar_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="rehgar_speechless">
+        <Image TextureSheet="storm_emoji_rehgar_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="rehgar_surprised">
+        <Image TextureSheet="storm_emoji_rehgar_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="gazlowe_angry">
+        <Image TextureSheet="storm_emoji_gazlowe_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="gazlowe_cool">
+        <Image TextureSheet="storm_emoji_gazlowe_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="gazlowe_embarrassed">
+        <Image TextureSheet="storm_emoji_gazlowe_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="gazlowe_happy">
+        <Image TextureSheet="storm_emoji_gazlowe_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="gazlowe_inlove">
+        <Image TextureSheet="storm_emoji_gazlowe_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="gazlowe_rofl">
+        <Image TextureSheet="storm_emoji_gazlowe_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="gazlowe_sad">
+        <Image TextureSheet="storm_emoji_gazlowe_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="gazlowe_silly">
+        <Image TextureSheet="storm_emoji_gazlowe_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="gazlowe_speechless">
+        <Image TextureSheet="storm_emoji_gazlowe_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="gazlowe_surprised">
+        <Image TextureSheet="storm_emoji_gazlowe_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="tracer_angry">
+        <Image TextureSheet="storm_emoji_tracer_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="tracer_cool">
+        <Image TextureSheet="storm_emoji_tracer_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="tracer_embarrassed">
+        <Image TextureSheet="storm_emoji_tracer_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="tracer_happy">
+        <Image TextureSheet="storm_emoji_tracer_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="tracer_inlove">
+        <Image TextureSheet="storm_emoji_tracer_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="tracer_rofl">
+        <Image TextureSheet="storm_emoji_tracer_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="tracer_sad">
+        <Image TextureSheet="storm_emoji_tracer_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="tracer_silly">
+        <Image TextureSheet="storm_emoji_tracer_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="tracer_speechless">
+        <Image TextureSheet="storm_emoji_tracer_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="tracer_surprised">
+        <Image TextureSheet="storm_emoji_tracer_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="tyrande_angry">
+        <Image TextureSheet="storm_emoji_tyrande_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="tyrande_cool">
+        <Image TextureSheet="storm_emoji_tyrande_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="tyrande_embarrassed">
+        <Image TextureSheet="storm_emoji_tyrande_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="tyrande_happy">
+        <Image TextureSheet="storm_emoji_tyrande_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="tyrande_inlove">
+        <Image TextureSheet="storm_emoji_tyrande_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="tyrande_rofl">
+        <Image TextureSheet="storm_emoji_tyrande_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="tyrande_sad">
+        <Image TextureSheet="storm_emoji_tyrande_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="tyrande_silly">
+        <Image TextureSheet="storm_emoji_tyrande_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="tyrande_speechless">
+        <Image TextureSheet="storm_emoji_tyrande_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="tyrande_surprised">
+        <Image TextureSheet="storm_emoji_tyrande_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="xul_angry">
+        <Image TextureSheet="storm_emoji_xul_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="xul_cool">
+        <Image TextureSheet="storm_emoji_xul_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="xul_embarrassed">
+        <Image TextureSheet="storm_emoji_xul_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="xul_happy">
+        <Image TextureSheet="storm_emoji_xul_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="xul_inlove">
+        <Image TextureSheet="storm_emoji_xul_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="xul_rofl">
+        <Image TextureSheet="storm_emoji_xul_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="xul_sad">
+        <Image TextureSheet="storm_emoji_xul_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="xul_silly">
+        <Image TextureSheet="storm_emoji_xul_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="xul_speechless">
+        <Image TextureSheet="storm_emoji_xul_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="xul_surprised">
+        <Image TextureSheet="storm_emoji_xul_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="zarya_angry">
+        <Image TextureSheet="storm_emoji_zarya_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="zarya_cool">
+        <Image TextureSheet="storm_emoji_zarya_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="zarya_embarrassed">
+        <Image TextureSheet="storm_emoji_zarya_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="zarya_happy">
+        <Image TextureSheet="storm_emoji_zarya_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="zarya_inlove">
+        <Image TextureSheet="storm_emoji_zarya_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="zarya_rofl">
+        <Image TextureSheet="storm_emoji_zarya_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="zarya_sad">
+        <Image TextureSheet="storm_emoji_zarya_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="zarya_silly">
+        <Image TextureSheet="storm_emoji_zarya_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="zarya_speechless">
+        <Image TextureSheet="storm_emoji_zarya_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="zarya_surprised">
+        <Image TextureSheet="storm_emoji_zarya_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="arthas_angry">
+        <Image TextureSheet="storm_emoji_arthas_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="arthas_cool">
+        <Image TextureSheet="storm_emoji_arthas_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="arthas_embarrassed">
+        <Image TextureSheet="storm_emoji_arthas_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="arthas_happy">
+        <Image TextureSheet="storm_emoji_arthas_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="arthas_inlove">
+        <Image TextureSheet="storm_emoji_arthas_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="arthas_rofl">
+        <Image TextureSheet="storm_emoji_arthas_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="arthas_sad">
+        <Image TextureSheet="storm_emoji_arthas_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="arthas_silly">
+        <Image TextureSheet="storm_emoji_arthas_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="arthas_speechless">
+        <Image TextureSheet="storm_emoji_arthas_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="arthas_surprised">
+        <Image TextureSheet="storm_emoji_arthas_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="nexus_angry">
+        <Image TextureSheet="storm_emoji_nexus_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="nexus_cool">
+        <Image TextureSheet="storm_emoji_nexus_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="nexus_embarrassed">
+        <Image TextureSheet="storm_emoji_nexus_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="nexus_happy">
+        <Image TextureSheet="storm_emoji_nexus_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="nexus_inlove">
+        <Image TextureSheet="storm_emoji_nexus_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="nexus_rofl">
+        <Image TextureSheet="storm_emoji_nexus_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="nexus_sad">
+        <Image TextureSheet="storm_emoji_nexus_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="nexus_silly">
+        <Image TextureSheet="storm_emoji_nexus_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="nexus_speechless">
+        <Image TextureSheet="storm_emoji_nexus_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="nexus_surprised">
+        <Image TextureSheet="storm_emoji_nexus_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="azmodan_angry">
+        <Image TextureSheet="storm_emoji_azmodan_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="azmodan_cool">
+        <Image TextureSheet="storm_emoji_azmodan_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="azmodan_embarrassed">
+        <Image TextureSheet="storm_emoji_azmodan_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="azmodan_happy">
+        <Image TextureSheet="storm_emoji_azmodan_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="azmodan_inlove">
+        <Image TextureSheet="storm_emoji_azmodan_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="azmodan_rofl">
+        <Image TextureSheet="storm_emoji_azmodan_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="azmodan_sad">
+        <Image TextureSheet="storm_emoji_azmodan_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="azmodan_silly">
+        <Image TextureSheet="storm_emoji_azmodan_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="azmodan_speechless">
+        <Image TextureSheet="storm_emoji_azmodan_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="azmodan_surprised">
+        <Image TextureSheet="storm_emoji_azmodan_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="thrall_angry">
+        <Image TextureSheet="storm_emoji_thrall_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="thrall_cool">
+        <Image TextureSheet="storm_emoji_thrall_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="thrall_embarrassed">
+        <Image TextureSheet="storm_emoji_thrall_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="thrall_happy">
+        <Image TextureSheet="storm_emoji_thrall_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="thrall_inlove">
+        <Image TextureSheet="storm_emoji_thrall_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="thrall_rofl">
+        <Image TextureSheet="storm_emoji_thrall_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="thrall_sad">
+        <Image TextureSheet="storm_emoji_thrall_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="thrall_silly">
+        <Image TextureSheet="storm_emoji_thrall_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="thrall_speechless">
+        <Image TextureSheet="storm_emoji_thrall_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="thrall_surprised">
+        <Image TextureSheet="storm_emoji_thrall_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="brightwing_angry">
+        <Image TextureSheet="storm_emoji_brightwing_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="brightwing_cool">
+        <Image TextureSheet="storm_emoji_brightwing_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="brightwing_embarrassed">
+        <Image TextureSheet="storm_emoji_brightwing_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="brightwing_happy">
+        <Image TextureSheet="storm_emoji_brightwing_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="brightwing_inlove">
+        <Image TextureSheet="storm_emoji_brightwing_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="brightwing_rofl">
+        <Image TextureSheet="storm_emoji_brightwing_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="brightwing_sad">
+        <Image TextureSheet="storm_emoji_brightwing_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="brightwing_silly">
+        <Image TextureSheet="storm_emoji_brightwing_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="brightwing_speechless">
+        <Image TextureSheet="storm_emoji_brightwing_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="brightwing_surprised">
+        <Image TextureSheet="storm_emoji_brightwing_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="cassia_angry">
+        <Image TextureSheet="storm_emoji_cassia_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="cassia_cool">
+        <Image TextureSheet="storm_emoji_cassia_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="cassia_embarrassed">
+        <Image TextureSheet="storm_emoji_cassia_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="cassia_happy">
+        <Image TextureSheet="storm_emoji_cassia_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="cassia_inlove">
+        <Image TextureSheet="storm_emoji_cassia_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="cassia_rofl">
+        <Image TextureSheet="storm_emoji_cassia_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="cassia_sad">
+        <Image TextureSheet="storm_emoji_cassia_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="cassia_silly">
+        <Image TextureSheet="storm_emoji_cassia_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="cassia_speechless">
+        <Image TextureSheet="storm_emoji_cassia_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="cassia_surprised">
+        <Image TextureSheet="storm_emoji_cassia_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="chen_angry">
+        <Image TextureSheet="storm_emoji_chen_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="chen_cool">
+        <Image TextureSheet="storm_emoji_chen_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="chen_embarrassed">
+        <Image TextureSheet="storm_emoji_chen_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="chen_happy">
+        <Image TextureSheet="storm_emoji_chen_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="chen_inlove">
+        <Image TextureSheet="storm_emoji_chen_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="chen_rofl">
+        <Image TextureSheet="storm_emoji_chen_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="chen_sad">
+        <Image TextureSheet="storm_emoji_chen_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="chen_silly">
+        <Image TextureSheet="storm_emoji_chen_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="chen_speechless">
+        <Image TextureSheet="storm_emoji_chen_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="chen_surprised">
+        <Image TextureSheet="storm_emoji_chen_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="cho_angry">
+        <Image TextureSheet="storm_emoji_cho_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="cho_cool">
+        <Image TextureSheet="storm_emoji_cho_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="cho_embarrassed">
+        <Image TextureSheet="storm_emoji_cho_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="cho_happy">
+        <Image TextureSheet="storm_emoji_cho_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="cho_inlove">
+        <Image TextureSheet="storm_emoji_cho_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="cho_rofl">
+        <Image TextureSheet="storm_emoji_cho_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="cho_sad">
+        <Image TextureSheet="storm_emoji_cho_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="cho_silly">
+        <Image TextureSheet="storm_emoji_cho_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="cho_speechless">
+        <Image TextureSheet="storm_emoji_cho_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="cho_surprised">
+        <Image TextureSheet="storm_emoji_cho_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="chromie_angry">
+        <Image TextureSheet="storm_emoji_chromie_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="chromie_cool">
+        <Image TextureSheet="storm_emoji_chromie_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="chromie_embarrassed">
+        <Image TextureSheet="storm_emoji_chromie_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="chromie_happy">
+        <Image TextureSheet="storm_emoji_chromie_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="chromie_inlove">
+        <Image TextureSheet="storm_emoji_chromie_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="chromie_rofl">
+        <Image TextureSheet="storm_emoji_chromie_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="chromie_sad">
+        <Image TextureSheet="storm_emoji_chromie_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="chromie_silly">
+        <Image TextureSheet="storm_emoji_chromie_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="chromie_speechless">
+        <Image TextureSheet="storm_emoji_chromie_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="chromie_surprised">
+        <Image TextureSheet="storm_emoji_chromie_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="dehaka_angry">
+        <Image TextureSheet="storm_emoji_dehaka_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="dehaka_cool">
+        <Image TextureSheet="storm_emoji_dehaka_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="dehaka_embarrassed">
+        <Image TextureSheet="storm_emoji_dehaka_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="dehaka_happy">
+        <Image TextureSheet="storm_emoji_dehaka_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="dehaka_inlove">
+        <Image TextureSheet="storm_emoji_dehaka_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="dehaka_rofl">
+        <Image TextureSheet="storm_emoji_dehaka_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="dehaka_sad">
+        <Image TextureSheet="storm_emoji_dehaka_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="dehaka_silly">
+        <Image TextureSheet="storm_emoji_dehaka_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="dehaka_speechless">
+        <Image TextureSheet="storm_emoji_dehaka_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="dehaka_surprised">
+        <Image TextureSheet="storm_emoji_dehaka_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="dva_angry">
+        <Image TextureSheet="storm_emoji_dva_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="dva_cool">
+        <Image TextureSheet="storm_emoji_dva_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="dva_embarrassed">
+        <Image TextureSheet="storm_emoji_dva_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="dva_happy">
+        <Image TextureSheet="storm_emoji_dva_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="dva_inlove">
+        <Image TextureSheet="storm_emoji_dva_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="dva_rofl">
+        <Image TextureSheet="storm_emoji_dva_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="dva_sad">
+        <Image TextureSheet="storm_emoji_dva_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="dva_silly">
+        <Image TextureSheet="storm_emoji_dva_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="dva_speechless">
+        <Image TextureSheet="storm_emoji_dva_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="dva_surprised">
+        <Image TextureSheet="storm_emoji_dva_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="gall_angry">
+        <Image TextureSheet="storm_emoji_gall_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="gall_cool">
+        <Image TextureSheet="storm_emoji_gall_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="gall_embarrassed">
+        <Image TextureSheet="storm_emoji_gall_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="gall_happy">
+        <Image TextureSheet="storm_emoji_gall_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="gall_inlove">
+        <Image TextureSheet="storm_emoji_gall_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="gall_rofl">
+        <Image TextureSheet="storm_emoji_gall_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="gall_sad">
+        <Image TextureSheet="storm_emoji_gall_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="gall_silly">
+        <Image TextureSheet="storm_emoji_gall_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="gall_speechless">
+        <Image TextureSheet="storm_emoji_gall_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="gall_surprised">
+        <Image TextureSheet="storm_emoji_gall_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="kaelthas_angry">
+        <Image TextureSheet="storm_emoji_kaelthas_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="kaelthas_cool">
+        <Image TextureSheet="storm_emoji_kaelthas_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="kaelthas_embarrassed">
+        <Image TextureSheet="storm_emoji_kaelthas_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="kaelthas_happy">
+        <Image TextureSheet="storm_emoji_kaelthas_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="kaelthas_inlove">
+        <Image TextureSheet="storm_emoji_kaelthas_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="kaelthas_rofl">
+        <Image TextureSheet="storm_emoji_kaelthas_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="kaelthas_sad">
+        <Image TextureSheet="storm_emoji_kaelthas_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="kaelthas_silly">
+        <Image TextureSheet="storm_emoji_kaelthas_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="kaelthas_speechless">
+        <Image TextureSheet="storm_emoji_kaelthas_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="kaelthas_surprised">
+        <Image TextureSheet="storm_emoji_kaelthas_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="kerrigan_angry">
+        <Image TextureSheet="storm_emoji_kerrigan_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="kerrigan_cool">
+        <Image TextureSheet="storm_emoji_kerrigan_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="kerrigan_embarrassed">
+        <Image TextureSheet="storm_emoji_kerrigan_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="kerrigan_happy">
+        <Image TextureSheet="storm_emoji_kerrigan_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="kerrigan_inlove">
+        <Image TextureSheet="storm_emoji_kerrigan_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="kerrigan_rofl">
+        <Image TextureSheet="storm_emoji_kerrigan_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="kerrigan_sad">
+        <Image TextureSheet="storm_emoji_kerrigan_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="kerrigan_silly">
+        <Image TextureSheet="storm_emoji_kerrigan_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="kerrigan_speechless">
+        <Image TextureSheet="storm_emoji_kerrigan_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="kerrigan_surprised">
+        <Image TextureSheet="storm_emoji_kerrigan_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="lili_angry">
+        <Image TextureSheet="storm_emoji_lili_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="lili_cool">
+        <Image TextureSheet="storm_emoji_lili_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="lili_embarrassed">
+        <Image TextureSheet="storm_emoji_lili_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="lili_happy">
+        <Image TextureSheet="storm_emoji_lili_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="lili_inlove">
+        <Image TextureSheet="storm_emoji_lili_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="lili_rofl">
+        <Image TextureSheet="storm_emoji_lili_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="lili_sad">
+        <Image TextureSheet="storm_emoji_lili_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="lili_silly">
+        <Image TextureSheet="storm_emoji_lili_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="lili_speechless">
+        <Image TextureSheet="storm_emoji_lili_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="lili_surprised">
+        <Image TextureSheet="storm_emoji_lili_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="liming_angry">
+        <Image TextureSheet="storm_emoji_liming_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="liming_cool">
+        <Image TextureSheet="storm_emoji_liming_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="liming_embarrassed">
+        <Image TextureSheet="storm_emoji_liming_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="liming_happy">
+        <Image TextureSheet="storm_emoji_liming_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="liming_inlove">
+        <Image TextureSheet="storm_emoji_liming_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="liming_rofl">
+        <Image TextureSheet="storm_emoji_liming_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="liming_sad">
+        <Image TextureSheet="storm_emoji_liming_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="liming_silly">
+        <Image TextureSheet="storm_emoji_liming_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="liming_speechless">
+        <Image TextureSheet="storm_emoji_liming_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="liming_surprised">
+        <Image TextureSheet="storm_emoji_liming_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="lostvikings_angry">
+        <Image TextureSheet="storm_emoji_lostvikings_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="lostvikings_cool">
+        <Image TextureSheet="storm_emoji_lostvikings_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="lostvikings_embarrassed">
+        <Image TextureSheet="storm_emoji_lostvikings_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="lostvikings_happy">
+        <Image TextureSheet="storm_emoji_lostvikings_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="lostvikings_inlove">
+        <Image TextureSheet="storm_emoji_lostvikings_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="lostvikings_rofl">
+        <Image TextureSheet="storm_emoji_lostvikings_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="lostvikings_sad">
+        <Image TextureSheet="storm_emoji_lostvikings_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="lostvikings_silly">
+        <Image TextureSheet="storm_emoji_lostvikings_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="lostvikings_speechless">
+        <Image TextureSheet="storm_emoji_lostvikings_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="lostvikings_surprised">
+        <Image TextureSheet="storm_emoji_lostvikings_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="lucio_angry">
+        <Image TextureSheet="storm_emoji_lucio_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="lucio_cool">
+        <Image TextureSheet="storm_emoji_lucio_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="lucio_embarrassed">
+        <Image TextureSheet="storm_emoji_lucio_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="lucio_happy">
+        <Image TextureSheet="storm_emoji_lucio_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="lucio_inlove">
+        <Image TextureSheet="storm_emoji_lucio_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="lucio_rofl">
+        <Image TextureSheet="storm_emoji_lucio_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="lucio_sad">
+        <Image TextureSheet="storm_emoji_lucio_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="lucio_silly">
+        <Image TextureSheet="storm_emoji_lucio_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="lucio_speechless">
+        <Image TextureSheet="storm_emoji_lucio_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="lucio_surprised">
+        <Image TextureSheet="storm_emoji_lucio_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="malfurion_angry">
+        <Image TextureSheet="storm_emoji_malfurion_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="malfurion_cool">
+        <Image TextureSheet="storm_emoji_malfurion_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="malfurion_embarrassed">
+        <Image TextureSheet="storm_emoji_malfurion_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="malfurion_happy">
+        <Image TextureSheet="storm_emoji_malfurion_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="malfurion_inlove">
+        <Image TextureSheet="storm_emoji_malfurion_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="malfurion_rofl">
+        <Image TextureSheet="storm_emoji_malfurion_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="malfurion_sad">
+        <Image TextureSheet="storm_emoji_malfurion_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="malfurion_silly">
+        <Image TextureSheet="storm_emoji_malfurion_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="malfurion_speechless">
+        <Image TextureSheet="storm_emoji_malfurion_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="malfurion_surprised">
+        <Image TextureSheet="storm_emoji_malfurion_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="medivh_angry">
+        <Image TextureSheet="storm_emoji_medivh_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="medivh_cool">
+        <Image TextureSheet="storm_emoji_medivh_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="medivh_embarrassed">
+        <Image TextureSheet="storm_emoji_medivh_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="medivh_happy">
+        <Image TextureSheet="storm_emoji_medivh_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="medivh_inlove">
+        <Image TextureSheet="storm_emoji_medivh_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="medivh_rofl">
+        <Image TextureSheet="storm_emoji_medivh_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="medivh_sad">
+        <Image TextureSheet="storm_emoji_medivh_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="medivh_silly">
+        <Image TextureSheet="storm_emoji_medivh_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="medivh_speechless">
+        <Image TextureSheet="storm_emoji_medivh_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="medivh_surprised">
+        <Image TextureSheet="storm_emoji_medivh_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="muradin_angry">
+        <Image TextureSheet="storm_emoji_muradin_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="muradin_cool">
+        <Image TextureSheet="storm_emoji_muradin_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="muradin_embarrassed">
+        <Image TextureSheet="storm_emoji_muradin_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="muradin_happy">
+        <Image TextureSheet="storm_emoji_muradin_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="muradin_inlove">
+        <Image TextureSheet="storm_emoji_muradin_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="muradin_rofl">
+        <Image TextureSheet="storm_emoji_muradin_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="muradin_sad">
+        <Image TextureSheet="storm_emoji_muradin_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="muradin_silly">
+        <Image TextureSheet="storm_emoji_muradin_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="muradin_speechless">
+        <Image TextureSheet="storm_emoji_muradin_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="muradin_surprised">
+        <Image TextureSheet="storm_emoji_muradin_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="murky_angry">
+        <Image TextureSheet="storm_emoji_murky_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="murky_cool">
+        <Image TextureSheet="storm_emoji_murky_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="murky_embarrassed">
+        <Image TextureSheet="storm_emoji_murky_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="murky_happy">
+        <Image TextureSheet="storm_emoji_murky_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="murky_inlove">
+        <Image TextureSheet="storm_emoji_murky_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="murky_rofl">
+        <Image TextureSheet="storm_emoji_murky_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="murky_sad">
+        <Image TextureSheet="storm_emoji_murky_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="murky_silly">
+        <Image TextureSheet="storm_emoji_murky_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="murky_speechless">
+        <Image TextureSheet="storm_emoji_murky_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="murky_surprised">
+        <Image TextureSheet="storm_emoji_murky_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="nova_angry">
+        <Image TextureSheet="storm_emoji_nova_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="nova_cool">
+        <Image TextureSheet="storm_emoji_nova_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="nova_embarrassed">
+        <Image TextureSheet="storm_emoji_nova_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="nova_happy">
+        <Image TextureSheet="storm_emoji_nova_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="nova_inlove">
+        <Image TextureSheet="storm_emoji_nova_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="nova_rofl">
+        <Image TextureSheet="storm_emoji_nova_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="nova_sad">
+        <Image TextureSheet="storm_emoji_nova_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="nova_silly">
+        <Image TextureSheet="storm_emoji_nova_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="nova_speechless">
+        <Image TextureSheet="storm_emoji_nova_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="nova_surprised">
+        <Image TextureSheet="storm_emoji_nova_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="probius_angry">
+        <Image TextureSheet="storm_emoji_probius_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="probius_cool">
+        <Image TextureSheet="storm_emoji_probius_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="probius_embarrassed">
+        <Image TextureSheet="storm_emoji_probius_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="probius_happy">
+        <Image TextureSheet="storm_emoji_probius_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="probius_inlove">
+        <Image TextureSheet="storm_emoji_probius_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="probius_rofl">
+        <Image TextureSheet="storm_emoji_probius_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="probius_sad">
+        <Image TextureSheet="storm_emoji_probius_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="probius_silly">
+        <Image TextureSheet="storm_emoji_probius_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="probius_speechless">
+        <Image TextureSheet="storm_emoji_probius_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="probius_surprised">
+        <Image TextureSheet="storm_emoji_probius_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="ragnaros_angry">
+        <Image TextureSheet="storm_emoji_ragnaros_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="ragnaros_cool">
+        <Image TextureSheet="storm_emoji_ragnaros_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="ragnaros_embarrassed">
+        <Image TextureSheet="storm_emoji_ragnaros_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="ragnaros_happy">
+        <Image TextureSheet="storm_emoji_ragnaros_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="ragnaros_inlove">
+        <Image TextureSheet="storm_emoji_ragnaros_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="ragnaros_rofl">
+        <Image TextureSheet="storm_emoji_ragnaros_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="ragnaros_sad">
+        <Image TextureSheet="storm_emoji_ragnaros_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="ragnaros_silly">
+        <Image TextureSheet="storm_emoji_ragnaros_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="ragnaros_speechless">
+        <Image TextureSheet="storm_emoji_ragnaros_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="ragnaros_surprised">
+        <Image TextureSheet="storm_emoji_ragnaros_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="raynor_angry">
+        <Image TextureSheet="storm_emoji_raynor_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="raynor_cool">
+        <Image TextureSheet="storm_emoji_raynor_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="raynor_embarrassed">
+        <Image TextureSheet="storm_emoji_raynor_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="raynor_happy">
+        <Image TextureSheet="storm_emoji_raynor_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="raynor_inlove">
+        <Image TextureSheet="storm_emoji_raynor_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="raynor_rofl">
+        <Image TextureSheet="storm_emoji_raynor_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="raynor_sad">
+        <Image TextureSheet="storm_emoji_raynor_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="raynor_silly">
+        <Image TextureSheet="storm_emoji_raynor_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="raynor_speechless">
+        <Image TextureSheet="storm_emoji_raynor_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="raynor_surprised">
+        <Image TextureSheet="storm_emoji_raynor_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="rexxar_angry">
+        <Image TextureSheet="storm_emoji_rexxar_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="rexxar_cool">
+        <Image TextureSheet="storm_emoji_rexxar_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="rexxar_embarrassed">
+        <Image TextureSheet="storm_emoji_rexxar_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="rexxar_happy">
+        <Image TextureSheet="storm_emoji_rexxar_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="rexxar_inlove">
+        <Image TextureSheet="storm_emoji_rexxar_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="rexxar_rofl">
+        <Image TextureSheet="storm_emoji_rexxar_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="rexxar_sad">
+        <Image TextureSheet="storm_emoji_rexxar_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="rexxar_silly">
+        <Image TextureSheet="storm_emoji_rexxar_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="rexxar_speechless">
+        <Image TextureSheet="storm_emoji_rexxar_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="rexxar_surprised">
+        <Image TextureSheet="storm_emoji_rexxar_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="samuro_angry">
+        <Image TextureSheet="storm_emoji_samuro_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="samuro_cool">
+        <Image TextureSheet="storm_emoji_samuro_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="samuro_embarrassed">
+        <Image TextureSheet="storm_emoji_samuro_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="samuro_happy">
+        <Image TextureSheet="storm_emoji_samuro_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="samuro_inlove">
+        <Image TextureSheet="storm_emoji_samuro_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="samuro_rofl">
+        <Image TextureSheet="storm_emoji_samuro_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="samuro_sad">
+        <Image TextureSheet="storm_emoji_samuro_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="samuro_silly">
+        <Image TextureSheet="storm_emoji_samuro_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="samuro_speechless">
+        <Image TextureSheet="storm_emoji_samuro_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="samuro_surprised">
+        <Image TextureSheet="storm_emoji_samuro_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="sylvanas_angry">
+        <Image TextureSheet="storm_emoji_sylvanas_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="sylvanas_cool">
+        <Image TextureSheet="storm_emoji_sylvanas_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="sylvanas_embarrassed">
+        <Image TextureSheet="storm_emoji_sylvanas_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="sylvanas_happy">
+        <Image TextureSheet="storm_emoji_sylvanas_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="sylvanas_inlove">
+        <Image TextureSheet="storm_emoji_sylvanas_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="sylvanas_rofl">
+        <Image TextureSheet="storm_emoji_sylvanas_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="sylvanas_sad">
+        <Image TextureSheet="storm_emoji_sylvanas_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="sylvanas_silly">
+        <Image TextureSheet="storm_emoji_sylvanas_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="sylvanas_speechless">
+        <Image TextureSheet="storm_emoji_sylvanas_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="sylvanas_surprised">
+        <Image TextureSheet="storm_emoji_sylvanas_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="tyrael_angry">
+        <Image TextureSheet="storm_emoji_tyrael_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="tyrael_cool">
+        <Image TextureSheet="storm_emoji_tyrael_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="tyrael_embarrassed">
+        <Image TextureSheet="storm_emoji_tyrael_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="tyrael_happy">
+        <Image TextureSheet="storm_emoji_tyrael_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="tyrael_inlove">
+        <Image TextureSheet="storm_emoji_tyrael_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="tyrael_rofl">
+        <Image TextureSheet="storm_emoji_tyrael_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="tyrael_sad">
+        <Image TextureSheet="storm_emoji_tyrael_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="tyrael_silly">
+        <Image TextureSheet="storm_emoji_tyrael_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="tyrael_speechless">
+        <Image TextureSheet="storm_emoji_tyrael_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="tyrael_surprised">
+        <Image TextureSheet="storm_emoji_tyrael_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="uther_angry">
+        <Image TextureSheet="storm_emoji_uther_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="uther_cool">
+        <Image TextureSheet="storm_emoji_uther_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="uther_embarrassed">
+        <Image TextureSheet="storm_emoji_uther_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="uther_happy">
+        <Image TextureSheet="storm_emoji_uther_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="uther_inlove">
+        <Image TextureSheet="storm_emoji_uther_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="uther_rofl">
+        <Image TextureSheet="storm_emoji_uther_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="uther_sad">
+        <Image TextureSheet="storm_emoji_uther_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="uther_silly">
+        <Image TextureSheet="storm_emoji_uther_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="uther_speechless">
+        <Image TextureSheet="storm_emoji_uther_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="uther_surprised">
+        <Image TextureSheet="storm_emoji_uther_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="valeera_angry">
+        <Image TextureSheet="storm_emoji_valeera_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="valeera_cool">
+        <Image TextureSheet="storm_emoji_valeera_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="valeera_embarrassed">
+        <Image TextureSheet="storm_emoji_valeera_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="valeera_happy">
+        <Image TextureSheet="storm_emoji_valeera_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="valeera_inlove">
+        <Image TextureSheet="storm_emoji_valeera_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="valeera_rofl">
+        <Image TextureSheet="storm_emoji_valeera_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="valeera_sad">
+        <Image TextureSheet="storm_emoji_valeera_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="valeera_silly">
+        <Image TextureSheet="storm_emoji_valeera_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="valeera_speechless">
+        <Image TextureSheet="storm_emoji_valeera_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="valeera_surprised">
+        <Image TextureSheet="storm_emoji_valeera_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="valla_angry">
+        <Image TextureSheet="storm_emoji_valla_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="valla_cool">
+        <Image TextureSheet="storm_emoji_valla_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="valla_embarrassed">
+        <Image TextureSheet="storm_emoji_valla_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="valla_happy">
+        <Image TextureSheet="storm_emoji_valla_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="valla_inlove">
+        <Image TextureSheet="storm_emoji_valla_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="valla_rofl">
+        <Image TextureSheet="storm_emoji_valla_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="valla_sad">
+        <Image TextureSheet="storm_emoji_valla_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="valla_silly">
+        <Image TextureSheet="storm_emoji_valla_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="valla_speechless">
+        <Image TextureSheet="storm_emoji_valla_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="valla_surprised">
+        <Image TextureSheet="storm_emoji_valla_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="zagara_angry">
+        <Image TextureSheet="storm_emoji_zagara_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="zagara_cool">
+        <Image TextureSheet="storm_emoji_zagara_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="zagara_embarrassed">
+        <Image TextureSheet="storm_emoji_zagara_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="zagara_happy">
+        <Image TextureSheet="storm_emoji_zagara_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="zagara_inlove">
+        <Image TextureSheet="storm_emoji_zagara_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="zagara_rofl">
+        <Image TextureSheet="storm_emoji_zagara_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="zagara_sad">
+        <Image TextureSheet="storm_emoji_zagara_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="zagara_silly">
+        <Image TextureSheet="storm_emoji_zagara_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="zagara_speechless">
+        <Image TextureSheet="storm_emoji_zagara_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="zagara_surprised">
+        <Image TextureSheet="storm_emoji_zagara_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="zeratul_angry">
+        <Image TextureSheet="storm_emoji_zeratul_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="zeratul_cool">
+        <Image TextureSheet="storm_emoji_zeratul_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="zeratul_embarrassed">
+        <Image TextureSheet="storm_emoji_zeratul_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="zeratul_happy">
+        <Image TextureSheet="storm_emoji_zeratul_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="zeratul_inlove">
+        <Image TextureSheet="storm_emoji_zeratul_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="zeratul_rofl">
+        <Image TextureSheet="storm_emoji_zeratul_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="zeratul_sad">
+        <Image TextureSheet="storm_emoji_zeratul_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="zeratul_silly">
+        <Image TextureSheet="storm_emoji_zeratul_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="zeratul_speechless">
+        <Image TextureSheet="storm_emoji_zeratul_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="zeratul_surprised">
+        <Image TextureSheet="storm_emoji_zeratul_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="artanis_sad">
+        <Image TextureSheet="storm_emoji_artanis_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="artanis_angry">
+        <Image TextureSheet="storm_emoji_artanis_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="artanis_cool">
+        <Image TextureSheet="storm_emoji_artanis_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="artanis_embarrassed">
+        <Image TextureSheet="storm_emoji_artanis_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="artanis_happy">
+        <Image TextureSheet="storm_emoji_artanis_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="artanis_inlove">
+        <Image TextureSheet="storm_emoji_artanis_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="artanis_rofl">
+        <Image TextureSheet="storm_emoji_artanis_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="artanis_silly">
+        <Image TextureSheet="storm_emoji_artanis_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="artanis_speechless">
+        <Image TextureSheet="storm_emoji_artanis_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="artanis_surprised">
+        <Image TextureSheet="storm_emoji_artanis_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="butcher_angry">
+        <Image TextureSheet="storm_emoji_butcher_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="butcher_cool">
+        <Image TextureSheet="storm_emoji_butcher_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="butcher_embarrassed">
+        <Image TextureSheet="storm_emoji_butcher_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="butcher_happy">
+        <Image TextureSheet="storm_emoji_butcher_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="butcher_inlove">
+        <Image TextureSheet="storm_emoji_butcher_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="butcher_rofl">
+        <Image TextureSheet="storm_emoji_butcher_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="butcher_sad">
+        <Image TextureSheet="storm_emoji_butcher_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="butcher_silly">
+        <Image TextureSheet="storm_emoji_butcher_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="butcher_speechless">
+        <Image TextureSheet="storm_emoji_butcher_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="butcher_surprised">
+        <Image TextureSheet="storm_emoji_butcher_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="johanna_angry">
+        <Image TextureSheet="storm_emoji_johanna_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="johanna_cool">
+        <Image TextureSheet="storm_emoji_johanna_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="johanna_embarrassed">
+        <Image TextureSheet="storm_emoji_johanna_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="johanna_happy">
+        <Image TextureSheet="storm_emoji_johanna_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="johanna_inlove">
+        <Image TextureSheet="storm_emoji_johanna_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="johanna_rofl">
+        <Image TextureSheet="storm_emoji_johanna_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="johanna_sad">
+        <Image TextureSheet="storm_emoji_johanna_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="johanna_silly">
+        <Image TextureSheet="storm_emoji_johanna_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="johanna_speechless">
+        <Image TextureSheet="storm_emoji_johanna_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="johanna_surprised">
+        <Image TextureSheet="storm_emoji_johanna_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="diablo_angry">
+        <Image TextureSheet="storm_emoji_diablo_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="diablo_cool">
+        <Image TextureSheet="storm_emoji_diablo_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="diablo_embarrassed">
+        <Image TextureSheet="storm_emoji_diablo_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="diablo_happy">
+        <Image TextureSheet="storm_emoji_diablo_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="diablo_inlove">
+        <Image TextureSheet="storm_emoji_diablo_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="diablo_rofl">
+        <Image TextureSheet="storm_emoji_diablo_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="diablo_sad">
+        <Image TextureSheet="storm_emoji_diablo_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="diablo_silly">
+        <Image TextureSheet="storm_emoji_diablo_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="diablo_speechless">
+        <Image TextureSheet="storm_emoji_diablo_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="diablo_surprised">
+        <Image TextureSheet="storm_emoji_diablo_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="sonya_angry">
+        <Image TextureSheet="storm_emoji_sonya_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="sonya_cool">
+        <Image TextureSheet="storm_emoji_sonya_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="sonya_embarrassed">
+        <Image TextureSheet="storm_emoji_sonya_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="sonya_happy">
+        <Image TextureSheet="storm_emoji_sonya_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="sonya_inlove">
+        <Image TextureSheet="storm_emoji_sonya_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="sonya_rofl">
+        <Image TextureSheet="storm_emoji_sonya_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="sonya_sad">
+        <Image TextureSheet="storm_emoji_sonya_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="sonya_silly">
+        <Image TextureSheet="storm_emoji_sonya_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="sonya_speechless">
+        <Image TextureSheet="storm_emoji_sonya_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="sonya_surprised">
+        <Image TextureSheet="storm_emoji_sonya_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="hammer_angry">
+        <Image TextureSheet="storm_emoji_hammer_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="hammer_cool">
+        <Image TextureSheet="storm_emoji_hammer_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="hammer_embarrassed">
+        <Image TextureSheet="storm_emoji_hammer_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="hammer_happy">
+        <Image TextureSheet="storm_emoji_hammer_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="hammer_inlove">
+        <Image TextureSheet="storm_emoji_hammer_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="hammer_rofl">
+        <Image TextureSheet="storm_emoji_hammer_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="hammer_sad">
+        <Image TextureSheet="storm_emoji_hammer_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="hammer_silly">
+        <Image TextureSheet="storm_emoji_hammer_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="hammer_speechless">
+        <Image TextureSheet="storm_emoji_hammer_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="hammer_surprised">
+        <Image TextureSheet="storm_emoji_hammer_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="tassadar_angry">
+        <Image TextureSheet="storm_emoji_tassadar_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="tassadar_cool">
+        <Image TextureSheet="storm_emoji_tassadar_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="tassadar_embarrassed">
+        <Image TextureSheet="storm_emoji_tassadar_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="tassadar_happy">
+        <Image TextureSheet="storm_emoji_tassadar_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="tassadar_inlove">
+        <Image TextureSheet="storm_emoji_tassadar_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="tassadar_rofl">
+        <Image TextureSheet="storm_emoji_tassadar_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="tassadar_sad">
+        <Image TextureSheet="storm_emoji_tassadar_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="tassadar_silly">
+        <Image TextureSheet="storm_emoji_tassadar_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="tassadar_speechless">
+        <Image TextureSheet="storm_emoji_tassadar_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="tassadar_surprised">
+        <Image TextureSheet="storm_emoji_tassadar_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="stitches_angry">
+        <Image TextureSheet="storm_emoji_stitches_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="stitches_cool">
+        <Image TextureSheet="storm_emoji_stitches_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="stitches_embarrassed">
+        <Image TextureSheet="storm_emoji_stitches_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="stitches_happy">
+        <Image TextureSheet="storm_emoji_stitches_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="stitches_inlove">
+        <Image TextureSheet="storm_emoji_stitches_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="stitches_rofl">
+        <Image TextureSheet="storm_emoji_stitches_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="stitches_sad">
+        <Image TextureSheet="storm_emoji_stitches_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="stitches_silly">
+        <Image TextureSheet="storm_emoji_stitches_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="stitches_speechless">
+        <Image TextureSheet="storm_emoji_stitches_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="stitches_surprised">
+        <Image TextureSheet="storm_emoji_stitches_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="alarak_angry">
+        <Image TextureSheet="storm_emoji_alarak_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="alarak_cool">
+        <Image TextureSheet="storm_emoji_alarak_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="alarak_embarrassed">
+        <Image TextureSheet="storm_emoji_alarak_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="alarak_happy">
+        <Image TextureSheet="storm_emoji_alarak_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="alarak_inlove">
+        <Image TextureSheet="storm_emoji_alarak_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="alarak_rofl">
+        <Image TextureSheet="storm_emoji_alarak_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="alarak_sad">
+        <Image TextureSheet="storm_emoji_alarak_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="alarak_silly">
+        <Image TextureSheet="storm_emoji_alarak_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="alarak_speechless">
+        <Image TextureSheet="storm_emoji_alarak_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="alarak_surprised">
+        <Image TextureSheet="storm_emoji_alarak_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="food_murkshimi">
+        <Image TextureSheet="storm_emoji_food_1_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="food_noodles">
+        <Image TextureSheet="storm_emoji_food_1_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="food_riceball">
+        <Image TextureSheet="storm_emoji_food_1_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="food_sushi">
+        <Image TextureSheet="storm_emoji_food_1_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="food_tofu">
+        <Image TextureSheet="storm_emoji_food_1_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="food_cheese">
+        <Image TextureSheet="storm_emoji_food_2_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="food_popcorn">
+        <Image TextureSheet="storm_emoji_food_2_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="food_potato">
+        <Image TextureSheet="storm_emoji_food_2_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="food_ham">
+        <Image TextureSheet="storm_emoji_food_2_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="food_salt">
+        <Image TextureSheet="storm_emoji_food_2_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="hand_fistbump">
+        <Image TextureSheet="storm_emoji_hands_generic_1_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="hand_hangloose">
+        <Image TextureSheet="storm_emoji_hands_generic_1_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="hand_rockon">
+        <Image TextureSheet="storm_emoji_hands_generic_1_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="hand_thumbsdown">
+        <Image TextureSheet="storm_emoji_hands_generic_1_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="hand_thumbsup">
+        <Image TextureSheet="storm_emoji_hands_generic_1_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="hand_fistbump_orc">
+        <Image TextureSheet="storm_emoji_hands_orc_1_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="hand_hangloose_orc">
+        <Image TextureSheet="storm_emoji_hands_orc_1_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="hand_rockon_orc">
+        <Image TextureSheet="storm_emoji_hands_orc_1_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="hand_thumbsdown_orc">
+        <Image TextureSheet="storm_emoji_hands_orc_1_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="hand_thumbsup_orc">
+        <Image TextureSheet="storm_emoji_hands_orc_1_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="phrases_gg">
+        <Image TextureSheet="storm_emoji_phrases_generic_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="phrases_gj">
+        <Image TextureSheet="storm_emoji_phrases_generic_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="phrases_glhf">
+        <Image TextureSheet="storm_emoji_phrases_generic_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="phrases_tt">
+        <Image TextureSheet="storm_emoji_phrases_generic_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="phrases_zzz">
+        <Image TextureSheet="storm_emoji_phrases_generic_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="hand_paper">
+        <Image TextureSheet="storm_emoji_hands_generic_2_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="hand_rock">
+        <Image TextureSheet="storm_emoji_hands_generic_2_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="hand_scissors">
+        <Image TextureSheet="storm_emoji_hands_generic_2_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="hand_tauren">
+        <Image TextureSheet="storm_emoji_hands_generic_2_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="hand_zerg">
+        <Image TextureSheet="storm_emoji_hands_generic_2_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="phrases_sweets_gg">
+        <Image TextureSheet="storm_emoji_phrases_sweets_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="phrases_sweets_gj">
+        <Image TextureSheet="storm_emoji_phrases_sweets_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="phrases_sweets_glhf">
+        <Image TextureSheet="storm_emoji_phrases_sweets_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="phrases_sweets_tt">
+        <Image TextureSheet="storm_emoji_phrases_sweets_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="phrases_sweets_zzz">
+        <Image TextureSheet="storm_emoji_phrases_sweets_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="death_bones">
+        <Image TextureSheet="storm_emoji_death_1_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="death_coffin">
+        <Image TextureSheet="storm_emoji_death_1_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="death_ghost">
+        <Image TextureSheet="storm_emoji_death_1_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="death_grave">
+        <Image TextureSheet="storm_emoji_death_1_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="death_tombstone">
+        <Image TextureSheet="storm_emoji_death_1_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="celebrations_fireworks">
+        <Image TextureSheet="storm_emoji_celebrations_1_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="celebrations_noisemaker">
+        <Image TextureSheet="storm_emoji_celebrations_1_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="celebrations_popper">
+        <Image TextureSheet="storm_emoji_celebrations_1_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="celebrations_present">
+        <Image TextureSheet="storm_emoji_celebrations_1_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="celebrations_toast">
+        <Image TextureSheet="storm_emoji_celebrations_1_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="hand_paper_orc">
+        <Image TextureSheet="storm_emoji_hands_orc_2_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="hand_rock_orc">
+        <Image TextureSheet="storm_emoji_hands_orc_2_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="hand_scissors_orc">
+        <Image TextureSheet="storm_emoji_hands_orc_2_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="hand_tauren_orc">
+        <Image TextureSheet="storm_emoji_hands_orc_2_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="hand_zerg_orc">
+        <Image TextureSheet="storm_emoji_hands_orc_2_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="hand_applause_orc">
+        <Image TextureSheet="storm_emoji_hands_orc_3_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="hand_fingerscrossed_orc">
+        <Image TextureSheet="storm_emoji_hands_orc_3_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="hand_flex_orc">
+        <Image TextureSheet="storm_emoji_hands_orc_3_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="hand_point_orc">
+        <Image TextureSheet="storm_emoji_hands_orc_3_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="hand_handshake_orc">
+        <Image TextureSheet="storm_emoji_hands_orc_3_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="hand_applause">
+        <Image TextureSheet="storm_emoji_hands_generic_3_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="hand_fingerscrossed">
+        <Image TextureSheet="storm_emoji_hands_generic_3_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="hand_flex">
+        <Image TextureSheet="storm_emoji_hands_generic_3_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="hand_point">
+        <Image TextureSheet="storm_emoji_hands_generic_3_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="hand_handshake">
+        <Image TextureSheet="storm_emoji_hands_generic_3_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="hand_fistbump_gauntlet">
+        <Image TextureSheet="storm_emoji_hands_gauntlet_1_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="hand_hangloose_gauntlet">
+        <Image TextureSheet="storm_emoji_hands_gauntlet_1_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="hand_rockon_gauntlet">
+        <Image TextureSheet="storm_emoji_hands_gauntlet_1_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="hand_thumbsdown_gauntlet">
+        <Image TextureSheet="storm_emoji_hands_gauntlet_1_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="hand_thumbsup_gauntlet">
+        <Image TextureSheet="storm_emoji_hands_gauntlet_1_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="hand_paper_gauntlet">
+        <Image TextureSheet="storm_emoji_hands_gauntlet_2_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="hand_rock_gauntlet">
+        <Image TextureSheet="storm_emoji_hands_gauntlet_2_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="hand_scissors_gauntlet">
+        <Image TextureSheet="storm_emoji_hands_gauntlet_2_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="hand_tauren_gauntlet">
+        <Image TextureSheet="storm_emoji_hands_gauntlet_2_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="hand_zerg_gauntlet">
+        <Image TextureSheet="storm_emoji_hands_gauntlet_2_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="hand_applause_gauntlet">
+        <Image TextureSheet="storm_emoji_hands_gauntlet_3_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="hand_fingerscrossed_gauntlet">
+        <Image TextureSheet="storm_emoji_hands_gauntlet_3_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="hand_flex_gauntlet">
+        <Image TextureSheet="storm_emoji_hands_gauntlet_3_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="hand_point_gauntlet">
+        <Image TextureSheet="storm_emoji_hands_gauntlet_3_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="hand_handshake_gauntlet">
+        <Image TextureSheet="storm_emoji_hands_gauntlet_3_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="anubarak_angry">
+        <Image TextureSheet="storm_emoji_anubarak_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="anubarak_cool">
+        <Image TextureSheet="storm_emoji_anubarak_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="anubarak_embarrassed">
+        <Image TextureSheet="storm_emoji_anubarak_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="anubarak_happy">
+        <Image TextureSheet="storm_emoji_anubarak_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="anubarak_inlove">
+        <Image TextureSheet="storm_emoji_anubarak_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="anubarak_rofl">
+        <Image TextureSheet="storm_emoji_anubarak_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="anubarak_sad">
+        <Image TextureSheet="storm_emoji_anubarak_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="anubarak_silly">
+        <Image TextureSheet="storm_emoji_anubarak_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="anubarak_speechless">
+        <Image TextureSheet="storm_emoji_anubarak_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="anubarak_surprised">
+        <Image TextureSheet="storm_emoji_anubarak_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="guldan_angry">
+        <Image TextureSheet="storm_emoji_guldan_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="guldan_cool">
+        <Image TextureSheet="storm_emoji_guldan_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="guldan_embarrassed">
+        <Image TextureSheet="storm_emoji_guldan_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="guldan_happy">
+        <Image TextureSheet="storm_emoji_guldan_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="guldan_inlove">
+        <Image TextureSheet="storm_emoji_guldan_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="guldan_rofl">
+        <Image TextureSheet="storm_emoji_guldan_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="guldan_sad">
+        <Image TextureSheet="storm_emoji_guldan_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="guldan_silly">
+        <Image TextureSheet="storm_emoji_guldan_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="guldan_speechless">
+        <Image TextureSheet="storm_emoji_guldan_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="guldan_surprised">
+        <Image TextureSheet="storm_emoji_guldan_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="varian_angry">
+        <Image TextureSheet="storm_emoji_varian_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="varian_cool">
+        <Image TextureSheet="storm_emoji_varian_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="varian_embarrassed">
+        <Image TextureSheet="storm_emoji_varian_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="varian_happy">
+        <Image TextureSheet="storm_emoji_varian_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="varian_inlove">
+        <Image TextureSheet="storm_emoji_varian_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="varian_rofl">
+        <Image TextureSheet="storm_emoji_varian_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="varian_sad">
+        <Image TextureSheet="storm_emoji_varian_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="varian_silly">
+        <Image TextureSheet="storm_emoji_varian_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="varian_speechless">
+        <Image TextureSheet="storm_emoji_varian_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="varian_surprised">
+        <Image TextureSheet="storm_emoji_varian_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="tychus_angry">
+        <Image TextureSheet="storm_emoji_tychus_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="tychus_cool">
+        <Image TextureSheet="storm_emoji_tychus_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="tychus_embarrassed">
+        <Image TextureSheet="storm_emoji_tychus_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="tychus_happy">
+        <Image TextureSheet="storm_emoji_tychus_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="tychus_inlove">
+        <Image TextureSheet="storm_emoji_tychus_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="tychus_rofl">
+        <Image TextureSheet="storm_emoji_tychus_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="tychus_sad">
+        <Image TextureSheet="storm_emoji_tychus_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="tychus_silly">
+        <Image TextureSheet="storm_emoji_tychus_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="tychus_speechless">
+        <Image TextureSheet="storm_emoji_tychus_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="tychus_surprised">
+        <Image TextureSheet="storm_emoji_tychus_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="auriel_angry">
+        <Image TextureSheet="storm_emoji_auriel_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="auriel_cool">
+        <Image TextureSheet="storm_emoji_auriel_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="auriel_embarrassed">
+        <Image TextureSheet="storm_emoji_auriel_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="auriel_happy">
+        <Image TextureSheet="storm_emoji_auriel_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="auriel_inlove">
+        <Image TextureSheet="storm_emoji_auriel_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="auriel_rofl">
+        <Image TextureSheet="storm_emoji_auriel_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="auriel_sad">
+        <Image TextureSheet="storm_emoji_auriel_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="auriel_silly">
+        <Image TextureSheet="storm_emoji_auriel_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="auriel_speechless">
+        <Image TextureSheet="storm_emoji_auriel_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="auriel_surprised">
+        <Image TextureSheet="storm_emoji_auriel_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="etc_angry">
+        <Image TextureSheet="storm_emoji_etc_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="etc_cool">
+        <Image TextureSheet="storm_emoji_etc_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="etc_embarrassed">
+        <Image TextureSheet="storm_emoji_etc_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="etc_happy">
+        <Image TextureSheet="storm_emoji_etc_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="etc_inlove">
+        <Image TextureSheet="storm_emoji_etc_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="etc_rofl">
+        <Image TextureSheet="storm_emoji_etc_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="etc_sad">
+        <Image TextureSheet="storm_emoji_etc_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="etc_silly">
+        <Image TextureSheet="storm_emoji_etc_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="etc_speechless">
+        <Image TextureSheet="storm_emoji_etc_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="etc_surprised">
+        <Image TextureSheet="storm_emoji_etc_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="illidan_angry">
+        <Image TextureSheet="storm_emoji_illidan_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="illidan_cool">
+        <Image TextureSheet="storm_emoji_illidan_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="illidan_embarrassed">
+        <Image TextureSheet="storm_emoji_illidan_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="illidan_happy">
+        <Image TextureSheet="storm_emoji_illidan_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="illidan_inlove">
+        <Image TextureSheet="storm_emoji_illidan_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="illidan_rofl">
+        <Image TextureSheet="storm_emoji_illidan_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="illidan_sad">
+        <Image TextureSheet="storm_emoji_illidan_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="illidan_silly">
+        <Image TextureSheet="storm_emoji_illidan_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="illidan_speechless">
+        <Image TextureSheet="storm_emoji_illidan_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="illidan_surprised">
+        <Image TextureSheet="storm_emoji_illidan_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="abathur_angry">
+        <Image TextureSheet="storm_emoji_abathur_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="abathur_cool">
+        <Image TextureSheet="storm_emoji_abathur_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="abathur_embarrassed">
+        <Image TextureSheet="storm_emoji_abathur_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="abathur_happy">
+        <Image TextureSheet="storm_emoji_abathur_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="abathur_inlove">
+        <Image TextureSheet="storm_emoji_abathur_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="abathur_rofl">
+        <Image TextureSheet="storm_emoji_abathur_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="abathur_sad">
+        <Image TextureSheet="storm_emoji_abathur_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="abathur_silly">
+        <Image TextureSheet="storm_emoji_abathur_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="abathur_speechless">
+        <Image TextureSheet="storm_emoji_abathur_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="abathur_surprised">
+        <Image TextureSheet="storm_emoji_abathur_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="jaina_angry">
+        <Image TextureSheet="storm_emoji_jaina_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="jaina_cool">
+        <Image TextureSheet="storm_emoji_jaina_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="jaina_embarrassed">
+        <Image TextureSheet="storm_emoji_jaina_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="jaina_happy">
+        <Image TextureSheet="storm_emoji_jaina_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="jaina_inlove">
+        <Image TextureSheet="storm_emoji_jaina_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="jaina_rofl">
+        <Image TextureSheet="storm_emoji_jaina_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="jaina_sad">
+        <Image TextureSheet="storm_emoji_jaina_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="jaina_silly">
+        <Image TextureSheet="storm_emoji_jaina_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="jaina_speechless">
+        <Image TextureSheet="storm_emoji_jaina_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="jaina_surprised">
+        <Image TextureSheet="storm_emoji_jaina_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="leoric_angry">
+        <Image TextureSheet="storm_emoji_leoric_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="leoric_cool">
+        <Image TextureSheet="storm_emoji_leoric_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="leoric_embarrassed">
+        <Image TextureSheet="storm_emoji_leoric_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="leoric_happy">
+        <Image TextureSheet="storm_emoji_leoric_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="leoric_inlove">
+        <Image TextureSheet="storm_emoji_leoric_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="leoric_rofl">
+        <Image TextureSheet="storm_emoji_leoric_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="leoric_sad">
+        <Image TextureSheet="storm_emoji_leoric_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="leoric_silly">
+        <Image TextureSheet="storm_emoji_leoric_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="leoric_speechless">
+        <Image TextureSheet="storm_emoji_leoric_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="leoric_surprised">
+        <Image TextureSheet="storm_emoji_leoric_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="kharazim_angry">
+        <Image TextureSheet="storm_emoji_kharazim_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="kharazim_cool">
+        <Image TextureSheet="storm_emoji_kharazim_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="kharazim_embarrassed">
+        <Image TextureSheet="storm_emoji_kharazim_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="kharazim_happy">
+        <Image TextureSheet="storm_emoji_kharazim_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="kharazim_inlove">
+        <Image TextureSheet="storm_emoji_kharazim_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="kharazim_rofl">
+        <Image TextureSheet="storm_emoji_kharazim_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="kharazim_sad">
+        <Image TextureSheet="storm_emoji_kharazim_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="kharazim_silly">
+        <Image TextureSheet="storm_emoji_kharazim_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="kharazim_speechless">
+        <Image TextureSheet="storm_emoji_kharazim_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="kharazim_surprised">
+        <Image TextureSheet="storm_emoji_kharazim_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="zuljin_angry">
+        <Image TextureSheet="storm_emoji_zuljin_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="zuljin_cool">
+        <Image TextureSheet="storm_emoji_zuljin_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="zuljin_embarrassed">
+        <Image TextureSheet="storm_emoji_zuljin_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="zuljin_happy">
+        <Image TextureSheet="storm_emoji_zuljin_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="zuljin_inlove">
+        <Image TextureSheet="storm_emoji_zuljin_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="zuljin_rofl">
+        <Image TextureSheet="storm_emoji_zuljin_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="zuljin_sad">
+        <Image TextureSheet="storm_emoji_zuljin_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="zuljin_silly">
+        <Image TextureSheet="storm_emoji_zuljin_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="zuljin_speechless">
+        <Image TextureSheet="storm_emoji_zuljin_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="zuljin_surprised">
+        <Image TextureSheet="storm_emoji_zuljin_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="genji_angry">
+        <Image TextureSheet="storm_emoji_genji_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="genji_cool">
+        <Image TextureSheet="storm_emoji_genji_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="genji_embarrassed">
+        <Image TextureSheet="storm_emoji_genji_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="genji_happy">
+        <Image TextureSheet="storm_emoji_genji_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="genji_inlove">
+        <Image TextureSheet="storm_emoji_genji_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="genji_rofl">
+        <Image TextureSheet="storm_emoji_genji_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="genji_sad">
+        <Image TextureSheet="storm_emoji_genji_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="genji_silly">
+        <Image TextureSheet="storm_emoji_genji_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="genji_speechless">
+        <Image TextureSheet="storm_emoji_genji_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="genji_surprised">
+        <Image TextureSheet="storm_emoji_genji_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="malthael_angry">
+        <Image TextureSheet="storm_emoji_malthael_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="malthael_cool">
+        <Image TextureSheet="storm_emoji_malthael_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="malthael_embarrassed">
+        <Image TextureSheet="storm_emoji_malthael_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="malthael_happy">
+        <Image TextureSheet="storm_emoji_malthael_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="malthael_inlove">
+        <Image TextureSheet="storm_emoji_malthael_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="malthael_rofl">
+        <Image TextureSheet="storm_emoji_malthael_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="malthael_sad">
+        <Image TextureSheet="storm_emoji_malthael_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="malthael_silly">
+        <Image TextureSheet="storm_emoji_malthael_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="malthael_speechless">
+        <Image TextureSheet="storm_emoji_malthael_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="malthael_surprised">
+        <Image TextureSheet="storm_emoji_malthael_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="stukov_angry">
+        <Image TextureSheet="storm_emoji_stukov_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="stukov_cool">
+        <Image TextureSheet="storm_emoji_stukov_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="stukov_embarrassed">
+        <Image TextureSheet="storm_emoji_stukov_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="stukov_happy">
+        <Image TextureSheet="storm_emoji_stukov_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="stukov_inlove">
+        <Image TextureSheet="storm_emoji_stukov_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="stukov_rofl">
+        <Image TextureSheet="storm_emoji_stukov_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="stukov_sad">
+        <Image TextureSheet="storm_emoji_stukov_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="stukov_silly">
+        <Image TextureSheet="storm_emoji_stukov_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="stukov_speechless">
+        <Image TextureSheet="storm_emoji_stukov_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="stukov_surprised">
+        <Image TextureSheet="storm_emoji_stukov_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="garrosh_angry">
+        <Image TextureSheet="storm_emoji_garrosh_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="garrosh_cool">
+        <Image TextureSheet="storm_emoji_garrosh_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="garrosh_embarrassed">
+        <Image TextureSheet="storm_emoji_garrosh_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="garrosh_happy">
+        <Image TextureSheet="storm_emoji_garrosh_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="garrosh_inlove">
+        <Image TextureSheet="storm_emoji_garrosh_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="garrosh_rofl">
+        <Image TextureSheet="storm_emoji_garrosh_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="garrosh_sad">
+        <Image TextureSheet="storm_emoji_garrosh_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="garrosh_silly">
+        <Image TextureSheet="storm_emoji_garrosh_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="garrosh_speechless">
+        <Image TextureSheet="storm_emoji_garrosh_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="garrosh_surprised">
+        <Image TextureSheet="storm_emoji_garrosh_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="zagara_cryptqueen_angry">
+        <Image TextureSheet="storm_emoji_zagara_cryptqueen_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="zagara_cryptqueen_cool">
+        <Image TextureSheet="storm_emoji_zagara_cryptqueen_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="zagara_cryptqueen_embarrassed">
+        <Image TextureSheet="storm_emoji_zagara_cryptqueen_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="zagara_cryptqueen_happy">
+        <Image TextureSheet="storm_emoji_zagara_cryptqueen_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="zagara_cryptqueen_inlove">
+        <Image TextureSheet="storm_emoji_zagara_cryptqueen_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="zagara_cryptqueen_rofl">
+        <Image TextureSheet="storm_emoji_zagara_cryptqueen_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="zagara_cryptqueen_sad">
+        <Image TextureSheet="storm_emoji_zagara_cryptqueen_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="zagara_cryptqueen_silly">
+        <Image TextureSheet="storm_emoji_zagara_cryptqueen_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="zagara_cryptqueen_speechless">
+        <Image TextureSheet="storm_emoji_zagara_cryptqueen_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="zagara_cryptqueen_surprised">
+        <Image TextureSheet="storm_emoji_zagara_cryptqueen_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="jaina_dreadlord_angry">
+        <Image TextureSheet="storm_emoji_jaina_dreadlord_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="jaina_dreadlord_cool">
+        <Image TextureSheet="storm_emoji_jaina_dreadlord_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="jaina_dreadlord_embarrassed">
+        <Image TextureSheet="storm_emoji_jaina_dreadlord_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="jaina_dreadlord_happy">
+        <Image TextureSheet="storm_emoji_jaina_dreadlord_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="jaina_dreadlord_inlove">
+        <Image TextureSheet="storm_emoji_jaina_dreadlord_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="jaina_dreadlord_rofl">
+        <Image TextureSheet="storm_emoji_jaina_dreadlord_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="jaina_dreadlord_sad">
+        <Image TextureSheet="storm_emoji_jaina_dreadlord_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="jaina_dreadlord_silly">
+        <Image TextureSheet="storm_emoji_jaina_dreadlord_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="jaina_dreadlord_speechless">
+        <Image TextureSheet="storm_emoji_jaina_dreadlord_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="jaina_dreadlord_surprised">
+        <Image TextureSheet="storm_emoji_jaina_dreadlord_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="sonya_deathknight_angry">
+        <Image TextureSheet="storm_emoji_sonya_deathknight_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="sonya_deathknight_cool">
+        <Image TextureSheet="storm_emoji_sonya_deathknight_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="sonya_deathknight_embarrassed">
+        <Image TextureSheet="storm_emoji_sonya_deathknight_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="sonya_deathknight_happy">
+        <Image TextureSheet="storm_emoji_sonya_deathknight_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="sonya_deathknight_inlove">
+        <Image TextureSheet="storm_emoji_sonya_deathknight_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="sonya_deathknight_rofl">
+        <Image TextureSheet="storm_emoji_sonya_deathknight_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="sonya_deathknight_sad">
+        <Image TextureSheet="storm_emoji_sonya_deathknight_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="sonya_deathknight_silly">
+        <Image TextureSheet="storm_emoji_sonya_deathknight_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="sonya_deathknight_speechless">
+        <Image TextureSheet="storm_emoji_sonya_deathknight_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="sonya_deathknight_surprised">
+        <Image TextureSheet="storm_emoji_sonya_deathknight_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="sonya_deathbringer_angry">
+        <Image TextureSheet="storm_emoji_sonya_deathbringer_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="sonya_deathbringer_cool">
+        <Image TextureSheet="storm_emoji_sonya_deathbringer_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="sonya_deathbringer_embarrassed">
+        <Image TextureSheet="storm_emoji_sonya_deathbringer_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="sonya_deathbringer_happy">
+        <Image TextureSheet="storm_emoji_sonya_deathbringer_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="sonya_deathbringer_inlove">
+        <Image TextureSheet="storm_emoji_sonya_deathbringer_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="sonya_deathbringer_rofl">
+        <Image TextureSheet="storm_emoji_sonya_deathbringer_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="sonya_deathbringer_sad">
+        <Image TextureSheet="storm_emoji_sonya_deathbringer_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="sonya_deathbringer_silly">
+        <Image TextureSheet="storm_emoji_sonya_deathbringer_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="sonya_deathbringer_speechless">
+        <Image TextureSheet="storm_emoji_sonya_deathbringer_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="sonya_deathbringer_surprised">
+        <Image TextureSheet="storm_emoji_sonya_deathbringer_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="kelthuzad_angry">
+        <Image TextureSheet="storm_emoji_kelthuzad_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="kelthuzad_cool">
+        <Image TextureSheet="storm_emoji_kelthuzad_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="kelthuzad_embarrassed">
+        <Image TextureSheet="storm_emoji_kelthuzad_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="kelthuzad_happy">
+        <Image TextureSheet="storm_emoji_kelthuzad_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="kelthuzad_inlove">
+        <Image TextureSheet="storm_emoji_kelthuzad_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="kelthuzad_rofl">
+        <Image TextureSheet="storm_emoji_kelthuzad_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="kelthuzad_sad">
+        <Image TextureSheet="storm_emoji_kelthuzad_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="kelthuzad_silly">
+        <Image TextureSheet="storm_emoji_kelthuzad_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="kelthuzad_speechless">
+        <Image TextureSheet="storm_emoji_kelthuzad_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="kelthuzad_surprised">
+        <Image TextureSheet="storm_emoji_kelthuzad_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="ana_angry">
+        <Image TextureSheet="storm_emoji_ana_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="ana_cool">
+        <Image TextureSheet="storm_emoji_ana_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="ana_embarrassed">
+        <Image TextureSheet="storm_emoji_ana_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="ana_happy">
+        <Image TextureSheet="storm_emoji_ana_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="ana_inlove">
+        <Image TextureSheet="storm_emoji_ana_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="ana_rofl">
+        <Image TextureSheet="storm_emoji_ana_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="ana_sad">
+        <Image TextureSheet="storm_emoji_ana_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="ana_silly">
+        <Image TextureSheet="storm_emoji_ana_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="ana_speechless">
+        <Image TextureSheet="storm_emoji_ana_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="ana_surprised">
+        <Image TextureSheet="storm_emoji_ana_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="pachimari_angry">
+        <Image TextureSheet="storm_emoji_pachimari_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="pachimari_cool">
+        <Image TextureSheet="storm_emoji_pachimari_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="pachimari_embarrassed">
+        <Image TextureSheet="storm_emoji_pachimari_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="pachimari_happy">
+        <Image TextureSheet="storm_emoji_pachimari_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="pachimari_inlove">
+        <Image TextureSheet="storm_emoji_pachimari_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="pachimari_rofl">
+        <Image TextureSheet="storm_emoji_pachimari_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="pachimari_sad">
+        <Image TextureSheet="storm_emoji_pachimari_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="pachimari_silly">
+        <Image TextureSheet="storm_emoji_pachimari_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="pachimari_speechless">
+        <Image TextureSheet="storm_emoji_pachimari_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="pachimari_surprised">
+        <Image TextureSheet="storm_emoji_pachimari_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="junkrat_angry">
+        <Image TextureSheet="storm_emoji_junkrat_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="junkrat_cool">
+        <Image TextureSheet="storm_emoji_junkrat_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="junkrat_embarrassed">
+        <Image TextureSheet="storm_emoji_junkrat_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="junkrat_happy">
+        <Image TextureSheet="storm_emoji_junkrat_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="junkrat_inlove">
+        <Image TextureSheet="storm_emoji_junkrat_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="junkrat_rofl">
+        <Image TextureSheet="storm_emoji_junkrat_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="junkrat_sad">
+        <Image TextureSheet="storm_emoji_junkrat_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="junkrat_silly">
+        <Image TextureSheet="storm_emoji_junkrat_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="junkrat_speechless">
+        <Image TextureSheet="storm_emoji_junkrat_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="junkrat_surprised">
+        <Image TextureSheet="storm_emoji_junkrat_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="xul_scarecrow_angry">
+        <Image TextureSheet="storm_emoji_xul_scarecrow_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="xul_scarecrow_cool">
+        <Image TextureSheet="storm_emoji_xul_scarecrow_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="xul_scarecrow_embarrassed">
+        <Image TextureSheet="storm_emoji_xul_scarecrow_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="xul_scarecrow_happy">
+        <Image TextureSheet="storm_emoji_xul_scarecrow_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="xul_scarecrow_inlove">
+        <Image TextureSheet="storm_emoji_xul_scarecrow_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="xul_scarecrow_rofl">
+        <Image TextureSheet="storm_emoji_xul_scarecrow_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="xul_scarecrow_sad">
+        <Image TextureSheet="storm_emoji_xul_scarecrow_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="xul_scarecrow_silly">
+        <Image TextureSheet="storm_emoji_xul_scarecrow_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="xul_scarecrow_speechless">
+        <Image TextureSheet="storm_emoji_xul_scarecrow_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="xul_scarecrow_surprised">
+        <Image TextureSheet="storm_emoji_xul_scarecrow_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="valla_deputy_angry">
+        <Image TextureSheet="storm_emoji_valla_deputy_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="valla_deputy_cool">
+        <Image TextureSheet="storm_emoji_valla_deputy_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="valla_deputy_embarrassed">
+        <Image TextureSheet="storm_emoji_valla_deputy_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="valla_deputy_happy">
+        <Image TextureSheet="storm_emoji_valla_deputy_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="valla_deputy_inlove">
+        <Image TextureSheet="storm_emoji_valla_deputy_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="valla_deputy_rofl">
+        <Image TextureSheet="storm_emoji_valla_deputy_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="valla_deputy_sad">
+        <Image TextureSheet="storm_emoji_valla_deputy_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="valla_deputy_silly">
+        <Image TextureSheet="storm_emoji_valla_deputy_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="valla_deputy_speechless">
+        <Image TextureSheet="storm_emoji_valla_deputy_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="valla_deputy_surprised">
+        <Image TextureSheet="storm_emoji_valla_deputy_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="arthas_crimsoncount_angry">
+        <Image TextureSheet="storm_emoji_arthas_count_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="arthas_crimsoncount_cool">
+        <Image TextureSheet="storm_emoji_arthas_count_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="arthas_crimsoncount_embarrassed">
+        <Image TextureSheet="storm_emoji_arthas_count_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="arthas_crimsoncount_happy">
+        <Image TextureSheet="storm_emoji_arthas_count_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="arthas_crimsoncount_inlove">
+        <Image TextureSheet="storm_emoji_arthas_count_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="arthas_crimsoncount_rofl">
+        <Image TextureSheet="storm_emoji_arthas_count_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="arthas_crimsoncount_sad">
+        <Image TextureSheet="storm_emoji_arthas_count_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="arthas_crimsoncount_silly">
+        <Image TextureSheet="storm_emoji_arthas_count_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="arthas_crimsoncount_speechless">
+        <Image TextureSheet="storm_emoji_arthas_count_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="arthas_crimsoncount_surprised">
+        <Image TextureSheet="storm_emoji_arthas_count_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="stitches_psycho_angry">
+        <Image TextureSheet="storm_emoji_stitches_psycho_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="stitches_psycho_cool">
+        <Image TextureSheet="storm_emoji_stitches_psycho_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="stitches_psycho_embarrassed">
+        <Image TextureSheet="storm_emoji_stitches_psycho_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="stitches_psycho_happy">
+        <Image TextureSheet="storm_emoji_stitches_psycho_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="stitches_psycho_inlove">
+        <Image TextureSheet="storm_emoji_stitches_psycho_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="stitches_psycho_rofl">
+        <Image TextureSheet="storm_emoji_stitches_psycho_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="stitches_psycho_sad">
+        <Image TextureSheet="storm_emoji_stitches_psycho_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="stitches_psycho_silly">
+        <Image TextureSheet="storm_emoji_stitches_psycho_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="stitches_psycho_speechless">
+        <Image TextureSheet="storm_emoji_stitches_psycho_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="stitches_psycho_surprised">
+        <Image TextureSheet="storm_emoji_stitches_psycho_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="valeera_vampireslayerv_angry">
+        <Image TextureSheet="storm_emoji_valeera_vampire_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="valeera_vampireslayerv_cool">
+        <Image TextureSheet="storm_emoji_valeera_vampire_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="valeera_vampireslayerv_embarrassed">
+        <Image TextureSheet="storm_emoji_valeera_vampire_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="valeera_vampireslayerv_happy">
+        <Image TextureSheet="storm_emoji_valeera_vampire_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="valeera_vampireslayerv_inlove">
+        <Image TextureSheet="storm_emoji_valeera_vampire_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="valeera_vampireslayerv_rofl">
+        <Image TextureSheet="storm_emoji_valeera_vampire_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="valeera_vampireslayerv_sad">
+        <Image TextureSheet="storm_emoji_valeera_vampire_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="valeera_vampireslayerv_silly">
+        <Image TextureSheet="storm_emoji_valeera_vampire_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="valeera_vampireslayerv_speechless">
+        <Image TextureSheet="storm_emoji_valeera_vampire_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="valeera_vampireslayerv_surprised">
+        <Image TextureSheet="storm_emoji_valeera_vampire_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="greymane_doctorwolfstein_worgen_angry">
+        <Image TextureSheet="storm_emoji_greymane_worgen_doctor_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="greymane_doctorwolfstein_worgen_cool">
+        <Image TextureSheet="storm_emoji_greymane_worgen_doctor_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="greymane_doctorwolfstein_worgen_embarrassed">
+        <Image TextureSheet="storm_emoji_greymane_worgen_doctor_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="greymane_doctorwolfstein_worgen_happy">
+        <Image TextureSheet="storm_emoji_greymane_worgen_doctor_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="greymane_doctorwolfstein_worgen_inlove">
+        <Image TextureSheet="storm_emoji_greymane_worgen_doctor_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="greymane_doctorwolfstein_worgen_rofl">
+        <Image TextureSheet="storm_emoji_greymane_worgen_doctor_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="greymane_doctorwolfstein_worgen_sad">
+        <Image TextureSheet="storm_emoji_greymane_worgen_doctor_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="greymane_doctorwolfstein_worgen_silly">
+        <Image TextureSheet="storm_emoji_greymane_worgen_doctor_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="greymane_doctorwolfstein_worgen_speechless">
+        <Image TextureSheet="storm_emoji_greymane_worgen_doctor_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="greymane_doctorwolfstein_worgen_surprised">
+        <Image TextureSheet="storm_emoji_greymane_worgen_doctor_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="hand_fistbump_skeletal">
+        <Image TextureSheet="storm_emoji_hands_bone_1_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="hand_hangloose_skeletal">
+        <Image TextureSheet="storm_emoji_hands_bone_1_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="hand_rockon_skeletal">
+        <Image TextureSheet="storm_emoji_hands_bone_1_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="hand_thumbsdown_skeletal">
+        <Image TextureSheet="storm_emoji_hands_bone_1_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="hand_thumbsup_skeletal">
+        <Image TextureSheet="storm_emoji_hands_bone_1_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="hand_paper_skeletal">
+        <Image TextureSheet="storm_emoji_hands_bone_2_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="hand_rock_skeletal">
+        <Image TextureSheet="storm_emoji_hands_bone_2_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="hand_scissors_skeletal">
+        <Image TextureSheet="storm_emoji_hands_bone_2_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="hand_tauren_skeletal">
+        <Image TextureSheet="storm_emoji_hands_bone_2_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="hand_zerg_skeletal">
+        <Image TextureSheet="storm_emoji_hands_bone_2_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="hand_applause_skeletal">
+        <Image TextureSheet="storm_emoji_hands_bone_3_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="hand_fingerscrossed_skeletal">
+        <Image TextureSheet="storm_emoji_hands_bone_3_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="hand_flex_skeletal">
+        <Image TextureSheet="storm_emoji_hands_bone_3_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="hand_point_skeletal">
+        <Image TextureSheet="storm_emoji_hands_bone_3_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="hand_handshake_skeletal">
+        <Image TextureSheet="storm_emoji_hands_bone_3_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="phrases_hallowsend_gg">
+        <Image TextureSheet="storm_emoji_phrases_hallowsend_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="phrases_hallowsend_gj">
+        <Image TextureSheet="storm_emoji_phrases_hallowsend_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="phrases_hallowsend_glhf">
+        <Image TextureSheet="storm_emoji_phrases_hallowsend_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="phrases_hallowsend_tt">
+        <Image TextureSheet="storm_emoji_phrases_hallowsend_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="phrases_hallowsend_zzz">
+        <Image TextureSheet="storm_emoji_phrases_hallowsend_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="sapper_angry">
+        <Image TextureSheet="storm_emoji_sapper_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="sapper_cool">
+        <Image TextureSheet="storm_emoji_sapper_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="sapper_embarrassed">
+        <Image TextureSheet="storm_emoji_sapper_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="sapper_happy">
+        <Image TextureSheet="storm_emoji_sapper_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="sapper_inlove">
+        <Image TextureSheet="storm_emoji_sapper_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="sapper_rofl">
+        <Image TextureSheet="storm_emoji_sapper_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="sapper_sad">
+        <Image TextureSheet="storm_emoji_sapper_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="sapper_silly">
+        <Image TextureSheet="storm_emoji_sapper_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="sapper_speechless">
+        <Image TextureSheet="storm_emoji_sapper_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="sapper_surprised">
+        <Image TextureSheet="storm_emoji_sapper_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="kerrigan_countess_angry">
+        <Image TextureSheet="storm_emoji_kerrigan_countess_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="kerrigan_countess_cool">
+        <Image TextureSheet="storm_emoji_kerrigan_countess_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="kerrigan_countess_embarrassed">
+        <Image TextureSheet="storm_emoji_kerrigan_countess_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="kerrigan_countess_happy">
+        <Image TextureSheet="storm_emoji_kerrigan_countess_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="kerrigan_countess_inlove">
+        <Image TextureSheet="storm_emoji_kerrigan_countess_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="kerrigan_countess_rofl">
+        <Image TextureSheet="storm_emoji_kerrigan_countess_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="kerrigan_countess_sad">
+        <Image TextureSheet="storm_emoji_kerrigan_countess_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="kerrigan_countess_silly">
+        <Image TextureSheet="storm_emoji_kerrigan_countess_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="kerrigan_countess_speechless">
+        <Image TextureSheet="storm_emoji_kerrigan_countess_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="kerrigan_countess_surprised">
+        <Image TextureSheet="storm_emoji_kerrigan_countess_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="alexstrasza_angry">
+        <Image TextureSheet="storm_emoji_alexstrasza_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="alexstrasza_cool">
+        <Image TextureSheet="storm_emoji_alexstrasza_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="alexstrasza_embarrassed">
+        <Image TextureSheet="storm_emoji_alexstrasza_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="alexstrasza_happy">
+        <Image TextureSheet="storm_emoji_alexstrasza_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="alexstrasza_inlove">
+        <Image TextureSheet="storm_emoji_alexstrasza_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="alexstrasza_rofl">
+        <Image TextureSheet="storm_emoji_alexstrasza_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="alexstrasza_sad">
+        <Image TextureSheet="storm_emoji_alexstrasza_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="alexstrasza_silly">
+        <Image TextureSheet="storm_emoji_alexstrasza_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="alexstrasza_speechless">
+        <Image TextureSheet="storm_emoji_alexstrasza_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="alexstrasza_surprised">
+        <Image TextureSheet="storm_emoji_alexstrasza_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="dragonknight_angry">
+        <Image TextureSheet="storm_emoji_dragonknight_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="dragonknight_cool">
+        <Image TextureSheet="storm_emoji_dragonknight_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="dragonknight_embarrassed">
+        <Image TextureSheet="storm_emoji_dragonknight_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="dragonknight_happy">
+        <Image TextureSheet="storm_emoji_dragonknight_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="dragonknight_inlove">
+        <Image TextureSheet="storm_emoji_dragonknight_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="dragonknight_rofl">
+        <Image TextureSheet="storm_emoji_dragonknight_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="dragonknight_sad">
+        <Image TextureSheet="storm_emoji_dragonknight_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="dragonknight_silly">
+        <Image TextureSheet="storm_emoji_dragonknight_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="dragonknight_speechless">
+        <Image TextureSheet="storm_emoji_dragonknight_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="dragonknight_surprised">
+        <Image TextureSheet="storm_emoji_dragonknight_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="drink_chocomilk">
+        <Image TextureSheet="storm_emoji_drink_1_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="drink_cola">
+        <Image TextureSheet="storm_emoji_drink_1_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="drink_brew">
+        <Image TextureSheet="storm_emoji_drink_1_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="drink_tea">
+        <Image TextureSheet="storm_emoji_drink_1_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="drink_water">
+        <Image TextureSheet="storm_emoji_drink_1_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="rehgar_winterveil_angry">
+        <Image TextureSheet="storm_emoji_rehgar_winterveil_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="rehgar_winterveil_cool">
+        <Image TextureSheet="storm_emoji_rehgar_winterveil_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="rehgar_winterveil_embarrassed">
+        <Image TextureSheet="storm_emoji_rehgar_winterveil_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="rehgar_winterveil_happy">
+        <Image TextureSheet="storm_emoji_rehgar_winterveil_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="rehgar_winterveil_inlove">
+        <Image TextureSheet="storm_emoji_rehgar_winterveil_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="rehgar_winterveil_rofl">
+        <Image TextureSheet="storm_emoji_rehgar_winterveil_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="rehgar_winterveil_sad">
+        <Image TextureSheet="storm_emoji_rehgar_winterveil_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="rehgar_winterveil_silly">
+        <Image TextureSheet="storm_emoji_rehgar_winterveil_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="rehgar_winterveil_speechless">
+        <Image TextureSheet="storm_emoji_rehgar_winterveil_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="rehgar_winterveil_surprised">
+        <Image TextureSheet="storm_emoji_rehgar_winterveil_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="stitches_winterveil_angry">
+        <Image TextureSheet="storm_emoji_stitches_winterveil_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="stitches_winterveil_cool">
+        <Image TextureSheet="storm_emoji_stitches_winterveil_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="stitches_winterveil_embarrassed">
+        <Image TextureSheet="storm_emoji_stitches_winterveil_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="stitches_winterveil_happy">
+        <Image TextureSheet="storm_emoji_stitches_winterveil_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="stitches_winterveil_inlove">
+        <Image TextureSheet="storm_emoji_stitches_winterveil_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="stitches_winterveil_rofl">
+        <Image TextureSheet="storm_emoji_stitches_winterveil_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="stitches_winterveil_sad">
+        <Image TextureSheet="storm_emoji_stitches_winterveil_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="stitches_winterveil_silly">
+        <Image TextureSheet="storm_emoji_stitches_winterveil_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="stitches_winterveil_speechless">
+        <Image TextureSheet="storm_emoji_stitches_winterveil_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="stitches_winterveil_surprised">
+        <Image TextureSheet="storm_emoji_stitches_winterveil_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="sylvanas_winterveil_angry">
+        <Image TextureSheet="storm_emoji_sylvanas_winterveil_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="sylvanas_winterveil_cool">
+        <Image TextureSheet="storm_emoji_sylvanas_winterveil_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="sylvanas_winterveil_embarrassed">
+        <Image TextureSheet="storm_emoji_sylvanas_winterveil_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="sylvanas_winterveil_happy">
+        <Image TextureSheet="storm_emoji_sylvanas_winterveil_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="sylvanas_winterveil_inlove">
+        <Image TextureSheet="storm_emoji_sylvanas_winterveil_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="sylvanas_winterveil_rofl">
+        <Image TextureSheet="storm_emoji_sylvanas_winterveil_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="sylvanas_winterveil_sad">
+        <Image TextureSheet="storm_emoji_sylvanas_winterveil_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="sylvanas_winterveil_silly">
+        <Image TextureSheet="storm_emoji_sylvanas_winterveil_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="sylvanas_winterveil_speechless">
+        <Image TextureSheet="storm_emoji_sylvanas_winterveil_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="sylvanas_winterveil_surprised">
+        <Image TextureSheet="storm_emoji_sylvanas_winterveil_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="hanzo_angry">
+        <Image TextureSheet="storm_emoji_hanzo_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="hanzo_cool">
+        <Image TextureSheet="storm_emoji_hanzo_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="hanzo_embarrassed">
+        <Image TextureSheet="storm_emoji_hanzo_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="hanzo_happy">
+        <Image TextureSheet="storm_emoji_hanzo_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="hanzo_inlove">
+        <Image TextureSheet="storm_emoji_hanzo_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="hanzo_rofl">
+        <Image TextureSheet="storm_emoji_hanzo_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="hanzo_sad">
+        <Image TextureSheet="storm_emoji_hanzo_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="hanzo_silly">
+        <Image TextureSheet="storm_emoji_hanzo_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="hanzo_speechless">
+        <Image TextureSheet="storm_emoji_hanzo_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="hanzo_surprised">
+        <Image TextureSheet="storm_emoji_hanzo_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="nazeebo_gingerdread_angry">
+        <Image TextureSheet="storm_emoji_nazeebo_winterveil_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="nazeebo_gingerdread_cool">
+        <Image TextureSheet="storm_emoji_nazeebo_winterveil_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="nazeebo_gingerdread_embarrassed">
+        <Image TextureSheet="storm_emoji_nazeebo_winterveil_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="nazeebo_gingerdread_happy">
+        <Image TextureSheet="storm_emoji_nazeebo_winterveil_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="nazeebo_gingerdread_inlove">
+        <Image TextureSheet="storm_emoji_nazeebo_winterveil_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="nazeebo_gingerdread_rofl">
+        <Image TextureSheet="storm_emoji_nazeebo_winterveil_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="nazeebo_gingerdread_sad">
+        <Image TextureSheet="storm_emoji_nazeebo_winterveil_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="nazeebo_gingerdread_silly">
+        <Image TextureSheet="storm_emoji_nazeebo_winterveil_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="nazeebo_gingerdread_speechless">
+        <Image TextureSheet="storm_emoji_nazeebo_winterveil_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="nazeebo_gingerdread_surprised">
+        <Image TextureSheet="storm_emoji_nazeebo_winterveil_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="malfurion_winterveil_angry">
+        <Image TextureSheet="storm_emoji_malfurion_winterveil_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="malfurion_winterveil_cool">
+        <Image TextureSheet="storm_emoji_malfurion_winterveil_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="malfurion_winterveil_embarrassed">
+        <Image TextureSheet="storm_emoji_malfurion_winterveil_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="malfurion_winterveil_happy">
+        <Image TextureSheet="storm_emoji_malfurion_winterveil_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="malfurion_winterveil_inlove">
+        <Image TextureSheet="storm_emoji_malfurion_winterveil_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="malfurion_winterveil_rofl">
+        <Image TextureSheet="storm_emoji_malfurion_winterveil_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="malfurion_winterveil_sad">
+        <Image TextureSheet="storm_emoji_malfurion_winterveil_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="malfurion_winterveil_silly">
+        <Image TextureSheet="storm_emoji_malfurion_winterveil_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="malfurion_winterveil_speechless">
+        <Image TextureSheet="storm_emoji_malfurion_winterveil_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="malfurion_winterveil_surprised">
+        <Image TextureSheet="storm_emoji_malfurion_winterveil_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="winter_candle">
+        <Image TextureSheet="storm_emoji_winter_decorations_1_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="winter_ornament">
+        <Image TextureSheet="storm_emoji_winter_decorations_1_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="winter_snowflake">
+        <Image TextureSheet="storm_emoji_winter_decorations_1_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="winter_snowman">
+        <Image TextureSheet="storm_emoji_winter_decorations_1_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="winter_wreath">
+        <Image TextureSheet="storm_emoji_winter_decorations_1_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="phrases_winterveil_gg">
+        <Image TextureSheet="storm_emoji_phrases_winterveil_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="phrases_winterveil_gj">
+        <Image TextureSheet="storm_emoji_phrases_winterveil_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="phrases_winterveil_glhf">
+        <Image TextureSheet="storm_emoji_phrases_winterveil_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="phrases_winterveil_tt">
+        <Image TextureSheet="storm_emoji_phrases_winterveil_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="phrases_winterveil_zzz">
+        <Image TextureSheet="storm_emoji_phrases_winterveil_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="blaze_angry">
+        <Image TextureSheet="storm_emoji_firebat_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="blaze_cool">
+        <Image TextureSheet="storm_emoji_firebat_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="blaze_embarrassed">
+        <Image TextureSheet="storm_emoji_firebat_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="blaze_happy">
+        <Image TextureSheet="storm_emoji_firebat_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="blaze_inlove">
+        <Image TextureSheet="storm_emoji_firebat_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="blaze_rofl">
+        <Image TextureSheet="storm_emoji_firebat_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="blaze_sad">
+        <Image TextureSheet="storm_emoji_firebat_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="blaze_silly">
+        <Image TextureSheet="storm_emoji_firebat_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="blaze_speechless">
+        <Image TextureSheet="storm_emoji_firebat_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="blaze_surprised">
+        <Image TextureSheet="storm_emoji_firebat_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="pachimari_gold">
+        <Image TextureSheet="storm_emoji_secret_01_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="sapper_googly">
+        <Image TextureSheet="storm_emoji_secret_01_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="nexus_thinking">
+        <Image TextureSheet="storm_emoji_secret_01_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="stukov_army18">
+        <Image TextureSheet="storm_emoji_secret_01_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="stukov_het">
+        <Image TextureSheet="storm_emoji_secret_01_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="abathur_mecha_angry">
+        <Image TextureSheet="storm_emoji_abathur_mecha_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="abathur_mecha_cool">
+        <Image TextureSheet="storm_emoji_abathur_mecha_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="abathur_mecha_embarrassed">
+        <Image TextureSheet="storm_emoji_abathur_mecha_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="abathur_mecha_happy">
+        <Image TextureSheet="storm_emoji_abathur_mecha_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="abathur_mecha_inlove">
+        <Image TextureSheet="storm_emoji_abathur_mecha_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="abathur_mecha_rofl">
+        <Image TextureSheet="storm_emoji_abathur_mecha_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="abathur_mecha_sad">
+        <Image TextureSheet="storm_emoji_abathur_mecha_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="abathur_mecha_silly">
+        <Image TextureSheet="storm_emoji_abathur_mecha_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="abathur_mecha_speechless">
+        <Image TextureSheet="storm_emoji_abathur_mecha_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="abathur_mecha_surprised">
+        <Image TextureSheet="storm_emoji_abathur_mecha_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="dehaka_mecha_angry">
+        <Image TextureSheet="storm_emoji_dehaka_mecha_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="dehaka_mecha_cool">
+        <Image TextureSheet="storm_emoji_dehaka_mecha_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="dehaka_mecha_embarrassed">
+        <Image TextureSheet="storm_emoji_dehaka_mecha_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="dehaka_mecha_happy">
+        <Image TextureSheet="storm_emoji_dehaka_mecha_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="dehaka_mecha_inlove">
+        <Image TextureSheet="storm_emoji_dehaka_mecha_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="dehaka_mecha_rofl">
+        <Image TextureSheet="storm_emoji_dehaka_mecha_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="dehaka_mecha_sad">
+        <Image TextureSheet="storm_emoji_dehaka_mecha_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="dehaka_mecha_silly">
+        <Image TextureSheet="storm_emoji_dehaka_mecha_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="dehaka_mecha_speechless">
+        <Image TextureSheet="storm_emoji_dehaka_mecha_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="dehaka_mecha_surprised">
+        <Image TextureSheet="storm_emoji_dehaka_mecha_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="rehgar_mecha_angry">
+        <Image TextureSheet="storm_emoji_rehgar_mecha_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="rehgar_mecha_cool">
+        <Image TextureSheet="storm_emoji_rehgar_mecha_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="rehgar_mecha_embarrassed">
+        <Image TextureSheet="storm_emoji_rehgar_mecha_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="rehgar_mecha_happy">
+        <Image TextureSheet="storm_emoji_rehgar_mecha_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="rehgar_mecha_inlove">
+        <Image TextureSheet="storm_emoji_rehgar_mecha_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="rehgar_mecha_rofl">
+        <Image TextureSheet="storm_emoji_rehgar_mecha_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="rehgar_mecha_sad">
+        <Image TextureSheet="storm_emoji_rehgar_mecha_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="rehgar_mecha_silly">
+        <Image TextureSheet="storm_emoji_rehgar_mecha_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="rehgar_mecha_speechless">
+        <Image TextureSheet="storm_emoji_rehgar_mecha_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="rehgar_mecha_surprised">
+        <Image TextureSheet="storm_emoji_rehgar_mecha_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="tassadar_mecha_angry">
+        <Image TextureSheet="storm_emoji_tassadar_mecha_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="tassadar_mecha_cool">
+        <Image TextureSheet="storm_emoji_tassadar_mecha_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="tassadar_mecha_embarrassed">
+        <Image TextureSheet="storm_emoji_tassadar_mecha_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="tassadar_mecha_happy">
+        <Image TextureSheet="storm_emoji_tassadar_mecha_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="tassadar_mecha_inlove">
+        <Image TextureSheet="storm_emoji_tassadar_mecha_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="tassadar_mecha_rofl">
+        <Image TextureSheet="storm_emoji_tassadar_mecha_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="tassadar_mecha_sad">
+        <Image TextureSheet="storm_emoji_tassadar_mecha_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="tassadar_mecha_silly">
+        <Image TextureSheet="storm_emoji_tassadar_mecha_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="tassadar_mecha_speechless">
+        <Image TextureSheet="storm_emoji_tassadar_mecha_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="tassadar_mecha_surprised">
+        <Image TextureSheet="storm_emoji_tassadar_mecha_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="tyrael_mecha_angry">
+        <Image TextureSheet="storm_emoji_tyrael_mecha_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="tyrael_mecha_cool">
+        <Image TextureSheet="storm_emoji_tyrael_mecha_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="tyrael_mecha_embarrassed">
+        <Image TextureSheet="storm_emoji_tyrael_mecha_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="tyrael_mecha_happy">
+        <Image TextureSheet="storm_emoji_tyrael_mecha_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="tyrael_mecha_inlove">
+        <Image TextureSheet="storm_emoji_tyrael_mecha_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="tyrael_mecha_rofl">
+        <Image TextureSheet="storm_emoji_tyrael_mecha_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="tyrael_mecha_sad">
+        <Image TextureSheet="storm_emoji_tyrael_mecha_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="tyrael_mecha_silly">
+        <Image TextureSheet="storm_emoji_tyrael_mecha_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="tyrael_mecha_speechless">
+        <Image TextureSheet="storm_emoji_tyrael_mecha_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="tyrael_mecha_surprised">
+        <Image TextureSheet="storm_emoji_tyrael_mecha_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="phrases_mecha_gg">
+        <Image TextureSheet="storm_emoji_phrases_mecha_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="phrases_mecha_gj">
+        <Image TextureSheet="storm_emoji_phrases_mecha_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="phrases_mecha_glhf">
+        <Image TextureSheet="storm_emoji_phrases_mecha_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="phrases_mecha_tt">
+        <Image TextureSheet="storm_emoji_phrases_mecha_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="phrases_mecha_zzz">
+        <Image TextureSheet="storm_emoji_phrases_mecha_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="maiev_angry">
+        <Image TextureSheet="storm_emoji_maiev_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="maiev_cool">
+        <Image TextureSheet="storm_emoji_maiev_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="maiev_embarrassed">
+        <Image TextureSheet="storm_emoji_maiev_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="maiev_happy">
+        <Image TextureSheet="storm_emoji_maiev_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="maiev_inlove">
+        <Image TextureSheet="storm_emoji_maiev_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="maiev_rofl">
+        <Image TextureSheet="storm_emoji_maiev_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="maiev_sad">
+        <Image TextureSheet="storm_emoji_maiev_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="maiev_silly">
+        <Image TextureSheet="storm_emoji_maiev_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="maiev_speechless">
+        <Image TextureSheet="storm_emoji_maiev_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="maiev_surprised">
+        <Image TextureSheet="storm_emoji_maiev_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="heart">
+        <Image TextureSheet="storm_emoji_hearts_1_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="heart_broken">
+        <Image TextureSheet="storm_emoji_hearts_1_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="heart_protoss">
+        <Image TextureSheet="storm_emoji_hearts_1_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="heart_terran">
+        <Image TextureSheet="storm_emoji_hearts_1_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="heart_zerg">
+        <Image TextureSheet="storm_emoji_hearts_1_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="genji_lunar_angry">
+        <Image TextureSheet="storm_emoji_genji_lunar_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="genji_lunar_cool">
+        <Image TextureSheet="storm_emoji_genji_lunar_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="genji_lunar_embarrassed">
+        <Image TextureSheet="storm_emoji_genji_lunar_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="genji_lunar_happy">
+        <Image TextureSheet="storm_emoji_genji_lunar_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="genji_lunar_inlove">
+        <Image TextureSheet="storm_emoji_genji_lunar_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="genji_lunar_rofl">
+        <Image TextureSheet="storm_emoji_genji_lunar_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="genji_lunar_sad">
+        <Image TextureSheet="storm_emoji_genji_lunar_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="genji_lunar_silly">
+        <Image TextureSheet="storm_emoji_genji_lunar_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="genji_lunar_speechless">
+        <Image TextureSheet="storm_emoji_genji_lunar_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="genji_lunar_surprised">
+        <Image TextureSheet="storm_emoji_genji_lunar_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="illidan_lunar_angry">
+        <Image TextureSheet="storm_emoji_illidan_lunar_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="illidan_lunar_cool">
+        <Image TextureSheet="storm_emoji_illidan_lunar_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="illidan_lunar_embarrassed">
+        <Image TextureSheet="storm_emoji_illidan_lunar_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="illidan_lunar_happy">
+        <Image TextureSheet="storm_emoji_illidan_lunar_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="illidan_lunar_inlove">
+        <Image TextureSheet="storm_emoji_illidan_lunar_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="illidan_lunar_rofl">
+        <Image TextureSheet="storm_emoji_illidan_lunar_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="illidan_lunar_sad">
+        <Image TextureSheet="storm_emoji_illidan_lunar_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="illidan_lunar_silly">
+        <Image TextureSheet="storm_emoji_illidan_lunar_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="illidan_lunar_speechless">
+        <Image TextureSheet="storm_emoji_illidan_lunar_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="illidan_lunar_surprised">
+        <Image TextureSheet="storm_emoji_illidan_lunar_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="kaelthas_lunar_angry">
+        <Image TextureSheet="storm_emoji_kaelthas_lunar_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="kaelthas_lunar_cool">
+        <Image TextureSheet="storm_emoji_kaelthas_lunar_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="kaelthas_lunar_embarrassed">
+        <Image TextureSheet="storm_emoji_kaelthas_lunar_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="kaelthas_lunar_happy">
+        <Image TextureSheet="storm_emoji_kaelthas_lunar_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="kaelthas_lunar_inlove">
+        <Image TextureSheet="storm_emoji_kaelthas_lunar_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="kaelthas_lunar_rofl">
+        <Image TextureSheet="storm_emoji_kaelthas_lunar_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="kaelthas_lunar_sad">
+        <Image TextureSheet="storm_emoji_kaelthas_lunar_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="kaelthas_lunar_silly">
+        <Image TextureSheet="storm_emoji_kaelthas_lunar_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="kaelthas_lunar_speechless">
+        <Image TextureSheet="storm_emoji_kaelthas_lunar_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="kaelthas_lunar_surprised">
+        <Image TextureSheet="storm_emoji_kaelthas_lunar_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="lili_lunar_angry">
+        <Image TextureSheet="storm_emoji_lili_lunar_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="lili_lunar_cool">
+        <Image TextureSheet="storm_emoji_lili_lunar_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="lili_lunar_embarrassed">
+        <Image TextureSheet="storm_emoji_lili_lunar_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="lili_lunar_happy">
+        <Image TextureSheet="storm_emoji_lili_lunar_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="lili_lunar_inlove">
+        <Image TextureSheet="storm_emoji_lili_lunar_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="lili_lunar_rofl">
+        <Image TextureSheet="storm_emoji_lili_lunar_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="lili_lunar_sad">
+        <Image TextureSheet="storm_emoji_lili_lunar_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="lili_lunar_silly">
+        <Image TextureSheet="storm_emoji_lili_lunar_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="lili_lunar_speechless">
+        <Image TextureSheet="storm_emoji_lili_lunar_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="lili_lunar_surprised">
+        <Image TextureSheet="storm_emoji_lili_lunar_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="sylvanas_lunar_angry">
+        <Image TextureSheet="storm_emoji_sylvanas_lunar_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="sylvanas_lunar_cool">
+        <Image TextureSheet="storm_emoji_sylvanas_lunar_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="sylvanas_lunar_embarrassed">
+        <Image TextureSheet="storm_emoji_sylvanas_lunar_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="sylvanas_lunar_happy">
+        <Image TextureSheet="storm_emoji_sylvanas_lunar_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="sylvanas_lunar_inlove">
+        <Image TextureSheet="storm_emoji_sylvanas_lunar_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="sylvanas_lunar_rofl">
+        <Image TextureSheet="storm_emoji_sylvanas_lunar_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="sylvanas_lunar_sad">
+        <Image TextureSheet="storm_emoji_sylvanas_lunar_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="sylvanas_lunar_silly">
+        <Image TextureSheet="storm_emoji_sylvanas_lunar_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="sylvanas_lunar_speechless">
+        <Image TextureSheet="storm_emoji_sylvanas_lunar_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="sylvanas_lunar_surprised">
+        <Image TextureSheet="storm_emoji_sylvanas_lunar_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="foodog_angry">
+        <Image TextureSheet="storm_emoji_foodog_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="foodog_cool">
+        <Image TextureSheet="storm_emoji_foodog_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="foodog_embarrassed">
+        <Image TextureSheet="storm_emoji_foodog_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="foodog_happy">
+        <Image TextureSheet="storm_emoji_foodog_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="foodog_inlove">
+        <Image TextureSheet="storm_emoji_foodog_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="foodog_rofl">
+        <Image TextureSheet="storm_emoji_foodog_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="foodog_sad">
+        <Image TextureSheet="storm_emoji_foodog_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="foodog_silly">
+        <Image TextureSheet="storm_emoji_foodog_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="foodog_speechless">
+        <Image TextureSheet="storm_emoji_foodog_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="foodog_surprised">
+        <Image TextureSheet="storm_emoji_foodog_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="phrases_lunar_gg">
+        <Image TextureSheet="storm_emoji_phrases_lunar_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="phrases_lunar_gj">
+        <Image TextureSheet="storm_emoji_phrases_lunar_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="phrases_lunar_glhf">
+        <Image TextureSheet="storm_emoji_phrases_lunar_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="phrases_lunar_tt">
+        <Image TextureSheet="storm_emoji_phrases_lunar_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="phrases_lunar_zzz">
+        <Image TextureSheet="storm_emoji_phrases_lunar_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="nature_crater">
+        <Image TextureSheet="storm_emoji_nature_1_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="nature_droplets">
+        <Image TextureSheet="storm_emoji_nature_1_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="nature_fire">
+        <Image TextureSheet="storm_emoji_nature_1_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="nature_flower">
+        <Image TextureSheet="storm_emoji_nature_1_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="nature_gust">
+        <Image TextureSheet="storm_emoji_nature_1_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="fenix_angry">
+        <Image TextureSheet="storm_emoji_fenix_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="fenix_cool">
+        <Image TextureSheet="storm_emoji_fenix_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="fenix_embarrassed">
+        <Image TextureSheet="storm_emoji_fenix_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="fenix_happy">
+        <Image TextureSheet="storm_emoji_fenix_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="fenix_inlove">
+        <Image TextureSheet="storm_emoji_fenix_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="fenix_rofl">
+        <Image TextureSheet="storm_emoji_fenix_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="fenix_sad">
+        <Image TextureSheet="storm_emoji_fenix_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="fenix_silly">
+        <Image TextureSheet="storm_emoji_fenix_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="fenix_speechless">
+        <Image TextureSheet="storm_emoji_fenix_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="fenix_surprised">
+        <Image TextureSheet="storm_emoji_fenix_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="deckard_angry">
+        <Image TextureSheet="storm_emoji_deckard_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="deckard_cool">
+        <Image TextureSheet="storm_emoji_deckard_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="deckard_embarrassed">
+        <Image TextureSheet="storm_emoji_deckard_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="deckard_happy">
+        <Image TextureSheet="storm_emoji_deckard_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="deckard_inlove">
+        <Image TextureSheet="storm_emoji_deckard_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="deckard_rofl">
+        <Image TextureSheet="storm_emoji_deckard_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="deckard_sad">
+        <Image TextureSheet="storm_emoji_deckard_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="deckard_silly">
+        <Image TextureSheet="storm_emoji_deckard_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="deckard_speechless">
+        <Image TextureSheet="storm_emoji_deckard_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="deckard_surprised">
+        <Image TextureSheet="storm_emoji_deckard_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="balls_basketball">
+        <Image TextureSheet="storm_emoji_ball_1_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="balls_eightball">
+        <Image TextureSheet="storm_emoji_ball_1_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="balls_football">
+        <Image TextureSheet="storm_emoji_ball_1_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="balls_soccerball">
+        <Image TextureSheet="storm_emoji_ball_1_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="balls_volleyball">
+        <Image TextureSheet="storm_emoji_ball_1_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="food_bbq">
+        <Image TextureSheet="storm_emoji_food_3_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="food_chips">
+        <Image TextureSheet="storm_emoji_food_3_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="food_lollipop">
+        <Image TextureSheet="storm_emoji_food_3_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="food_meat">
+        <Image TextureSheet="storm_emoji_food_3_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="food_pineapplepizza">
+        <Image TextureSheet="storm_emoji_food_3_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="lunara_summer18_angry">
+        <Image TextureSheet="storm_emoji_lunara_summer18_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="lunara_summer18_cool">
+        <Image TextureSheet="storm_emoji_lunara_summer18_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="lunara_summer18_embarrassed">
+        <Image TextureSheet="storm_emoji_lunara_summer18_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="lunara_summer18_happy">
+        <Image TextureSheet="storm_emoji_lunara_summer18_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="lunara_summer18_inlove">
+        <Image TextureSheet="storm_emoji_lunara_summer18_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="lunara_summer18_rofl">
+        <Image TextureSheet="storm_emoji_lunara_summer18_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="lunara_summer18_sad">
+        <Image TextureSheet="storm_emoji_lunara_summer18_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="lunara_summer18_silly">
+        <Image TextureSheet="storm_emoji_lunara_summer18_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="lunara_summer18_speechless">
+        <Image TextureSheet="storm_emoji_lunara_summer18_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="lunara_summer18_surprised">
+        <Image TextureSheet="storm_emoji_lunara_summer18_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="diablo_summer18_angry">
+        <Image TextureSheet="storm_emoji_diablo_summer18_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="diablo_summer18_cool">
+        <Image TextureSheet="storm_emoji_diablo_summer18_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="diablo_summer18_embarrassed">
+        <Image TextureSheet="storm_emoji_diablo_summer18_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="diablo_summer18_happy">
+        <Image TextureSheet="storm_emoji_diablo_summer18_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="diablo_summer18_inlove">
+        <Image TextureSheet="storm_emoji_diablo_summer18_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="diablo_summer18_rofl">
+        <Image TextureSheet="storm_emoji_diablo_summer18_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="diablo_summer18_sad">
+        <Image TextureSheet="storm_emoji_diablo_summer18_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="diablo_summer18_silly">
+        <Image TextureSheet="storm_emoji_diablo_summer18_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="diablo_summer18_speechless">
+        <Image TextureSheet="storm_emoji_diablo_summer18_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="diablo_summer18_surprised">
+        <Image TextureSheet="storm_emoji_diablo_summer18_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="garrosh_summer18_angry">
+        <Image TextureSheet="storm_emoji_garrosh_summer18_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="garrosh_summer18_cool">
+        <Image TextureSheet="storm_emoji_garrosh_summer18_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="garrosh_summer18_embarrassed">
+        <Image TextureSheet="storm_emoji_garrosh_summer18_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="garrosh_summer18_happy">
+        <Image TextureSheet="storm_emoji_garrosh_summer18_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="garrosh_summer18_inlove">
+        <Image TextureSheet="storm_emoji_garrosh_summer18_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="garrosh_summer18_rofl">
+        <Image TextureSheet="storm_emoji_garrosh_summer18_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="garrosh_summer18_sad">
+        <Image TextureSheet="storm_emoji_garrosh_summer18_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="garrosh_summer18_silly">
+        <Image TextureSheet="storm_emoji_garrosh_summer18_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="garrosh_summer18_speechless">
+        <Image TextureSheet="storm_emoji_garrosh_summer18_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="garrosh_summer18_surprised">
+        <Image TextureSheet="storm_emoji_garrosh_summer18_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="sonya_summer18_angry">
+        <Image TextureSheet="storm_emoji_sonya_summer18_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="sonya_summer18_cool">
+        <Image TextureSheet="storm_emoji_sonya_summer18_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="sonya_summer18_embarrassed">
+        <Image TextureSheet="storm_emoji_sonya_summer18_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="sonya_summer18_happy">
+        <Image TextureSheet="storm_emoji_sonya_summer18_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="sonya_summer18_inlove">
+        <Image TextureSheet="storm_emoji_sonya_summer18_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="sonya_summer18_rofl">
+        <Image TextureSheet="storm_emoji_sonya_summer18_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="sonya_summer18_sad">
+        <Image TextureSheet="storm_emoji_sonya_summer18_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="sonya_summer18_silly">
+        <Image TextureSheet="storm_emoji_sonya_summer18_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="sonya_summer18_speechless">
+        <Image TextureSheet="storm_emoji_sonya_summer18_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="sonya_summer18_surprised">
+        <Image TextureSheet="storm_emoji_sonya_summer18_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="yrel_angry">
+        <Image TextureSheet="storm_emoji_yrel_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="yrel_cool">
+        <Image TextureSheet="storm_emoji_yrel_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="yrel_embarrassed">
+        <Image TextureSheet="storm_emoji_yrel_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="yrel_happy">
+        <Image TextureSheet="storm_emoji_yrel_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="yrel_inlove">
+        <Image TextureSheet="storm_emoji_yrel_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="yrel_rofl">
+        <Image TextureSheet="storm_emoji_yrel_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="yrel_sad">
+        <Image TextureSheet="storm_emoji_yrel_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="yrel_silly">
+        <Image TextureSheet="storm_emoji_yrel_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="yrel_speechless">
+        <Image TextureSheet="storm_emoji_yrel_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="yrel_surprised">
+        <Image TextureSheet="storm_emoji_yrel_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="ana_army18_angry">
+        <Image TextureSheet="storm_emoji_ana_army18_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="ana_army18_cool">
+        <Image TextureSheet="storm_emoji_ana_army18_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="ana_army18_embarrassed">
+        <Image TextureSheet="storm_emoji_ana_army18_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="ana_army18_happy">
+        <Image TextureSheet="storm_emoji_ana_army18_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="ana_army18_inlove">
+        <Image TextureSheet="storm_emoji_ana_army18_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="ana_army18_rofl">
+        <Image TextureSheet="storm_emoji_ana_army18_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="ana_army18_sad">
+        <Image TextureSheet="storm_emoji_ana_army18_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="ana_army18_silly">
+        <Image TextureSheet="storm_emoji_ana_army18_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="ana_army18_speechless">
+        <Image TextureSheet="storm_emoji_ana_army18_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="ana_army18_surprised">
+        <Image TextureSheet="storm_emoji_ana_army18_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="stukov_army18_lurking">
+        <Image TextureSheet="storm_emoji_stukov_army18_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="stukov_army18_pustule">
+        <Image TextureSheet="storm_emoji_stukov_army18_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="stukov_army18_shove_01">
+        <Image TextureSheet="storm_emoji_stukov_army18_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="stukov_army18_shove_02">
+        <Image TextureSheet="storm_emoji_stukov_army18_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="stukov_army18_shove_03">
+        <Image TextureSheet="storm_emoji_stukov_army18_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="genji_army18_helmet">
+        <Image TextureSheet="storm_emoji_genji_army18_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="genji_army18_stars">
+        <Image TextureSheet="storm_emoji_genji_army18_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="genji_army18_viper">
+        <Image TextureSheet="storm_emoji_genji_army18_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="genji_army18_well">
+        <Image TextureSheet="storm_emoji_genji_army18_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="genji_army18_xstrike">
+        <Image TextureSheet="storm_emoji_genji_army18_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="whitemane_angry">
+        <Image TextureSheet="storm_emoji_whitemane_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="whitemane_cool">
+        <Image TextureSheet="storm_emoji_whitemane_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="whitemane_embarrassed">
+        <Image TextureSheet="storm_emoji_whitemane_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="whitemane_happy">
+        <Image TextureSheet="storm_emoji_whitemane_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="whitemane_inlove">
+        <Image TextureSheet="storm_emoji_whitemane_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="whitemane_rofl">
+        <Image TextureSheet="storm_emoji_whitemane_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="whitemane_sad">
+        <Image TextureSheet="storm_emoji_whitemane_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="whitemane_silly">
+        <Image TextureSheet="storm_emoji_whitemane_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="whitemane_speechless">
+        <Image TextureSheet="storm_emoji_whitemane_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="whitemane_surprised">
+        <Image TextureSheet="storm_emoji_whitemane_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="mephisto_angry">
+        <Image TextureSheet="storm_emoji_mephisto_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="mephisto_cool">
+        <Image TextureSheet="storm_emoji_mephisto_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="mephisto_embarrassed">
+        <Image TextureSheet="storm_emoji_mephisto_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="mephisto_happy">
+        <Image TextureSheet="storm_emoji_mephisto_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="mephisto_inlove">
+        <Image TextureSheet="storm_emoji_mephisto_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="mephisto_rofl">
+        <Image TextureSheet="storm_emoji_mephisto_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="mephisto_sad">
+        <Image TextureSheet="storm_emoji_mephisto_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="mephisto_silly">
+        <Image TextureSheet="storm_emoji_mephisto_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="mephisto_speechless">
+        <Image TextureSheet="storm_emoji_mephisto_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="mephisto_surprised">
+        <Image TextureSheet="storm_emoji_mephisto_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="ghost_worry_anim">
+        <Image TextureSheet="storm_emoji_ghost_worry_anim_sheet" Count="6" DurationPerFrame="150"/>
+    </CEmoticon>
+    <CEmoticon id="ghost_boogie_anim">
+        <Image TextureSheet="storm_emoji_ghost_boogie_anim_sheet" Count="8" DurationPerFrame="100"/>
+    </CEmoticon>
+    <CEmoticon id="ghost_cheer_anim">
+        <Image TextureSheet="storm_emoji_ghost_cheer_anim_sheet" Count="2" DurationPerFrame="500"/>
+    </CEmoticon>
+    <CEmoticon id="ghost_golfclap_anim">
+        <Image TextureSheet="storm_emoji_ghost_golfclap_anim_sheet" Count="4" DurationPerFrame="100"/>
+    </CEmoticon>
+    <CEmoticon id="ghost_rage_anim">
+        <Image TextureSheet="storm_emoji_ghost_rage_anim_sheet" Count="2" DurationPerFrame="50"/>
+    </CEmoticon>
+    <CEmoticon id="cat_puke_anim">
+        <Image TextureSheet="storm_emoji_cat_puke_anim_sheet" Count="12" DurationPerFrame="50"/>
+    </CEmoticon>
+    <CEmoticon id="cat_grumpy_anim">
+        <Image TextureSheet="storm_emoji_cat_grumpy_anim_sheet" Count="16" DurationPerFrame="300"/>
+    </CEmoticon>
+    <CEmoticon id="cat_gleam_anim">
+        <Image TextureSheet="storm_emoji_cat_gleam_anim_sheet" Count="25" DurationPerFrame="50"/>
+    </CEmoticon>
+    <CEmoticon id="cat_dealwithit_anim">
+        <Image TextureSheet="storm_emoji_cat_dealwithit_anim_sheet" Count="23" DurationPerFrame="100"/>
+    </CEmoticon>
+    <CEmoticon id="cat_blink_anim">
+        <Image TextureSheet="storm_emoji_cat_blink_anim_sheet" Count="29" DurationPerFrame="50"/>
+    </CEmoticon>
+    <CEmoticon id="spooky_potg_anim">
+        <Image TextureSheet="storm_emoji_spooky_potg_anim_sheet" Count="9" DurationPerFrame="40"/>
+    </CEmoticon>
+    <CEmoticon id="spooky_ravenlol_anim">
+        <Image TextureSheet="storm_emoji_spooky_ravenlol_anim_sheet" Count="8" DurationPerFrame="60"/>
+    </CEmoticon>
+    <CEmoticon id="spooky_rip_anim">
+        <Image TextureSheet="storm_emoji_spooky_rip_anim_sheet" Count="26" DurationPerFrame="50"/>
+    </CEmoticon>
+    <CEmoticon id="spooky_spider_anim">
+        <Image TextureSheet="storm_emoji_spooky_spider_anim_sheet" Count="8" DurationPerFrame="50"/>
+    </CEmoticon>
+    <CEmoticon id="spooky_worm_anim">
+        <Image TextureSheet="storm_emoji_spooky_worm_anim_sheet" Count="8" DurationPerFrame="50"/>
+    </CEmoticon>
+    <CEmoticon id="eyeball_bloodlust_anim">
+        <Image TextureSheet="storm_emoji_eyeball_bloodlust_anim_sheet" Count="17" DurationPerFrame="50"/>
+    </CEmoticon>
+    <CEmoticon id="eyeball_cthun_anim">
+        <Image TextureSheet="storm_emoji_eyeball_cthun_anim_sheet" Count="4" DurationPerFrame="50"/>
+    </CEmoticon>
+    <CEmoticon id="eyeball_human_anim">
+        <Image TextureSheet="storm_emoji_eyeball_human_anim_sheet" Count="16" DurationPerFrame="50"/>
+    </CEmoticon>
+    <CEmoticon id="eyeball_kilrogg_anim">
+        <Image TextureSheet="storm_emoji_eyeball_kilrogg_anim_sheet" Count="16" DurationPerFrame="80"/>
+    </CEmoticon>
+    <CEmoticon id="eyeball_ravenlord_anim">
+        <Image TextureSheet="storm_emoji_eyeball_ravenlord_anim_sheet" Count="14" DurationPerFrame="50"/>
+    </CEmoticon>
+    <CEmoticon id="malganis_angry">
+        <Image TextureSheet="storm_emoji_malganis_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="malganis_cool">
+        <Image TextureSheet="storm_emoji_malganis_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="malganis_embarrassed">
+        <Image TextureSheet="storm_emoji_malganis_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="malganis_happy">
+        <Image TextureSheet="storm_emoji_malganis_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="malganis_inlove">
+        <Image TextureSheet="storm_emoji_malganis_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="malganis_rofl">
+        <Image TextureSheet="storm_emoji_malganis_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="malganis_sad">
+        <Image TextureSheet="storm_emoji_malganis_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="malganis_silly">
+        <Image TextureSheet="storm_emoji_malganis_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="malganis_speechless">
+        <Image TextureSheet="storm_emoji_malganis_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="malganis_surprised">
+        <Image TextureSheet="storm_emoji_malganis_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="orphea_angry">
+        <Image TextureSheet="storm_emoji_orphea_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="orphea_cool">
+        <Image TextureSheet="storm_emoji_orphea_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="orphea_embarrassed">
+        <Image TextureSheet="storm_emoji_orphea_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="orphea_happy">
+        <Image TextureSheet="storm_emoji_orphea_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="orphea_inlove">
+        <Image TextureSheet="storm_emoji_orphea_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="orphea_rofl">
+        <Image TextureSheet="storm_emoji_orphea_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="orphea_sad">
+        <Image TextureSheet="storm_emoji_orphea_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="orphea_silly">
+        <Image TextureSheet="storm_emoji_orphea_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="orphea_speechless">
+        <Image TextureSheet="storm_emoji_orphea_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="orphea_surprised">
+        <Image TextureSheet="storm_emoji_orphea_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="carbot_boom">
+        <Image TextureSheet="storm_emoji_carbot_nexus_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="carbot_health_globe">
+        <Image TextureSheet="storm_emoji_carbot_nexus_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="carbot_minions">
+        <Image TextureSheet="storm_emoji_carbot_nexus_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="carbot_orphea">
+        <Image TextureSheet="storm_emoji_carbot_nexus_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="carbot_stick_horse">
+        <Image TextureSheet="storm_emoji_carbot_nexus_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="chomp_growl_anim">
+        <Image TextureSheet="storm_emoji_chomp_growl_anim_sheet" Count="2" DurationPerFrame="100"/>
+    </CEmoticon>
+    <CEmoticon id="chomp_minion_anim">
+        <Image TextureSheet="storm_emoji_chomp_minion_anim_sheet" Count="4" DurationPerFrame="100"/>
+    </CEmoticon>
+    <CEmoticon id="chomp_pet_anim">
+        <Image TextureSheet="storm_emoji_chomp_pet_anim_sheet" Count="2" DurationPerFrame="500"/>
+    </CEmoticon>
+    <CEmoticon id="chomp_wave_anim">
+        <Image TextureSheet="storm_emoji_chomp_wave_anim_sheet" Count="6" DurationPerFrame="100"/>
+    </CEmoticon>
+    <CEmoticon id="chomp_paku_anim">
+        <Image TextureSheet="storm_emoji_chomp_paku_anim_sheet" Count="4" DurationPerFrame="100"/>
+    </CEmoticon>
+    <CEmoticon id="toy_bear_anim">
+        <Image TextureSheet="storm_emoji_toy_bear_anim_sheet" Count="12" DurationPerFrame="150"/>
+    </CEmoticon>
+    <CEmoticon id="toy_cosmicflurry_anim">
+        <Image TextureSheet="storm_emoji_toy_cosmicflurry_anim_sheet" Count="5" DurationPerFrame="100"/>
+    </CEmoticon>
+    <CEmoticon id="toy_dice_anim">
+        <Image TextureSheet="storm_emoji_toy_dice_anim_sheet" Count="6" DurationPerFrame="100"/>
+    </CEmoticon>
+    <CEmoticon id="toy_dino_anim">
+        <Image TextureSheet="storm_emoji_toy_dino_anim_sheet" Count="4" DurationPerFrame="80"/>
+    </CEmoticon>
+    <CEmoticon id="toy_herospinner_anim">
+        <Image TextureSheet="storm_emoji_toy_herospinner_anim_sheet" Count="7" DurationPerFrame="25"/>
+    </CEmoticon>
+    <CEmoticon id="toy_minion_anim">
+        <Image TextureSheet="storm_emoji_toy_minion_anim_sheet" Count="6" DurationPerFrame="160"/>
+    </CEmoticon>
+    <CEmoticon id="toy_nerfthis_anim">
+        <Image TextureSheet="storm_emoji_toy_nerfthis_anim_sheet" Count="4" DurationPerFrame="62"/>
+    </CEmoticon>
+    <CEmoticon id="toy_robots_anim">
+        <Image TextureSheet="storm_emoji_toy_robots_anim_sheet" Count="10" DurationPerFrame="120"/>
+    </CEmoticon>
+    <CEmoticon id="toy_train_anim">
+        <Image TextureSheet="storm_emoji_toy_train_anim_sheet" Count="6" DurationPerFrame="200"/>
+    </CEmoticon>
+    <CEmoticon id="toy_turd_anim">
+        <Image TextureSheet="storm_emoji_toy_turd_anim_sheet" Count="8" DurationPerFrame="120"/>
+    </CEmoticon>
+    <CEmoticon id="imperius_angry">
+        <Image TextureSheet="storm_emoji_imperius_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="imperius_cool">
+        <Image TextureSheet="storm_emoji_imperius_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="imperius_embarrassed">
+        <Image TextureSheet="storm_emoji_imperius_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="imperius_happy">
+        <Image TextureSheet="storm_emoji_imperius_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="imperius_inlove">
+        <Image TextureSheet="storm_emoji_imperius_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="imperius_rofl">
+        <Image TextureSheet="storm_emoji_imperius_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="imperius_sad">
+        <Image TextureSheet="storm_emoji_imperius_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="imperius_silly">
+        <Image TextureSheet="storm_emoji_imperius_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="imperius_speechless">
+        <Image TextureSheet="storm_emoji_imperius_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="imperius_surprised">
+        <Image TextureSheet="storm_emoji_imperius_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="carbot_auriel">
+        <Image TextureSheet="storm_emoji_carbot_diablo_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="carbot_cain">
+        <Image TextureSheet="storm_emoji_carbot_diablo_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="carbot_diablo">
+        <Image TextureSheet="storm_emoji_carbot_diablo_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="carbot_johanna">
+        <Image TextureSheet="storm_emoji_carbot_diablo_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="carbot_nazeebo">
+        <Image TextureSheet="storm_emoji_carbot_diablo_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="anduin_angry">
+        <Image TextureSheet="storm_emoji_anduin_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="anduin_cool">
+        <Image TextureSheet="storm_emoji_anduin_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="anduin_embarrassed">
+        <Image TextureSheet="storm_emoji_anduin_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="anduin_happy">
+        <Image TextureSheet="storm_emoji_anduin_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="anduin_inlove">
+        <Image TextureSheet="storm_emoji_anduin_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="anduin_rofl">
+        <Image TextureSheet="storm_emoji_anduin_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="anduin_sad">
+        <Image TextureSheet="storm_emoji_anduin_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="anduin_silly">
+        <Image TextureSheet="storm_emoji_anduin_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="anduin_speechless">
+        <Image TextureSheet="storm_emoji_anduin_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="anduin_surprised">
+        <Image TextureSheet="storm_emoji_anduin_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="carbot_chromie">
+        <Image TextureSheet="storm_emoji_carbot_alliance_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="carbot_greymane">
+        <Image TextureSheet="storm_emoji_carbot_alliance_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="carbot_lunara">
+        <Image TextureSheet="storm_emoji_carbot_alliance_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="carbot_uther">
+        <Image TextureSheet="storm_emoji_carbot_alliance_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="carbot_yrel">
+        <Image TextureSheet="storm_emoji_carbot_alliance_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="carbot_kaelthas">
+        <Image TextureSheet="storm_emoji_carbot_horde_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="carbot_murky">
+        <Image TextureSheet="storm_emoji_carbot_horde_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="carbot_ragnaros">
+        <Image TextureSheet="storm_emoji_carbot_horde_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="carbot_thrall">
+        <Image TextureSheet="storm_emoji_carbot_horde_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="carbot_zuljin">
+        <Image TextureSheet="storm_emoji_carbot_horde_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="phrases_spring19_1337">
+        <Image TextureSheet="storm_emoji_phrases_spring19_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="phrases_spring19_h4x">
+        <Image TextureSheet="storm_emoji_phrases_spring19_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="phrases_spring19_m8">
+        <Image TextureSheet="storm_emoji_phrases_spring19_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="phrases_spring19_pwn">
+        <Image TextureSheet="storm_emoji_phrases_spring19_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="phrases_spring19_woot">
+        <Image TextureSheet="storm_emoji_phrases_spring19_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="mecha_yrel_anim">
+        <Image TextureSheet="storm_emoji_mecha_yrel_anim_sheet" Count="3" DurationPerFrame="100"/>
+    </CEmoticon>
+    <CEmoticon id="mecha_valla_anim">
+        <Image TextureSheet="storm_emoji_mecha_valla_anim_sheet" Count="6" DurationPerFrame="70"/>
+    </CEmoticon>
+    <CEmoticon id="mecha_pilotyrel_anim">
+        <Image TextureSheet="storm_emoji_mecha_pilotyrel_anim_sheet" Count="5" DurationPerFrame="120"/>
+    </CEmoticon>
+    <CEmoticon id="mecha_pilotvalla_anim">
+        <Image TextureSheet="storm_emoji_mecha_pilotvalla_anim_sheet" Count="4" DurationPerFrame="60"/>
+    </CEmoticon>
+    <CEmoticon id="mecha_malthael_anim">
+        <Image TextureSheet="storm_emoji_mecha_malthael_anim_sheet" Count="6" DurationPerFrame="120"/>
+    </CEmoticon>
+    <CEmoticon id="mecha_anduin_neo">
+        <Image TextureSheet="storm_emoji_secret_01_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="nexushunter_angry">
+        <Image TextureSheet="storm_emoji_nexushunter_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="nexushunter_cool">
+        <Image TextureSheet="storm_emoji_nexushunter_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="nexushunter_embarrassed">
+        <Image TextureSheet="storm_emoji_nexushunter_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="nexushunter_happy">
+        <Image TextureSheet="storm_emoji_nexushunter_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="nexushunter_inlove">
+        <Image TextureSheet="storm_emoji_nexushunter_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="nexushunter_rofl">
+        <Image TextureSheet="storm_emoji_nexushunter_sheet" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="nexushunter_sad">
+        <Image TextureSheet="storm_emoji_nexushunter_sheet" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="nexushunter_silly">
+        <Image TextureSheet="storm_emoji_nexushunter_sheet" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="nexushunter_speechless">
+        <Image TextureSheet="storm_emoji_nexushunter_sheet" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="nexushunter_surprised">
+        <Image TextureSheet="storm_emoji_nexushunter_sheet" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="madaxe19_azmotank">
+        <Image TextureSheet="storm_emoji_madaxe19_1_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="madaxe19_deckardcans">
+        <Image TextureSheet="storm_emoji_madaxe19_1_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="madaxe19_garrrry">
+        <Image TextureSheet="storm_emoji_madaxe19_1_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="madaxe19_madlad">
+        <Image TextureSheet="storm_emoji_madaxe19_1_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="madaxe19_madrider">
+        <Image TextureSheet="storm_emoji_madaxe19_1_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="madaxe19_bloodrage">
+        <Image TextureSheet="storm_emoji_madaxe19_2_sheet"/>
+    </CEmoticon>
+    <CEmoticon id="madaxe19_nazeebo">
+        <Image TextureSheet="storm_emoji_madaxe19_2_sheet" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="madaxe19_ripper">
+        <Image TextureSheet="storm_emoji_madaxe19_2_sheet" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="madaxe19_trashsniper">
+        <Image TextureSheet="storm_emoji_madaxe19_2_sheet" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="madaxe19_zombies">
+        <Image TextureSheet="storm_emoji_madaxe19_2_sheet" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="Dev001">
+        <Image TextureSheet="Developers"/>
+    </CEmoticon>
+    <CEmoticon id="Dev002">
+        <Image TextureSheet="Developers" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="Dev003">
+        <Image TextureSheet="Developers" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="Dev004">
+        <Image TextureSheet="Developers" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="Dev005">
+        <Image TextureSheet="Developers" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="ShashangA">
+        <Image TextureSheet="Shashang"/>
+    </CEmoticon>
+    <CEmoticon id="ShashangB">
+        <Image TextureSheet="Shashang" Index="1"/>
+    </CEmoticon>
+    <CEmoticon id="ShashangC">
+        <Image TextureSheet="Shashang" Index="2"/>
+    </CEmoticon>
+    <CEmoticon id="ShashangD">
+        <Image TextureSheet="Shashang" Index="3"/>
+    </CEmoticon>
+    <CEmoticon id="ShashangE">
+        <Image TextureSheet="Shashang" Index="4"/>
+    </CEmoticon>
+    <CEmoticon id="ShashangF">
+        <Image TextureSheet="Shashang" Index="5"/>
+    </CEmoticon>
+    <CEmoticon id="ShashangG">
+        <Image TextureSheet="Shashang" Index="6"/>
+    </CEmoticon>
+    <CEmoticon id="ShashangH">
+        <Image TextureSheet="Shashang" Index="7"/>
+    </CEmoticon>
+    <CEmoticon id="ShashangI">
+        <Image TextureSheet="Shashang" Index="8"/>
+    </CEmoticon>
+    <CEmoticon id="ShashangJ">
+        <Image TextureSheet="Shashang" Index="9"/>
+    </CEmoticon>
+    <CEmoticon id="ShashangK">
+        <Image TextureSheet="Shashang" Index="10"/>
+    </CEmoticon>
+    <CEmoticon id="ShashangL">
+        <Image TextureSheet="Shashang" Index="11"/>
+    </CEmoticon>
+    <CEmoticon id="ShashangM">
+        <Image TextureSheet="Shashang" Index="12"/>
+    </CEmoticon>
+    <CEmoticon id="ShashangN">
+        <Image TextureSheet="Shashang" Index="13"/>
+    </CEmoticon>
+    <CEmoticon id="ShashangO">
+        <Image TextureSheet="Shashang" Index="14"/>
+    </CEmoticon>
+    <CEmoticon id="ShashangP">
+        <Image TextureSheet="Shashang" Index="15"/>
+    </CEmoticon>
+    <CEmoticon id="ShashangQ">
+        <Image TextureSheet="Shashang" Index="16"/>
+    </CEmoticon>
+    <CEmoticon id="ShashangR">
+        <Image TextureSheet="Shashang" Index="17"/>
+    </CEmoticon>
+    <CEmoticon id="ShashangS">
+        <Image TextureSheet="Shashang" Index="18"/>
+    </CEmoticon>
+    <CEmoticon id="ShashangT">
+        <Image TextureSheet="Shashang" Index="19"/>
+    </CEmoticon>
+    <CEmoticon id="ShashangU">
+        <Image TextureSheet="Shashang" Index="20"/>
+    </CEmoticon>
+    <CEmoticon id="ShashangV">
+        <Image TextureSheet="Shashang" Index="21"/>
+    </CEmoticon>
+    <CEmoticon id="ShashangW">
+        <Image TextureSheet="Shashang" Index="22"/>
+    </CEmoticon>
+    <CEmoticon id="ShashangX">
+        <Image TextureSheet="Shashang" Index="23"/>
+    </CEmoticon>
+    <CEmoticon id="ShashangY">
+        <Image TextureSheet="Shashang" Index="24"/>
+    </CEmoticon>
+</Catalog>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CConsoleSkin default="1" id="ConsoleBase_Reward">
+        <RequiredReward value=""/>
+    </CConsoleSkin>
+    <CConsoleSkin default="1" id="ConsoleBase_Reward_2D">
+        <RequiredReward value=""/>
+    </CConsoleSkin>
+    <CConsoleSkin id="ConsoleProtoss_Alliance">
+        <RequiredReward value=""/>
+    </CConsoleSkin>
+    <CConsoleSkin id="ConsoleProtoss_ArcadePurple">
+        <RequiredReward value=""/>
+    </CConsoleSkin>
+    <CConsoleSkin id="ConsoleProtoss_Classic">
+        <RequiredReward value=""/>
+    </CConsoleSkin>
+    <CConsoleSkin id="ConsoleProtoss_Default">
+        <RequiredReward value=""/>
+    </CConsoleSkin>
+    <CConsoleSkin id="ConsoleProtoss_Fenix">
+        <RequiredReward value=""/>
+    </CConsoleSkin>
+    <CConsoleSkin id="ConsoleProtoss_Forged">
+        <RequiredReward value=""/>
+    </CConsoleSkin>
+    <CConsoleSkin id="ConsoleProtoss_Horde">
+        <RequiredReward value=""/>
+    </CConsoleSkin>
+    <CConsoleSkin id="ConsoleProtoss_Ihanrii">
+        <RequiredReward value=""/>
+    </CConsoleSkin>
+    <CConsoleSkin id="ConsoleProtoss_Nerazim">
+        <RequiredReward value=""/>
+    </CConsoleSkin>
+    <CConsoleSkin id="ConsoleProtoss_Scourge">
+        <RequiredReward value=""/>
+    </CConsoleSkin>
+    <CConsoleSkin id="ConsoleProtoss_Sentinels">
+        <RequiredReward value=""/>
+    </CConsoleSkin>
+    <CConsoleSkin id="ConsoleProtoss_XelNaga">
+        <RequiredReward value=""/>
+    </CConsoleSkin>
+    <CConsoleSkin id="ConsoleTerran_Alliance">
+        <RequiredReward value=""/>
+    </CConsoleSkin>
+    <CConsoleSkin id="ConsoleTerran_ArcadePurple">
+        <RequiredReward value=""/>
+    </CConsoleSkin>
+    <CConsoleSkin id="ConsoleTerran_Classic">
+        <RequiredReward value=""/>
+    </CConsoleSkin>
+    <CConsoleSkin id="ConsoleTerran_CovertOps">
+        <RequiredReward value=""/>
+    </CConsoleSkin>
+    <CConsoleSkin id="ConsoleTerran_Default">
+        <RequiredReward value=""/>
+    </CConsoleSkin>
+    <CConsoleSkin id="ConsoleTerran_Horde">
+        <RequiredReward value=""/>
+    </CConsoleSkin>
+    <CConsoleSkin id="ConsoleTerran_Horner">
+        <RequiredReward value=""/>
+    </CConsoleSkin>
+    <CConsoleSkin id="ConsoleTerran_Imperial">
+        <RequiredReward value=""/>
+        <!-- <ProductId value="48752"/> -->
+    </CConsoleSkin>
+    <CConsoleSkin id="ConsoleTerran_Nova">
+        <SkinId value="SpecialForces"/>
+    </CConsoleSkin>
+    <CConsoleSkin id="ConsoleTerran_Scourge">
+        <RequiredReward value=""/>
+    </CConsoleSkin>
+    <CConsoleSkin id="ConsoleTerran_Sentinels">
+        <RequiredReward value=""/>
+    </CConsoleSkin>
+    <CConsoleSkin id="ConsoleTerran_Silver">
+        <RequiredReward value=""/>
+    </CConsoleSkin>
+    <CConsoleSkin id="ConsoleTerran_Swann">
+        <RequiredReward value=""/>
+    </CConsoleSkin>
+    <CConsoleSkin id="ConsoleTerran_XelNaga">
+        <RequiredReward value=""/>
+    </CConsoleSkin>
+    <CConsoleSkin id="ConsoleZerg_Abathur">
+        <RequiredReward value=""/>
+    </CConsoleSkin>
+    <CConsoleSkin id="ConsoleZerg_Alliance">
+        <RequiredReward value=""/>
+    </CConsoleSkin>
+    <CConsoleSkin id="ConsoleZerg_ArcadePurple">
+        <RequiredReward value=""/>
+    </CConsoleSkin>
+    <CConsoleSkin id="ConsoleZerg_Classic">
+        <RequiredReward value=""/>
+    </CConsoleSkin>
+    <CConsoleSkin id="ConsoleZerg_Default">
+        <RequiredReward value=""/>
+    </CConsoleSkin>
+    <CConsoleSkin id="ConsoleZerg_Dehaka">
+        <RequiredReward value=""/>
+    </CConsoleSkin>
+    <CConsoleSkin id="ConsoleZerg_Horde">
+        <RequiredReward value=""/>
+    </CConsoleSkin>
+    <CConsoleSkin id="ConsoleZerg_Mecha">
+        <RequiredReward value=""/>
+    </CConsoleSkin>
+    <CConsoleSkin id="ConsoleZerg_RCZ">
+        <RequiredReward value=""/>
+    </CConsoleSkin>
+    <CConsoleSkin id="ConsoleZerg_Scourge">
+        <RequiredReward value=""/>
+    </CConsoleSkin>
+    <CConsoleSkin id="ConsoleZerg_Sentinels">
+        <RequiredReward value=""/>
+    </CConsoleSkin>
+    <CConsoleSkin id="ConsoleZerg_XelNaga">
+        <RequiredReward value=""/>
+    </CConsoleSkin>
+</Catalog>

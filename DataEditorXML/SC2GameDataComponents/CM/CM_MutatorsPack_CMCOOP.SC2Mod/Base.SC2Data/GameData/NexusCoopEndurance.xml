@@ -1,0 +1,1121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CEffectApplyBehavior id="MutatorBlessingAB">
+        <EditorCategories value=""/>
+        <Behavior value="MutatorBlessing"/>
+    </CEffectApplyBehavior>
+    <CEffectEnumArea id="MutatorBlessingSearch">
+        <EditorCategories value=""/>
+        <SearchFilters value="-;Self,Neutral,Enemy,Structure,Heroic,Worker,Missile,Dead,Hidden"/>
+        <AreaArray MaxCount="1" Radius="6" Effect="MutatorBlessingAB"/>
+    </CEffectEnumArea>
+    <CEffectApplyBehavior id="HybridReaverBreathofEvilCasterPreventKnockBackAB">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <Behavior value="PreventKnockback"/>
+        <Flags index="UseDuration" value="1"/>
+        <Duration value="10"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="SoulCrushCountAB">
+        <EditorCategories value="Race:Zerg"/>
+        <Behavior value="SoulCrushCount"/>
+    </CEffectApplyBehavior>
+    <CEffectEnumArea id="VoidCounterattackCasterSearch">
+        <EditorCategories value=""/>
+        <SearchFilters value="-;Player,Ally,Neutral,Dead,Hidden,Invulnerable"/>
+        <AreaArray Radius="6" Effect="VoidCounterattackDamage"/>
+    </CEffectEnumArea>
+    <CEffectApplyBehavior id="HybridReaverBreathofEvilCasterAB">
+        <EditorCategories value="Race:Terran"/>
+        <Behavior value="HybridReaverBreathofEvilCaster"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="VoidPsiStormAB">
+        <EditorCategories value="Race:Protoss"/>
+        <Behavior value="VoidPsiStorm"/>
+    </CEffectApplyBehavior>
+    <CEffectDamage id="VoidPsiStormDamage">
+        <ValidatorArray value="PsiStormUTargetFilters"/>
+        <EditorCategories value="Race:Protoss"/>
+        <Visibility value="Hidden"/>
+        <Amount value="10"/>
+    </CEffectDamage>
+    <CEffectCreatePersistent id="VoidPsiStormCP">
+        <EditorCategories value="Race:Protoss"/>
+        <InitialEffect value="VoidPsiStormSet"/>
+        <PeriodCount value="12"/>
+        <PeriodicEffectArray value="VoidPsiStormSet"/>
+        <PeriodicPeriodArray value="0.1"/>
+        <AINotifyEffect value="PsiStormSearch"/>
+    </CEffectCreatePersistent>
+    <CEffectEnumArea id="VoidPsiStormSearch">
+        <EditorCategories value="Race:Protoss"/>
+        <AINotifyFlags index="HurtFriend" value="1"/>
+        <AINotifyFlags index="HurtEnemy" value="1"/>
+        <SearchFilters value="-;Player,Ally,Neutral,Missile,Destructible,Stasis,Dead,Hidden,Invulnerable"/>
+        <AreaArray Radius="2.5" Effect="VoidPsiStormAB"/>
+        <SearchFlags index="CallForHelp" value="1"/>
+    </CEffectEnumArea>
+    <CEffectSet id="VoidPsiStormSet">
+        <EditorCategories value="Race:Protoss"/>
+        <EffectArray value="VoidPsiStormSearch"/>
+    </CEffectSet>
+    <CEffectDamage id="VoidPlasmaBlastAOEDamage">
+        <EditorCategories value="Race:Zerg"/>
+        <ResponseFlags index="Acquire" value="1"/>
+        <ResponseFlags index="Flee" value="1"/>
+        <Visibility value="Visible"/>
+        <Flags index="Notification" value="1"/>
+        <Kind value="Splash"/>
+        <Amount value="260"/>
+        <Death value="Blast"/>
+        <SearchFilters value="-;Self,Missile,Stasis,Dead,Hidden,Invulnerable"/>
+    </CEffectDamage>
+    <CEffectDamage id="VoidPlasmaBlastMainDamage">
+        <EditorCategories value="Race:Zerg"/>
+        <ResponseFlags index="Acquire" value="1"/>
+        <ResponseFlags index="Flee" value="1"/>
+        <Visibility value="Visible"/>
+        <Flags index="Notification" value="1"/>
+        <Kind value="Splash"/>
+        <Amount value="500"/>
+        <Death value="Blast"/>
+        <SearchFilters value="-;Self,Missile,Stasis,Dead,Hidden,Invulnerable"/>
+    </CEffectDamage>
+    <CEffectSet id="VoidPlasmaBlastImpactSet">
+        <EditorCategories value=""/>
+        <EffectArray value="VoidPlasmaBlastMainDamage"/>
+        <EffectArray value="VoidPlasmaBlastImpactAB"/>
+        <EffectArray value="VoidPlasmaBlastSearch"/>
+    </CEffectSet>
+    <CEffectLaunchMissile id="VoidPlasmaBlastLM">
+        <EditorCategories value="Race:Protoss"/>
+        <ImpactEffect value="VoidPlasmaBlastImpactSet"/>
+        <AmmoUnit value="VoidPlasmaBlast"/>
+    </CEffectLaunchMissile>
+    <CEffectDamage id="VoidCounterattackDamage">
+        <EditorCategories value=""/>
+        <Amount value="20"/>
+        <LeechFraction index="Shields" value="0.1"/>
+    </CEffectDamage>
+    <CEffectApplyBehavior id="VoidCounterattackCasterAB">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <Behavior value="VoidCounterattackCaster"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="EssenceConsumeLMAB">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <Behavior value="EssenceConsume"/>
+    </CEffectApplyBehavior>
+    <CEffectCreatePersistent id="EssenceConsumeCP">
+        <EditorCategories value=""/>
+        <WhichLocation Value="TargetUnitOrPoint"/>
+        <PeriodCount value="20"/>
+        <PeriodicEffectArray value="EssenceConsumeSetLM"/>
+        <PeriodicPeriodArray value="0.1"/>
+    </CEffectCreatePersistent>
+    <CEffectDamage id="EssenceConsumeLaunch">
+        <EditorCategories value="Race:Zerg"/>
+        <Kind value="Ranged"/>
+        <Amount value="20"/>
+    </CEffectDamage>
+    <CEffectModifyUnit id="EssenceConsumeImpact">
+        <EditorCategories value=""/>
+        <TransferUnit Value="Target"/>
+        <ImpactUnit Value="Caster"/>
+        <VitalArray index="Life">
+            <Change value="20"/>
+            <ChangeFraction value="0.01"/>
+        </VitalArray>
+    </CEffectModifyUnit>
+    <CEffectSet id="EssenceConsumeLMSet">
+        <EditorCategories value=""/>
+        <EffectArray value="EssenceConsumeImpact"/>
+        <EffectArray value="EssenceConsumeLMAB"/>
+    </CEffectSet>
+    <CEffectLaunchMissile id="EssenceConsumeLM">
+        <EditorCategories value="Race:Zerg"/>
+        <LaunchLocation Value="TargetUnitOrPoint"/>
+        <ImpactLocation Value="CasterUnit"/>
+        <LaunchEffect value="EssenceConsumeLaunch"/>
+        <ImpactEffect value="EssenceConsumeLMSet"/>
+        <AmmoUnit value="EssenceConsumeMissile"/>
+        <Movers Link="EssenceConsumeMover"/>
+    </CEffectLaunchMissile>
+    <CEffectSet id="EssenceConsumeSetLM">
+        <ValidatorArray value="NotDead"/>
+        <EditorCategories value="Race:Zerg"/>
+        <EffectArray value="EssenceConsumeLM"/>
+    </CEffectSet>
+    <CEffectSet id="EssenceConsumeSetCP">
+        <ValidatorArray value="NotDead"/>
+        <EditorCategories value="Race:Zerg"/>
+        <EffectArray value="EssenceConsumeCP"/>
+    </CEffectSet>
+    <CEffectDamage id="SoulCrushDamage" parent="DU_WEAP">
+        <EditorCategories value="Race:Zerg"/>
+        <ImpactLocation Value="SourceUnit"/>
+        <AttributeBonus index="Armored" value="5"/>
+        <Amount value="5"/>
+        <LeechFraction index="Life" value="0.5"/>
+    </CEffectDamage>
+    <CEffectEnumArea id="SoulCrushSearch">
+        <EditorCategories value="Race:Zerg"/>
+        <SearchFilters value="Visible;Self,Player,Ally,Neutral,Missile,Buried,Dead,Invulnerable"/>
+        <AreaArray Radius="11" Effect="SoulCrushSet"/>
+    </CEffectEnumArea>
+    <CEffectApplyBehavior id="SoulCrushAB">
+        <EditorCategories value="Race:Zerg"/>
+        <Behavior value="SoulCrush"/>
+    </CEffectApplyBehavior>
+    <CEffectSet id="SoulCrushSet">
+        <EditorCategories value=""/>
+        <EffectArray value="SoulCrushAB"/>
+        <EffectArray value="EssenceConsumeSetLM"/>
+        <EffectArray value="SoulCrushCountAB"/>
+    </CEffectSet>
+    <CEffectEnumArea id="VoidPlasmaBlastSearch">
+        <EditorCategories value=""/>
+        <ExcludeArray Value="Target"/>
+        <SearchFilters value="-;Player,Ally,Neutral,Missile,Dead,Hidden,Invulnerable"/>
+        <AreaArray Radius="4" Effect="VoidPlasmaBlastAOESet"/>
+        <SearchFlags index="OffsetAreaByAngle" value="0"/>
+    </CEffectEnumArea>
+    <CEffectSet id="VoidPlasmaBlastAOESet">
+        <EditorCategories value=""/>
+        <DamageModifierSource Effect="VoidPlasmaBlastSearch" Value="Source"/>
+        <EffectArray value="VoidPlasmaBlastAOEDamage"/>
+        <EffectArray value="VoidPlasmaBlastAOEKnockback4"/>
+    </CEffectSet>
+    <CEffectCreatePersistent id="HybridReaverBreathofEvilCP">
+        <EditorCategories value="Race:Protoss"/>
+        <PeriodCount value="144"/>
+        <PeriodicEffectArray value="HybridReaverBreathofEvilSearch"/>
+        <PeriodicPeriodArray value="0.0625"/>
+    </CEffectCreatePersistent>
+    <CEffectDamage id="HybridReaverBreathofEvilDamage">
+        <EditorCategories value="Race:Zerg"/>
+        <Kind value="Ranged"/>
+        <Amount value="5"/>
+        <Death value="Blast"/>
+    </CEffectDamage>
+    <CEffectSet id="HybridReaverBreathofEvilInitSet">
+        <EditorCategories value=""/>
+        <EffectArray value="HybridReaverBreathofEvilCasterPreventKnockBackAB"/>
+        <EffectArray value="ApplyFrenzyCaster"/>
+    </CEffectSet>
+    <CEffectLaunchMissile id="HybridReaverBreathofEvilLM">
+        <EditorCategories value="Race:Protoss"/>
+        <LaunchLocation Value="TargetUnitOrPoint"/>
+        <ImpactLocation Value="SourceUnit"/>
+        <LaunchEffect value="HybridReaverBreathofEvilDamage"/>
+        <ImpactEffect value="HybridReaverBreathofEvilHealCaster"/>
+        <AmmoUnit value="HybridReaverBreathofEvilMissile"/>
+        <Movers Link="HybridSingularityFeedback"/>
+    </CEffectLaunchMissile>
+    <CEffectModifyUnit id="HybridReaverBreathofEvilHealCaster">
+        <EditorCategories value=""/>
+        <TransferUnit Value="Target"/>
+        <VitalArray index="Life">
+            <Change value="20"/>
+        </VitalArray>
+    </CEffectModifyUnit>
+    <CEffectEnumArea id="HybridReaverBreathofEvilSearch">
+        <EditorCategories value="Race:Terran"/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Missile,Dead,Hidden,Invulnerable"/>
+        <AreaArray Radius="10" Effect="HybridReaverBreathofEvilLM"/>
+        <MaxCount value="1"/>
+        <SearchFlags index="ExtendByUnitRadius" value="1"/>
+    </CEffectEnumArea>
+    <CEffectCreateUnit id="VoidPlasmaBlastAOEKnockback4">
+        <ValidatorArray value="NoPreventKnockback"/>
+        <ValidatorArray value="NotStructureTarget"/>
+        <EditorCategories value="Race:Zerg"/>
+        <Origin Value="SourcePoint"/>
+        <CreateFlags index="Birth" value="0"/>
+        <CreateFlags index="DropOff" value="0"/>
+        <CreateFlags index="PlacementIgnoreBlockers" value="1"/>
+        <CreateFlags index="Precursor" value="1"/>
+        <CreateFlags index="ProvideFood" value="0"/>
+        <CreateFlags index="TechComplete" value="0"/>
+        <CreateFlags index="UseFood" value="0"/>
+        <CreateFlags index="NormalizeSpawnOffset" value="0"/>
+        <SpawnOwner Value="Neutral"/>
+        <SpawnEffect value="VoidPlasmaBlastAOEKnockback4PHSet"/>
+        <SpawnRange value="5"/>
+        <SpawnOffset value="0,4"/>
+        <TypeFallbackUnit Value="Target"/>
+    </CEffectCreateUnit>
+    <CEffectApplyBehavior id="VoidPlasmaBlastAOEKnockback4AB">
+        <WhichUnit Effect="VoidPlasmaBlastAOEKnockback4"/>
+        <Behavior value="VoidPlasmaBlastKnockback4"/>
+    </CEffectApplyBehavior>
+    <CEffectSet id="VoidPlasmaBlastAOEKnockback4PHSet">
+        <EffectArray value="PrecursorUnitKnockbackAB"/>
+        <EffectArray value="VoidPlasmaBlastAOEKnockback4AB"/>
+        <EffectArray value="VoidPlasmaBlastAOEKnockback4PHLM"/>
+    </CEffectSet>
+    <CEffectCreatePersistent id="VoidPlasmaBlastAOEKnockback4CP">
+        <WhichLocation Value="CasterUnit"/>
+        <PeriodCount value="1"/>
+        <PeriodicEffectArray value="VoidPlasmaBlastAOEKnockback4RB"/>
+        <PeriodicPeriodArray value="0.0625"/>
+    </CEffectCreatePersistent>
+    <CEffectLaunchMissile id="VoidPlasmaBlastAOEKnockback4PHLM">
+        <LaunchLocation Effect="VoidPlasmaBlastAOEKnockback4" Value="TargetUnit"/>
+        <ImpactEffect value="VoidPlasmaBlastAOEKnockback4CP"/>
+        <Flags index="2D" value="1"/>
+        <Movers Link="UnitKnockbackMover4"/>
+        <DeathType value="Unknown"/>
+    </CEffectLaunchMissile>
+    <CEffectRemoveBehavior id="VoidPlasmaBlastAOEKnockback4RB">
+        <WhichUnit Effect="VoidPlasmaBlastAOEKnockback4"/>
+        <BehaviorLink value="UnitKnockback"/>
+        <Count value="1"/>
+    </CEffectRemoveBehavior>
+    <CEffectApplyBehavior id="VoidPlasmaBlastImpactAB">
+        <ValidatorArray index="0" removed="1"/>
+        <EditorCategories value="Race:InfestedTerran"/>
+        <Behavior value="VoidPlasmaBlastStun"/>
+    </CEffectApplyBehavior>
+    <CEffectRemoveBehavior id="HybridNemesisDebuffRBPeriod">
+        <EditorCategories value=""/>
+        <BehaviorAlignment value="Negative"/>
+    </CEffectRemoveBehavior>
+    <CEffectApplyBehavior id="MutatorsArmorFailureAB">
+        <EditorCategories value="Race:Terran"/>
+        <Chance value="0.1"/>
+        <Behavior value="MutatorsArmorFailure"/>
+    </CEffectApplyBehavior>
+    <CEffectDamage id="MutatorsArmorFailureBonusDamage">
+        <ValidatorArray value="HasMutatorsArmorFailure"/>
+        <EditorCategories value=""/>
+        <Chance value="0.5"/>
+        <VitalFractionMax index="Life" value="0.05"/>
+        <VitalFractionMax index="Shields" value="0.05"/>
+    </CEffectDamage>
+    <CEffectSet id="MutatorsArmorFailureSet">
+        <EditorCategories value=""/>
+        <EffectArray value="MutatorsArmorFailureAB"/>
+        <EffectArray value="MutatorsArmorFailureBonusDamage"/>
+    </CEffectSet>
+    <CAbilEffectTarget id="VoidPlasmaBlast">
+        <Alignment value="Negative"/>
+        <EditorCategories value="Race:Protoss,AbilityorEffectType:Units"/>
+        <Effect index="0" value="VoidPlasmaBlastLM"/>
+        <Cost>
+            <Cooldown TimeUse="10"/>
+        </Cost>
+        <Range value="10"/>
+        <RangeSlop value="10"/>
+        <PrepTime value="3"/>
+        <UninterruptibleArray index="Prep" value="1"/>
+        <UninterruptibleArray index="Cast" value="1"/>
+        <UninterruptibleArray index="Channel" value="1"/>
+        <UninterruptibleArray index="Finish" value="1"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="VoidPlasmaBlast">
+            <Flags index="UseDefaultButton" value="1"/>
+            <Flags index="CreateDefaultButton" value="1"/>
+        </CmdButtonArray>
+    </CAbilEffectTarget>
+    <CAbilEffectTarget id="VoidPsiStorm">
+        <EditorCategories value="Race:Protoss,AbilityorEffectType:Units"/>
+        <Effect index="0" value="VoidPsiStormCP"/>
+        <Flags index="AllowMovement" value="1"/>
+        <Cost>
+            <Cooldown TimeUse="8"/>
+        </Cost>
+        <Range value="9"/>
+        <CursorEffect value="VoidPsiStormSearch"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="VoidPsiStorm">
+            <Flags index="UseDefaultButton" value="1"/>
+            <Flags index="CreateDefaultButton" value="1"/>
+        </CmdButtonArray>
+    </CAbilEffectTarget>
+    <CAbilEffectInstant id="HybridReaverBreathofEvil">
+        <EditorCategories value="Race:Terran,AbilityorEffectType:Units"/>
+        <InfoTooltipPriority value="1"/>
+        <Effect index="0" value="HybridReaverBreathofEvilCasterAB"/>
+        <Flags index="Transient" value="1"/>
+        <Cost>
+            <Cooldown TimeUse="20"/>
+        </Cost>
+        <CmdButtonArray index="Execute" DefaultButtonFace="HybridReaverBreathofEvil">
+            <Flags index="ToSelection" value="1"/>
+            <Flags index="UseDefaultButton" value="1"/>
+            <Flags index="CreateDefaultButton" value="1"/>
+        </CmdButtonArray>
+    </CAbilEffectInstant>
+    <CAbilEffectTarget id="EssenceConsume">
+        <Alignment value="Negative"/>
+        <EditorCategories value="Race:Zerg,AbilityorEffectType:Units"/>
+        <Effect index="0" value="EssenceConsumeSetCP"/>
+        <Cost>
+            <Cooldown TimeUse="10"/>
+        </Cost>
+        <TargetFilters value="-;Self,Missile,Uncommandable,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="5"/>
+        <FinishTime value="2"/>
+        <UninterruptibleArray index="Approach" value="1"/>
+        <UninterruptibleArray index="Prep" value="1"/>
+        <UninterruptibleArray index="Cast" value="1"/>
+        <UninterruptibleArray index="Channel" value="1"/>
+        <UninterruptibleArray index="Finish" value="1"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="EssenceConsume">
+            <Flags index="UseDefaultButton" value="1"/>
+            <Flags index="CreateDefaultButton" value="1"/>
+        </CmdButtonArray>
+    </CAbilEffectTarget>
+    <CAbilEffectInstant id="SoulCrush">
+        <EditorCategories value="Race:Zerg,AbilityorEffectType:Units"/>
+        <Effect index="0" value="SoulCrushSearch"/>
+        <Flags index="Transient" value="1"/>
+        <Cost>
+            <Cooldown TimeUse="20"/>
+        </Cost>
+        <AINotifyEffect value="SoulCrushAB"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="SuperCommanderMutators21Behemoth">
+            <Flags index="UseDefaultButton" value="1"/>
+            <Flags index="CreateDefaultButton" value="1"/>
+        </CmdButtonArray>
+    </CAbilEffectInstant>
+    <CValidatorLocationEnumArea id="MutatorBlessingArea">
+        <AreaArray Compare="GE" Radius="12"/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,RawResource,HarvestableResource,Missile,Stasis,Dead,Hidden,Invulnerable"/>
+    </CValidatorLocationEnumArea>
+    <CValidatorUnitCompareBehaviorCount id="HasMutatorsArmorFailure">
+        <Value value="1"/>
+        <Behavior value="MutatorsArmorFailure"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CButton id="VoidPlasmaBlast">
+        <Icon value="Assets\Textures\btn-ability-protoss-purify.dds"/>
+        <AlertIcon value="Assets\Textures\btn-ability-protoss-purify.dds"/>
+        <EditorCategories value="Race:Protoss"/>
+        <DefaultButtonLayout Row="2"/>
+    </CButton>
+    <CButton id="HybridReaverBreathofEvil">
+        <Icon value="Assets\Textures\btn-ability-zerg-rapidregeneration-color.dds"/>
+        <AlertIcon value="Assets\Textures\btn-ability-zerg-rapidregeneration-color.dds"/>
+        <EditorCategories value="Race:Terran"/>
+        <DefaultButtonLayout Row="2" Column="1"/>
+    </CButton>
+    <CButton id="VoidPsiStorm">
+        <Icon value="Assets\Textures\btn-ability-protoss-psistorm-color.dds"/>
+        <AlertIcon value="Assets\Textures\btn-ability-protoss-psistorm-color.dds"/>
+        <EditorCategories value="Race:Protoss"/>
+        <DefaultButtonLayout Row="2" Column="1"/>
+    </CButton>
+    <CButton id="EssenceConsume">
+        <Icon value="Assets\Textures\btn-ability-zerg-consume.dds"/>
+        <AlertIcon value="Assets\Textures\btn-ability-zerg-consume.dds"/>
+        <EditorCategories value="Race:Zerg"/>
+        <DefaultButtonLayout Row="2"/>
+    </CButton>
+    <CButton id="SuperCommanderMutators21Behemoth">
+        <Icon value="Assets\Textures\storm_soulstile01_red.dds"/>
+        <AlertIcon value="Assets\Textures\storm_soulstile01_red.dds"/>
+        <EditorCategories value="Race:Zerg"/>
+        <DefaultButtonLayout Row="2" Column="1"/>
+    </CButton>
+    <CActorModelMaterial id="AlarakSoulStealGlaze5" parent="GlazeParent">
+        <On index="0" Terms="ActorCreation" Send="AnimBracketStart BSD Birth Stand Death OpeningPlayForever"/>
+        <On Terms="ActorCreation" Send="ModelMaterialApplyTo ::Main"/>
+        <On Terms="Behavior.AbsuletlyDefenseAlly.On" Send="Create"/>
+        <On Terms="Behavior.AbsuletlyDefenseAlly.Off" Send="Destroy"/>
+        <On Terms="Behavior.AbsuletlyDefenseEnemy.On" Send="Create"/>
+        <On Terms="Behavior.AbsuletlyDefenseEnemy.Off" Send="Destroy"/>
+        <Model value="AbsuletlyDefenseAlly"/>
+        <ModelFlags index="AutomateGlobalLoops" value="1"/>
+    </CActorModelMaterial>
+    <CActorModel id="MutatorBlessing" parent="ModelAnimationStyleContinuous">
+        <EditorCategories value=""/>
+        <On Terms="Behavior.MutatorBlessing.On" Send="Create"/>
+        <On Terms="Behavior.MutatorBlessing.Off" Send="AnimBracketStop BSD"/>
+        <On Terms="ActorCreation" Send="SetTintColor {255,0,0 3.000000}"/>
+        <On Terms="Behavior.MutatorBlessing.On" Target="_Unit" Send="SetScale 1.500000 2.000000"/>
+        <On Terms="Behavior.MutatorBlessing.Off" Target="_Unit" Send="SetScale"/>
+        <Host Subject="_Selectable"/>
+        <HostSiteOps Ops="SOpAttachOverhead"/>
+        <Scale value="1.500000"/>
+    </CActorModel>
+    <CActorModel id="VoidPlasmaBlastStun" parent="ModelAnimationStyleContinuous">
+        <On Terms="Behavior.VoidPlasmaBlastStun.On" Send="Create"/>
+        <On Terms="ActorCreation" Send="AnimBracketStart GL_BSD GLbirth GLstand GLdeath"/>
+        <On Terms="ActorCreation" Send="AnimBracketStart $BSD"/>
+        <On Terms="Behavior.VoidPlasmaBlastStun.Off" Send="Destroy"/>
+        <Host Subject="_Selectable"/>
+        <HostSiteOps Ops="SOpAttachCenter"/>
+    </CActorModel>
+    <CActorSound id="VoidPsiStormSound" parent="SoundOneShot">
+        <On Terms="Behavior.VoidPsiStorm.On" Send="Create"/>
+        <Sound value="HighTemplar_PsionicStormImpact"/>
+    </CActorSound>
+    <CActorModel id="VoidPsiStormImpact" parent="ModelAnimationStyleContinuous">
+        <Inherits index="BaseModelScale" value="1"/>
+        <Inherits index="Scale" value="1"/>
+        <On Terms="Behavior.VoidPsiStorm.On" Send="Create"/>
+        <On Terms="Behavior.VoidPsiStorm.Off" Send="AnimBracketStop BSD"/>
+        <On Terms="ActorCreation" Send="SetTintColorBlendPair {0,255,0 2.000000} {0,0,255 2.000000} 1.000000 Cycle"/>
+        <Host Subject="_Selectable"/>
+        <HostSiteOps Ops="SOpAttachCenter"/>
+        <AutoScaleFactor value="0.750000"/>
+    </CActorModel>
+    <CActorModel id="VoidPsiStormCP" parent="ModelAnimationStyleContinuous">
+        <On Terms="Effect.VoidPsiStormCP.Start" Send="Create"/>
+        <On Terms="Effect.VoidPsiStormCP.Stop" Send="AnimBracketStop BSD"/>
+        <On Terms="ActorCreation; ValidatePlayer HaveVoidHighTemplarPsiStormFilter" Send="SetTintColor 0,255,0"/>
+        <On Terms="ActorCreation" Send="SetTintColorBlendPair {0,255,0 2.000000} {0,255,255 2.000000} 2.000000 Cycle"/>
+        <HostSiteOps Ops="SOpShadow"/>
+        <Model value="VoidPsiStorm"/>
+        <Scale value="1.300000"/>
+    </CActorModel>
+    <CActorSound id="VoidPsiStormSearch" parent="SoundContinuous">
+        <On Terms="Effect.VoidPsiStormCP.Start" Send="Create"/>
+        <On Terms="Effect.VoidPsiStormCP.Stop" Send="Destroy"/>
+        <HostSiteOps Ops="SOpShadow"/>
+        <Sound value="HighTemplar_PsionicStormLaunch"/>
+    </CActorSound>
+    <CActorAction id="VoidPlasmaBlastAttack" parent="GenericAttack" effectImpact="VoidPlasmaBlastAOEDamage" effectLaunch="VoidPlasmaBlastLM">
+        <On index="1" Terms="Effect.VoidPlasmaBlastSearch.Start; FromEffectTreeDescendant" Send="ActionImpact"/>
+        <On index="2" Terms="Effect.VoidPlasmaBlastSearch.Stop; FromEffectTreeDescendant" Send="ActionImpactPhysics"/>
+        <LaunchAssets Sound="Hybrid_PlasmaBlastLaunch"/>
+        <ImpactSiteOps HoldPosition="1"/>
+        <ImpactMap index="None" Model="VoidPlasmaBlastImpact" Sound="Hybrid_PlasmaBlastImpact"/>
+        <ImpactModel value="VoidPlasmaBlastAttackImpact"/>
+    </CActorAction>
+    <CActorModel id="VoidPlasmaBlastAttackImpact" parent="ModelAnimationStyleOneShotNoOrphan">
+        <Flags index="SuppressCreationErrors" value="1"/>
+        <Inherits index="Visibility" value="1"/>
+        <ModelFlags index="AllowHitTest" value="0"/>
+    </CActorModel>
+    <CActorMissile id="VoidPlasmaBlastAttackMissile" parent="GenericAttackMissile" unitName="VoidPlasmaBlast"/>
+    <CActorSimple id="VoidPlasmaBlastAOEKnockback">
+        <On Terms="Behavior.VoidPlasmaBlastKnockback4.On; ValidateUnit IsNotConstructing" Send="Create"/>
+        <On Terms="ActorCreation" Target="_Unit" Send="AnimClear Attack"/>
+        <On Terms="ActorCreation" Target="_Unit" Send="AnimClear AttackReady"/>
+        <On Terms="ActorCreation" Target="_Unit" Send="AnimClear AttackLeft"/>
+        <On Terms="ActorCreation" Target="_Unit" Send="AnimClear AttackRight"/>
+        <On Terms="ActorCreation" Target="_Unit" Send="AnimPlay KnockbackFlail Flail PlayForever,RandomStartOffset 0.100000 0.100000"/>
+        <On Terms="ActorCreation" Send="TimerSet 3.500000 KnockbackDelay"/>
+        <On Terms="TimerExpired; TimerName KnockbackDelay" Target="_Unit" Send="AnimClear KnockbackFlail"/>
+        <On Terms="TimerExpired; TimerName KnockbackDelay" Send="Destroy"/>
+        <On Terms="Behavior.VoidPlasmaBlastKnockback4.Off" Target="_Unit" Send="AnimClear KnockbackFlail"/>
+        <On Terms="Behavior.VoidPlasmaBlastKnockback4.Off" Send="Destroy"/>
+        <On Terms="Behavior.HHWarHoundKnockback.On; ValidateUnit IsNotConstructing; ValidateUnitType NotSiegedTank" Send="Create"/>
+        <On Terms="Behavior.HHWarHoundKnockback.Off" Target="_Unit" Send="AnimClear KnockbackFlail"/>
+        <On Terms="Behavior.HHWarHoundKnockback.Off" Send="Destroy"/>
+        <On Terms="Behavior.HHReaperKnockback.On; ValidateUnit IsNotConstructing; ValidateUnitType NotSiegedTank" Send="Create"/>
+        <On Terms="Behavior.HHReaperKnockback.Off" Target="_Unit" Send="AnimClear KnockbackFlail"/>
+        <On Terms="Behavior.HHReaperKnockback.Off" Send="Destroy"/>
+    </CActorSimple>
+    <CActorBeamSimple id="VoidCounterattackBeam" parent="BeamSimpleAnimationStyleOneShot">
+        <Model value="VoidCounterattackLighting"/>
+    </CActorBeamSimple>
+    <CActorSound id="VoidCounterattackImpactSound" parent="SoundOneShot">
+        <On Terms="Effect.ChainReaction1Damage.Start" Send="Create"/>
+        <On Terms="Effect.KerriganVoidUlnar02ChainReaction1Damage.Start" Send="Create"/>
+        <On Terms="Effect.VoidCounterattackDamage.Start" Send="Create"/>
+        <Sound value="Kerrigan_BeamInitial_AttackLaunch"/>
+    </CActorSound>
+    <CActorAction id="VoidCounterattackImpact" parent="GenericAttack" effectAttack="VoidCounterattackDamage">
+        <LaunchSiteOps Ops="SOpAttachCenter"/>
+        <Beam value="VoidCounterattackBeam"/>
+        <BeamScope value="Caster"/>
+        <ImpactSiteOps Ops="SOpAttachHarness SOpAttachVolumeNoVizEnhance"/>
+        <ImpactSite value="ChainReaction1ImpactSite"/>
+        <ImpactPhysics Name="ChainReactionAttackForce" MatchKeys="Basic" Physics="ChainReactionAttackForce"/>
+    </CActorAction>
+    <CActorModel id="VoidCounterattackCaster" parent="ModelAddition">
+        <Macros value="GlobalLoopMacro"/>
+        <On index="0" Terms="ActorCreation" Send="AnimBracketStart BSD Stand Stand Death"/>
+        <On Terms="Behavior.VoidCounterattackCaster.On" Send="AnimGroupApply E"/>
+        <On Terms="UnitDeath" Send="Destroy"/>
+        <On Terms="Behavior.VoidCounterattackCaster.On" Send="Create"/>
+        <On Terms="Behavior.VoidCounterattackCaster.Off" Send="Destroy"/>
+        <HostSiteOps Ops="SOpAttachOrigin"/>
+        <AutoScaleFactor value="1.000000"/>
+    </CActorModel>
+    <CActorModel id="EssenceConsumeBuffImpact">
+        <Flags index="SuppressCreationErrors" value="1"/>
+        <Flags index="SuppressSaveLoad" value="1"/>
+        <Inherits index="Visibility" value="1"/>
+        <On Terms="ActorCreation" Send="AnimBracketStart BSD Birth {} {} ContentPlayOnce"/>
+        <On Terms="AnimBracketState.*.AfterClosing; AnimName BSD" Send="Destroy"/>
+        <On Terms="Effect.EssenceConsumeLMAB.Start; At Caster" Send="Create"/>
+        <HostSiteOps Ops="SOpAttachWeapon"/>
+        <ModelFlags index="AllowHitTest" value="0"/>
+    </CActorModel>
+    <CActorAction id="EssenceConsumeAttact" parent="GenericAttackBase">
+        <On Terms="Effect.EssenceConsumeImpact.Start; FromEffectTreeDescendant" Send="ActionImpact"/>
+        <On Terms="Effect.EssenceConsumeImpact.Stop; FromEffectTreeDescendant" Send="ActionImpactPhysics"/>
+        <On Terms="Effect.EssenceConsumeLM.Start; At Caster" Send="Create"/>
+        <LaunchAttachQuery Methods="Center"/>
+        <Missile value="EssenceConsumeMissile"/>
+        <ImpactSiteOps Ops="SOpAttachHarness"/>
+        <ImpactAttachQuery Methods="Center"/>
+        <ShieldFlashType value="Full"/>
+        <ForceCommencementFrom value="ConsumeDNAFeedbackLM"/>
+    </CActorAction>
+    <CActorMissile id="EssenceConsumeMissile" parent="GenericAttackMissile" unitName="EssenceConsumeMissile"/>
+    <CActorSound id="EssenceConsumeCP" parent="SoundOneShot">
+        <On Terms="Effect.EssenceConsumeCP.Start" Send="Create"/>
+        <Sound value="HybridF_ConsumeDNAImpact"/>
+    </CActorSound>
+    <CActorSound id="EssenceConsumeSound" parent="SoundOneShot">
+        <On Terms="Abil.EssenceConsume.SourceCastStart" Send="Create"/>
+        <Sound value="HybridF_ConsumeDNALaunch"/>
+    </CActorSound>
+    <CActorModel id="EssenceConsumeBuff" parent="ModelAdditionStatic">
+        <Inherits index="BaseModelScale" value="0"/>
+        <Inherits index="Scale" value="0"/>
+        <On Terms="Behavior.EssenceConsume.On" Send="Create"/>
+        <On Terms="Behavior.EssenceConsume.Off" Send="$Death"/>
+        <On Terms="AnimDone; AnimName Death" Send="Destroy"/>
+        <Host Subject="_Unit"/>
+        <HostSiteOps Ops="SOpAttachHead"/>
+        <Model value="EssenceConsumeBuffWeapon"/>
+        <AutoScaleFactor value="1.500000"/>
+    </CActorModel>
+    <CActorModel id="SoulCrushLaunch" parent="ModelAnimationStyleOneShot">
+        <On Terms="Abil.SoulCrush.SourceCastStart" Send="Create"/>
+        <On Terms="Abil.HybridAiurStun2.SourceFinishStart" Send="Create"/>
+        <On Terms="ActorCreation" Target="_Unit" Send="AnimPlay b Stand,Work FullMatch"/>
+    </CActorModel>
+    <CActorSound id="SoulCrushImpactSound" parent="SoundOneShot">
+        <On Terms="Behavior.SoulCrush.On" Send="Create"/>
+    </CActorSound>
+    <CActorSound id="SoulCrushLaunchSound" parent="SoundOneShot">
+        <On Terms="Abil.SoulCrush.SourceCastStart" Send="Create"/>
+        <On Terms="Abil.HybridAiurStun2.SourceFinishStart" Send="Create"/>
+    </CActorSound>
+    <CActorSound id="HybridReaverBreathofEvilMissileImpact" parent="SoundOneShot">
+        <On Terms="Effect.HybridReaverBreathofEvilDamage.Start" Send="Create"/>
+        <Sound value="HybridF_ConsumeDNAImpact"/>
+    </CActorSound>
+    <CActorSound id="HybridReaverBreathofEvilMissileLaunch" parent="SoundOneShot">
+        <On Terms="Behavior.HybridReaverBreathofEvilCaster.On" Send="Create"/>
+        <Sound value="HybridF_ConsumeDNALaunch"/>
+    </CActorSound>
+    <CActorMissile id="HybridReaverBreathofEvilMissile" parent="GenericAttackMissile" unitName="HybridSingularityFeedbackWeapon">
+        <On index="0" Terms="UnitBirth.HybridReaverBreathofEvilMissile" Send="Create"/>
+        <Model value="HybridReaverBreathofEvilMissile"/>
+    </CActorMissile>
+    <CActorModel id="SoulCrushImpact" parent="ModelAdditionStatic">
+        <Inherits index="BaseModelScale" value="0"/>
+        <Inherits index="Scale" value="0"/>
+        <On Terms="Behavior.SoulCrush.On" Send="Create"/>
+        <On Terms="Behavior.SoulCrush.Off" Send="$Death"/>
+        <On Terms="AnimDone; AnimName Death" Send="Destroy"/>
+        <Host Subject="_Unit"/>
+        <HostSiteOps Ops="SOpAttachOrigin"/>
+        <AutoScaleFactor value="1.500000"/>
+    </CActorModel>
+    <CActorModel id="HybridReaverBreathofEvilCaster" parent="ModelAnimationStyleContinuous">
+        <EditorCategories value=""/>
+        <On Terms="Behavior.HybridReaverBreathofEvilCaster.On" Target="_Unit" Send="ModelSwap HybridZergBlackDeath"/>
+        <On Terms="Behavior.HybridReaverBreathofEvilCaster.On" Target="_Unit" Send="AnimPlay b Birth"/>
+        <On Terms="Behavior.HybridReaverBreathofEvilCaster.Off" Target="_Unit" Send="ModelSwap HybridReaver"/>
+        <On Terms="Behavior.HybridReaverBreathofEvilCaster.On" Send="Create"/>
+        <On Terms="Behavior.HybridReaverBreathofEvilCaster.Off" Send="Destroy"/>
+        <Host Subject="_Selectable"/>
+        <HostSiteOps Ops="SOpAttachOrigin"/>
+        <Model value="HybridReaverBreathofEvilImpact"/>
+    </CActorModel>
+    <CActorModelMaterial id="EssenceConsumeBuffGlaze" parent="GlazeParent">
+        <On Terms="Behavior.EssenceConsume.On" Send="Create"/>
+        <On Terms="ActorCreation" Send="ModelMaterialApplyTo ::Main"/>
+        <On Terms="Behavior.EssenceConsume.Off" Send="Destroy"/>
+        <ModelFlags index="AutomateGlobalLoops" value="1"/>
+    </CActorModelMaterial>
+    <CActorModel id="MutatorsExhausted" parent="ModelAnimationStyleContinuous">
+        <EditorCategories value=""/>
+        <On Terms="Behavior.MutatorsExhausted.On" Send="Create"/>
+        <On Terms="Behavior.MutatorsExhausted.Off" Send="AnimBracketStop BSD"/>
+        <On Terms="ActorCreation" Send="SetTintColor {255,0,0 2.000000}"/>
+        <On Terms="ActorCreation" Send="SetOpacity 0.200000"/>
+        <Host Subject="_Selectable"/>
+        <HostSiteOps Ops="SOpAttachOrigin"/>
+    </CActorModel>
+    <CActorModel id="VoidPlasmaBlastChargeModel" parent="ModelAnimationStyleContinuous">
+        <On Terms="Abil.VoidPlasmaBlast.SourcePrepStart" Send="Create"/>
+        <On Terms="Abil.VoidPlasmaBlast.SourcePrepStop" Send="Destroy"/>
+        <Host Subject="_Selectable"/>
+        <HostSiteOps Ops="SOpAttachWeapon"/>
+        <Scale value="0.500000"/>
+    </CActorModel>
+    <CActorSound id="VoidPlasmaBlastChargeSound" parent="SoundContinuous">
+        <On Terms="Abil.VoidPlasmaBlast.SourcePrepStart" Send="Create"/>
+        <On Terms="Abil.VoidPlasmaBlast.SourcePrepStop" Send="Destroy"/>
+        <Host Subject="VoidPlasmaBlastChargeModel"/>
+    </CActorSound>
+    <CActorModel id="MutatorsArmorFailure" parent="ModelAnimationStyleOneShot">
+        <On index="0" Terms="ActorCreation" Send="TimerSet 3.000000 1"/>
+        <On Terms="Behavior.MutatorsArmorFailure.On" Send="Create"/>
+        <On Terms="ActorCreation" Send="AnimPlay BSD Birth"/>
+        <On Terms="TimerExpired; TimerName 1" Send="TimerSet 3.000000 1"/>
+        <On Terms="ActorDestruction" Send="Destroy"/>
+        <On Terms="TimerExpired; TimerName 1" Send="AnimPlay BSD Birth"/>
+        <On Terms="Behavior.MutatorsArmorFailure.Off" Send="Destroy"/>
+        <HostForProps Subject="_Selectable"/>
+        <HostSiteOps Ops="SOpAttachOverhead"/>
+    </CActorModel>
+    <CActorSimple id="MutatorsArmorFailureTint">
+        <On Terms="Behavior.MutatorsArmorFailure.Enable" Send="Create"/>
+        <On Terms="Behavior.MutatorsArmorFailure.On" Target="_Unit" Send="SetTintColor 255,172,89 0.100000 OneShot SeekerTargetArmor"/>
+        <On Terms="Behavior.MutatorsArmorFailure.Off" Target="_Unit" Send="ClearTintColor 0.100000 SeekerTargetArmor"/>
+        <On Terms="Behavior.MutatorsArmorFailure.Off" Send="Destroy"/>
+    </CActorSimple>
+    <CModel id="AbsuletlyDefenseAlly" parent="Glaze">
+        <Model value="Assets\Effects\Glaze\Glaze_Alarak_COOP_Empower\Glaze_Alarak_COOP_Empower.m3"/>
+        <EditorCategories value="Race:Protoss"/>
+    </CModel>
+    <CModel id="VoidPlasmaBlastChargeModel" parent="ImpactFX">
+        <Model value="Assets\Effects\Protoss\PsiStormImpact\PsiStormImpact.m3"/>
+        <EditorCategories value="Race:Protoss"/>
+    </CModel>
+    <CModel id="MutatorBlessing">
+        <Model value="Assets\Effects\Protoss\Revelation_Ex2\Revelation_Ex2.m3"/>
+        <AnimSpeed value="2.000000"/>
+    </CModel>
+    <CModel id="VoidPsiStormImpact" parent="ImpactFX">
+        <Model value="Assets\Effects\Protoss\PsiStormImpact\PsiStormImpact.m3"/>
+        <EditorCategories value="Race:Protoss"/>
+        <Radius value="1.000000"/>
+    </CModel>
+    <CModel id="VoidPsiStorm" parent="PersistentSpellFX">
+        <Model value="Assets\Effects\Protoss\PsiStorm\PsiStorm.m3"/>
+        <EditorCategories value="Race:Protoss"/>
+        <RadiusLoose value="1.000000"/>
+        <ScaleMax value="1.100000,1.100000,1.100000"/>
+        <ScaleMin value="1.100000,1.100000,1.100000"/>
+    </CModel>
+    <CModel id="VoidPlasmaBlastStun" parent="PersistentSpellFX_COOP" COOP="Stetmann" Race="Zerg">
+        <Model value="Assets\COOP\Stetmann\Effects\Ultralisk_Stetmann_COOP_Stunned\Ultralisk_Stetmann_COOP_Stunned.m3"/>
+    </CModel>
+    <CModel id="VoidPlasmaBlastImpact" parent="ImpactFX">
+        <Model value="Assets\Effects\Protoss\ShadowCannonImpact\ShadowCannonImpact.m3"/>
+        <EditorCategories value="Race:Protoss"/>
+        <ScaleMax value="3.000000,3.000000,2.000000"/>
+        <ScaleMin value="3.000000,3.000000,2.000000"/>
+    </CModel>
+    <CModel id="VoidPlasmaBlast" parent="MissileFX">
+        <Model value="Assets\Effects\Protoss\ArcadePlasmaMissile\ArcadePlasmaMissile.m3"/>
+        <EditorCategories value="Race:Protoss"/>
+        <ScaleMax value="3.000000,3.000000,3.000000"/>
+        <ScaleMin value="3.000000,3.000000,3.000000"/>
+    </CModel>
+    <CModel id="VoidCounterattackLighting" parent="PersistentSpellFX">
+        <Model value="Assets\Effects\Zerg\HybridBeam\HybridBeam.m3"/>
+        <EditorCategories value="Race:Zerg"/>
+    </CModel>
+    <CModel id="VoidCounterattackCaster" parent="PersistentSpellFX">
+        <Model value="Assets\COOP\Kerrigan\Effects\LightningFury_Kerrigan_COOP\LightningFury_Kerrigan_COOP.m3"/>
+        <EditorCategories value="Race:Terran"/>
+        <ScaleMax value="0.800000,0.800000,2.000000"/>
+        <ScaleMin value="0.800000,0.800000,2.000000"/>
+    </CModel>
+    <CModel id="EssenceConsumeMissile" parent="MissileFX">
+        <Model value="Assets\Effects\Protoss\Alarak_COOP_SoulAbsorption_Missile\Alarak_COOP_SoulAbsorption_Missile.m3"/>
+        <EditorCategories value="Race:Protoss"/>
+        <ScaleMax value="1.600000,1.600000,1.600000"/>
+        <ScaleMin value="1.600000,1.600000,1.600000"/>
+        <SelectionRadius value="0.333200"/>
+        <ShadowRadius value="0.333200"/>
+    </CModel>
+    <CModel id="EssenceConsumeBuffImpact">
+        <Model value="Assets\Effects\Protoss\Alarak_COOP_SoulAbsorption_Impact\Alarak_COOP_SoulAbsorption_Impact.m3"/>
+        <AnimSpeed value="0.500000"/>
+        <ScaleMax value="1.800000,1.800000,1.800000"/>
+        <ScaleMin value="1.800000,1.800000,1.800000"/>
+    </CModel>
+    <CModel id="EssenceConsumeBuffWeapon" parent="Unit" Race="Zerg">
+        <Model value="Assets\Effects\Protoss\Alarak_COOP_Sacrifice_Missile\Alarak_COOP_Sacrifice_Missile.m3"/>
+        <Radius value="0.800000"/>
+        <ScaleMax value="1.200000,1.200000,0.600000"/>
+        <ScaleMin value="1.200000,1.200000,0.600000"/>
+        <SelectionOffset value="0.000000,0.000000,-0.750000"/>
+        <SelectionRadius value="1.000000"/>
+        <ShadowRadius value="1.000000"/>
+    </CModel>
+    <CModel id="SoulCrushLaunch">
+        <Model value="Assets\Effects\Protoss\TaldarimDeathFleet_Impact\TaldarimDeathFleet_Impact.m3"/>
+        <AnimSpeed value="3.000000"/>
+        <EditorCategories value="Race:Zerg"/>
+        <ScaleMax value="0.500000,0.500000,0.800000"/>
+        <ScaleMin value="0.500000,0.500000,0.800000"/>
+        <SelectionRadius value="0.178400"/>
+        <ShadowRadius value="0.178400"/>
+    </CModel>
+    <CModel id="SoulCrushImpact" parent="Unit" Race="Zerg">
+        <Model value="Assets\Effects\Protoss\Alarak_COOP_LightningStrikes_PowerUp\Alarak_COOP_LightningStrikes_PowerUp.m3"/>
+        <Radius value="0.800000"/>
+        <ScaleMax value="1.200000,1.200000,0.600000"/>
+        <ScaleMin value="1.200000,1.200000,0.600000"/>
+        <SelectionOffset value="0.000000,0.000000,-0.750000"/>
+        <SelectionRadius value="1.000000"/>
+        <ShadowRadius value="1.000000"/>
+    </CModel>
+    <CModel id="HybridReaverBreathofEvilMissile" parent="MissileFX">
+        <Model value="Assets\Effects\Protoss\HybridSuckBlackMissile\HybridSuckBlackMissile.m3"/>
+        <EditorCategories value="Race:Protoss"/>
+        <ScaleMax value="2.000000,2.000000,2.000000"/>
+        <ScaleMin value="2.000000,2.000000,2.000000"/>
+        <SelectionRadius value="0.333200"/>
+        <ShadowRadius value="0.333200"/>
+    </CModel>
+    <CModel id="HybridReaverBreathofEvilImpact">
+        <Model value="Assets\Effects\Zerg\HybridCorruptionCloud_Impact\HybridCorruptionCloud_Impact.m3"/>
+        <ScaleMax value="3.000000,3.000000,3.000000"/>
+        <ScaleMin value="3.000000,3.000000,3.000000"/>
+    </CModel>
+    <CModel id="EssenceConsumeBuffGlaze" parent="Glaze">
+        <Model value="Assets\Effects\Glaze\Glaze_Alarak_COOP_PrestigeMechBuff\Glaze_Alarak_COOP_PrestigeMechBuff.m3"/>
+        <AnimSpeed value="5.000000"/>
+        <Priority value="32"/>
+    </CModel>
+    <CModel id="MutatorsExhausted">
+        <Model value="Assets\Effects\Protoss\AmonShard_Heal_Beam_Impact\AmonShard_Heal_Beam_Impact.m3"/>
+    </CModel>
+    <CModel id="MutatorsArmorFailure" parent="RaceMissileFX" Race="Terran">
+        <Model value="Assets\Effects\Terran\Raven_Shredder_Missile_MP_ImpactDebuff\Raven_Shredder_Missile_MP_ImpactDebuff.m3"/>
+    </CModel>
+    <CMoverMissile id="VoidPlasmaBlastMover">
+        <MotionPhases>
+            <Driver value="Guidance"/>
+            <Acceleration value="3200"/>
+            <MaxSpeed value="40"/>
+            <ClearanceAcceleration value="75"/>
+            <ActorTracking value="Actual"/>
+            <Outro value="-1"/>
+            <ThrowBandYaw value="-360,-360,-360,-360"/>
+            <ThrowBandPitch value="-360,-360,-360,-360"/>
+            <YawPitchRoll value="719.2968"/>
+        </MotionPhases>
+        <MotionPhases>
+            <Driver value="Guidance"/>
+            <ThrowBandYaw value="-360,-360,-360,-360"/>
+            <ThrowBandPitch value="-360,-360,-360,-360"/>
+            <YawPitchRoll value="5759.6484"/>
+        </MotionPhases>
+    </CMoverMissile>
+    <CMoverMissile id="EssenceConsumeMover">
+        <MotionPhases>
+            <Driver value="Throw"/>
+            <Acceleration value="1"/>
+            <AccelerationRange value="5"/>
+            <MaxSpeed value="20"/>
+            <ArrivalTestType value="2D"/>
+            <BlendType value="Linear"/>
+            <Outro value="8,18"/>
+            <ThrowVector value="0,-1,0"/>
+            <ThrowBandYaw value="180,-180,14.9963,-14.9963"/>
+            <ThrowBandPitch value="90,4.9987,-360,-360"/>
+        </MotionPhases>
+        <MotionPhases>
+            <Driver value="Guidance"/>
+            <Acceleration value="3200"/>
+            <MaxSpeed value="20"/>
+            <TurnType value="Optimal"/>
+            <ArrivalTestType value="2D"/>
+            <BlendType value="Linear"/>
+            <RotationActorType value="LookAtTarget"/>
+            <ThrowBandYaw value="-360,-360,-360,-360"/>
+            <ThrowBandPitch value="-360,-360,-360,-360"/>
+            <YawPitchRoll value="5759.6484"/>
+        </MotionPhases>
+    </CMoverMissile>
+    <CMoverMissile id="HybridReaverBreathofEvilMissileMover">
+        <MotionPhases>
+            <Driver value="Throw"/>
+            <Acceleration value="3200"/>
+            <MaxSpeed value="7"/>
+            <ArrivalTestType value="2D"/>
+            <BlendType value="Linear"/>
+            <Outro value="4,4.5"/>
+            <RotationActorType value="LookAtTarget"/>
+            <ThrowVector value="0,-1,0"/>
+            <ThrowBandYaw value="180,-180,14.9963,-14.9963"/>
+            <ThrowBandPitch value="90,4.9987,-360,-360"/>
+        </MotionPhases>
+        <MotionPhases>
+            <Driver value="Guidance"/>
+            <Acceleration value="3200"/>
+            <MaxSpeed value="20"/>
+            <TurnType value="Optimal"/>
+            <ArrivalTestType value="2D"/>
+            <BlendType value="Linear"/>
+            <RotationActorType value="LookAtTarget"/>
+            <ThrowBandYaw value="-360,-360,-360,-360"/>
+            <ThrowBandPitch value="-360,-360,-360,-360"/>
+            <YawPitchRoll value="5759.6484"/>
+        </MotionPhases>
+    </CMoverMissile>
+    <CSound id="VoidPlasmaBlastChargeSound" parent="Combat">
+        <EditorCategories value="Race:Protoss"/>
+        <AssetArray File="Assets\Sounds\Zerg\Hybrid\HybridMaar_PlasmaBlastBuildUp0.wav"/>
+        <AssetArray File="Assets\Sounds\Zerg\Hybrid\HybridMaar_PlasmaBlastBuildUp1.wav"/>
+        <AssetArray File="Assets\Sounds\Zerg\Hybrid\HybridMaar_PlasmaBlastBuildUp2.wav"/>
+    </CSound>
+    <CSound id="SoulCrushImpactSound" parent="Spell">
+        <EditorCategories value="Race:Zerg"/>
+        <AssetArray File="Assets\Sounds\MutatorFear_01.wav" FacialGroup=""/>
+        <AssetArray File="Assets\Sounds\MutatorFear_02.wav" FacialGroup=""/>
+        <AssetArray File="Assets\Sounds\MutatorFear_03.wav" FacialGroup=""/>
+        <AssetArray File="Assets\Sounds\MutatorFear_04.wav" FacialGroup=""/>
+        <AssetArray File="Assets\Sounds\MutatorFear_05.wav" FacialGroup=""/>
+        <AssetArray File="Assets\Sounds\MutatorFear_06.wav" FacialGroup=""/>
+        <AssetArray File="Assets\Sounds\MutatorFear_07.wav" FacialGroup=""/>
+        <Category value="Combat"/>
+        <DupeDestroyCount value="6"/>
+        <Pitch value="-1.000000,1.000000"/>
+        <Volume value="-4.000000,-3.000000"/>
+    </CSound>
+    <CSound id="SoulCrushLaunchSound" parent="Spell">
+        <EditorCategories value="Race:Zerg"/>
+        <AssetArray File="Assets\Sounds\Tempest_GroundAttackLaunch_00.wav" FacialGroup=""/>
+        <AssetArray File="Assets\Sounds\Tempest_GroundAttackLaunch_01.wav" FacialGroup=""/>
+        <AssetArray File="Assets\Sounds\Tempest_GroundAttackLaunch_02.wav" FacialGroup=""/>
+        <AssetArray File="Assets\Sounds\Tempest_GroundAttackLaunch_03.wav" FacialGroup=""/>
+        <AssetArray File="Assets\Sounds\Tempest_GroundAttackLaunch_04.wav" FacialGroup=""/>
+        <AssetArray File="Assets\Sounds\Tempest_GroundAttackLaunch_05.wav" FacialGroup=""/>
+        <AssetArray File="Assets\Sounds\Tempest_GroundAttackLaunch_06.wav" FacialGroup=""/>
+        <AssetArray File="Assets\Sounds\Tempest_GroundAttackLaunch_07.wav" FacialGroup=""/>
+        <DupeMuteCount value="4"/>
+        <Pitch value="-0.500000,0.500000"/>
+        <Volume value="-4.000000,-3.000000"/>
+    </CSound>
+    <CUnit id="EssenceConsumeMissile" parent="MISSILE">
+        <Race value="Zerg"/>
+        <Mover value="EssenceConsumeMover"/>
+        <EditorCategories value="ObjectType:Projectile,ObjectFamily:Campaign"/>
+    </CUnit>
+    <CUnit id="VoidPlasmaBlast" parent="MISSILE_INVULNERABLE">
+        <Race value="Prot"/>
+        <Mover value="VoidPlasmaBlastMover"/>
+        <EditorCategories value="ObjectType:Projectile,ObjectFamily:Campaign"/>
+    </CUnit>
+    <CUnit id="HybridReaverBreathofEvilMissile" parent="MISSILE">
+        <Race value="Protoss"/>
+        <Mover value="HybridReaverBreathofEvilMissileMover"/>
+        <EditorCategories value="ObjectType:Projectile,ObjectFamily:Campaign"/>
+    </CUnit>
+    <CBehaviorBuff id="AbsuletlyDefenseEnemy">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification>
+            <DamageTakenFraction index="Spell" value="-0.5"/>
+            <DamageTakenFraction index="Melee" value="-0.5"/>
+            <DamageTakenFraction index="Ranged" value="-0.5"/>
+            <DamageTakenFraction index="Splash" value="-0.5"/>
+            <DamageTakenFraction index="NoProc" value="-0.5"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="AbsuletlyDefenseAlly">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification>
+            <DamageTakenFraction index="Spell" value="0.5"/>
+            <DamageTakenFraction index="Melee" value="0.5"/>
+            <DamageTakenFraction index="Ranged" value="0.5"/>
+            <DamageTakenFraction index="Splash" value="0.5"/>
+            <DamageTakenFraction index="NoProc" value="0.5"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="MutatorBlessingSource">
+        <InfoFlags index="Hidden" value="1"/>
+        <InfoIcon value="Assets\Textures\btn-upgrade-protoss-alarak-stunnonheroicenemies.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DisableValidatorArray value="MutatorBlessingArea"/>
+        <Period value="4"/>
+        <PeriodicEffect value="MutatorBlessingSearch"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="MutatorBlessing">
+        <Alignment value="Positive"/>
+        <InfoIcon value="Assets\Textures\btn-upgrade-protoss-alarak-stunnonheroicenemies.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification>
+            <StateFlags index="UnitAttrOnHeroic" value="1"/>
+            <DamageDealtFraction index="Spell" value="1"/>
+            <DamageDealtFraction index="Melee" value="1"/>
+            <DamageDealtFraction index="Ranged" value="1"/>
+            <DamageDealtFraction index="Splash" value="1"/>
+            <DamageDealtFraction index="NoProc" value="1"/>
+            <VitalMaxFractionArray index="Life" value="2"/>
+            <VitalMaxFractionArray index="Shields" value="2"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="HybridNemesisDebuffRB">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <PeriodicEffect value="HybridNemesisDebuffRBPeriod"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="SoulCrushCount">
+        <Alignment value="Negative"/>
+        <InfoFlags index="Hidden" value="1"/>
+        <InfoIcon value="Assets\Textures\btn-ability-zerg-corruption.dds"/>
+        <EditorCategories value="Race:Zerg,AbilityorEffectType:Units"/>
+        <MaxStackCount value="65535"/>
+        <TimeScaleSource Value="Global"/>
+        <Duration value="6"/>
+        <Period value="0.5"/>
+        <PeriodicEffect value="SoulCrushDamage"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="VoidPsiStorm">
+        <Alignment value="Negative"/>
+        <InfoIcon value="Assets\Textures\btn-ability-protoss-psistorm.dds"/>
+        <EditorCategories value="Race:Protoss,AbilityorEffectType:Units"/>
+        <MaxStackCount value="65535"/>
+        <TimeScaleSource Value="Global"/>
+        <Duration value="0.6665"/>
+        <Period value="0.571"/>
+        <InitialEffect value="VoidPsiStormDamage"/>
+        <PeriodicEffect value="VoidPsiStormDamage"/>
+        <Modification>
+            <StateFlags index="Silence" value="1"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="VoidCounterattackSource">
+        <InfoFlags index="Hidden" value="1"/>
+        <InfoIcon value="Assets\Textures\btn-ability-hornerhan-hellbat-dot.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DamageResponse Handled="VoidCounterattackCasterAB">
+            <Chance value="1"/>
+            <Cost>
+                <Cooldown TimeStart="0.1" TimeUse="20"/>
+            </Cost>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="VoidCounterattackCaster">
+        <InfoIcon value="Assets\Textures\lightning_10b_swarm.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DisplayDuration index="Self" value="1"/>
+        <DisplayDuration index="Ally" value="1"/>
+        <DisplayDuration index="Neutral" value="1"/>
+        <DisplayDuration index="Enemy" value="1"/>
+        <Duration value="10"/>
+        <Modification>
+            <DamageTakenFraction index="Spell" value="-0.8"/>
+            <DamageTakenFraction index="Melee" value="-0.8"/>
+            <DamageTakenFraction index="Ranged" value="-0.8"/>
+            <DamageTakenFraction index="Splash" value="-0.8"/>
+            <DamageTakenFraction index="NoProc" value="-0.8"/>
+        </Modification>
+        <DamageResponse Handled="VoidCounterattackCasterSearch">
+            <Chance value="0.2"/>
+            <Cost>
+                <Cooldown TimeUse="1"/>
+            </Cost>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="SoulCrush">
+        <Alignment value="Negative"/>
+        <InfoIcon value="Assets\Textures\storm_soulstile01_red.dds"/>
+        <EditorCategories value="Race:Zerg,AbilityorEffectType:Units"/>
+        <TimeScaleSource Value="Global"/>
+        <Duration value="6"/>
+        <Modification MoveSpeedMultiplier="0.1" AttackSpeedMultiplier="0.1">
+            <DamageDealtFraction index="Spell" value="-0.5"/>
+            <DamageDealtFraction index="Melee" value="-0.5"/>
+            <DamageDealtFraction index="Ranged" value="-0.5"/>
+            <DamageDealtFraction index="Splash" value="-0.5"/>
+            <DamageDealtFraction index="NoProc" value="-0.5"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="EssenceConsume">
+        <InfoIcon value="Assets\Textures\aiur_ancienttemple_hybridshadow_emiss.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DisplayDuration index="Self" value="1"/>
+        <DisplayDuration index="Ally" value="1"/>
+        <DisplayDuration index="Neutral" value="1"/>
+        <DisplayDuration index="Enemy" value="1"/>
+        <BuffFlags index="RefreshStack" value="1"/>
+        <MaxStackCount value="20"/>
+        <Duration value="15"/>
+        <Modification>
+            <AdditiveMoveSpeedFactor value="0.01"/>
+            <AdditiveAttackSpeedFactor value="0.01"/>
+            <DamageTotalMultiplier index="Spell" value="0.01"/>
+            <DamageTotalMultiplier index="Melee" value="0.01"/>
+            <DamageTotalMultiplier index="Ranged" value="0.01"/>
+            <DamageTotalMultiplier index="Splash" value="0.01"/>
+            <DamageTotalMultiplier index="NoProc" value="0.01"/>
+            <VitalMaxAdditiveMultiplierArray index="Life" value="0.01"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="HybridReaverBreathofEvilCaster">
+        <Alignment value="Positive"/>
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="Race:Protoss,AbilityorEffectType:Units"/>
+        <DisplayDuration index="Self" value="1"/>
+        <DisplayDuration index="Ally" value="1"/>
+        <DisplayDuration index="Neutral" value="1"/>
+        <DisplayDuration index="Enemy" value="1"/>
+        <Duration value="10"/>
+        <Period value="1"/>
+        <PeriodCount value="1"/>
+        <InitialEffect value="HybridReaverBreathofEvilInitSet"/>
+        <PeriodicEffect value="HybridReaverBreathofEvilCP"/>
+        <FinalEffect value="RemoveFrenzyCaster"/>
+        <Modification SnareMultiplier="0">
+            <ModifyFlags index="SuppressMoving" value="1"/>
+            <ModifyFlags index="SuppressTurning" value="1"/>
+            <StateFlags index="Stun" value="1"/>
+            <StateFlags index="UnitAttrOnMapBoss" value="1"/>
+            <StateFlags index="Unstoppable" value="1"/>
+        </Modification>
+        <DamageResponse ModifyFraction="0.1">
+            <Chance value="1"/>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="VoidPlasmaBlastStun">
+        <Alignment value="Negative"/>
+        <InfoIcon value="Assets\Textures\btn-upgrade-stetmann-ultraliskburrowchargestun.dds"/>
+        <BehaviorCategories index="Stun" value="1"/>
+        <EditorCategories value="Race:InfestedTerran,AbilityorEffectType:Units"/>
+        <Duration value="5"/>
+        <Modification>
+            <ModifyFlags index="SuppressTurning" value="1"/>
+            <StateFlags index="Stun" value="1"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="VoidPlasmaBlastKnockback4">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="Race:Zerg,AbilityorEffectType:Units"/>
+        <Duration value="2"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="MutatorsExhausted">
+        <Alignment value="Negative"/>
+        <InfoIcon value="Assets\Textures\btn-upgrade-protoss-alarak-havoctargetlockbuffed.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DisplayDuration index="Self" value="1"/>
+        <DisplayDuration index="Ally" value="1"/>
+        <DisplayDuration index="Neutral" value="1"/>
+        <DisplayDuration index="Enemy" value="1"/>
+        <BuffFlags index="RefreshStack" value="1"/>
+        <MaxStackCount value="50"/>
+        <Duration value="20"/>
+        <Modification>
+            <DamageDealtFraction index="Spell" value="-0.01"/>
+            <DamageDealtFraction index="Melee" value="-0.01"/>
+            <DamageDealtFraction index="Ranged" value="-0.01"/>
+            <DamageDealtFraction index="Splash" value="-0.01"/>
+            <VitalMaxAdditiveMultiplierArray index="Life" value="-0.01"/>
+            <VitalMaxAdditiveMultiplierArray index="Shields" value="-0.01"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="MutatorsArmorFailureSource">
+        <InfoFlags index="Hidden" value="1"/>
+        <InfoIcon value="Assets\Textures\btn-ability-terran-ignorearmor.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DamageResponse Handled="MutatorsArmorFailureSet" Location="Attacker">
+            <Chance value="1"/>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="MutatorsArmorFailure">
+        <Alignment value="Negative"/>
+        <InfoIcon value="Assets\Textures\btn-ability-terran-ignorearmor.dds"/>
+        <EditorCategories value="Race:Terran,AbilityorEffectType:Units"/>
+        <Duration value="5"/>
+        <Modification LifeArmorMultiplier="-1" ShieldArmorMultiplier="-1"/>
+    </CBehaviorBuff>
+</Catalog>

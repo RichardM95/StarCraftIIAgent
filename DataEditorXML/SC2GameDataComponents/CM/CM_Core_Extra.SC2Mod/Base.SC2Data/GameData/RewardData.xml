@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CRewardEmoticon id="Emoticon_Test" parent="EMOTICON">
+        <Flags index="Allowed" value="1"/>
+        <Emoticon value="abathur_angry"/>
+    </CRewardEmoticon>
+</Catalog>

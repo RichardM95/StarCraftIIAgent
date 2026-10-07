@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CButton id="TurnOnAutoCreep">
+        <Icon value="Assets\Textures\btn-ability-zerg-creepspread.dds"/>
+        <AlertIcon value="Assets\Textures\btn-ability-zerg-generatecreep-color.dds"/>
+        <EditorCategories value="Race:Zerg"/>
+        <HotkeySet value="AutoCreep"/>
+    </CButton>
+    <CButton id="TurnOffAutoCreep">
+        <Icon value="Assets\Textures\btn-ability-zerg-generatecreepstop-color.dds"/>
+        <AlertIcon value="Assets\Textures\btn-ability-zerg-generatecreepstop-color.dds"/>
+        <EditorCategories value="Race:Zerg"/>
+        <HotkeySet value="AutoCreep"/>
+    </CButton>
+</Catalog>

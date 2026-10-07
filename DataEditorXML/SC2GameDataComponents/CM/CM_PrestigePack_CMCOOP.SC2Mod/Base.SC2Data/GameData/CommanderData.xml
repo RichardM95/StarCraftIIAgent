@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CCommander id="Abathur">
+        <PrestigeArray value="CommanderPrestigeAbathur4"/>
+        <PrestigeArray value="CommanderPrestigeAbathur5DevouringScourge"/>
+    </CCommander>
+    <CCommander id="Artanis">
+        <PrestigeArray value="CommanderPrestigeArtanis4"/>
+        <PrestigeArray value="CommanderPrestigeArtanisPowerFieldRemake"/>
+    </CCommander>
+    <CCommander id="Dehaka">
+        <PrestigeArray value="CommanderPrestigeDehaka4"/>
+    </CCommander>
+    <CCommander id="Karax">
+        <PrestigeArray value="CommanderPrestigeKarax4"/>
+        <PrestigeArray value="CommanderPrestigeKaraxArmyRemake"/>
+    </CCommander>
+    <CCommander id="Kerrigan">
+        <PrestigeArray value="CommanderPrestigeKerriganXelnagaMutalisk"/>
+        <PrestigeArray value="CommanderPrestigeKerriganSupremeOverlord"/>
+    </CCommander>
+    <CCommander id="Raynor">
+        <PrestigeArray value="CommanderPrestigeRaynor4"/>
+    </CCommander>
+</Catalog>

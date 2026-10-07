@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xs:simpleType name="EAttributeType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Global" />
+      <xs:enumeration value="Player" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="EAttributeAvailability">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="All" />
+      <xs:enumeration value="First" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="EAttributeVisibility">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None" />
+      <xs:enumeration value="Self" />
+      <xs:enumeration value="Host" />
+      <xs:enumeration value="All" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="EAttributeAccess">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None" />
+      <xs:enumeration value="Self" />
+      <xs:enumeration value="Host" />
+      <xs:enumeration value="All" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="AttributeValueInteger">
+    <xs:attribute name="Value" use="required" type="xs:integer" />
+  </xs:complexType>
+  <xs:complexType name="AttributeValueString">
+    <xs:attribute name="Value" use="required" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="AttributeValueType">
+    <xs:attribute name="Value" use="required" type="EAttributeType" />
+  </xs:complexType>
+  <xs:complexType name="AttributeValueAvailability">
+    <xs:attribute name="Value" use="required" type="EAttributeAvailability" />
+  </xs:complexType>
+  <xs:complexType name="AttributeValueVisibility">
+    <xs:attribute name="Value" use="required" type="EAttributeVisibility" />
+  </xs:complexType>
+  <xs:complexType name="AccessValueAccess">
+    <xs:attribute name="Value" use="required" type="EAttributeAccess" />
+  </xs:complexType>
+  <xs:complexType name="AttributeRequirement">
+    <xs:sequence>
+      <xs:element name="Attribute" />
+      <xs:element name="Value" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="VariantValueHidden">
+    <xs:attribute name="Id" use="required" type="xs:integer" />
+    <xs:attribute name="Slot" type="xs:integer" />
+  </xs:complexType>
+  <xs:complexType name="AttributeDefinition">
+    <xs:choice maxOccurs="unbounded">
+      <xs:element minOccurs="1" name="Id" type="AttributeValueInteger" />
+      <xs:element name="Name" type="AttributeValueString" />
+      <xs:element name="Description" type="AttributeValueString" />
+      <xs:element name="Icon" type="AttributeValueString" />
+    </xs:choice>
+    <!-- <xs:attribute name="Id" type="xs:integer"/> -->
+    <!-- <xs:attribute name="Index" type="xs:integer"/> -->
+  </xs:complexType>
+  <xs:complexType name="AttributeDefault">
+    <xs:choice maxOccurs="unbounded">
+      <xs:element minOccurs="1" maxOccurs="1" name="Slot">
+        <xs:complexType>
+          <xs:attribute name="Id" use="required" type="xs:NMTOKEN" />
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" name="Value">
+        <xs:complexType>
+          <xs:attribute name="Id" use="required" type="xs:NMTOKEN" />
+          <xs:attribute name="Index" use="optional" type="xs:positiveInteger" />
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" name="Locked" />
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="VariantAttribute">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="Default" type="AttributeDefault" />
+      <xs:element name="ValueHidden" type="VariantValueHidden" />
+    </xs:choice>
+    <xs:attribute name="Namespace" use="optional" type="xs:integer" />
+    <xs:attribute name="Id" use="required" type="xs:integer" />
+  </xs:complexType>
+
+  <xs:complexType name="DefaultVariants">
+    <xs:attribute name="Value" use="required" type="xs:integer" />
+  </xs:complexType>
+  <xs:complexType name="Variant">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element minOccurs="1" maxOccurs="1" name="Id" type="AttributeValueInteger" />
+      <xs:element maxOccurs="1" name="CategoryId" type="AttributeValueInteger" />
+      <xs:element maxOccurs="1" name="ModeId" type="AttributeValueString" />
+      <xs:element maxOccurs="1" name="ModeName" type="AttributeValueString" />
+      <xs:element maxOccurs="1" name="ModeDesc" type="AttributeValueString" />
+      <xs:element maxOccurs="1" name="MaxTeamSize" type="AttributeValueInteger" />
+      <xs:element name="TeamName" type="AttributeValueString" />
+      <xs:element name="IsDefault" />
+      <xs:element maxOccurs="unbounded" name="AttributeHidden">
+        <xs:complexType>
+          <xs:attribute name="Namespace" use="optional" type="xs:integer" />
+          <xs:attribute name="Id" use="required" type="xs:integer" />
+        </xs:complexType>
+      </xs:element>
+      <xs:element maxOccurs="unbounded" name="Attribute" type="VariantAttribute" />
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="Attribute">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element minOccurs="1" maxOccurs="1" name="Id" type="AttributeValueInteger" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Type" type="AttributeValueType" />
+      <xs:element maxOccurs="1" name="Name" type="AttributeValueString" />
+      <xs:element maxOccurs="1" name="Description" type="AttributeValueString" />
+      <xs:element maxOccurs="1" name="Availability" type="AttributeValueAvailability" />
+      <xs:element maxOccurs="1" name="Visibility" type="AttributeValueVisibility" />
+      <xs:element maxOccurs="1" name="Access" type="AccessValueAccess" />
+      <xs:element maxOccurs="1" name="Requirement" type="AttributeRequirement" />
+      <xs:element maxOccurs="1" name="PublicLocked" />
+      <xs:element maxOccurs="1" name="Hidden" />
+      <xs:element name="Value" type="AttributeDefinition" />
+      <xs:element name="Default" type="AttributeDefault" />
+    </xs:choice>
+  </xs:complexType>
+
+  <xs:element name="Attributes">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Attribute" type="Attribute" />
+        <xs:element name="DefaultVariants" type="DefaultVariants" />
+        <xs:element name="Variant" type="Variant" />
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

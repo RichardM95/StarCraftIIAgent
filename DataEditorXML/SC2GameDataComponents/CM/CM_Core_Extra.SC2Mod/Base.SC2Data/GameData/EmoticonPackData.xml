@@ -1,0 +1,2099 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CEmoticonPack default="1" id="LimitedReleaseEmoticonPackParent"/>
+    <CEmoticonPack default="1" id="HallowsEndEmoticonPackParent" parent="LimitedReleaseEmoticonPackParent"/>
+    <CEmoticonPack default="1" id="WinterVeilEmoticonPackParent" parent="LimitedReleaseEmoticonPackParent"/>
+    <CEmoticonPack default="1" id="LunarFestivalEmoticonPackParent" parent="LimitedReleaseEmoticonPackParent"/>
+    <CEmoticonPack default="1" id="NexomaniaEmoticonPackParent" parent="LimitedReleaseEmoticonPackParent"/>
+    <CEmoticonPack id="AbstractEmoticonPack">
+        <EmoticonArray value="abstract_angry"/>
+        <EmoticonArray value="abstract_cool"/>
+        <EmoticonArray value="abstract_cool_casesensitive"/>
+        <EmoticonArray value="abstract_embarrassed"/>
+        <EmoticonArray value="abstract_happy"/>
+        <EmoticonArray value="abstract_inlove"/>
+        <EmoticonArray value="abstract_rofl"/>
+        <EmoticonArray value="abstract_rofl_casesensitive"/>
+        <EmoticonArray value="abstract_sad"/>
+        <EmoticonArray value="abstract_silly"/>
+        <EmoticonArray value="abstract_speechless"/>
+        <EmoticonArray value="abstract_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="DVaEmoticonPack">
+        <EmoticonArray value="dva_happy"/>
+        <EmoticonArray value="dva_rofl"/>
+        <EmoticonArray value="dva_sad"/>
+        <EmoticonArray value="dva_silly"/>
+        <EmoticonArray value="dva_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="DVaEmoticonPack2">
+        <EmoticonArray value="dva_angry"/>
+        <EmoticonArray value="dva_cool"/>
+        <EmoticonArray value="dva_embarrassed"/>
+        <EmoticonArray value="dva_inlove"/>
+        <EmoticonArray value="dva_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="Developers">
+        <EmoticonArray value="Dev004"/>
+        <EmoticonArray value="Dev002"/>
+        <EmoticonArray value="Dev001"/>
+        <EmoticonArray value="Dev005"/>
+        <EmoticonArray value="Dev003"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="Shashang">
+        <EmoticonArray value="ShashangA"/>
+        <EmoticonArray value="ShashangB"/>
+        <EmoticonArray value="ShashangC"/>
+        <EmoticonArray value="ShashangD"/>
+        <EmoticonArray value="ShashangE"/>
+        <EmoticonArray value="ShashangF"/>
+        <EmoticonArray value="ShashangG"/>
+        <EmoticonArray value="ShashangH"/>
+        <EmoticonArray value="ShashangI"/>
+        <EmoticonArray value="ShashangJ"/>
+        <EmoticonArray value="ShashangK"/>
+        <EmoticonArray value="ShashangL"/>
+        <EmoticonArray value="ShashangM"/>
+        <EmoticonArray value="ShashangN"/>
+        <EmoticonArray value="ShashangO"/>
+        <EmoticonArray value="ShashangP"/>
+        <EmoticonArray value="ShashangQ"/>
+        <EmoticonArray value="ShashangR"/>
+        <EmoticonArray value="ShashangS"/>
+        <EmoticonArray value="ShashangT"/>
+        <EmoticonArray value="ShashangU"/>
+        <EmoticonArray value="ShashangV"/>
+        <EmoticonArray value="ShashangW"/>
+        <EmoticonArray value="ShashangX"/>
+        <EmoticonArray value="ShashangY"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="MalthaelEmoticonPack2">
+        <EmoticonArray value="malthael_angry"/>
+        <EmoticonArray value="malthael_cool"/>
+        <EmoticonArray value="malthael_embarrassed"/>
+        <EmoticonArray value="malthael_inlove"/>
+        <EmoticonArray value="malthael_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="StukovEmoticonPack">
+        <EmoticonArray value="stukov_happy"/>
+        <EmoticonArray value="stukov_rofl"/>
+        <EmoticonArray value="stukov_sad"/>
+        <EmoticonArray value="stukov_silly"/>
+        <EmoticonArray value="stukov_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="StukovEmoticonPack2">
+        <EmoticonArray value="stukov_angry"/>
+        <EmoticonArray value="stukov_cool"/>
+        <EmoticonArray value="stukov_embarrassed"/>
+        <EmoticonArray value="stukov_inlove"/>
+        <EmoticonArray value="stukov_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="MalthaelEmoticonPack">
+        <EmoticonArray value="malthael_happy"/>
+        <EmoticonArray value="malthael_rofl"/>
+        <EmoticonArray value="malthael_sad"/>
+        <EmoticonArray value="malthael_silly"/>
+        <EmoticonArray value="malthael_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="NexusEmoticonPack">
+        <EmoticonArray value="nexus_happy"/>
+        <EmoticonArray value="nexus_rofl"/>
+        <EmoticonArray value="nexus_sad"/>
+        <EmoticonArray value="nexus_silly"/>
+        <EmoticonArray value="nexus_speechless"/>
+        <EmoticonArray value="nexus_angry"/>
+        <EmoticonArray value="nexus_cool"/>
+        <EmoticonArray value="nexus_embarrassed"/>
+        <EmoticonArray value="nexus_inlove"/>
+        <EmoticonArray value="nexus_surprised"/>
+        <EmoticonArray value="nexus_thinking"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="LunaraEmoticonPack">
+        <EmoticonArray value="lunara_happy"/>
+        <EmoticonArray value="lunara_rofl"/>
+        <EmoticonArray value="lunara_sad"/>
+        <EmoticonArray value="lunara_silly"/>
+        <EmoticonArray value="lunara_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="LunaraEmoticonPack2">
+        <EmoticonArray value="lunara_angry"/>
+        <EmoticonArray value="lunara_cool"/>
+        <EmoticonArray value="lunara_embarrassed"/>
+        <EmoticonArray value="lunara_inlove"/>
+        <EmoticonArray value="lunara_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="GreymaneEmoticonPack">
+        <EmoticonArray value="greymane_happy"/>
+        <EmoticonArray value="greymane_rofl"/>
+        <EmoticonArray value="greymane_sad"/>
+        <EmoticonArray value="greymane_silly"/>
+        <EmoticonArray value="greymane_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="GreymaneEmoticonPack2">
+        <EmoticonArray value="greymane_angry"/>
+        <EmoticonArray value="greymane_cool"/>
+        <EmoticonArray value="greymane_embarrassed"/>
+        <EmoticonArray value="greymane_inlove"/>
+        <EmoticonArray value="greymane_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="ArthasEmoticonPack">
+        <EmoticonArray value="arthas_happy"/>
+        <EmoticonArray value="arthas_rofl"/>
+        <EmoticonArray value="arthas_sad"/>
+        <EmoticonArray value="arthas_silly"/>
+        <EmoticonArray value="arthas_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="ArthasEmoticonPack2">
+        <EmoticonArray value="arthas_angry"/>
+        <EmoticonArray value="arthas_cool"/>
+        <EmoticonArray value="arthas_embarrassed"/>
+        <EmoticonArray value="arthas_inlove"/>
+        <EmoticonArray value="arthas_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="TyrandeEmoticonPack">
+        <EmoticonArray value="tyrande_happy"/>
+        <EmoticonArray value="tyrande_rofl"/>
+        <EmoticonArray value="tyrande_sad"/>
+        <EmoticonArray value="tyrande_silly"/>
+        <EmoticonArray value="tyrande_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="TyrandeEmoticonPack2">
+        <EmoticonArray value="tyrande_angry"/>
+        <EmoticonArray value="tyrande_cool"/>
+        <EmoticonArray value="tyrande_embarrassed"/>
+        <EmoticonArray value="tyrande_inlove"/>
+        <EmoticonArray value="tyrande_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="NazeeboEmoticonPack">
+        <EmoticonArray value="nazeebo_happy"/>
+        <EmoticonArray value="nazeebo_rofl"/>
+        <EmoticonArray value="nazeebo_sad"/>
+        <EmoticonArray value="nazeebo_silly"/>
+        <EmoticonArray value="nazeebo_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="NazeeboEmoticonPack2">
+        <EmoticonArray value="nazeebo_angry"/>
+        <EmoticonArray value="nazeebo_cool"/>
+        <EmoticonArray value="nazeebo_embarrassed"/>
+        <EmoticonArray value="nazeebo_inlove"/>
+        <EmoticonArray value="nazeebo_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="GazloweEmoticonPack">
+        <EmoticonArray value="gazlowe_happy"/>
+        <EmoticonArray value="gazlowe_rofl"/>
+        <EmoticonArray value="gazlowe_sad"/>
+        <EmoticonArray value="gazlowe_silly"/>
+        <EmoticonArray value="gazlowe_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="GazloweEmoticonPack2">
+        <EmoticonArray value="gazlowe_angry"/>
+        <EmoticonArray value="gazlowe_cool"/>
+        <EmoticonArray value="gazlowe_embarrassed"/>
+        <EmoticonArray value="gazlowe_inlove"/>
+        <EmoticonArray value="gazlowe_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="FalstadEmoticonPack">
+        <EmoticonArray value="falstad_happy"/>
+        <EmoticonArray value="falstad_rofl"/>
+        <EmoticonArray value="falstad_sad"/>
+        <EmoticonArray value="falstad_silly"/>
+        <EmoticonArray value="falstad_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="FalstadEmoticonPack2">
+        <EmoticonArray value="falstad_angry"/>
+        <EmoticonArray value="falstad_cool"/>
+        <EmoticonArray value="falstad_embarrassed"/>
+        <EmoticonArray value="falstad_inlove"/>
+        <EmoticonArray value="falstad_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="RehgarEmoticonPack">
+        <EmoticonArray value="rehgar_happy"/>
+        <EmoticonArray value="rehgar_rofl"/>
+        <EmoticonArray value="rehgar_sad"/>
+        <EmoticonArray value="rehgar_silly"/>
+        <EmoticonArray value="rehgar_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="RehgarEmoticonPack2">
+        <EmoticonArray value="rehgar_angry"/>
+        <EmoticonArray value="rehgar_cool"/>
+        <EmoticonArray value="rehgar_embarrassed"/>
+        <EmoticonArray value="rehgar_inlove"/>
+        <EmoticonArray value="rehgar_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="AzmodanEmoticonPack">
+        <EmoticonArray value="azmodan_happy"/>
+        <EmoticonArray value="azmodan_rofl"/>
+        <EmoticonArray value="azmodan_sad"/>
+        <EmoticonArray value="azmodan_silly"/>
+        <EmoticonArray value="azmodan_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="AzmodanEmoticonPack2">
+        <EmoticonArray value="azmodan_angry"/>
+        <EmoticonArray value="azmodan_cool"/>
+        <EmoticonArray value="azmodan_embarrassed"/>
+        <EmoticonArray value="azmodan_inlove"/>
+        <EmoticonArray value="azmodan_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="ThrallEmoticonPack">
+        <EmoticonArray value="thrall_happy"/>
+        <EmoticonArray value="thrall_rofl"/>
+        <EmoticonArray value="thrall_sad"/>
+        <EmoticonArray value="thrall_silly"/>
+        <EmoticonArray value="thrall_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="ThrallEmoticonPack2">
+        <EmoticonArray value="thrall_angry"/>
+        <EmoticonArray value="thrall_cool"/>
+        <EmoticonArray value="thrall_embarrassed"/>
+        <EmoticonArray value="thrall_inlove"/>
+        <EmoticonArray value="thrall_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="MoralesEmoticonPack">
+        <EmoticonArray value="morales_happy"/>
+        <EmoticonArray value="morales_rofl"/>
+        <EmoticonArray value="morales_sad"/>
+        <EmoticonArray value="morales_silly"/>
+        <EmoticonArray value="morales_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="MoralesEmoticonPack2">
+        <EmoticonArray value="morales_angry"/>
+        <EmoticonArray value="morales_cool"/>
+        <EmoticonArray value="morales_embarrassed"/>
+        <EmoticonArray value="morales_inlove"/>
+        <EmoticonArray value="morales_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="XulEmoticonPack">
+        <EmoticonArray value="xul_happy"/>
+        <EmoticonArray value="xul_rofl"/>
+        <EmoticonArray value="xul_sad"/>
+        <EmoticonArray value="xul_silly"/>
+        <EmoticonArray value="xul_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="XulEmoticonPack2">
+        <EmoticonArray value="xul_angry"/>
+        <EmoticonArray value="xul_cool"/>
+        <EmoticonArray value="xul_embarrassed"/>
+        <EmoticonArray value="xul_inlove"/>
+        <EmoticonArray value="xul_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="TracerEmoticonPack">
+        <EmoticonArray value="tracer_happy"/>
+        <EmoticonArray value="tracer_rofl"/>
+        <EmoticonArray value="tracer_sad"/>
+        <EmoticonArray value="tracer_silly"/>
+        <EmoticonArray value="tracer_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="TracerEmoticonPack2">
+        <EmoticonArray value="tracer_angry"/>
+        <EmoticonArray value="tracer_cool"/>
+        <EmoticonArray value="tracer_embarrassed"/>
+        <EmoticonArray value="tracer_inlove"/>
+        <EmoticonArray value="tracer_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="ZaryaEmoticonPack">
+        <EmoticonArray value="zarya_happy"/>
+        <EmoticonArray value="zarya_rofl"/>
+        <EmoticonArray value="zarya_sad"/>
+        <EmoticonArray value="zarya_silly"/>
+        <EmoticonArray value="zarya_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="ZaryaEmoticonPack2">
+        <EmoticonArray value="zarya_angry"/>
+        <EmoticonArray value="zarya_cool"/>
+        <EmoticonArray value="zarya_embarrassed"/>
+        <EmoticonArray value="zarya_inlove"/>
+        <EmoticonArray value="zarya_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="ZeratulEmoticonPack">
+        <EmoticonArray value="zeratul_happy"/>
+        <EmoticonArray value="zeratul_rofl"/>
+        <EmoticonArray value="zeratul_sad"/>
+        <EmoticonArray value="zeratul_silly"/>
+        <EmoticonArray value="zeratul_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="ZeratulEmoticonPack2">
+        <EmoticonArray value="zeratul_angry"/>
+        <EmoticonArray value="zeratul_cool"/>
+        <EmoticonArray value="zeratul_embarrassed"/>
+        <EmoticonArray value="zeratul_inlove"/>
+        <EmoticonArray value="zeratul_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="VallaEmoticonPack">
+        <EmoticonArray value="valla_happy"/>
+        <EmoticonArray value="valla_rofl"/>
+        <EmoticonArray value="valla_sad"/>
+        <EmoticonArray value="valla_silly"/>
+        <EmoticonArray value="valla_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="VallaEmoticonPack2">
+        <EmoticonArray value="valla_angry"/>
+        <EmoticonArray value="valla_cool"/>
+        <EmoticonArray value="valla_embarrassed"/>
+        <EmoticonArray value="valla_inlove"/>
+        <EmoticonArray value="valla_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="UtherEmoticonPack">
+        <EmoticonArray value="uther_happy"/>
+        <EmoticonArray value="uther_rofl"/>
+        <EmoticonArray value="uther_sad"/>
+        <EmoticonArray value="uther_silly"/>
+        <EmoticonArray value="uther_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="UtherEmoticonPack2">
+        <EmoticonArray value="uther_angry"/>
+        <EmoticonArray value="uther_cool"/>
+        <EmoticonArray value="uther_embarrassed"/>
+        <EmoticonArray value="uther_inlove"/>
+        <EmoticonArray value="uther_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="TyraelEmoticonPack">
+        <EmoticonArray value="tyrael_happy"/>
+        <EmoticonArray value="tyrael_rofl"/>
+        <EmoticonArray value="tyrael_sad"/>
+        <EmoticonArray value="tyrael_silly"/>
+        <EmoticonArray value="tyrael_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="TyraelEmoticonPack2">
+        <EmoticonArray value="tyrael_angry"/>
+        <EmoticonArray value="tyrael_cool"/>
+        <EmoticonArray value="tyrael_embarrassed"/>
+        <EmoticonArray value="tyrael_inlove"/>
+        <EmoticonArray value="tyrael_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="TassadarEmoticonPack">
+        <EmoticonArray value="tassadar_happy"/>
+        <EmoticonArray value="tassadar_rofl"/>
+        <EmoticonArray value="tassadar_sad"/>
+        <EmoticonArray value="tassadar_silly"/>
+        <EmoticonArray value="tassadar_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="TassadarEmoticonPack2">
+        <EmoticonArray value="tassadar_angry"/>
+        <EmoticonArray value="tassadar_cool"/>
+        <EmoticonArray value="tassadar_embarrassed"/>
+        <EmoticonArray value="tassadar_inlove"/>
+        <EmoticonArray value="tassadar_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="StitchesEmoticonPack">
+        <EmoticonArray value="stitches_happy"/>
+        <EmoticonArray value="stitches_rofl"/>
+        <EmoticonArray value="stitches_sad"/>
+        <EmoticonArray value="stitches_silly"/>
+        <EmoticonArray value="stitches_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="StitchesEmoticonPack2">
+        <EmoticonArray value="stitches_angry"/>
+        <EmoticonArray value="stitches_cool"/>
+        <EmoticonArray value="stitches_embarrassed"/>
+        <EmoticonArray value="stitches_inlove"/>
+        <EmoticonArray value="stitches_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="SonyaEmoticonPack">
+        <EmoticonArray value="sonya_happy"/>
+        <EmoticonArray value="sonya_rofl"/>
+        <EmoticonArray value="sonya_sad"/>
+        <EmoticonArray value="sonya_silly"/>
+        <EmoticonArray value="sonya_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="SonyaEmoticonPack2">
+        <EmoticonArray value="sonya_angry"/>
+        <EmoticonArray value="sonya_cool"/>
+        <EmoticonArray value="sonya_embarrassed"/>
+        <EmoticonArray value="sonya_inlove"/>
+        <EmoticonArray value="sonya_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="HammerEmoticonPack">
+        <EmoticonArray value="hammer_happy"/>
+        <EmoticonArray value="hammer_rofl"/>
+        <EmoticonArray value="hammer_sad"/>
+        <EmoticonArray value="hammer_silly"/>
+        <EmoticonArray value="hammer_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="HammerEmoticonPack2">
+        <EmoticonArray value="hammer_angry"/>
+        <EmoticonArray value="hammer_cool"/>
+        <EmoticonArray value="hammer_embarrassed"/>
+        <EmoticonArray value="hammer_inlove"/>
+        <EmoticonArray value="hammer_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="RaynorEmoticonPack">
+        <EmoticonArray value="raynor_happy"/>
+        <EmoticonArray value="raynor_rofl"/>
+        <EmoticonArray value="raynor_sad"/>
+        <EmoticonArray value="raynor_silly"/>
+        <EmoticonArray value="raynor_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="RaynorEmoticonPack2">
+        <EmoticonArray value="raynor_angry"/>
+        <EmoticonArray value="raynor_cool"/>
+        <EmoticonArray value="raynor_embarrassed"/>
+        <EmoticonArray value="raynor_inlove"/>
+        <EmoticonArray value="raynor_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="NovaEmoticonPack">
+        <EmoticonArray value="nova_happy"/>
+        <EmoticonArray value="nova_rofl"/>
+        <EmoticonArray value="nova_sad"/>
+        <EmoticonArray value="nova_silly"/>
+        <EmoticonArray value="nova_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="NovaEmoticonPack2">
+        <EmoticonArray value="nova_angry"/>
+        <EmoticonArray value="nova_cool"/>
+        <EmoticonArray value="nova_embarrassed"/>
+        <EmoticonArray value="nova_inlove"/>
+        <EmoticonArray value="nova_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="MuradinEmoticonPack">
+        <EmoticonArray value="muradin_happy"/>
+        <EmoticonArray value="muradin_rofl"/>
+        <EmoticonArray value="muradin_sad"/>
+        <EmoticonArray value="muradin_silly"/>
+        <EmoticonArray value="muradin_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="MuradinEmoticonPack2">
+        <EmoticonArray value="muradin_angry"/>
+        <EmoticonArray value="muradin_cool"/>
+        <EmoticonArray value="muradin_embarrassed"/>
+        <EmoticonArray value="muradin_inlove"/>
+        <EmoticonArray value="muradin_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="MalfurionEmoticonPack">
+        <EmoticonArray value="malfurion_happy"/>
+        <EmoticonArray value="malfurion_rofl"/>
+        <EmoticonArray value="malfurion_sad"/>
+        <EmoticonArray value="malfurion_silly"/>
+        <EmoticonArray value="malfurion_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="MalfurionEmoticonPack2">
+        <EmoticonArray value="malfurion_angry"/>
+        <EmoticonArray value="malfurion_cool"/>
+        <EmoticonArray value="malfurion_embarrassed"/>
+        <EmoticonArray value="malfurion_inlove"/>
+        <EmoticonArray value="malfurion_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="KerriganEmoticonPack">
+        <EmoticonArray value="kerrigan_happy"/>
+        <EmoticonArray value="kerrigan_rofl"/>
+        <EmoticonArray value="kerrigan_sad"/>
+        <EmoticonArray value="kerrigan_silly"/>
+        <EmoticonArray value="kerrigan_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="KerriganEmoticonPack2">
+        <EmoticonArray value="kerrigan_angry"/>
+        <EmoticonArray value="kerrigan_cool"/>
+        <EmoticonArray value="kerrigan_embarrassed"/>
+        <EmoticonArray value="kerrigan_inlove"/>
+        <EmoticonArray value="kerrigan_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="IllidanEmoticonPack">
+        <EmoticonArray value="illidan_happy"/>
+        <EmoticonArray value="illidan_rofl"/>
+        <EmoticonArray value="illidan_sad"/>
+        <EmoticonArray value="illidan_silly"/>
+        <EmoticonArray value="illidan_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="IllidanEmoticonPack2">
+        <EmoticonArray value="illidan_angry"/>
+        <EmoticonArray value="illidan_cool"/>
+        <EmoticonArray value="illidan_embarrassed"/>
+        <EmoticonArray value="illidan_inlove"/>
+        <EmoticonArray value="illidan_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="EtcEmoticonPack">
+        <EmoticonArray value="etc_happy"/>
+        <EmoticonArray value="etc_rofl"/>
+        <EmoticonArray value="etc_sad"/>
+        <EmoticonArray value="etc_silly"/>
+        <EmoticonArray value="etc_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="EtcEmoticonPack2">
+        <EmoticonArray value="etc_angry"/>
+        <EmoticonArray value="etc_cool"/>
+        <EmoticonArray value="etc_embarrassed"/>
+        <EmoticonArray value="etc_inlove"/>
+        <EmoticonArray value="etc_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="DiabloEmoticonPack">
+        <EmoticonArray value="diablo_happy"/>
+        <EmoticonArray value="diablo_rofl"/>
+        <EmoticonArray value="diablo_sad"/>
+        <EmoticonArray value="diablo_silly"/>
+        <EmoticonArray value="diablo_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="DiabloEmoticonPack2">
+        <EmoticonArray value="diablo_angry"/>
+        <EmoticonArray value="diablo_cool"/>
+        <EmoticonArray value="diablo_embarrassed"/>
+        <EmoticonArray value="diablo_inlove"/>
+        <EmoticonArray value="diablo_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="AbathurEmoticonPack">
+        <EmoticonArray value="abathur_happy"/>
+        <EmoticonArray value="abathur_rofl"/>
+        <EmoticonArray value="abathur_sad"/>
+        <EmoticonArray value="abathur_silly"/>
+        <EmoticonArray value="abathur_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="AbathurEmoticonPack2">
+        <EmoticonArray value="abathur_angry"/>
+        <EmoticonArray value="abathur_cool"/>
+        <EmoticonArray value="abathur_embarrassed"/>
+        <EmoticonArray value="abathur_inlove"/>
+        <EmoticonArray value="abathur_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="TychusEmoticonPack">
+        <EmoticonArray value="tychus_happy"/>
+        <EmoticonArray value="tychus_rofl"/>
+        <EmoticonArray value="tychus_sad"/>
+        <EmoticonArray value="tychus_silly"/>
+        <EmoticonArray value="tychus_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="TychusEmoticonPack2">
+        <EmoticonArray value="tychus_angry"/>
+        <EmoticonArray value="tychus_cool"/>
+        <EmoticonArray value="tychus_embarrassed"/>
+        <EmoticonArray value="tychus_inlove"/>
+        <EmoticonArray value="tychus_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="LiliEmoticonPack">
+        <EmoticonArray value="lili_happy"/>
+        <EmoticonArray value="lili_rofl"/>
+        <EmoticonArray value="lili_sad"/>
+        <EmoticonArray value="lili_silly"/>
+        <EmoticonArray value="lili_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="LiliEmoticonPack2">
+        <EmoticonArray value="lili_angry"/>
+        <EmoticonArray value="lili_cool"/>
+        <EmoticonArray value="lili_embarrassed"/>
+        <EmoticonArray value="lili_inlove"/>
+        <EmoticonArray value="lili_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="BrightwingEmoticonPack">
+        <EmoticonArray value="brightwing_happy"/>
+        <EmoticonArray value="brightwing_rofl"/>
+        <EmoticonArray value="brightwing_sad"/>
+        <EmoticonArray value="brightwing_silly"/>
+        <EmoticonArray value="brightwing_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="BrightwingEmoticonPack2">
+        <EmoticonArray value="brightwing_angry"/>
+        <EmoticonArray value="brightwing_cool"/>
+        <EmoticonArray value="brightwing_embarrassed"/>
+        <EmoticonArray value="brightwing_inlove"/>
+        <EmoticonArray value="brightwing_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="MurkyEmoticonPack">
+        <EmoticonArray value="murky_happy"/>
+        <EmoticonArray value="murky_rofl"/>
+        <EmoticonArray value="murky_sad"/>
+        <EmoticonArray value="murky_silly"/>
+        <EmoticonArray value="murky_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="MurkyEmoticonPack2">
+        <EmoticonArray value="murky_angry"/>
+        <EmoticonArray value="murky_cool"/>
+        <EmoticonArray value="murky_embarrassed"/>
+        <EmoticonArray value="murky_inlove"/>
+        <EmoticonArray value="murky_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="ZagaraEmoticonPack">
+        <EmoticonArray value="zagara_happy"/>
+        <EmoticonArray value="zagara_rofl"/>
+        <EmoticonArray value="zagara_sad"/>
+        <EmoticonArray value="zagara_silly"/>
+        <EmoticonArray value="zagara_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="ZagaraEmoticonPack2">
+        <EmoticonArray value="zagara_angry"/>
+        <EmoticonArray value="zagara_cool"/>
+        <EmoticonArray value="zagara_embarrassed"/>
+        <EmoticonArray value="zagara_inlove"/>
+        <EmoticonArray value="zagara_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="ChenEmoticonPack">
+        <EmoticonArray value="chen_happy"/>
+        <EmoticonArray value="chen_rofl"/>
+        <EmoticonArray value="chen_sad"/>
+        <EmoticonArray value="chen_silly"/>
+        <EmoticonArray value="chen_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="ChenEmoticonPack2">
+        <EmoticonArray value="chen_angry"/>
+        <EmoticonArray value="chen_cool"/>
+        <EmoticonArray value="chen_embarrassed"/>
+        <EmoticonArray value="chen_inlove"/>
+        <EmoticonArray value="chen_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="AnubarakEmoticonPack">
+        <EmoticonArray value="anubarak_happy"/>
+        <EmoticonArray value="anubarak_rofl"/>
+        <EmoticonArray value="anubarak_sad"/>
+        <EmoticonArray value="anubarak_silly"/>
+        <EmoticonArray value="anubarak_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="AnubarakEmoticonPack2">
+        <EmoticonArray value="anubarak_angry"/>
+        <EmoticonArray value="anubarak_cool"/>
+        <EmoticonArray value="anubarak_embarrassed"/>
+        <EmoticonArray value="anubarak_inlove"/>
+        <EmoticonArray value="anubarak_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="JainaEmoticonPack">
+        <EmoticonArray value="jaina_happy"/>
+        <EmoticonArray value="jaina_rofl"/>
+        <EmoticonArray value="jaina_sad"/>
+        <EmoticonArray value="jaina_silly"/>
+        <EmoticonArray value="jaina_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="JainaEmoticonPack2">
+        <EmoticonArray value="jaina_angry"/>
+        <EmoticonArray value="jaina_cool"/>
+        <EmoticonArray value="jaina_embarrassed"/>
+        <EmoticonArray value="jaina_inlove"/>
+        <EmoticonArray value="jaina_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="VikingsEmoticonPack">
+        <EmoticonArray value="lostvikings_happy"/>
+        <EmoticonArray value="lostvikings_rofl"/>
+        <EmoticonArray value="lostvikings_sad"/>
+        <EmoticonArray value="lostvikings_silly"/>
+        <EmoticonArray value="lostvikings_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="VikingsEmoticonPack2">
+        <EmoticonArray value="lostvikings_angry"/>
+        <EmoticonArray value="lostvikings_cool"/>
+        <EmoticonArray value="lostvikings_embarrassed"/>
+        <EmoticonArray value="lostvikings_inlove"/>
+        <EmoticonArray value="lostvikings_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="SylvanasEmoticonPack">
+        <EmoticonArray value="sylvanas_happy"/>
+        <EmoticonArray value="sylvanas_rofl"/>
+        <EmoticonArray value="sylvanas_sad"/>
+        <EmoticonArray value="sylvanas_silly"/>
+        <EmoticonArray value="sylvanas_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="SylvanasEmoticonPack2">
+        <EmoticonArray value="sylvanas_angry"/>
+        <EmoticonArray value="sylvanas_cool"/>
+        <EmoticonArray value="sylvanas_embarrassed"/>
+        <EmoticonArray value="sylvanas_inlove"/>
+        <EmoticonArray value="sylvanas_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="KaelthasEmoticonPack">
+        <EmoticonArray value="kaelthas_happy"/>
+        <EmoticonArray value="kaelthas_rofl"/>
+        <EmoticonArray value="kaelthas_sad"/>
+        <EmoticonArray value="kaelthas_silly"/>
+        <EmoticonArray value="kaelthas_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="KaelthasEmoticonPack2">
+        <EmoticonArray value="kaelthas_angry"/>
+        <EmoticonArray value="kaelthas_cool"/>
+        <EmoticonArray value="kaelthas_embarrassed"/>
+        <EmoticonArray value="kaelthas_inlove"/>
+        <EmoticonArray value="kaelthas_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="JohannaEmoticonPack">
+        <EmoticonArray value="johanna_happy"/>
+        <EmoticonArray value="johanna_rofl"/>
+        <EmoticonArray value="johanna_sad"/>
+        <EmoticonArray value="johanna_silly"/>
+        <EmoticonArray value="johanna_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="JohannaEmoticonPack2">
+        <EmoticonArray value="johanna_angry"/>
+        <EmoticonArray value="johanna_cool"/>
+        <EmoticonArray value="johanna_embarrassed"/>
+        <EmoticonArray value="johanna_inlove"/>
+        <EmoticonArray value="johanna_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="ButcherEmoticonPack">
+        <EmoticonArray value="butcher_happy"/>
+        <EmoticonArray value="butcher_rofl"/>
+        <EmoticonArray value="butcher_sad"/>
+        <EmoticonArray value="butcher_silly"/>
+        <EmoticonArray value="butcher_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="ButcherEmoticonPack2">
+        <EmoticonArray value="butcher_angry"/>
+        <EmoticonArray value="butcher_cool"/>
+        <EmoticonArray value="butcher_embarrassed"/>
+        <EmoticonArray value="butcher_inlove"/>
+        <EmoticonArray value="butcher_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="LeoricEmoticonPack">
+        <EmoticonArray value="leoric_happy"/>
+        <EmoticonArray value="leoric_rofl"/>
+        <EmoticonArray value="leoric_sad"/>
+        <EmoticonArray value="leoric_silly"/>
+        <EmoticonArray value="leoric_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="LeoricEmoticonPack2">
+        <EmoticonArray value="leoric_angry"/>
+        <EmoticonArray value="leoric_cool"/>
+        <EmoticonArray value="leoric_embarrassed"/>
+        <EmoticonArray value="leoric_inlove"/>
+        <EmoticonArray value="leoric_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="KharazimEmoticonPack">
+        <EmoticonArray value="kharazim_happy"/>
+        <EmoticonArray value="kharazim_rofl"/>
+        <EmoticonArray value="kharazim_sad"/>
+        <EmoticonArray value="kharazim_silly"/>
+        <EmoticonArray value="kharazim_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="KharazimEmoticonPack2">
+        <EmoticonArray value="kharazim_angry"/>
+        <EmoticonArray value="kharazim_cool"/>
+        <EmoticonArray value="kharazim_embarrassed"/>
+        <EmoticonArray value="kharazim_inlove"/>
+        <EmoticonArray value="kharazim_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="RexxarEmoticonPack">
+        <EmoticonArray value="rexxar_happy"/>
+        <EmoticonArray value="rexxar_rofl"/>
+        <EmoticonArray value="rexxar_sad"/>
+        <EmoticonArray value="rexxar_silly"/>
+        <EmoticonArray value="rexxar_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="RexxarEmoticonPack2">
+        <EmoticonArray value="rexxar_angry"/>
+        <EmoticonArray value="rexxar_cool"/>
+        <EmoticonArray value="rexxar_embarrassed"/>
+        <EmoticonArray value="rexxar_inlove"/>
+        <EmoticonArray value="rexxar_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="ArtanisEmoticonPack">
+        <EmoticonArray value="artanis_happy"/>
+        <EmoticonArray value="artanis_rofl"/>
+        <EmoticonArray value="artanis_sad"/>
+        <EmoticonArray value="artanis_silly"/>
+        <EmoticonArray value="artanis_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="ArtanisEmoticonPack2">
+        <EmoticonArray value="artanis_angry"/>
+        <EmoticonArray value="artanis_cool"/>
+        <EmoticonArray value="artanis_embarrassed"/>
+        <EmoticonArray value="artanis_inlove"/>
+        <EmoticonArray value="artanis_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="ChoEmoticonPack">
+        <EmoticonArray value="cho_happy"/>
+        <EmoticonArray value="cho_rofl"/>
+        <EmoticonArray value="cho_sad"/>
+        <EmoticonArray value="cho_silly"/>
+        <EmoticonArray value="cho_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="ChoEmoticonPack2">
+        <EmoticonArray value="cho_angry"/>
+        <EmoticonArray value="cho_cool"/>
+        <EmoticonArray value="cho_embarrassed"/>
+        <EmoticonArray value="cho_inlove"/>
+        <EmoticonArray value="cho_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="GallEmoticonPack">
+        <EmoticonArray value="gall_happy"/>
+        <EmoticonArray value="gall_rofl"/>
+        <EmoticonArray value="gall_sad"/>
+        <EmoticonArray value="gall_silly"/>
+        <EmoticonArray value="gall_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="GallEmoticonPack2">
+        <EmoticonArray value="gall_angry"/>
+        <EmoticonArray value="gall_cool"/>
+        <EmoticonArray value="gall_embarrassed"/>
+        <EmoticonArray value="gall_inlove"/>
+        <EmoticonArray value="gall_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="LimingEmoticonPack">
+        <EmoticonArray value="liming_happy"/>
+        <EmoticonArray value="liming_rofl"/>
+        <EmoticonArray value="liming_sad"/>
+        <EmoticonArray value="liming_silly"/>
+        <EmoticonArray value="liming_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="LimingEmoticonPack2">
+        <EmoticonArray value="liming_angry"/>
+        <EmoticonArray value="liming_cool"/>
+        <EmoticonArray value="liming_embarrassed"/>
+        <EmoticonArray value="liming_inlove"/>
+        <EmoticonArray value="liming_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="DehakaEmoticonPack">
+        <EmoticonArray value="dehaka_happy"/>
+        <EmoticonArray value="dehaka_rofl"/>
+        <EmoticonArray value="dehaka_sad"/>
+        <EmoticonArray value="dehaka_silly"/>
+        <EmoticonArray value="dehaka_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="DehakaEmoticonPack2">
+        <EmoticonArray value="dehaka_angry"/>
+        <EmoticonArray value="dehaka_cool"/>
+        <EmoticonArray value="dehaka_embarrassed"/>
+        <EmoticonArray value="dehaka_inlove"/>
+        <EmoticonArray value="dehaka_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="ChromieEmoticonPack">
+        <EmoticonArray value="chromie_happy"/>
+        <EmoticonArray value="chromie_rofl"/>
+        <EmoticonArray value="chromie_sad"/>
+        <EmoticonArray value="chromie_silly"/>
+        <EmoticonArray value="chromie_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="ChromieEmoticonPack2">
+        <EmoticonArray value="chromie_angry"/>
+        <EmoticonArray value="chromie_cool"/>
+        <EmoticonArray value="chromie_embarrassed"/>
+        <EmoticonArray value="chromie_inlove"/>
+        <EmoticonArray value="chromie_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="MedivhEmoticonPack">
+        <EmoticonArray value="medivh_happy"/>
+        <EmoticonArray value="medivh_rofl"/>
+        <EmoticonArray value="medivh_sad"/>
+        <EmoticonArray value="medivh_silly"/>
+        <EmoticonArray value="medivh_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="MedivhEmoticonPack2">
+        <EmoticonArray value="medivh_angry"/>
+        <EmoticonArray value="medivh_cool"/>
+        <EmoticonArray value="medivh_embarrassed"/>
+        <EmoticonArray value="medivh_inlove"/>
+        <EmoticonArray value="medivh_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="GuldanEmoticonPack">
+        <EmoticonArray value="guldan_happy"/>
+        <EmoticonArray value="guldan_rofl"/>
+        <EmoticonArray value="guldan_sad"/>
+        <EmoticonArray value="guldan_silly"/>
+        <EmoticonArray value="guldan_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="GuldanEmoticonPack2">
+        <EmoticonArray value="guldan_angry"/>
+        <EmoticonArray value="guldan_cool"/>
+        <EmoticonArray value="guldan_embarrassed"/>
+        <EmoticonArray value="guldan_inlove"/>
+        <EmoticonArray value="guldan_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="AurielEmoticonPack">
+        <EmoticonArray value="auriel_happy"/>
+        <EmoticonArray value="auriel_rofl"/>
+        <EmoticonArray value="auriel_sad"/>
+        <EmoticonArray value="auriel_silly"/>
+        <EmoticonArray value="auriel_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="AurielEmoticonPack2">
+        <EmoticonArray value="auriel_angry"/>
+        <EmoticonArray value="auriel_cool"/>
+        <EmoticonArray value="auriel_embarrassed"/>
+        <EmoticonArray value="auriel_inlove"/>
+        <EmoticonArray value="auriel_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="AlarakEmoticonPack">
+        <EmoticonArray value="alarak_happy"/>
+        <EmoticonArray value="alarak_rofl"/>
+        <EmoticonArray value="alarak_sad"/>
+        <EmoticonArray value="alarak_silly"/>
+        <EmoticonArray value="alarak_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="AlarakEmoticonPack2">
+        <EmoticonArray value="alarak_angry"/>
+        <EmoticonArray value="alarak_cool"/>
+        <EmoticonArray value="alarak_embarrassed"/>
+        <EmoticonArray value="alarak_inlove"/>
+        <EmoticonArray value="alarak_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="SamuroEmoticonPack">
+        <EmoticonArray value="samuro_happy"/>
+        <EmoticonArray value="samuro_rofl"/>
+        <EmoticonArray value="samuro_sad"/>
+        <EmoticonArray value="samuro_silly"/>
+        <EmoticonArray value="samuro_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="SamuroEmoticonPack2">
+        <EmoticonArray value="samuro_angry"/>
+        <EmoticonArray value="samuro_cool"/>
+        <EmoticonArray value="samuro_embarrassed"/>
+        <EmoticonArray value="samuro_inlove"/>
+        <EmoticonArray value="samuro_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="VarianEmoticonPack">
+        <EmoticonArray value="varian_happy"/>
+        <EmoticonArray value="varian_rofl"/>
+        <EmoticonArray value="varian_sad"/>
+        <EmoticonArray value="varian_silly"/>
+        <EmoticonArray value="varian_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="VarianEmoticonPack2">
+        <EmoticonArray value="varian_angry"/>
+        <EmoticonArray value="varian_cool"/>
+        <EmoticonArray value="varian_embarrassed"/>
+        <EmoticonArray value="varian_inlove"/>
+        <EmoticonArray value="varian_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="RagnarosEmoticonPack">
+        <EmoticonArray value="ragnaros_happy"/>
+        <EmoticonArray value="ragnaros_rofl"/>
+        <EmoticonArray value="ragnaros_sad"/>
+        <EmoticonArray value="ragnaros_silly"/>
+        <EmoticonArray value="ragnaros_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="RagnarosEmoticonPack2">
+        <EmoticonArray value="ragnaros_angry"/>
+        <EmoticonArray value="ragnaros_cool"/>
+        <EmoticonArray value="ragnaros_embarrassed"/>
+        <EmoticonArray value="ragnaros_inlove"/>
+        <EmoticonArray value="ragnaros_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="ZuljinEmoticonPack">
+        <EmoticonArray value="zuljin_happy"/>
+        <EmoticonArray value="zuljin_rofl"/>
+        <EmoticonArray value="zuljin_sad"/>
+        <EmoticonArray value="zuljin_silly"/>
+        <EmoticonArray value="zuljin_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="ZuljinEmoticonPack2">
+        <EmoticonArray value="zuljin_angry"/>
+        <EmoticonArray value="zuljin_cool"/>
+        <EmoticonArray value="zuljin_embarrassed"/>
+        <EmoticonArray value="zuljin_inlove"/>
+        <EmoticonArray value="zuljin_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="ValeeraEmoticonPack">
+        <EmoticonArray value="valeera_happy"/>
+        <EmoticonArray value="valeera_rofl"/>
+        <EmoticonArray value="valeera_sad"/>
+        <EmoticonArray value="valeera_silly"/>
+        <EmoticonArray value="valeera_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="ValeeraEmoticonPack2">
+        <EmoticonArray value="valeera_angry"/>
+        <EmoticonArray value="valeera_cool"/>
+        <EmoticonArray value="valeera_embarrassed"/>
+        <EmoticonArray value="valeera_inlove"/>
+        <EmoticonArray value="valeera_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="LucioEmoticonPack">
+        <EmoticonArray value="lucio_happy"/>
+        <EmoticonArray value="lucio_rofl"/>
+        <EmoticonArray value="lucio_sad"/>
+        <EmoticonArray value="lucio_silly"/>
+        <EmoticonArray value="lucio_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="LucioEmoticonPack2">
+        <EmoticonArray value="lucio_angry"/>
+        <EmoticonArray value="lucio_cool"/>
+        <EmoticonArray value="lucio_embarrassed"/>
+        <EmoticonArray value="lucio_inlove"/>
+        <EmoticonArray value="lucio_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="ProbiusEmoticonPack">
+        <EmoticonArray value="probius_happy"/>
+        <EmoticonArray value="probius_rofl"/>
+        <EmoticonArray value="probius_sad"/>
+        <EmoticonArray value="probius_silly"/>
+        <EmoticonArray value="probius_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="ProbiusEmoticonPack2">
+        <EmoticonArray value="probius_angry"/>
+        <EmoticonArray value="probius_cool"/>
+        <EmoticonArray value="probius_embarrassed"/>
+        <EmoticonArray value="probius_inlove"/>
+        <EmoticonArray value="probius_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="CassiaEmoticonPack">
+        <EmoticonArray value="cassia_happy"/>
+        <EmoticonArray value="cassia_rofl"/>
+        <EmoticonArray value="cassia_sad"/>
+        <EmoticonArray value="cassia_silly"/>
+        <EmoticonArray value="cassia_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="CassiaEmoticonPack2">
+        <EmoticonArray value="cassia_angry"/>
+        <EmoticonArray value="cassia_cool"/>
+        <EmoticonArray value="cassia_embarrassed"/>
+        <EmoticonArray value="cassia_inlove"/>
+        <EmoticonArray value="cassia_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="GenjiEmoticonPack">
+        <EmoticonArray value="genji_happy"/>
+        <EmoticonArray value="genji_rofl"/>
+        <EmoticonArray value="genji_sad"/>
+        <EmoticonArray value="genji_silly"/>
+        <EmoticonArray value="genji_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="GenjiEmoticonPack2">
+        <EmoticonArray value="genji_angry"/>
+        <EmoticonArray value="genji_cool"/>
+        <EmoticonArray value="genji_embarrassed"/>
+        <EmoticonArray value="genji_inlove"/>
+        <EmoticonArray value="genji_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="Food1EmoticonPack">
+        <EmoticonArray value="food_murkshimi"/>
+        <EmoticonArray value="food_noodles"/>
+        <EmoticonArray value="food_sushi"/>
+        <EmoticonArray value="food_tofu"/>
+        <EmoticonArray value="food_riceball"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="Food2EmoticonPack">
+        <EmoticonArray value="food_ham"/>
+        <EmoticonArray value="food_cheese"/>
+        <EmoticonArray value="food_salt"/>
+        <EmoticonArray value="food_popcorn"/>
+        <EmoticonArray value="food_potato"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="HandSigns1EmoticonPack">
+        <EmoticonArray value="hand_thumbsup"/>
+        <EmoticonArray value="hand_thumbsdown"/>
+        <EmoticonArray value="hand_fistbump"/>
+        <EmoticonArray value="hand_hangloose"/>
+        <EmoticonArray value="hand_rockon"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="HandSigns2EmoticonPack">
+        <EmoticonArray value="hand_rock"/>
+        <EmoticonArray value="hand_paper"/>
+        <EmoticonArray value="hand_scissors"/>
+        <EmoticonArray value="hand_tauren"/>
+        <EmoticonArray value="hand_zerg"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="HandSigns3EmoticonPack">
+        <EmoticonArray value="hand_flex"/>
+        <EmoticonArray value="hand_applause"/>
+        <EmoticonArray value="hand_fingerscrossed"/>
+        <EmoticonArray value="hand_point"/>
+        <EmoticonArray value="hand_handshake"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="HandSigns1OrcEmoticonPack">
+        <EmoticonArray value="hand_thumbsup_orc"/>
+        <EmoticonArray value="hand_thumbsdown_orc"/>
+        <EmoticonArray value="hand_fistbump_orc"/>
+        <EmoticonArray value="hand_hangloose_orc"/>
+        <EmoticonArray value="hand_rockon_orc"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="HandSigns2OrcEmoticonPack">
+        <EmoticonArray value="hand_rock_orc"/>
+        <EmoticonArray value="hand_paper_orc"/>
+        <EmoticonArray value="hand_scissors_orc"/>
+        <EmoticonArray value="hand_tauren_orc"/>
+        <EmoticonArray value="hand_zerg_orc"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="HandSigns3OrcEmoticonPack">
+        <EmoticonArray value="hand_flex_orc"/>
+        <EmoticonArray value="hand_applause_orc"/>
+        <EmoticonArray value="hand_fingerscrossed_orc"/>
+        <EmoticonArray value="hand_point_orc"/>
+        <EmoticonArray value="hand_handshake_orc"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="HandSigns1GauntletEmoticonPack">
+        <EmoticonArray value="hand_thumbsup_gauntlet"/>
+        <EmoticonArray value="hand_thumbsdown_gauntlet"/>
+        <EmoticonArray value="hand_fistbump_gauntlet"/>
+        <EmoticonArray value="hand_hangloose_gauntlet"/>
+        <EmoticonArray value="hand_rockon_gauntlet"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="HandSigns2GauntletEmoticonPack">
+        <EmoticonArray value="hand_rock_gauntlet"/>
+        <EmoticonArray value="hand_paper_gauntlet"/>
+        <EmoticonArray value="hand_scissors_gauntlet"/>
+        <EmoticonArray value="hand_tauren_gauntlet"/>
+        <EmoticonArray value="hand_zerg_gauntlet"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="HandSigns3GauntletEmoticonPack">
+        <EmoticonArray value="hand_flex_gauntlet"/>
+        <EmoticonArray value="hand_applause_gauntlet"/>
+        <EmoticonArray value="hand_fingerscrossed_gauntlet"/>
+        <EmoticonArray value="hand_point_gauntlet"/>
+        <EmoticonArray value="hand_handshake_gauntlet"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="DeathEmoticonPack">
+        <EmoticonArray value="death_bones"/>
+        <EmoticonArray value="death_coffin"/>
+        <EmoticonArray value="death_tombstone"/>
+        <EmoticonArray value="death_ghost"/>
+        <EmoticonArray value="death_grave"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="PhrasesEmoticonPack">
+        <EmoticonArray value="phrases_gg"/>
+        <EmoticonArray value="phrases_gj"/>
+        <EmoticonArray value="phrases_glhf"/>
+        <EmoticonArray value="phrases_zzz"/>
+        <EmoticonArray value="phrases_tt"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="PhrasesTheme1EmoticonPack">
+        <EmoticonArray value="phrases_sweets_gg"/>
+        <EmoticonArray value="phrases_sweets_gj"/>
+        <EmoticonArray value="phrases_sweets_glhf"/>
+        <EmoticonArray value="phrases_sweets_zzz"/>
+        <EmoticonArray value="phrases_sweets_tt"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="CelebrationsEmoticonPack">
+        <EmoticonArray value="celebrations_fireworks"/>
+        <EmoticonArray value="celebrations_noisemaker"/>
+        <EmoticonArray value="celebrations_popper"/>
+        <EmoticonArray value="celebrations_present"/>
+        <EmoticonArray value="celebrations_toast"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="GarroshPack1">
+        <EmoticonArray value="garrosh_happy"/>
+        <EmoticonArray value="garrosh_rofl"/>
+        <EmoticonArray value="garrosh_sad"/>
+        <EmoticonArray value="garrosh_silly"/>
+        <EmoticonArray value="garrosh_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="GarroshPack2">
+        <EmoticonArray value="garrosh_angry"/>
+        <EmoticonArray value="garrosh_cool"/>
+        <EmoticonArray value="garrosh_embarrassed"/>
+        <EmoticonArray value="garrosh_inlove"/>
+        <EmoticonArray value="garrosh_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="KelThuzadPack1">
+        <EmoticonArray value="kelthuzad_happy"/>
+        <EmoticonArray value="kelthuzad_rofl"/>
+        <EmoticonArray value="kelthuzad_sad"/>
+        <EmoticonArray value="kelthuzad_silly"/>
+        <EmoticonArray value="kelthuzad_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="KelThuzadPack2">
+        <EmoticonArray value="kelthuzad_angry"/>
+        <EmoticonArray value="kelthuzad_cool"/>
+        <EmoticonArray value="kelthuzad_embarrassed"/>
+        <EmoticonArray value="kelthuzad_inlove"/>
+        <EmoticonArray value="kelthuzad_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="DeathbringerSonyaPack1">
+        <EmoticonArray value="sonya_deathbringer_happy"/>
+        <EmoticonArray value="sonya_deathbringer_rofl"/>
+        <EmoticonArray value="sonya_deathbringer_sad"/>
+        <EmoticonArray value="sonya_deathbringer_silly"/>
+        <EmoticonArray value="sonya_deathbringer_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="DeathbringerSonyaPack2">
+        <EmoticonArray value="sonya_deathbringer_angry"/>
+        <EmoticonArray value="sonya_deathbringer_cool"/>
+        <EmoticonArray value="sonya_deathbringer_embarrassed"/>
+        <EmoticonArray value="sonya_deathbringer_inlove"/>
+        <EmoticonArray value="sonya_deathbringer_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="DeathKnightSonyaPack1">
+        <EmoticonArray value="sonya_deathknight_happy"/>
+        <EmoticonArray value="sonya_deathknight_rofl"/>
+        <EmoticonArray value="sonya_deathknight_sad"/>
+        <EmoticonArray value="sonya_deathknight_silly"/>
+        <EmoticonArray value="sonya_deathknight_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="DeathKnightSonyaPack2">
+        <EmoticonArray value="sonya_deathknight_angry"/>
+        <EmoticonArray value="sonya_deathknight_cool"/>
+        <EmoticonArray value="sonya_deathknight_embarrassed"/>
+        <EmoticonArray value="sonya_deathknight_inlove"/>
+        <EmoticonArray value="sonya_deathknight_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="DreadlordJainaPack1">
+        <EmoticonArray value="jaina_dreadlord_happy"/>
+        <EmoticonArray value="jaina_dreadlord_rofl"/>
+        <EmoticonArray value="jaina_dreadlord_sad"/>
+        <EmoticonArray value="jaina_dreadlord_silly"/>
+        <EmoticonArray value="jaina_dreadlord_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="DreadlordJainaPack2">
+        <EmoticonArray value="jaina_dreadlord_angry"/>
+        <EmoticonArray value="jaina_dreadlord_cool"/>
+        <EmoticonArray value="jaina_dreadlord_embarrassed"/>
+        <EmoticonArray value="jaina_dreadlord_inlove"/>
+        <EmoticonArray value="jaina_dreadlord_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="CryptQueenZagaraPack1">
+        <EmoticonArray value="zagara_cryptqueen_happy"/>
+        <EmoticonArray value="zagara_cryptqueen_rofl"/>
+        <EmoticonArray value="zagara_cryptqueen_sad"/>
+        <EmoticonArray value="zagara_cryptqueen_silly"/>
+        <EmoticonArray value="zagara_cryptqueen_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="CryptQueenZagaraPack2">
+        <EmoticonArray value="zagara_cryptqueen_angry"/>
+        <EmoticonArray value="zagara_cryptqueen_cool"/>
+        <EmoticonArray value="zagara_cryptqueen_embarrassed"/>
+        <EmoticonArray value="zagara_cryptqueen_inlove"/>
+        <EmoticonArray value="zagara_cryptqueen_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="AnaPack1">
+        <EmoticonArray value="ana_happy"/>
+        <EmoticonArray value="ana_rofl"/>
+        <EmoticonArray value="ana_sad"/>
+        <EmoticonArray value="ana_silly"/>
+        <EmoticonArray value="ana_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="AnaPack2">
+        <EmoticonArray value="ana_angry"/>
+        <EmoticonArray value="ana_cool"/>
+        <EmoticonArray value="ana_embarrassed"/>
+        <EmoticonArray value="ana_inlove"/>
+        <EmoticonArray value="ana_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="PachimariPack1" parent="LimitedReleaseEmoticonPackParent">
+        <EmoticonArray value="pachimari_happy"/>
+        <EmoticonArray value="pachimari_rofl"/>
+        <EmoticonArray value="pachimari_sad"/>
+        <EmoticonArray value="pachimari_silly"/>
+        <EmoticonArray value="pachimari_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="PachimariPack2" parent="LimitedReleaseEmoticonPackParent">
+        <EmoticonArray value="pachimari_angry"/>
+        <EmoticonArray value="pachimari_cool"/>
+        <EmoticonArray value="pachimari_embarrassed"/>
+        <EmoticonArray value="pachimari_inlove"/>
+        <EmoticonArray value="pachimari_surprised"/>
+        <EmoticonArray value="pachimari_gold"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="SkeletalHandSymbolPack1" parent="HallowsEndEmoticonPackParent">
+        <EmoticonArray value="hand_thumbsup_skeletal"/>
+        <EmoticonArray value="hand_thumbsdown_skeletal"/>
+        <EmoticonArray value="hand_fistbump_skeletal"/>
+        <EmoticonArray value="hand_hangloose_skeletal"/>
+        <EmoticonArray value="hand_rockon_skeletal"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="SkeletalHandSymbolPack2" parent="HallowsEndEmoticonPackParent">
+        <EmoticonArray value="hand_rock_skeletal"/>
+        <EmoticonArray value="hand_paper_skeletal"/>
+        <EmoticonArray value="hand_scissors_skeletal"/>
+        <EmoticonArray value="hand_tauren_skeletal"/>
+        <EmoticonArray value="hand_zerg_skeletal"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="SkeletalHandSymbolPack3" parent="HallowsEndEmoticonPackParent">
+        <EmoticonArray value="hand_flex_skeletal"/>
+        <EmoticonArray value="hand_applause_skeletal"/>
+        <EmoticonArray value="hand_fingerscrossed_skeletal"/>
+        <EmoticonArray value="hand_point_skeletal"/>
+        <EmoticonArray value="hand_handshake_skeletal"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="JunkratPack1">
+        <EmoticonArray value="junkrat_happy"/>
+        <EmoticonArray value="junkrat_rofl"/>
+        <EmoticonArray value="junkrat_sad"/>
+        <EmoticonArray value="junkrat_silly"/>
+        <EmoticonArray value="junkrat_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="JunkratPack2">
+        <EmoticonArray value="junkrat_angry"/>
+        <EmoticonArray value="junkrat_cool"/>
+        <EmoticonArray value="junkrat_embarrassed"/>
+        <EmoticonArray value="junkrat_inlove"/>
+        <EmoticonArray value="junkrat_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="ScarecrowXulPack1" parent="HallowsEndEmoticonPackParent">
+        <EmoticonArray value="xul_scarecrow_happy"/>
+        <EmoticonArray value="xul_scarecrow_rofl"/>
+        <EmoticonArray value="xul_scarecrow_sad"/>
+        <EmoticonArray value="xul_scarecrow_silly"/>
+        <EmoticonArray value="xul_scarecrow_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="ScarecrowXulPack2" parent="HallowsEndEmoticonPackParent">
+        <EmoticonArray value="xul_scarecrow_angry"/>
+        <EmoticonArray value="xul_scarecrow_cool"/>
+        <EmoticonArray value="xul_scarecrow_embarrassed"/>
+        <EmoticonArray value="xul_scarecrow_inlove"/>
+        <EmoticonArray value="xul_scarecrow_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="DeputyVallaPack1" parent="HallowsEndEmoticonPackParent">
+        <EmoticonArray value="valla_deputy_happy"/>
+        <EmoticonArray value="valla_deputy_rofl"/>
+        <EmoticonArray value="valla_deputy_sad"/>
+        <EmoticonArray value="valla_deputy_silly"/>
+        <EmoticonArray value="valla_deputy_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="DeputyVallaPack2" parent="HallowsEndEmoticonPackParent">
+        <EmoticonArray value="valla_deputy_angry"/>
+        <EmoticonArray value="valla_deputy_cool"/>
+        <EmoticonArray value="valla_deputy_embarrassed"/>
+        <EmoticonArray value="valla_deputy_inlove"/>
+        <EmoticonArray value="valla_deputy_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="CountessKerriganPack1" parent="HallowsEndEmoticonPackParent">
+        <EmoticonArray value="kerrigan_countess_happy"/>
+        <EmoticonArray value="kerrigan_countess_rofl"/>
+        <EmoticonArray value="kerrigan_countess_sad"/>
+        <EmoticonArray value="kerrigan_countess_silly"/>
+        <EmoticonArray value="kerrigan_countess_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="CountessKerriganPack2" parent="HallowsEndEmoticonPackParent">
+        <EmoticonArray value="kerrigan_countess_angry"/>
+        <EmoticonArray value="kerrigan_countess_cool"/>
+        <EmoticonArray value="kerrigan_countess_embarrassed"/>
+        <EmoticonArray value="kerrigan_countess_inlove"/>
+        <EmoticonArray value="kerrigan_countess_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="CrimsonCountArthasPack1" parent="HallowsEndEmoticonPackParent">
+        <EmoticonArray value="arthas_crimsoncount_happy"/>
+        <EmoticonArray value="arthas_crimsoncount_rofl"/>
+        <EmoticonArray value="arthas_crimsoncount_sad"/>
+        <EmoticonArray value="arthas_crimsoncount_silly"/>
+        <EmoticonArray value="arthas_crimsoncount_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="CrimsonCountArthasPack2" parent="HallowsEndEmoticonPackParent">
+        <EmoticonArray value="arthas_crimsoncount_angry"/>
+        <EmoticonArray value="arthas_crimsoncount_cool"/>
+        <EmoticonArray value="arthas_crimsoncount_embarrassed"/>
+        <EmoticonArray value="arthas_crimsoncount_inlove"/>
+        <EmoticonArray value="arthas_crimsoncount_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="PsychoStitchesPack1" parent="HallowsEndEmoticonPackParent">
+        <EmoticonArray value="stitches_psycho_happy"/>
+        <EmoticonArray value="stitches_psycho_rofl"/>
+        <EmoticonArray value="stitches_psycho_sad"/>
+        <EmoticonArray value="stitches_psycho_silly"/>
+        <EmoticonArray value="stitches_psycho_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="PsychoStitchesPack2" parent="HallowsEndEmoticonPackParent">
+        <EmoticonArray value="stitches_psycho_angry"/>
+        <EmoticonArray value="stitches_psycho_cool"/>
+        <EmoticonArray value="stitches_psycho_embarrassed"/>
+        <EmoticonArray value="stitches_psycho_inlove"/>
+        <EmoticonArray value="stitches_psycho_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="VampireSlayerVPack1" parent="HallowsEndEmoticonPackParent">
+        <EmoticonArray value="valeera_vampireslayerv_happy"/>
+        <EmoticonArray value="valeera_vampireslayerv_rofl"/>
+        <EmoticonArray value="valeera_vampireslayerv_sad"/>
+        <EmoticonArray value="valeera_vampireslayerv_silly"/>
+        <EmoticonArray value="valeera_vampireslayerv_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="VampireSlayerVPack2" parent="HallowsEndEmoticonPackParent">
+        <EmoticonArray value="valeera_vampireslayerv_angry"/>
+        <EmoticonArray value="valeera_vampireslayerv_cool"/>
+        <EmoticonArray value="valeera_vampireslayerv_embarrassed"/>
+        <EmoticonArray value="valeera_vampireslayerv_inlove"/>
+        <EmoticonArray value="valeera_vampireslayerv_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="DoctorWolfSteinPack1" parent="HallowsEndEmoticonPackParent">
+        <EmoticonArray value="greymane_doctorwolfstein_worgen_happy"/>
+        <EmoticonArray value="greymane_doctorwolfstein_worgen_rofl"/>
+        <EmoticonArray value="greymane_doctorwolfstein_worgen_sad"/>
+        <EmoticonArray value="greymane_doctorwolfstein_worgen_silly"/>
+        <EmoticonArray value="greymane_doctorwolfstein_worgen_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="DoctorWolfSteinPack2" parent="HallowsEndEmoticonPackParent">
+        <EmoticonArray value="greymane_doctorwolfstein_worgen_angry"/>
+        <EmoticonArray value="greymane_doctorwolfstein_worgen_cool"/>
+        <EmoticonArray value="greymane_doctorwolfstein_worgen_embarrassed"/>
+        <EmoticonArray value="greymane_doctorwolfstein_worgen_inlove"/>
+        <EmoticonArray value="greymane_doctorwolfstein_worgen_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="HallowsEndPhrasesPack" parent="HallowsEndEmoticonPackParent">
+        <EmoticonArray value="phrases_hallowsend_gg"/>
+        <EmoticonArray value="phrases_hallowsend_gj"/>
+        <EmoticonArray value="phrases_hallowsend_glhf"/>
+        <EmoticonArray value="phrases_hallowsend_zzz"/>
+        <EmoticonArray value="phrases_hallowsend_tt"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="SapperPack1" parent="HallowsEndEmoticonPackParent">
+        <EmoticonArray value="sapper_happy"/>
+        <EmoticonArray value="sapper_rofl"/>
+        <EmoticonArray value="sapper_sad"/>
+        <EmoticonArray value="sapper_silly"/>
+        <EmoticonArray value="sapper_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="SapperPack2" parent="HallowsEndEmoticonPackParent">
+        <EmoticonArray value="sapper_angry"/>
+        <EmoticonArray value="sapper_cool"/>
+        <EmoticonArray value="sapper_embarrassed"/>
+        <EmoticonArray value="sapper_inlove"/>
+        <EmoticonArray value="sapper_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="SapperPackBonus" parent="HallowsEndEmoticonPackParent">
+        <EmoticonArray value="sapper_googly"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="AlexstraszaPack1">
+        <EmoticonArray value="alexstrasza_happy"/>
+        <EmoticonArray value="alexstrasza_rofl"/>
+        <EmoticonArray value="alexstrasza_sad"/>
+        <EmoticonArray value="alexstrasza_silly"/>
+        <EmoticonArray value="alexstrasza_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="AlexstraszaPack2">
+        <EmoticonArray value="alexstrasza_angry"/>
+        <EmoticonArray value="alexstrasza_cool"/>
+        <EmoticonArray value="alexstrasza_embarrassed"/>
+        <EmoticonArray value="alexstrasza_inlove"/>
+        <EmoticonArray value="alexstrasza_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="DragonKnightPack1">
+        <EmoticonArray value="dragonknight_happy"/>
+        <EmoticonArray value="dragonknight_rofl"/>
+        <EmoticonArray value="dragonknight_sad"/>
+        <EmoticonArray value="dragonknight_silly"/>
+        <EmoticonArray value="dragonknight_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="DragonKnightPack2">
+        <EmoticonArray value="dragonknight_angry"/>
+        <EmoticonArray value="dragonknight_cool"/>
+        <EmoticonArray value="dragonknight_embarrassed"/>
+        <EmoticonArray value="dragonknight_inlove"/>
+        <EmoticonArray value="dragonknight_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="DrinksPack">
+        <EmoticonArray value="drink_chocomilk"/>
+        <EmoticonArray value="drink_cola"/>
+        <EmoticonArray value="drink_brew"/>
+        <EmoticonArray value="drink_tea"/>
+        <EmoticonArray value="drink_water"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="GreatfatherWinterStitchesPack1" parent="WinterVeilEmoticonPackParent">
+        <EmoticonArray value="stitches_winterveil_happy"/>
+        <EmoticonArray value="stitches_winterveil_rofl"/>
+        <EmoticonArray value="stitches_winterveil_sad"/>
+        <EmoticonArray value="stitches_winterveil_silly"/>
+        <EmoticonArray value="stitches_winterveil_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="GreatfatherWinterStitchesPack2" parent="WinterVeilEmoticonPackParent">
+        <EmoticonArray value="stitches_winterveil_angry"/>
+        <EmoticonArray value="stitches_winterveil_cool"/>
+        <EmoticonArray value="stitches_winterveil_embarrassed"/>
+        <EmoticonArray value="stitches_winterveil_inlove"/>
+        <EmoticonArray value="stitches_winterveil_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="GreatfatherWinterRehgarPack1" parent="WinterVeilEmoticonPackParent">
+        <EmoticonArray value="rehgar_winterveil_happy"/>
+        <EmoticonArray value="rehgar_winterveil_rofl"/>
+        <EmoticonArray value="rehgar_winterveil_sad"/>
+        <EmoticonArray value="rehgar_winterveil_silly"/>
+        <EmoticonArray value="rehgar_winterveil_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="GreatfatherWinterRehgarPack2" parent="WinterVeilEmoticonPackParent">
+        <EmoticonArray value="rehgar_winterveil_angry"/>
+        <EmoticonArray value="rehgar_winterveil_cool"/>
+        <EmoticonArray value="rehgar_winterveil_embarrassed"/>
+        <EmoticonArray value="rehgar_winterveil_inlove"/>
+        <EmoticonArray value="rehgar_winterveil_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="SugarPlumSylvanasPack1" parent="WinterVeilEmoticonPackParent">
+        <EmoticonArray value="sylvanas_winterveil_happy"/>
+        <EmoticonArray value="sylvanas_winterveil_rofl"/>
+        <EmoticonArray value="sylvanas_winterveil_sad"/>
+        <EmoticonArray value="sylvanas_winterveil_silly"/>
+        <EmoticonArray value="sylvanas_winterveil_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="SugarPlumSylvanasPack2" parent="WinterVeilEmoticonPackParent">
+        <EmoticonArray value="sylvanas_winterveil_angry"/>
+        <EmoticonArray value="sylvanas_winterveil_cool"/>
+        <EmoticonArray value="sylvanas_winterveil_embarrassed"/>
+        <EmoticonArray value="sylvanas_winterveil_inlove"/>
+        <EmoticonArray value="sylvanas_winterveil_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="HanzoPack1">
+        <EmoticonArray value="hanzo_happy"/>
+        <EmoticonArray value="hanzo_rofl"/>
+        <EmoticonArray value="hanzo_sad"/>
+        <EmoticonArray value="hanzo_silly"/>
+        <EmoticonArray value="hanzo_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="HanzoPack2">
+        <EmoticonArray value="hanzo_angry"/>
+        <EmoticonArray value="hanzo_cool"/>
+        <EmoticonArray value="hanzo_embarrassed"/>
+        <EmoticonArray value="hanzo_inlove"/>
+        <EmoticonArray value="hanzo_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="GingerdreadNazeeboPack1" parent="WinterVeilEmoticonPackParent">
+        <EmoticonArray value="nazeebo_gingerdread_happy"/>
+        <EmoticonArray value="nazeebo_gingerdread_rofl"/>
+        <EmoticonArray value="nazeebo_gingerdread_sad"/>
+        <EmoticonArray value="nazeebo_gingerdread_silly"/>
+        <EmoticonArray value="nazeebo_gingerdread_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="GingerdreadNazeeboPack2" parent="WinterVeilEmoticonPackParent">
+        <EmoticonArray value="nazeebo_gingerdread_angry"/>
+        <EmoticonArray value="nazeebo_gingerdread_cool"/>
+        <EmoticonArray value="nazeebo_gingerdread_embarrassed"/>
+        <EmoticonArray value="nazeebo_gingerdread_inlove"/>
+        <EmoticonArray value="nazeebo_gingerdread_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="GreatfatherWinterMalfurionPack1" parent="WinterVeilEmoticonPackParent">
+        <EmoticonArray value="malfurion_winterveil_happy"/>
+        <EmoticonArray value="malfurion_winterveil_rofl"/>
+        <EmoticonArray value="malfurion_winterveil_sad"/>
+        <EmoticonArray value="malfurion_winterveil_silly"/>
+        <EmoticonArray value="malfurion_winterveil_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="GreatfatherWinterMalfurionPack2" parent="WinterVeilEmoticonPackParent">
+        <EmoticonArray value="malfurion_winterveil_angry"/>
+        <EmoticonArray value="malfurion_winterveil_cool"/>
+        <EmoticonArray value="malfurion_winterveil_embarrassed"/>
+        <EmoticonArray value="malfurion_winterveil_inlove"/>
+        <EmoticonArray value="malfurion_winterveil_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WinterVeilPhrasesPack" parent="WinterVeilEmoticonPackParent">
+        <EmoticonArray value="phrases_winterveil_gg"/>
+        <EmoticonArray value="phrases_winterveil_gj"/>
+        <EmoticonArray value="phrases_winterveil_glhf"/>
+        <EmoticonArray value="phrases_winterveil_zzz"/>
+        <EmoticonArray value="phrases_winterveil_tt"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="DecktheHallsPack" parent="WinterVeilEmoticonPackParent">
+        <EmoticonArray value="winter_candle"/>
+        <EmoticonArray value="winter_ornament"/>
+        <EmoticonArray value="winter_snowflake"/>
+        <EmoticonArray value="winter_snowman"/>
+        <EmoticonArray value="winter_wreath"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="BlazePack1">
+        <EmoticonArray value="blaze_happy"/>
+        <EmoticonArray value="blaze_rofl"/>
+        <EmoticonArray value="blaze_sad"/>
+        <EmoticonArray value="blaze_silly"/>
+        <EmoticonArray value="blaze_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="BlazePack2">
+        <EmoticonArray value="blaze_angry"/>
+        <EmoticonArray value="blaze_cool"/>
+        <EmoticonArray value="blaze_embarrassed"/>
+        <EmoticonArray value="blaze_inlove"/>
+        <EmoticonArray value="blaze_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="MechaPhrasesPack">
+        <EmoticonArray value="phrases_mecha_gg"/>
+        <EmoticonArray value="phrases_mecha_gj"/>
+        <EmoticonArray value="phrases_mecha_glhf"/>
+        <EmoticonArray value="phrases_mecha_zzz"/>
+        <EmoticonArray value="phrases_mecha_tt"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="MechaRehgarPack1">
+        <EmoticonArray value="rehgar_mecha_happy"/>
+        <EmoticonArray value="rehgar_mecha_rofl"/>
+        <EmoticonArray value="rehgar_mecha_sad"/>
+        <EmoticonArray value="rehgar_mecha_silly"/>
+        <EmoticonArray value="rehgar_mecha_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="MechaRehgarPack2">
+        <EmoticonArray value="rehgar_mecha_angry"/>
+        <EmoticonArray value="rehgar_mecha_cool"/>
+        <EmoticonArray value="rehgar_mecha_embarrassed"/>
+        <EmoticonArray value="rehgar_mecha_inlove"/>
+        <EmoticonArray value="rehgar_mecha_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="MechaAbathurPack1">
+        <EmoticonArray value="abathur_mecha_happy"/>
+        <EmoticonArray value="abathur_mecha_rofl"/>
+        <EmoticonArray value="abathur_mecha_sad"/>
+        <EmoticonArray value="abathur_mecha_silly"/>
+        <EmoticonArray value="abathur_mecha_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="MechaAbathurPack2">
+        <EmoticonArray value="abathur_mecha_angry"/>
+        <EmoticonArray value="abathur_mecha_cool"/>
+        <EmoticonArray value="abathur_mecha_embarrassed"/>
+        <EmoticonArray value="abathur_mecha_inlove"/>
+        <EmoticonArray value="abathur_mecha_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="MechaTyraelPack1">
+        <EmoticonArray value="tyrael_mecha_happy"/>
+        <EmoticonArray value="tyrael_mecha_rofl"/>
+        <EmoticonArray value="tyrael_mecha_sad"/>
+        <EmoticonArray value="tyrael_mecha_silly"/>
+        <EmoticonArray value="tyrael_mecha_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="MechaTyraelPack2">
+        <EmoticonArray value="tyrael_mecha_angry"/>
+        <EmoticonArray value="tyrael_mecha_cool"/>
+        <EmoticonArray value="tyrael_mecha_embarrassed"/>
+        <EmoticonArray value="tyrael_mecha_inlove"/>
+        <EmoticonArray value="tyrael_mecha_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="MechaDehakaPack1">
+        <EmoticonArray value="dehaka_mecha_happy"/>
+        <EmoticonArray value="dehaka_mecha_rofl"/>
+        <EmoticonArray value="dehaka_mecha_sad"/>
+        <EmoticonArray value="dehaka_mecha_silly"/>
+        <EmoticonArray value="dehaka_mecha_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="MechaDehakaPack2">
+        <EmoticonArray value="dehaka_mecha_angry"/>
+        <EmoticonArray value="dehaka_mecha_cool"/>
+        <EmoticonArray value="dehaka_mecha_embarrassed"/>
+        <EmoticonArray value="dehaka_mecha_inlove"/>
+        <EmoticonArray value="dehaka_mecha_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="MechaTassadarPack1">
+        <EmoticonArray value="tassadar_mecha_happy"/>
+        <EmoticonArray value="tassadar_mecha_rofl"/>
+        <EmoticonArray value="tassadar_mecha_sad"/>
+        <EmoticonArray value="tassadar_mecha_silly"/>
+        <EmoticonArray value="tassadar_mecha_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="MechaTassadarPack2">
+        <EmoticonArray value="tassadar_mecha_angry"/>
+        <EmoticonArray value="tassadar_mecha_cool"/>
+        <EmoticonArray value="tassadar_mecha_embarrassed"/>
+        <EmoticonArray value="tassadar_mecha_inlove"/>
+        <EmoticonArray value="tassadar_mecha_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="MaievPack1">
+        <EmoticonArray value="maiev_happy"/>
+        <EmoticonArray value="maiev_rofl"/>
+        <EmoticonArray value="maiev_sad"/>
+        <EmoticonArray value="maiev_silly"/>
+        <EmoticonArray value="maiev_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="MaievPack2">
+        <EmoticonArray value="maiev_angry"/>
+        <EmoticonArray value="maiev_cool"/>
+        <EmoticonArray value="maiev_embarrassed"/>
+        <EmoticonArray value="maiev_inlove"/>
+        <EmoticonArray value="maiev_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="LunarLiLiPack1" parent="LunarFestivalEmoticonPackParent">
+        <EmoticonArray value="lili_lunar_happy"/>
+        <EmoticonArray value="lili_lunar_rofl"/>
+        <EmoticonArray value="lili_lunar_sad"/>
+        <EmoticonArray value="lili_lunar_silly"/>
+        <EmoticonArray value="lili_lunar_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="LunarLiLiPack2" parent="LunarFestivalEmoticonPackParent">
+        <EmoticonArray value="lili_lunar_angry"/>
+        <EmoticonArray value="lili_lunar_cool"/>
+        <EmoticonArray value="lili_lunar_embarrassed"/>
+        <EmoticonArray value="lili_lunar_inlove"/>
+        <EmoticonArray value="lili_lunar_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="LunarIllidanPack1" parent="LunarFestivalEmoticonPackParent">
+        <EmoticonArray value="illidan_lunar_happy"/>
+        <EmoticonArray value="illidan_lunar_rofl"/>
+        <EmoticonArray value="illidan_lunar_sad"/>
+        <EmoticonArray value="illidan_lunar_silly"/>
+        <EmoticonArray value="illidan_lunar_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="LunarIllidanPack2" parent="LunarFestivalEmoticonPackParent">
+        <EmoticonArray value="illidan_lunar_angry"/>
+        <EmoticonArray value="illidan_lunar_cool"/>
+        <EmoticonArray value="illidan_lunar_embarrassed"/>
+        <EmoticonArray value="illidan_lunar_inlove"/>
+        <EmoticonArray value="illidan_lunar_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="LunarSylvanasPack1" parent="LunarFestivalEmoticonPackParent">
+        <EmoticonArray value="sylvanas_lunar_happy"/>
+        <EmoticonArray value="sylvanas_lunar_rofl"/>
+        <EmoticonArray value="sylvanas_lunar_sad"/>
+        <EmoticonArray value="sylvanas_lunar_silly"/>
+        <EmoticonArray value="sylvanas_lunar_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="LunarSylvanasPack2" parent="LunarFestivalEmoticonPackParent">
+        <EmoticonArray value="sylvanas_lunar_angry"/>
+        <EmoticonArray value="sylvanas_lunar_cool"/>
+        <EmoticonArray value="sylvanas_lunar_embarrassed"/>
+        <EmoticonArray value="sylvanas_lunar_inlove"/>
+        <EmoticonArray value="sylvanas_lunar_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="LunarKaelthasPack1" parent="LunarFestivalEmoticonPackParent">
+        <EmoticonArray value="kaelthas_lunar_happy"/>
+        <EmoticonArray value="kaelthas_lunar_rofl"/>
+        <EmoticonArray value="kaelthas_lunar_sad"/>
+        <EmoticonArray value="kaelthas_lunar_silly"/>
+        <EmoticonArray value="kaelthas_lunar_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="LunarKaelthasPack2" parent="LunarFestivalEmoticonPackParent">
+        <EmoticonArray value="kaelthas_lunar_angry"/>
+        <EmoticonArray value="kaelthas_lunar_cool"/>
+        <EmoticonArray value="kaelthas_lunar_embarrassed"/>
+        <EmoticonArray value="kaelthas_lunar_inlove"/>
+        <EmoticonArray value="kaelthas_lunar_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="LunarGenjiPack1" parent="LunarFestivalEmoticonPackParent">
+        <EmoticonArray value="genji_lunar_happy"/>
+        <EmoticonArray value="genji_lunar_rofl"/>
+        <EmoticonArray value="genji_lunar_sad"/>
+        <EmoticonArray value="genji_lunar_silly"/>
+        <EmoticonArray value="genji_lunar_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="LunarGenjiPack2" parent="LunarFestivalEmoticonPackParent">
+        <EmoticonArray value="genji_lunar_angry"/>
+        <EmoticonArray value="genji_lunar_cool"/>
+        <EmoticonArray value="genji_lunar_embarrassed"/>
+        <EmoticonArray value="genji_lunar_inlove"/>
+        <EmoticonArray value="genji_lunar_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="LunarGuardianPack1" parent="LunarFestivalEmoticonPackParent">
+        <EmoticonArray value="foodog_happy"/>
+        <EmoticonArray value="foodog_rofl"/>
+        <EmoticonArray value="foodog_sad"/>
+        <EmoticonArray value="foodog_silly"/>
+        <EmoticonArray value="foodog_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="LunarGuardianPack2" parent="LunarFestivalEmoticonPackParent">
+        <EmoticonArray value="foodog_angry"/>
+        <EmoticonArray value="foodog_cool"/>
+        <EmoticonArray value="foodog_embarrassed"/>
+        <EmoticonArray value="foodog_inlove"/>
+        <EmoticonArray value="foodog_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="LunarFestivalPhrasesPack" parent="LunarFestivalEmoticonPackParent">
+        <EmoticonArray value="phrases_lunar_gg"/>
+        <EmoticonArray value="phrases_lunar_gj"/>
+        <EmoticonArray value="phrases_lunar_glhf"/>
+        <EmoticonArray value="phrases_lunar_zzz"/>
+        <EmoticonArray value="phrases_lunar_tt"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="ElementsPack">
+        <EmoticonArray value="nature_crater"/>
+        <EmoticonArray value="nature_droplets"/>
+        <EmoticonArray value="nature_fire"/>
+        <EmoticonArray value="nature_flower"/>
+        <EmoticonArray value="nature_gust"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="HeartPack">
+        <EmoticonArray value="heart"/>
+        <EmoticonArray value="heart_broken"/>
+        <EmoticonArray value="heart_protoss"/>
+        <EmoticonArray value="heart_terran"/>
+        <EmoticonArray value="heart_zerg"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="FenixPack1">
+        <EmoticonArray value="fenix_happy"/>
+        <EmoticonArray value="fenix_rofl"/>
+        <EmoticonArray value="fenix_sad"/>
+        <EmoticonArray value="fenix_silly"/>
+        <EmoticonArray value="fenix_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="FenixPack2">
+        <EmoticonArray value="fenix_angry"/>
+        <EmoticonArray value="fenix_cool"/>
+        <EmoticonArray value="fenix_embarrassed"/>
+        <EmoticonArray value="fenix_inlove"/>
+        <EmoticonArray value="fenix_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="DeckardPack1">
+        <EmoticonArray value="deckard_happy"/>
+        <EmoticonArray value="deckard_rofl"/>
+        <EmoticonArray value="deckard_sad"/>
+        <EmoticonArray value="deckard_silly"/>
+        <EmoticonArray value="deckard_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="DeckardPack2">
+        <EmoticonArray value="deckard_angry"/>
+        <EmoticonArray value="deckard_cool"/>
+        <EmoticonArray value="deckard_embarrassed"/>
+        <EmoticonArray value="deckard_inlove"/>
+        <EmoticonArray value="deckard_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="SportsballPack">
+        <EmoticonArray value="balls_basketball"/>
+        <EmoticonArray value="balls_eightball"/>
+        <EmoticonArray value="balls_football"/>
+        <EmoticonArray value="balls_soccerball"/>
+        <EmoticonArray value="balls_volleyball"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="FoodPack3">
+        <EmoticonArray value="food_bbq"/>
+        <EmoticonArray value="food_chips"/>
+        <EmoticonArray value="food_lollipop"/>
+        <EmoticonArray value="food_meat"/>
+        <EmoticonArray value="food_pineapplepizza"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="ElChamucoDiabloPack1" parent="NexomaniaEmoticonPackParent">
+        <EmoticonArray value="diablo_summer18_happy"/>
+        <EmoticonArray value="diablo_summer18_rofl"/>
+        <EmoticonArray value="diablo_summer18_sad"/>
+        <EmoticonArray value="diablo_summer18_silly"/>
+        <EmoticonArray value="diablo_summer18_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="ElChamucoDiabloPack2" parent="NexomaniaEmoticonPackParent">
+        <EmoticonArray value="diablo_summer18_angry"/>
+        <EmoticonArray value="diablo_summer18_cool"/>
+        <EmoticonArray value="diablo_summer18_embarrassed"/>
+        <EmoticonArray value="diablo_summer18_inlove"/>
+        <EmoticonArray value="diablo_summer18_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="LaParcaLunaraPack1" parent="NexomaniaEmoticonPackParent">
+        <EmoticonArray value="lunara_summer18_happy"/>
+        <EmoticonArray value="lunara_summer18_rofl"/>
+        <EmoticonArray value="lunara_summer18_sad"/>
+        <EmoticonArray value="lunara_summer18_silly"/>
+        <EmoticonArray value="lunara_summer18_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="LaParcaLunaraPack2" parent="NexomaniaEmoticonPackParent">
+        <EmoticonArray value="lunara_summer18_angry"/>
+        <EmoticonArray value="lunara_summer18_cool"/>
+        <EmoticonArray value="lunara_summer18_embarrassed"/>
+        <EmoticonArray value="lunara_summer18_inlove"/>
+        <EmoticonArray value="lunara_summer18_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="LaPanteraSonyaPack1" parent="NexomaniaEmoticonPackParent">
+        <EmoticonArray value="sonya_summer18_happy"/>
+        <EmoticonArray value="sonya_summer18_rofl"/>
+        <EmoticonArray value="sonya_summer18_sad"/>
+        <EmoticonArray value="sonya_summer18_silly"/>
+        <EmoticonArray value="sonya_summer18_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="LaPanteraSonyaPack2" parent="NexomaniaEmoticonPackParent">
+        <EmoticonArray value="sonya_summer18_angry"/>
+        <EmoticonArray value="sonya_summer18_cool"/>
+        <EmoticonArray value="sonya_summer18_embarrassed"/>
+        <EmoticonArray value="sonya_summer18_inlove"/>
+        <EmoticonArray value="sonya_summer18_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="ElJefeGarroshPack1" parent="NexomaniaEmoticonPackParent">
+        <EmoticonArray value="garrosh_summer18_happy"/>
+        <EmoticonArray value="garrosh_summer18_rofl"/>
+        <EmoticonArray value="garrosh_summer18_sad"/>
+        <EmoticonArray value="garrosh_summer18_silly"/>
+        <EmoticonArray value="garrosh_summer18_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="ElJefeGarroshPack2" parent="NexomaniaEmoticonPackParent">
+        <EmoticonArray value="garrosh_summer18_angry"/>
+        <EmoticonArray value="garrosh_summer18_cool"/>
+        <EmoticonArray value="garrosh_summer18_embarrassed"/>
+        <EmoticonArray value="garrosh_summer18_inlove"/>
+        <EmoticonArray value="garrosh_summer18_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="YrelPack1">
+        <EmoticonArray value="yrel_happy"/>
+        <EmoticonArray value="yrel_rofl"/>
+        <EmoticonArray value="yrel_sad"/>
+        <EmoticonArray value="yrel_silly"/>
+        <EmoticonArray value="yrel_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="YrelPack2">
+        <EmoticonArray value="yrel_angry"/>
+        <EmoticonArray value="yrel_cool"/>
+        <EmoticonArray value="yrel_embarrassed"/>
+        <EmoticonArray value="yrel_inlove"/>
+        <EmoticonArray value="yrel_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WhitemanePack1">
+        <EmoticonArray value="whitemane_happy"/>
+        <EmoticonArray value="whitemane_rofl"/>
+        <EmoticonArray value="whitemane_sad"/>
+        <EmoticonArray value="whitemane_silly"/>
+        <EmoticonArray value="whitemane_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="WhitemanePack2">
+        <EmoticonArray value="whitemane_angry"/>
+        <EmoticonArray value="whitemane_cool"/>
+        <EmoticonArray value="whitemane_embarrassed"/>
+        <EmoticonArray value="whitemane_inlove"/>
+        <EmoticonArray value="whitemane_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="SidewinderAnaPack1">
+        <EmoticonArray value="ana_army18_happy"/>
+        <EmoticonArray value="ana_army18_rofl"/>
+        <EmoticonArray value="ana_army18_sad"/>
+        <EmoticonArray value="ana_army18_silly"/>
+        <EmoticonArray value="ana_army18_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="SidewinderAnaPack2">
+        <EmoticonArray value="ana_army18_angry"/>
+        <EmoticonArray value="ana_army18_cool"/>
+        <EmoticonArray value="ana_army18_embarrassed"/>
+        <EmoticonArray value="ana_army18_inlove"/>
+        <EmoticonArray value="ana_army18_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="ImperatorStukovPack">
+        <EmoticonArray value="stukov_army18_lurking"/>
+        <EmoticonArray value="stukov_army18_pustule"/>
+        <EmoticonArray value="stukov_army18_shove_01"/>
+        <EmoticonArray value="stukov_army18_shove_02"/>
+        <EmoticonArray value="stukov_army18_shove_03"/>
+        <EmoticonArray value="stukov_het"/>
+        <EmoticonArray value="stukov_army18"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="DeathfangGenjiPack">
+        <EmoticonArray value="genji_army18_helmet"/>
+        <EmoticonArray value="genji_army18_xstrike"/>
+        <EmoticonArray value="genji_army18_well"/>
+        <EmoticonArray value="genji_army18_viper"/>
+        <EmoticonArray value="genji_army18_stars"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="MephistoPack1">
+        <EmoticonArray value="mephisto_happy"/>
+        <EmoticonArray value="mephisto_rofl"/>
+        <EmoticonArray value="mephisto_sad"/>
+        <EmoticonArray value="mephisto_silly"/>
+        <EmoticonArray value="mephisto_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="MephistoPack2">
+        <EmoticonArray value="mephisto_angry"/>
+        <EmoticonArray value="mephisto_cool"/>
+        <EmoticonArray value="mephisto_embarrassed"/>
+        <EmoticonArray value="mephisto_inlove"/>
+        <EmoticonArray value="mephisto_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="GhostSpooky18Pack" parent="LimitedReleaseEmoticonPackParent">
+        <EmoticonArray value="ghost_worry_anim"/>
+        <EmoticonArray value="ghost_boogie_anim"/>
+        <EmoticonArray value="ghost_cheer_anim"/>
+        <EmoticonArray value="ghost_golfclap_anim"/>
+        <EmoticonArray value="ghost_rage_anim"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="SillySpooky18Pack" parent="LimitedReleaseEmoticonPackParent">
+        <EmoticonArray value="spooky_ravenlol_anim"/>
+        <EmoticonArray value="spooky_potg_anim"/>
+        <EmoticonArray value="spooky_worm_anim"/>
+        <EmoticonArray value="spooky_spider_anim"/>
+        <EmoticonArray value="spooky_rip_anim"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="EyeSpooky18Pack" parent="LimitedReleaseEmoticonPackParent">
+        <EmoticonArray value="eyeball_cthun_anim"/>
+        <EmoticonArray value="eyeball_kilrogg_anim"/>
+        <EmoticonArray value="eyeball_bloodlust_anim"/>
+        <EmoticonArray value="eyeball_ravenlord_anim"/>
+        <EmoticonArray value="eyeball_human_anim"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="CatSpooky18Pack" parent="LimitedReleaseEmoticonPackParent">
+        <EmoticonArray value="cat_dealwithit_anim"/>
+        <EmoticonArray value="cat_puke_anim"/>
+        <EmoticonArray value="cat_blink_anim"/>
+        <EmoticonArray value="cat_gleam_anim"/>
+        <EmoticonArray value="cat_grumpy_anim"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="EmojiMalGanisPack1">
+        <EmoticonArray value="malganis_happy"/>
+        <EmoticonArray value="malganis_rofl"/>
+        <EmoticonArray value="malganis_sad"/>
+        <EmoticonArray value="malganis_silly"/>
+        <EmoticonArray value="malganis_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="EmojiMalGanisPack2">
+        <EmoticonArray value="malganis_angry"/>
+        <EmoticonArray value="malganis_cool"/>
+        <EmoticonArray value="malganis_embarrassed"/>
+        <EmoticonArray value="malganis_inlove"/>
+        <EmoticonArray value="malganis_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="HeroStormNexusPack">
+        <EmoticonArray value="carbot_stick_horse"/>
+        <EmoticonArray value="carbot_health_globe"/>
+        <EmoticonArray value="carbot_boom"/>
+        <EmoticonArray value="carbot_minions"/>
+        <EmoticonArray value="carbot_orphea"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="EmojiOrpheaPack1">
+        <EmoticonArray value="orphea_happy"/>
+        <EmoticonArray value="orphea_rofl"/>
+        <EmoticonArray value="orphea_sad"/>
+        <EmoticonArray value="orphea_silly"/>
+        <EmoticonArray value="orphea_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="EmojiOrpheaPack2">
+        <EmoticonArray value="orphea_angry"/>
+        <EmoticonArray value="orphea_cool"/>
+        <EmoticonArray value="orphea_embarrassed"/>
+        <EmoticonArray value="orphea_inlove"/>
+        <EmoticonArray value="orphea_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="ChompPack" parent="LimitedReleaseEmoticonPackParent">
+        <EmoticonArray value="chomp_wave_anim"/>
+        <EmoticonArray value="chomp_pet_anim"/>
+        <EmoticonArray value="chomp_growl_anim"/>
+        <EmoticonArray value="chomp_paku_anim"/>
+        <EmoticonArray value="chomp_minion_anim"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="EmojiPlushiePack1" parent="LimitedReleaseEmoticonPackParent">
+        <EmoticonArray value="toy_bear_anim"/>
+        <EmoticonArray value="toy_nerfthis_anim"/>
+        <EmoticonArray value="toy_turd_anim"/>
+        <EmoticonArray value="toy_minion_anim"/>
+        <EmoticonArray value="toy_train_anim"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="EmojiToysPack1" parent="LimitedReleaseEmoticonPackParent">
+        <EmoticonArray value="toy_cosmicflurry_anim"/>
+        <EmoticonArray value="toy_dice_anim"/>
+        <EmoticonArray value="toy_dino_anim"/>
+        <EmoticonArray value="toy_herospinner_anim"/>
+        <EmoticonArray value="toy_robots_anim"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="EmojiCarbotDiabloPack">
+        <EmoticonArray value="carbot_auriel"/>
+        <EmoticonArray value="carbot_cain"/>
+        <EmoticonArray value="carbot_johanna"/>
+        <EmoticonArray value="carbot_nazeebo"/>
+        <EmoticonArray value="carbot_diablo"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="EmojiImperiusPack1">
+        <EmoticonArray value="imperius_happy"/>
+        <EmoticonArray value="imperius_rofl"/>
+        <EmoticonArray value="imperius_sad"/>
+        <EmoticonArray value="imperius_silly"/>
+        <EmoticonArray value="imperius_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="EmojiImperiusPack2">
+        <EmoticonArray value="imperius_angry"/>
+        <EmoticonArray value="imperius_cool"/>
+        <EmoticonArray value="imperius_embarrassed"/>
+        <EmoticonArray value="imperius_inlove"/>
+        <EmoticonArray value="imperius_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="Spring19PhrasesPack" parent="LimitedReleaseEmoticonPackParent">
+        <EmoticonArray value="phrases_spring19_1337"/>
+        <EmoticonArray value="phrases_spring19_h4x"/>
+        <EmoticonArray value="phrases_spring19_m8"/>
+        <EmoticonArray value="phrases_spring19_pwn"/>
+        <EmoticonArray value="phrases_spring19_woot"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="EmojiAnduinPack1">
+        <EmoticonArray value="anduin_happy"/>
+        <EmoticonArray value="anduin_rofl"/>
+        <EmoticonArray value="anduin_sad"/>
+        <EmoticonArray value="anduin_silly"/>
+        <EmoticonArray value="anduin_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="EmojiAnduinPack2">
+        <EmoticonArray value="anduin_angry"/>
+        <EmoticonArray value="anduin_cool"/>
+        <EmoticonArray value="anduin_embarrassed"/>
+        <EmoticonArray value="anduin_inlove"/>
+        <EmoticonArray value="anduin_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="EmojiCarbotAlliancePack">
+        <EmoticonArray value="carbot_chromie"/>
+        <EmoticonArray value="carbot_greymane"/>
+        <EmoticonArray value="carbot_lunara"/>
+        <EmoticonArray value="carbot_uther"/>
+        <EmoticonArray value="carbot_yrel"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="EmojiCarbotHordePack">
+        <EmoticonArray value="carbot_kaelthas"/>
+        <EmoticonArray value="carbot_murky"/>
+        <EmoticonArray value="carbot_ragnaros"/>
+        <EmoticonArray value="carbot_thrall"/>
+        <EmoticonArray value="carbot_zuljin"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="EmojiMechastormPack1" parent="LimitedReleaseEmoticonPackParent">
+        <EmoticonArray value="mecha_yrel_anim"/>
+        <EmoticonArray value="mecha_valla_anim"/>
+        <EmoticonArray value="mecha_pilotyrel_anim"/>
+        <EmoticonArray value="mecha_pilotvalla_anim"/>
+        <EmoticonArray value="mecha_malthael_anim"/>
+        <EmoticonArray value="mecha_anduin_neo"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="EmojiNexusHunterPack1">
+        <EmoticonArray value="nexushunter_happy"/>
+        <EmoticonArray value="nexushunter_rofl"/>
+        <EmoticonArray value="nexushunter_sad"/>
+        <EmoticonArray value="nexushunter_silly"/>
+        <EmoticonArray value="nexushunter_speechless"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="EmojiNexusHunterPack2">
+        <EmoticonArray value="nexushunter_angry"/>
+        <EmoticonArray value="nexushunter_cool"/>
+        <EmoticonArray value="nexushunter_embarrassed"/>
+        <EmoticonArray value="nexushunter_inlove"/>
+        <EmoticonArray value="nexushunter_surprised"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="EmojiMadAxe19Pack1">
+        <EmoticonArray value="madaxe19_azmotank"/>
+        <EmoticonArray value="madaxe19_deckardcans"/>
+        <EmoticonArray value="madaxe19_garrrry"/>
+        <EmoticonArray value="madaxe19_madlad"/>
+        <EmoticonArray value="madaxe19_madrider"/>
+    </CEmoticonPack>
+    <CEmoticonPack id="EmojiMadAxe19Pack2">
+        <EmoticonArray value="madaxe19_bloodrage"/>
+        <EmoticonArray value="madaxe19_nazeebo"/>
+        <EmoticonArray value="madaxe19_ripper"/>
+        <EmoticonArray value="madaxe19_trashsniper"/>
+        <EmoticonArray value="madaxe19_zombies"/>
+    </CEmoticonPack>
+</Catalog>

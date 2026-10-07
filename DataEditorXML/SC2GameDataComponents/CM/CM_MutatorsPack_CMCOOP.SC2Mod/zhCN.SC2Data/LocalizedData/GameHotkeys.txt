@@ -1,0 +1,6 @@
+﻿Button/Hotkey/EssenceConsume=C
+Button/Hotkey/HybridReaverBreathofEvil=T
+Button/Hotkey/SoulCrush=R
+Button/Hotkey/SuperCommanderMutators21Behemoth=R
+Button/Hotkey/VoidPlasmaBlast=Q
+Button/Hotkey/VoidPsiStorm=T

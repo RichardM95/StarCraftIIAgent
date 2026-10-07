@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CEffectModifyPlayer id="AutoCreepDowngrade">
+        <EditorCategories value="Race:Zerg"/>
+        <WhichPlayer Value="Caster"/>
+        <Upgrades Upgrade="AutoCreep" Count="-1"/>
+    </CEffectModifyPlayer>
+    <CEffectModifyUnit id="AutoCreepTumorSpread"/>
+    <CEffectModifyPlayer id="AutoCreepUpgrade">
+        <EditorCategories value="Race:Zerg"/>
+        <WhichPlayer Value="Caster"/>
+        <Upgrades Upgrade="AutoCreep" Count="1"/>
+    </CEffectModifyPlayer>
+    <CEffectRemoveBehavior id="AutoCreepTumorSpreadRB">
+        <EditorCategories value=""/>
+        <WhichUnit Value="Caster"/>
+        <BehaviorLink value="AutoCreepTumorSpread"/>
+    </CEffectRemoveBehavior>
+</Catalog>

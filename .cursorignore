@@ -1,0 +1,32 @@
+# Agent context efficiency — see wiki/implementation/agent-context-efficiency.md
+# Intentionally NOT listed: DataEditorXML/, ../../Maps/Campaign/**/Triggers
+
+# Generated / local-only
+publish/
+.git/
+__pycache__/
+*.pyc
+sc2-catalog-graph-out/
+bugreport.txt
+
+# Map terrain/object binaries (opaque editor output)
+../../Maps/Campaign/**/t3*
+../../Maps/Campaign/**/Objects
+../../Maps/Campaign/**/MapScript.galaxy
+../../Maps/Campaign/**/ai*.galaxy
+
+# Non-English map localization (English work uses enUS.SC2Data/)
+../../Maps/Campaign/**/deDE.SC2Data/
+../../Maps/Campaign/**/esES.SC2Data/
+../../Maps/Campaign/**/esMX.SC2Data/
+../../Maps/Campaign/**/frFR.SC2Data/
+../../Maps/Campaign/**/itIT.SC2Data/
+../../Maps/Campaign/**/koKR.SC2Data/
+../../Maps/Campaign/**/plPL.SC2Data/
+../../Maps/Campaign/**/ptBR.SC2Data/
+../../Maps/Campaign/**/ruRU.SC2Data/
+../../Maps/Campaign/**/zhCN.SC2Data/
+../../Maps/Campaign/**/zhTW.SC2Data/
+
+# Compiled Galaxy library output (source: script block / Base.SC2Data/Scripts/)
+*.SC2Mod/Base.SC2Data/Lib*.galaxy

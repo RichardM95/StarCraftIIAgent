@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CRequirementCountUpgrade id="CountUpgradeAutoCreepCompleteOnly">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="AutoCreep" State="CompleteOnly"/>
+    </CRequirementCountUpgrade>
+    <CRequirementNot id="NotCountUpgradeAutoCreepCompleteOnly">
+        <Tooltip value="RequirementNode/Tooltip/##id##"/>
+        <OperandArray index="0" value="CountUpgradeAutoCreepCompleteOnly"/>
+    </CRequirementNot>
+</Catalog>

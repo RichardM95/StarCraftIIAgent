@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="PlayerIndex">
+    <xs:restriction base="xs:unsignedByte">
+      <xs:minInclusive value="0" />
+      <xs:maxInclusive value="15" />
+      <xs:totalDigits value="2" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="BankName">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="\w+" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="Bank">
+    <xs:attribute name="Name" use="required" type="BankName" />
+    <xs:attribute name="Player" use="required" type="PlayerIndex" />
+  </xs:complexType>
+
+  <xs:element name="BankList">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Bank" type="Bank" />
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,747 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <!--用于英雄UI的显示，除了指挥官本身的英雄单位，还需要控制一些临时加入战斗的英雄以及神器卡车等关卡特殊英雄。-->
+    <CUser id="HeroIcon">
+        <Instances Id="ArtanisPrestige">
+            <GameLink GameLink="ArtanisPrestige">
+                <Field Id="HeroUnit"/>
+            </GameLink>
+            <Image Image="Assets\Textures\btn-hero-artanis.dds">
+                <Field Id="HeroIcon"/>
+            </Image>
+            <Text Text="UserData/HeroIcon/ArtanisPrestige_Name">
+                <Field Id="Name"/>
+            </Text>
+        </Instances>
+        <Instances Id="ArtanisPrestigeReviveBeacon">
+            <GameLink GameLink="ProtossHeroReviveBeacon">
+                <Field Id="HeroUnit"/>
+            </GameLink>
+            <Image Image="Assets\Textures\btn-hero-artanis.dds">
+                <Field Id="HeroIcon"/>
+            </Image>
+            <Text Text="UserData/HeroIcon/ArtanisPrestigeReviveBeacon_Name">
+                <Field Id="Name"/>
+            </Text>
+        </Instances>
+        <Instances Id="RaynorPrestigeHyperion">
+            <GameLink GameLink="HyperionVoidCoopP4">
+                <Field Id="HeroUnit"/>
+            </GameLink>
+            <Image Image="Assets\Textures\talent-raynor-level15-hyperiondamageaura.dds">
+                <Field Id="HeroIcon"/>
+            </Image>
+            <Text Text="UserData/HeroIcon/RaynorPrestigeHyperion_Name">
+                <Field Id="Name"/>
+            </Text>
+        </Instances>
+        <Instances Id="XelNagaKerriganReviveBeacon">
+            <GameLink GameLink="XelNagaKerriganReviveBeacn">
+                <Field Id="HeroUnit"/>
+            </GameLink>
+            <Image Image="Assets\Textures\btn-hero-kerriganascended.dds">
+                <Field Id="HeroIcon"/>
+            </Image>
+            <Text Text="UserData/HeroIcon/XelNagaKerriganReviveBeacon_Name">
+                <Field Id="Name"/>
+            </Text>
+        </Instances>
+        <Instances Id="XelNagaKerrigan">
+            <GameLink GameLink="XelNagaKerrigan">
+                <Field Id="HeroUnit"/>
+            </GameLink>
+            <Image Image="Assets\Textures\btn-hero-kerriganascended.dds">
+                <Field Id="HeroIcon"/>
+            </Image>
+            <Text Text="UserData/HeroIcon/XelNagaKerrigan_Name">
+                <Field Id="Name"/>
+            </Text>
+        </Instances>
+    </CUser>
+    <CUser id="PlayerHeroStructures">
+        <Instances Id="ProtossHeroReviveBeacon">
+            <GameLink GameLink="ProtossHeroReviveBeacon">
+                <Field Id="HS - Unit"/>
+            </GameLink>
+        </Instances>
+        <Instances Id="DehakaBarracks">
+            <GameLink GameLink="DehakaBarracks">
+                <Field Id="HS - Unit"/>
+            </GameLink>
+        </Instances>
+        <Instances Id="XelNagaKerriganReviveBeacn">
+            <GameLink GameLink="XelNagaKerriganReviveBeacn">
+                <Field Id="HS - Unit"/>
+            </GameLink>
+        </Instances>
+    </CUser>
+    <!--CUser id="PlayerCommanders">-->
+    <!--        <Instances Id="[Override]TerranRaynor">-->
+    <!--            <User Type="PlayerPrestige" Instance="CommanderPrestigeRaynor4">-->
+    <!--                <Field Id="Prestige" Index="3"/>-->
+    <!--            </User>-->
+    <!--        </Instances>-->
+    <!--        <Instances Id="[Override]ZergKerrigan">-->
+    <!--            <User Type="PlayerPrestige" Instance="CommanderPrestigeKerrigan4">-->
+    <!--                <Field Id="Prestige" Index="3"/>-->
+    <!--            </User>-->
+    <!--        </Instances>-->
+    <!--        <Instances Id="[Override]ProtossArtanis">-->
+    <!--            <User Type="PlayerPrestige" Instance="CommanderPrestigeArtanis4">-->
+    <!--                <Field Id="Prestige" Index="3"/>-->
+    <!--            </User>-->
+    <!--            <User Type="PlayerPrestige" Instance="CommanderPrestigeArtanisPowerFieldRemake">-->
+    <!--                <Field Id="Prestige" Index="4"/>-->
+    <!--            </User>-->
+    <!--        </Instances>-->
+    <!--        <Instances Id="[Override]ProtossKarax">-->
+    <!--            <User Type="PlayerPrestige" Instance="CommanderPrestigeKarax4">-->
+    <!--                <Field Id="Prestige" Index="3"/>-->
+    <!--            </User>-->
+    <!--            <User Type="PlayerHeros" Instance="[Default]">-->
+    <!--                <Field Id="HeroLinks"/>-->
+    <!--            </User>-->
+    <!--            <User Type="PlayerPrestige" Instance="CommanderPrestigeKaraxArmyRemake">-->
+    <!--                <Field Id="Prestige" Index="4"/>-->
+    <!--            </User>-->
+    <!--        </Instances>-->
+    <!--        <Instances Id="[Override]ZergAbathur">-->
+    <!--            <User Type="PlayerPrestige" Instance="CommanderPrestigeAbathur4">-->
+    <!--                <Field Id="Prestige" Index="3"/>-->
+    <!--            </User>-->
+    <!--            <User Type="PlayerPrestige" Instance="CommanderPrestigeAbathur5">-->
+    <!--                <Field Id="Prestige" Index="4"/>-->
+    <!--            </User>-->
+    <!--        </Instances>-->
+    <!--        <Instances Id="[Override]ZergDehaka">-->
+    <!--            <User Type="PlayerPrestige" Instance="CommanderPrestigeDehaka4">-->
+    <!--                <Field Id="Prestige" Index="3"/>-->
+    <!--            </User>-->
+    <!--        </Instances>-->
+    <!--        <Instances Id="[Override]TerranTychus">-->
+    <!--            <User Type="PlayerPrestige" Instance="CommanderPrestigeTychus4">-->
+    <!--                <Field Id="Prestige" Index="3"/>-->
+    <!--            </User>-->
+    <!--        </Instances>-->
+    <!--    </CUser-->
+    <!--复活音效以及对应的升级应该从高等级向下填写-->
+    <CUser id="PlayerHeros">
+        <Instances Id="ProtossArtanis">
+            <AbilCmd Abil="ArtanisRevive">
+                <Field Id="ReviveAbilityCommand"/>
+            </AbilCmd>
+            <Fixed Fixed="2">
+                <Field Id="HeroReviveSoundDelay"/>
+            </Fixed>
+            <GameLink GameLink="ArtanisPrestigeReady">
+                <Field Id="HeroReviveSound"/>
+            </GameLink>
+            <GameLink GameLink="ProtossHeroReviveBeacon">
+                <Field Id="HeroReviveUnit"/>
+            </GameLink>
+            <GameLink GameLink="ArtanisPrestige">
+                <Field Id="HeroUnit"/>
+            </GameLink>
+            <GameLink GameLink="ArtanisInitialReviveTimer">
+                <Field Id="HeroUnitFirstReviveBehavior"/>
+            </GameLink>
+            <GameLink GameLink="ArtanisReviveTimer">
+                <Field Id="HeroUnitNormalReviveBehavior"/>
+            </GameLink>
+            <String String="Abil/ArtanisRevive">
+                <Field Id="HeroReviveLink"/>
+            </String>
+            <Text Text="UserData/PlayerHeros/ProtossArtanis_HeroReviveMsgComplete">
+                <Field Id="HeroReviveMsgComplete"/>
+            </Text>
+            <Text Text="UserData/PlayerHeros/ProtossArtanis_HeroReviveMsgFirstBorn">
+                <Field Id="HeroReviveMsgFirstBorn"/>
+            </Text>
+            <Text Text="UserData/PlayerHeros/ProtossArtanis_HeroReviveMsgNormal">
+                <Field Id="HeroReviveMsgNormal"/>
+            </Text>
+            <Text Text="UserData/PlayerHeros/ProtossArtanis_HeroReviveMsgNoTownHall">
+                <Field Id="HeroReviveMsgNoTownHall"/>
+            </Text>
+            <Text Text="UserData/PlayerHeros/ProtossArtanis_Name">
+                <Field Id="Name"/>
+            </Text>
+        </Instances>
+        <Instances Id="XelNagaKerrigan">
+            <AbilCmd Abil="KerriganRevive">
+                <Field Id="ReviveAbilityCommand"/>
+            </AbilCmd>
+            <GameLink GameLink="KerriganFirstReviveTimer">
+                <Field Id="HeroUnitFirstReviveBehavior"/>
+            </GameLink>
+            <GameLink GameLink="KerriganNormalReviveTimer">
+                <Field Id="HeroUnitNormalReviveBehavior"/>
+            </GameLink>
+            <GameLink GameLink="XelNagaKerriganReviveBeacn">
+                <Field Id="HeroReviveUnit"/>
+            </GameLink>
+            <GameLink GameLink="XelNagaKerrigan">
+                <Field Id="HeroUnit"/>
+            </GameLink>
+            <GameLink GameLink="KerriganEpilogue_Ready">
+                <Field Id="HeroReviveSound"/>
+            </GameLink>
+            <String String="Abil/KerriganRevive">
+                <Field Id="HeroReviveLink"/>
+            </String>
+            <Text Text="UserData/PlayerHeros/XelNagaKerrigan_Name">
+                <Field Id="Name"/>
+            </Text>
+            <Text Text="UserData/PlayerHeros/XelNagaKerrigan_HeroReviveMsgNormal">
+                <Field Id="HeroReviveMsgNormal"/>
+            </Text>
+            <Text Text="UserData/PlayerHeros/XelNagaKerrigan_HeroReviveMsgNoTownHall">
+                <Field Id="HeroReviveMsgNoTownHall"/>
+            </Text>
+            <Text Text="UserData/PlayerHeros/XelNagaKerrigan_HeroReviveMsgComplete">
+                <Field Id="HeroReviveMsgComplete"/>
+            </Text>
+            <Text Text="UserData/PlayerHeros/XelNagaKerrigan_HeroReviveMsgFirstBorn">
+                <Field Id="HeroReviveMsgFirstBorn"/>
+            </Text>
+        </Instances>
+    </CUser>
+    <CUser id="PlayerPrestige">
+        <Instances Id="CommanderPrestigeStukovLeftNoDead">
+            <AbilCmd Abil="SIStukovInfestStructure">
+                <Field Id="UM - Disable Abil"/>
+            </AbilCmd>
+            <AbilCmd Abil="SIStukovInfestStructureUpgraded">
+                <Field Id="UM - Disable Abil" Index="1"/>
+            </AbilCmd>
+            <AbilCmd Abil="SICommandCenterResearch">
+                <Field Id="UM - Disable Abil" Index="2"/>
+            </AbilCmd>
+            <GameLink GameLink="CommanderPrestigeStukovLeftNoDead">
+                <Field Id="Necessary - Primary Upgrade"/>
+            </GameLink>
+            <GameLink GameLink="CommanderPrestigeStukovLeftNoDead">
+                <Field Id="Necessary - Icon"/>
+            </GameLink>
+            <String String="libCMEP_gt_StukovPrestige4ExtraTrigger">
+                <Field Id="Addition - Prestige Trigger"/>
+            </String>
+            <User Type="PlayerPrestigeUpgradeSupplements" Instance="StukovLND_1">
+                <Field Id="Addition - Upgrade Supplements"/>
+            </User>
+            <User Type="PlayerPrestigeUpgradeSupplements" Instance="StukovLND_2">
+                <Field Id="Addition - Upgrade Supplements" Index="1"/>
+            </User>
+            <User Type="PlayerPrestigeUpgradeSupplements" Instance="StukovLND_3">
+                <Field Id="Addition - Upgrade Supplements" Index="2"/>
+            </User>
+            <User Type="PlayerCommanders" Instance="ZergStukov">
+                <Field Id="Necessary - Commander"/>
+            </User>
+        </Instances>
+        <Instances Id="CommanderPrestigeArtanis4">
+            <AbilCmd Abil="ForgeResearch" Cmd="24">
+                <Field Id="UM - Enable Abil"/>
+            </AbilCmd>
+            <GameLink GameLink="CommanderPrestigeArtanis4">
+                <Field Id="Necessary - Primary Upgrade"/>
+            </GameLink>
+            <GameLink GameLink="CommanderPrestigeArtanis4">
+                <Field Id="Necessary - Icon"/>
+            </GameLink>
+            <Int Int="1">
+                <Field Id="OWT - Global Power"/>
+            </Int>
+            <Int Int="1">
+                <Field Id="OWT - Hero"/>
+            </Int>
+            <Int Int="1">
+                <Field Id="OWT - HeroStructure"/>
+            </Int>
+            <Int Int="1">
+                <Field Id="OWT - Hero Structure"/>
+            </Int>
+            <User Type="PlayerHeros" Instance="ProtossArtanis">
+                <Field Id="OW - Hero Links"/>
+            </User>
+            <User Type="PlayerHeroStructures" Instance="ProtossHeroReviveBeacon">
+                <Field Id="OW - Hero Structure Links"/>
+            </User>
+            <User Type="PlayerCommanders" Instance="ProtossArtanis">
+                <Field Id="Necessary - Commander"/>
+            </User>
+            <User Type="PlayerGlobalPowers" Instance="[Default]">
+                <Field Id="OW - Global Power Links"/>
+            </User>
+        </Instances>
+        <Instances Id="CommanderPrestigeArtanisPowerFieldRemake">
+            <GameLink GameLink="CommanderPrestigeArtanisPowerField">
+                <Field Id="Necessary - Primary Upgrade"/>
+            </GameLink>
+            <GameLink GameLink="CommanderPrestigeArtanisPowerFieldRemake">
+                <Field Id="Addition - Upgrades Self"/>
+            </GameLink>
+            <GameLink GameLink="CommanderPrestigeArtanisPowerFieldRemake">
+                <Field Id="Necessary - Icon"/>
+            </GameLink>
+            <User Type="PlayerCommanders" Instance="ProtossArtanis">
+                <Field Id="Necessary - Commander"/>
+            </User>
+        </Instances>
+        <Instances Id="CommanderPrestigeKarax4">
+            <AbilCmd Abil="SolarForgeResearch" Cmd="4">
+                <Field Id="UM - Disable Abil"/>
+            </AbilCmd>
+            <AbilCmd Abil="SolarForgeResearch" Cmd="5">
+                <Field Id="UM - Disable Abil" Index="1"/>
+            </AbilCmd>
+            <AbilCmd Abil="KaraxPrestigeSOADeployStructuresWithoutResources">
+                <Field Id="UM - Enable Abil"/>
+            </AbilCmd>
+            <AbilCmd Abil="KaraxPrestigeSOADeployStructuresWithoutResources" Cmd="3">
+                <Field Id="UM - Enable Abil" Index="1"/>
+            </AbilCmd>
+            <AbilCmd Abil="KaraxPrestigeSOADeployStructuresWithoutResources" Cmd="2">
+                <Field Id="UM - Enable Abil" Index="2"/>
+            </AbilCmd>
+            <AbilCmd Abil="KaraxPrestigeSOADeployStructuresWithoutResources" Cmd="1">
+                <Field Id="UM - Enable Abil" Index="3"/>
+            </AbilCmd>
+            <AbilCmd Abil="PhaseStructure" Cmd="2">
+                <Field Id="UM - Enable Abil" Index="4"/>
+            </AbilCmd>
+            <AbilCmd Abil="PhaseStructure">
+                <Field Id="UM - Enable Abil" Index="5"/>
+            </AbilCmd>
+            <AbilCmd Abil="PhaseStructure" Cmd="1">
+                <Field Id="UM - Enable Abil" Index="6"/>
+            </AbilCmd>
+            <AbilCmd Abil="PhaseStructure" Cmd="30">
+                <Field Id="UM - Enable Abil" Index="7"/>
+            </AbilCmd>
+            <AbilCmd Abil="EnablePowerOverchargeShieldBattery">
+                <Field Id="UM - Enable Abil" Index="8"/>
+            </AbilCmd>
+            <AbilCmd Abil="EnablePowerOvercharge">
+                <Field Id="UM - Enable Abil" Index="9"/>
+            </AbilCmd>
+            <AbilCmd Abil="EnablePowerOverchargeKhaydarinMonolith">
+                <Field Id="UM - Enable Abil" Index="10"/>
+            </AbilCmd>
+            <GameLink GameLink="CommanderPrestigeKarax4">
+                <Field Id="Necessary - Primary Upgrade"/>
+            </GameLink>
+            <GameLink GameLink="CommanderPrestigeKarax4">
+                <Field Id="Necessary - Icon"/>
+            </GameLink>
+            <String String="libCMEP_gt_KaraxPrestige4ExtraTrigger">
+                <Field Id="Addition - Prestige Trigger"/>
+            </String>
+            <User Type="PlayerPrestigeUpgradeSupplements" Instance="[Default]">
+                <Field Id="Addition - Upgrade Supplements" Index="3"/>
+            </User>
+            <User Type="PlayerHeros" Instance="[Default]">
+                <Field Id="OW - Hero Links"/>
+            </User>
+            <User Type="PlayerPrestigeUpgradeSupplements" Instance="[Default]">
+                <Field Id="Addition - Upgrade Supplements" Index="2"/>
+            </User>
+            <User Type="PlayerPrestigeUpgradeSupplements" Instance="[Default]">
+                <Field Id="Addition - Upgrade Supplements" Index="1"/>
+            </User>
+            <User Type="PlayerPrestigeUpgradeSupplements" Instance="[Default]">
+                <Field Id="Addition - Upgrade Supplements"/>
+            </User>
+            <User Type="PlayerCommanders" Instance="ProtossKarax">
+                <Field Id="Necessary - Commander"/>
+            </User>
+            <User Type="PlayerHeroStructures" Instance="[Default]">
+                <Field Id="OW - Hero Structure Links"/>
+            </User>
+        </Instances>
+        <Instances Id="CommanderPrestigeKaraxArmyRemake">
+            <AbilCmd Abil="ForgeResearch" Cmd="10">
+                <Field Id="UM - Disable Abil"/>
+            </AbilCmd>
+            <AbilCmd Abil="GatewayTrain" Cmd="1">
+                <Field Id="UM - Enable Abil"/>
+            </AbilCmd>
+            <AbilCmd Abil="WarpGateTrain" Cmd="1">
+                <Field Id="UM - Enable Abil" Index="1"/>
+            </AbilCmd>
+            <GameLink GameLink="CommanderPrestigeKaraxArmy">
+                <Field Id="Necessary - Primary Upgrade"/>
+            </GameLink>
+            <GameLink GameLink="VoidStalkerBlinkCharges">
+                <Field Id="Addition - Upgrades Self"/>
+            </GameLink>
+            <GameLink GameLink="CommanderPrestigeKaraxArmyRemake">
+                <Field Id="Necessary - Icon"/>
+            </GameLink>
+            <String String="libCMEP_gt_KaraxPrestige5ExtraTrigger">
+                <Field Id="Addition - Prestige Trigger"/>
+            </String>
+            <Unit Unit="PhotonCannon">
+                <Field Id="DisableUnit"/>
+            </Unit>
+            <Unit Unit="KhaydarinMonolith">
+                <Field Id="DisableUnit" Index="1"/>
+            </Unit>
+            <Unit Unit="PhotonCannon">
+                <Field Id="UM - Disable Unit"/>
+            </Unit>
+            <Unit Unit="KhaydarinMonolith">
+                <Field Id="UM - Disable Unit" Index="1"/>
+            </Unit>
+            <User Type="PlayerHeros" Instance="[Default]">
+                <Field Id="OW - Hero Links"/>
+            </User>
+            <User Type="PlayerResponse" Instance="[Default]">
+                <Field Id="PM - Player Responses"/>
+            </User>
+            <User Type="PlayerCommanders" Instance="ProtossKarax">
+                <Field Id="Necessary - Commander"/>
+            </User>
+        </Instances>
+        <Instances Id="CommanderPrestigeDehaka4">
+            <GameLink GameLink="CommanderPrestigeDehaka4">
+                <Field Id="Necessary - Primary Upgrade"/>
+            </GameLink>
+            <GameLink GameLink="CommanderPrestigeDehaka4">
+                <Field Id="Necessary - Icon"/>
+            </GameLink>
+            <Int Int="1">
+                <Field Id="OWT - Hero"/>
+            </Int>
+            <Int Int="1">
+                <Field Id="OWT - HeroStructure"/>
+            </Int>
+            <Int Int="1">
+                <Field Id="OWT - Hero Structure"/>
+            </Int>
+            <String String="libCMEP_gt_DehakaPrestige4ExtraTrigger">
+                <Field Id="Addition - Prestige Trigger"/>
+            </String>
+            <User Type="PlayerHeros" Instance="[Default]">
+                <Field Id="OW - Hero Links"/>
+            </User>
+            <User Type="PlayerHeroStructures" Instance="DehakaBarracks">
+                <Field Id="OW - Hero Structure Links"/>
+            </User>
+            <User Type="PlayerCommanders" Instance="ZergDehaka">
+                <Field Id="Necessary - Commander"/>
+            </User>
+            <User Type="PlayerPrestigeUpgradeSupplements" Instance="Dehaka4-1">
+                <Field Id="Addition - Upgrade Supplements"/>
+            </User>
+            <User Type="PlayerGlobalPowers" Instance="[Default]">
+                <Field Id="OW - Global Power Links"/>
+            </User>
+        </Instances>
+        <Instances Id="CommanderPrestigeAbathur4">
+            <GameLink GameLink="CommanderPrestigeAbathur4">
+                <Field Id="Necessary - Primary Upgrade"/>
+            </GameLink>
+            <GameLink GameLink="CommanderPrestigeAbathur4">
+                <Field Id="Necessary - Icon"/>
+            </GameLink>
+            <Int Int="-100">
+                <Field Id="SuppliesMax"/>
+            </Int>
+            <String String="libCMEP_gt_AbathurPrestige4ExtraTrigger">
+                <Field Id="Addition - Prestige Trigger"/>
+            </String>
+            <User Type="PlayerPrestigeUpgradeSupplements" Instance="Abathur4-1">
+                <Field Id="Addition - Upgrade Supplements"/>
+            </User>
+            <User Type="PlayerPrestigeUpgradeSupplements" Instance="Abathur4-2">
+                <Field Id="Addition - Upgrade Supplements" Index="1"/>
+            </User>
+            <User Type="PlayerPrestigeUpgradeSupplements" Instance="Abathur4-3">
+                <Field Id="Addition - Upgrade Supplements" Index="2"/>
+            </User>
+            <User Type="PlayerPrestigeUpgradeSupplements" Instance="Abathur4-4">
+                <Field Id="Addition - Upgrade Supplements" Index="3"/>
+            </User>
+            <User Type="PlayerPrestigeUpgradeSupplements" Instance="[Default]">
+                <Field Id="Addition - Upgrade Supplements" Index="4"/>
+            </User>
+            <User Type="PlayerCommanders" Instance="ZergAbathur">
+                <Field Id="Necessary - Commander"/>
+            </User>
+            <User Type="PlayerHeros" Instance="[Default]">
+                <Field Id="OW - Hero Links"/>
+            </User>
+            <User Type="PlayerHeroStructures" Instance="[Default]">
+                <Field Id="OW - Hero Structure Links"/>
+            </User>
+            <User Type="PlayerGlobalPowers" Instance="[Default]">
+                <Field Id="OW - Global Power Links"/>
+            </User>
+        </Instances>
+        <Instances Id="CommanderPrestigeAbathur5">
+            <AbilCmd Abil="LarvaTrain" Cmd="15">
+                <Field Id="UM - Disable Abil"/>
+            </AbilCmd>
+            <AbilCmd Abil="LarvaTrain" Cmd="14">
+                <Field Id="UM - Disable Abil" Index="1"/>
+            </AbilCmd>
+            <AbilCmd Abil="InfestationPitResearch" Cmd="11">
+                <Field Id="UM - Disable Abil" Index="2"/>
+            </AbilCmd>
+            <GameLink GameLink="CommanderPrestigeAbathur5">
+                <Field Id="Necessary - Primary Upgrade"/>
+            </GameLink>
+            <GameLink GameLink="CommanderPrestigeAbathur5DevouringScourge">
+                <Field Id="Necessary - Icon"/>
+            </GameLink>
+            <Int Int="1">
+                <Field Id="State - Developing"/>
+            </Int>
+            <User Type="PlayerPrestigeUpgradeSupplements" Instance="Abathur5-1">
+                <Field Id="Addition - Upgrade Supplements"/>
+            </User>
+            <User Type="PlayerPrestigeUpgradeSupplements" Instance="Abathur5-2">
+                <Field Id="Addition - Upgrade Supplements" Index="1"/>
+            </User>
+            <User Type="PlayerPrestigeUpgradeSupplements" Instance="Abathur5-3">
+                <Field Id="Addition - Upgrade Supplements" Index="2"/>
+            </User>
+            <User Type="PlayerPrestigeUpgradeSupplements" Instance="Abathur5-4">
+                <Field Id="Addition - Upgrade Supplements" Index="3"/>
+            </User>
+            <User Type="PlayerPrestigeUpgradeSupplements" Instance="Abathur5-5">
+                <Field Id="Addition - Upgrade Supplements" Index="4"/>
+            </User>
+            <User Type="PlayerPrestigeUpgradeSupplements" Instance="Abathur5-6">
+                <Field Id="Addition - Upgrade Supplements" Index="5"/>
+            </User>
+            <User Type="PlayerCommanders" Instance="ZergAbathur">
+                <Field Id="Necessary - Commander"/>
+            </User>
+        </Instances>
+        <Instances Id="CommanderPrestigeKerrigan4">
+            <GameLink GameLink="CommanderPrestigeKerriganXelnagaMutalisk">
+                <Field Id="Necessary - Primary Upgrade"/>
+            </GameLink>
+            <GameLink GameLink="CommanderPrestigeKerriganXelnagaMutalisk">
+                <Field Id="Necessary - Icon"/>
+            </GameLink>
+            <Int>
+                <Field Id="State - Show In UI"/>
+            </Int>
+            <User Type="PlayerPrestigeUpgradeSupplements" Instance="Kerrigan4-1">
+                <Field Id="Addition - Upgrade Supplements"/>
+            </User>
+            <User Type="PlayerCommanders" Instance="ZergKerrigan">
+                <Field Id="Necessary - Commander"/>
+            </User>
+        </Instances>
+        <Instances Id="CommanderPrestigeRaynor4">
+            <AbilCmd Abil="BansheeAirstrike">
+                <Field Id="UM - Disable Abil"/>
+            </AbilCmd>
+            <AbilCmd Abil="FusionCoreResearch" Cmd="7">
+                <Field Id="UM - Enable Abil"/>
+            </AbilCmd>
+            <AbilCmd Abil="FusionCoreResearch" Cmd="8">
+                <Field Id="UM - Enable Abil" Index="2"/>
+            </AbilCmd>
+            <AbilCmd Abil="FusionCoreResearch" Cmd="9">
+                <Field Id="UM - Enable Abil" Index="3"/>
+            </AbilCmd>
+            <AbilCmd Abil="FusionCoreResearch" Cmd="10">
+                <Field Id="UM - Enable Abil" Index="4"/>
+            </AbilCmd>
+            <AbilCmd Abil="FusionCoreResearch" Cmd="6">
+                <Field Id="UM - Enable Abil" Index="1"/>
+            </AbilCmd>
+            <GameLink GameLink="CommanderPrestigeRaynor4">
+                <Field Id="Necessary - Primary Upgrade"/>
+            </GameLink>
+            <GameLink GameLink="CommanderPrestigeRaynor4">
+                <Field Id="Necessary - Icon"/>
+            </GameLink>
+            <User Type="PlayerCommanders" Instance="TerranRaynor">
+                <Field Id="Necessary - Commander"/>
+            </User>
+        </Instances>
+        <Instances Id="CommanderPrestigeKerriganSupermeOverlord">
+            <AbilCmd Abil="ZergBuild" Cmd="9">
+                <Field Id="UM - Disable Abil"/>
+            </AbilCmd>
+            <GameLink GameLink="CommanderPrestigeKerriganSupremeOverlord">
+                <Field Id="Necessary - Primary Upgrade"/>
+            </GameLink>
+            <GameLink GameLink="K5TwoDrones">
+                <Field Id="Addition - Upgrades Self"/>
+            </GameLink>
+            <GameLink GameLink="K5AutoExtractor">
+                <Field Id="Addition - Upgrades Self" Index="1"/>
+            </GameLink>
+            <GameLink GameLink="K5ImprovedOverlords">
+                <Field Id="Addition - Upgrades Self" Index="2"/>
+            </GameLink>
+            <GameLink GameLink="HotSCampaignLarvaCountEasy">
+                <Field Id="Addition - Upgrades Self" Index="3"/>
+            </GameLink>
+            <GameLink GameLink="K5ZerglingRespawn">
+                <Field Id="Addition - Upgrades Self" Index="4"/>
+            </GameLink>
+            <GameLink GameLink="CommanderPrestigeKerriganSupremeOverlord">
+                <Field Id="Necessary - Icon"/>
+            </GameLink>
+            <Int Int="1">
+                <Field Id="OWT - Hero"/>
+            </Int>
+            <Int Int="1">
+                <Field Id="OWT - HeroStructure"/>
+            </Int>
+            <User Type="PlayerCommanders" Instance="ZergKerrigan">
+                <Field Id="Necessary - Commander"/>
+            </User>
+            <User Type="PlayerHeroStructures" Instance="XelNagaKerriganReviveBeacn">
+                <Field Id="OW - Hero Structure Links"/>
+            </User>
+            <User Type="PlayerHeros" Instance="XelNagaKerrigan">
+                <Field Id="OW - Hero Links"/>
+            </User>
+            <User Type="PlayerResponse" Instance="[Default]">
+                <Field Id="PM - Player Responses"/>
+            </User>
+            <User Type="PlayerPrestigeUpgradeSupplements" Instance="[Default]">
+                <Field Id="Addition - Upgrade Supplements"/>
+            </User>
+        </Instances>
+    </CUser>
+    <CUser id="PlayerPrestigeUpgradeSupplements">
+        <Instances Id="Abathur5-1">
+            <GameLink GameLink="AbathurMorphTimeCostReduced">
+                <Field Id="Upgrade"/>
+            </GameLink>
+            <GameLink GameLink="CommanderPrestigeAbathur5level12">
+                <Field Id="Supplement"/>
+            </GameLink>
+        </Instances>
+        <Instances Id="Abathur5-2">
+            <GameLink GameLink="CommanderPrestigeAbathur5GuardianAttackRangeIncrease">
+                <Field Id="Supplement"/>
+            </GameLink>
+            <GameLink GameLink="GuardianAttackRangeIncrease">
+                <Field Id="Upgrade"/>
+            </GameLink>
+        </Instances>
+        <Instances Id="Abathur5-3">
+            <GameLink GameLink="CommanderPrestigeAbathur5DevourerAoEDamage">
+                <Field Id="Supplement"/>
+            </GameLink>
+            <GameLink GameLink="DevourerAoEDamage">
+                <Field Id="Upgrade"/>
+            </GameLink>
+        </Instances>
+        <Instances Id="Abathur5-4">
+            <GameLink GameLink="CommanderPrestigeAbathur5MutaliskSunderingGlave">
+                <Field Id="Supplement"/>
+            </GameLink>
+            <GameLink GameLink="MutaliskSunderingGlave">
+                <Field Id="Upgrade"/>
+            </GameLink>
+        </Instances>
+        <Instances Id="Abathur5-5">
+            <GameLink GameLink="CommanderPrestigeAbathur5ViperAbductImprovedStun">
+                <Field Id="Supplement"/>
+            </GameLink>
+            <GameLink GameLink="ViperAbductImprovedStun">
+                <Field Id="Upgrade"/>
+            </GameLink>
+        </Instances>
+        <Instances Id="Abathur5-6">
+            <GameLink GameLink="CommanderPrestigeAbathur5ViperImprovedCastRange">
+                <Field Id="Supplement"/>
+            </GameLink>
+            <GameLink GameLink="ViperImprovedCastRange">
+                <Field Id="Upgrade"/>
+            </GameLink>
+        </Instances>
+        <Instances Id="Abathur4-1">
+            <GameLink GameLink="GlialReconstitution">
+                <Field Id="Upgrade"/>
+            </GameLink>
+            <GameLink GameLink="CommanderPrestigeAbathur4GlialReconstitution">
+                <Field Id="Supplement"/>
+            </GameLink>
+        </Instances>
+        <Instances Id="Abathur4-2">
+            <GameLink GameLink="TunnelingClaws">
+                <Field Id="Upgrade"/>
+            </GameLink>
+            <GameLink GameLink="CommanderPrestigeAbathur4TunnelingClaws">
+                <Field Id="Supplement"/>
+            </GameLink>
+        </Instances>
+        <Instances Id="Abathur4-3">
+            <GameLink GameLink="HotSRoachDamage">
+                <Field Id="Upgrade"/>
+            </GameLink>
+            <GameLink GameLink="CommanderPrestigeAbathur4RavagerDamage">
+                <Field Id="Supplement"/>
+            </GameLink>
+        </Instances>
+        <Instances Id="Abathur4-4">
+            <GameLink GameLink="CommanderPrestigeAbathur4SunderingGlave">
+                <Field Id="Supplement"/>
+            </GameLink>
+            <GameLink GameLink="MutaliskSunderingGlave">
+                <Field Id="Upgrade"/>
+            </GameLink>
+        </Instances>
+        <Instances Id="Tychus4-1">
+            <GameLink GameLink="MasteryTychusHeroCooldown">
+                <Field Id="Upgrade"/>
+            </GameLink>
+            <GameLink GameLink="CommanderPrestigeTychus4SquadAbilitiesMastery">
+                <Field Id="Supplement"/>
+            </GameLink>
+        </Instances>
+        <Instances Id="Kerrigan4-1">
+            <GameLink GameLink="KerriganSeveringGlave">
+                <Field Id="Upgrade"/>
+            </GameLink>
+            <GameLink GameLink="CommanderPrestigeKerriganXelnagaMutaliskSeveringGlaveUpgradeSupplyment">
+                <Field Id="Supplement"/>
+            </GameLink>
+        </Instances>
+        <Instances Id="Dehaka4-1">
+            <GameLink GameLink="MasteryDehakaPrimalWurmCDR">
+                <Field Id="Upgrade"/>
+            </GameLink>
+            <GameLink GameLink="CommanderPrestigeDehaka4MasteryDehakaPrimalWurmCDRUpgradeSupplyment">
+                <Field Id="Supplement"/>
+            </GameLink>
+        </Instances>
+        <Instances Id="StukovLND_1">
+            <GameLink GameLink="SIBarracksTrainInfestedCivilianLevel2">
+                <Field Id="Upgrade"/>
+            </GameLink>
+            <GameLink GameLink="CommanderPrestigeStukovLeftNoDeadSIBarracksTrainInfestedCivilianLevel2">
+                <Field Id="Supplement"/>
+            </GameLink>
+        </Instances>
+        <Instances Id="StukovLND_2">
+            <GameLink GameLink="SIBarracksTrainInfestedCivilianLevel3">
+                <Field Id="Upgrade"/>
+            </GameLink>
+            <GameLink GameLink="CommanderPrestigeStukovLeftNoDeadSIBarracksTrainInfestedCivilianLevel3">
+                <Field Id="Supplement"/>
+            </GameLink>
+        </Instances>
+        <Instances Id="StukovLND_3">
+            <GameLink GameLink="SIBarracksTrainInfestedCivilianLevel4">
+                <Field Id="Upgrade"/>
+            </GameLink>
+            <GameLink GameLink="CommanderPrestigeStukovLeftNoDeadSIBarracksTrainInfestedCivilianLevel4">
+                <Field Id="Supplement"/>
+            </GameLink>
+        </Instances>
+    </CUser>
+</Catalog>

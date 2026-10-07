@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CModel id="ImbalycMutator_OldLegendryOverlordNuke" parent="PersistentSpellFX">
+        <Model value="Assets\UI\Cursors\ZergAOECursor\ZergAOECursor.m3"/>
+        <EditorCategories value="Race:Terran"/>
+        <ScaleMax value="1.300000,1.300000,1.300000"/>
+        <ScaleMin value="1.300000,1.300000,1.300000"/>
+    </CModel>
+    <CModel id="ImbalycMutator_OldLegendryOverlord_NukeLM" parent="MissileFX">
+        <Model value="Assets\Effects\Zerg\BileLauncherMissile\BileLauncherMissile.m3"/>
+        <EditorCategories value="Race:Zerg"/>
+    </CModel>
+    <CModel id="ImbalycMutator_OldLegendryOverlordNukeLMImpact" parent="ImpactFX">
+        <Model value="Assets\Effects\Zerg\BileLauncherMissileImpact\BileLauncherMissileImpact.m3"/>
+        <EditorCategories value="Race:Zerg"/>
+    </CModel>
+    <CModel id="SCCImbalyc_InfestorEgg" parent="Unit" Race="Zerg">
+        <Model value="Assets\Units\Zerg\Egg\Egg_01.m3"/>
+        <Events>
+            <Anim value="Stand,Work,Start,00"/>
+            <Name value="BlightBringer_Egg_BurstSwt"/>
+            <Type value="Sound"/>
+            <Time value="0.027000"/>
+            <Payload value="BlightBringer_Egg_BurstSwt"/>
+        </Events>
+        <Events>
+            <Anim value="Stand,Work,Start,01"/>
+            <Name value="BlightBringer_Egg_BurstSwt"/>
+            <Type value="Sound"/>
+            <Time value="0.027000"/>
+            <Payload value="BlightBringer_Egg_BurstSwt"/>
+        </Events>
+        <ScaleMax value="2.000000,2.000000,2.000000"/>
+        <ScaleMin value="2.000000,2.000000,2.000000"/>
+    </CModel>
+    <CModel id="CloakModelRed" parent="RacePersistentSpellFX" Race="Protoss">
+        <Model value="Assets\Effects\Terran\TerranCloakingEffect\TerranCloakingEffect.m3"/>
+    </CModel>
+    <CModel id="CloakModelRedLow" parent="RacePersistentSpellFX" Race="Protoss">
+        <Model value="Assets\Effects\Terran\TerranCloakingEffect\TerranCloakingEffect_Low.m3"/>
+    </CModel>
+    <CModel id="ImbalycMutator_OldHero6ABIL3Model" parent="PersistentSpellFX">
+        <Model value="Assets\Effects\Zerg\Fungal_Snare\Fungal_Snare.m3"/>
+        <EditorCategories value="Race:Zerg"/>
+        <ScaleMax value="1.500000,1.500000,1.500000"/>
+        <ScaleMin value="1.500000,1.500000,1.500000"/>
+        <SelectionRadius value="5.000000"/>
+        <ShadowRadius value="5.000000"/>
+    </CModel>
+    <CModel id="ImbalycMutator_HybridUpgradeAvatarBlue_LineAttackBeam" parent="PersistentSpellFX">
+        <Model value="Assets\Effects\Protoss\Sentry_HealingBeam\Sentry_HealingBeam.m3"/>
+        <EditorCategories value="Race:Protoss"/>
+        <ScaleMax value="2.500000,2.500000,2.500000"/>
+        <ScaleMin value="2.500000,2.500000,2.500000"/>
+    </CModel>
+    <CModel id="TheSecondComingGhastHasBeenRevivedAddon">
+        <Model value="Assets\Effects\Glaze\Glaze_Nova_Buff_Damage\Glaze_Nova_Buff_Damage.m3"/>
+    </CModel>
+    <CModel id="TheSecondComingGhastAddon" parent="PersistentSpellFX">
+        <Model value="Assets\Effects\Protoss\DarkArchon_MindControl_State\DarkArchon_MindControl_State.m3"/>
+        <EditorCategories value="Race:Protoss"/>
+        <ScaleMax value="1.500000,1.500000,1.500000"/>
+        <ScaleMin value="1.500000,1.500000,1.500000"/>
+    </CModel>
+    <CModel id="CrushAtmosphere" parent="ImpactFX">
+        <Model value="Assets\Effects\Terran\UltraSonicMissileImpact\UltraSonicMissileImpact.m3"/>
+        <EditorCategories value="Race:Zerg"/>
+    </CModel>
+</Catalog>

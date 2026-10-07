@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CRequirementAnd id="AndCountUpgradeCommanderPrestigeStukovLeftNoDeadCompleteOnlyLTCountUnitSICivilianStructureInProgressOrBetter3">
+        <OperandArray value="CountUpgradeCommanderPrestigeStukovLeftNoDeadCompleteOnly"/>
+        <OperandArray value="LTCountUnitSICivilianStructureInProgressOrBetter3"/>
+    </CRequirementAnd>
+    <CRequirementAnd id="AndCountUpgradeCommanderPrestigeStukovLeftNoDeadCompleteOnlyNotCountUpgradeAberrationArmorAuraQueuedOrBetter">
+        <Tooltip value="RequirementNode/Tooltip/##id##"/>
+        <OperandArray value="CountUpgradeCommanderPrestigeStukovLeftNoDeadCompleteOnly"/>
+        <OperandArray value="NotCountUpgradeAberrationArmorAuraQueuedOrBetter"/>
+    </CRequirementAnd>
+    <CRequirementAnd id="AndNotCountUpgradeSIVolatileInfestedExplodeHealQueuedOrBetterCountUpgradeCommanderPrestigeStukovLeftNoDeadQueuedOrBetter">
+        <OperandArray value="NotCountUpgradeSIVolatileInfestedExplodeHealQueuedOrBetter"/>
+        <OperandArray value="CountUpgradeCommanderPrestigeStukovLeftNoDeadQueuedOrBetter"/>
+    </CRequirementAnd>
+    <CRequirementAnd id="AndNotCountUpgradeZerglingArmorShredQueuedOrBetterCountUpgradeCommanderPrestigeStukovLeftNoDeadQueuedOrBetter">
+        <OperandArray value="NotCountUpgradeZerglingArmorShredQueuedOrBetter"/>
+        <OperandArray value="CountUpgradeCommanderPrestigeStukovLeftNoDeadQueuedOrBetter"/>
+    </CRequirementAnd>
+    <CRequirementCountUnit id="CountUnitSICivilianStructureCompleteOnly">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="SICivilianStructure" State="CompleteOnly"/>
+    </CRequirementCountUnit>
+    <CRequirementCountUnit id="CountUnitSICivilianStructureCompleteOnlyAtUnit1344415123">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="SICivilianStructure" State="CompleteOnlyAtUnit"/>
+    </CRequirementCountUnit>
+    <CRequirementCountUnit id="CountUnitSICivilianStructureFlyingCompleteOnly">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="SICivilianStructureFlying" State="CompleteOnly"/>
+    </CRequirementCountUnit>
+    <CRequirementCountUpgrade id="CountUpgradeAberrationArmorAuraCompleteOnly1178490739">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="AberrationArmorAura" State="CompleteOnly"/>
+    </CRequirementCountUpgrade>
+    <CRequirementCountUpgrade id="CountUpgradeCommanderPrestigeStukovLeftNoDeadCompleteOnly">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="CommanderPrestigeStukovLeftNoDead" State="CompleteOnly"/>
+    </CRequirementCountUpgrade>
+    <CRequirementCountUpgrade id="CountUpgradeCommanderPrestigeStukovLeftNoDeadQueuedOrBetter">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="CommanderPrestigeStukovLeftNoDead" State="QueuedOrBetter"/>
+    </CRequirementCountUpgrade>
+    <CRequirementCountUpgrade id="CountUpgradeSIBarracksTrainInfestedCivilianLevel2CompleteOnly1189261887">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="SIBarracksTrainInfestedCivilianLevel2" State="CompleteOnly"/>
+    </CRequirementCountUpgrade>
+    <CRequirementCountUpgrade id="CountUpgradeSIBarracksTrainInfestedCivilianLevel2CompleteOnly1189261887TechTreeCheat">
+        <Count Link="SIBarracksTrainInfestedCivilianLevel2" State="CompleteOnly"/>
+    </CRequirementCountUpgrade>
+    <CRequirementCountUpgrade id="CountUpgradeSIBarracksTrainInfestedCivilianLevel3CompleteOnly3048850846TechTreeCheat">
+        <Count Link="SIBarracksTrainInfestedCivilianLevel3" State="CompleteOnly"/>
+    </CRequirementCountUpgrade>
+    <CRequirementCountUpgrade id="CountUpgradeSIVolatileInfestedExplodeHealCompleteOnly3068251394">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="SIVolatileInfestedExplodeHeal" State="CompleteOnly"/>
+    </CRequirementCountUpgrade>
+    <CRequirementCountUpgrade id="CountUpgradeSIVolatileInfestedExplodeHealQueuedOrBetter">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="SIVolatileInfestedExplodeHeal" State="QueuedOrBetter"/>
+    </CRequirementCountUpgrade>
+    <CRequirementCountUpgrade id="CountUpgradeZerglingArmorShredCompleteOnly3167936120">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="ZerglingArmorShred" State="CompleteOnly"/>
+    </CRequirementCountUpgrade>
+    <CRequirementLT id="LTCountUnitSICivilianStructureInProgressOrBetter1">
+        <OperandArray index="0" value="CountUnitSICivilianStructureInProgressOrBetter"/>
+        <OperandArray index="1" value="1"/>
+    </CRequirementLT>
+    <CRequirementLT id="LTCountUnitSICivilianStructureInProgressOrBetter3">
+        <OperandArray index="0" value="CountUnitSICivilianStructureInProgressOrBetter"/>
+        <OperandArray index="1" value="2"/>
+    </CRequirementLT>
+    <CRequirementNot id="NotCountUpgradeCommanderPrestigeStukovLeftNoDeadCompleteOnly">
+        <OperandArray index="0" value="CountUpgradeCommanderPrestigeStukovLeftNoDeadCompleteOnly"/>
+    </CRequirementNot>
+    <CRequirementNot id="NotCountUpgradeSIVolatileInfestedExplodeHealQueuedOrBetter">
+        <OperandArray index="0" value="CountUpgradeSIVolatileInfestedExplodeHealQueuedOrBetter"/>
+    </CRequirementNot>
+    <CRequirementOr id="Or1569788332LTCountUnitSICivilianStructureInProgressOrBetter1AndCountUpgradeCommanderPrestigeStukovLeftNoDeadCompleteOnlyLTCountUnitSICivilianStructureInProgressOrBetter3">
+        <OperandArray value="LTCountUnitSICivilianStructureInProgressOrBetter1"/>
+        <OperandArray value="AndCountUpgradeCommanderPrestigeStukovLeftNoDeadCompleteOnlyLTCountUnitSICivilianStructureInProgressOrBetter3"/>
+    </CRequirementOr>
+    <CRequirementOr id="OrCountUnitSICivilianStructureFlyingCompleteOnlyCountUnitSICivilianStructureCompleteOnly">
+        <OperandArray value="CountUnitSICivilianStructureFlyingCompleteOnly"/>
+        <OperandArray value="CountUnitSICivilianStructureCompleteOnly"/>
+    </CRequirementOr>
+    <CRequirementAnd id="And1444893453CountUpgradeRaynorCommanderHyperionAdvancedTargetingSystemsCompleteOnlyCountUpgradeHyperionTacticalCommandSystemCompleteOnly">
+        <OperandArray value="CountUpgradeRaynorCommanderHyperionAdvancedTargetingSystemsCompleteOnly"/>
+        <OperandArray value="CountUpgradeHyperionTacticalCommandSystemCompleteOnly"/>
+    </CRequirementAnd>
+    <CRequirementAnd id="AndCountUpgradeAbathurCommanderCompleteOnlyCountUpgradeCommanderPrestigeAbathur4CompleteOnlyOrEqCountBehaviorBiomassBuff1CompleteOnlyAtUnit0EqCountBehaviorBiomassBuff10CompleteOnlyAtUnit0EqCountBehaviorBiomassBuff100CompleteOnlyAtUnit0">
+        <OperandArray value="CountUpgradeAbathurCommanderCompleteOnly"/>
+        <OperandArray value="CountUpgradeCommanderPrestigeAbathur4CompleteOnly"/>
+        <OperandArray value="OrEqCountBehaviorBiomassBuff1CompleteOnlyAtUnit0EqCountBehaviorBiomassBuff10CompleteOnlyAtUnit0EqCountBehaviorBiomassBuff100CompleteOnlyAtUnit0"/>
+    </CRequirementAnd>
+    <CRequirementAnd id="AndCountUpgradeAbathurCommanderCompleteOnlyNotCountUpgradeCommanderPrestigeAbathurBiomassCompleteOnlyNotCountUpgradeCommanderPrestigeAbathur4CompleteOnly">
+        <OperandArray value="CountUpgradeAbathurCommanderCompleteOnly"/>
+        <OperandArray value="NotCountUpgradeCommanderPrestigeAbathurBiomassCompleteOnly"/>
+        <OperandArray value="NotCountUpgradeCommanderPrestigeAbathur4CompleteOnly"/>
+    </CRequirementAnd>
+    <CRequirementAnd id="AndCountUpgradeArtanisCommanderCompleteOnlyNotCountUpgradeArtanisHardenedShieldQueuedOrBetterCountUpgradeCommanderPrestigeArtanis4CompleteOnly">
+        <OperandArray value="CountUpgradeArtanisCommanderCompleteOnly"/>
+        <OperandArray value="NotCountUpgradeArtanisHardenedShieldQueuedOrBetter"/>
+        <OperandArray value="CountUpgradeCommanderPrestigeArtanis4CompleteOnly"/>
+    </CRequirementAnd>
+    <CRequirementAnd id="AndCountUpgradeCommanderPrestigeAbathur4CompleteOnlyGTCountBehaviorBiomassBuff100CompleteOnlyAtUnit0">
+        <OperandArray value="CountUpgradeCommanderPrestigeAbathur4CompleteOnly"/>
+        <OperandArray value="GTCountBehaviorBiomassBuff100CompleteOnlyAtUnit0"/>
+    </CRequirementAnd>
+    <CRequirementAnd id="AndCountUpgradeCommanderPrestigeAbathur4CompleteOnlyLT10CountUpgradeCommanderLevelCompleteOnly">
+        <OperandArray value="CountUpgradeCommanderPrestigeAbathur4CompleteOnly"/>
+        <OperandArray value="LT10CountUpgradeCommanderLevelCompleteOnly"/>
+    </CRequirementAnd>
+    <CRequirementAnd id="AndCountUpgradeCommanderPrestigeAbathur4CompleteOnlyLT4CountUpgradeCommanderLevelCompleteOnly">
+        <OperandArray value="CountUpgradeCommanderPrestigeAbathur4CompleteOnly"/>
+        <OperandArray value="LT4CountUpgradeCommanderLevelCompleteOnly"/>
+    </CRequirementAnd>
+    <CRequirementAnd id="AndCountUpgradeCommanderPrestigeAbathur4CompleteOnlyLTE9CountUpgradeCommanderLevelCompleteOnly">
+        <Tooltip value="RequirementNode/Tooltip/##id##"/>
+        <OperandArray value="CountUpgradeCommanderPrestigeAbathur4CompleteOnly"/>
+        <OperandArray value="LTE9CountUpgradeCommanderLevelCompleteOnly"/>
+    </CRequirementAnd>
+    <CRequirementAnd id="AndCountUpgradeCommanderPrestigeAbathur4CompleteOnlyOrGTCountBehaviorBiomassBuff1CompleteOnlyAtUnit0GTCountBehaviorBiomassBuff10CompleteOnlyAtUnit0GTCountBehaviorBiomassBuff100CompleteOnlyAtUnit0">
+        <OperandArray value="CountUpgradeCommanderPrestigeAbathur4CompleteOnly"/>
+        <OperandArray value="OrGTCountBehaviorBiomassBuff1CompleteOnlyAtUnit0GTCountBehaviorBiomassBuff10CompleteOnlyAtUnit0GTCountBehaviorBiomassBuff100CompleteOnlyAtUnit0"/>
+    </CRequirementAnd>
+    <CRequirementAnd id="AndCountUpgradeCommanderPrestigeKarax4CompleteOnlyLTCountBehaviorKaraxBuildingUpgradeWeaponCompleteOnlyAtUnit10">
+        <OperandArray value="CountUpgradeCommanderPrestigeKarax4CompleteOnly"/>
+        <OperandArray value="LTCountBehaviorKaraxBuildingUpgradeWeaponCompleteOnlyAtUnit10"/>
+    </CRequirementAnd>
+    <CRequirementAnd id="AndCountUpgradeCommanderPrestigeKarax4CompleteOnlyLTCountBehaviorKaraxBuildingUpgradeWeaponKhaydarinMonolithCompleteOnlyAtUnit10">
+        <OperandArray value="CountUpgradeCommanderPrestigeKarax4CompleteOnly"/>
+        <OperandArray value="LTCountBehaviorKaraxBuildingUpgradeWeaponKhaydarinMonolithCompleteOnlyAtUnit10"/>
+    </CRequirementAnd>
+    <CRequirementAnd id="AndCountUpgradeCommanderPrestigeKarax4CompleteOnlyLTCountBehaviorKaraxBuildingUpgradeWeaponShieldBatteryCompleteOnlyAtUnit10">
+        <OperandArray value="CountUpgradeCommanderPrestigeKarax4CompleteOnly"/>
+        <OperandArray value="LTCountBehaviorKaraxBuildingUpgradeWeaponShieldBatteryCompleteOnlyAtUnit10"/>
+    </CRequirementAnd>
+    <CRequirementAnd id="AndCountUpgradeCommanderPrestigeRaynor4CompleteOnlyCountUnitAlias_StarportCompleteOnlyLTCountUnitHyperionVoidCoopP4CompleteOnly1">
+        <OperandArray value="CountUpgradeCommanderPrestigeRaynor4CompleteOnly"/>
+        <OperandArray value="CountUnitAlias_StarportCompleteOnly"/>
+        <OperandArray value="LTCountUnitHyperionVoidCoopP4CompleteOnly1"/>
+    </CRequirementAnd>
+    <CRequirementAnd id="AndNotCountBehaviorKaraxBuildingUpgradeTransportCompleteOnlyAtUnitCountUpgradeCommanderPrestigeKarax4CompleteOnly">
+        <OperandArray value="NotCountBehaviorKaraxBuildingUpgradeTransportCompleteOnlyAtUnit"/>
+        <OperandArray value="CountUpgradeCommanderPrestigeKarax4CompleteOnly"/>
+    </CRequirementAnd>
+    <CRequirementAnd id="AndNotCountUpgradeCommanderPrestigeAbathurUltEvoCompleteOnlyLTCountUnitAlias_BrutaliskQueuedOrBetter3">
+        <OperandArray value="NotCountUpgradeCommanderPrestigeAbathurUltEvoCompleteOnly"/>
+        <OperandArray value="LTCountUnitAlias_BrutaliskQueuedOrBetter3"/>
+    </CRequirementAnd>
+    <CRequirementAnd id="AndNotCountUpgradeCommanderPrestigeAbathurUltEvoCompleteOnlyLTCountUnitHotSLeviathanQueuedOrBetter24414874533">
+        <OperandArray value="NotCountUpgradeCommanderPrestigeAbathurUltEvoCompleteOnly"/>
+        <OperandArray value="LTCountUnitHotSLeviathanQueuedOrBetter24414874533"/>
+    </CRequirementAnd>
+    <CRequirementAnd id="AndOr1853099161CountUpgradeCommanderPrestigeAbathurUltEvoCompleteOnlyAndNotCountUpgradeCommanderPrestigeAbathurUltEvoCompleteOnlyLTCountUnitHotSLeviathanQueuedOrBetter24414874533Or1528817496AndCountUp3327226461">
+        <OperandArray value="Or1853099161CountUpgradeCommanderPrestigeAbathurUltEvoCompleteOnlyAndNotCountUpgradeCommanderPrestigeAbathurUltEvoCompleteOnlyLTCountUnitHotSLeviathanQueuedOrBetter24414874533"/>
+        <OperandArray value="Or1528817496AndCountUpgradeCommanderPrestigeAbathurUltEvoCompleteOnlyGTCountBehaviorBiomassBuff100CompleteOnlyAtUnit1AndNotCountUpgradeCommanderPrestigeAbathurUltEvoCompleteOnlyGTCountBehaviorBiomassBuff100CompleteOnlyAtUnit0"/>
+    </CRequirementAnd>
+    <CRequirementAnd id="AndOr2240178058CountUpgradeCommanderPrestigeAbathurUltEvoCompleteOnlyAndNotCountUpgradeCommanderPrestigeAbathurUltEvoCompleteOnlyLTCountUnitAlias_BrutaliskQueuedOrBetter3Or1528817496AndCountUpgradeCom853834415">
+        <OperandArray value="Or2240178058CountUpgradeCommanderPrestigeAbathurUltEvoCompleteOnlyAndNotCountUpgradeCommanderPrestigeAbathurUltEvoCompleteOnlyLTCountUnitAlias_BrutaliskQueuedOrBetter3"/>
+        <OperandArray value="Or1528817496AndCountUpgradeCommanderPrestigeAbathurUltEvoCompleteOnlyGTCountBehaviorBiomassBuff100CompleteOnlyAtUnit1AndNotCountUpgradeCommanderPrestigeAbathurUltEvoCompleteOnlyGTCountBehaviorBiomassBuff100CompleteOnlyAtUnit0"/>
+    </CRequirementAnd>
+    <CRequirementAnd id="AndOrCountUpgradeCommanderPrestigeAbathurDeepTunnelCompleteOnlyCountUpgradeCommanderPrestigeAbathur4CompleteOnlyLTE9CountUpgradeCommanderLevelCompleteOnly">
+        <OperandArray value="OrCountUpgradeCommanderPrestigeAbathurDeepTunnelCompleteOnlyCountUpgradeCommanderPrestigeAbathur4CompleteOnly"/>
+        <OperandArray value="LTE9CountUpgradeCommanderLevelCompleteOnly"/>
+    </CRequirementAnd>
+    <CRequirementCountBehavior id="CountBehaviorKaraxBuildingUpgradeTransportCompleteOnlyAtUnit">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="KaraxBuildingUpgradeTransport" State="CompleteOnlyAtUnit"/>
+    </CRequirementCountBehavior>
+    <CRequirementCountBehavior id="CountBehaviorKaraxBuildingUpgradeWeaponCompleteOnlyAtUnit">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="KaraxBuildingUpgradeWeapon" State="CompleteOnlyAtUnit"/>
+    </CRequirementCountBehavior>
+    <CRequirementCountBehavior id="CountBehaviorKaraxBuildingUpgradeWeaponKhaydarinMonolithCompleteOnlyAtUnit">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="KaraxBuildingUpgradeWeaponKhaydarinMonolith" State="CompleteOnlyAtUnit"/>
+    </CRequirementCountBehavior>
+    <CRequirementCountBehavior id="CountBehaviorKaraxBuildingUpgradeWeaponShieldBatteryCompleteOnlyAtUnit">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="KaraxBuildingUpgradeWeaponShieldBattery" State="CompleteOnlyAtUnit"/>
+    </CRequirementCountBehavior>
+    <CRequirementCountBehavior id="CountBehaviorResurgenceDisableCompleteOnlyAtUnit">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="ResurgenceDisable" State="CompleteOnlyAtUnit"/>
+    </CRequirementCountBehavior>
+    <CRequirementCountUnit id="CountUnitAlias_StarportCompleteOnly">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="Alias_Starport" State="CompleteOnly"/>
+    </CRequirementCountUnit>
+    <CRequirementCountUnit id="CountUnitHotSLeviathanQueuedOrBetter2441487453">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="HotSLeviathan" State="QueuedOrBetter"/>
+    </CRequirementCountUnit>
+    <CRequirementCountUnit id="CountUnitHyperionVoidCoopP4CompleteOnly">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="HyperionVoidCoopP4" State="CompleteOnly"/>
+    </CRequirementCountUnit>
+    <CRequirementCountUpgrade id="CountUpgradeAbathurDeepTunnelCompleteOnly896593563TechTreeCheat">
+        <Count Link="AbathurDeepTunnel" State="CompleteOnly"/>
+    </CRequirementCountUpgrade>
+    <CRequirementCountUpgrade id="CountUpgradeArtanisHardenedShieldCompleteOnly1513199048">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="ArtanisHardenedShield" State="CompleteOnly"/>
+    </CRequirementCountUpgrade>
+    <CRequirementCountUpgrade id="CountUpgradeArtanisHardenedShieldQueuedOrBetter">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="ArtanisHardenedShield" State="QueuedOrBetter"/>
+    </CRequirementCountUpgrade>
+    <CRequirementCountUpgrade id="CountUpgradeBattlecruiserEnableSpecializationsCompleteOnly">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="BattlecruiserEnableSpecializations" State="CompleteOnly"/>
+    </CRequirementCountUpgrade>
+    <CRequirementCountUpgrade id="CountUpgradeBattlecruiserEnableSpecializationsQueuedOrBetter1873221433">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="BattlecruiserEnableSpecializations" State="QueuedOrBetter"/>
+    </CRequirementCountUpgrade>
+    <CRequirementCountUpgrade id="CountUpgradeCommanderPrestigeAbathur4CompleteOnly">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="CommanderPrestigeAbathur4" State="CompleteOnly"/>
+    </CRequirementCountUpgrade>
+    <CRequirementCountUpgrade id="CountUpgradeCommanderPrestigeArtanis4CompleteOnly">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="CommanderPrestigeArtanis4" State="CompleteOnly"/>
+    </CRequirementCountUpgrade>
+    <CRequirementCountUpgrade id="CountUpgradeCommanderPrestigeDehaka4CompleteOnly">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="CommanderPrestigeDehaka4" State="CompleteOnly"/>
+    </CRequirementCountUpgrade>
+    <CRequirementCountUpgrade id="CountUpgradeCommanderPrestigeKarax4CompleteOnly">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="CommanderPrestigeKarax4" State="CompleteOnly"/>
+    </CRequirementCountUpgrade>
+    <CRequirementCountUpgrade id="CountUpgradeCommanderPrestigeRaynor4CompleteOnly">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="CommanderPrestigeRaynor4" State="CompleteOnly"/>
+    </CRequirementCountUpgrade>
+    <CRequirementCountUpgrade id="CountUpgradeGlialReconstitutionCompleteOnly76844448">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="GlialReconstitution" State="CompleteOnly"/>
+    </CRequirementCountUpgrade>
+    <CRequirementCountUpgrade id="CountUpgradeHotSRapidRegenerationCompleteOnly3817045586TechTreeCheat">
+        <Count Link="HotSRapidRegeneration" State="CompleteOnly"/>
+    </CRequirementCountUpgrade>
+    <CRequirementCountUpgrade id="CountUpgradeHotSRoachDamageCompleteOnly2822298903">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="HotSRoachDamage" State="CompleteOnly"/>
+    </CRequirementCountUpgrade>
+    <CRequirementCountUpgrade id="CountUpgradeHotSRoachShieldCompleteOnly2806997148">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="HotSRoachShield" State="CompleteOnly"/>
+    </CRequirementCountUpgrade>
+    <CRequirementCountUpgrade id="CountUpgradeHyperionRepairCompleteOnly1993632571">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="HyperionRepair" State="CompleteOnly"/>
+    </CRequirementCountUpgrade>
+    <CRequirementCountUpgrade id="CountUpgradeHyperionRepairQueuedOrBetter">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="HyperionRepair" State="QueuedOrBetter"/>
+    </CRequirementCountUpgrade>
+    <CRequirementCountUpgrade id="CountUpgradeHyperionTacticalCommandSystemCompleteOnly">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="HyperionTacticalCommandSystem" State="CompleteOnly"/>
+    </CRequirementCountUpgrade>
+    <CRequirementCountUpgrade id="CountUpgradeHyperionTacticalCommandSystemQueuedOrBetter">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="HyperionTacticalCommandSystem" State="QueuedOrBetter"/>
+    </CRequirementCountUpgrade>
+    <CRequirementCountUpgrade id="CountUpgradeHyperionUltimateWeaponCompleteOnly">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="HyperionUltimateWeapon" State="CompleteOnly"/>
+    </CRequirementCountUpgrade>
+    <CRequirementCountUpgrade id="CountUpgradeHyperionUltimateWeaponQueuedOrBetter">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="HyperionUltimateWeapon" State="QueuedOrBetter"/>
+    </CRequirementCountUpgrade>
+    <CRequirementCountUpgrade id="CountUpgradeHyperjumpEngineQueuedOrBetter">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="HyperjumpEngine" State="QueuedOrBetter"/>
+    </CRequirementCountUpgrade>
+    <CRequirementCountUpgrade id="CountUpgradeMutaliskSunderingGlaveCompleteOnly355255440">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="MutaliskSunderingGlave" State="CompleteOnly"/>
+    </CRequirementCountUpgrade>
+    <CRequirementCountUpgrade id="CountUpgradeTunnelingClawsCompleteOnly615034983TechTreeCheat">
+        <Count Link="TunnelingClaws" State="CompleteOnly"/>
+    </CRequirementCountUpgrade>
+    <CRequirementCountUpgrade id="CountUpgradeVoidCoopHeroicFortitudeCompleteOnly">
+        <Flags index="TechTreeCheat" value="0"/>
+        <Count Link="VoidCoopHeroicFortitude" State="CompleteOnly"/>
+    </CRequirementCountUpgrade>
+    <CRequirementLT id="LT2528870634CountUnitDehakaDakrunStructureQueuedOrBetter1">
+        <OperandArray index="0" value="CountUnitDehakaDakrunStructureQueuedOrBetter"/>
+        <OperandArray index="1" value="1"/>
+    </CRequirementLT>
+    <CRequirementLT id="LT2528870634CountUnitDehakaGlevigStructureQueuedOrBetter1">
+        <OperandArray index="0" value="CountUnitDehakaGlevigStructureQueuedOrBetter"/>
+        <OperandArray index="1" value="1"/>
+    </CRequirementLT>
+    <CRequirementLT id="LT2528870634CountUnitDehakaMurvarStructureQueuedOrBetter1">
+        <OperandArray index="0" value="CountUnitDehakaMurvarStructureQueuedOrBetter"/>
+        <OperandArray index="1" value="1"/>
+    </CRequirementLT>
+    <CRequirementLT id="LTCountBehaviorKaraxBuildingUpgradeWeaponCompleteOnlyAtUnit10">
+        <OperandArray index="0" value="CountBehaviorKaraxBuildingUpgradeWeaponCompleteOnlyAtUnit"/>
+        <OperandArray index="1" value="10"/>
+    </CRequirementLT>
+    <CRequirementLT id="LTCountBehaviorKaraxBuildingUpgradeWeaponKhaydarinMonolithCompleteOnlyAtUnit10">
+        <OperandArray index="0" value="CountBehaviorKaraxBuildingUpgradeWeaponKhaydarinMonolithCompleteOnlyAtUnit"/>
+        <OperandArray index="1" value="10"/>
+    </CRequirementLT>
+    <CRequirementLT id="LTCountBehaviorKaraxBuildingUpgradeWeaponShieldBatteryCompleteOnlyAtUnit10">
+        <OperandArray index="0" value="CountBehaviorKaraxBuildingUpgradeWeaponShieldBatteryCompleteOnlyAtUnit"/>
+        <OperandArray index="1" value="10"/>
+    </CRequirementLT>
+    <CRequirementLT id="LTCountUnitHotSLeviathanQueuedOrBetter24414874533">
+        <OperandArray index="0" value="CountUnitHotSLeviathanQueuedOrBetter2441487453"/>
+        <OperandArray index="1" value="3"/>
+    </CRequirementLT>
+    <CRequirementLT id="LTCountUnitHyperionVoidCoopP4CompleteOnly1">
+        <OperandArray index="0" value="CountUnitHyperionVoidCoopP4CompleteOnly"/>
+        <OperandArray index="1" value="1"/>
+    </CRequirementLT>
+    <CRequirementNot id="NotCountBehaviorKaraxBuildingUpgradeTransportCompleteOnlyAtUnit">
+        <OperandArray index="0" value="CountBehaviorKaraxBuildingUpgradeTransportCompleteOnlyAtUnit"/>
+    </CRequirementNot>
+    <CRequirementNot id="NotCountBehaviorResurgenceDisableCompleteOnlyAtUnit">
+        <OperandArray index="0" value="CountBehaviorResurgenceDisableCompleteOnlyAtUnit"/>
+    </CRequirementNot>
+    <CRequirementNot id="NotCountUpgradeArtanisHardenedShieldQueuedOrBetter">
+        <OperandArray index="0" value="CountUpgradeArtanisHardenedShieldQueuedOrBetter"/>
+    </CRequirementNot>
+    <CRequirementNot id="NotCountUpgradeCommanderPrestigeAbathur4CompleteOnly">
+        <OperandArray index="0" value="CountUpgradeCommanderPrestigeAbathur4CompleteOnly"/>
+    </CRequirementNot>
+    <CRequirementNot id="NotCountUpgradeCommanderPrestigeRaynor4CompleteOnly">
+        <OperandArray index="0" value="CountUpgradeCommanderPrestigeRaynor4CompleteOnly"/>
+    </CRequirementNot>
+    <CRequirementNot id="NotCountUpgradeHyperionRepairQueuedOrBetter">
+        <OperandArray index="0" value="CountUpgradeHyperionRepairQueuedOrBetter"/>
+    </CRequirementNot>
+    <CRequirementNot id="NotCountUpgradeHyperionTacticalCommandSystemQueuedOrBetter">
+        <OperandArray index="0" value="CountUpgradeHyperionTacticalCommandSystemQueuedOrBetter"/>
+    </CRequirementNot>
+    <CRequirementNot id="NotCountUpgradeHyperionUltimateWeaponQueuedOrBetter">
+        <OperandArray index="0" value="CountUpgradeHyperionUltimateWeaponQueuedOrBetter"/>
+    </CRequirementNot>
+    <CRequirementNot id="NotCountUpgradeHyperjumpEngineQueuedOrBetter">
+        <OperandArray index="0" value="CountUpgradeHyperjumpEngineQueuedOrBetter"/>
+    </CRequirementNot>
+    <CRequirementNot id="NotOrCountUpgradeCommanderPrestigeAbathurDeepTunnelCompleteOnlyCountUpgradeCommanderPrestigeAbathur4CompleteOnly">
+        <OperandArray index="0" value="OrCountUpgradeCommanderPrestigeAbathurDeepTunnelCompleteOnlyCountUpgradeCommanderPrestigeAbathur4CompleteOnly"/>
+    </CRequirementNot>
+    <CRequirementOr id="Or1528817496AndCountUpgradeCommanderPrestigeAbathurUltEvoCompleteOnlyGTCountBehaviorBiomassBuff100CompleteOnlyAtUnit1AndNotCountUpgradeCommanderPrestigeAbathurUltEvoCompleteOnlyGTCountBehaviorBiomassBuff100CompleteOnlyAtUnit0">
+        <OperandArray value="AndCountUpgradeCommanderPrestigeAbathurUltEvoCompleteOnlyGTCountBehaviorBiomassBuff100CompleteOnlyAtUnit1"/>
+        <OperandArray value="AndNotCountUpgradeCommanderPrestigeAbathurUltEvoCompleteOnlyGTCountBehaviorBiomassBuff100CompleteOnlyAtUnit0"/>
+    </CRequirementOr>
+    <CRequirementOr id="Or1853099161CountUpgradeCommanderPrestigeAbathurUltEvoCompleteOnlyAndNotCountUpgradeCommanderPrestigeAbathurUltEvoCompleteOnlyLTCountUnitHotSLeviathanQueuedOrBetter24414874533">
+        <OperandArray value="CountUpgradeCommanderPrestigeAbathurUltEvoCompleteOnly"/>
+        <OperandArray value="AndNotCountUpgradeCommanderPrestigeAbathurUltEvoCompleteOnlyLTCountUnitHotSLeviathanQueuedOrBetter24414874533"/>
+    </CRequirementOr>
+    <CRequirementOr id="Or2240178058CountUpgradeCommanderPrestigeAbathurUltEvoCompleteOnlyAndNotCountUpgradeCommanderPrestigeAbathurUltEvoCompleteOnlyLTCountUnitAlias_BrutaliskQueuedOrBetter3">
+        <OperandArray value="CountUpgradeCommanderPrestigeAbathurUltEvoCompleteOnly"/>
+        <OperandArray value="AndNotCountUpgradeCommanderPrestigeAbathurUltEvoCompleteOnlyLTCountUnitAlias_BrutaliskQueuedOrBetter3"/>
+    </CRequirementOr>
+    <CRequirementOr id="Or750862857NotCountUpgradeCommanderPrestigeRaynor4CompleteOnlyAndCountUpgradeCommanderPrestigeRaynor4CompleteOnlyCountUnitAlias_StarportCompleteOnlyLTCountUnitHyperionVoidCoopP4CompleteOnly1">
+        <OperandArray value="NotCountUpgradeCommanderPrestigeRaynor4CompleteOnly"/>
+        <OperandArray value="AndCountUpgradeCommanderPrestigeRaynor4CompleteOnlyCountUnitAlias_StarportCompleteOnlyLTCountUnitHyperionVoidCoopP4CompleteOnly1"/>
+    </CRequirementOr>
+    <CRequirementOr id="OrCountUpgradeAbathurDeepTunnelCompleteOnly896593563TechTreeCheatAndCountUpgradeCommanderPrestigeAbathur4CompleteOnlyGTCountBehaviorBiomassBuff100CompleteOnlyAtUnit0">
+        <OperandArray value="CountUpgradeAbathurDeepTunnelCompleteOnly896593563TechTreeCheat"/>
+        <OperandArray value="AndCountUpgradeCommanderPrestigeAbathur4CompleteOnlyGTCountBehaviorBiomassBuff100CompleteOnlyAtUnit0"/>
+    </CRequirementOr>
+    <CRequirementOr id="OrCountUpgradeCommanderPrestigeAbathurDeepTunnelCompleteOnlyCountUpgradeCommanderPrestigeAbathur4CompleteOnly">
+        <OperandArray value="CountUpgradeCommanderPrestigeAbathurDeepTunnelCompleteOnly"/>
+        <OperandArray value="CountUpgradeCommanderPrestigeAbathur4CompleteOnly"/>
+    </CRequirementOr>
+</Catalog>

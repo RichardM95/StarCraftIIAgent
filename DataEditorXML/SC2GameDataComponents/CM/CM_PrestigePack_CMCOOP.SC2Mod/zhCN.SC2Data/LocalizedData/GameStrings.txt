@@ -1,0 +1,490 @@
+﻿Abil/Name/AbathurSymbioteHangerAirUnit=阿巴瑟共生激素携带体
+Abil/Name/AbathurSymbioteHangerGroundUnit=阿巴瑟共生激素携带体
+Abil/Name/AbathurSymbioteHangerLocust=阿巴瑟共生激素携带体
+Abil/Name/ArtanisRevive=ArtanisRevive
+Abil/Name/AstralWind=AstralWind
+Abil/Name/CommanderPrestigeAbathurEssenceShift=CommanderPrestigeAbathurEssenceShift
+Abil/Name/CommanderPrestigeArtanisInspire=CommanderPrestigeArtanisInspire
+Abil/Name/CommanderPrestigeStukovLeftNoDeadSICivilianStructureSpawnCivilian=CommanderPrestigeStukovLeftNoDeadSICivilianStructureSpawnCivilian
+Abil/Name/EnablePhaseStructure=激活传输建筑
+Abil/Name/EnablePowerOvercharge=激活能量过载
+Abil/Name/EnablePowerOverchargeKhaydarinMonolith=激活能量过载
+Abil/Name/EnablePowerOverchargeShieldBattery=激活能量过载
+Abil/Name/HyperionAdvancedPDDQueue4=生成定点防御无人机队列
+Abil/Name/HyperionAdvancedPDDReplenish=装填定点防御无人机
+Abil/Name/HyperionVoidCoopHyperjumpP4=超时空跳跃
+Abil/Name/HyperionVoidCoopYamatoCannonP4=大和炮
+Abil/Name/KaraxPhaseSturctureCannon=传输建筑
+Abil/Name/KaraxPrestigeSOADeployStructuresWithoutResources=KaraxPrestigeSOADeployStructuresWithoutResources
+Abil/Name/LightningDash=LightningDash
+Abil/Name/SIMorphtoInfestedSolder=SIMorphtoInfestedSolder
+Abil/Name/SymbioteCarapaceN=共生体甲壳
+Abil/Name/SymbioteCarapaceS=共生体甲壳
+Abil/Name/TychusRaynorSnipe=12号穿刺弹
+Abil/Name/XelNagaKerriganCelestialRadiance=Celestial Radiance
+Abil/Name/XelNagaKerriganCreepTeleport=XelNagaKerriganCreepTeleport
+Abil/Name/XelNagaKerriganExtinction=Extinction
+Abil/Name/XelNagaKerriganQuantumRay=XelNagaKerriganQuantumRay
+Alert/Text/HyperionAdvancedPDDComplete=蜘蛛雷完成。
+Alert/Tooltip/HyperionAdvancedPDDComplete=定点防御无人机完成。
+Behavior/Name/HyperionVoidCoopDamageAuraMechaStim=载具预燃充能
+Behavior/Name/HyperionVoidCoopLightningStormStun=电能力场
+Behavior/Name/HyperionVoidCoopWeaponRefitCaster=终极王牌
+Behavior/Name/LightningDashStun=昏迷
+Behavior/Name/ResurgenceDisable=复苏未恢复
+Behavior/Name/ResurgenceInvulnerability=ResurgenceInvulnerability
+Behavior/Name/SymbioteCarapaceN=生物质甲壳
+Behavior/Name/SymbioteCarapaceS=生物质甲壳
+Behavior/Name/VehicleAfterburnersWithStim=载具后燃充能
+Behavior/Name/XelNagaKerriganEconDropCaster=吸收光环
+Behavior/Name/XleNagaKerriganDamageAura=寰宇之怒
+Behavior/Tooltip/HyperionVoidCoopDamageAuraMechaStim=后燃推进系统现在还会提高单位的攻击速度。
+Behavior/Tooltip/HyperionVoidCoopLightningStormStun=该单位被休伯利安号折跃时释放的能量击晕了。
+Behavior/Tooltip/HyperionVoidCoopWeaponRefitCaster=休伯利安号通过大和炮消灭了敌人，伤害暂时获得提高。
+Behavior/Tooltip/ResurgenceDisable=阿塔尼斯每60秒只能享受一次复苏效果。
+Behavior/Tooltip/ResurgenceInvulnerability=阿塔尼斯处于无敌状态。
+Behavior/Tooltip/SymbioteCarapaceN=吸收<d ref="Behavior,SymbioteCarapace,Modification.VitalMaxArray[Shields]"/>点伤害。
+Behavior/Tooltip/SymbioteCarapaceS=吸收<d ref="Behavior,SymbioteCarapace,Modification.VitalMaxArray[Shields]"/>点伤害。
+Behavior/Tooltip/VehicleAfterburnersWithStim=该单位的移动速度提高了。
+Behavior/Tooltip/XelNagaKerriganEconDropCaster=在凯瑞甘附近的敌人在被消灭后会掉落资源。
+Behavior/Tooltip/XleNagaKerriganDamageAura=该单位的移动和攻击速度获得了提高。
+Button/AppendTooltip/HaveK5ChainLightning=<n/><c val="ffff8a">连锁反应：</c>攻击会在不同目标间弹射至多4次，并且不会衰减。
+Button/AppendTooltip/HaveK5Cooldowns=<n/><c val="ffff8a">技能专精：</c>技能冷却时间和能量消耗降低20%。
+Button/AppendTooltip/HaveVoidCoopHeroicFortitude=<n/><c val="ffff8a">英勇刚毅：</c>最大生命值提高200点。生命恢复速度提高100%。
+Button/AppendTooltip/NotHaveK5ChainLightning=<n/><c val="777777">连锁反应：</c>攻击会在不同目标间弹射至多4次，并且不会衰减。
+Button/AppendTooltip/NotHaveK5Cooldowns=<n/><c val="777777">技能专精：</c>技能冷却时间和能量消耗降低20%。
+Button/AppendTooltip/NotHaveVoidCoopHeroicFortitude=<n/><c val="777777">英勇刚毅：</c>最大生命值提高200点。生命恢复速度提高100%。
+Button/AppenderTooltip/CommanderPrestigeArtanisInspireSpeed=<n/>使地图上所有友方单位和建筑获得折跃急速，其攻击速度、移动速度、冷却时间缩减和能量恢复速度提高<c val="FFFF8A"><d ref="Effect,MasteryArtanisSOAWarpInHasteDisplayDummy,Amount" player="current"/></c>%，持续30秒。
+Button/Name/AbathurSymbioteLocust=共生体
+Button/Name/AbathurSymbioteNormal=共生体
+Button/Name/ArtanisHardenedShield=坚韧不拔
+Button/Name/ArtanisPrestigePowerSource=意志力场
+Button/Name/AstralWind=星界之风
+Button/Name/CommanderPrestigeAbathur4=源质残杀 - Wonders
+Button/Name/CommanderPrestigeAbathur5DevouringScourge=遮天蔽日 - YB
+Button/Name/CommanderPrestigeAbathurEssenceShift=源质穿梭
+Button/Name/CommanderPrestigeArtanis4=身先士卒
+Button/Name/CommanderPrestigeArtanisInspire=激励
+Button/Name/CommanderPrestigeArtanisPowerFieldRemake=星灵使节·改 - Wonders
+Button/Name/CommanderPrestigeDehaka4=物竞天择 - Wonders
+Button/Name/CommanderPrestigeKarax4=塔攻大师 - CM
+Button/Name/CommanderPrestigeKaraxArmyRemake=圣堂表象·改 - Wonders
+Button/Name/CommanderPrestigeKerriganSupremeOverlord=至尊霸主
+Button/Name/CommanderPrestigeKerriganXelnagaMutalisk=萨尔那加飞龙
+Button/Name/CommanderPrestigeRaynor4=星海巡航 - CM
+Button/Name/CommanderPrestigeRaynorBansheeAirstrike=女妖空袭
+Button/Name/CommanderPrestigeStukovLeftNoDead=求生无路 - Sakura
+Button/Name/CommanderPrestigeStukovLeftNoDeadSICivilianStructureSpawnCivilian=孵化感染军团
+Button/Name/CommanderPrestigeTychus4=不法之徒中的一个传奇·改 - Wonders
+Button/Name/EnablePhaseStructure=激活传输建筑
+Button/Name/EnablePowerOvercharge=激活能量过载
+Button/Name/EnablePowerOverchargeKhaydarinMonolith=激活能量过载
+Button/Name/EnablePowerOverchargeShieldBattery=激活能量过载
+Button/Name/EvolveSIInfestedAberrationArmorAura=进化肉身掩体
+Button/Name/EvolveSIInfestedCivilianArmorShred=进化切割利爪
+Button/Name/EvolveSIVolatileInfestedExplodeHeal=进化再生性虫酸
+Button/Name/HyperionAdvancedPDDReplenish=装填定点防御无人机
+Button/Name/HyperionSelfRepair=损管系统
+Button/Name/HyperionVoidCoopHyperjumpP4=超时空跳跃
+Button/Name/HyperionVoidCoopYamatoCannonP4=大和炮
+Button/Name/KaraxPhaseSturctureCannon=传输建筑
+Button/Name/KaraxPhaseSturctureKhaydarinMonolith=传输建筑
+Button/Name/KaraxPhaseSturctureShieldBattery=传输建筑
+Button/Name/KaraxPrestigeSOADeployKhaydarinMonolith=部署凯达琳巨石
+Button/Name/KaraxPrestigeSOADeployPhotonCannon=部署光子炮台
+Button/Name/KaraxPrestigeSOADeployPylon=部署水晶塔
+Button/Name/KaraxPrestigeSOADeployShieldBattery=部署护盾充能器
+Button/Name/LightningDash=闪电冲锋
+Button/Name/PowerOvercharge=能量过载
+Button/Name/PowerOverchargeKhaydarinMonolith=能量过载
+Button/Name/PowerOverchargeShiledBattery=能量过载
+Button/Name/ResearchArtanisHardenedShield=升级坚韧不拔
+Button/Name/ResearchSelfRepair=研究损管系统
+Button/Name/ResearchTacticalCommandSystem2=研究战术指挥系统
+Button/Name/ResearchUltimateWeapon=研究终极武器
+Button/Name/ResearchWormholeJumpEngine=研究虫洞跃迁引擎
+Button/Name/Resurgence=复苏
+Button/Name/SIInfestedCivilianArmorShred=切割利爪
+Button/Name/SIVolatileInfestedExplodeHeal=再生性虫酸
+Button/Name/StalkerPurifier=折跃鼓舞者
+Button/Name/TacticalCommandSystem=战术指挥系统
+Button/Name/TychusRaynorSnipe=穿刺弹
+Button/Name/XelNagaKerriganCelestialRadiance=星界光辉
+Button/Name/XelNagaKerriganCreepTeleport=星界传送
+Button/Name/XelNagaKerriganExtinction=灭绝
+Button/Name/XelNagaKerriganHeartoftheSwarm=虫群之心
+Button/Name/XelNagaKerriganLightoftheUniverse=寰宇之辉
+Button/Name/XelNagaKerriganQuantumRay=量子光束
+Button/Tooltip/AbathurSymbioteLocust=获得一个拥有下列技能的共生体：<n/><n/><c val="ffff00">甲壳：</c>每<d ref="Abil,SymbioteCarapaceS,Cost[0].Cooldown.TimeUse" precision="1"/>秒为宿主吸收<d ref="Behavior,SymbioteCarapaceS,Modification.VitalMaxArray[Shields]"/>点伤害。
+Button/Tooltip/AbathurSymbioteNormal=获得一个拥有下列技能的共生体：<n/><n/><c val="ffff00">刺击：</c>每<d ref="Abil,SymbioteStab,Cost[0].Cooldown.TimeUse" precision="1"/>秒攻击周围的敌人，造成<d ref="Effect,SymbioteStabDamage,Amount"/>点伤害。<n/><c val="ffff00">甲壳：</c>每<d ref="Abil,SymbioteCarapaceN,Cost[0].Cooldown.TimeUse" precision="1"/>秒为宿主吸收<d ref="Behavior,SymbioteCarapaceN,Modification.VitalMaxArray[Shields]"/>点伤害。
+Button/Tooltip/ArtanisHardenedShield=受到的伤害减少至最多<d ref="Behavior,ArtanisHardenedShield,DamageResponse.ClampMaximum"/>点。
+Button/Tooltip/ArtanisPrestige=达拉姆的大主教。强大的灵能战士，精于近战。
+Button/Tooltip/ArtanisPrestigePowerSource=阿塔尼斯可以提供用于单位折跃的能量场。
+Button/Tooltip/AstralWind=为阿塔尼斯恢复<d ref="Effect,AstralWindSelf,VitalArray[0].Change"/>点生命值和<d ref="Effect,AstralWindSelf,VitalArray[1].Change"/>点护盾值。<n/>为周围友方单位恢复<d ref="Effect,AstralWindOther,VitalArray[0].Change"/>点生命值和<d ref="Effect,AstralWindOther,VitalArray[1].Change"/>点护盾值。
+Button/Tooltip/CommanderPrestigeAbathur4=<s val="Coop_Prestige_Advantage">优点</s><n/>进化后的非终极进化单位享受前体单位的几乎全部升级和被动，单位获得满生物质后获得共生体，地面单位获得深槽虫道，空军单位获得灵质穿梭。<n/><n/><s val="Coop_Prestige_Disadvantage">缺点</s><n/>终极进化不可用。
+Button/Tooltip/CommanderPrestigeAbathur4EvolveAdaptivePlating=当<c val="ffff8a">蟑螂</c>和<c val="ffff8a">破坏者</c>的生命值低于50%时，获得<d ref="Behavior,RoachShield,Modification[0].LifeArmorBonus"/>点额外护甲值。
+Button/Tooltip/CommanderPrestigeAbathur4EvolveGlialRegeneration=提高<c val="ffff8a">蟑螂</c>和<c val="ffff8a">破坏者</c>的移动速度。
+Button/Tooltip/CommanderPrestigeAbathur4EvolveHydriodicBile=<c val="ffff8a">蟑螂</c>和<c val="ffff8a">破坏者</c>对轻甲单位造成<d ref="Upgrade,HotSRoachDamage,EffectArray[0].Value / Effect,AcidSalivaU"/>点额外伤害值。
+Button/Tooltip/CommanderPrestigeAbathur4EvolveSunderingGlave=<c val="ffff8a">异龙</c>、<c val="ffff8a">吞噬者</c>和<c val="ffff8a">守护者</c>对重甲单位造成100%的额外伤害。
+Button/Tooltip/CommanderPrestigeAbathur4EvolveTunnelingClaws=使<c val="ffff8a">蟑螂</c>和<c val="ffff8a">破坏者</c>可以在潜地后移动。提高<c val="ffff8a">蟑螂</c>和<c val="ffff8a">破坏者</c>在潜地时的生命值恢复速度。
+Button/Tooltip/CommanderPrestigeAbathur4ExplosiveGlaive=<c val="ffff8a">异龙</c>、<c val="ffff8a">吞噬者</c>和<c val="ffff8a">守护者</c>对重甲单位造成100%的额外伤害。
+Button/Tooltip/CommanderPrestigeAbathur4HotSRoachDamage=蟑螂和破坏者对轻甲单位造成<d ref="Upgrade,HotSRoachDamage,EffectArray[0].Value / Effect,AcidSalivaU"/>点额外伤害值。
+Button/Tooltip/CommanderPrestigeAbathur4HotSRoachShield=当蟑螂和破坏者的生命值低于50%时，获得<d ref="Behavior,RoachShield,Modification[0].LifeArmorBonus"/>点额外护甲值。
+Button/Tooltip/CommanderPrestigeAbathur4RapidRegeneration=蟑螂和破坏者在潜地时能够以极快的速度恢复生命值。
+Button/Tooltip/CommanderPrestigeAbathur5DevouringScourge=<s val="Coop_Prestige_Advantage">优点</s><n/>阿巴瑟的空中单位瓦斯消耗降低50%，裂骨龙爪、麻痹勾刺、剧毒细菌、加长散射、腐蚀喷涌的升级效果提高100%。<n/><n/><s val="Coop_Prestige_Disadvantage">缺点</s><n/>虫群宿主不可用，阿巴瑟的空中单位矿物消耗提高100%。
+Button/Tooltip/CommanderPrestigeAbathur5EvolveGuardianAttackRangeIncrease=<c val="ffff8a">守护者</c>的攻击射程提高<d ref="2*Upgrade,GuardianAttackRangeIncrease,EffectArray[0].Value"/>。
+Button/Tooltip/CommanderPrestigeAbathur5EvolveViperAbductImprovedStun=<c val="ffff8a">飞蛇</c>的绑架使单位昏迷额外<d ref="2*Upgrade,ViperAbductImprovedStun,EffectArray[0].Value"/>秒。
+Button/Tooltip/CommanderPrestigeAbathur5EvolveViperImprovedCastRange=所有<c val="ffff8a">飞蛇</c>技能获得+<d ref="2*Upgrade,ViperImprovedCastRange,EffectArray[0].Value"/>的施法范围。
+Button/Tooltip/CommanderPrestigeAbathur5ExplosiveGlaive=<c val="ffff8a">异龙</c>对重甲单位造成200%额外伤害。
+Button/Tooltip/CommanderPrestigeAbathur5GuardianAttackRangeIncrease=<c val="ffff8a">守护者</c>的攻击射程提高<d ref="2*Upgrade,GuardianAttackRangeIncrease,EffectArray[0].Value"/>。
+Button/Tooltip/CommanderPrestigeAbathur5ViperAbductImprovedStunPassive=绑架使单位昏迷额外<d ref="2*Upgrade,ViperAbductImprovedStun,EffectArray[0].Value"/>秒。
+Button/Tooltip/CommanderPrestigeAbathur5ViperImprovedCastRangePassive=所有<c val="ffff8a">飞蛇</c>技能获得+<d ref="2*Upgrade,ViperImprovedCastRange,EffectArray[0].Value"/>的施法范围。
+Button/Tooltip/CommanderPrestigeAbathurEssenceShift=快速穿梭空间前往目标位置。
+Button/Tooltip/CommanderPrestigeArtanis4=<s val="Coop_Prestige_Advantage">优点</s><n/>阿塔尼斯将会加入战场亲自作战。<n/><n/><s val="Coop_Prestige_Disadvantage">缺点</s><n/>无法使用亚顿之矛主动能力。
+Button/Tooltip/CommanderPrestigeArtanisInspire=为友方单位和建筑提供最多能吸收<d ref="Behavior,SOASuperShield,DamageResponse.ModifyLimit" player="current"/>点伤害的屏障，持续<d ref="Behavior,SOASuperShield,Duration" player="current"/>秒。
+Button/Tooltip/CommanderPrestigeArtanisPowerFieldRemake=<s val="Coop_Prestige_Advantage">优点</s><n/>使用时，投射能量场将你的战斗单位从一个已经存在的力场投射器中折跃出来，并将他们折跃到新的位置。移除冷却时间。<n/><n/><s val="Coop_Prestige_Disadvantage">缺点</s><n/>投射能量场消耗10能量。<n/><n/><s val="Coop_Prestige_Advantage">附加</s><n/>相对原版本消耗的能量降低60%。
+Button/Tooltip/CommanderPrestigeDehaka4=<s val="Coop_Prestige_Advantage">优点</s><n/>原始决斗获得原始突变的基础概率提高50%，召唤和通过虫道转移原始建筑所需的时间大幅降低，原始建筑不再占用补给，游戏开始时就拥有一座原始战争之巢。<n/><n/><s val="Coop_Prestige_Disadvantage">缺点</s><n/>德哈卡不可用。
+Button/Tooltip/CommanderPrestigeDehaka4Append=<n/><n/><s val="Coop_Prestige_Tooltip">威望：</s>基因突变的几率提高<c val="FFFF8A">50%</c>。
+Button/Tooltip/CommanderPrestigeKarax4=<s val="Coop_Prestige_Advantage">优点</s><n/>可以通过顶部面板消耗能量在战场的任何位置快速免费部署防御建筑。防御建筑武器和护甲受部队武器和护甲影响。防御建筑可以获得独立升级。<n/><n/><s val="Coop_Prestige_Disadvantage">缺点</s><n/>原有顶部面板技能不可用。
+Button/Tooltip/CommanderPrestigeKaraxArmyRemake=<s val="Coop_Prestige_Advantage">优点</s><n/>战斗单位的消耗减少40%。<n/><n/><s val="Coop_Prestige_Disadvantage">缺点</s><n/>光子炮台和凯达琳巨石不可用。<n/><n/><s val="Coop_Prestige_Advantage">附加</s><n/>可以训练鼓舞者。
+Button/Tooltip/CommanderPrestigeKerriganSupremeOverlord=<s val="Coop_Prestige_Advantage">优点</s><n/>凯瑞甘获得萨尔那加之力。<n/>虫群获得多项运营科技。<n/><s val="Coop_Prestige_Disadvantage">缺点</s><n/>虫道网络不可用。<n/>战斗单位资源消耗提高100%。
+Button/Tooltip/CommanderPrestigeKerriganXelnagaMutalisk=<s val="Coop_Prestige_Advantage">改动</s><n/>异龙射程+2。<n/>削铁刃虫包含裂骨升级效果。<n/>削铁刃虫升级后每次弹射都会提升1点伤害。
+Button/Tooltip/CommanderPrestigeKerriganXelnagaMutaliskEvolveSeveringGlave=<c val="ffff8a">异龙</c>的每次后续弹射攻击提高伤害。<n/><c val="ffff8a">异龙</c>对重甲单位造成的伤害提高100%。
+Button/Tooltip/CommanderPrestigeKerriganXelnagaMutaliskSeveringGlave=异龙的每次后续弹射攻击伤害不断提高。且异龙对重甲单位造成的伤害加倍。
+Button/Tooltip/CommanderPrestigeKerriganXelnagaMutliskEvolveSeveringGlave=<c val="ffff8a">异龙</c>的每次后续弹射攻击提高伤害。<n/><c val="ffff8a">异龙</c>对重甲单位造成的伤害提高100%。
+Button/Tooltip/CommanderPrestigeKerriganXelnagaMutliskSeveringGlave=异龙的每次后续弹射攻击伤害不断提高。且异龙对重甲单位造成的伤害加倍。
+Button/Tooltip/CommanderPrestigeRaynor4=<s val="Coop_Prestige_Advantage">优点</s><n/>休伯利安的部署不再具有初始冷却时间，获得多项强化科技。<n/><n/><s val="Coop_Prestige_Disadvantage">缺点</s><n/>黄昏之翼不可用、休伯利安号的部署需要建造星港作为前置条件，初始状态仅具备较低的属性。
+Button/Tooltip/CommanderPrestigeRaynorBansheeAirstrike=该技能被指挥官威望锁定。
+Button/Tooltip/CommanderPrestigeStukovLeftNoDead=<s val="Coop_Prestige_Advantage">优点</s><n/>可以额外建造一个被感染的移民营，移民营可以孵化额外单位，单位获得额外科技，感染等级提升不再需要前置建筑。<n/><n/><s val="Coop_Prestige_Disadvantage">缺点</s><n/>建造移民营价格提高，孵化巢虫不可用，孵化被感染的人类冷却时间提高100%（不影响初始冷却时间）；非被感染的移民营孵化的战斗单位消耗的补给提高50%。
+Button/Tooltip/CommanderPrestigeStukovLeftNoDeadResearchSIBarracksTrainInfestedCivilianLevel2=<c val="ffff8a">被感染的移民营</c>获得500点生命值，并且同一时间可以孵化额外8名<c val="ffff8a">被感染的平民</c>，总共16名；孵化额外8名<c val="ffff8a">被感染的士兵</c>，总共8名；孵化额外1名<c val="ffff8a">畸变体</c>，总共1名。<n/>
+Button/Tooltip/CommanderPrestigeStukovLeftNoDeadResearchSIBarracksTrainInfestedCivilianLevel3=<c val="ffff8a">被感染的移民营</c>获得500点生命值，并且同一时间可以孵化额外16名<c val="ffff8a">被感染的平民</c>，总共32名；孵化额外8名<c val="ffff8a">被感染的士兵</c>，总共16名；孵化额外1名<c val="ffff8a">畸变体</c>，总共2名。<n/>
+Button/Tooltip/CommanderPrestigeStukovLeftNoDeadResearchSIBarracksTrainInfestedCivilianLevel4=<c val="ffff8a">被感染的移民营</c>获得500点生命值，并且同一时间可以孵化额外32名<c val="ffff8a">被感染的平民</c>，总共64名；孵化额外16名<c val="ffff8a">被感染的士兵</c>，总共32名；孵化额外2名<c val="ffff8a">畸变体</c>，总共4名。<n/>
+Button/Tooltip/CommanderPrestigeStukovLeftNoDeadSICivilianStructureSpawnCivilian=根据当前感染等级孵化大量被感染的单位，持续存在<d ref="Behavior,SIBarracksTrainTimedLife,Duration"/>秒。<n/><n/><c val="#ColorAttackInfo">可以对地。</c>
+Button/Tooltip/CommanderPrestigeTychus4=<s val="Coop_Prestige_Advantage">改动</s><n/>不法之徒冷却时间缩短25%，上限提高到9，装备价格降低25%。<n/><n/><s val="Coop_Prestige_Disadvantage">缺点</s><n/>这不是个威望，这是个IF，所以活不了太久，且玩且珍惜~
+Button/Tooltip/Dehaka4GeneCreepersPassive=该掘地虫宿主孵化的掘地虫数量提高200%。
+Button/Tooltip/Dehaka4GeneThornsPassive=该单位每次受到伤害，都会向攻击者发射2枚脊刺，每枚造成<d ref="Effect,DehakaGeneThornsDamage,Amount"/>点伤害。
+Button/Tooltip/EnablePhaseStructure=允许此建筑在能量场范围经过短暂延迟后自由传输。
+Button/Tooltip/EnablePowerOvercharge=永久提升该建筑能量输出功率，提高8%攻速、12%伤害，以及20%生命护盾上限。<n/><n/>最多叠加10次。
+Button/Tooltip/EnablePowerOverchargeKhaydarinMonolith=永久提升该建筑能量输出功率，提高8%攻速、12%伤害，以及20%生命护盾上限。<n/><n/>最多叠加10次。
+Button/Tooltip/EnablePowerOverchargeShieldBattery=永久提升该建筑能量输出功率，提升20%生命护盾和能量上限。<n/><n/>最多叠加10次。
+Button/Tooltip/EvolveSIInfestedAberrationArmorAura=<c val="ffff8a">畸变体</c>会使他们身下的单位受到的伤害减少<d ref="Behavior,AberrationArmorAuraTarget,DamageResponse.ModifyFraction*100"/>%。
+Button/Tooltip/EvolveSIInfestedCivilianArmorShred=<c val="ffff8a">被感染的平民</c>的攻击会使目标的护甲降低至0，持续<d ref="Behavior,ZerglingArmorShredTarget,Duration"/>秒。
+Button/Tooltip/EvolveSIVolatileInfestedExplodeHeal=除了能造成普通伤害外，<c val="ffff8a">易爆感染体</c>的爆炸还能治疗附近的友方单位和建筑。
+Button/Tooltip/GuardianMP2=超远距离对地空军。<n/><n/><c val="ffff8a">可以对地。</c>
+Button/Tooltip/HyperionAdvancedPDDReplenish=制造新的定点防御无人机来替换那些已经使用过的。<n/><n/>休伯利安号同时只能携带<d ref="Abil,HyperionAdvancedPDD,Cost[0].Charge.CountMax"/>架定点防御无人机。
+Button/Tooltip/HyperionSelfRepair=休伯利安号正在持续恢复生命。
+Button/Tooltip/HyperionVoidCoopHyperjumpP4=超时空跳跃到目标位置。
+Button/Tooltip/HyperionVoidCoopHyperjumpP4Upgrade=超时空跳跃到目标位置，并释放电能力场，击晕大范围的敌人消耗他们的护盾并修复自身。
+Button/Tooltip/HyperionVoidCoopP4=
+Button/Tooltip/HyperionVoidCoopYamatoCannonP4=使用毁灭性的等离子火炮轰击目标，造成<d ref="Effect,HyperionVoidCoopYamatoCannonDamageTargetP4,Amount"/>点伤害。对周围的单位造成<d ref="Effect,HyperionVoidCoopYamatoCannonDamageAOEP4,Amount"/>点伤害。
+Button/Tooltip/Karax4EnergyRegenUpgrade=能量恢复速度大幅提高。
+Button/Tooltip/Karax4TurretAttackSpeed=防御性建筑的攻击速度提高50%。
+Button/Tooltip/Karax4TurretRange=防御性建筑的射程提高4。
+Button/Tooltip/KaraxEnergy4RegenUpgrade=能量恢复速度大幅提高。
+Button/Tooltip/KaraxPhaseSturctureCannon=将该建筑传输到另一个位置。<n/>（射程：<d ref="Abil,PhaseStructure,Range"/>）
+Button/Tooltip/KaraxPhaseSturctureKhaydarinMonolith=将该建筑传输到另一个位置。<n/>（射程：<d ref="Abil,PhaseStructure,Range"/>）
+Button/Tooltip/KaraxPhaseSturctureShieldBattery=将该建筑传输到另一个位置。<n/>（射程：<d ref="Abil,PhaseStructure,Range"/>）
+Button/Tooltip/KaraxPrestigeSOADeployKhaydarinMonolith=快速在任意可见位置折跃一座凯达琳巨石。
+Button/Tooltip/KaraxPrestigeSOADeployPhotonCannon=快速在任意可见位置折跃一座光子炮台。
+Button/Tooltip/KaraxPrestigeSOADeployPylon=快速在任意可见位置折跃一座水晶塔。
+Button/Tooltip/KaraxPrestigeSOADeployShieldBattery=快速在任意可见位置折跃一座护盾充能器。
+Button/Tooltip/LightningDash=阿塔尼斯向前冲锋，释放一道能量波对附近的敌人造成<d ref="Effect,LightningDashDamage,Amount"/>（+<d ref="Effect,LightningDashDamage,AttributeBonus[Structure]"/>对建筑）点伤害，并使他们昏迷<d ref="Behavior,LightningDashStun,Duration"/>秒。
+Button/Tooltip/MasteryKerriganQuantumRayAppend=<n/><n/><c val="FFFF8A">精通：</c>伤害提高<c val="FFFF8A"><d ref="Effect,MasteryXelNagaKerriganQuantumRayDamageDummy,Amount"/></c>点。
+Button/Tooltip/PowerOvercharge=永久提升该建筑能量输出功率，提高8%攻速、12%伤害，以及20%生命护盾上限。<n/><n/>最多叠加10次。
+Button/Tooltip/PowerOverchargeKhaydarinMonolith=永久提升该建筑能量输出功率，提高8%攻速、12%伤害，以及20%生命护盾上限。<n/><n/>最多叠加10次。
+Button/Tooltip/PowerOverchargeShiledBattery=永久提升该建筑能量输出功率，提升20%生命护盾和能量上限。<n/><n/>最多叠加10次。
+Button/Tooltip/ProtossHeroReviveBeacon=达拉姆星灵的英雄会在这里折跃进场。
+Button/Tooltip/ResearchArtanisHardenedShield=<c val="ffff8a">阿塔尼斯</c>受到的伤害减少至最多<d ref="Behavior,ArtanisHardenedShield,DamageResponse.ClampMaximum"/>点。
+Button/Tooltip/ResearchBattlecruiserSpecializationsUpgradedP4=使<c val="ffff8a">战列巡航舰</c>能够使用大和炮。使<c val="ffff8a">休伯利安号</c>使用大和炮消灭敌人后获得短暂的伤害提升。<n/>
+Button/Tooltip/ResearchKarax4EnergyRegenUpgrade=使<c val="ffff8a">激励者</c>的能量恢复速度提高200%。<n/>使<c val="ffff8a">护盾充能器</c>的能量恢复速度提高400%。
+Button/Tooltip/ResearchKarax4TurretAttackSpeed=使<c val="ffff8a">光子炮台</c>和<c val="ffff8a">凯达琳巨石</c>的攻击速度提高50%。
+Button/Tooltip/ResearchKarax4TurretRange=<c val="ffff8a">光子炮台</c>、<c val="ffff8a">凯达琳巨石</c>和<c val="ffff8a">护盾充能器</c>的射程提高4。
+Button/Tooltip/ResearchSelfRepair=休伯利安号可以进行自我修复。
+Button/Tooltip/ResearchTacticalCommandSystem2=为休伯利安号解锁战术指挥系统。
+Button/Tooltip/ResearchUltimateWeapon=提高休伯利安大和炮200点范围伤害。
+Button/Tooltip/ResearchWormholeJumpEngine=休伯利安号战术跳跃充能+2，战术跳跃后可以对大范围内的敌人释放电能力场，电能力场可以击晕敌人并消耗他们的护盾，同时休伯利安也会借此修复自身。
+Button/Tooltip/Resurgence=当阿塔尼斯受到致命伤时获得一个持续<d ref="Behavior,ArtanisResurgenceInvulnerable,Duration"/>秒的无敌状态，使他免于死亡并恢复他的护盾和生命值。<n/><n/>与此同时，还会爆发一阵巨大的能量冲击，将周围所有的敌人弹开并对他们分别造成<d ref="Effect,ArtanisResurgenceEnemyImpactDamage,Amount"/>点伤害。<n/><n/>该效果每<d ref="Behavior,ArtanisResurgenceDisable,Duration"/>秒最多触发一次。<n/><n/>该效果会优先于其他濒死效果触发。
+Button/Tooltip/SIInfestedCivilianArmorShred=被感染的平民的攻击会使目标的护甲降低到0，持续<d ref="Behavior,ZerglingArmorShredTarget,Duration"/>秒。
+Button/Tooltip/SIVolatileInfestedExplodeHeal=除了能造成普通伤害外，爆虫的爆炸还能治疗附近的友方单位和建筑。
+Button/Tooltip/StalkerPurifier=净化者阵营<n/>远程支援型步战单位。可以储存多次闪现。<n/><n/><c val="ffff8a">可以对地和对空。</c>
+Button/Tooltip/TacticalCommandSystem=休伯利安号的战术指挥系统能使附近的友方单位攻击力提高2，并允许机械单位使用载具后燃充能获得额外的攻击速度提升。
+Button/Tooltip/TychusRaynorSnipe=通过精确瞄准，雷诺可发射一枚穿刺弹，攻击弹道覆盖的所有敌人，造成<d ref="Effect,RaynorSnipeDamage,Amount"/>点伤害。
+Button/Tooltip/TychusRaynorSniper=枪王之一，擅长从远距离沉重打击敌人。可以使用12号穿刺弹。<n/><n/><c val="ffff8a">可以对地和对空。</c>
+Button/Tooltip/XelNagaKerrigan=升格为萨尔纳加，获得了神之力量的存在。
+Button/Tooltip/XelNagaKerriganCelestialRadiance=治疗凯瑞甘<d ref="Effect,XelNagaKerriganCelestialRadianceBig,VitalArray[Life].Change"/>点生命值，并治疗其周围大范围内的友军<d ref="Effect,XelNagaKerriganCelestialRadianceSmall,VitalArray[Life].Change"/>点生命值。
+Button/Tooltip/XelNagaKerriganCreepTeleport=凯瑞甘将自己和附近所有你控制的单位传送到地图上的任意可见位置。
+Button/Tooltip/XelNagaKerriganExtinction=凯瑞甘引导天神力量<d ref="Effect,XelNagaKerriganExtinctionCP,PeriodicPeriodArray[1]"/>秒，引导完成后释放一道巨大的冲击波，对大范围内的所有敌人造成<d ref="Effect,XelNagaKerriganExtinctionPulseDamageNormal,Amount"/>点伤害。立即毁灭所有虚空造物。
+Button/Tooltip/XelNagaKerriganHeartoftheSwarm=<c val="ffff8a">改进型王虫：</c>王虫可以立即孵化并提供额外50%的补给。<n/><c val="ffff8a">跳虫重组：</c>阵亡的跳虫在主要孵化场免费复活。每<d time="30"/>可以复活至多<d ref="Effect,ZerglingRespawnTooltipDummy,SpawnCount"/>只阵亡的跳虫，直到所有跳虫都返回战场。<n/><c val="ffff8a">自动萃取房：</c>萃取房在没有工蜂的情况下自动采集高能瓦斯。<n/><c val="ffff8a">恶变菌毯：</c>当处于菌毯上时，友方单位的攻击速度提高<d ref="Effect,KerriganMalignantCreepAttackSpeedDummy,Amount*100"/>%，生命恢复速度也会提高。提高菌毯肿瘤散布菌毯的速度和范围。<n/><c val="ffff8a">工蜂双子：</c>可以一次孵化两只工蜂。资源消耗和制造时间减少50%。
+Button/Tooltip/XelNagaKerriganLightoftheUniverse=<c val="ffff8a">造物之息：</c>能量恢复速度提高50%。<n/><c val="ffff8a">创世之怒：</c>凯瑞甘的每次攻击都能使攻击速度暂时提高<d ref="(Behavior,KerriganPrimalRage1,Modification.AttackSpeedMultiplier - 1) * 100"/>%。最多可提高<d ref="(Behavior,KerriganPrimalRage5,Modification.AttackSpeedMultiplier - 1) * 100"/>%攻击速度。<n/><c val="ffff8a">寰宇之壁：</c>造成伤害时获得相当于<d ref="Behavior,KerriganAssimilationLifesteal,Modification.VitalDamageLeechArray[Shields].KindArray[Melee] * 100"/>%伤害值的额外生命值。<n/><c val="ffff8a">始源祝福：</c>附近除凯瑞甘外大范围内的友军的移动速度提高25%，攻击速度提高25%。<n/><c val="ffff8a">吸收光环：</c>附近所有被消灭的敌人掉落资源。
+Button/Tooltip/XelNagaKerriganQuantumRay=凯瑞甘发射一道充能激光，对目标单位造成<d ref="Effect,XelNagaKerriganQuantumRayDamage,Amount*Effect,XelNagaKerriganQuantumRayDamageCP,PeriodCount"/>点伤害。
+Button/Tooltip/XelNagaKerriganReviveBeacn=萨尔那加会在此降临。
+Chargetext/PowerOvercharge=<d ref="$BehaviorStackCount:KaraxBuildingUpgradeWeapon$"/>
+Chargetext/PowerOverchargeKhaydarinMonolith=<d ref="$BehaviorStackCount:KaraxBuildingUpgradeWeaponKhaydarinMonolith$"/>
+Chargetext/PowerOverchargeShieldBattery=<d ref="$BehaviorStackCount:KaraxBuildingUpgradeWeaponShieldBattery$"/>
+DocInfo/DescLong=用于CM的指挥官威望拓展包标准参考项。
+DocInfo/Name=CM_PrestigePack_CMCOOP
+Effect/Name/AbathurAirUnitOutOfCombat2AB=AbathurAirUnitOutOfCombat2AB
+Effect/Name/AbathurAirUnitOutOfCombat3Set=AbathurAirUnitOutOfCombat3Set
+Effect/Name/AbathurAirUnitOutOfCombatRegenAB=AbathurAirUnitOutOfCombatRegenAB
+Effect/Name/AdvancedPointDefenseDroneReleaseReplenishNanoConstructor=AdvancedPointDefenseDroneReleaseReplenishNano-Constructor
+Effect/Name/ArtanisAbilitiesColldownChargeAB=ArtanisAbilitiesColldownChargeAB
+Effect/Name/ArtanisAbilitiesColldownChargeAstralWind=ArtanisAbilitiesColldownChargeAstralWind
+Effect/Name/ArtanisAbilitiesColldownChargeCP=ArtanisAbilitiesColldownChargeCP
+Effect/Name/ArtanisAbilitiesColldownChargeInspire=ArtanisAbilitiesColldownChargeInspire
+Effect/Name/ArtanisAbilitiesColldownChargeSet=ArtanisAbilitiesColldownChargeSet
+Effect/Name/ArtanisInvisPowerSourceCP=Artanis Invis Power Source CP
+Effect/Name/ArtanisInvisPowerSourceCU=Artanis Invis Power Source CU
+Effect/Name/ArtanisInvisPowerSourceTeleport=Artanis Invis Power Source Teleport
+Effect/Name/ArtanisPrestigeAirDamage=ArtanisPrestigeAirDamage
+Effect/Name/ArtanisPrestigeAirLM=ArtanisPrestigeAirLM
+Effect/Name/ArtanisPrestigeAirSet=ArtanisPrestigeAirSet
+Effect/Name/ArtanisPrestigeMeleeWeaponCP=ArtanisPrestigeMeleeWeaponCP
+Effect/Name/ArtanisPrestigeMeleeWeaponDamage=ArtanisPrestigeMeleeWeaponDamage
+Effect/Name/ArtanisPrestigeMeleeWeaponSet=ArtanisPrestigeMeleeWeaponSet
+Effect/Name/ArtanisReviveIntro=ArtanisReviveIntro
+Effect/Name/ArtanisReviveSet=ArtanisReviveSet
+Effect/Name/AstralWind=AstralWind
+Effect/Name/AstralWindOther=AstralWindOther
+Effect/Name/AstralWindOtherSet=AstralWindOtherSet
+Effect/Name/AstralWindSearch=AstralWindSearch
+Effect/Name/AstralWindSelf=AstralWindSelf
+Effect/Name/CommanderPrestigeAbathurEssenceShift=CommanderPrestigeAbathurEssenceShift
+Effect/Name/CommanderPrestigeAbathurEssenceShiftAB=CommanderPrestigeAbathurEssenceShiftAB
+Effect/Name/CommanderPrestigeAbathurEssenceShiftPB=CommanderPrestigeAbathurEssenceShiftPB
+Effect/Name/CommanderPrestigeAbathurEssenceShiftPrepare=CommanderPrestigeAbathurEssenceShiftPrepare
+Effect/Name/CommanderPrestigeAbathurEssenceShiftSet=CommanderPrestigeAbathurEssenceShiftSet
+Effect/Name/CommanderPrestigeArtanisInspireAB=CommanderPrestigeArtanisInspireAB
+Effect/Name/CommanderPrestigeArtanisInspireSearch=CommanderPrestigeArtanisInspireSearch
+Effect/Name/CommanderPrestigeArtanisInspireSet=CommanderPrestigeArtanisInspireSet
+Effect/Name/CommanderPrestigeStukovLeftNoDeadSIBarracksTrainInfestedAberrationSpawnCP=CommanderPrestigeStukovLeftNoDeadSIBarracksTrainInfestedAberrationSpawnCP
+Effect/Name/CommanderPrestigeStukovLeftNoDeadSIBarracksTrainInfestedAberrationSpawnCU=CommanderPrestigeStukovLeftNoDeadSIBarracksTrainInfestedAberrationSpawnCU
+Effect/Name/CommanderPrestigeStukovLeftNoDeadSIBarracksTrainInfestedMarineSpawnCP=CommanderPrestigeStukovLeftNoDeadSIBarracksTrainInfestedMarineSpawnCP
+Effect/Name/CommanderPrestigeStukovLeftNoDeadSIBarracksTrainInfestedMarineSpawnCU=CommanderPrestigeStukovLeftNoDeadSIBarracksTrainInfestedMarineSpawnCU
+Effect/Name/CommanderPrestigeStukovLeftNoDeadSIBarracksTrainInfestedSpawnSet=CommanderPrestigeStukovLeftNoDeadSIBarracksTrainInfestedSpawnSet
+Effect/Name/CommanderPrestigeStukovLeftNoDeadSICivilianStructureSpawnCivilian=CommanderPrestigeStukovLeftNoDeadSICivilianStructureSpawnCivilian
+Effect/Name/HyperionVoidCoopDamageAuraSearchMechaStim=Hyperion Void Coop Damage Aura Search Mecha Stim
+Effect/Name/HyperionVoidCoopDamageAuraSearchSet=Hyperion Void Coop Damage Aura Search Set
+Effect/Name/HyperionVoidCoopDamageAuraTargetMechaStimAB=Hyperion Void Coop Damage Aura Target Mecha Stim AB
+Effect/Name/HyperionVoidCoopHyperjumpTeleportABP4=Hyperion Void Coop Hyperjump Teleport AB P4
+Effect/Name/HyperionVoidCoopHyperjumpTeleportCreatePrecursorP4=Hyperion Void Coop Hyperjump Teleport Create Precursor P4
+Effect/Name/HyperionVoidCoopHyperjumpTeleportInP4=Hyperion Void Coop Hyperjump Teleport In P4
+Effect/Name/HyperionVoidCoopHyperjumpTeleportOutABP4=Hyperion Void Coop Hyperjump Teleport Out AB P4
+Effect/Name/HyperionVoidCoopHyperjumpTeleportOutABSetP4=Hyperion Void Coop Hyperjump Teleport Out AB Set P4
+Effect/Name/HyperionVoidCoopHyperjumpTeleportOutTargetABP4=Hyperion Void Coop Hyperjump Teleport Out Target AB P4
+Effect/Name/HyperionVoidCoopHyperjumpTeleportP4=Hyperion Void Coop Hyperjump Teleport P4
+Effect/Name/HyperionVoidCoopHyperjumpTeleportSetP4=Hyperion Void Coop Hyperjump Teleport Set P4
+Effect/Name/HyperionVoidCoopMotionWeaponDamage=Hyperion Void Coop Motion Weapon Damage
+Effect/Name/HyperionVoidCoopMotionWeaponLM=Hyperion Void Coop Motion Weapon LM
+Effect/Name/HyperionVoidCoopWeaponRefitCasterAB=HyperionVoidCoopWeaponRefitCasterAB
+Effect/Name/HyperionVoidCoopWeaponRefitTargetAB=HyperionVoidCoopWeaponRefitTargetAB
+Effect/Name/HyperionVoidCoopYamatoCannonCPP4=Hyperion Void Coop Yamato Cannon CP P4
+Effect/Name/HyperionVoidCoopYamatoCannonDamageAOEP4=Hyperion Void Coop Yamato Cannon Damage AOE P4
+Effect/Name/HyperionVoidCoopYamatoCannonDamageTargetP4=Hyperion Void Coop Yamato Cannon Damage Target P4
+Effect/Name/HyperionVoidCoopYamatoCannonLMP4=Hyperion Void Coop Yamato Cannon LM P4
+Effect/Name/HyperionVoidCoopYamatoCannonLMSearchP4=Hyperion Void Coop Yamato Cannon LM Search P4
+Effect/Name/HyperionVoidCoopYamatoCannonLMSearchSetP4=Hyperion Void Coop Yamato Cannon LM Search Set P4
+Effect/Name/HyperionVoidCoopYamatoCannonLMSetP4=Hyperion Void Coop Yamato Cannon LM Set P4
+Effect/Name/KaraxBuildingUpgradeKhaydarinMonolithSet=KaraxBuildingUpgradeKhaydarinMonolithSet
+Effect/Name/KaraxBuildingUpgradeSet=KaraxBuildingUpgradeSet
+Effect/Name/KaraxBuildingUpgradeShieldBatterySet=KaraxBuildingUpgradeShieldBatterySet
+Effect/Name/KaraxBuildingUpgradeTransportAB=KaraxBuildingUpgradeTransportAB
+Effect/Name/KaraxBuildingUpgradeWeaponAB=KaraxBuildingUpgradeWeaponAB
+Effect/Name/KaraxBuildingUpgradeWeaponKhaydarinMonolithAB=KaraxBuildingUpgradeWeaponKhaydarinMonolithAB
+Effect/Name/KaraxBuildingUpgradeWeaponShieldBatteryAB=KaraxBuildingUpgradeWeaponShieldBatteryAB
+Effect/Name/KaraxPhaseSturctureCannonCU=KaraxPhaseSturctureCannonCU
+Effect/Name/KaraxPhaseSturctureCannonSuppressDetectionAB=KaraxPhaseSturctureCannonSuppressDetectionAB
+Effect/Name/KaraxPhaseSturctureCannonTeleport=KaraxPhaseSturctureCannonTeleport
+Effect/Name/KaraxPhaseSturctureCannonTeleportSet=KaraxPhaseSturctureCannonTeleportSet
+Effect/Name/KaraxPrestigeSOAProxyPylonVisualAB=KaraxPrestigeSOAProxyPylonVisualAB
+Effect/Name/KerriganEpilogue03CreepTeleportClearLockOn2=Kerrigan Epilogue03 Creep Teleport Clear Lock On
+Effect/Name/KerriganEpilogue03CreepTeleportSearch2=Kerrigan Epilogue03 Creep Teleport Search
+Effect/Name/LightningDash=LightningDash
+Effect/Name/LightningDashCU=LightningDashCU
+Effect/Name/LightningDashCUClosest=LightningDashCUClosest
+Effect/Name/LightningDashCUPoint=LightningDashCUPoint
+Effect/Name/LightningDashColldownAB=LightningDashColldownAB
+Effect/Name/LightningDashColldownSearch=LightningDashColldownSearch
+Effect/Name/LightningDashDamage=LightningDashDamage
+Effect/Name/LightningDashLM=LightningDashLM
+Effect/Name/LightningDashLaunchMissileImpactSet=LightningDashLaunchMissileImpactSet
+Effect/Name/LightningDashRU=LightningDashRU
+Effect/Name/LightningDashSearch=LightningDashSearch
+Effect/Name/LightningDashStunAB=LightningDashStunAB
+Effect/Name/LightningDashStunSearch=LightningDashStunSearch
+Effect/Name/LightningDashSwitch=LightningDashSwitch
+Effect/Name/MasteryXelNagaKerriganExtinctionPulseDamageDisplayDummy=MasteryXelNagaKerriganExtinctionPulseDamageDisplayDummy
+Effect/Name/MasteryXelNagaKerriganQuantumRayDamageDummy=MasteryXelNagaKerriganQuantumRayDamageDummy
+Effect/Name/ReplenishHyperionAdvancedPDD=Replenish Hyperion Advanced PDD
+Effect/Name/ResurgenceDisable=ResurgenceDisable 
+Effect/Name/ResurgenceEnemyImpact=ResurgenceEnemyImpact 
+Effect/Name/ResurgenceEnemyImpactDamage=ResurgenceEnemyImpactDamage
+Effect/Name/ResurgenceEnemyImpactSet=ResurgenceEnemyImpactSet
+Effect/Name/ResurgenceExplodeSet=ResurgenceExplodeSet
+Effect/Name/ResurgenceHeal=ResurgenceHeal
+Effect/Name/ResurgenceInvulnerableAB=ResurgenceInvulnerableAB
+Effect/Name/ResurgenceSearch=ResurgenceSearch
+Effect/Name/ResurgenceSet=ResurgenceSet
+Effect/Name/ResurgenceStun=ResurgenceStun 
+Effect/Name/ResurgenceSuppressedAB=ResurgenceSuppressedAB
+Effect/Name/SIInfestedCivilianWeaponSet=SIInfestedCivilianWeaponSet
+Effect/Name/SIVolatileInfestedExplodeHealSearch=SIVolatileInfestedExplodeHealSearch
+Effect/Name/SIVolatileInfestedExplodeHealSearchHeal=SIVolatileInfestedExplodeHealSearchHeal
+Effect/Name/SuicideRemove2=Suicide Remove
+Effect/Name/SummonHyperionCreateUnitP4=Hyperion Create Unit
+Effect/Name/SymbioteCarapaceNAB=SymbioteCarapaceNAB
+Effect/Name/SymbioteCarapaceNSet=SymbioteCarapaceNSet
+Effect/Name/SymbioteCarapaceSAB=SymbioteCarapaceSAB
+Effect/Name/SymbioteCarapaceSSet=SymbioteCarapaceSSet
+Effect/Name/TychusRaynorSnipeAB=TychusRaynorSnipeAB
+Effect/Name/TychusRaynorSnipeCP=TychusRaynorSnipeCP
+Effect/Name/TychusRaynorSnipeDamage=TychusRaynorSnipeDamage
+Effect/Name/TychusRaynorSnipeSearch=TychusRaynorSnipeSearch
+Effect/Name/TychusRaynorSnipeSearchSet=TychusRaynorSnipeSearchSet
+Effect/Name/TychusSkullCrusherDamage=TychusSkullCrusherDamage
+Effect/Name/VehicleAfterburnersSwitch=Vehicle Afterburners Switch
+Effect/Name/VehicleAfterburnersWithStimAB=Vehicle Afterburners With Stim AB
+Effect/Name/XelNagaKerriganCelestialRadiance=XelNaga Kerrigan Celestial Radiance
+Effect/Name/XelNagaKerriganCelestialRadianceBig=XelNaga Kerrigan Celestial Radiance Big
+Effect/Name/XelNagaKerriganCelestialRadianceSearch=XelNaga Kerrigan Celestial Radiance Search
+Effect/Name/XelNagaKerriganCelestialRadianceSmall=XelNaga Kerrigan Celestial Radiance Small
+Effect/Name/XelNagaKerriganCreepTeleport=XelNagaKerriganCreepTeleport
+Effect/Name/XelNagaKerriganCreepTeleportApplyBehavior=XelNagaKerriganCreepTeleportApplyBehavior
+Effect/Name/XelNagaKerriganCreepTeleportClearLockOn=XelNagaKerriganCreepTeleportClearLockOn
+Effect/Name/XelNagaKerriganCreepTeleportPostBehavior=XelNagaKerriganCreepTeleportPostBehavior
+Effect/Name/XelNagaKerriganCreepTeleportPrepare=XelNagaKerriganCreepTeleportPrepare
+Effect/Name/XelNagaKerriganCreepTeleportSearch=XelNagaKerriganCreepTeleportSearch
+Effect/Name/XelNagaKerriganCreepTeleportSet=XelNagaKerriganCreepTeleportSet
+Effect/Name/XelNagaKerriganExtinctionAB=XelNagaKerriganExtinctionAB
+Effect/Name/XelNagaKerriganExtinctionCP=XelNagaKerriganExtinctionCP
+Effect/Name/XelNagaKerriganExtinctionInitialSet=XelNagaKerriganExtinctionInitialSet
+Effect/Name/XelNagaKerriganExtinctionPulseCP=XelNagaKerriganExtinctionPulseCP
+Effect/Name/XelNagaKerriganExtinctionPulseDamageNormal=XelNagaKerriganExtinctionPulseDamageNormal
+Effect/Name/XelNagaKerriganExtinctionPulseDamageSet=XelNagaKerriganExtinctionPulseDamageSet
+Effect/Name/XelNagaKerriganExtinctionPulseDamageShadow=XelNagaKerriganExtinctionPulseDamageShadow
+Effect/Name/XelNagaKerriganExtinctionPulseMU=XelNagaKerriganExtinctionPulseMU
+Effect/Name/XelNagaKerriganExtinctionPulseSearch=XelNagaKerriganExtinctionPulseSearch
+Effect/Name/XelNagaKerriganLightDamage=XelNagaKerriganLightDamage
+Effect/Name/XelNagaKerriganLightDamage1=XelNagaKerriganLightDamage1
+Effect/Name/XelNagaKerriganLightDamage2=XelNagaKerriganLightDamage2
+Effect/Name/XelNagaKerriganLightDamage3=XelNagaKerriganLightDamage3
+Effect/Name/XelNagaKerriganLightDamage4=XelNagaKerriganLightDamage4
+Effect/Name/XelNagaKerriganLightImpactSet1=XelNagaKerriganLightImpactSet1
+Effect/Name/XelNagaKerriganLightImpactSet2=XelNagaKerriganLightImpactSet2
+Effect/Name/XelNagaKerriganLightImpactSet3=XelNagaKerriganLightImpactSet3
+Effect/Name/XelNagaKerriganLightImpactSet4=XelNagaKerriganLightImpactSet4
+Effect/Name/XelNagaKerriganLightSearch1=XelNagaKerriganLightSearch1
+Effect/Name/XelNagaKerriganLightSearch2=XelNagaKerriganLightSearch2
+Effect/Name/XelNagaKerriganLightSearch3=XelNagaKerriganLightSearch3
+Effect/Name/XelNagaKerriganLightSearch4=XelNagaKerriganLightSearch4
+Effect/Name/XelNagaKerriganLightSearchDelay1=XelNagaKerriganLightSearchDelay1
+Effect/Name/XelNagaKerriganLightSearchDelay2=XelNagaKerriganLightSearchDelay2
+Effect/Name/XelNagaKerriganLightSearchDelay3=XelNagaKerriganLightSearchDelay3
+Effect/Name/XelNagaKerriganLightSearchDelay4=XelNagaKerriganLightSearchDelay4
+Effect/Name/XelNagaKerriganLightSet=XelNagaKerriganLightSet
+Effect/Name/XelNagaKerriganQuantumRayDamage=XelNaga Kerrigan Quantum Ray Damage
+Effect/Name/XelNagaKerriganQuantumRayDamageCP=XelNaga Kerrigan Quantum Ray Damage CP
+Effect/Name/XelNagaKerriganQuantumRayInitialCP=XelNaga Kerrigan Quantum Ray Initial CP
+Effect/Name/XelNagaKerriganReviveLand=XelNagaKerriganReviveLand
+Effect/Name/XelNagaKerriganReviveSet=XelNagaKerriganReviveSet
+Effect/Name/XleNagaKerriganDamageAuraAB=XleNagaKerriganDamageAuraAB
+Effect/Name/XleNagaKerriganDamageAuraSearch=XleNagaKerriganDamageAuraSearch
+Effect/Name/ZerglingArmorShredStukovTargetAB=ZerglingArmorShredStukovTargetAB
+RequirementNode/Tooltip/And1444893453CountUpgradeRaynorCommanderHyperionAdvancedTargetingSystemsCompleteOnlyCountUpgradeHyperionTacticalCommandSystemCompleteOnly=在聚变芯体内研究战术指挥系统
+RequirementNode/Tooltip/CountUnitHotSLeviathanQueuedOrBetter2441487453=同时只能孵化1只利维坦。
+RequirementNode/Tooltip/CountUnitSICivilianStructureCompleteOnlyAtUnit1344415123=必须扎根
+RequirementNode/Tooltip/CountUpgradeAbathurDeepTunnelCompleteOnly896593563TechTreeCheat=在感染深渊中进化深槽虫道
+RequirementNode/Tooltip/CountUpgradeAberrationArmorAuraCompleteOnly1178490739=在被感染的移民营进化肉身掩体
+RequirementNode/Tooltip/CountUpgradeArtanisHardenedShieldCompleteOnly1513199048=在锻炉中研究坚韧不拔
+RequirementNode/Tooltip/CountUpgradeBattlecruiserEnableSpecializationsQueuedOrBetter1873221433=在聚变芯体中研发武器改装
+RequirementNode/Tooltip/CountUpgradeGlialReconstitutionCompleteOnly76844448=在蟑螂温室中进化神经胶原重组
+RequirementNode/Tooltip/CountUpgradeGuardianAttackRangeIncreaseCompleteOnly26837403372=在巨型尖塔中进化加长散射
+RequirementNode/Tooltip/CountUpgradeHotSRapidRegenerationCompleteOnly3817045586TechTreeCheat=在尖塔进化极速再生
+RequirementNode/Tooltip/CountUpgradeHotSRoachDamageCompleteOnly2822298903=在蟑螂温室中进化氢碘胆汁
+RequirementNode/Tooltip/CountUpgradeHotSRoachShieldCompleteOnly2806997148=在蟑螂温室进化应激骨片
+RequirementNode/Tooltip/CountUpgradeHyperionRepairCompleteOnly1993632571=在聚变芯体内研究损管系统
+RequirementNode/Tooltip/CountUpgradeMutaliskSunderingGlaveCompleteOnly355255440=在尖塔进化裂骨龙爪
+RequirementNode/Tooltip/CountUpgradeSIBarracksTrainInfestedCivilianLevel2CompleteOnly1189261887=在被感染的移民营升级1级感染
+RequirementNode/Tooltip/CountUpgradeSIBarracksTrainInfestedCivilianLevel2CompleteOnly1189261887TechTreeCheat=在被感染的移民营升级1级感染
+RequirementNode/Tooltip/CountUpgradeSIBarracksTrainInfestedCivilianLevel3CompleteOnly3048850846TechTreeCheat=在被感染的移民营升级2级感染
+RequirementNode/Tooltip/CountUpgradeSIVolatileInfestedExplodeHealCompleteOnly3068251394=在被感染的工程站进化再生性虫酸
+RequirementNode/Tooltip/CountUpgradeTunnelingClawsCompleteOnly615034983TechTreeCheat=在蟑螂温室进化掘地之爪
+RequirementNode/Tooltip/CountUpgradeZerglingArmorShredCompleteOnly3167936120=在被感染的工程站进化切割利爪
+RequirementNode/Tooltip/LT2528870634CountUnitDehakaDakrunStructureQueuedOrBetter1=限制1个
+RequirementNode/Tooltip/LT2528870634CountUnitDehakaGlevigStructureQueuedOrBetter1=限制1个
+RequirementNode/Tooltip/LT2528870634CountUnitDehakaMurvarStructureQueuedOrBetter1=限制1个
+RequirementNode/Tooltip/Or1528817496AndCountUpgradeCommanderPrestigeAbathurUltEvoCompleteOnlyGTCountBehaviorBiomassBuff100CompleteOnlyAtUnit1AndNotCountUpgradeCommanderPrestigeAbathurUltEvoCompleteOnlyGTCountBehaviorBiomassBuff100CompleteOnlyAtUnit0=<d ref="Effect,AbathurBiomassMaxStacksDummy,Amount" precision="0"/>生物质
+RequirementNode/Tooltip/Or1569788332LTCountUnitSICivilianStructureInProgressOrBetter1AndCountUpgradeCommanderPrestigeStukovLeftNoDeadCompleteOnlyLTCountUnitSICivilianStructureInProgressOrBetter3=被感染的移民营未达数量上限
+RequirementNode/Tooltip/Or1853099161CountUpgradeCommanderPrestigeAbathurUltEvoCompleteOnlyAndNotCountUpgradeCommanderPrestigeAbathurUltEvoCompleteOnlyLTCountUnitHotSLeviathanQueuedOrBetter24414874533=利维坦数量未达上限
+RequirementNode/Tooltip/Or2240178058CountUpgradeCommanderPrestigeAbathurUltEvoCompleteOnlyAndNotCountUpgradeCommanderPrestigeAbathurUltEvoCompleteOnlyLTCountUnitAlias_BrutaliskQueuedOrBetter3=莽兽数量未达上限
+RequirementNode/Tooltip/Or750862857NotCountUpgradeCommanderPrestigeRaynor4CompleteOnlyAndCountUpgradeCommanderPrestigeRaynor4CompleteOnlyCountUnitAlias_StarportCompleteOnlyLTCountUnitHyperionVoidCoopP4CompleteOnly1=非星海巡航或拥有星港且只能拥有一艘休伯利安号
+Unit/Category/ProtossDaelaam=星灵 - 达拉姆
+Unit/LifeArmorName/XelNagaKerrigan=天神之躯
+Unit/Name/AbathurSymbioteAirUnit=共生体
+Unit/Name/AbathurSymbioteGroundUnit=共生体
+Unit/Name/AbathurSymbioteLocust=共生体
+Unit/Name/ArtanisPrestige=阿塔尼斯
+Unit/Name/ArtanisPrestigeAirWeapon=ArtanisPrestigeAirWeapon
+Unit/Name/HyperionVoidCoopMotionWeapon=动态激光
+Unit/Name/HyperionVoidCoopP4=休伯利安号
+Unit/Name/HyperionVoidCoopYamatoCannonWeaponP4=大和炮武器
+Unit/Name/ProtossHeroReviveBeacon=星灵英雄折跃信标
+Unit/Name/TychusRaynorSniper=吉姆“碎骨”雷诺
+Unit/Name/TychusSniperNickname=碎骨
+Unit/Name/XelNagaKerrigan=凯瑞甘
+Unit/Name/XelNagaKerriganReviveBeacn=神降之处
+Unit/ShieldArmorName/XelNagaKerrigan=寰宇之壁
+UnitSubtitle/HyperionVoidCoopP4=雷诺的旗舰
+Upgrade/Name/ArtanisHardenedShield=坚韧不拔
+Upgrade/Name/CommanderPrestigeAbathur4=CommanderPrestigeAbathur4
+Upgrade/Name/CommanderPrestigeAbathur4GlialReconstitution=CommanderPrestigeAbathur4GlialReconstitution
+Upgrade/Name/CommanderPrestigeAbathur4RavagerDamage=CommanderPrestigeAbathur4RavagerDamage
+Upgrade/Name/CommanderPrestigeAbathur4SunderingGlave=CommanderPrestigeAbathur4SunderingGlave
+Upgrade/Name/CommanderPrestigeAbathur4TunnelingClaws=CommanderPrestigeAbathur4TunnelingClaws
+Upgrade/Name/CommanderPrestigeAbathur5=CommanderPrestigeAbathur5
+Upgrade/Name/CommanderPrestigeAbathur5GuardianAttackRangeIncrease=CommanderPrestigeAbathur5GuardianAttackRangeIncrease
+Upgrade/Name/CommanderPrestigeAbathur5level12=CommanderPrestigeAbathur5level12
+Upgrade/Name/CommanderPrestigeArtanis4=CommanderPrestigeArtanis4
+Upgrade/Name/CommanderPrestigeArtanisPowerFieldRemake=CommanderPrestigeArtanisPowerFieldRemake
+Upgrade/Name/CommanderPrestigeDehaka4=CommanderPrestigeDehaka4
+Upgrade/Name/CommanderPrestigeDehaka4MasteryDehakaPrimalWurmCDRUpgradeSupplyment=CommanderPrestigeDehaka4MasteryDehakaPrimalWurmCDRUpgradeSupplyment
+Upgrade/Name/CommanderPrestigeKarax4=CommanderPrestigeKarax4
+Upgrade/Name/CommanderPrestigeKaraxSuperArmyMasteryArtanisChronoBoostSupplyment=CommanderPrestigeKaraxSuperArmyMasteryArtanisChronoBoostSupplyment
+Upgrade/Name/CommanderPrestigeKerriganSupremeOverlord=CommanderPrestigeKerriganSupremeOverlord
+Upgrade/Name/CommanderPrestigeKerriganXelnagaMutalisk=CommanderPrestigeKerriganXelnagaMutalisk
+Upgrade/Name/CommanderPrestigeKerriganXelnagaMutaliskSeveringGlaveUpgradeSupplyment=削铁刃虫伴随升级
+Upgrade/Name/CommanderPrestigeRaynor4=CommanderPrestigeRaynor4
+Upgrade/Name/CommanderPrestigeStukovLeftNoDead=CommanderPrestigeStukovLeftNoDead
+Upgrade/Name/CommanderPrestigeTychus4=CommanderPrestigeTychus4
+Upgrade/Name/CommanderPrestigeTychus4SquadAbilitiesMastery=CommanderPrestigeTychus4SquadAbilitiesMastery
+Upgrade/Name/HyperionRepair=损管系统
+Upgrade/Name/HyperionTacticalCommandSystem=战术指挥系统
+Upgrade/Name/HyperionUltimateWeapon=终极武器
+Upgrade/Name/HyperjumpEngine=跃迁引擎
+Upgrade/Name/SIVolatileInfestedExplodeHeal=SI Volatile Infested Explode Heal
+Upgrade/Name/StructureArmorUpgradeP4=Structure Armor Upgrade P4
+Upgrade/Name/StructureAttackUpgradeP4=Structure Attack Upgrade P4
+Upgrade/Name/StructureShieldUpgradeP4=Structure Shield Upgrade P4
+Upgrade/Name/TerranVehicleAndShipArmorsLevel2=人类战车和舰船钢板等级2
+Upgrade/Name/VoidStalkerPurifier=Void Stalker Purifier
+UserData/HeroIcon/ArtanisPrestigeReviveBeacon_Name=阿塔尼斯
+UserData/HeroIcon/ArtanisPrestige_Name=阿塔尼斯
+UserData/HeroIcon/RaynorPrestigeHyperion_Name=休伯利安号
+UserData/HeroIcon/XelNagaKerriganReviveBeacon_Name=神降之处
+UserData/HeroIcon/XelNagaKerrigan_Name=凯瑞甘（萨尔那加）
+UserData/PlayerHeros/ProtossArtanis_HeroReviveMsgComplete=<c val="FF9800">阿塔尼斯复活了。</c>
+UserData/PlayerHeros/ProtossArtanis_HeroReviveMsgFirstBorn=<c val="FF9800">阿塔尼斯已准备好身先士卒。</c>
+UserData/PlayerHeros/ProtossArtanis_HeroReviveMsgNoTownHall=<c val="FF9800">阿塔尼斯已阵亡。你必须折跃一座星灵枢纽才能将其复活。</c>
+UserData/PlayerHeros/ProtossArtanis_HeroReviveMsgNormal=阿塔尼斯已死亡。他将在~Duration~秒后在枢纽处重新复活。
+UserData/PlayerHeros/XelNagaKerrigan_HeroReviveMsgComplete=<c val="FF9800">凯瑞甘已重现世间。</c>
+UserData/PlayerHeros/XelNagaKerrigan_HeroReviveMsgFirstBorn=<c val="FF9800">凯瑞甘已准备湮灭黑暗。</c>
+UserData/PlayerHeros/XelNagaKerrigan_HeroReviveMsgNoTownHall=<c val="FF9800">凯瑞甘已回归虚空。你必须变异一座孵化场来为她指引现实世界的回归坐标。</c>
+UserData/PlayerHeros/XelNagaKerrigan_HeroReviveMsgNormal=凯瑞甘已回归虚空。她将于~Duration~秒后重回世间。
+UserData/PlayerHeros/XelNagaKerrigan_Name=凯瑞甘（萨尔那加）
+Vital/XelNagaShields=星界之壁
+Weapon/Name/ArtanisPrestigeAirWeapon=灵能突击
+Weapon/Name/ArtanisPrestigeMeleeWeapon=灵能利刃
+Weapon/Name/CommanderPrestigeKaraxSuperArmyColossusChargedBeam=充能爆裂弹
+Weapon/Name/CommanderPrestigeKaraxSuperArmyShadowCannon=暗影光炮
+Weapon/Name/HyperionVoidCoopMotionWeapon=动态激光炮组
+Weapon/Name/TychusSkullCrusher=颅骨粉碎者
+Weapon/Name/XelNagaKerriganLight=天神光束

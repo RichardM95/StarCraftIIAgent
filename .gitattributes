@@ -1,0 +1,7 @@
+* text=auto eol=lf
+*.galaxy text eol=lf
+*.xml text eol=lf
+*.SC2Layout text eol=lf
+*.SC2Components text eol=lf
+*.SC2Bank text eol=lf
+*.txt text eol=lf

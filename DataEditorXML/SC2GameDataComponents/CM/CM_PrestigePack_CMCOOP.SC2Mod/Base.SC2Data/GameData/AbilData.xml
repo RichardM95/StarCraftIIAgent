@@ -1,0 +1,527 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CAbilEffectInstant id="CommanderPrestigeStukovLeftNoDeadSICivilianStructureSpawnCivilian">
+        <Flags index="AutoCast" value="1"/>
+        <Flags index="AutoCastOn" value="1"/>
+        <Cost>
+            <Cooldown Location="Unit" TimeStart="180" TimeUse="120"/>
+        </Cost>
+        <AutoCastFilters value="Visible;Ally,Neutral,Enemy"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="CommanderPrestigeStukovLeftNoDeadSICivilianStructureSpawnCivilian" Requirements="HaveCommanderPrestigeStukovLeftNoDead"/>
+    </CAbilEffectInstant>
+    <CAbilEffectTarget id="TychusRaynorSnipe">
+        <Alignment value="Negative"/>
+        <EditorCategories value="Race:Terran,AbilityorEffectType:Units"/>
+        <Effect index="0" value="TychusRaynorSnipeCP"/>
+        <Cost>
+            <Cooldown TimeUse="20"/>
+        </Cost>
+        <Range value="12"/>
+        <CastIntroTime value="0.66"/>
+        <FinishTime value="1.66"/>
+        <UninterruptibleArray index="Cast" value="1"/>
+        <UninterruptibleArray index="Finish" value="1"/>
+        <CursorEffect value="TychusRaynorSnipeSearch"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="TychusRaynorSnipe"/>
+    </CAbilEffectTarget>
+    <CAbilResearch id="SIEngineeringBayResearch">
+        <InfoArray index="Research7" Time="90" Upgrade="AberrationArmorAura">
+            <Resource index="Minerals" value="150"/>
+            <Resource index="Vespene" value="150"/>
+            <Button DefaultButtonFace="EvolveAberrationArmorAura" Requirements="LearnAberrationArmorAuraStukovLeftNoDead"/>
+        </InfoArray>
+        <InfoArray index="Research8" Time="90" Upgrade="ZerglingArmorShred">
+            <Resource index="Minerals" value="150"/>
+            <Resource index="Vespene" value="150"/>
+            <Button DefaultButtonFace="EvolveSIInfestedCivilianArmorShred" Requirements="LearnZerglingArmorShredStukovLeftNoDead"/>
+        </InfoArray>
+        <InfoArray index="Research9" Time="90" Upgrade="SIVolatileInfestedExplodeHeal">
+            <Resource index="Minerals" value="150"/>
+            <Resource index="Vespene" value="150"/>
+            <Button DefaultButtonFace="EvolveSIVolatileInfestedExplodeHeal" Requirements="LearnSIVolatileInfestedExplodeHealStukovLeftNoDead"/>
+        </InfoArray>
+    </CAbilResearch>
+    <CAbilTrain id="SIMorphtoInfestedAberration">
+        <InfoArray index="Train1" Effect="SIBarracksTrainTimedLifeAB"/>
+    </CAbilTrain>
+    <CAbilTrain id="SIMorphtoInfestedSolder">
+        <EditorCategories value="Race:Zerg,AbilityorEffectType:Units"/>
+        <Activity value="UI/SISpawning"/>
+        <Flags index="IgnoreUnitCost" value="1"/>
+        <Flags index="KillOnCancel" value="1"/>
+        <Flags index="KillOnFinish" value="1"/>
+        <Flags index="Select" value="1"/>
+        <Flags index="WaitForFood" value="0"/>
+        <MorphUnit value="SICocoonInfestedSolder"/>
+        <InfoArray index="Train1" Time="30" Effect="SIBarracksTrainTimedLifeAB">
+            <Button DefaultButtonFace="SIInfestedBunkerSpawnInfestedMarine"/>
+            <Unit value="SIInfestedTrooper"/>
+            <Flags index="AutoCast" value="1"/>
+            <Flags index="AutoCastOn" value="1"/>
+            <Flags index="IgnorePlacement" value="1"/>
+        </InfoArray>
+    </CAbilTrain>
+    <CAbilArmMagazine id="AbathurSymbioteHangerGroundUnit">
+        <EditorCategories value="Race:Protoss,AbilityorEffectType:Units"/>
+        <Launch value="ReleaseAtSource"/>
+        <Flags index="AutoCreate" value="1"/>
+        <Flags index="Retarget" value="1"/>
+        <Flags index="Transient" value="1"/>
+        <Leash value="1"/>
+        <InfoArray index="Ammo1" Manage="Recall" Unit="AbathurSymbioteGroundUnit">
+            <Charge>
+                <CountMax value="1"/>
+                <CountStart value="1"/>
+                <CountUse value="1"/>
+                <HideCount value="1"/>
+                <Link value="Abil/AbathurSymbioteHangerGroundUnit"/>
+                <Location value="Unit"/>
+            </Charge>
+            <Cooldown Link="Abil/AbathurSymbioteHangerGroundUnit"/>
+            <Button DefaultButtonFace="CreateSymbiotes" Requirements="CommanderPrestigeAbahur4WithMaxBiomass">
+                <Flags index="ToSelection" value="1"/>
+            </Button>
+            <Flags index="AutoBuild" value="1"/>
+            <Flags index="AutoBuildOn" value="1"/>
+            <Flags index="External" value="1"/>
+        </InfoArray>
+        <EffectArray index="Create" value="SymbioteCreateSet"/>
+        <MaxCount value="1"/>
+    </CAbilArmMagazine>
+    <CAbilArmMagazine id="AbathurSymbioteHangerAirUnit">
+        <EditorCategories value="Race:Protoss,AbilityorEffectType:Units"/>
+        <Launch value="ReleaseAtSource"/>
+        <Flags index="AutoCreate" value="1"/>
+        <Flags index="Retarget" value="1"/>
+        <Flags index="Transient" value="1"/>
+        <Leash value="1"/>
+        <InfoArray index="Ammo1" Manage="Recall" Unit="AbathurSymbioteAirUnit">
+            <Charge>
+                <CountMax value="1"/>
+                <CountStart value="1"/>
+                <CountUse value="1"/>
+                <HideCount value="1"/>
+                <Link value="Abil/AbathurSymbioteHangerAirUnit"/>
+                <Location value="Unit"/>
+            </Charge>
+            <Cooldown Link="Abil/AbathurSymbioteHangerAirUnit"/>
+            <Button DefaultButtonFace="CreateSymbiotes" Requirements="CommanderPrestigeAbahur4WithMaxBiomass">
+                <Flags index="ToSelection" value="1"/>
+            </Button>
+            <Flags index="AutoBuild" value="1"/>
+            <Flags index="AutoBuildOn" value="1"/>
+            <Flags index="External" value="1"/>
+        </InfoArray>
+        <EffectArray index="Create" value="SymbioteCreateSet"/>
+        <MaxCount value="1"/>
+    </CAbilArmMagazine>
+    <CAbilArmMagazine id="AbathurSymbioteHangerLocust">
+        <EditorCategories value="Race:Protoss,AbilityorEffectType:Units"/>
+        <Launch value="ReleaseAtSource"/>
+        <Flags index="AutoCreate" value="1"/>
+        <Flags index="Retarget" value="1"/>
+        <Flags index="Transient" value="1"/>
+        <Leash value="1"/>
+        <InfoArray index="Ammo1" Manage="Recall" Unit="AbathurSymbioteLocust">
+            <Charge>
+                <CountMax value="1"/>
+                <CountStart value="1"/>
+                <CountUse value="1"/>
+                <HideCount value="1"/>
+                <Link value="Abil/AbathurSymbioteHangerLocust"/>
+                <Location value="Unit"/>
+            </Charge>
+            <Cooldown Link="Abil/AbathurSymbioteHangerLocust"/>
+            <Button DefaultButtonFace="CreateSymbiotes" Requirements="CommanderPrestigeAbahur4WithMaxBiomass">
+                <Flags index="ToSelection" value="1"/>
+            </Button>
+            <Flags index="AutoBuild" value="1"/>
+            <Flags index="AutoBuildOn" value="1"/>
+            <Flags index="External" value="1"/>
+        </InfoArray>
+        <EffectArray index="Create" value="SymbioteCreateSet"/>
+        <MaxCount value="1"/>
+    </CAbilArmMagazine>
+    <CAbilEffectInstant id="CommanderPrestigeArtanisInspire">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="CommanderPrestigeArtanisInspireSearch"/>
+        <Flags index="Transient" value="1"/>
+        <Cost>
+            <Cooldown TimeUse="360"/>
+        </Cost>
+        <CmdButtonArray index="Execute" DefaultButtonFace="CommanderPrestigeArtanisInspire"/>
+    </CAbilEffectInstant>
+    <CAbilRevive id="ArtanisRevive" parent="ReviveSelf">
+        <EditorCategories value="Race:Zerg,AbilityorEffectType:Units"/>
+        <CmdButtonArray index="Revive1" DefaultButtonFace="KerriganRevive"/>
+        <CmdButtonArray index="ReviveAtTarget1" DefaultButtonFace="KerriganRevivePlacement"/>
+        <Flags index="UnitOrderQueue" value="1"/>
+        <BaseInfo>
+            <Cooldown Location="Player" TimeUse="0.1"/>
+        </BaseInfo>
+        <Effect value="ArtanisReviveSet"/>
+        <Offset value="0,0"/>
+        <Range value="10"/>
+        <Alert value="KerriganReviveComplete"/>
+    </CAbilRevive>
+    <CAbilEffectInstant id="EnablePowerOvercharge">
+        <EditorCategories value="Race:Protoss,AbilityorEffectType:Units"/>
+        <Effect index="0" value="KaraxBuildingUpgradeSet"/>
+        <Cost>
+            <Resource index="Minerals" value="105"/>
+        </Cost>
+        <PrepTime value="5"/>
+        <UninterruptibleArray index="Wait" value="1"/>
+        <UninterruptibleArray index="Prep" value="1"/>
+        <UninterruptibleArray index="Cast" value="1"/>
+        <UninterruptibleArray index="Channel" value="1"/>
+        <ProgressButtonArray index="Prep" value="EnablePowerOvercharge"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="EnablePowerOvercharge" State="Restricted" Requirements="HaveKaraxBuildingUpgradeEnableWeapon">
+            <Flags index="ToSelection" value="1"/>
+        </CmdButtonArray>
+        <ShowProgressArray index="Prep" value="1"/>
+    </CAbilEffectInstant>
+    <CAbilEffectInstant id="EnablePowerOverchargeShieldBattery">
+        <EditorCategories value="Race:Protoss,AbilityorEffectType:Units"/>
+        <Effect index="0" value="KaraxBuildingUpgradeShieldBatterySet"/>
+        <Cost>
+            <Resource index="Minerals" value="70"/>
+        </Cost>
+        <PrepTime value="5"/>
+        <ShowProgressArray index="Prep" value="1"/>
+        <UninterruptibleArray index="Wait" value="1"/>
+        <UninterruptibleArray index="Prep" value="1"/>
+        <UninterruptibleArray index="Cast" value="1"/>
+        <UninterruptibleArray index="Channel" value="1"/>
+        <ProgressButtonArray index="Prep" value="EnablePowerOvercharge"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="EnablePowerOverchargeShieldBattery" State="Restricted" Requirements="HaveKaraxBuildingUpgradeEnableWeaponShieldBattery">
+            <Flags index="ToSelection" value="1"/>
+        </CmdButtonArray>
+    </CAbilEffectInstant>
+    <CAbilEffectInstant id="EnablePowerOverchargeKhaydarinMonolith">
+        <EditorCategories value="Race:Protoss,AbilityorEffectType:Units"/>
+        <Effect index="0" value="KaraxBuildingUpgradeKhaydarinMonolithSet"/>
+        <Cost>
+            <Resource index="Minerals" value="210"/>
+            <Resource index="Vespene" value="70"/>
+        </Cost>
+        <PrepTime value="5"/>
+        <ShowProgressArray index="Prep" value="1"/>
+        <UninterruptibleArray index="Wait" value="1"/>
+        <UninterruptibleArray index="Prep" value="1"/>
+        <UninterruptibleArray index="Cast" value="1"/>
+        <UninterruptibleArray index="Channel" value="1"/>
+        <ProgressButtonArray index="Prep" value="EnablePowerOvercharge"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="EnablePowerOverchargeKhaydarinMonolith" State="Restricted" Requirements="HaveKaraxBuildingUpgradeEnableWeaponKhaydarinMonolith">
+            <Flags index="ToSelection" value="1"/>
+        </CmdButtonArray>
+    </CAbilEffectInstant>
+    <CAbilResearch id="ForgeResearch">
+        <InfoArray index="Research25" Time="240" Upgrade="ArtanisHardenedShield">
+            <Resource index="Minerals" value="300"/>
+            <Resource index="Vespene" value="300"/>
+            <Button DefaultButtonFace="ResearchArtanisHardenedShield" State="Restricted" Requirements="LearnArtanisHardenedShield"/>
+        </InfoArray>
+    </CAbilResearch>
+    <CAbilResearch id="FusionCoreResearch">
+        <InfoArray index="Research7" Time="60" Upgrade="HyperjumpEngine">
+            <Resource index="Minerals" value="200"/>
+            <Resource index="Vespene" value="100"/>
+            <Button DefaultButtonFace="ResearchWormholeJumpEngine" State="Restricted" Requirements="LearnHyperjumpEngine"/>
+        </InfoArray>
+        <InfoArray index="Research8" Time="60" Upgrade="HyperionTacticalCommandSystem">
+            <Resource index="Minerals" value="175"/>
+            <Resource index="Vespene" value="175"/>
+            <Button DefaultButtonFace="ResearchTacticalCommandSystem2" State="Restricted" Requirements="LearnHyperionTacticalCommandSystem"/>
+        </InfoArray>
+        <InfoArray index="Research9" Time="60" Upgrade="HyperionUltimateWeapon">
+            <Resource index="Minerals" value="200"/>
+            <Resource index="Vespene" value="200"/>
+            <Button DefaultButtonFace="ResearchUltimateWeapon" State="Restricted" Requirements="LearnUltimateWeapon"/>
+        </InfoArray>
+        <InfoArray index="Research10" Time="45" Upgrade="HyperionRepair">
+            <Resource index="Minerals" value="100"/>
+            <Resource index="Vespene" value="100"/>
+            <Button DefaultButtonFace="ResearchSelfRepair" State="Restricted" Requirements="LearnHyperionRepair"/>
+        </InfoArray>
+    </CAbilResearch>
+    <CAbilEffectTarget id="HyperionVoidCoopHyperjumpP4">
+        <EditorCategories value="AbilityorEffectType:Units,Race:Terran"/>
+        <Effect index="0" value="HyperionVoidCoopHyperjumpTeleportCreatePrecursorP4"/>
+        <Flags index="AllowMovement" value="1"/>
+        <Flags index="BestUnit" value="0"/>
+        <Flags index="NoDeceleration" value="1"/>
+        <Flags index="RequireTargetVision" value="0"/>
+        <Cost>
+            <Charge>
+                <CountMax value="1"/>
+                <CountStart value="1"/>
+                <CountUse value="1"/>
+                <TimeUse value="43"/>
+            </Charge>
+        </Cost>
+        <Range value="500"/>
+        <CastIntroTime value="0"/>
+        <CastOutroTime value="1.25"/>
+        <ShowProgressArray index="Channel" value="1"/>
+        <UninterruptibleArray index="Channel" value="1"/>
+        <ProgressButtonArray index="Channel" value="HyperionVoidCoopHyperjump"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="HyperionVoidCoopHyperjumpP4"/>
+    </CAbilEffectTarget>
+    <CAbilEffectTarget id="HyperionVoidCoopYamatoCannonP4">
+        <Alignment value="Negative"/>
+        <EditorCategories value="Race:Terran,AbilityorEffectType:Units"/>
+        <Effect index="0" value="HyperionVoidCoopYamatoCannonCPP4"/>
+        <Flags index="AbortOnAllianceChange" value="0"/>
+        <Flags index="AllowMovement" value="1"/>
+        <Flags index="NoDeceleration" value="1"/>
+        <Cost>
+            <Charge Link="Abil/HyperionVoidCoopYamatoGun"/>
+            <Cooldown Link="Abil/HyperionVoidCoopYamatoGun" TimeUse="15"/>
+        </Cost>
+        <TargetFilters value="Visible;Self,Player,Ally,Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <Range value="14"/>
+        <RangeSlop value="10"/>
+        <CastIntroTime value="1"/>
+        <CastOutroTime value="0"/>
+        <ShowProgressArray index="Cast" value="1"/>
+        <UninterruptibleArray index="Cast" value="1"/>
+        <UninterruptibleArray index="Channel" value="1"/>
+        <CursorEffect value="HyperionVoidCoopYamatoCannonLMSearchP4"/>
+        <ProgressButtonArray index="Cast" value="HyperionVoidCoopYamatoCannon"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="HyperionVoidCoopYamatoCannonP4"/>
+    </CAbilEffectTarget>
+    <CAbilEffectTarget id="KaraxPhaseSturctureCannon">
+        <EditorCategories value="Race:Protoss,AbilityorEffectType:Units"/>
+        <Effect index="0" value="KaraxPhaseSturctureCannonCU"/>
+        <Cost>
+            <Cooldown TimeUse="60"/>
+        </Cost>
+        <Range value="500"/>
+        <Arc value="360"/>
+        <CastIntroTime value="1"/>
+        <CastOutroTime value="0"/>
+        <FinishTime value="1"/>
+        <ShowProgressArray index="Cast" value="1"/>
+        <ShowProgressArray index="Finish" value="1"/>
+        <UninterruptibleArray index="Cast" value="1"/>
+        <UninterruptibleArray index="Finish" value="1"/>
+        <ProgressButtonArray index="Cast" value="KaraxPhaseSturctureCannon"/>
+        <ProgressButtonArray index="Channel" value="KaraxPhaseSturctureCannon"/>
+        <ProgressButtonArray index="Finish" value="KaraxPhaseSturctureCannon"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="KaraxPhaseSturctureCannon"/>
+        <PlaceUnit value="PhaseCannonDummy"/>
+    </CAbilEffectTarget>
+    <CAbilEffectTarget id="CommanderPrestigeAbathurEssenceShift">
+        <EditorCategories value="Race:Zerg,AbilityorEffectType:Units"/>
+        <Effect index="0" value="CommanderPrestigeAbathurEssenceShiftPrepare"/>
+        <Flags index="BestUnit" value="0"/>
+        <Flags index="RequireTargetVision" value="0"/>
+        <Cost>
+            <Cooldown TimeUse="30"/>
+        </Cost>
+        <Range value="500"/>
+        <Arc value="360"/>
+        <DefaultError value="CantTargetThatUnit"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="CommanderPrestigeAbathurEssenceShift" Requirements="HaveAbathurImpalerDeepTunnelImprovedP4">
+            <Flags index="ToSelection" value="1"/>
+        </CmdButtonArray>
+        <CastIntroTime value="1"/>
+        <CastOutroTime value="1"/>
+        <FinishTime value="0.5"/>
+        <UninterruptibleArray index="Cast" value="1"/>
+        <UninterruptibleArray index="Finish" value="1"/>
+        <ProgressButtonArray index="Cast" value="CommanderPrestigeAbathurEssenceShift"/>
+    </CAbilEffectTarget>
+    <CAbilEffectInstant id="SymbioteCarapaceN">
+        <Alignment value="Positive"/>
+        <EditorCategories value="Race:Protoss,AbilityorEffectType:Units"/>
+        <Effect index="0" value="SymbioteCarapaceNSet"/>
+        <Flags index="AllowMovement" value="1"/>
+        <Flags index="AutoCast" value="1"/>
+        <Flags index="AutoCastOn" value="1"/>
+        <Flags index="BestUnit" value="1"/>
+        <Flags index="NoDeceleration" value="1"/>
+        <Flags index="ReExecutable" value="1"/>
+        <Flags index="Transient" value="1"/>
+        <Cost>
+            <Cooldown TimeUse="20"/>
+        </Cost>
+        <AutoCastRange value="500"/>
+        <AutoCastValidatorArray value="HasCarapaceTakenDamageBehaviorCheck"/>
+        <AutoCastValidatorArray value="IsNotBuried"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="CommanderKerriganMutatingCarapace" Requirements="CommanderPrestigeAbahur4WithMaxBiomass"/>
+    </CAbilEffectInstant>
+    <CAbilEffectInstant id="SymbioteCarapaceS">
+        <Alignment value="Positive"/>
+        <EditorCategories value="Race:Protoss,AbilityorEffectType:Units"/>
+        <Effect index="0" value="SymbioteCarapaceSSet"/>
+        <Flags index="AllowMovement" value="1"/>
+        <Flags index="AutoCast" value="1"/>
+        <Flags index="AutoCastOn" value="1"/>
+        <Flags index="BestUnit" value="1"/>
+        <Flags index="NoDeceleration" value="1"/>
+        <Flags index="ReExecutable" value="1"/>
+        <Flags index="Transient" value="1"/>
+        <Cost>
+            <Cooldown TimeUse="20"/>
+        </Cost>
+        <AutoCastRange value="500"/>
+        <AutoCastValidatorArray value="HasCarapaceTakenDamageBehaviorCheck"/>
+        <AutoCastValidatorArray value="IsNotBuried"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="CommanderKerriganMutatingCarapace" Requirements="CommanderPrestigeAbahur4WithMaxBiomass"/>
+    </CAbilEffectInstant>
+    <CAbilEffectTarget id="XelNagaKerriganCreepTeleport">
+        <EditorCategories value="Race:Zerg,AbilityorEffectType:Units"/>
+        <Effect index="0" value="XelNagaKerriganCreepTeleportPrepare"/>
+        <Cost>
+            <Vital index="Energy" value="100"/>
+            <Charge Link=""/>
+            <Cooldown Link=""/>
+        </Cost>
+        <Range value="500"/>
+        <Arc value="360"/>
+        <CursorEffect value="XelNagaKerriganCreepTeleportSearch"/>
+        <DefaultError value="CantTargetThatUnit"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="XelNagaKerriganCreepTeleport"/>
+    </CAbilEffectTarget>
+    <CAbilEffectInstant id="XelNagaKerriganExtinction">
+        <EditorCategories value="Race:Protoss,AbilityorEffectType:Units"/>
+        <Effect index="0" value="XelNagaKerriganExtinctionCP"/>
+        <Cost>
+            <Vital index="Energy" value="100"/>
+            <Cooldown Location="Player" TimeStart="600" TimeUse="240"/>
+        </Cost>
+        <UninterruptibleArray index="Channel" value="1"/>
+        <AINotifyEffect value="XelNagaKerriganExtinctionCP"/>
+        <ProgressButtonArray index="Channel" value="KerriganEpilogue03Extinction"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="XelNagaKerriganExtinction"/>
+    </CAbilEffectInstant>
+    <CAbilEffectInstant id="XelNagaKerriganCelestialRadiance">
+        <EditorCategories value="Race:Protoss,AbilityorEffectType:Units"/>
+        <Flags index="Transient" value="1"/>
+        <Cost>
+            <Vital index="Energy" value="50"/>
+            <Cooldown Location="Unit" TimeUse="5"/>
+        </Cost>
+        <CmdButtonArray index="Execute" DefaultButtonFace="XelNagaKerriganCelestialRadiance"/>
+    </CAbilEffectInstant>
+    <CAbilEffectTarget id="XelNagaKerriganQuantumRay">
+        <EditorCategories value="Race:Zerg,AbilityorEffectType:Units"/>
+        <Effect index="0" value="XelNagaKerriganQuantumRayInitialCP"/>
+        <Cost>
+            <Vital index="Energy" value="100"/>
+        </Cost>
+        <TargetFilters value="Visible;Self,Player,Ally,Missile,Item,Dead,Hidden,Invulnerable"/>
+        <Range value="9"/>
+        <CancelableArray index="Cast" value="1"/>
+        <CancelableArray index="Channel" value="1"/>
+        <UninterruptibleArray index="Cast" value="1"/>
+        <UninterruptibleArray index="Channel" value="1"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="XelNagaKerriganQuantumRay"/>
+        <CmdButtonArray index="Cancel" DefaultButtonFace="Cancel"/>
+    </CAbilEffectTarget>
+    <CAbilEffectTarget id="LightningDash">
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Cost>
+            <Cooldown TimeUse="5"/>
+        </Cost>
+        <Range value="8"/>
+        <Arc value="4.9987"/>
+        <CursorEffect value="LightningDashSearch"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="LightningDash"/>
+    </CAbilEffectTarget>
+    <CAbilEffectInstant id="AstralWind">
+        <EditorCategories value="Race:Zerg,AbilityorEffectType:Units"/>
+        <Flags index="Transient" value="1"/>
+        <Cost>
+            <Cooldown TimeUse="30"/>
+        </Cost>
+        <CmdButtonArray index="Execute" DefaultButtonFace="AstralWind"/>
+    </CAbilEffectInstant>
+    <CAbilBuild id="KaraxPrestigeSOADeployStructuresWithoutResources">
+        <EditorCategories value="Race:Protoss,AbilityorEffectType:Units"/>
+        <FlagArray index="IgnoreUnitCost" value="1"/>
+        <FlagArray index="PeonMaintained" value="0"/>
+        <InfoArray index="Build1" Unit="Pylon" Time="1">
+            <Vital index="Energy" value="5"/>
+            <Button DefaultButtonFace="KaraxPrestigeSOADeployPylon" State="Restricted"/>
+            <ValidatorArray value="HasVisionOfTarget"/>
+        </InfoArray>
+        <InfoArray index="Build2" Unit="PhotonCannon" Time="1">
+            <Vital index="Energy" value="10"/>
+            <Button DefaultButtonFace="KaraxPrestigeSOADeployPhotonCannon" State="Restricted" Requirements="HaveForge"/>
+            <ValidatorArray value="HasVisionOfTarget"/>
+        </InfoArray>
+        <InfoArray index="Build3" Unit="ShieldBattery" Time="1">
+            <Vital index="Energy" value="8"/>
+            <Button DefaultButtonFace="KaraxPrestigeSOADeployShieldBattery" State="Restricted" Requirements="HaveGateway"/>
+            <ValidatorArray value="HasVisionOfTarget"/>
+        </InfoArray>
+        <InfoArray index="Build4" Unit="KhaydarinMonolith" Time="1">
+            <Vital index="Energy" value="18"/>
+            <Button DefaultButtonFace="KaraxPrestigeSOADeployKhaydarinMonolith" State="Restricted" Requirements="HaveForge"/>
+            <ValidatorArray value="HasVisionOfTarget"/>
+        </InfoArray>
+        <Range value="500"/>
+        <EffectArray index="Start" value="SOAProxyPylonVisualAB"/>
+    </CAbilBuild>
+    <CAbilSpecialize id="HyperionAdvancedPDDReplenish">
+        <EditorCategories value="Race:Terran,AbilityorEffectType:Units"/>
+        <Activity value="UI/SpiderMineBuilding"/>
+        <InfoArray index="Specialize1" Time="30" Alert="HyperionAdvancedPDDComplete" Effect="ReplenishHyperionAdvancedPDD">
+            <Resource index="Minerals" value="200"/>
+            <Display index="Minerals" value="1"/>
+            <Charge>
+                <CountMax value="4"/>
+                <CountUse value="1"/>
+                <HideCount value="1"/>
+                <Location value="Unit"/>
+            </Charge>
+            <Button DefaultButtonFace="HyperionAdvancedPDDReplenish"/>
+            <Flags index="AutoCast" value="1"/>
+        </InfoArray>
+        <Alert value="BuildComplete"/>
+        <Flags index="BestUnit" value="0"/>
+    </CAbilSpecialize>
+    <CAbilQueue id="HyperionAdvancedPDDQueue4">
+        <EditorCategories value="Race:Neutral,AbilityorEffectType:Structures"/>
+        <QueueSize value="4"/>
+        <Flags index="Passive" value="1"/>
+    </CAbilQueue>
+    <CAbilBuild id="PhaseStructure">
+        <InfoArray index="Build1" Time="0.7">
+            <Button Requirements="HaveKaraxBuildingUpgradeTransport"/>
+        </InfoArray>
+        <InfoArray index="Build2" Time="0.7">
+            <Button Requirements="HaveKaraxBuildingUpgradeTransport"/>
+        </InfoArray>
+        <InfoArray index="Build3" Time="0.7">
+            <Button Requirements="HaveKaraxBuildingUpgradeTransport"/>
+        </InfoArray>
+        <Range value="500"/>
+    </CAbilBuild>
+    <CAbilEffectInstant id="EnablePhaseStructure">
+        <EditorCategories value="Race:Protoss,AbilityorEffectType:Units"/>
+        <Effect index="0" value="KaraxBuildingUpgradeTransportAB"/>
+        <Cost>
+            <Resource index="Minerals" value="300"/>
+        </Cost>
+        <PrepTime value="10"/>
+        <UninterruptibleArray index="Wait" value="1"/>
+        <UninterruptibleArray index="Prep" value="1"/>
+        <UninterruptibleArray index="Cast" value="1"/>
+        <UninterruptibleArray index="Channel" value="1"/>
+        <ProgressButtonArray index="Prep" value="EnablePhaseStructure"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="EnablePhaseStructure" State="Restricted" Requirements="HaveKaraxBuildingUpgradeEnableTransport">
+            <Flags index="ToSelection" value="1"/>
+        </CmdButtonArray>
+        <ShowProgressArray index="Prep" value="1"/>
+    </CAbilEffectInstant>
+    <CAbilEffectInstant id="VehicleAfterburners">
+        <Effect index="0" value="VehicleAfterburnersSwitch"/>
+    </CAbilEffectInstant>
+    <CAbilEffectTarget id="VoidCoopSummonHyperion">
+        <CmdButtonArray index="Execute" Requirements="CommanderPrestigeRaynor4CalldownHyperion"/>
+    </CAbilEffectTarget>
+</Catalog>

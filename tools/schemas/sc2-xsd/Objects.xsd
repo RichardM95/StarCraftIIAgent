@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="PlayerIndex">
+    <xs:restriction base="xs:unsignedByte">
+      <xs:minInclusive value="0" />
+      <xs:maxInclusive value="15" />
+      <xs:totalDigits value="2" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- CAMPIGN: 0=auto, 1=easy, 2=normal, 3=hard, 4=brutal -->
+  <xs:simpleType name="DifficultyLevelIndex">
+    <xs:restriction base="xs:unsignedByte">
+      <xs:minInclusive value="0" />
+      <xs:maxInclusive value="15" />
+      <xs:totalDigits value="2" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="CliffLevelIndex">
+    <xs:restriction base="xs:unsignedByte">
+      <xs:minInclusive value="0" />
+      <xs:maxInclusive value="15" />
+      <xs:totalDigits value="2" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="DecimalBoolean">
+    <xs:restriction base="xs:unsignedByte">
+      <xs:minInclusive value="0" />
+      <xs:maxInclusive value="1" />
+      <xs:totalDigits value="1" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="ColorRGBHDRValue">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="([\d]{1,3},[\d]{1,3},[\d]{1,3}|NULL)( \d+.\d+)?" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="ColorRGBAValue">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[\d]{1,3},[\d]{1,3},[\d]{1,3},[\d]{1,3}" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="FixedValue">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="-?[\d]+(\.[\d]*)?" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="Vector2D">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="-?[\d]+(\.[\d]*)?,-?[\d]+(\.[\d]*)?" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="Vector3D">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="-?[\d]+(\.[\d]*)?,-?[\d]+(\.[\d]*)?,-?[\d]+(\.[\d]*)?" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="EObjectType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ObjectDoodad" />
+      <xs:enumeration value="ObjectUnit" />
+      <xs:enumeration value="ObjectPoint" />
+      <xs:enumeration value="ObjectCamera" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="EObjectFlagType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="HeightOffset" />
+      <xs:enumeration value="UnitNoCreate" />
+      <xs:enumeration value="PointHidden" />
+      <xs:enumeration value="HeightAbsolute" />
+      <xs:enumeration value="UnitHidden" />
+      <xs:enumeration value="ForcePlacement" />
+      <xs:enumeration value="DeferModelLoad" />
+      <xs:enumeration value="CameraLockSource" />
+      <xs:enumeration value="NoDoodadFootprint" />
+      <xs:enumeration value="CameraHidden" />
+      <xs:enumeration value="NoSoundEmitters" />
+      <xs:enumeration value="DisableNoFlyZone" />
+      <xs:enumeration value="ForceOcclusionHide" />
+      <xs:enumeration value="SoundFogVisible" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="EObjectSoundHeightFlag">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="IsUseable" />
+      <xs:enumeration value="Flyer" />
+      <xs:enumeration value="Absolute" />
+      <!-- <xs:enumeration value="Unknown"/> -->
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="EObjectAIFlag">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="IsUseable" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="EObjectPointType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Normal" />
+      <xs:enumeration value="StartLoc" />
+      <xs:enumeration value="BlockPathing" />
+      <xs:enumeration value="SoundEmitter" />
+      <xs:enumeration value="ThreeD" />
+      <xs:enumeration value="NoFlyZone" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="ECameraValueFlag">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="FieldOfView" />
+      <xs:enumeration value="NearClip" />
+      <xs:enumeration value="FarClip" />
+      <xs:enumeration value="ShadowClip" />
+      <xs:enumeration value="Distance" />
+      <xs:enumeration value="Pitch" />
+      <xs:enumeration value="Yaw" />
+      <xs:enumeration value="Roll" />
+      <xs:enumeration value="HeightOffset" />
+      <xs:enumeration value="DepthOfField" />
+      <xs:enumeration value="FocalDepth" />
+      <xs:enumeration value="FalloffStart" />
+      <xs:enumeration value="FalloffEnd" />
+      <xs:enumeration value="FalloffStartNear" />
+      <xs:enumeration value="FalloffEndNear" />
+      <xs:enumeration value="BokehFStop" />
+      <xs:enumeration value="BokehMaxCoC" />
+      <xs:enumeration value="DoFType" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="ObjectFlagTypeValueArray">
+    <xs:attribute name="Index" use="required" type="EObjectFlagType" />
+    <xs:attribute name="Value" use="required" type="DecimalBoolean" />
+  </xs:complexType>
+
+  <xs:complexType name="ObjectAIFlagValueArray">
+    <xs:attribute name="Index" use="required" type="EObjectAIFlag" />
+    <xs:attribute name="Value" use="required" type="DecimalBoolean" />
+  </xs:complexType>
+
+  <xs:complexType name="ObjectCameraValueArray">
+    <xs:attribute name="Index" use="required" type="ECameraValueFlag" />
+    <xs:attribute name="Value" use="required" type="FixedValue" />
+  </xs:complexType>
+
+  <xs:complexType name="ObjectSoundHeightTypeArray">
+    <xs:attribute name="Type" use="required" type="EObjectSoundHeightFlag" />
+    <xs:attribute name="Value" use="required" type="FixedValue" />
+  </xs:complexType>
+
+  <xs:complexType name="ObjectPlayerBooleanValueArray">
+    <xs:attribute name="Index" use="required" type="PlayerIndex" />
+    <xs:attribute name="Value" use="required" type="DecimalBoolean" />
+  </xs:complexType>
+
+  <xs:complexType name="ObjectPlayerDifficultyValueArray">
+    <xs:attribute name="Index" use="required" type="DifficultyLevelIndex" />
+    <xs:attribute name="Value" use="required" type="xs:nonNegativeInteger" />
+  </xs:complexType>
+
+  <xs:complexType name="ObjectPlayerDifficultyResourcesValueArray">
+    <xs:attribute name="Index" use="required" type="DifficultyLevelIndex" />
+    <xs:attribute name="Value" use="required" type="xs:nonNegativeInteger" />
+  </xs:complexType>
+
+  <xs:complexType name="ObjectTextureValue">
+    <xs:attribute name="TexSlot" use="required" type="xs:NCName" />
+    <xs:attribute name="TexProps" use="required" type="xs:string" />
+    <xs:attribute name="TexLink" use="required" type="xs:string" />
+  </xs:complexType>
+
+  <xs:complexType name="ObjectBase" abstract="true">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="Flag" type="ObjectFlagTypeValueArray" />
+    </xs:choice>
+    <xs:attribute name="Id" use="required" type="xs:unsignedLong" />
+    <xs:attribute name="Position" use="required" type="Vector3D" />
+    <xs:attribute name="Rotation" use="optional" type="FixedValue" />
+    <xs:attribute name="Scale" type="Vector3D" />
+    <xs:attribute name="Section" use="optional" type="xs:normalizedString" />
+    <xs:attribute name="UserTag" use="optional" type="xs:normalizedString" />
+    <!-- depracated attrs: -->
+    <xs:attribute name="ObjectId" type="xs:nonNegativeInteger" />
+    <xs:attribute name="ObjectType" type="xs:normalizedString" />
+  </xs:complexType>
+
+  <xs:complexType name="ObjectDoodad">
+    <xs:complexContent>
+      <xs:extension base="ObjectBase">
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="SoundHeight" type="ObjectSoundHeightTypeArray" />
+          <xs:element name="Texture" type="ObjectTextureValue" />
+        </xs:choice>
+        <xs:attribute name="Name" use="optional" type="xs:normalizedString" />
+        <xs:attribute name="Type" use="required" type="xs:NCName" />
+        <xs:attribute name="Pitch" type="FixedValue" />
+        <xs:attribute name="Roll" type="FixedValue" />
+        <xs:attribute name="TileSet" type="xs:string" />
+        <xs:attribute name="Variation" type="xs:unsignedByte" />
+        <xs:attribute name="BoostexCliffLevel" use="optional" type="CliffLevelIndex" />
+        <xs:attribute name="TintColor" type="ColorRGBHDRValue" />
+        <xs:attribute name="TeamColor" type="PlayerIndex" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="ObjectUnit">
+    <xs:complexContent>
+      <xs:extension base="ObjectBase">
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="AIActive" type="ObjectPlayerBooleanValueArray" />
+          <xs:element name="AIRebuild" type="ObjectPlayerDifficultyValueArray" />
+          <xs:element name="AIFlag" type="ObjectAIFlagValueArray" />
+          <xs:element name="Texture" type="ObjectTextureValue" />
+          <xs:element name="Resources" type="ObjectPlayerDifficultyResourcesValueArray" />
+        </xs:choice>
+        <xs:attribute name="Name" use="optional" type="xs:normalizedString" />
+        <xs:attribute name="UnitType" use="required" type="xs:NCName" />
+        <xs:attribute name="Variation" type="xs:unsignedByte" />
+        <xs:attribute name="BoostexCliffLevel" use="optional" type="CliffLevelIndex" />
+        <xs:attribute name="Player" use="optional" type="PlayerIndex" />
+        <xs:attribute name="Resources" use="optional" type="xs:nonNegativeInteger" />
+        <xs:attribute name="Footprint" use="optional" type="xs:normalizedString" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="ObjectPoint">
+    <xs:complexContent>
+      <xs:extension base="ObjectBase">
+        <xs:choice minOccurs="0" maxOccurs="unbounded" />
+        <xs:attribute name="Name" use="required" type="xs:normalizedString" />
+        <xs:attribute name="Type" use="required" type="EObjectPointType" />
+        <xs:attribute name="Color" type="ColorRGBAValue" />
+        <xs:attribute name="Model" type="xs:normalizedString" />
+        <xs:attribute name="Animation" type="xs:normalizedString" />
+        <xs:attribute name="Sound" type="xs:normalizedString" />
+        <xs:attribute name="SoundActor" type="xs:normalizedString" />
+        <xs:attribute name="Attachment" type="xs:normalizedString" />
+        <xs:attribute name="PathingRadiusSoft" type="FixedValue" />
+        <xs:attribute name="PathingRadiusHard" type="FixedValue" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="ObjectCamera">
+    <xs:complexContent>
+      <xs:extension base="ObjectBase">
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="CameraValue" type="ObjectCameraValueArray" />
+        </xs:choice>
+        <xs:attribute name="Name" use="required" type="xs:normalizedString" />
+        <xs:attribute name="CameraTarget" use="required" type="Vector2D" />
+        <xs:attribute name="Color" type="ColorRGBAValue" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="ObjectGroupLink">
+    <xs:attribute name="Id" use="required" type="xs:nonNegativeInteger" />
+  </xs:complexType>
+
+  <xs:complexType name="PatrolPointLink">
+    <xs:attribute name="Id" use="required" type="xs:nonNegativeInteger" />
+    <xs:attribute name="WaitTime" use="required" type="xs:nonNegativeInteger" />
+  </xs:complexType>
+
+  <xs:complexType name="ObjectGroup">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="GroupObject" type="ObjectGroupLink" />
+      <xs:element name="PatrolPoint" type="PatrolPointLink" />
+    </xs:choice>
+    <xs:attribute name="Id" use="required" type="xs:nonNegativeInteger" />
+    <xs:attribute name="Type" use="required" type="EObjectType" />
+    <xs:attribute name="Name" use="required" type="xs:normalizedString" />
+    <xs:attribute name="Icon" use="optional" type="xs:normalizedString" />
+  </xs:complexType>
+
+  <xs:element name="PlacedObjects">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="ObjectDoodad" type="ObjectDoodad" />
+        <xs:element name="ObjectUnit" type="ObjectUnit" />
+        <xs:element name="ObjectPoint" type="ObjectPoint" />
+        <xs:element name="ObjectCamera" type="ObjectCamera" />
+        <xs:element name="Group" type="ObjectGroup" />
+      </xs:choice>
+      <xs:attribute name="Version" use="required" type="xs:nonNegativeInteger" />
+    </xs:complexType>
+    <xs:unique name="ObjectId">
+      <xs:selector xpath="ObjectDoodad|ObjectUnit|ObjectPoint|ObjectCamera" />
+      <xs:field xpath="@Id" />
+    </xs:unique>
+    <xs:unique name="ObjectDoodadName">
+      <xs:selector xpath="ObjectDoodad" />
+      <xs:field xpath="@Name" />
+    </xs:unique>
+    <xs:unique name="ObjectUnitName">
+      <xs:selector xpath="ObjectUnit" />
+      <xs:field xpath="@Name" />
+    </xs:unique>
+    <xs:unique name="ObjectPointName">
+      <xs:selector xpath="ObjectPoint" />
+      <xs:field xpath="@Name" />
+    </xs:unique>
+    <xs:unique name="ObjectCameraName">
+      <xs:selector xpath="ObjectCamera" />
+      <xs:field xpath="@Name" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>
+<!-- 
+SoundEmitter
+#PlacedObjects
+Doodad
+#ObjectDoodad
+#ObjectUnit
+#ObjectPoint
+#ObjectCamera
+
+#Group
+#GroupObject
+
+#PatrolPoint
+Flag
+#Resources
+#AIRebuild
+#AIActive
+#AIFlag
+
+#CameraValue
+#SoundHeight
+
+#version
+#Version
+#variation
+#Variation
+#position
+#rotation
+#scale
+#Scale
+#section
+#Section
+#usertag
+#UserTag
+index
+Index
+value
+color
+#boostedCliffLevel
+#BoostexCliffLevel
+#footprint
+#unitType
+#UnitType
+#resources
+lifePercent
+LifePercent
+diff
+Difficulty
+chance
+SpawnChance
+respawnChance
+RespawnChance
+respawnTime
+RespawnTime
+#teamColor
+#TeamColor
+#tintColor
+#TintColor
+#tileset
+#TileSet
+#pitch
+#Pitch
+#roll
+#Roll
+#CameraTarget
+#model
+animProps
+#Animation
+#soundActor9
+#SoundActor
+#attachId
+#Attachment
+#objectId
+#ObjectId
+#objectType
+#ObjectType
+#pathingSoftRadius
+#pathingHardRadius
+#PathingRadiusSoft
+#PathingRadiusHard
+#icon
+loot
+#waitTime
+#WaitTime
+#slot
+#TexSlot
+#props
+#TexProps
+#link
+#TexLink
+StartLocOld
+
+#FieldOfView
+#NearClip
+#FarClip
+#ShadowClip
+#Distance
+#HeightOffset
+#DepthOfField
+#FocalDepth
+#FalloffStart
+#FalloffEnd
+#FalloffStartNear
+#FalloffEndNear
+#BokehFStop
+#BokehMaxCoC
+#DoFType
+
+#UnitNoCreate
+#PointHidden
+#HeightAbsolute
+#UnitHidden
+#ForcePlacement
+#DeferModelLoad
+#CameraLockSource
+#NoDoodadFootprint
+#CameraHidden
+#NoSoundEmitters
+#DisableNoFlyZone
+#ForceOcclusionHide
+#SoundFogVisible
+
+#IsUseable
+#Flyer
+#Absolute
+#Unknown
+
+SetZ
+TextureSelectByMatch
+TextureSelectBySlot
+CActorTableFromScope
+AngleOfAttack
+GameDebug/InvalidPreplacedDoodad
+GameDebug/InvalidPreplacedUnit
+Creating Preplaced Object Groups
+ -->

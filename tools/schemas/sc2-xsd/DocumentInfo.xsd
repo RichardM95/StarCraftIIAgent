@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <!-- Document type. "Interface" is by far the most common in practice;
+       "Campaign"/"Melee" are documented in file-format/document-info.md. The
+       full set is not exhaustively known, so this list may grow. -->
+  <xs:simpleType name="EModType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ExtensionMod"/>
+      <xs:enumeration value="Interface"/>
+      <xs:enumeration value="Gameplay"/>
+      <xs:enumeration value="Campaign"/>
+      <xs:enumeration value="Melee"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- DocInfo-level document flags. Values below the first two were harvested
+       from the vanilla sc2-game-data corpus (counts: ExtensionMod 241,
+       PublishPrivate 240, UseAsGameDescription 177, PreloadNoTrigger 55,
+       AllowIncludeOverride 1); the doc format reference does not enumerate them. -->
+  <xs:simpleType name="EDocumentFlags">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ActiveSectionRequired"/>
+      <xs:enumeration value="ArcadeCluster"/>
+      <xs:enumeration value="ArcadeShowLobby"/><!-- deprecated -->
+      <xs:enumeration value="PreloadNoTrigger"/>
+      <xs:enumeration value="ExtensionMod"/>
+      <xs:enumeration value="PublishPrivate"/>
+      <xs:enumeration value="UseAsGameDescription"/>
+      <xs:enumeration value="AllowIncludeOverride"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="EGameSpeedValue">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Slower"/>
+      <xs:enumeration value="Slow"/>
+      <xs:enumeration value="Normal"/>
+      <xs:enumeration value="Fast"/>
+      <xs:enumeration value="Faster"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="DocumentFlagsValue">
+    <xs:sequence maxOccurs="unbounded">
+      <xs:element name="Value" type="EDocumentFlags"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ModTypeValue">
+    <xs:sequence maxOccurs="unbounded">
+      <xs:element name="Value" type="EModType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SpeedValue">
+    <xs:sequence maxOccurs="unbounded">
+      <xs:element name="Value" type="EGameSpeedValue"/>
+    </xs:sequence>
+  </xs:complexType>
+  
+  <xs:element name="DocInfo">
+    <xs:complexType>
+      <xs:choice maxOccurs="unbounded">
+        <xs:element minOccurs="0" name="Flags" type="DocumentFlagsValue"/>
+        <xs:element minOccurs="0" name="ModType" type="ModTypeValue"/>
+        <xs:element minOccurs="0" ref="Icon"/>
+        <xs:element minOccurs="0" ref="Tutorial"/>
+        <xs:element minOccurs="0" ref="Dependencies"/>
+        <xs:element minOccurs="0" ref="ModifiableDependencies"/>
+        <xs:element minOccurs="0" ref="Screenshot"/>
+        <xs:element minOccurs="0" ref="ScreenshotHowToPlay"/>
+        <xs:element minOccurs="0" ref="HowToPlayAdvanced"/>
+        <xs:element minOccurs="0" ref="HowToPlayHeroSelectionType"/>
+        <xs:element minOccurs="0" ref="PatchNote"/>
+        <xs:element minOccurs="0" ref="Preload"/>
+        <xs:element minOccurs="0" ref="Sections"/>
+        <xs:element minOccurs="0" ref="MatchMakerTag"/>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Icon">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Value"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Tutorial">
+    <xs:complexType>
+      <xs:choice maxOccurs="unbounded">
+        <xs:element minOccurs="1" ref="Type"/>
+        <xs:element ref="VariantIndex"/>
+        <xs:element ref="VariantCategory"/>
+        <xs:element ref="VariantMode"/>
+        <xs:element name="GameSpeed" type="SpeedValue"/>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Type">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Value"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VariantIndex">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Value"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VariantCategory">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Value"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VariantMode">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Value"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Dependencies">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="Value"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <!-- Elements below (ModifiableDependencies, Sections, MatchMakerTag,
+       HowToPlayHeroSelectionType) are not in the doc format reference; they were
+       observed on real DocInfo files in the vanilla sc2-game-data corpus. -->
+  <xs:element name="ModifiableDependencies">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="Value"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Sections">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="Value"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MatchMakerTag">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="Value"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="HowToPlayHeroSelectionType">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="ListType"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Screenshot">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="File"/>
+        <xs:element ref="CaptionId"/>
+        <xs:element ref="Flags"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ScreenshotHowToPlay">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="File"/>
+        <xs:element ref="CaptionId"/>
+        <xs:element ref="Flags"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListType">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Value"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="HowToPlayAdvanced">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="ListType"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PatchNote">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Version"/>
+        <xs:element ref="Date"/>
+        <xs:element ref="Notes"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Version">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="Value"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Date">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="Value"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Notes">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="Value"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Preload">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="Value"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Flags">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="Value"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Value" type="xs:anyURI"/>
+  <xs:element name="File">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="Value"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CaptionId">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="Value"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

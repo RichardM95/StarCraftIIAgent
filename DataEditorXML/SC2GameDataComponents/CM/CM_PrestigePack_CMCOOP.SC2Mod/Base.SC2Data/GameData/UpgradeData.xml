@@ -1,0 +1,672 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CUpgrade id="CommanderPrestigeStukovLeftNoDead" parent="CommanderPrestige">
+        <EffectArray Operation="Subtract" Reference="Unit,SICocoonInfestedBanshee,Food" Value="1.5"/>
+        <EffectArray Operation="Subtract" Reference="Unit,StukovInfestedBanshee,Food" Value="1.5"/>
+        <EffectArray Operation="Subtract" Reference="Unit,StukovInfestedBansheeBurrowed,Food" Value="1.5"/>
+        <EffectArray Operation="Subtract" Reference="Unit,SICocoonInfestedLiberator,Food" Value="1.5"/>
+        <EffectArray Operation="Subtract" Reference="Unit,SILiberator,Food" Value="1.5"/>
+        <EffectArray Operation="Subtract" Reference="Unit,SICocoonInfestedSiegeTank,Food" Value="1.5"/>
+        <EffectArray Operation="Subtract" Reference="Unit,StukovInfestedSiegeTank,Food" Value="1.5"/>
+        <EffectArray Operation="Subtract" Reference="Unit,StukovInfestedSiegeTankUprooted,Food" Value="1.5"/>
+        <EffectArray Operation="Subtract" Reference="Unit,SICocoonInfestedDiamondBack,Food" Value="1.5"/>
+        <EffectArray Operation="Subtract" Reference="Unit,StukovInfestedDiamondBack,Food" Value="1.5"/>
+        <EffectArray Operation="Subtract" Reference="Unit,SICocoonInfestedMarine,Food" Value="0.5"/>
+        <EffectArray Operation="Subtract" Reference="Unit,SIInfestedMarine,Food" Value="0.5"/>
+        <EffectArray Operation="Subtract" Reference="Unit,SIInfestedMarineBurrowed,Food" Value="0.5"/>
+        <EffectArray Operation="Subtract" Reference="Unit,SICocoonQueen,Food" Value="1"/>
+        <EffectArray Operation="Subtract" Reference="Unit,SIQueen,Food" Value="1"/>
+        <EffectArray Reference="Unit,InfestedAbomination,Food" Value="3"/>
+        <EffectArray Reference="Unit,InfestedAbominationBurrowed,Food" Value="3"/>
+        <EffectArray Operation="Set" Reference="Button,ResearchSIBarracksTrainInfestedCivilianLevel3,AlertTooltip" Value="Button/Tooltip/CommanderPrestigeStukovLeftNoDeadResearchSIBarracksTrainInfestedCivilianLevel3"/>
+        <EffectArray Operation="Set" Reference="Button,ResearchSIBarracksTrainInfestedCivilianLevel4,AlertTooltip" Value="Button/Tooltip/CommanderPrestigeStukovLeftNoDeadResearchSIBarracksTrainInfestedCivilianLevel4"/>
+        <EffectArray Operation="Set" Reference="Button,ResearchSIBarracksTrainInfestedCivilianLevel2,Tooltip" Value="Button/Tooltip/CommanderPrestigeStukovLeftNoDeadResearchSIBarracksTrainInfestedCivilianLevel2"/>
+        <EffectArray Operation="Set" Reference="Button,ResearchSIBarracksTrainInfestedCivilianLevel3,Tooltip" Value="Button/Tooltip/CommanderPrestigeStukovLeftNoDeadResearchSIBarracksTrainInfestedCivilianLevel3"/>
+        <EffectArray Operation="Set" Reference="Button,ResearchSIBarracksTrainInfestedCivilianLevel4,Tooltip" Value="Button/Tooltip/CommanderPrestigeStukovLeftNoDeadResearchSIBarracksTrainInfestedCivilianLevel4"/>
+        <EffectArray Reference="Unit,SIInfestedTrooper,Food" Value="1"/>
+        <EffectArray Reference="Unit,SIInfestedTrooperBurrowed,Food" Value="1"/>
+        <EffectArray Operation="Subtract" Reference="Unit,SIInfestedBunker,Food" Value="2"/>
+        <EffectArray Operation="Subtract" Reference="Unit,SIInfestedBunkerUprooted,Food" Value="2"/>
+        <EffectArray Operation="Set" Reference="Abil,SIInfestedCivilianStructureResearch,InfoArray[Research1].Button.Requirements" Value="CommanderPrestigeStukovLeftNoDeadLearnSIBarracksTrainInfestedCivilianLevel2"/>
+        <EffectArray Operation="Set" Reference="Abil,SIInfestedCivilianStructureResearch,InfoArray[Research2].Button.Requirements" Value="CommanderPrestigeStukovLeftNoDeadLearnSIBarracksTrainInfestedCivilianLevel3"/>
+        <EffectArray Operation="Set" Reference="Abil,SIInfestedCivilianStructureResearch,InfoArray[Research3].Button.Requirements" Value="CommanderPrestigeStukovLeftNoDeadLearnSIBarracksTrainInfestedCivilianLevel4"/>
+        <EffectArray Operation="Set" Reference="Unit,SICivilianStructure,CostResource[Minerals]" Value="800"/>
+        <EffectArray Operation="Set" Reference="Unit,SICivilianStructureFlying,CostResource[Minerals]" Value="800"/>
+        <EffectArray Operation="Set" Reference="Unit,InfestedAbomination,CostResource[Minerals]" Value="0"/>
+        <EffectArray Operation="Set" Reference="Unit,InfestedAbomination,CostResource[Vespene]" Value="0"/>
+        <EffectArray Operation="Set" Reference="Unit,InfestedAbominationBurrowed,CostResource[Vespene]" Value="0"/>
+        <EffectArray Operation="Set" Reference="Unit,InfestedAbominationBurrowed,CostResource[Minerals]" Value="0"/>
+    </CUpgrade>
+    <CUpgrade id="CommanderPrestigeStukovLeftNoDeadSIBarracksTrainInfestedCivilianLevel2">
+        <EffectArray Reference="Effect,CommanderPrestigeStukovLeftNoDeadSIBarracksTrainInfestedMarineSpawnCP,Chance" Value="1"/>
+        <EffectArray Reference="Effect,CommanderPrestigeStukovLeftNoDeadSIBarracksTrainInfestedAberrationSpawnCP,Chance" Value="1"/>
+    </CUpgrade>
+    <CUpgrade id="CommanderPrestigeStukovLeftNoDeadSIBarracksTrainInfestedCivilianLevel3">
+        <EffectArray Reference="Effect,CommanderPrestigeStukovLeftNoDeadSIBarracksTrainInfestedMarineSpawnCP,PeriodCount" Value="8"/>
+        <EffectArray Reference="Effect,CommanderPrestigeStukovLeftNoDeadSIBarracksTrainInfestedAberrationSpawnCP,PeriodCount" Value="1"/>
+    </CUpgrade>
+    <CUpgrade id="CommanderPrestigeStukovLeftNoDeadSIBarracksTrainInfestedCivilianLevel4">
+        <EffectArray Reference="Effect,CommanderPrestigeStukovLeftNoDeadSIBarracksTrainInfestedMarineSpawnCU,SpawnCount" Value="1"/>
+        <EffectArray Reference="Effect,CommanderPrestigeStukovLeftNoDeadSIBarracksTrainInfestedAberrationSpawnCP,PeriodCount" Value="2"/>
+    </CUpgrade>
+    <CUpgrade id="SIInfantryArmorLevel1">
+        <EffectArray Reference="Unit,InfestedAbomination,LifeArmor" Value="1"/>
+        <EffectArray Reference="Unit,InfestedAbomination,LifeArmorLevel" Value="1"/>
+        <EffectArray Operation="Set" Reference="Actor,InfestedAbomination,LifeArmorIcon" Value="Assets\Textures\btn-upgrade-zerg-groundcarapace-level1.dds"/>
+        <EffectArray Reference="Unit,InfestedAbominationBurrowed,LifeArmor" Value="1"/>
+        <EffectArray Reference="Unit,InfestedAbominationBurrowed,LifeArmorLevel" Value="1"/>
+        <EffectArray Operation="Set" Reference="Actor,InfestedAbominationBurrowed,LifeArmorIcon" Value="Assets\Textures\btn-upgrade-zerg-groundcarapace-level1.dds"/>
+    </CUpgrade>
+    <CUpgrade id="SIInfantryArmorLevel2">
+        <EffectArray Reference="Unit,InfestedAbomination,LifeArmor" Value="1"/>
+        <EffectArray Reference="Unit,InfestedAbomination,LifeArmorLevel" Value="1"/>
+        <EffectArray Operation="Set" Reference="Actor,InfestedAbomination,LifeArmorIcon" Value="Assets\Textures\btn-upgrade-zerg-groundcarapace-level2.dds"/>
+        <EffectArray Reference="Unit,InfestedAbominationBurrowed,LifeArmor" Value="1"/>
+        <EffectArray Reference="Unit,InfestedAbominationBurrowed,LifeArmorLevel" Value="1"/>
+        <EffectArray Operation="Set" Reference="Actor,InfestedAbominationBurrowed,LifeArmorIcon" Value="Assets\Textures\btn-upgrade-zerg-groundcarapace-level2.dds"/>
+    </CUpgrade>
+    <CUpgrade id="SIInfantryArmorLevel3">
+        <EffectArray Reference="Unit,InfestedAbomination,LifeArmor" Value="1"/>
+        <EffectArray Reference="Unit,InfestedAbomination,LifeArmorLevel" Value="1"/>
+        <EffectArray Operation="Set" Reference="Actor,InfestedAbomination,LifeArmorIcon" Value="Assets\Textures\btn-upgrade-zerg-groundcarapace-level3.dds"/>
+        <EffectArray Reference="Unit,InfestedAbominationBurrowed,LifeArmor" Value="1"/>
+        <EffectArray Reference="Unit,InfestedAbominationBurrowed,LifeArmorLevel" Value="1"/>
+        <EffectArray Operation="Set" Reference="Actor,InfestedAbomination,LifeArmorIcon" Value="Assets\Textures\btn-upgrade-zerg-groundcarapace-level3.dds"/>
+    </CUpgrade>
+    <CUpgrade id="SIInfantryWeaponsLevel1">
+        <EffectArray Operation="Set" Reference="Weapon,InfestedAbomination,Icon" Value="Assets\Textures\btn-upgrade-zerg-meleeattacks-level1.dds"/>
+        <EffectArray Reference="Weapon,InfestedAbomination,Level" Value="1"/>
+        <EffectArray Reference="Effect,InfestedAbomination,Amount" Value="2"/>
+        <EffectArray Reference="Effect,InfestedAbomination,AttributeBonus[Armored]" Value="1"/>
+    </CUpgrade>
+    <CUpgrade id="SIInfantryWeaponsLevel2">
+        <EffectArray Operation="Set" Reference="Weapon,InfestedAbomination,Icon" Value="Assets\Textures\btn-upgrade-zerg-meleeattacks-level2.dds"/>
+        <EffectArray Reference="Weapon,InfestedAbomination,Level" Value="1"/>
+        <EffectArray Reference="Effect,InfestedAbomination,Amount" Value="2"/>
+        <EffectArray Reference="Effect,InfestedAbomination,AttributeBonus[Armored]" Value="1"/>
+    </CUpgrade>
+    <CUpgrade id="SIInfantryWeaponsLevel3">
+        <EffectArray Operation="Set" Reference="Weapon,InfestedAbomination,Icon" Value="Assets\Textures\btn-upgrade-zerg-meleeattacks-level3.dds"/>
+        <EffectArray Reference="Weapon,InfestedAbomination,Level" Value="1"/>
+        <EffectArray Reference="Effect,InfestedAbomination,Amount" Value="2"/>
+        <EffectArray Reference="Effect,InfestedAbomination,AttributeBonus[Armored]" Value="1"/>
+    </CUpgrade>
+    <CUpgrade id="SIVolatileInfestedExplodeHeal">
+        <EffectArray Reference="Effect,SIVolatileInfestedExplodeHealSearch,Chance" Value="1"/>
+    </CUpgrade>
+    <CUpgrade id="CommanderPrestigeKerriganSupremeOverlord" parent="CommanderPrestige">
+        <EffectArray Operation="Subtract" Reference="Effect,KR0,Resources[Minerals]" Value="2"/>
+        <EffectArray Operation="Subtract" Reference="Effect,KR1,Resources[Minerals]" Value="4"/>
+        <EffectArray Operation="Subtract" Reference="Effect,KR2,Resources[Minerals]" Value="4"/>
+        <EffectArray Operation="Subtract" Reference="Effect,KR2,Resources[Vespene]" Value="4"/>
+        <EffectArray Operation="Subtract" Reference="Effect,KR3,Resources[Minerals]" Value="8"/>
+        <EffectArray Operation="Subtract" Reference="Effect,KR3,Resources[Vespene]" Value="8"/>
+        <EffectArray Operation="Subtract" Reference="Effect,KR4,Resources[Minerals]" Value="16"/>
+        <EffectArray Operation="Subtract" Reference="Effect,KR4,Resources[Vespene]" Value="16"/>
+        <EffectArray Operation="Subtract" Reference="Effect,KR5,Resources[Minerals]" Value="20"/>
+        <EffectArray Operation="Subtract" Reference="Effect,KR5,Resources[Vespene]" Value="20"/>
+        <EffectArray Reference="Unit,HotSRaptor,CostResource[Minerals]" Value="15"/>
+        <EffectArray Reference="Unit,HydraliskLurker,CostResource[Minerals]" Value="60"/>
+        <EffectArray Reference="Unit,HydraliskLurker,CostResource[Vespene]" Value="30"/>
+        <EffectArray Reference="Unit,MutaliskBroodlord,CostResource[Vespene]" Value="60"/>
+        <EffectArray Reference="Unit,MutaliskBroodlord,CostResource[Minerals]" Value="60"/>
+        <EffectArray Reference="Unit,Lurker,CostResource[Minerals]" Value="90"/>
+        <EffectArray Reference="Unit,Lurker,CostResource[Vespene]" Value="90"/>
+        <EffectArray Reference="Unit,HotSRaptorBurrowed,CostResource[Minerals]" Value="15"/>
+        <EffectArray Reference="Unit,HydraliskLurkerBurrowed,CostResource[Vespene]" Value="30"/>
+        <EffectArray Reference="Unit,HydraliskLurkerBurrowed,CostResource[Minerals]" Value="60"/>
+        <EffectArray Reference="Unit,LurkerBurrowed,CostResource[Minerals]" Value="90"/>
+        <EffectArray Reference="Unit,LurkerBurrowed,CostResource[Vespene]" Value="90"/>
+        <EffectArray Reference="Unit,BroodLord,CostResource[Minerals]" Value="150"/>
+        <EffectArray Reference="Unit,BroodLord,CostResource[Vespene]" Value="150"/>
+        <EffectArray Operation="Set" Reference="Abil,ZerglingRespawnTrain,InfoArray[Train1].Unit[0]" Value="HotSRaptor"/>
+        <EffectArray Operation="Set" Reference="Abil,ZerglingRespawnTrain,InfoArray[Train3].Unit[0]" Value="HotSRaptor"/>
+        <EffectArray Reference="Unit,HotSTorrasque,CostResource[Vespene]" Value="120"/>
+        <EffectArray Reference="Unit,HotSTorrasque,CostResource[Minerals]" Value="180"/>
+        <EffectArray Reference="Unit,HotSTorrasqueBurrowed,CostResource[Minerals]" Value="180"/>
+        <EffectArray Reference="Unit,HotSTorrasqueBurrowed,CostResource[Vespene]" Value="120"/>
+        <EffectArray Operation="Set" Reference="Abil,KerriganRevive,Effect" Value="XelNagaKerriganReviveSet"/>
+        <EffectArray Operation="Subtract" Reference="Behavior,KerriganFirstReviveTimer,Duration" Value="5.000000"/>
+        <EffectArray Operation="Subtract" Reference="Behavior,KerriganNormalReviveTimer,Duration" Value="5.000000"/>
+    </CUpgrade>
+    <CUpgrade id="K5Cooldowns">
+        <EffectArray Operation="Subtract" Reference="Abil,XelNagaKerriganCelestialRadiance,Cost[0].Vital[Energy]" Value="10"/>
+        <EffectArray Operation="Subtract" Reference="Abil,XelNagaKerriganCelestialRadiance,Cost[0].Cooldown.TimeUse" Value="1.000000"/>
+        <EffectArray Operation="Subtract" Reference="Abil,XelNagaKerriganExtinction,Cost[0].Vital[Energy]" Value="20"/>
+        <EffectArray Operation="Subtract" Reference="Abil,XelNagaKerriganExtinction,Cost[0].Cooldown.TimeUse" Value="24.000000"/>
+        <EffectArray Operation="Subtract" Reference="Abil,XelNagaKerriganCreepTeleport,Cost[0].Vital[Energy]" Value="20"/>
+        <EffectArray Operation="Subtract" Reference="Abil,XelNagaKerriganQuantumRay,Cost[0].Vital[Energy]" Value="20"/>
+    </CUpgrade>
+    <CUpgrade id="KerriganVoidCoopEnergyRegen">
+        <EffectArray Reference="Unit,XelNagaKerrigan,EnergyRegenRate" Value="3.33"/>
+    </CUpgrade>
+    <CUpgrade id="KerriganVoidCoopImprovedLeapingStrike">
+        <EffectArray Reference="Effect,XelNagaKerriganQuantumRayDamage,Amount" Value="10"/>
+    </CUpgrade>
+    <CUpgrade id="MasteryAbathurSymbioteCDR">
+        <EffectArray Operation="Subtract" Reference="Abil,SymbioteCarapaceN,Cost[0].Cooldown.TimeUse" Value="0.400000"/>
+        <EffectArray Operation="Subtract" Reference="Abil,SymbioteCarapaceS,Cost[0].Cooldown.TimeUse" Value="0.400000"/>
+    </CUpgrade>
+    <CUpgrade id="CommanderPrestigeDehaka4MasteryDehakaPrimalWurmCDRUpgradeSupplyment">
+        <EffectArray Reference="Abil,DehakaNydusDestroyerTopBar,InfoArray[Build1].Charge.TimeUse" Value="1.200000"/>
+        <EffectArray Reference="Abil,DehakaNydusDestroyerTopBar,InfoArray[Build1].Charge.TimeStart" Value="1.200000"/>
+        <MaxLevel value="30"/>
+    </CUpgrade>
+    <CUpgrade id="MasteryAbathurSymbioteCarapace">
+        <EffectArray Reference="Behavior,SymbioteCarapaceS,Modification.VitalMaxArray[Shields]" Value="1.6667"/>
+        <EffectArray Reference="Behavior,SymbioteCarapaceN,Modification.VitalMaxArray[Shields]" Value="3.3334"/>
+    </CUpgrade>
+    <CUpgrade id="MasteryKerriganAutoAttackDamage">
+        <EffectArray Reference="Effect,XelNagaKerriganLightDamage,Amount" Value="1"/>
+        <EffectArray Reference="Effect,XelNagaKerriganLightDamage1,Amount" Value="1"/>
+        <EffectArray Reference="Effect,XelNagaKerriganLightDamage2,Amount" Value="1"/>
+        <EffectArray Reference="Effect,XelNagaKerriganLightDamage3,Amount" Value="1"/>
+        <EffectArray Reference="Effect,XelNagaKerriganLightDamage4,Amount" Value="1"/>
+    </CUpgrade>
+    <CUpgrade id="MasteryKerriganEnergyRegen">
+        <EffectArray Reference="Unit,XelNagaKerrigan,EnergyRegenRate" Value="0.15"/>
+    </CUpgrade>
+    <CUpgrade id="MasteryKerriganImmobilizationWaveDamage">
+        <EffectArray Reference="Effect,MasteryXelNagaKerriganExtinctionPulseDamageDisplayDummy,Amount" Value="1000"/>
+        <EffectArray Reference="Effect,XelNagaKerriganExtinctionPulseDamageNormal,Amount" Value="1000"/>
+    </CUpgrade>
+    <CUpgrade id="CommanderPrestigeKaraxSuperArmyMasteryArtanisChronoBoostSupplyment">
+        <Flags index="UpgradeCheat" value="0"/>
+        <EffectArray Reference="Behavior,VoidSentryChronoBeam,Modification.AdditiveAttackSpeedFactor" Value="0.01"/>
+        <EffectArray Reference="Behavior,VoidSentryChronoBeam,Modification.AdditiveMoveSpeedFactor" Value="0.02"/>
+        <EffectArray Reference="Behavior,SOAMapWideChronoPassiveTarget,Modification.RateMultiplierArray[Charge]" Value="0.01"/>
+        <EffectArray Reference="Behavior,SOAMapWideChronoPassiveTarget,Modification.RateMultiplierArray[Cooldown]" Value="0.01"/>
+        <EffectArray Reference="Behavior,SOAMapWideChronoPassiveTarget,Modification.RateMultiplierArray[Creep]" Value="0.01"/>
+        <EffectArray Reference="Behavior,SOAMapWideChronoPassiveTarget,Modification.RateMultiplierArray[Morph]" Value="0.01"/>
+        <EffectArray Reference="Behavior,SOAMapWideChronoPassiveTarget,Modification.RateMultiplierArray[Progress]" Value="0.01"/>
+        <EffectArray Reference="Behavior,SOAMapWideChronoPassiveTarget,Modification.RateMultiplierArray[Queueable]" Value="0.01"/>
+        <EffectArray Reference="Behavior,SOAMapWideChronoPassiveTarget,Modification.RateMultiplierArray[Spawn]" Value="0.01"/>
+        <EditorCategories value="Race:Protoss"/>
+        <MaxLevel value="30"/>
+        <LeaderAlias value=""/>
+    </CUpgrade>
+    <CUpgrade id="MasteryKerriganPrimarySpeedDamage">
+        <EffectArray Reference="Weapon,XelNagaKerriganLight,RateMultiplier" Value="0.01"/>
+        <EffectArray Reference="Effect,XelNagaKerriganQuantumRayDamage,Amount" Value="0.4"/>
+        <EffectArray Reference="Effect,MasteryXelNagaKerriganQuantumRayDamageDummy,Amount" Value="20"/>
+    </CUpgrade>
+    <CUpgrade id="SwannCommanderVehicleWeaponRange">
+        <EffectArray Reference="Weapon,HyperionVoidCoopMotionWeapon,MinScanRange" Value="1"/>
+        <EffectArray Reference="Weapon,HyperionVoidCoopMotionWeapon,Range" Value="1"/>
+        <AffectedUnitArray value="HyperionVoidCoopP4"/>
+    </CUpgrade>
+    <CUpgrade id="RaynorTalentedTerranVehicleAndShipPlatingLevel1">
+        <EffectArray Reference="Unit,HyperionVoidCoopP4,LifeArmorLevel" Value="1"/>
+        <EffectArray Reference="Unit,HyperionVoidCoopP4,LifeArmor" Value="1"/>
+        <EffectArray Reference="Unit,HyperionVoidCoopP4,LifeMax" Value="100"/>
+        <EffectArray Reference="Unit,HyperionVoidCoopP4,LifeStart" Value="100"/>
+        <EffectArray Operation="Set" Reference="Actor,HyperionVoidCoopP4,LifeArmorIcon" Value="Assets\Textures\btn-upgrade-terran-shipplatinglevel1.dds"/>
+        <AffectedUnitArray value="HyperionVoidCoopP4"/>
+    </CUpgrade>
+    <CUpgrade id="RaynorTalentedTerranVehicleAndShipPlatingLevel2">
+        <EffectArray Reference="Unit,HyperionVoidCoopP4,LifeArmorLevel" Value="1"/>
+        <EffectArray Reference="Unit,HyperionVoidCoopP4,LifeArmor" Value="1"/>
+        <EffectArray Reference="Unit,HyperionVoidCoopP4,LifeMax" Value="100"/>
+        <EffectArray Reference="Unit,HyperionVoidCoopP4,LifeStart" Value="100"/>
+        <EffectArray Operation="Set" Reference="Actor,HyperionVoidCoopP4,LifeArmorIcon" Value="Assets\Textures\btn-upgrade-terran-shipplatinglevel2.dds"/>
+        <AffectedUnitArray value="HyperionVoidCoopP4"/>
+    </CUpgrade>
+    <CUpgrade id="RaynorTalentedTerranVehicleAndShipPlatingLevel3">
+        <EffectArray Reference="Unit,HyperionVoidCoopP4,LifeArmorLevel" Value="1"/>
+        <EffectArray Reference="Unit,HyperionVoidCoopP4,LifeArmor" Value="1"/>
+        <EffectArray Reference="Unit,HyperionVoidCoopP4,LifeMax" Value="100"/>
+        <EffectArray Reference="Unit,HyperionVoidCoopP4,LifeStart" Value="100"/>
+        <EffectArray Operation="Set" Reference="Actor,HyperionVoidCoopP4,LifeArmorIcon" Value="Assets\Textures\btn-upgrade-terran-shipplatinglevel3.dds"/>
+        <AffectedUnitArray value="HyperionVoidCoopP4"/>
+    </CUpgrade>
+    <CUpgrade id="TerranVehicleAndShipWeaponsLevel1">
+        <AffectedUnitArray value="HyperionVoidCoopP4"/>
+        <EffectArray Reference="Weapon,HyperionVoidCoopMotionWeapon,Level" Value="1"/>
+        <EffectArray Reference="Effect,HyperionVoidCoopMotionWeaponDamage,Amount" Value="1.000000"/>
+        <EffectArray Operation="Set" Reference="Weapon,HyperionVoidCoopMotionWeapon,Icon" Value="Assets\Textures\btn-upgrade-terran-shipweaponslevel1.dds"/>
+    </CUpgrade>
+    <CUpgrade id="TerranVehicleAndShipWeaponsLevel2">
+        <AffectedUnitArray value="HyperionVoidCoopP4"/>
+        <EffectArray Reference="Weapon,HyperionVoidCoopMotionWeapon,Level" Value="1"/>
+        <EffectArray Reference="Effect,HyperionVoidCoopMotionWeaponDamage,Amount" Value="1.000000"/>
+        <EffectArray Operation="Set" Reference="Weapon,HyperionVoidCoopMotionWeapon,Icon" Value="Assets\Textures\btn-upgrade-terran-shipweaponslevel2.dds"/>
+    </CUpgrade>
+    <CUpgrade id="TerranVehicleAndShipWeaponsLevel3">
+        <AffectedUnitArray value="HyperionVoidCoopP4"/>
+        <EffectArray Reference="Weapon,HyperionVoidCoopMotionWeapon,Level" Value="1"/>
+        <EffectArray Reference="Effect,HyperionVoidCoopMotionWeaponDamage,Amount" Value="1.000000"/>
+        <EffectArray Operation="Set" Reference="Weapon,HyperionVoidCoopMotionWeapon,Icon" Value="Assets\Textures\btn-upgrade-terran-shipweaponslevel3.dds"/>
+    </CUpgrade>
+    <CUpgrade id="TerranVehicleAndShipArmorsLevel1">
+        <AffectedUnitArray value="HyperionVoidCoopP4"/>
+        <EffectArray Reference="Unit,HyperionVoidCoopP4,LifeArmorLevel" Value="1"/>
+        <EffectArray Reference="Unit,HyperionVoidCoopP4,LifeArmor" Value="1"/>
+        <EffectArray Operation="Set" Reference="Actor,HyperionVoidCoopP4,LifeArmorIcon" Value="Assets\Textures\btn-upgrade-terran-shipplatinglevel1.dds"/>
+    </CUpgrade>
+    <CUpgrade id="TerranVehicleAndShipArmorsLevel2">
+        <AffectedUnitArray value="HyperionVoidCoopP4"/>
+        <EffectArray Reference="Unit,HyperionVoidCoopP4,LifeArmorLevel" Value="1"/>
+        <EffectArray Reference="Unit,HyperionVoidCoopP4,LifeArmor" Value="1"/>
+        <EffectArray Operation="Set" Reference="Actor,HyperionVoidCoopP4,LifeArmorIcon" Value="Assets\Textures\btn-upgrade-terran-shipplatinglevel2.dds"/>
+    </CUpgrade>
+    <CUpgrade id="TerranVehicleAndShipArmorsLevel3">
+        <AffectedUnitArray value="HyperionVoidCoopP4"/>
+        <EffectArray Reference="Unit,HyperionVoidCoopP4,LifeArmorLevel" Value="1"/>
+        <EffectArray Reference="Unit,HyperionVoidCoopP4,LifeArmor" Value="1"/>
+        <EffectArray Operation="Set" Reference="Actor,HyperionVoidCoopP4,LifeArmorIcon" Value="Assets\Textures\btn-upgrade-terran-shipplatinglevel3.dds"/>
+    </CUpgrade>
+    <CUpgrade id="CommanderPrestigeRaynor4" parent="CommanderPrestige">
+        <EffectArray Reference="Behavior,HyperionVoidCoopSpawn,Duration" Value="0.660000"/>
+        <EffectArray Operation="Set" Reference="Effect,SummonHyperionCreateUnit,SpawnUnit[0]" Value="HyperionVoidCoopP4"/>
+        <EffectArray Operation="Set" Reference="Button,ResearchBattlecruiserSpecializations,AlertTooltip" Value="Button/Tooltip/ResearchBattlecruiserSpecializationsUpgradedP4"/>
+        <EffectArray Operation="Set" Reference="Button,ResearchBattlecruiserSpecializations,Tooltip" Value="Button/Tooltip/ResearchBattlecruiserSpecializationsUpgradedP4"/>
+        <EffectArray Operation="Set" Reference="Effect,HyperionVoidCoopSpawnTimedLifeAB,Behavior" Value="HyperionNeverDie"/>
+        <EffectArray Operation="Set" Reference="Actor,HyperionHyperjumpLaunch,Scale" Value="0.660000"/>
+        <EffectArray Operation="Subtract" Reference="Abil,VoidCoopSummonHyperion,Cost[0].Cooldown.TimeStart" Value="300"/>
+    </CUpgrade>
+    <CUpgrade id="HyperionUltimateWeapon">
+        <InfoTooltipPriority value="1"/>
+        <Icon value="Assets\Textures\btn-ability-stetmann-battlecarrierlordmechayamatocannon.dds"/>
+        <Alert value="ResearchComplete"/>
+        <Race value="Terr"/>
+        <ScoreResult value="BuildOrder"/>
+        <EditorCategories value="Race:Terran,UpgradeType:Talents"/>
+        <AffectedUnitArray value="HyperionVoidCoopP4"/>
+        <EffectArray Reference="Effect,HyperionVoidCoopYamatoCannonDamageAOEP4,Amount" Value="200"/>
+    </CUpgrade>
+    <CUpgrade id="CommanderPrestigeAbathur5">
+        <EffectArray Reference="Unit,Devourer,CostResource[Minerals]" Value="250"/>
+        <EffectArray Operation="Subtract" Reference="Unit,Devourer,CostResource[Vespene]" Value="75"/>
+        <EffectArray Reference="Unit,GuardianMP,CostResource[Minerals]" Value="150"/>
+        <EffectArray Operation="Subtract" Reference="Unit,GuardianMP,CostResource[Vespene]" Value="100"/>
+        <EffectArray Reference="Unit,Mutalisk,CostResource[Minerals]" Value="100"/>
+        <EffectArray Operation="Subtract" Reference="Unit,Mutalisk,CostResource[Vespene]" Value="50"/>
+        <EffectArray Operation="Subtract" Reference="Unit,Viper,CostResource[Vespene]" Value="100"/>
+        <EffectArray Reference="Unit,Viper,CostResource[Minerals]" Value="100"/>
+        <EffectArray Operation="Set" Reference="Button,ExplosiveGlaive,AlertTooltip" Value="Button/Tooltip/CommanderPrestigeAbathur5ExplosiveGlaive"/>
+        <EffectArray Operation="Set" Reference="Button,ExplosiveGlaive,Tooltip" Value="Button/Tooltip/CommanderPrestigeAbathur5ExplosiveGlaive"/>
+        <EffectArray Operation="Set" Reference="Button,EvolveViperAbductImprovedStun,Tooltip" Value="Button/Tooltip/CommanderPrestigeAbathur5EvolveViperAbductImprovedStun"/>
+        <EffectArray Operation="Set" Reference="Button,EvolveViperAbductImprovedStun,AlertTooltip" Value="Button/Tooltip/CommanderPrestigeAbathur5EvolveViperAbductImprovedStun"/>
+        <EffectArray Operation="Set" Reference="Button,EvolveSunderingGlave,AlertTooltip" Value="Button/Tooltip/CommanderPrestigeAbathur5ExplosiveGlaive"/>
+        <EffectArray Operation="Set" Reference="Button,EvolveSunderingGlave,Tooltip" Value="Button/Tooltip/CommanderPrestigeAbathur5ExplosiveGlaive"/>
+        <EffectArray Operation="Set" Reference="Button,ViperAbductImprovedStunPassive,AlertTooltip" Value="Button/Tooltip/CommanderPrestigeAbathur5ViperAbductImprovedStunPassive"/>
+        <EffectArray Operation="Set" Reference="Button,ViperAbductImprovedStunPassive,Tooltip" Value="Button/Tooltip/CommanderPrestigeAbathur5ViperAbductImprovedStunPassive"/>
+        <EffectArray Operation="Set" Reference="Button,EvolveViperImprovedCastRange,AlertTooltip" Value="Button/Tooltip/CommanderPrestigeAbathur5EvolveViperImprovedCastRange"/>
+        <EffectArray Operation="Set" Reference="Button,EvolveViperImprovedCastRange,Tooltip" Value="Button/Tooltip/CommanderPrestigeAbathur5EvolveViperImprovedCastRange"/>
+        <EffectArray Operation="Set" Reference="Button,ViperImprovedCastRangePassive,AlertTooltip" Value="Button/Tooltip/CommanderPrestigeAbathur5ViperImprovedCastRangePassive"/>
+        <EffectArray Operation="Set" Reference="Button,ViperImprovedCastRangePassive,Tooltip" Value="Button/Tooltip/CommanderPrestigeAbathur5ViperImprovedCastRangePassive"/>
+        <EffectArray Operation="Set" Reference="Button,GuardianAttackRangeIncrease,AlertTooltip" Value="Button/Tooltip/CommanderPrestigeAbathur5GuardianAttackRangeIncrease"/>
+        <EffectArray Operation="Set" Reference="Button,GuardianAttackRangeIncrease,Tooltip" Value="Button/Tooltip/CommanderPrestigeAbathur5GuardianAttackRangeIncrease"/>
+        <EffectArray Operation="Set" Reference="Button,EvolveGuardianAttackRangeIncrease,AlertTooltip" Value="Button/Tooltip/CommanderPrestigeAbathur5EvolveGuardianAttackRangeIncrease"/>
+        <EffectArray Operation="Set" Reference="Button,EvolveGuardianAttackRangeIncrease,Tooltip" Value="Button/Tooltip/CommanderPrestigeAbathur5EvolveGuardianAttackRangeIncrease"/>
+    </CUpgrade>
+    <CUpgrade id="CommanderPrestigeAbathur5level12">
+        <EffectArray Operation="Subtract" Reference="Unit,Devourer,CostResource[Minerals]" Value="75"/>
+        <EffectArray Operation="Subtract" Reference="Unit,GuardianMP,CostResource[Minerals]" Value="25"/>
+        <EffectArray Reference="Unit,GuardianMP,CostResource[Vespene]" Value="25"/>
+        <EffectArray Operation="Subtract" Reference="Unit,Devourer,CostResource[Vespene]" Value="12"/>
+    </CUpgrade>
+    <CUpgrade id="CommanderPrestigeAbathur5DevourerAoEDamage">
+        <EffectArray Reference="Effect,DevourerAoeDamage,AreaArray[0].Radius" Value="1.5"/>
+    </CUpgrade>
+    <CUpgrade id="CommanderPrestigeAbathur5MutaliskSunderingGlave">
+        <EffectArray Reference="Effect,GlaiveWurmU1,AttributeFactor[Armored]" Value="1"/>
+        <EffectArray Reference="Effect,GlaiveWurmU2,AttributeFactor[Armored]" Value="1"/>
+        <EffectArray Reference="Effect,GlaiveWurmU3,AttributeFactor[Armored]" Value="1"/>
+        <EffectArray Reference="Effect,GlaiveWurmU4,AttributeFactor[Armored]" Value="1"/>
+        <EffectArray Reference="Effect,GlaiveWurmU5,AttributeFactor[Armored]" Value="1"/>
+        <EffectArray Reference="Effect,GlaiveWurmU6,AttributeFactor[Armored]" Value="1"/>
+    </CUpgrade>
+    <CUpgrade id="CommanderPrestigeAbathur5ViperAbductImprovedStun">
+        <EffectArray Reference="Behavior,YoinkEnemyStun,Duration" Value="5.000000"/>
+    </CUpgrade>
+    <CUpgrade id="CommanderPrestigeAbathur5ViperImprovedCastRange">
+        <EffectArray Reference="Abil,Yoink,Range[0]" Value="4"/>
+        <EffectArray Reference="Abil,ViperConsumption,Range[0]" Value="4"/>
+        <EffectArray Reference="Abil,DisablingCloud,Range[0]" Value="4"/>
+        <EffectArray Reference="Abil,ParasiticBomb,Range[0]" Value="4"/>
+    </CUpgrade>
+    <CUpgrade id="ArtanisHardenedShield">
+        <Flags index="TechTreeCheat" value="1"/>
+        <Icon value="Assets\Textures\btn-ability-protoss-hardenedshields-color.dds"/>
+        <Alert value="ResearchComplete"/>
+        <Race value="Prot"/>
+        <ScoreResult value="BuildOrder"/>
+        <EditorCategories value="Race:Protoss,UpgradeType:Talents"/>
+        <AffectedUnitArray value="ArtanisPrestige"/>
+    </CUpgrade>
+    <CUpgrade id="CommanderPrestigeAbathur4" parent="CommanderPrestige">
+        <EffectArray Operation="Set" Reference="Button,EvolveAdaptivePlating,AlertTooltip" Value="Button/Tooltip/CommanderPrestigeAbathur4EvolveAdaptivePlating"/>
+        <EffectArray Operation="Set" Reference="Button,EvolveAdaptivePlating,Tooltip" Value="Button/Tooltip/CommanderPrestigeAbathur4EvolveAdaptivePlating"/>
+        <EffectArray Operation="Set" Reference="Button,EvolveGlialRegeneration,AlertTooltip" Value="Button/Tooltip/CommanderPrestigeAbathur4EvolveGlialRegeneration"/>
+        <EffectArray Operation="Set" Reference="Button,EvolveGlialRegeneration,Tooltip" Value="Button/Tooltip/CommanderPrestigeAbathur4EvolveGlialRegeneration"/>
+        <EffectArray Operation="Set" Reference="Button,EvolveHydriodicBile,AlertTooltip" Value="Button/Tooltip/CommanderPrestigeAbathur4EvolveHydriodicBile"/>
+        <EffectArray Operation="Set" Reference="Button,EvolveHydriodicBile,Tooltip" Value="Button/Tooltip/CommanderPrestigeAbathur4EvolveHydriodicBile"/>
+        <EffectArray Operation="Set" Reference="Button,EvolveSunderingGlave,AlertTooltip" Value="Button/Tooltip/CommanderPrestigeAbathur4EvolveSunderingGlave"/>
+        <EffectArray Operation="Set" Reference="Button,EvolveSunderingGlave,Tooltip" Value="Button/Tooltip/CommanderPrestigeAbathur4EvolveSunderingGlave"/>
+        <EffectArray Operation="Set" Reference="Button,EvolveTunnelingClaws,AlertTooltip" Value="Button/Tooltip/CommanderPrestigeAbathur4EvolveTunnelingClaws"/>
+        <EffectArray Operation="Set" Reference="Button,EvolveTunnelingClaws,Tooltip" Value="Button/Tooltip/CommanderPrestigeAbathur4EvolveTunnelingClaws"/>
+        <EffectArray Operation="Set" Reference="Button,ExplosiveGlaive,AlertTooltip" Value="Button/Tooltip/CommanderPrestigeAbathur4ExplosiveGlaive"/>
+        <EffectArray Operation="Set" Reference="Button,ExplosiveGlaive,Tooltip" Value="Button/Tooltip/CommanderPrestigeAbathur4ExplosiveGlaive"/>
+        <EffectArray Operation="Set" Reference="Button,HotSRoachDamage,AlertTooltip" Value="Button/Tooltip/CommanderPrestigeAbathur4HotSRoachDamage"/>
+        <EffectArray Operation="Set" Reference="Button,HotSRoachDamage,Tooltip" Value="Button/Tooltip/CommanderPrestigeAbathur4HotSRoachDamage"/>
+        <EffectArray Operation="Set" Reference="Button,HotSRoachShield,AlertTooltip" Value="Button/Tooltip/CommanderPrestigeAbathur4HotSRoachShield"/>
+        <EffectArray Operation="Set" Reference="Button,HotSRoachShield,Tooltip" Value="Button/Tooltip/CommanderPrestigeAbathur4HotSRoachShield"/>
+        <EffectArray Operation="Set" Reference="Button,RapidRegeneration,AlertTooltip" Value="Button/Tooltip/CommanderPrestigeAbathur4RapidRegeneration"/>
+        <EffectArray Operation="Set" Reference="Button,RapidRegeneration,Tooltip" Value="Button/Tooltip/CommanderPrestigeAbathur4RapidRegeneration"/>
+    </CUpgrade>
+    <CUpgrade id="CommanderPrestigeArtanis4" parent="CommanderPrestige">
+        <EffectArray Reference="Unit,ProtossHeroReviveBeacon,Food" Value="200"/>
+    </CUpgrade>
+    <CUpgrade id="CommanderPrestigeArtanisPowerFieldRemake" parent="CommanderPrestige">
+        <EffectArray Operation="Subtract" Reference="Abil,SOAPylonPower,Cost[0].Vital[Energy]" Value="15"/>
+    </CUpgrade>
+    <CUpgrade id="CommanderPrestigeKarax4" parent="CommanderPrestige"/>
+    <CUpgrade id="CommanderPrestigeAbathur5GuardianAttackRangeIncrease">
+        <EffectArray Reference="Weapon,GuardianMPWeapon,Range" Value="3"/>
+    </CUpgrade>
+    <CUpgrade id="CommanderPrestigeAbathur4RavagerDamage">
+        <EffectArray Reference="Effect,RavagerWeaponDamage,AttributeBonus[Light]" Value="8"/>
+    </CUpgrade>
+    <CUpgrade id="CommanderPrestigeAbathur4GlialReconstitution">
+        <EffectArray Reference="Unit,RavagerAbathur,Speed" Value="0.750000"/>
+        <EffectArray Reference="Unit,RavagerAbathurBurrowed,Speed" Value="0.750000"/>
+        <AffectedUnitArray value="RavagerAbathur"/>
+        <AffectedUnitArray value="RavagerAbathurBurrowed"/>
+    </CUpgrade>
+    <CUpgrade id="CommanderPrestigeKaraxArmy">
+        <EffectArray Operation="Subtract" Reference="Unit,StalkerPurifier,CostResource[Minerals]" Value="65"/>
+        <EffectArray Operation="Subtract" Reference="Unit,StalkerPurifier,CostResource[Vespene]" Value="26"/>
+    </CUpgrade>
+    <CUpgrade id="CommanderPrestigeKerriganXelnagaMutalisk" parent="CommanderPrestige">
+        <EffectArray Operation="Set" Reference="Button,SeveringGlave,Tooltip" Value="Button/Tooltip/CommanderPrestigeKerriganXelnagaMutaliskSeveringGlave"/>
+        <EffectArray Operation="Set" Reference="Button,SeveringGlave,AlertTooltip" Value="Button/Tooltip/CommanderPrestigeKerriganXelnagaMutaliskSeveringGlave"/>
+        <EffectArray Operation="Set" Reference="Button,EvolveSeveringGlave,AlertTooltip" Value="Button/Tooltip/CommanderPrestigeKerriganXelnagaMutaliskEvolveSeveringGlave"/>
+        <EffectArray Operation="Set" Reference="Button,EvolveSeveringGlave,Tooltip" Value="Button/Tooltip/CommanderPrestigeKerriganXelnagaMutaliskEvolveSeveringGlave"/>
+    </CUpgrade>
+    <CUpgrade id="CommanderPrestigeTychus4SquadAbilitiesMastery" parent="CommanderPrestige">
+        <EffectArray Reference="Effect,TychusOutlawUnlockDurationDummy,Amount" Value="0.5"/>
+        <EditorCategories value="Race:Terran"/>
+        <MaxLevel value="30"/>
+    </CUpgrade>
+    <CUpgrade id="HyperionTacticalCommandSystem">
+        <InfoTooltipPriority value="1"/>
+        <Icon value="Assets\Textures\btn-tips-starmap.dds"/>
+        <Alert value="ResearchComplete"/>
+        <Race value="Terr"/>
+        <ScoreResult value="BuildOrder"/>
+        <EditorCategories value="Race:Terran,UpgradeType:Talents"/>
+        <AffectedUnitArray value="HyperionVoidCoopP4"/>
+    </CUpgrade>
+    <CUpgrade id="HyperionRepair">
+        <InfoTooltipPriority value="1"/>
+        <Icon value="Assets\Textures\btn-ability-stetmann-garyselfhealing.dds"/>
+        <Alert value="ResearchComplete"/>
+        <Race value="Terr"/>
+        <ScoreResult value="BuildOrder"/>
+        <EditorCategories value="Race:Terran,UpgradeType:Talents"/>
+        <EffectArray Reference="Unit,HyperionVoidCoopP4,LifeRegenRate" Value="10.000000"/>
+        <AffectedUnitArray value="HyperionVoidCoopP4"/>
+    </CUpgrade>
+    <CUpgrade id="HyperjumpEngine">
+        <Icon value="Assets\Textures\btn-ability-hornerhan-fleethyperjump.dds"/>
+        <EffectArray Reference="Effect,HyperionVoidCoopLightningStormCP,Chance" Value="1"/>
+        <EffectArray Operation="Set" Reference="Button,HyperionVoidCoopHyperjumpP4,Icon" Value="Assets\Textures\btn-ability-SuperHyperionJump.dds"/>
+        <EffectArray Reference="Abil,HyperionVoidCoopHyperjumpP4,Cost[0].Charge.CountStart" Value="1"/>
+        <EffectArray Reference="Abil,HyperionVoidCoopHyperjumpP4,Cost[0].Charge.CountMax" Value="1"/>
+        <EffectArray Operation="Set" Reference="Button,HyperionVoidCoopHyperjumpP4,AlertTooltip" Value="Button/Tooltip/HyperionVoidCoopHyperjumpP4Upgrade"/>
+        <EffectArray Operation="Set" Reference="Button,HyperionVoidCoopHyperjumpP4,Tooltip" Value="Button/Tooltip/HyperionVoidCoopHyperjumpP4Upgrade"/>
+        <AffectedUnitArray value="HyperionVoidCoopP4"/>
+    </CUpgrade>
+    <CUpgrade id="KaraxCommander">
+        <EffectArray Reference="Unit,StalkerPurifier,LifeMax" Value="40"/>
+        <EffectArray Reference="Unit,StalkerPurifier,LifeStart" Value="40"/>
+        <EffectArray Reference="Unit,StalkerPurifier,CostResource[Vespene]" Value="15"/>
+        <EffectArray Reference="Unit,StalkerPurifier,CostResource[Minerals]" Value="37"/>
+    </CUpgrade>
+    <CUpgrade id="CommanderPrestigeKerriganXelnagaMutaliskSeveringGlaveUpgradeSupplyment">
+        <Icon value="Assets\Textures\btn-upgrade-zerg-explosiveglaive.dds"/>
+        <EffectArray Reference="Effect,CoopGlaiveWurmU1,AttributeFactor[Armored]" Value="1"/>
+        <EffectArray Reference="Effect,CoopGlaiveWurmU2,AttributeFactor[Armored]" Value="1"/>
+        <EffectArray Reference="Effect,CoopGlaiveWurmU3,AttributeFactor[Armored]" Value="1"/>
+        <EffectArray Reference="Effect,CoopGlaiveWurmU4,AttributeFactor[Armored]" Value="1"/>
+        <EffectArray Reference="Effect,CoopGlaiveWurmU5,AttributeFactor[Armored]" Value="1"/>
+        <EffectArray Reference="Effect,CoopGlaiveWurmU6,AttributeFactor[Armored]" Value="1"/>
+        <EffectArray Reference="Effect,CoopGlaiveWurmU2,Amount" Value="1"/>
+        <EffectArray Reference="Effect,CoopGlaiveWurmU3,Amount" Value="2"/>
+        <EffectArray Reference="Effect,CoopGlaiveWurmU4,Amount" Value="3"/>
+        <EffectArray Reference="Effect,CoopGlaiveWurmU5,Amount" Value="4"/>
+        <EffectArray Reference="Effect,CoopGlaiveWurmU6,Amount" Value="5"/>
+        <EditorCategories value="Race:Zerg,UpgradeType:SpellResearch"/>
+        <AffectedUnitArray value="MutaliskBroodlord"/>
+    </CUpgrade>
+    <CUpgrade id="MasteryArtanisEnergyRegenCooldown">
+        <EffectArray Operation="Subtract" Reference="Abil,LightningDash,Cost[0].Cooldown.TimeUse" Value="0.075000"/>
+        <EffectArray Operation="Subtract" Reference="Abil,AstralWind,Cost[0].Cooldown.TimeUse" Value="0.45000"/>
+        <EffectArray Operation="Subtract" Reference="Abil,CommanderPrestigeArtanisInspire,Cost[0].Cooldown.TimeUse" Value="3.6"/>
+    </CUpgrade>
+    <CUpgrade id="CommanderPrestigeDehaka4">
+        <Flags index="UpgradeCheat" value="0"/>
+        <EffectArray Reference="Effect,DehakaGeneCarapaceAB,Chance" Value="0.50"/>
+        <EffectArray Reference="Effect,DehakaGene4CreepersAB,Chance" Value="0.50"/>
+        <EffectArray Reference="Effect,DehakaGeneThornsAuraAB,Chance" Value="0.50"/>
+        <EffectArray Reference="Effect,DehakaGeneFrenziedAB,Chance" Value="0.50"/>
+        <EffectArray Reference="Effect,DehakaGeneAttackSpeedAB,Chance" Value="0.50"/>
+        <EffectArray Reference="Effect,DehakaGeneLifeLeechAB,Chance" Value="0.50"/>
+        <EffectArray Operation="Subtract" Reference="Abil,DehakaDroneMorph,InfoArray[Build1].Time" Value="75.000000"/>
+        <EffectArray Operation="Subtract" Reference="Abil,DehakaDroneMorph,InfoArray[Build2].Time" Value="45.000000"/>
+        <EffectArray Operation="Subtract" Reference="Abil,DehakaDroneMorph,InfoArray[Build3].Time" Value="60.000000"/>
+        <EffectArray Operation="Subtract" Reference="Abil,DehakaDroneMorph,InfoArray[Build4].Time" Value="90.000000"/>
+        <EffectArray Operation="Subtract" Reference="Abil,DehakaDroneMorph,InfoArray[Build5].Time" Value="90.000000"/>
+        <EffectArray Operation="Subtract" Reference="Abil,DehakaDroneMorph,InfoArray[Build6].Time" Value="30.000000"/>
+        <EffectArray Reference="Unit,DehakaBarracks,Food" Value="2"/>
+        <EffectArray Reference="Unit,DehakaBarracksUprooted,Food" Value="2"/>
+        <EffectArray Reference="Unit,DehakaHatchery,Food" Value="6"/>
+        <EffectArray Reference="Unit,DehakaHatcheryUprooted,Food" Value="6"/>
+        <EffectArray Reference="Unit,DehakaNydusDestroyer,Food" Value="2"/>
+        <EffectArray Operation="Set" Reference="Abil,DehakaDroneMorph,InfoArray[Build5].Button.Requirements" Value="P4DehakaDakrunBuild"/>
+        <EffectArray Operation="Set" Reference="Abil,DehakaDroneMorph,InfoArray[Build4].Button.Requirements" Value="P4DehakaMurvarBuild"/>
+        <EffectArray Operation="Set" Reference="Abil,DehakaDroneMorph,InfoArray[Build3].Button.Requirements" Value="P4DehakaGlevigBuild"/>
+        <EffectArray Operation="Set" Reference="Abil,DehakaHatcheryResearch,InfoArray[Research1].Button.Requirements" Value="P4LearnDehakaPrimalWeapons1"/>
+        <EffectArray Operation="Set" Reference="Abil,DehakaHatcheryResearch,InfoArray[Research2].Button.Requirements" Value="P4LearnDehakaPrimalWeapons2"/>
+        <EffectArray Operation="Set" Reference="Abil,DehakaHatcheryResearch,InfoArray[Research3].Button.Requirements" Value="P4LearnDehakaPrimalWeapons3"/>
+        <EffectArray Operation="Set" Reference="Abil,DehakaHatcheryResearch,InfoArray[Research4].Button.Requirements" Value="P4LearnDehakaPrimalArmor1"/>
+        <EffectArray Operation="Set" Reference="Abil,DehakaHatcheryResearch,InfoArray[Research5].Button.Requirements" Value="P4LearnDehakaPrimalArmor2"/>
+        <EffectArray Operation="Set" Reference="Abil,DehakaHatcheryResearch,InfoArray[Research6].Button.Requirements" Value="P4LearnDehakaPrimalArmor3"/>
+        <EffectArray Operation="Subtract" Reference="Abil,DehakaNydusDestroyerTopBar,InfoArray[Build1].Charge.TimeStart" Value="60.000000"/>
+        <EffectArray Operation="Subtract" Reference="Abil,DehakaNydusDestroyerTopBar,InfoArray[Build1].Charge.TimeUse" Value="60.000000"/>
+        <EffectArray Reference="Unit,DehakaNydusDestroyer,Food" Value="2"/>
+        <EffectArray Operation="Subtract" Reference="Abil,NydusDestroyerDeepTunnel,Cost[0].Cooldown.TimeUse" Value="45.000000"/>
+        <EffectArray Operation="Subtract" Reference="Abil,GreaterNydusDestroyerDeepTunnel,Cost[0].Cooldown.TimeUse" Value="45.000000"/>
+        <EditorCategories value="Race:PrimalZerg"/>
+    </CUpgrade>
+    <CUpgrade id="CommanderPrestigeAbathur4SunderingGlave">
+        <EffectArray Reference="Effect,GuardianMPWeaponDamage,AttributeFactor[Armored]" Value="1"/>
+        <EffectArray Reference="Effect,DevourerDamage,AttributeFactor[Armored]" Value="1"/>
+    </CUpgrade>
+    <CUpgrade id="CommanderPrestigeTychus4">
+        <EffectArray Operation="Subtract" Reference="Effect,TychusOutlawUnlockDurationDummy,Amount" Value="60"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch,InfoArray[Research1].Resource[Minerals]" Value="175"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch,InfoArray[Research1].Resource[Vespene]" Value="63"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch,InfoArray[Research2].Resource[Minerals]" Value="175"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch,InfoArray[Research2].Resource[Vespene]" Value="63"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch,InfoArray[Research3].Resource[Minerals]" Value="175"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch,InfoArray[Research3].Resource[Vespene]" Value="63"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch,InfoArray[Research4].Resource[Minerals]" Value="300"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch,InfoArray[Research4].Resource[Vespene]" Value="100"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch,InfoArray[Research5].Resource[Minerals]" Value="175"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch,InfoArray[Research5].Resource[Vespene]" Value="63"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch,InfoArray[Research6].Resource[Minerals]" Value="175"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch,InfoArray[Research6].Resource[Vespene]" Value="63"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch,InfoArray[Research7].Resource[Minerals]" Value="175"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch,InfoArray[Research7].Resource[Vespene]" Value="63"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch,InfoArray[Research8].Resource[Minerals]" Value="300"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch,InfoArray[Research8].Resource[Vespene]" Value="100"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch,InfoArray[Research9].Resource[Minerals]" Value="175"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch,InfoArray[Research9].Resource[Vespene]" Value="63"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch,InfoArray[Research10].Resource[Minerals]" Value="175"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch,InfoArray[Research10].Resource[Vespene]" Value="63"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch,InfoArray[Research11].Resource[Minerals]" Value="175"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch,InfoArray[Research11].Resource[Vespene]" Value="63"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch,InfoArray[Research12].Resource[Minerals]" Value="300"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch,InfoArray[Research12].Resource[Vespene]" Value="100"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch2,InfoArray[Research1].Resource[Minerals]" Value="175"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch2,InfoArray[Research1].Resource[Vespene]" Value="63"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch2,InfoArray[Research2].Resource[Minerals]" Value="175"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch2,InfoArray[Research2].Resource[Vespene]" Value="63"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch2,InfoArray[Research3].Resource[Minerals]" Value="300"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch2,InfoArray[Research3].Resource[Vespene]" Value="100"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch2,InfoArray[Research4].Resource[Minerals]" Value="175"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch2,InfoArray[Research4].Resource[Vespene]" Value="63"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch2,InfoArray[Research5].Resource[Minerals]" Value="175"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch2,InfoArray[Research5].Resource[Vespene]" Value="63"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch2,InfoArray[Research6].Resource[Minerals]" Value="175"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch2,InfoArray[Research6].Resource[Vespene]" Value="63"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch2,InfoArray[Research7].Resource[Minerals]" Value="175"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch2,InfoArray[Research7].Resource[Vespene]" Value="63"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch2,InfoArray[Research8].Resource[Minerals]" Value="300"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch2,InfoArray[Research8].Resource[Vespene]" Value="100"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch2,InfoArray[Research9].Resource[Minerals]" Value="175"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch2,InfoArray[Research9].Resource[Vespene]" Value="63"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch2,InfoArray[Research10].Resource[Minerals]" Value="175"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch2,InfoArray[Research10].Resource[Vespene]" Value="63"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch2,InfoArray[Research11].Resource[Minerals]" Value="175"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch2,InfoArray[Research11].Resource[Vespene]" Value="63"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch2,InfoArray[Research12].Resource[Minerals]" Value="300"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch2,InfoArray[Research12].Resource[Vespene]" Value="100"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch2,InfoArray[Research13].Resource[Minerals]" Value="175"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch2,InfoArray[Research13].Resource[Vespene]" Value="63"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch2,InfoArray[Research14].Resource[Minerals]" Value="175"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch2,InfoArray[Research14].Resource[Vespene]" Value="63"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch2,InfoArray[Research15].Resource[Minerals]" Value="175"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch2,InfoArray[Research15].Resource[Vespene]" Value="63"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch2,InfoArray[Research16].Resource[Minerals]" Value="300"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch2,InfoArray[Research16].Resource[Vespene]" Value="100"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch2,InfoArray[Research17].Resource[Minerals]" Value="175"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch2,InfoArray[Research17].Resource[Vespene]" Value="63"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch2,InfoArray[Research18].Resource[Minerals]" Value="300"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch2,InfoArray[Research18].Resource[Vespene]" Value="100"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch2,InfoArray[Research19].Resource[Minerals]" Value="175"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch2,InfoArray[Research19].Resource[Vespene]" Value="63"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch2,InfoArray[Research20].Resource[Minerals]" Value="175"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch2,InfoArray[Research20].Resource[Vespene]" Value="63"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch2,InfoArray[Research21].Resource[Minerals]" Value="300"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch2,InfoArray[Research21].Resource[Vespene]" Value="100"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch2,InfoArray[Research22].Resource[Minerals]" Value="175"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch2,InfoArray[Research22].Resource[Vespene]" Value="63"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch2,InfoArray[Research23].Resource[Minerals]" Value="175"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch2,InfoArray[Research23].Resource[Vespene]" Value="63"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch2,InfoArray[Research24].Resource[Minerals]" Value="175"/>
+        <EffectArray Operation="Subtract" Reference="Abil,TychusHeroResearch2,InfoArray[Research24].Resource[Vespene]" Value="63"/>
+    </CUpgrade>
+    <CUpgrade id="MasteryRaynorResearchSpeed">
+        <EffectArray Operation="Subtract" Reference="Abil,FusionCoreResearch,InfoArray[Research7].Time" Value="3.600000"/>
+        <EffectArray Operation="Subtract" Reference="Abil,FusionCoreResearch,InfoArray[Research8].Time" Value="2.400000"/>
+        <EffectArray Operation="Subtract" Reference="Abil,FusionCoreResearch,InfoArray[Research9].Time" Value="3.600000"/>
+        <EffectArray Operation="Subtract" Reference="Abil,FusionCoreResearch,InfoArray[Research10].Time" Value="1.800000"/>
+    </CUpgrade>
+    <CUpgrade id="StructureArmorUpgradeP4">
+        <EffectArray Reference="Unit,KhaydarinMonolith,LifeArmor" Value="2"/>
+        <EffectArray Reference="Unit,PhotonCannon,LifeArmor" Value="2"/>
+        <EffectArray Reference="Unit,ShieldBattery,LifeArmor" Value="2"/>
+        <EffectArray Reference="Unit,Pylon,LifeArmor" Value="2"/>
+        <EffectArray Reference="Unit,Pylon,LifeArmorLevel" Value="2"/>
+        <EffectArray Reference="Unit,ShieldBattery,LifeArmorLevel" Value="2"/>
+        <EffectArray Reference="Unit,PhotonCannon,LifeArmorLevel" Value="2"/>
+        <EffectArray Reference="Unit,KhaydarinMonolith,LifeArmorLevel" Value="2"/>
+        <MaxLevel value="3"/>
+        <LeaderAlias value="StructureAttackUpgrade"/>
+    </CUpgrade>
+    <CUpgrade id="StructureShieldUpgradeP4">
+        <EffectArray Reference="Unit,KhaydarinMonolith,ShieldArmor" Value="1"/>
+        <EffectArray Reference="Unit,PhotonCannon,ShieldArmor" Value="1"/>
+        <EffectArray Reference="Unit,ShieldBattery,ShieldArmor" Value="1"/>
+        <EffectArray Reference="Unit,Pylon,ShieldArmor" Value="1"/>
+        <EffectArray Reference="Unit,Pylon,ShieldArmorLevel" Value="1"/>
+        <EffectArray Reference="Unit,ShieldBattery,ShieldArmorLevel" Value="1"/>
+        <EffectArray Reference="Unit,PhotonCannon,ShieldArmorLevel" Value="1"/>
+        <EffectArray Reference="Unit,KhaydarinMonolith,ShieldArmorLevel" Value="1"/>
+        <MaxLevel value="3"/>
+        <LeaderAlias value="StructureAttackUpgrade"/>
+    </CUpgrade>
+    <CUpgrade id="StructureAttackUpgradeP4">
+        <EffectArray Reference="Effect,KhaydarinBeamDamage,Amount" Value="20"/>
+        <EffectArray Reference="Effect,PhotonCannonU,Amount" Value="4"/>
+        <EffectArray Reference="Weapon,KhaydarinBeam,Level" Value="2"/>
+        <EffectArray Reference="Weapon,PhotonCannon,Level" Value="2"/>
+        <MaxLevel value="3"/>
+        <LeaderAlias value="StructureAttackUpgrade"/>
+    </CUpgrade>
+    <CUpgrade id="CommanderPrestigeAbathur4TunnelingClaws">
+        <Race value="Zerg"/>
+        <EffectArray Reference="Unit,RavagerAbathurBurrowed,Speed" Value="2.250000"/>
+        <EffectArray Reference="Unit,RavagerAbathurBurrowed,LifeRegenRate" Value="5"/>
+        <EffectArray Reference="Unit,RavagerAbathurBurrowed,Acceleration" Value="1000.000000"/>
+        <AffectedUnitArray value="RavagerAbathur"/>
+        <AffectedUnitArray value="RavagerAbathurBurrowed"/>
+    </CUpgrade>
+    <CUpgrade id="TerranShipArmorsVanadiumPlatingLevel1">
+        <EffectArray Reference="Unit,HyperionVoidCoopP4,LifeArmorLevel" Value="1"/>
+        <EffectArray Reference="Unit,HyperionVoidCoopP4,LifeArmor" Value="1"/>
+        <EffectArray Operation="Multiply" Reference="Unit,HyperionVoidCoopP4,LifeMax" Value="1.05"/>
+        <EffectArray Operation="Multiply" Reference="Unit,HyperionVoidCoopP4,LifeStart" Value="1.05"/>
+        <EffectArray Operation="Set" Reference="Actor,HyperionVoidCoopP4,LifeArmorIcon" Value="Assets\Textures\btn-upgrade-terran-shipplatinglevel1.dds"/>
+    </CUpgrade>
+    <CUpgrade id="TerranShipArmorsVanadiumPlatingLevel2">
+        <EffectArray Reference="Unit,HyperionVoidCoopP4,LifeArmorLevel" Value="1"/>
+        <EffectArray Reference="Unit,HyperionVoidCoopP4,LifeArmor" Value="1"/>
+        <EffectArray Operation="Multiply" Reference="Unit,HyperionVoidCoopP4,LifeMax" Value="1.05"/>
+        <EffectArray Operation="Multiply" Reference="Unit,HyperionVoidCoopP4,LifeStart" Value="1.05"/>
+        <EffectArray Operation="Set" Reference="Actor,HyperionVoidCoopP4,LifeArmorIcon" Value="Assets\Textures\btn-upgrade-terran-shipplatinglevel2.dds"/>
+    </CUpgrade>
+    <CUpgrade id="TerranShipArmorsVanadiumPlatingLevel3">
+        <EffectArray Reference="Unit,HyperionVoidCoopP4,LifeArmorLevel" Value="1"/>
+        <EffectArray Reference="Unit,HyperionVoidCoopP4,LifeArmor" Value="1"/>
+        <EffectArray Operation="Multiply" Reference="Unit,HyperionVoidCoopP4,LifeMax" Value="1.05"/>
+        <EffectArray Operation="Multiply" Reference="Unit,HyperionVoidCoopP4,LifeStart" Value="1.05"/>
+        <EffectArray Operation="Set" Reference="Actor,HyperionVoidCoopP4,LifeArmorIcon" Value="Assets\Textures\btn-upgrade-terran-shipplatinglevel3.dds"/>
+    </CUpgrade>
+    <CUpgrade id="TerranShipArmorsLevel1">
+        <AffectedUnitArray value="HyperionVoidCoopP4"/>
+        <!--  Hyperion  -->
+        <EffectArray Reference="Unit,HyperionVoidCoopP4,LifeArmorLevel" Value="1"/>
+        <EffectArray Reference="Unit,HyperionVoidCoopP4,LifeArmor" Value="1"/>
+        <EffectArray Operation="Set" Reference="Actor,HyperionVoidCoopP4,LifeArmorIcon" Value="Assets\Textures\btn-upgrade-terran-shipplatinglevel1.dds"/>
+    </CUpgrade>
+    <CUpgrade id="TerranShipArmorsLevel2">
+        <AffectedUnitArray value="HyperionVoidCoopP4"/>
+        <!--  Hyperion  -->
+        <EffectArray Reference="Unit,HyperionVoidCoopP4,LifeArmorLevel" Value="1"/>
+        <EffectArray Reference="Unit,HyperionVoidCoopP4,LifeArmor" Value="1"/>
+        <EffectArray Operation="Set" Reference="Actor,HyperionVoidCoopP4,LifeArmorIcon" Value="Assets\Textures\btn-upgrade-terran-shipplatinglevel2.dds"/>
+    </CUpgrade>
+    <CUpgrade id="TerranShipArmorsLevel3">
+        <AffectedUnitArray value="HyperionVoidCoopP4"/>
+        <!--  Hyperion  -->
+        <EffectArray Reference="Unit,HyperionVoidCoopP4,LifeArmorLevel" Value="1"/>
+        <EffectArray Reference="Unit,HyperionVoidCoopP4,LifeArmor" Value="1"/>
+        <EffectArray Operation="Set" Reference="Actor,HyperionVoidCoopP4,LifeArmorIcon" Value="Assets\Textures\btn-upgrade-terran-shipplatinglevel3.dds"/>
+    </CUpgrade>
+    <CUpgrade id="VoidCoopHeroicFortitude">
+        <EffectArray Reference="Unit,XelNagaKerrigan,LifeMax" Value="200"/>
+        <EffectArray Reference="Unit,XelNagaKerrigan,LifeRegenRate" Value="5.000000"/>
+        <EffectArray Reference="Unit,XelNagaKerrigan,LifeStart" Value="200"/>
+    </CUpgrade>
+    <CUpgrade id="VoidStalkerPurifier">
+        <Flags index="UpgradeCheat" value="0"/>
+        <InfoTooltipPriority value="2"/>
+        <Race value="Protoss"/>
+        <ScoreResult value="BuildOrder"/>
+        <EffectArray Operation="Set" Reference="Button,Stalker,Name" Value="Button/Name/StalkerPurifier"/>
+        <EffectArray Operation="Set" Reference="Button,Stalker,Tooltip" Value="Button/Tooltip/StalkerPurifier"/>
+        <EffectArray Operation="Set" Reference="Button,Stalker,AlertTooltip" Value="Button/Tooltip/StalkerPurifier"/>
+        <EffectArray Operation="Set" Reference="Button,Stalker,Icon" Value="Assets\Textures\btn-unit-protoss-stalker-purifier.dds"/>
+        <EffectArray Operation="Set" Reference="Button,Stalker,AlertIcon" Value="Assets\Textures\btn-unit-protoss-stalker-purifier.dds"/>
+        <EffectArray Operation="Set" Reference="Abil,GatewayTrain,InfoArray[Train2].Unit[0]" Value="StalkerPurifier"/>
+        <EffectArray Operation="Set" Reference="Abil,WarpGateTrain,InfoArray[Train2].Unit" Value="StalkerPurifier"/>
+        <EditorCategories value="Race:Protoss,UpgradeType:Talents"/>
+        <AffectedUnitArray value="Stalker"/>
+        <AffectedUnitArray value="Dragoon"/>
+        <LeaderAlias value=""/>
+    </CUpgrade>
+</Catalog>

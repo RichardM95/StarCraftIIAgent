@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CScoreValueCustom id="DamageDealtbyContaminatedStrike" parent="BaseScoreValue">
+        <Type value="Fixed"/>
+    </CScoreValueCustom>
+    <CScoreValueCustom id="Devouroffcooldown" parent="AchievementScoreValue">
+        <Type value="Fixed"/>
+    </CScoreValueCustom>
+</Catalog>

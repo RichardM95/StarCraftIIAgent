@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CAbilEffectInstant id="AutoCreepOn">
+        <OrderArray index="0" Model="Assets\UI\Cursors\WayPointConfirm_Void\WayPointConfirm_Void.m3"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="AutoCreepUpgrade"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="TurnOnAutoCreep" State="Restricted" Requirements="AutoCreepOff"/>
+    </CAbilEffectInstant>
+    <CAbilEffectInstant id="AutoCreepOff">
+        <OrderArray index="0" Model="Assets\UI\Cursors\WayPointConfirm_Void\WayPointConfirm_Void.m3"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Effect index="0" value="AutoCreepDowngrade"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="TurnOffAutoCreep" State="Restricted" Requirements="AutoCreepOn"/>
+    </CAbilEffectInstant>
+</Catalog>

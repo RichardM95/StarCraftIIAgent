@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CBehaviorBuff id="GoldRush">
+        <InfoFlags index="Hidden" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="ImbalycMutator_OldHeroDebuff">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification>
+            <AdditiveAttackSpeedFactor value="-0.5"/>
+            <DamageDealtFraction index="Spell" value="-0.75"/>
+            <DamageDealtFraction index="Melee" value="-0.6"/>
+            <DamageDealtFraction index="Ranged" value="-0.6"/>
+            <DamageDealtFraction index="Splash" value="-0.75"/>
+            <DamageDealtFraction index="NoProc" value="-0.75"/>
+            <LifeArmorBonus value="-2"/>
+            <VitalMaxFractionArray index="Life" value="-0.5"/>
+            <VitalMaxFractionArray index="Shields" value="-0.5"/>
+            <VitalRegenMultiplier index="Life" value="-0.5"/>
+            <VitalRegenMultiplier index="Shields" value="-0.5"/>
+            <VitalRegenMultiplier index="Energy" value="-0.5"/>
+            <RateMultiplierArray index="Charge" value="0.5"/>
+            <RateMultiplierArray index="Cooldown" value="0.5"/>
+            <RateMultiplierArray index="Morph" value="0.5"/>
+            <RateMultiplierArray index="Progress" value="0.5"/>
+            <RateMultiplierArray index="Queueable" value="0.5"/>
+            <RateMultiplierArray index="Spawn" value="0.5"/>
+            <RateMultiplierArray index="Creep" value="0.5"/>
+        </Modification>
+        <BehaviorFlags index="Permanent" value="1"/>
+    </CBehaviorBuff>
+    <CBehaviorAttribute id="MutatorGetArmor">
+        <Face value="MutatorGetArmor"/>
+        <InfoFlags index="Hidden" value="1"/>
+        <InfoIcon value="Assets\Textures\btn-upgrade-swann-hellarmor.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <MaxPoints value="65535"/>
+        <Modification ShieldArmorBonus="0.5">
+            <LifeArmorBonus value="0.5"/>
+        </Modification>
+        <PointDisplayFlags index="ExpandUpgraded" value="1"/>
+    </CBehaviorAttribute>
+    <CBehaviorBuff id="NexusCoopExcludeEndurance">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="NexusCoopEndurance">
+        <InfoIcon value="3P_Endurance.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="NexusCoopEnduranceTrain">
+        <InfoIcon value="3P_Endurance.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification LifeArmorMultiplier="0">
+            <UnifiedDamageTakenFraction index="Spell" value="-0.6"/>
+            <UnifiedDamageTakenFraction index="Melee" value="-0.6"/>
+            <UnifiedDamageTakenFraction index="Ranged" value="-0.6"/>
+            <UnifiedDamageTakenFraction index="Splash" value="-0.6"/>
+            <UnifiedDamageTakenFraction index="NoProc" value="-0.6"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="SCCImbalyc_InfestorEgg">
+        <InfoIcon value="Assets\Textures\btn-unit-collection-primal-infestor.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DisplayDuration index="Self" value="1"/>
+        <DisplayDuration index="Ally" value="1"/>
+        <DisplayDuration index="Neutral" value="1"/>
+        <DisplayDuration index="Enemy" value="1"/>
+        <Duration value="90"/>
+        <FinalEffect value="SCCImbalyc_InfestorEggCU3"/>
+        <ExpireEffect value="SCCImbalyc_InfestorEggSuicide"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="SCCImbalyc_InfestorEggB">
+        <InfoFlags index="Hidden" value="1"/>
+        <InfoIcon value="Assets\Textures\btn-unit-collection-primal-infestor.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="75"/>
+        <Period value="6"/>
+        <InitialEffect value="SCCImbalyc_InfestorEggCU2"/>
+        <PeriodicEffect value="SCCImbalyc_InfestorEggCU"/>
+        <FinalEffect value="SCCImbalyc_InfestorEggCU2"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="SCCImbalyc_InfestorEggA">
+        <InfoFlags index="Hidden" value="1"/>
+        <InfoIcon value="Assets\Textures\btn-unit-collection-primal-infestor.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="15"/>
+        <FinalEffect value="SCCImbalyc_InfestorEggA"/>
+    </CBehaviorBuff>
+</Catalog>

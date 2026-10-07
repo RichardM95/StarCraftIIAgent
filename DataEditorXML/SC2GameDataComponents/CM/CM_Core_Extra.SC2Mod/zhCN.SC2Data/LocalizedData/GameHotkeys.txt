@@ -1,0 +1,2 @@
+﻿Button/Hotkey/TurnOffAutoCreep=D
+Button/Hotkey/TurnOnAutoCreep=E

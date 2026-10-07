@@ -1,0 +1,2 @@
+﻿DocInfo/DescLong=直接用于地图的整合包文件，不包含任何实质性数据，仅用于挂载不同的指挥官/因子拓展包。
+DocInfo/Name=CM_IntegrationPack_Standard

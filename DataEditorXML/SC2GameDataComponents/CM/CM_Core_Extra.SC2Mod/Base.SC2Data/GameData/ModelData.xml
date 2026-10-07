@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CModel id="GlueMultiplayerMenuVoidZealotSP" parent="SMCHARACTER">
+        <Model value="Assets\StoryModeCharacters\Protoss\SMX2_ZealotUpgraded\SMX2_ZealotUpgraded.m3"/>
+    </CModel>
+</Catalog>

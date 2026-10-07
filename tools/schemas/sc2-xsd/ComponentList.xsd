@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xs:element name="Components">
+    <xs:complexType>
+      <xs:choice maxOccurs="unbounded">
+        <xs:element name="Optimized" maxOccurs="1">
+          <xs:complexType/>
+        </xs:element>
+        <xs:element name="DataComponent" maxOccurs="unbounded">
+          <xs:complexType mixed="true">
+            <xs:attribute name="Type" use="required" type="DataType"/>
+            <xs:attribute name="Locale" type="xs:NCName"/>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- The 15 ComponentType FourCCs (enum index in comment), per the RE'd
+       ComponentType enum in file-format/component-list.md. Comment = default
+       component file name. -->
+  <xs:simpleType name="DataType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="info"/><!-- 0  DocumentInfo -->
+      <xs:enumeration value="text"/><!-- 1  GameText -->
+      <xs:enumeration value="gada"/><!-- 2  GameData -->
+      <xs:enumeration value="attr"/><!-- 3  Attributes -->
+      <xs:enumeration value="aiai"/><!-- 4  CustomAI -->
+      <xs:enumeration value="uiui"/><!-- 5  (product-specific) -->
+      <xs:enumeration value="cuts"/><!-- 6  Cutscenes/Index -->
+      <xs:enumeration value="font"/><!-- 7  (product-specific) -->
+      <xs:enumeration value="mapi"/><!-- 8  MapInfo -->
+      <xs:enumeration value="terr"/><!-- 9  t3Terrain.xml -->
+      <xs:enumeration value="plob"/><!-- 10 Objects -->
+      <xs:enumeration value="regi"/><!-- 11 Regions -->
+      <xs:enumeration value="trig"/><!-- 12 Triggers -->
+      <xs:enumeration value="cine"/><!-- 13 Cinematics -->
+      <xs:enumeration value="stdi"/><!-- 14 StandardInfo.xml -->
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

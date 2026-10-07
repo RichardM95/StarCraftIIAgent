@@ -1,0 +1,2 @@
+UI/SC2_UI_Coop_SelectTile_UnLockIcon=Assets\Textures\ui_battlenet_glue_coop_selecttile_unlockicon.dds
+UI/SC2_UI_Coop_SelectTile_UnLockIcon_Disabled=Assets\Textures\ui_battlenet_glue_coop_selecttile_unlockicon_disabled.dds

@@ -1,0 +1,29 @@
+# 发布与分发构建产物（禁止就地编辑）
+publish/
+
+# 本地缓存与临时文件
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.DS_Store
+Thumbs.db
+
+# 生成的 catalog 索引（可用 tools/build-sc2-catalog-graph.py 重建）
+sc2-catalog-graph-out/
+
+# 本地试玩提取日志
+bugreport.txt
+
+# 本地备份与临时工作文件
+backups/
+tmp/
+.sc2-reference-stage-*/
+.sc2-reference-backup-*/
+
+# 本机路径配置（不同机器路径不同，不进版本库）
+agent-config.json
+
+# Workspace reset recovery archive
+.workspace-recovery/

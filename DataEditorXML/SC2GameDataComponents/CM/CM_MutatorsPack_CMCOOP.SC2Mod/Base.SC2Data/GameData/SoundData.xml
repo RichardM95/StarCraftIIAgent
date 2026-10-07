@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CSound id="ImbalycMutator_OldLegendryOverlordNukeLMImpact" parent="Combat">
+        <EditorCategories value="Race:Zerg"/>
+        <AssetArray File="Assets\Sounds\BileLauncher_impact00.wav" FacialGroup=""/>
+        <AssetArray File="Assets\Sounds\BileLauncher_impact01.wav" FacialGroup=""/>
+        <AssetArray File="Assets\Sounds\BileLauncher_impact02.wav" FacialGroup=""/>
+        <Pitch value="-2.000000,1.000000"/>
+        <Volume value="3.000000,5.000000"/>
+        <VolumeRolloffPoints Distance="23.259054"/>
+        <VolumeRolloffPoints Distance="36.072426" Volume="-96.000000"/>
+    </CSound>
+</Catalog>

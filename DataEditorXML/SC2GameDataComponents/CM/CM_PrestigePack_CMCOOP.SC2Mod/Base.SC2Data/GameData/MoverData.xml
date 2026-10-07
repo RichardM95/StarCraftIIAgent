@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CMoverAvoid id="XelNagaKerrigan">
+        <HeightMap value="Glide"/>
+        <PathMode value="Scaler"/>
+    </CMoverAvoid>
+    <CMoverMissile id="LightningDash">
+        <MotionPhases>
+            <Driver value="Guidance"/>
+            <Acceleration value="4000"/>
+            <MaxSpeed value="25"/>
+            <Timeout value="1"/>
+            <ThrowBandYaw value="-360,-360,-360,-360"/>
+            <ThrowBandPitch value="-360,-360,-360,-360"/>
+        </MotionPhases>
+    </CMoverMissile>
+</Catalog>

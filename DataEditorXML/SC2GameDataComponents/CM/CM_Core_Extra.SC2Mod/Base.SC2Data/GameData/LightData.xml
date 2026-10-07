@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CLight id="UIAlliedCommanderMPCP" parent="default">
+        <ToDInfoArray index="0" Id="UIAlliedCommanderMPCP" AmbientColor="0.101961,0.062745,0.031373" OperatorHDR="4">
+            <Param index="HDRExposure" value="1.000000"/>
+            <DirectionalLight index="Key">
+                <Color value="1.000000,0.909804,0.803922"/>
+                <ColorMultiplier value="0.000000"/>
+                <SpecColorMultiplier value="0.000000"/>
+                <Direction value="-0.706218,0.204641,-0.677775"/>
+            </DirectionalLight>
+            <DirectionalLight index="Fill" Color="0.498039,0.713726,1.000000" ColorMultiplier="0.000000" Direction="0.665929,0.393515,-0.633786"/>
+            <DirectionalLight index="Back" Color="1.000000,0.835294,0.666667" ColorMultiplier="0.000000" Direction="0.459543,-0.860646,-0.219336"/>
+        </ToDInfoArray>
+        <EditorCategories value="LightGroup:UI"/>
+    </CLight>
+    <CLight id="UIAlliedCommanderMPCPCustomMutator" parent="default">
+        <ToDInfoArray index="0">
+            <Id value="UIAlliedCommanderMPCPCustomMutator"/>
+            <AmbientColor value="0.101961,0.062745,0.031373"/>
+            <OperatorHDR value="4"/>
+            <Colorize value="1"/>
+            <Param index="HDRExposure" value="1.000000"/>
+            <Param index="ColorizationHue" value="-0.250000"/>
+            <Param index="ColorizationSaturation" value="0.400000"/>
+            <Param index="ColorizationLightness" value="-0.300000"/>
+            <Param index="ColorizationBlend" value="0.320000"/>
+            <DirectionalLight index="Key">
+                <Color value="1.000000,0.909804,0.803922"/>
+                <ColorMultiplier value="0.000000"/>
+                <SpecColorMultiplier value="0.000000"/>
+                <Direction value="-0.706218,0.204641,-0.677775"/>
+            </DirectionalLight>
+            <DirectionalLight index="Fill" Color="0.498039,0.713726,1.000000" ColorMultiplier="0.000000" Direction="0.665929,0.393515,-0.633786"/>
+            <DirectionalLight index="Back" Color="1.000000,0.835294,0.666667" ColorMultiplier="0.000000" Direction="0.459543,-0.860646,-0.219336"/>
+        </ToDInfoArray>
+        <EditorCategories value="LightGroup:UI"/>
+    </CLight>
+    <CLight id="UIAlliedCommanderMPCPMutator" parent="default">
+        <ToDInfoArray index="0">
+            <Id value="UIAlliedCommanderMPCPMutator"/>
+            <AmbientColor value="0.101961,0.062745,0.031373"/>
+            <OperatorHDR value="4"/>
+            <Colorize value="1"/>
+            <Param index="HDRExposure" value="1.000000"/>
+            <Param index="ColorizationHue" value="0.300000"/>
+            <Param index="ColorizationSaturation" value="0.400000"/>
+            <Param index="ColorizationLightness" value="-0.300000"/>
+            <Param index="ColorizationBlend" value="0.320000"/>
+            <DirectionalLight index="Key">
+                <Color value="1.000000,0.909804,0.803922"/>
+                <ColorMultiplier value="0.000000"/>
+                <SpecColorMultiplier value="0.000000"/>
+                <Direction value="-0.706218,0.204641,-0.677775"/>
+            </DirectionalLight>
+            <DirectionalLight index="Fill" Color="0.498039,0.713726,1.000000" ColorMultiplier="0.000000" Direction="0.665929,0.393515,-0.633786"/>
+            <DirectionalLight index="Back" Color="1.000000,0.835294,0.666667" ColorMultiplier="0.000000" Direction="0.459543,-0.860646,-0.219336"/>
+        </ToDInfoArray>
+        <EditorCategories value="LightGroup:UI"/>
+    </CLight>
+</Catalog>

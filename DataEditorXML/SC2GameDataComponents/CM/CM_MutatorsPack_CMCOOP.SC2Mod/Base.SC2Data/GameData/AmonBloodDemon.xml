@@ -1,0 +1,846 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CEffectDamage id="AmonBloodDemonUnitLightningDamage">
+        <EditorCategories value="Race:Protoss"/>
+        <ResponseFlags index="Acquire" value="1"/>
+        <ResponseFlags index="Flee" value="1"/>
+        <Flags index="Notification" value="1"/>
+        <Amount value="20"/>
+    </CEffectDamage>
+    <CEffectSet id="AmonBloodDemonUnitLightningSet">
+        <EffectArray value="AmonBloodDemonUnitLightningDamage"/>
+    </CEffectSet>
+    <CEffectEnumArea id="AmonBloodDemonUnitLightningSearch">
+        <EditorCategories value="Race:Protoss"/>
+        <SearchFilters value="-;Player,Ally,Neutral,Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <TargetSorts>
+            <SortArray value="TSRandom"/>
+        </TargetSorts>
+        <AreaArray MaxCount="3" Radius="8" Effect="AmonBloodDemonUnitLightningLMSet"/>
+    </CEffectEnumArea>
+    <CEffectDamage id="AmonBloodDemonUnitLightningLMDamage">
+        <EditorCategories value="Race:Zerg"/>
+        <Kind value="Ranged"/>
+        <Amount value="25"/>
+    </CEffectDamage>
+    <CEffectLaunchMissile id="AmonBloodDemonUnitLightningLM">
+        <EditorCategories value="Race:Zerg"/>
+        <LaunchLocation Value="TargetUnit"/>
+        <ImpactLocation Effect="AmonBloodDemonUnitLightningSearch" Value="OuterUnit"/>
+        <LaunchEffect value="AmonBloodDemonUnitLightningLMDamage"/>
+        <ImpactEffect value="AmonBloodDemonUnitLightningHeal"/>
+        <AmmoUnit value="AmonBloodDemonUnitLightning"/>
+    </CEffectLaunchMissile>
+    <CEffectSet id="AmonBloodDemonUnitLightningLMSet">
+        <EditorCategories value="Race:Zerg"/>
+        <EffectArray value="AmonBloodDemonUnitLightningLM"/>
+    </CEffectSet>
+    <CEffectModifyUnit id="AmonBloodDemonUnitLightningHeal">
+        <ValidatorArray value="IsNotInvisibleTargetDummy2"/>
+        <EditorCategories value=""/>
+        <ImpactUnit Effect="AmonBloodDemonUnitLightningSearch" Value="Outer"/>
+        <VitalArray index="Life">
+            <Change value="3"/>
+        </VitalArray>
+        <VitalArray index="Shields">
+            <Change value="3"/>
+        </VitalArray>
+    </CEffectModifyUnit>
+    <CEffectEnumArea id="AmonBloodDemonUnitHealSearch">
+        <EditorCategories value="Race:Zerg"/>
+        <ImpactLocation Value="OuterUnitOrPoint"/>
+        <SearchFilters value="-;Neutral,Enemy,Missile,Stasis,Dead,Hidden"/>
+        <AreaArray Radius="3.5" Effect="AmonBloodDemonUnitHealSet"/>
+        <SearchFlags index="ExtendByUnitRadius" value="1"/>
+    </CEffectEnumArea>
+    <CEffectModifyUnit id="AmonBloodDemonUnitHeal">
+        <EditorCategories value="Race:Zerg"/>
+        <VitalArray index="Life">
+            <Change value="30"/>
+        </VitalArray>
+        <VitalArray index="Shields">
+            <Change value="30"/>
+        </VitalArray>
+    </CEffectModifyUnit>
+    <CEffectApplyBehavior id="AmonBloodDemonUnitHealAB">
+        <EditorCategories value="Race:Zerg"/>
+        <Behavior value="AmonBloodDemonUnitHealPeriod"/>
+    </CEffectApplyBehavior>
+    <CEffectSet id="AmonBloodDemonUnitHealSet">
+        <EditorCategories value="Race:Zerg"/>
+        <EffectArray value="AmonBloodDemonUnitHeal"/>
+        <EffectArray value="AmonBloodDemonUnitHealAB"/>
+    </CEffectSet>
+    <CEffectDamage id="AmonBloodDemonUnitPlagueDamage">
+        <Amount value="5"/>
+    </CEffectDamage>
+    <CEffectEnumArea id="AmonBloodDemonUnitPlagueSearch">
+        <AINotifyFlags index="HurtEnemy" value="1"/>
+        <LaunchLocation Value="OuterUnit"/>
+        <SearchFilters value="-;Self,Player,Ally,Neutral,Missile,Stasis,Dead,Hidden,Invulnerable"/>
+        <AreaArray Radius="1.25" Effect="AmonBloodDemonUnitPlagueDamage"/>
+    </CEffectEnumArea>
+    <CEffectEnumArea id="AmonBloodDemonUnitPlagueSearchMissile">
+        <AINotifyFlags index="HurtEnemy" value="1"/>
+        <LaunchLocation Value="OuterUnit"/>
+        <SearchFilters value="Missile;Player,Ally,Neutral,Stasis,Dead,Hidden,Invulnerable"/>
+        <AreaArray MaxCount="3" Radius="2" Effect="AmonBloodDemonUnitPlagueDamageMissile"/>
+    </CEffectEnumArea>
+    <CEffectSet id="AmonBloodDemonUnitPlagueSet">
+        <EffectArray value="AmonBloodDemonUnitPlagueDamage"/>
+    </CEffectSet>
+    <CEffectModifyUnit id="AmonBloodDemonUnitPlagueDamageMissile">
+        <Chance value="0.25"/>
+        <ModifyFlags index="Hide" value="1"/>
+        <ModifyFlags index="NullifyMissile" value="1"/>
+    </CEffectModifyUnit>
+    <CEffectSet id="AmonBloodDemonUnitPlagueSearchSet">
+        <EffectArray value="AmonBloodDemonUnitPlagueSearch"/>
+        <EffectArray value="AmonBloodDemonUnitPlagueSearchMissile"/>
+    </CEffectSet>
+    <CEffectApplyBehavior id="AmonBloodDemonUnitBarrier">
+        <EditorCategories value="Race:Protoss"/>
+        <WhichUnit Value="Outer"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="AmonBloodDemonUnitBarrierBan">
+        <EditorCategories value="Race:Protoss"/>
+        <WhichUnit Value="Outer"/>
+    </CEffectApplyBehavior>
+    <CEffectSet id="AmonBloodDemonUnitBarrierSet">
+        <EditorCategories value="Race:Protoss"/>
+        <EffectArray value="AmonBloodDemonUnitBarrierBan"/>
+        <EffectArray value="AmonBloodDemonUnitBarrier"/>
+    </CEffectSet>
+    <CEffectCreatePersistent id="AmonBloodDemonModel">
+        <EditorCategories value="Race:Terran"/>
+        <WhichLocation Value="TargetUnit"/>
+        <Flags index="Channeled" value="1"/>
+        <InitialEffect value="ArtanisBeamInitialDummyDamage"/>
+        <PeriodCount value="1"/>
+        <PeriodicEffectArray value="ArtanisBeamInitialDummyDamage"/>
+        <PeriodicPeriodArray value="3"/>
+    </CEffectCreatePersistent>
+    <CEffectSet id="AmonBloodDemonSet">
+        <ValidatorArray value="NoBloodDemonPersistent"/>
+        <ValidatorArray value="NoBloodDemonWithin"/>
+        <EditorCategories value="Race:Terran"/>
+        <EffectArray value="AmonBloodDemonModel"/>
+        <EffectArray value="AmonBloodDemonAB"/>
+    </CEffectSet>
+    <CEffectApplyBehavior id="AmonBloodDemonAB">
+        <ValidatorArray index="0" removed="1"/>
+        <EditorCategories value="Race:Terran"/>
+        <Behavior value="AmonBloodDemonPersistent"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="AmonBloodDemonCooldown">
+        <ValidatorArray index="0" removed="1"/>
+        <EditorCategories value="Race:Terran"/>
+        <WhichUnit Value="Caster"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="AmonBloodDemonB">
+        <ValidatorArray index="0" removed="1"/>
+        <EditorCategories value="Race:Terran"/>
+        <Behavior value="AmonBloodDemonWithinLV0"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="AmonBloodDemonBUnitLightning">
+        <ValidatorArray index="0" removed="1"/>
+        <EditorCategories value="Race:Terran"/>
+        <Behavior value="AmonBloodDemonUnitLightning"/>
+    </CEffectApplyBehavior>
+    <CEffectSet id="AmonBloodDemonBSet">
+        <EditorCategories value="Race:Terran"/>
+        <EffectArray value="AmonBloodDemonSuicideDelay"/>
+    </CEffectSet>
+    <CEffectApplyBehavior id="AmonBloodDemonBUnitBarrier">
+        <ValidatorArray index="0" removed="1"/>
+        <EditorCategories value="Race:Terran"/>
+        <Behavior value="AmonBloodDemonUnitBarrierMain"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="AmonBloodDemonBUnitFrenzy">
+        <ValidatorArray index="0" removed="1"/>
+        <EditorCategories value="Race:Terran"/>
+        <Behavior value="AmonBloodDemonUnitFrenzy"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="AmonBloodDemonBUnitHardened">
+        <ValidatorArray index="0" removed="1"/>
+        <EditorCategories value="Race:Terran"/>
+        <Behavior value="AmonBloodDemonUnitHardened"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="AmonBloodDemonBUnitHeal">
+        <ValidatorArray index="0" removed="1"/>
+        <EditorCategories value="Race:Terran"/>
+        <Behavior value="AmonBloodDemonUnitHeal"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="AmonBloodDemonBUnitStronger">
+        <ValidatorArray index="0" removed="1"/>
+        <EditorCategories value="Race:Terran"/>
+        <Behavior value="AmonBloodDemonUnitStronger"/>
+    </CEffectApplyBehavior>
+    <CEffectApplyBehavior id="AmonBloodDemonBUnitPlague">
+        <ValidatorArray index="0" removed="1"/>
+        <EditorCategories value="Race:Terran"/>
+        <Behavior value="AmonBloodDemonUnitPlague"/>
+    </CEffectApplyBehavior>
+    <CEffectCreateUnit id="AmonBloodDemonRevive">
+        <EditorCategories value="Race:Terran"/>
+        <SpawnEffect value="AmonBloodDemonReviveAB"/>
+        <SpawnUnit value="AmonBloodDemon"/>
+    </CEffectCreateUnit>
+    <CEffectApplyBehavior id="AmonBloodDemonReviveAB">
+        <ValidatorArray index="0" removed="1"/>
+        <EditorCategories value="Race:Terran"/>
+        <Behavior value="AmonBloodDemonReviveAbilityChoice"/>
+    </CEffectApplyBehavior>
+    <CEffectDamage id="AmonBloodDemonSuicide">
+        <ImpactLocation Value="CasterUnit"/>
+        <Flags index="Kill" value="1"/>
+        <Flags index="NoKillCredit" value="1"/>
+    </CEffectDamage>
+    <CEffectCreatePersistent id="AmonBloodDemonSuicideDelay">
+        <EditorCategories value="Race:Zerg"/>
+        <WhichLocation Value="CasterUnit"/>
+        <ExpireDelay value="0.0625"/>
+        <FinalEffect value="AmonBloodDemonSuicide"/>
+    </CEffectCreatePersistent>
+    <CAbilEffectTarget id="AmonBloodDemonWithinBefore">
+        <Alignment value="Negative"/>
+        <EditorCategories value="Race:Terran,AbilityorEffectType:Units"/>
+        <Effect index="0" value="AmonBloodDemonSet"/>
+        <Flags index="AutoCast" value="1"/>
+        <Flags index="AutoCastOn" value="1"/>
+        <Cost>
+            <Charge>
+                <CountMax value="1"/>
+                <CountStart value="1"/>
+                <CountUse value="1"/>
+                <HideCount value="1"/>
+                <Link value="Abil/BloodDemonSF"/>
+                <Location value="Global"/>
+                <TimeStart value="0.5"/>
+                <TimeUse value="0.5"/>
+                <Flags index="EnableChargeTimeQueuing" value="1"/>
+            </Charge>
+            <Cooldown TimeStart="3" TimeUse="3"/>
+        </Cost>
+        <TargetFilters value="-;Neutral,Enemy,Structure,Missile,Dead,Hidden,Invulnerable,MapBoss"/>
+        <TargetSorts>
+            <SortArray value="TSLife"/>
+        </TargetSorts>
+        <Range value="12"/>
+        <AutoCastAcquireLevel value="Defensive"/>
+        <AutoCastFilters value="-;Neutral,Enemy"/>
+        <AutoCastRange value="12"/>
+        <Marker>
+            <MatchFlags index="Link" value="0"/>
+            <MatchFlags index="CasterUnit" value="1"/>
+        </Marker>
+        <CmdButtonArray index="Execute" DefaultButtonFace="AmonBloodDemonWithin"/>
+    </CAbilEffectTarget>
+    <CAbilEffectTarget id="AmonBloodDemonWithinAfter">
+        <Alignment value="Negative"/>
+        <EditorCategories value="Race:Terran,AbilityorEffectType:Units"/>
+        <DataCollection value="Snipe4"/>
+        <Effect index="0" value="AmonBloodDemonSet"/>
+        <Flags index="AutoCast" value="1"/>
+        <Flags index="AutoCastOn" value="1"/>
+        <Cost>
+            <Charge>
+                <CountMax value="1"/>
+                <CountStart value="1"/>
+                <CountUse value="1"/>
+                <HideCount value="1"/>
+                <Link value="Abil/BloodDemonSF"/>
+                <Location value="Global"/>
+                <TimeStart value="0.5"/>
+                <TimeUse value="0.5"/>
+                <Flags index="EnableChargeTimeQueuing" value="1"/>
+            </Charge>
+            <Cooldown TimeStart="3" TimeUse="3"/>
+        </Cost>
+        <TargetFilters value="-;Neutral,Enemy,Structure,Missile,Dead,Hidden,Invulnerable,MapBoss"/>
+        <TargetSorts>
+            <SortArray value="TSLifeLargestFirst"/>
+        </TargetSorts>
+        <Range value="12"/>
+        <AutoCastAcquireLevel value="Defensive"/>
+        <AutoCastFilters value="-;Neutral,Enemy"/>
+        <AutoCastRange value="12"/>
+        <Marker>
+            <MatchFlags index="Link" value="0"/>
+            <MatchFlags index="CasterUnit" value="1"/>
+        </Marker>
+        <AINotifyEffect value="Snipe4"/>
+        <CmdButtonArray index="Execute" DefaultButtonFace="AmonBloodDemonWithin"/>
+    </CAbilEffectTarget>
+    <CValidatorUnitCompareBehaviorCount id="NoBloodDemonWithin">
+        <Behavior value="AmonBloodDemonWithinLV0"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorUnitCompareBehaviorCount id="NoBloodDemonPersistent">
+        <Behavior value="AmonBloodDemonPersistent"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CValidatorUnitCompareBehaviorCount id="NoBloodDemonUnitBarrierBan">
+        <Behavior value="AmonBloodDemonUnitBarrierBan"/>
+    </CValidatorUnitCompareBehaviorCount>
+    <CButton id="AmonBloodDemonWithin">
+        <Icon value="Assets\Textures\btn-ability-protoss-mindblast.dds"/>
+        <AlertIcon value="Assets\Textures\btn-ability-protoss-mindblast.dds"/>
+        <EditorCategories value="Race:Protoss"/>
+    </CButton>
+    <CActorModel id="AmonBloodDemonWithinBuffModel1" parent="ModelAnimationStyleContinuous">
+        <Terms value="Cap 1"/>
+        <On Terms="Behavior.AmonBloodDemonWithinLV0.On" Send="Create"/>
+        <On Terms="Behavior.AmonBloodDemonWithinLV0.Off" Send="Destroy"/>
+        <Host Subject="_Selectable"/>
+        <HostSiteOps Ops="SOpAttachCenter"/>
+        <AutoScaleFactor value="1.500000"/>
+    </CActorModel>
+    <CActorModel id="AmonBloodDemonWithinBuffModel2" parent="ModelAnimationStyleContinuous">
+        <Terms value="Cap 1"/>
+        <On Terms="Behavior.AmonBloodDemonWithinLV0.On" Send="Create"/>
+        <On Terms="Behavior.AmonBloodDemonWithinLV0.Off" Send="Destroy"/>
+        <On Terms="ActorCreation" Send="SetScale 0.100000"/>
+        <On Terms="ActorCreation" Send="SetScale 1.000000 0.300000"/>
+        <Host Subject="_Selectable"/>
+        <HostSiteOps Ops="SOpShadow"/>
+        <AutoScaleFactor value="0.600000"/>
+        <ModelFlags index="AllowHitTest" value="0"/>
+    </CActorModel>
+    <CActorAction id="AmonBloodDemonUnitLightningAttack" parent="GenericAttack" effectAttack="AmonBloodDemonUnitLightningDamage">
+        <EditorCategories value=""/>
+        <LaunchSiteOps Ops="SOpAttachHead"/>
+        <Beam value="AmonBloodDemonUnitLightningBeam"/>
+    </CActorAction>
+    <CActorBeamSimple id="AmonBloodDemonUnitLightningBeam" parent="BeamSimpleAnimationStyleOneShot">
+        <On Terms="ActorCreation" Send="TimerSet 1.000000 Death"/>
+        <On Terms="ActorCreation" Send="Create AlarakPsionicOrbAttackSound"/>
+        <On Terms="TimerExpired; TimerName Death" Send="AnimBracketStop BSD"/>
+        <On Terms="ActorCreation" Send="SetTintColor {255,0,0 3.000000}"/>
+        <Model value="AmonBloodDemonUnitLightning"/>
+    </CActorBeamSimple>
+    <CActorModel id="AmonBloodDemonTakeOverModel" parent="ModelAddition">
+        <EditorCategories value=""/>
+        <On index="0" Terms="ActorCreation" Send="AnimBracketStart BSD Birth Stand Death ContentPlayOnce"/>
+        <On index="2" Terms="AnimBracketState.*.AfterClosing; AnimName BSD" Send="Destroy"/>
+        <On Terms="Behavior.AmonBloodDemonWithinLV0.On" Send="Create"/>
+        <On Terms="Behavior.AmonBloodDemonWithinLV0.Off" Send="Destroy"/>
+        <HostSiteOps Ops="SOpAttachCenter"/>
+        <AutoScaleFactor value="1.000000"/>
+    </CActorModel>
+    <CActorAction id="AmonBloodDemonUnitLightningAttack2" parent="GenericAttackBase">
+        <On Terms="Effect.AmonBloodDemonUnitLightningHeal.Start; FromEffectTreeDescendant" Send="ActionImpact"/>
+        <On Terms="Effect.AmonBloodDemonUnitLightningHeal.Stop; FromEffectTreeDescendant" Send="ActionImpactPhysics"/>
+        <On Terms="Effect.AmonBloodDemonUnitLightningLM.Start; At Caster" Send="Create"/>
+        <LaunchAttachQuery Methods="Center"/>
+        <Missile value="AmonBloodDemonUnitLightningAttackMissile"/>
+        <ImpactSiteOps Ops="SOpAttachCenterStationary"/>
+        <ShieldFlashType value="Full"/>
+        <ForceCommencementFrom value="AmonBloodDemonUnitLightningLM"/>
+    </CActorAction>
+    <CActorMissile id="AmonBloodDemonUnitLightningAttackMissile" parent="GenericAttackMissile" unitName="AmonBloodDemonUnitLightning">
+        <Model value="AmonBloodDemonUnitLightningMissile"/>
+    </CActorMissile>
+    <CActorModel id="AmonBloodDemonUnitHealModel" parent="ModelAnimationStyleOneShot">
+        <Inherits index="CloakEffect" value="1"/>
+        <Inherits index="Visibility" value="1"/>
+        <On Terms="ActorCreation" Send="$Birth PlayForever"/>
+        <On Terms="Behavior.AmonBloodDemonUnitHealPeriod.On" Send="Create"/>
+        <On Terms="ActorCreation" Send="SetTintColor 255,0,0"/>
+        <Host Subject="_Selectable"/>
+        <HostSiteOps Ops="SOpAttachCenter SOpForwardNorth" HoldRotation="1"/>
+        <Model value="AmonBloodDemonUnitHeal"/>
+    </CActorModel>
+    <CActorModel id="AmonBloodDemonUnitHealBuffModel" parent="ModelAnimationStyleContinuous">
+        <Inherits index="CloakEffect" value="1"/>
+        <Inherits index="Visibility" value="1"/>
+        <On Terms="ActorCreation" Send="$Birth PlayForever"/>
+        <On Terms="Behavior.AmonBloodDemonUnitHealPeriod.On" Send="Create"/>
+        <On Terms="Behavior.AmonBloodDemonUnitHealPeriod.Off" Send="Destroy"/>
+        <On Terms="ActorCreation" Send="SetTintColor 255,0,0"/>
+        <Host Subject="_Selectable"/>
+        <HostSiteOps Ops="SOpAttachCenter SOpForwardNorth" HoldRotation="1"/>
+        <Model value="AmonBloodDemonUnitHeal"/>
+    </CActorModel>
+    <CActorModel id="AmonBloodDemonUnitHealSearchModel" parent="ModelAnimationStyleContinuous">
+        <Inherits index="CloakEffect" value="1"/>
+        <Inherits index="Visibility" value="1"/>
+        <On Terms="Effect.AmonBloodDemonUnitHealSearch.Start" Send="Create"/>
+        <Host Subject="_Selectable"/>
+        <HostSiteOps Ops="SOpAttachOrigin" HoldRotation="1"/>
+    </CActorModel>
+    <CActorAction id="AmonBloodDemonWithin" parent="GenericAttack" effectAttack="AmonBloodDemonModel">
+        <On index="0" Terms="Effect.Bogus.Stop; FromEffectTreeDescendant" Send="ActionImpactPhysics"/>
+        <On index="5" Terms="Effect.Bogus.Start; At Caster" Send="Create"/>
+        <On index="6" Terms="Effect.AmonBloodDemonModel.Start; At Caster" Send="Create"/>
+        <LaunchSiteOps Ops="SOpAttachWeaponLeft"/>
+        <ImpactSiteOps Ops="SOpAttachHead"/>
+        <ImpactPhysics Name="GhostSnipeImpact" MatchKeys="Basic" Physics="GhostSnipeAttackDeathForce"/>
+    </CActorAction>
+    <CActorBeamSimple id="AmonBloodDemonWithinBeam" parent="GenericAttackBeam">
+        <On Terms="ActorCreation" Send="SetOpacity 0.000000 0.500000"/>
+        <On Terms="ActorCreation" Send="TimerSet 2.000000 End"/>
+        <On Terms="TimerExpired; TimerName End" Send="SetOpacity 1.000000 0.500000"/>
+        <On Terms="ActorCreation" Send="SetOpacity 1.000000"/>
+        <On Terms="Effect.AmonBloodDemonModel.Stop" Send="AnimBracketStop BSD"/>
+    </CActorBeamSimple>
+    <CActorModelMaterial id="AmonBloodDemonWithinGlaze" parent="GlazeParent">
+        <On Terms="Behavior.AmonBloodDemonWithinLV0.On" Send="Create"/>
+        <On Terms="ActorCreation" Send="ModelMaterialApplyTo ::Main"/>
+        <On Terms="Behavior.AmonBloodDemonWithinLV0.Off" Send="ModelMaterialRemoveFrom ::Main"/>
+        <On Terms="Behavior.AmonBloodDemonWithinLV0.Off" Send="Destroy"/>
+        <ModelFlags index="AutomateGlobalLoops" value="1"/>
+    </CActorModelMaterial>
+    <CActorModel id="AmonBloodDemonUnitPlague" parent="ModelAnimationStyleContinuous">
+        <On Terms="Behavior.AmonBloodDemonUnitPlague.On" Send="Create"/>
+        <On Terms="Behavior.AmonBloodDemonUnitPlague.Off" Send="AnimBracketStop BSD"/>
+        <Host Subject="_Selectable"/>
+        <HostSiteOps Ops="SOpAttachCenter"/>
+        <ModelFlags index="AllowHitTest" value="0"/>
+        <ModelFlags index="OutlineOccluder" value="1"/>
+    </CActorModel>
+    <CActorUnit id="AmonBloodDemon" parent="GenericUnitStandardNoAutoSoundLinks" unitName="AmonBloodDemon">
+        <Aliases value="_UnitMedium"/>
+        <On index="35" Terms="UnitFidget" Send="AnimPlay Fidget Fidget"/>
+        <On index="36" Terms="UnitMovementUpdate.*.Walk" Send="AnimClear Fidget"/>
+        <On index="37" Terms="UnitDetectedByViewer.*.On; ValidateUnit IsHallucination" Target="_HallucinationTinter" Send="Signal HallucinationTintOn"/>
+        <On index="38" Terms="UnitDetectedByViewer.*.Off; ValidateUnit IsHallucination" Send="Signal HallucinationTintOff"/>
+        <On index="39" Terms="UnitDeathCustomize; ValidateUnit NotStructure; IsStatus InAir 1" Target="" Send="DeathCustomize AntiGravGeneric"/>
+        <On index="40" Terms="UnitDeathCustomize; ValidateUnit IsProtossUnit; IsStatus InAir 1" Send="DeathCustomize AntiGravProtoss"/>
+        <On index="41" Terms="UnitDeathCustomize; ValidateUnit IsTerranUnit; IsStatus InAir 1" Send="DeathCustomize AntiGravTerran"/>
+        <On index="42" Terms="UnitDeathCustomize; ValidateUnit IsZergUnit; IsStatus InAir 1" Send="DeathCustomize AntiGravZerg"/>
+        <On index="43" Terms="UnitDeathCustomize; ValidateUnit IsVortexed" Send="DeathCustomize Vortex"/>
+        <On index="44" Terms="UnitDeathCustomize; ValidateUnit HasForceLowDeathProtoss" Send="DeathCustomize AntiGravProtoss"/>
+        <On index="45" Terms="UnitDeathCustomize; ValidateUnit HasForceLowDeathZerg" Send="DeathCustomize AntiGravZerg"/>
+        <On index="46" Terms="UnitDeathCustomize; ValidateUnit HasForceLowDeathTerran" Send="DeathCustomize AntiGravTerran"/>
+        <On index="47" Terms="Behavior.PhoenixAntiGrav.On" Send="ModelSuddenMotionStart"/>
+        <On index="48" Terms="Behavior.PhoenixAntiGrav.Off" Send="ModelSuddenMotionStop"/>
+        <On index="49" Terms="Behavior.ForceLowDeath.On" Send="DeathCustomsEnablePhysics 0"/>
+        <On index="50" Terms="UnitTaunt.*.Start; Taunt" Send="AnimPlay Cheer Stand,Victory"/>
+        <On index="51" Terms="UnitTaunt.*.Stop; Taunt" Send="AnimClear Cheer"/>
+        <On index="52" Terms="UnitTaunt.*.Start; Taunt Dance" Send="AnimPlay Dance Stand,Dance"/>
+        <On index="53" Terms="UnitTaunt.*.Stop; Taunt Dance" Send="AnimClear Dance"/>
+        <On index="54" Terms="UnitTaunt.*.Start; Taunt Tease" Send="AnimPlay Taunt Taunt"/>
+        <On index="55" Terms="UnitTaunt.*.Stop; Taunt Tease" Send="AnimClear Taunt"/>
+        <On index="56" Terms="ActorCreation" Send="StatusSet InAir 0"/>
+        <On index="57" Terms="UnitHeightUpdate.*.Lift" Send="StatusSet InAir 1"/>
+        <On index="58" Terms="UnitHeightUpdate.*.Land" Send="StatusSet InAir 0"/>
+        <On index="59" Terms="BuildCoachHover.*.On" Send="TimerKill DelayUnhighlight"/>
+        <On index="60" Send="SetTintColor 0,255,0 0.100000"/>
+        <On index="61" Terms="BuildCoachHover.*.Off" Send="TimerSet 0.300000 DelayUnhighlight"/>
+        <On index="62" Terms="TimerExpired; TimerName DelayUnhighlight" Send="SetTintColor 255,255,255 0.500000"/>
+        <On index="63" Terms="Abil.attack.ReadyStart" Send="AnimGroupApply Ready"/>
+        <On index="64" Terms="WeaponStart.*.AttackStart" Send="AnimBracketStart Attack Attack"/>
+        <On index="65" Terms="WeaponStart.*.AttackStart; AnimPlaying Birth" Send="AnimClear Birth"/>
+        <On index="66" Terms="WeaponStop.*.AttackStop" Send="AnimBracketStop Attack"/>
+        <On index="67" Terms="Abil.attack.ReadyStop" Send="AnimGroupRemove Ready"/>
+        <On index="68" Terms="ActorCreation" Send="$Birth NoMismatchQueryProps -1.000000 -1.000000 0.700000 AsTimeScale"/>
+        <On Terms="Behavior.AmonBloodDemonCooldown.On" Target="AmonBloodDemonWithin" Send="Destroy"/>
+        <On Terms="Abil.AmonBloodDemonWithinBefore.SourceCastStart" Send="$Spell 0 -1.000000 -1.000000 3.500000 AsDuration"/>
+        <On Terms="ActorCreation" Send="Create VoidHighTemplarWeaponCrippleImpactSound"/>
+        <On Terms="Abil.AmonBloodDemonWithinAfter.SourceCastStart" Send="$Spell 0 -1.000000 -1.000000 3.500000 AsDuration"/>
+        <On Terms="ActorCreation" Send="SetTintColor {255,0,0 4.000000}"/>
+        <ModelFlags index="AutomateGlobalLoops" value="0"/>
+        <ModelFlags index="OutlineEmitter" value="1"/>
+        <Baselines index="Walk" AnimProps="Stand"/>
+        <BuildModel value="DarkArchonChampionWarpIn"/>
+        <PortraitModel value="MalashPortrait"/>
+        <GroupIcon>
+            <Image value="Assets\Textures\wireframe-protoss-malash.dds"/>
+        </GroupIcon>
+        <LifeArmorIcon value="Assets\Textures\btn-upgrade-protoss-groundarmorlevel1.dds"/>
+        <SoundArray index="Ready" value="Swarm_Silent"/>
+        <SoundArray index="Help" value="Swarm_Silent"/>
+        <SoundArray index="What" value="Swarm_Silent"/>
+        <SoundArray index="Yes" value="Swarm_Silent"/>
+        <SoundArray index="Attack" value="Swarm_Silent"/>
+        <SoundArray index="Pissed" value="Swarm_Silent"/>
+        <StatusBarFlags index="Shields" value="0"/>
+        <StatusBarFlags index="Life" value="0"/>
+        <StatusBarFlags index="Energy" value="0"/>
+        <StatusBarFlags index="Cargo" value="0"/>
+        <StatusBarFlags index="Progress" value="0"/>
+        <StatusBarFlags index="Duration" value="0"/>
+        <StatusBarFlags index="Magazine" value="0"/>
+        <StatusBarFlags index="Workers" value="0"/>
+        <StatusBarFlags index="Custom" value="0"/>
+        <Wireframe>
+            <Image value="Assets\Textures\wireframe-protoss-malash.dds"/>
+        </Wireframe>
+        <WireframeShield>
+            <Image value="Assets\Textures\wireframe-protoss-malash-shield01.dds"/>
+            <Image value="Assets\Textures\wireframe-protoss-malash-shield02.dds"/>
+            <Image value="Assets\Textures\wireframe-protoss-malash-shield03.dds"/>
+        </WireframeShield>
+    </CActorUnit>
+    <CActorModelMaterial id="AmonBloodDemonUnitBarrier" parent="GlazeParent">
+        <On Terms="Behavior.AmonBloodDemonUnitBarrier.On" Send="Create"/>
+        <On Terms="ActorCreation" Send="ModelMaterialApplyTo ::Main"/>
+        <On Terms="Behavior.AmonBloodDemonUnitBarrier.Off" Send="ModelMaterialRemoveFrom ::Main"/>
+        <On Terms="Behavior.AmonBloodDemonUnitBarrier.Off" Send="Destroy"/>
+        <On Terms="ActorCreation" Send="AnimBracketStart BSD Birth Stand Death"/>
+        <ModelFlags index="AutomateGlobalLoops" value="1"/>
+    </CActorModelMaterial>
+    <CActorModel id="AmonBloodDemonUnitBarrierHardened" parent="ModelAnimationStyleOneShot">
+        <Terms value="Cap 1"/>
+        <On Terms="Behavior.AmonBloodDemonUnitHardened.DamageHandled" Send="Create"/>
+        <On Terms="AnimDone" Send="Destroy"/>
+        <Host Subject="_Selectable"/>
+        <HostSiteOps Ops="SOpAttachCenter"/>
+        <AutoScaleFactor value="0.750000"/>
+    </CActorModel>
+    <CActorModel id="AmonBloodDemonUnitShieldCapacitor">
+        <Flags index="SuppressSaveLoad" value="1"/>
+        <Inherits index="BaseModelScale" value="1"/>
+        <Inherits index="Scale" value="1"/>
+        <On Terms="Behavior.AmonBloodDemonUnitBarrier.On" Send="Create"/>
+        <On Terms="ActorCreation" Send="AnimBracketStart BSD Birth {} Death ContentPlayOnce"/>
+        <On Terms="AnimBracketState.*.AfterClosing; AnimName BSD" Send="Destroy"/>
+        <On Terms="ActorOrphan" Send="AnimBracketStop BSD"/>
+        <On Terms="Behavior.AmonBloodDemonUnitBarrier.Off" Send="Destroy"/>
+        <Host Subject="_Selectable"/>
+        <HostSiteOps Ops="SOpAttachCenter"/>
+        <AutoScaleFactor value="0.850000"/>
+        <ModelFlags index="AllowHitTest" value="0"/>
+        <ModelFlags index="AutomateGlobalLoops" value="1"/>
+    </CActorModel>
+    <CModel id="AmonBloodDemonWithinBuffModel1" parent="BuffFX">
+        <Model value="Assets\Effects\Protoss\Amon_Possession_Unit\Amon_Possession_Unit.m3"/>
+        <EditorCategories value="Race:Protoss"/>
+        <SelectionRadius value="0.400000"/>
+        <ShadowRadius value="0.400000"/>
+    </CModel>
+    <CModel id="AmonBloodDemonWithinBuffModel2" parent="BuffFX">
+        <Model value="Assets\Doodads\LightOmniRed\LightOmniRed.m3"/>
+        <EditorCategories value="Race:Protoss"/>
+        <SelectionRadius value="0.400000"/>
+        <ShadowRadius value="0.400000"/>
+    </CModel>
+    <CModel id="AmonBloodDemonUnitLightning" parent="PersistentSpellFX">
+        <Model value="Assets\Effects\Protoss\ArchonBeam\ArchonBeam.m3"/>
+        <LowQualityModel value="ArchonAttackBeamLow"/>
+        <EditorCategories value="Race:Protoss"/>
+        <RadiusLoose value="1.000000"/>
+    </CModel>
+    <CModel id="AmonBloodDemonTakeOverModel" parent="PersistentSpellFX">
+        <Model value="Assets\Effects\Protoss\AmonTakeover_Impact\AmonTakeover_Impact.m3"/>
+        <ScaleMax value="0.800000,0.800000,0.800000"/>
+        <ScaleMin value="0.800000,0.800000,0.800000"/>
+    </CModel>
+    <CModel id="AmonBloodDemonUnitLightningMissile" parent="MissileFX">
+        <Model value="Assets\Effects\Protoss\Alarak_COOP_Sacrifice_Missile\Alarak_COOP_Sacrifice_Missile.m3"/>
+        <EditorCategories value="Race:Protoss"/>
+        <SelectionRadius value="0.333200"/>
+        <ShadowRadius value="0.333200"/>
+    </CModel>
+    <CModel id="AmonBloodDemonUnitHealSearchModel" parent="OneShotSpellFX">
+        <Model value="Assets\Effects\Protoss\HighTemplar_Taldarim_COOP_Sacrifice_Impact\HighTemplar_Taldarim_COOP_Sacrifice_Impact.m3"/>
+        <EditorCategories value="Race:Zerg"/>
+        <ScaleMax value="1.500000,1.500000,1.500000"/>
+        <ScaleMin value="1.500000,1.500000,1.500000"/>
+    </CModel>
+    <CModel id="AmonBloodDemonWithinBeam" parent="PersistentSpellFX">
+        <Model value="Assets\Effects\Protoss\AmonShard_Rift_Beam\AmonShard_Rift_Beam.m3"/>
+        <AnimSpeed value="1.500000"/>
+        <EditorCategories value="Race:Terran"/>
+        <ScaleMax value="0.600000,0.600000,0.600000"/>
+        <ScaleMin value="0.600000,0.600000,0.600000"/>
+    </CModel>
+    <CModel id="AmonBloodDemonWithinImpact" parent="ImpactFX">
+        <Model value="Assets\Effects\Protoss\Alarak_COOP_Sacrifice_Impact\Alarak_COOP_Sacrifice_Impact.m3"/>
+        <AnimSpeed value="1.500000"/>
+        <EditorCategories value="Race:Terran"/>
+        <ScaleMax value="0.750000,0.750000,0.750000"/>
+        <ScaleMin value="0.750000,0.750000,0.750000"/>
+    </CModel>
+    <CModel id="AmonBloodDemonWithinLaunch" parent="LaunchFX">
+        <Model value="Assets\Effects\Protoss\AmonShards_Red_FocusBeam_Launch\AmonShards_Red_FocusBeam_Launch.m3"/>
+        <AnimSpeed value="1.500000"/>
+        <EditorCategories value="Race:Terran"/>
+        <ScaleMax value="0.750000,0.750000,0.750000"/>
+        <ScaleMin value="0.750000,0.750000,0.750000"/>
+    </CModel>
+    <CModel id="AmonBloodDemonWithinGlaze" parent="Glaze">
+        <Model value="Assets\Effects\Glaze\Glaze_Alarak_COOP_Empower\Glaze_Alarak_COOP_Empower.m3"/>
+        <Priority value="32"/>
+    </CModel>
+    <CModel id="AmonBloodDemonUnitBarrierHardened" parent="OneShotSpellFX">
+        <Model value="Assets\Effects\Protoss\Alarak_COOP_Sacrifice_Impact\Alarak_COOP_Sacrifice_Impact.m3"/>
+        <ScaleMax value="0.800000,0.800000,0.800000"/>
+        <ScaleMin value="0.800000,0.800000,0.800000"/>
+    </CModel>
+    <CModel id="AmonBloodDemonUnitHeal" parent="PersistentSpellFX">
+        <Model value="Assets\Effects\Zerg\MendBuff\MendBuff.m3"/>
+        <EditorCategories value="Race:Terran"/>
+    </CModel>
+    <CModel id="AmonBloodDemonUnitPlague" parent="Unit">
+        <Model value="Assets\Doodads\TheVoid_DeathCloud_Intense\TheVoid_DeathCloud_Intense.m3"/>
+        <ScaleMax value="0.100000,0.100000,0.095000"/>
+        <ScaleMin value="0.100000,0.100000,0.095000"/>
+    </CModel>
+    <CModel id="AmonBloodDemon" parent="Unit" Race="Protoss">
+        <Model value="Assets\Units\Protoss\HighTemplar_Taldarim_HoloUnit\HighTemplar_Taldarim_HoloUnit.m3"/>
+        <Occlusion value="Show"/>
+        <PlanetPanelCamera value="Star2CameraMid05"/>
+        <ScaleMax value="5.000000,5.000000,5.000000"/>
+        <ScaleMin value="5.000000,5.000000,5.000000"/>
+        <SelectionRadius value="0.375000"/>
+        <ShadowRadius value="0.375000"/>
+        <TechPurchaseCamera value="Star2CameraMid05"/>
+        <UnitGlossaryCamera value="Star2CameraMid05"/>
+    </CModel>
+    <CModel id="AmonBloodDemonUnitBarrier">
+        <Model value="Assets\Effects\Glaze\Glaze_Alarak_COOP_PrestigeMechBuff\Glaze_Alarak_COOP_PrestigeMechBuff.m3"/>
+        <AnimSpeed value="1.500000"/>
+    </CModel>
+    <CModel id="AmonBloodDemonUnitShieldCapacitor" parent="OneShotSpellFX">
+        <Model value="Assets\Effects\Protoss\Alarak_COOP_Sacrifice_CDR\Alarak_COOP_Sacrifice_CDR.m3"/>
+        <EditorCategories value="Race:Protoss"/>
+        <ScaleMax value="1.300000,1.300000,1.300000"/>
+        <ScaleMin value="1.300000,1.300000,1.300000"/>
+    </CModel>
+    <CSound id="AmonBloodDemonWithinImpact" parent="Spell">
+        <EditorCategories value="Race:Terran"/>
+        <AssetArray File="Assets\Sounds\Protoss\Zealot\Zealot_Charge0.wav"/>
+        <DupeMaximumMethod value="Replace"/>
+        <Pitch value="-1.000000,3.000000"/>
+        <Volume value="-1.000000,-1.000000"/>
+    </CSound>
+    <CSound id="AmonBloodDemonWithinLaunch" parent="Spell">
+        <EditorCategories value="Race:Terran"/>
+        <AssetArray File="Assets\Sounds\Zurvan_Vx_BreathCharge_2.wav"/>
+        <DupeMaximumMethod value="Replace"/>
+        <Pitch value="2.000000,2.000000"/>
+        <Volume value="-1.000000,-1.000000"/>
+    </CSound>
+    <CUnit id="AmonBloodDemonUnitLightning" parent="MISSILE">
+        <Race value="Prot2"/>
+        <Mover value="AlarakSoulStealDummyAttackMissile"/>
+        <EditorCategories value="ObjectType:Projectile,ObjectFamily:Campaign"/>
+        <HotkeyAlias value="AmonBloodDemonUnitLightning"/>
+    </CUnit>
+    <CUnit id="AmonBloodDemon">
+        <DeathRevealRadius value="3"/>
+        <Race value="Prot"/>
+        <Mob value="Multiplayer"/>
+        <FlagArray index="Untooltipable" value="0"/>
+        <FlagArray index="Unselectable" value="1"/>
+        <FlagArray index="PreventDestroy" value="1"/>
+        <FlagArray index="UseLineOfSight" value="1"/>
+        <FlagArray index="Invulnerable" value="1"/>
+        <FlagArray index="ArmySelect" value="1"/>
+        <PlaneArray index="Ground" value="1"/>
+        <PlaneArray index="Air" value="1"/>
+        <Attributes index="Psionic" value="1"/>
+        <Attributes index="Heroic" value="1"/>
+        <Attributes index="MapBoss" value="1"/>
+        <LifeStart value="10"/>
+        <LifeMax value="10"/>
+        <LifeArmor value="1"/>
+        <LifeArmorName value="Unit/LifeArmorName/ProtossArmor"/>
+        <ShieldsStart value="1000"/>
+        <ShieldsMax value="1000"/>
+        <ShieldArmorName value="Unit/ShieldArmorName/ProtossPlasmaShields"/>
+        <Acceleration value="1000"/>
+        <LateralAcceleration value="46"/>
+        <StationaryTurningRate value="999.8437"/>
+        <TurningRate value="999.8437"/>
+        <Height value="0.375"/>
+        <CostCategory value="Army"/>
+        <AttackTargetPriority value="255"/>
+        <AbilArray Link="stop"/>
+        <AbilArray Link="attack"/>
+        <AbilArray Link="ProgressRally"/>
+        <AbilArray Link="Warpable"/>
+        <AbilArray Link="AmonBloodDemonWithinBefore"/>
+        <AbilArray Link="AmonBloodDemonWithinAfter"/>
+        <BehaviorArray Link="Unmoved"/>
+        <BehaviorArray Link="Unrepairable"/>
+        <BehaviorArray Link="Benign"/>
+        <BehaviorArray Link="AmonBloodDemonDeathCount"/>
+        <CardLayouts>
+            <LayoutButtons Face="MoveChampions" Type="AbilCmd" AbilCmd="move,Move" Row="0" Column="0"/>
+            <LayoutButtons Face="Stop" Type="AbilCmd" AbilCmd="stop,Stop" Row="0" Column="1"/>
+            <LayoutButtons Face="MoveHoldPosition" Type="AbilCmd" AbilCmd="move,HoldPos" Row="0" Column="2"/>
+            <LayoutButtons Face="AttackChampions" Type="AbilCmd" AbilCmd="attack,Execute" Row="0" Column="4"/>
+            <LayoutButtons Face="MovePatrol" Type="AbilCmd" AbilCmd="move,Patrol" Row="0" Column="3"/>
+            <LayoutButtons Face="Rally" Type="AbilCmd" AbilCmd="ProgressRally,Rally1" Row="2" Column="4"/>
+            <LayoutButtons Face="Cancel" Type="AbilCmd" AbilCmd="PitMalashFightDummyAbilityCancel,Execute" Row="2" Column="4"/>
+            <LayoutButtons Face="AmonBloodDemonWithin" Type="AbilCmd" AbilCmd="AmonBloodDemonWithinAfter,255" Row="2" Column="0"/>
+            <LayoutButtons Face="AmonBloodDemonWithin" Type="AbilCmd" AbilCmd="AmonBloodDemonWithinBefore,255" Row="2" Column="0"/>
+        </CardLayouts>
+        <Radius value="1"/>
+        <SeparationRadius value="0.75"/>
+        <InnerRadius value="0.75"/>
+        <ScoreResult value="BuildOrder"/>
+        <SubgroupPriority value="20"/>
+        <MinimapRadius value="0.75"/>
+        <EditorCategories value="ObjectType:Hero,ObjectFamily:Campaign"/>
+        <GlossaryPriority value="90"/>
+        <AlliedPushPriority value="11"/>
+    </CUnit>
+    <CBehaviorBuff id="AmonBloodDemonPersistent">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="3"/>
+        <FinalEffect value="AmonBloodDemonCooldown"/>
+        <ExpireEffect value="AmonBloodDemonB"/>
+        <Modification>
+            <StateFlags index="UnitAttrOnHeroic" value="1"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="AmonBloodDemonCooldown">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Duration value="0.0625"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="AmonBloodDemonDeathCount">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <DisplayDuration index="Self" value="1"/>
+        <DisplayDuration index="Ally" value="1"/>
+        <DisplayDuration index="Neutral" value="1"/>
+        <DisplayDuration index="Enemy" value="1"/>
+        <Duration value="15"/>
+        <ExpireEffect value="AmonBloodDemonSuicideDelay"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="AmonBloodDemonAD">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="AmonBloodDemonCreateAbilityChoice">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification>
+            <AbilLinkEnableArray value="AmonBloodDemonWithinBefore"/>
+            <AbilLinkDisableArray value="AmonBloodDemonWithinAfter"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="AmonBloodDemonReviveAbilityChoice">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Modification>
+            <AbilLinkEnableArray value="AmonBloodDemonWithinAfter"/>
+            <AbilLinkDisableArray value="AmonBloodDemonWithinBefore"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="AmonBloodDemonWithinLV0">
+        <InfoFlags index="Hidden" value="1"/>
+        <InfoIcon value="Assets\Textures\btn-ability-protoss-mindblast.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <InitialEffect value="AmonBloodDemonBSet"/>
+        <FinalEffect value="AmonBloodDemonRevive"/>
+        <Modification>
+            <StateFlags index="UnitAttrOnHeroic" value="1"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="AmonBloodDemonWithinLV1">
+        <InfoIcon value="Assets\Textures\btn-ability-protoss-mindblast.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="AmonBloodDemonWithinLV2">
+        <InfoIcon value="Assets\Textures\btn-ability-protoss-mindblast.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="AmonBloodDemonWithinLV3">
+        <InfoIcon value="Assets\Textures\btn-ability-protoss-mindblast.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="AmonBloodDemonWithinLV4">
+        <InfoIcon value="Assets\Textures\btn-ability-protoss-mindblast.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="AmonBloodDemonWithinLV5">
+        <InfoIcon value="Assets\Textures\btn-ability-protoss-mindblast.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="AmonBloodDemonWithinLV6">
+        <InfoIcon value="Assets\Textures\btn-ability-protoss-mindblast.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="AmonBloodDemonWithinLV7">
+        <InfoIcon value="Assets\Textures\btn-ability-protoss-mindblast.dds"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="AmonBloodDemonUnitHealPeriod">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <MaxStackCount value="3"/>
+        <Duration value="3"/>
+        <Modification>
+            <VitalRegenArray index="Life" value="3"/>
+            <VitalRegenArray index="Shields" value="3"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="AmonBloodDemonUnitLightning">
+        <InfoFlags index="Hidden" value="1"/>
+        <Period value="3"/>
+        <PeriodicEffect value="AmonBloodDemonUnitLightningSearch"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="AmonBloodDemonUnitBarrierMain">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units,Race:Protoss"/>
+        <DisableValidatorArray value="NoBloodDemonUnitBarrierBan"/>
+        <DamageResponse Handled="AmonBloodDemonUnitBarrierSet" ModifyFraction="0">
+            <Chance value="1"/>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="AmonBloodDemonUnitFrenzy">
+        <InfoFlags index="Hidden" value="1"/>
+        <Modification MoveSpeedMultiplier="1.5" AttackSpeedMultiplier="2" Detect="10">
+            <StateFlags index="UnitAttrOnMassive" value="1"/>
+            <StateFlags index="UnitAttrOnHeroic" value="1"/>
+            <StateFlags index="Unstoppable" value="1"/>
+            <VitalRegenMultiplier index="Energy" value="2"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="AmonBloodDemonUnitHeal">
+        <InfoFlags index="Hidden" value="1"/>
+        <Period value="5"/>
+        <PeriodicEffect value="AmonBloodDemonUnitHealSearch"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="AmonBloodDemonUnitStronger">
+        <InfoFlags index="Hidden" value="1"/>
+        <Modification>
+            <DamageDealtFraction index="Spell" value="0.5"/>
+            <DamageDealtFraction index="Melee" value="0.5"/>
+            <DamageDealtFraction index="Ranged" value="0.5"/>
+            <DamageDealtFraction index="Splash" value="0.5"/>
+            <DamageDealtFraction index="NoProc" value="0.5"/>
+            <VitalMaxFractionArray index="Life" value="0.75"/>
+            <VitalMaxFractionArray index="Shields" value="0.75"/>
+            <VitalMaxFractionArray index="Energy" value="0.75"/>
+        </Modification>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="AmonBloodDemonUnitHardened">
+        <InfoFlags index="Hidden" value="1"/>
+        <DamageResponse ClampMaximum="100" Minimum="100">
+            <Chance value="1"/>
+            <Cost>
+                <Charge Link="Behavior/MutatorHardenedWill"/>
+                <Cooldown Link="Behavior/MutatorHardenedWill"/>
+            </Cost>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="AmonBloodDemonUnitPlague">
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="AbilityorEffectType:Units"/>
+        <Period value="0.25"/>
+        <PeriodicEffect value="AmonBloodDemonUnitPlagueSearchSet"/>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="AmonBloodDemonUnitBarrier">
+        <Alignment value="Positive"/>
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="Race:Protoss,AbilityorEffectType:Units"/>
+        <TimeScaleSource Value="Global"/>
+        <Duration value="15"/>
+        <DamageResponse ModifyFraction="0" ModifyLimit="300" ModifyMinimumDamage="1">
+            <Chance value="1"/>
+        </DamageResponse>
+    </CBehaviorBuff>
+    <CBehaviorBuff id="AmonBloodDemonUnitBarrierBan">
+        <Alignment value="Positive"/>
+        <InfoFlags index="Hidden" value="1"/>
+        <EditorCategories value="Race:Protoss,AbilityorEffectType:Units"/>
+        <TimeScaleSource Value="Global"/>
+        <Duration value="20"/>
+    </CBehaviorBuff>
+</Catalog>

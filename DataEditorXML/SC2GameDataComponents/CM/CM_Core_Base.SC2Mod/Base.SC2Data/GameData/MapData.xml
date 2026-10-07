@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CMap default="1" id="ACMap">
+        <UserReference value="CoopMaps;##id##"/>
+    </CMap>
+    <CMap id="COOP_Placeholder" parent="ACMap"/>
+    <CMap id="AC_AiurSiege" parent="ACMap">
+        <File value="Scythe of Amon"/>
+    </CMap>
+    <CMap id="AC_JarbanPointCapture" parent="ACMap">
+        <File value="Miner Evacuation"/>
+    </CMap>
+    <CMap id="AC_KorhalSkyGuard" parent="ACMap">
+        <File value="AC_KorhalSkyGuard"/>
+    </CMap>
+    <CMap id="AC_KaldirShuttle" parent="ACMap">
+        <File value="Void Launch"/>
+    </CMap>
+    <CMap id="AC_KorhalRift" parent="ACMap">
+        <File value="Rifts to Korhal"/>
+    </CMap>
+    <CMap id="AC_PartAndParcel" parent="ACMap">
+        <File value="Part and Parcel"/>
+    </CMap>
+    <CMap id="AC_ShakurasTemple" parent="ACMap">
+        <File value="Temple of the Past"/>
+    </CMap>
+    <CMap id="AC_SlaynPayload" parent="ACMap">
+        <File value="Chain of Ascension"/>
+    </CMap>
+    <CMap id="AC_UlnarLocks" parent="ACMap">
+        <File value="Lock and Load"/>
+    </CMap>
+    <CMap id="AC_TarsonisTrain" parent="ACMap">
+        <File value="Oblivion Express"/>
+    </CMap>
+    <CMap id="AC_CharThrasher" parent="ACMap">
+        <File value="Void Thrashing"/>
+    </CMap>
+    <CMap id="AC_VeridiaCourier" parent="ACMap">
+        <File value="The Vermillion Problem"/>
+    </CMap>
+    <CMap id="AC_BelshirEscort" parent="ACMap">
+        <File value="Mist Opportunities"/>
+    </CMap>
+    <CMap id="AC_MeinhoffDayNight" parent="ACMap">
+        <File value="Dead of Night"/>
+    </CMap>
+    <CMap id="AC_CybrosEscort" parent="ACMap">
+        <File value="Malwarfare"/>
+    </CMap>
+    <CMap id="AC_CradleOfDeath" parent="ACMap">
+        <File value="Cradle of Death"/>
+    </CMap>
+</Catalog>

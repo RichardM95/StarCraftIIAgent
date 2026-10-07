@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Catalog>
+    <CButton id="CommanderPrestigeStukovLeftNoDead">
+        <Icon value="Assets\Textures\btn-upgrade-zerg-stukov-infestedciviliansleap.dds"/>
+        <HotkeyAlias value="CommanderPrestigeStukov"/>
+    </CButton>
+    <CButton id="EvolveSIInfestedAberrationArmorAura">
+        <Icon value="Assets\Textures\btn-upgrade-zagara-aberrationarmorcover.dds"/>
+        <AlertIcon value="Assets\Textures\btn-upgrade-zagara-aberrationarmorcover.dds"/>
+        <Hotkey value="Button/Hotkey/EvolveK5Cooldowns"/>
+        <EditorCategories value="Race:Zerg"/>
+        <HotkeyAlias value="EvolveK5Cooldowns"/>
+    </CButton>
+    <CButton id="EvolveSIInfestedCivilianArmorShred">
+        <Icon value="Assets\Textures\btn-upgrade-zergling-armorshredding.dds"/>
+        <AlertIcon value="Assets\Textures\btn-upgrade-zergling-armorshredding.dds"/>
+        <EditorCategories value="Race:Zerg"/>
+    </CButton>
+    <CButton id="CommanderPrestigeStukovLeftNoDeadSICivilianStructureSpawnCivilian">
+        <TooltipAppender Validator="HaveMasteryStukovVolatileChance" Text="Button/Tooltip/MasteryStukovVolatileChanceAppend"/>
+        <TooltipAppender Validator="HaveMasteryStukovTimedLife" Text="Button/Tooltip/MasteryMasteryStukovTimedLifeAppend"/>
+        <Icon value="Assets\Textures\btn-abil-zerg-stukov-spawninfestedarmy.dds"/>
+        <AlertIcon value="Assets\Textures\btn-abil-zerg-stukov-spawninfestedarmy.dds"/>
+        <EditorCategories value="Race:InfestedTerran"/>
+    </CButton>
+    <CButton id="TychusRaynorSnipe">
+        <Icon value="Assets\Textures\btn-upgrade-terran-nova-snipetripletap.dds"/>
+        <AlertIcon value="Assets\Textures\btn-upgrade-terran-nova-snipetripletap.dds"/>
+        <EditorCategories value="Race:Terran"/>
+    </CButton>
+    <CButton id="SIVolatileInfestedExplodeHeal">
+        <Icon value="Assets\Textures\BTN-Upgrade-Zerg-RegenerativeBile.dds"/>
+        <AlertIcon value="Assets\Textures\BTN-Upgrade-Zerg-RegenerativeBile.dds"/>
+        <EditorCategories value="Race:Terran"/>
+    </CButton>
+    <CButton id="EvolveSIVolatileInfestedExplodeHeal">
+        <Icon value="Assets\Textures\BTN-Upgrade-Zerg-RegenerativeBile.dds"/>
+        <AlertIcon value="Assets\Textures\BTN-Upgrade-Zerg-RegenerativeBile.dds"/>
+        <EditorCategories value="Race:Terran"/>
+    </CButton>
+    <CButton id="SIInfestedCivilianArmorShred">
+        <Icon value="Assets\Textures\btn-upgrade-zergling-armorshredding.dds"/>
+        <AlertIcon value="Assets\Textures\btn-upgrade-zergling-armorshredding.dds"/>
+        <EditorCategories value="Race:Zerg"/>
+    </CButton>
+    <CButton id="AbathurSymbioteLocust">
+        <TooltipAppender Validator="HaveMasteryAbathurSymbioteCarapace" Text="Button/Tooltip/MasteryAbathurSymbioteCarapaceAppend"/>
+        <TooltipAppender Validator="HaveMasteryAbathurSymbioteCDR" Text="Button/Tooltip/MasteryAbathurSymbioteCDRAppend"/>
+        <Icon value="Assets\Textures\btn-upgrade-zerg-abathur-symbiote.dds"/>
+        <AlertIcon value="Assets\Textures\btn-unit-zerg-symbiote.dds"/>
+        <EditorCategories value="Race:Zerg"/>
+        <HotkeyAlias value="AbathurBrutaliskLeviathanSymbiote"/>
+    </CButton>
+    <CButton id="AbathurSymbioteNormal">
+        <TooltipAppender Validator="HaveMasteryAbathurSymbioteCarapace" Text="Button/Tooltip/MasteryAbathurSymbioteCarapaceAppend"/>
+        <TooltipAppender Validator="HaveMasteryAbathurSymbioteCDR" Text="Button/Tooltip/MasteryAbathurSymbioteCDRAppend"/>
+        <Icon value="Assets\Textures\btn-upgrade-zerg-abathur-symbiote.dds"/>
+        <AlertIcon value="Assets\Textures\btn-unit-zerg-symbiote.dds"/>
+        <EditorCategories value="Race:Zerg"/>
+        <HotkeyAlias value="AbathurBrutaliskLeviathanSymbiote"/>
+    </CButton>
+    <CButton id="CommanderPrestigeArtanisInspire">
+        <Icon value="Assets\Textures\btn-ability-spearofadun-shieldovercharge.dds"/>
+        <AlertIcon value="Assets\Textures\btn-ability-spearofadun-shieldovercharge.dds"/>
+        <TooltipAppender Validator="HaveMasteryArtanisWarpinHaste" Text="Button/AppenderTooltip/CommanderPrestigeArtanisInspireSpeed"/>
+    </CButton>
+    <CButton id="CommanderPrestigeKerriganSupremeOverlord"/>
+    <CButton id="CommanderPrestigeRaynor4">
+        <Icon value="Assets\Textures\btn-ability-zerg-dehaka-essencecollector.dds"/>
+    </CButton>
+    <CButton id="CommanderPrestigeRaynorBansheeAirstrike" parent="PrestigeAbilLocked"/>
+    <CButton id="HyperionSelfRepair">
+        <Icon value="Assets\Textures\btn-ability-stetmann-garyselfhealing.dds"/>
+        <AlertIcon value="Assets\Textures\btn-ability-stetmann-garyselfhealing.dds"/>
+        <HotkeyAlias value="ResearchSelfRepair"/>
+    </CButton>
+    <CButton id="KaraxPhaseSturctureCannon">
+        <Icon value="Assets\Textures\btn-ability-protoss-phasecannon.dds"/>
+        <AlertIcon value="Assets\Textures\btn-ability-protoss-phasecannon.dds"/>
+        <EditorCategories value="Race:Protoss"/>
+    </CButton>
+    <CButton id="CommanderPrestigeAbathurEssenceShift">
+        <Icon value="Assets\Textures\BTN-Ability-Zerg-CreepTeleport.dds"/>
+        <AlertIcon value="Assets\Textures\BTN-Ability-Zerg-CreepTeleport.dds"/>
+        <EditorCategories value="Race:Zerg"/>
+    </CButton>
+    <CButton id="XelNagaKerriganLightoftheUniverse">
+        <TooltipAppender Validator="HaveVoidCoopHeroicFortitude" Text="Button/AppendTooltip/HaveVoidCoopHeroicFortitude"/>
+        <TooltipAppender Validator="NotHaveVoidCoopHeroicFortitude" Text="Button/AppendTooltip/NotHaveVoidCoopHeroicFortitude"/>
+        <TooltipAppender Validator="HaveK5ChainLightning" Text="Button/AppendTooltip/HaveK5ChainLightning"/>
+        <TooltipAppender Validator="NotHaveK5ChainLightning" Text="Button/AppendTooltip/NotHaveK5ChainLightning"/>
+        <TooltipAppender Validator="HaveK5Cooldowns" Text="Button/AppendTooltip/HaveK5Cooldowns"/>
+        <TooltipAppender Validator="NotHaveK5Cooldowns" Text="Button/AppendTooltip/NotHaveK5Cooldowns"/>
+        <TooltipAppender Validator="HaveMasteryKerriganEnergyRegen" Text="Button/Tooltip/MasteryKerriganEnergyRegenAppend"/>
+        <TooltipAppender Validator="HaveMasteryKerriganAutoAttackDamage" Text="Button/Tooltip/MasteryKerriganAutoAttackDamageAppend"/>
+        <Icon value="Assets\Textures\btn-ability-zerg-cosmicfury.dds"/>
+    </CButton>
+    <CButton id="XelNagaKerriganCreepTeleport">
+        <Icon value="Assets\Textures\BTN-Ability-Zerg-CreepTeleport.dds"/>
+        <AlertIcon value="Assets\Textures\BTN-Ability-Zerg-CreepTeleport.dds"/>
+        <EditorCategories value="Race:Zerg"/>
+    </CButton>
+    <CButton id="XelNagaKerriganExtinction">
+        <Icon value="Assets\Textures\BTN-Ability-Zerg-Extinction.dds"/>
+        <TooltipAppender Validator="HaveMasteryKerriganImmobilizationWaveDamage" Text="Button/Tooltip/MasteryKerriganImmobilizationWaveDamageAppend"/>
+    </CButton>
+    <CButton id="XelNagaKerriganCelestialRadiance">
+        <Icon value="Assets\Textures\btn-ability-xelnagakerrigan-heal.dds"/>
+    </CButton>
+    <CButton id="XelNagaKerriganHeartoftheSwarm">
+        <Icon value="Assets\Textures\btn-ability-kerrigan-heroicfortitude.dds"/>
+        <HotkeyAlias value="XelNagaKerriganLightoftheUniverse"/>
+    </CButton>
+    <CButton id="XelNagaKerriganQuantumRay">
+        <TooltipAppender Validator="HaveMasteryKerriganPrimarySpeedDamage" Text="Button/Tooltip/MasteryKerriganQuantumRayAppend"/>
+        <Icon value="Assets\Textures\BTN-Ability-Zerg-QuantumRay.dds"/>
+        <EditorCategories value="Race:Zerg"/>
+    </CButton>
+    <CButton id="ResearchTacticalCommandSystem2">
+        <Icon value="Assets\Textures\btn-tips-starmap.dds"/>
+        <AlertIcon value="Assets\Textures\btn-tips-starmap.dds"/>
+    </CButton>
+    <CButton id="ResearchUltimateWeapon">
+        <Icon value="Assets\Textures\btn-ability-stetmann-battlecarrierlordmechayamatocannon.dds"/>
+        <AlertIcon value="Assets\Textures\btn-ability-stetmann-battlecarrierlordmechayamatocannon.dds"/>
+    </CButton>
+    <CButton id="ResearchSelfRepair">
+        <Icon value="Assets\Textures\btn-ability-stetmann-garyselfhealing.dds"/>
+        <AlertIcon value="Assets\Textures\btn-ability-stetmann-garyselfhealing.dds"/>
+    </CButton>
+    <CButton id="TacticalCommandSystem">
+        <Icon value="Assets\Textures\btn-tips-starmap.dds"/>
+        <AlertIcon value="Assets\Textures\btn-tips-starmap.dds"/>
+        <EditorCategories value="Race:Terran"/>
+    </CButton>
+    <CButton id="ArtanisPrestigePowerSource">
+        <Icon value="Assets\Textures\btn-ability-protoss-forceofwill.dds"/>
+    </CButton>
+    <CButton id="CommanderPrestigeKerriganXelnagaMutalisk">
+        <Icon value="Assets\Textures\btn-ability-kerrigan-malignantcreep.dds"/>
+    </CButton>
+    <CButton id="CommanderPrestigeAbathur4">
+        <Icon value="Assets\Textures\btn-ability-zerg-dehaka-essencecollector.dds"/>
+    </CButton>
+    <CButton id="CommanderPrestigeAbathur5DevouringScourge">
+        <Icon value="Assets\Textures\btn-ability-zerg-dehaka-essencecollector.dds"/>
+    </CButton>
+    <CButton id="CommanderPrestigeArtanis4">
+        <Icon value="Assets\Textures\btn-upgrade-artanis-pylonpower.dds"/>
+    </CButton>
+    <CButton id="CommanderPrestigeArtanisPowerFieldRemake">
+        <Icon value="Assets\Textures\btn-upgrade-artanis-pylonpower.dds"/>
+    </CButton>
+    <CButton id="CommanderPrestigeDehaka4">
+        <Icon value="Assets\Textures\btn-progression-zerg-dehaka-8-fireroachimpalerupgradepack.dds"/>
+    </CButton>
+    <CButton id="CommanderPrestigeKarax4">
+        <Icon value="Assets\Textures\btn-upgrade-karax-orbitalassault_stun.dds"/>
+    </CButton>
+    <CButton id="CommanderPrestigeKaraxArmyRemake">
+        <Icon value="Assets\Textures\btn-ability-spearofadun-warpinreinforcements.dds"/>
+    </CButton>
+    <CButton id="CommanderPrestigeTychus4">
+        <Icon value="Assets\Textures\btn-ability-mengsk-royalguard-mightoftheempire.dds"/>
+    </CButton>
+    <CButton id="DehakaUltraliskLevel2Merge">
+        <TooltipAppender Validator="HaveCommanderPrestigeDehaka4" Text="Button/Tooltip/CommanderPrestigeDehaka4Append"/>
+    </CButton>
+    <CButton id="DehakaRoachLevel2Merge">
+        <TooltipAppender Validator="HaveCommanderPrestigeDehaka4" Text="Button/Tooltip/CommanderPrestigeDehaka4Append"/>
+    </CButton>
+    <CButton id="DehakaRavasaurMerge">
+        <TooltipAppender Validator="HaveCommanderPrestigeDehaka4" Text="Button/Tooltip/CommanderPrestigeDehaka4Append"/>
+    </CButton>
+    <CButton id="DehakaHydraliskToMutalisk">
+        <TooltipAppender Validator="HaveCommanderPrestigeDehaka4" Text="Button/Tooltip/CommanderPrestigeDehaka4Append"/>
+    </CButton>
+    <CButton id="DehakaRoachGuardianMerge">
+        <TooltipAppender Validator="HaveCommanderPrestigeDehaka4" Text="Button/Tooltip/CommanderPrestigeDehaka4Append"/>
+    </CButton>
+    <CButton id="DehakaSwarmHostMerge">
+        <TooltipAppender Validator="HaveCommanderPrestigeDehaka4" Text="Button/Tooltip/CommanderPrestigeDehaka4Append"/>
+    </CButton>
+    <CButton id="DehakaHydraliskImpalerMerge">
+        <TooltipAppender Validator="HaveCommanderPrestigeDehaka4" Text="Button/Tooltip/CommanderPrestigeDehaka4Append"/>
+    </CButton>
+    <CButton id="EnablePowerOvercharge">
+        <Icon value="Assets\Textures\btn-upgrade-stetmann-ultraliskburrowchargestun.dds"/>
+        <AlertIcon value="Assets\Textures\btn-upgrade-stetmann-ultraliskburrowchargestun.dds"/>
+        <EditorCategories value="Race:Protoss"/>
+    </CButton>
+    <CButton id="EnablePowerOverchargeKhaydarinMonolith">
+        <Icon value="Assets\Textures\btn-upgrade-stetmann-ultraliskburrowchargestun.dds"/>
+        <AlertIcon value="Assets\Textures\btn-upgrade-stetmann-ultraliskburrowchargestun.dds"/>
+        <EditorCategories value="Race:Protoss"/>
+        <HotkeyAlias value="EnablePowerOvercharge"/>
+    </CButton>
+    <CButton id="EnablePowerOverchargeShieldBattery">
+        <Icon value="Assets\Textures\btn-upgrade-stetmann-ultraliskburrowchargestun.dds"/>
+        <AlertIcon value="Assets\Textures\btn-upgrade-stetmann-ultraliskburrowchargestun.dds"/>
+        <EditorCategories value="Race:Protoss"/>
+        <HotkeyAlias value="EnablePowerOvercharge"/>
+    </CButton>
+    <CButton id="HyperionVoidCoopHyperjumpP4">
+        <Icon value="Assets\Textures\btn-ability-terran-warpjump.dds"/>
+    </CButton>
+    <CButton id="HyperionVoidCoopYamatoCannonP4">
+        <Icon value="Assets\Textures\btn-ability-terran-yamatogun-color.dds"/>
+        <AlertIcon value="Assets\Textures\btn-ability-terran-yamatogun-color.dds"/>
+        <EditorCategories value="Race:Terran"/>
+    </CButton>
+    <CButton id="PowerOvercharge">
+        <Icon value="Assets\Textures\btn-upgrade-stetmann-ultraliskburrowchargestun.dds"/>
+        <AlertIcon value="Assets\Textures\btn-upgrade-stetmann-ultraliskburrowchargestun.dds"/>
+        <EditorCategories value="Race:Protoss"/>
+        <ChargeText value="Chargetext/PowerOvercharge"/>
+    </CButton>
+    <CButton id="KaraxPrestigeSOADeployPhotonCannon">
+        <Icon value="Assets\Textures\btn-building-protoss-photoncannon.dds"/>
+        <AlertIcon value="Assets\Textures\btn-building-protoss-photoncannon.dds"/>
+        <EditorCategories value="Race:Protoss"/>
+    </CButton>
+    <CButton id="KaraxPrestigeSOADeployKhaydarinMonolith">
+        <Icon value="Assets\Textures\btn-upgrade-karax-newunitkhaydarinmonolith.dds"/>
+        <AlertIcon value="Assets\Textures\btn-upgrade-karax-newunitkhaydarinmonolith.dds"/>
+        <EditorCategories value="Race:Protoss"/>
+    </CButton>
+    <CButton id="KaraxPrestigeSOADeployShieldBattery">
+        <Icon value="Assets\Textures\btn-building-protoss-shieldbattery.dds"/>
+        <AlertIcon value="Assets\Textures\btn-building-protoss-shieldbattery.dds"/>
+        <EditorCategories value="Race:Protoss"/>
+    </CButton>
+    <CButton id="EnablePhaseStructure">
+        <Icon value="Assets\Textures\btn-ability-protoss-phasecannon.dds"/>
+        <AlertIcon value="Assets\Textures\btn-ability-protoss-phasecannon.dds"/>
+        <EditorCategories value="Race:Protoss"/>
+    </CButton>
+    <CButton id="PowerOverchargeKhaydarinMonolith">
+        <Icon value="Assets\Textures\btn-upgrade-stetmann-ultraliskburrowchargestun.dds"/>
+        <AlertIcon value="Assets\Textures\btn-upgrade-stetmann-ultraliskburrowchargestun.dds"/>
+        <EditorCategories value="Race:Protoss"/>
+        <HotkeyAlias value="PowerOvercharge"/>
+        <ChargeText value="Chargetext/PowerOverchargeKhaydarinMonolith"/>
+    </CButton>
+    <CButton id="PowerOverchargeShiledBattery">
+        <Icon value="Assets\Textures\btn-upgrade-stetmann-ultraliskburrowchargestun.dds"/>
+        <AlertIcon value="Assets\Textures\btn-upgrade-stetmann-ultraliskburrowchargestun.dds"/>
+        <EditorCategories value="Race:Protoss"/>
+        <HotkeyAlias value="PowerOvercharge"/>
+        <ChargeText value="Chargetext/PowerOverchargeShieldBattery"/>
+    </CButton>
+    <CButton id="ResearchArtanisHardenedShield">
+        <Icon value="Assets\Textures\btn-ability-protoss-hardenedshields-color.dds"/>
+        <AlertIcon value="Assets\Textures\btn-ability-protoss-hardenedshields-color.dds"/>
+        <EditorCategories value="Race:Protoss"/>
+    </CButton>
+    <CButton id="Resurgence">
+        <Icon value="Assets\Textures\btn-ability-protoss-resurgence.dds"/>
+    </CButton>
+    <CButton id="LightningDash">
+        <Icon value="Assets\Textures\btn-ability-protoss-lightningdash.dds"/>
+        <EditorCategories value="Race:Protoss"/>
+    </CButton>
+    <CButton id="AstralWind">
+        <Icon value="Assets\Textures\btn-ability-protoss-astralwind.dds"/>
+    </CButton>
+    <CButton id="ArtanisHardenedShield">
+        <Icon value="Assets\Textures\btn-ability-protoss-hardenedshields-color.dds"/>
+        <AlertIcon value="Assets\Textures\btn-ability-protoss-hardenedshields-color.dds"/>
+        <EditorCategories value="Race:Protoss"/>
+    </CButton>
+    <CButton id="KaraxPrestigeSOADeployPylon">
+        <Icon value="Assets\Textures\btn-ability-spearofadun-deploypylon.dds"/>
+        <AlertIcon value="Assets\Textures\btn-ability-spearofadun-deploypylon.dds"/>
+        <EditorCategories value="Race:Protoss"/>
+    </CButton>
+    <CButton id="HyperionAdvancedPDDReplenish">
+        <Icon value="Assets\Textures\Talent-Raynor-Level05-PointDefenseDrones.dds"/>
+        <AlertIcon value="Assets\Textures\Talent-Raynor-Level05-PointDefenseDrones.dds"/>
+        <EditorCategories value="Race:Terran"/>
+    </CButton>
+    <CButton id="ResearchWormholeJumpEngine">
+        <Icon value="Assets\Textures\btn-ability-hornerhan-fleethyperjump.dds"/>
+        <AlertIcon value="Assets\Textures\btn-ability-hornerhan-fleethyperjump.dds"/>
+    </CButton>
+</Catalog>
