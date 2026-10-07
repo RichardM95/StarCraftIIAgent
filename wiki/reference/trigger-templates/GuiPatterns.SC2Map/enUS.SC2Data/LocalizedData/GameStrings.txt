@@ -1,0 +1,7 @@
+Param/Value/70000002=Initialization ran
+Param/Value/7000000A=Complete the configured task
+Param/Value/7000000B=Replace this description with the mission objective
+Param/Value/7000002A=A unit entered the configured region
+Param/Value/7000003E=Configured timer expired
+Param/Value/70000061=Player difficulty matches configured value
+Param/Value/70000067=Player difficulty does not match configured value

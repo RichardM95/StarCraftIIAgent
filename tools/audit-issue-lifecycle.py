@@ -2,13 +2,14 @@
 """Validate active issue-ledger lifecycle labels and required evidence fields."""
 from __future__ import annotations
 
+import argparse
 import re
+from sc2_paths import project_data_dir
 import sys
 from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
-LEDGER = REPO_ROOT / "wiki" / "implementation" / "bug-reports" / "latest.md"
 STAGES = (
     "reported",
     "root cause confirmed",
@@ -21,7 +22,19 @@ BASE_FIELDS = ("Status", "Map / Context", "Reproduction", "Observed", "Expected"
 
 
 def main() -> int:
-    text = LEDGER.read_text(encoding="utf-8").split("## Issue Template", 1)[0]
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--ledger", type=Path, help="Explicit issue ledger; missing explicit files fail")
+    args = parser.parse_args()
+    try:
+        data = project_data_dir(REPO_ROOT) if args.ledger is None else None
+        ledger = args.ledger if args.ledger is not None else data / "docs/issues.md" if data else None
+        if args.ledger is None and (ledger is None or not ledger.exists()):
+            print("SKIP Issue lifecycle audit: no active project or project ledger: " + str(ledger))
+            return 0
+        text = ledger.read_text(encoding="utf-8").split("## Issue Template", 1)[0]
+    except (OSError, ValueError) as exc:
+        print("ERROR: " + str(exc))
+        return 1
     sections = re.split(r"(?m)^### (?=ISSUE-\d+:)", text)[1:]
     failures: list[str] = []
     for section in sections:

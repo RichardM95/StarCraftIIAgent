@@ -12,7 +12,7 @@ from typing import Iterable
 
 from sc2_dependencies import build_dependency_graph, resolve_dependency_root, dependency_state, IncompleteDependenciesError, RECURSION_DISABLED
 from sc2_catalog_inputs import changed_input, index_inputs, manifest_path, read_manifest
-from sc2_paths import find_project_mods, load_project_config, resolve_configured_path
+from sc2_paths import catalog_output_dir, find_project_mods, load_project_config, resolve_configured_path
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -357,16 +357,15 @@ def stale_default_index_input(store: CatalogStore, *, verify_hashes: bool = Fals
 
 
 def load_store(args: argparse.Namespace) -> CatalogStore:
-    db_path = Path(args.db) if args.db else None
-    graph_path = Path(args.graph)
+    default_out = catalog_output_dir(ROOT) if not args.db and not args.graph else None
+    db_path = Path(args.db) if args.db else (default_out / "catalog.sqlite" if default_out else None)
+    graph_path = Path(args.graph) if args.graph else (db_path.with_name("graph.json") if db_path else default_out / "graph.json")
     if db_path and db_path.exists():
         store: CatalogStore = SqliteCatalogStore(db_path)
     else:
         sibling_db = graph_path.with_name("catalog.sqlite")
         if sibling_db.exists():
             store = SqliteCatalogStore(sibling_db)
-        elif DEFAULT_DB.exists() and graph_path == DEFAULT_GRAPH:
-            store = SqliteCatalogStore(DEFAULT_DB)
         else:
             store = JsonCatalogStore(graph_path)
     allow_partial = getattr(args, "allow_incomplete_dependencies", False)
@@ -832,8 +831,8 @@ def command_production_chain(args: argparse.Namespace) -> None:
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--graph", default=str(DEFAULT_GRAPH), help="Fallback path to sc2-catalog-graph-out/graph.json")
-    parser.add_argument("--db", default=str(DEFAULT_DB), help="Preferred path to sc2-catalog-graph-out/catalog.sqlite")
+    parser.add_argument("--graph", default=None, help="Graph path; default: selected project catalog, or sibling of explicit --db")
+    parser.add_argument("--db", default=None, help="SQLite path; default: selected project catalog (explicit --graph keeps its own scope)")
     parser.add_argument("--allow-incomplete-dependencies", action="store_true", help="Explicitly permit marked partial dependency investigation; independent of --allow-stale")
     parser.add_argument("--allow-stale", action="store_true", help="Permit explicitly marked historical inspection when the default index is outdated or current project configuration cannot be verified")
     parser.add_argument("--verify-input-hashes", action="store_true", help="Hash indexed inputs to detect same-size edits with restored timestamps")

@@ -3,6 +3,7 @@
 > Generated from `Core.SC2Mod/base.sc2data/triggerlibs/nativelib.triggerlib` (3,196 native functions, library `Ntve`) plus empirically validated workflow notes for generating Trigger XML externally.
 
 Use this page first when generating or editing `.SC2Map` / `.SC2Mod` Trigger XML. For quick function IDs and parameter IDs, use [triggers-cheatsheet.md](triggers-cheatsheet.md). For the full native lookup table, use [triggers-native-functions.md](triggers-native-functions.md).
+Before selecting library functions, use [dependency-aware queries and official cases](trigger-knowledge.md). The raw library definitions are authoritative for complete parameter/default/sub-action structure; the Markdown table is a navigation aid.
 For external Trigger Editor orientation, see [external-sc2-resources.md](external-sc2-resources.md).
 
 ## Quick orientation
@@ -91,8 +92,8 @@ Validated examples:
   picked unit.
 - **`Or` (Ntve `00000133`) vs `And` (Ntve `00000132`)** use DIFFERENT
   cond sub-type IDs: `And` cond = `00000002`; `Or` cond = `00000001`.
-  Mixing them silently strips Comparisons on save. Always read the
-  parent's `<SubFunctionType>` declarations in nativelib first.
+  Read the target parent's `<SubFunctionType>` declarations first. The exact
+  save-time failure behavior requires versioned Editor evidence.
 
 ---
 
@@ -101,16 +102,14 @@ Validated examples:
 Events are NOT declared as `<Element Type="Event">` siblings. They are
 declared as `<Element Type="FunctionCall" Id="X">` (same shape as actions)
 and the Trigger references them via `<Event Type="FunctionCall" Id="X"/>`.
-The editor SILENTLY STRIPS any `<Event Type="Event"/>` refs and any
-`<Element Type="Event">` declarations on save — that type doesn't exist in
-the schema.
+Use this shape from official GUI sources. Save-time rejection or removal of
+other shapes requires a recorded Editor reproduction.
 
-**Layout requirement:** the event `<Element Type="FunctionCall">` MUST be
-placed immediately after its Trigger's closing `</Element>` (sibling-
-adjacent), not later in the file. If the referenced FunctionCall is far
-away (e.g. end-of-file), the editor's `_Init` codegen silently DROPS the
-`TriggerAddEvent*(...)` registration call — the trigger appears to register
-but never fires. Verify by reading `MapScript.galaxy`.
+Place event declarations beside their Trigger as a conservative handoff
+practice. The earlier mandatory-adjacency claim lacks a versioned minimal
+reproduction; see [evidence scope](trigger-knowledge.md#编辑器行为的证据范围).
+After Editor save, inspect generated event registration and record the result
+using the [acceptance record](trigger-templates/acceptance.md).
 
 ```xml
 <Element Type="Trigger" Id="D23DC42E">

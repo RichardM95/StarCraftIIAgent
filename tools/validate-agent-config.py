@@ -7,7 +7,7 @@ from collections.abc import Mapping
 from pathlib import Path
 
 from sc2_dependencies import build_dependency_graph
-from sc2_paths import CONFIG_FILENAME, config_path, load_project_config, resolve_configured_path
+from sc2_paths import CONFIG_FILENAME, config_path, load_project_config, resolve_configured_path, project_data_dir
 
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
@@ -106,6 +106,11 @@ def main() -> int:
                 failures.append("project.source_mod must end with .SC2Mod")
             if not primary_path.is_dir():
                 failures.append(f"project.source_mod directory not found: {primary_path}")
+
+    try:
+        project_data_dir(REPO_ROOT, config)
+    except ValueError as exc:
+        failures.append(str(exc))
 
     validation = config.get("validation", {})
     if not isinstance(validation, Mapping):

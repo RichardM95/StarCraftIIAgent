@@ -1,0 +1,15 @@
+Trigger/Name/70000008=Template - Map Initialization
+Variable/Name/70000009=TemplateObjective
+Trigger/Name/70000018=Template - Create Objective
+Trigger/Name/70000019=Template - Complete Objective
+Trigger/Name/7000001F=Template - Victory
+Trigger/Name/70000025=Template - Defeat
+Variable/Name/70000027=TemplateRegion
+Trigger/Name/70000033=Template - Unit Enters Region
+Variable/Name/70000035=TemplateTimer
+Trigger/Name/7000003C=Template - Start Timer
+Trigger/Name/70000045=Template - Timer Expired
+Variable/Name/70000047=TemplateWaveUnits
+Variable/Name/7000004C=TemplateWaveTarget
+Trigger/Name/70000058=Template - Send Existing Units
+Trigger/Name/7000006C=Template - Difficulty Branch

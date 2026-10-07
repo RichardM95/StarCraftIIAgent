@@ -19,6 +19,7 @@ When the user supplies a primary Components `.SC2Mod` folder path and asks to in
 
 After reading this skill, route to the appropriate deep skill based on the task. Sub-skills under `skills/galaxy/` and `skills/sc2data/` are loaded after the corresponding top-level router skill.
 For a new trigger request, route to `sc2-map-triggers` and prefer editable GUI events, conditions, and actions. Use embedded Custom Script only for a small part that GUI cannot reasonably express; choose standalone Galaxy only when the user explicitly requests it or the task maintains existing Galaxy source.
+Library selection follows `tools/sc2-trigger-query.py libraries` for the actual target; use the [dependency query workflow](../../wiki/reference/trigger-knowledge.md) before choosing function, parameter, preset or sub-action IDs. Official reference membership does not establish target availability.
 
 | Task type | Load next skill | Wiki page |
 |---|---|---|
@@ -40,7 +41,7 @@ After loading `sc2-galaxy-scripting` or `sc2-catalog-xml`, use that skill's own 
 
 - `DataEditorXML/*.txt` — selected catalog dumps already covered by the graph; grep one identified file for exact fields
 - `DataEditorXML/SC2GameDataComponents/` — query with `tools/sc2-reference-query.py`, restricting family, component, and area
-- `sc2-catalog-graph-out/` — query with `tools/sc2-catalog-query.py`
+- Project `runtime/catalog/` (or external reference cache) — query with `tools/sc2-catalog-query.py`
 - `wiki/reference/triggers-native/` — native function signatures
 - Git history (`git log -n <N> -- <path>`) for historical provenance
 
@@ -77,4 +78,4 @@ Use `tools/README.md` and each tool's `--help` for current commands and argument
 3. **Project-unique IDs:** Make variants with project-unique IDs; only override same-name vanilla IDs when the user explicitly asks for a global change. Sync check gameplay, production entry, presentation, and localization chain.
 4. **Edit component source:** Do not hand-edit `publish/`, auto-generated `MapScript.galaxy`, or compiled library output. Respect the current project's hand-authored script entry points.
 5. **Static then runtime:** Run static checks against the actual target and confirm the scan scope; then schedule Editor open/save and in-game scenario verification. Do not present static pass as Editor acceptance or game pass without evidence.
-6. **Record decisions:** Write durable design facts to `wiki/design/` and summarize in `DesignDocument.md`; write implementation conventions to topic pages. Only log a decision to `wiki/log.md` when its rationale would otherwise be lost.
+6. **Record decisions:** Resolve project paths with `python tools/project-paths.py`; durable project facts go to docs/design/ or docs/implementation/ there, with design sources in docs/sources.md. Only reusable, sourced findings enter the suite wiki. Ordinary queries need no persistent record; see [project data](../../docs/agents/project-data.md).

@@ -17,11 +17,11 @@ graph LR
     E --> F[6. packaged runtime passed]
 ```
 
-1. **`reported`**: The issue is recorded in the active ledger (`wiki/implementation/bug-reports/latest.md`) with reproduction context:
+1. **`reported`**: The issue is recorded in the active ledger (`<project-data>/docs/issues.md`) with reproduction context:
    - Map / mission
    - Player/faction configuration
    - Observed behavior vs expected behavior
-   - Exact SC2 Editor warning text or in-game error log (from `bugreport.txt`)
+   - Exact SC2 Editor warning text or in-game error log (from `<project-data>/runtime/reports/bugreport.txt`)
 2. **`root cause confirmed`**: The root catalog ID, parent inheritance flaw, or Galaxy script logic error is identified.
 3. **`source fixed`**: Working-tree source files (`Base.SC2Data/GameData/*.xml`, `Base.SC2Data/Scripts/*.galaxy`, etc.) are updated.
 4. **`static validation passed`**: `python tools/test-suite.py` executes with zero errors.
@@ -44,10 +44,10 @@ Every handoff and completion report must name the highest gate actually reached.
 
 - **Statistic Changes:** Before editing XML statistics, record the local catalog entry, parent, inherited value, and intended override in the ledger.
 - **UI & Text Fixes:** Identify the exact UI surface (world hover, selection card, command card button, tooltip, or editor text) and its effective localization anchor before modifying `GameStrings.txt` or `ObjectStrings.txt`.
-- **Runtime Log Extraction:** Run `python tools/extract-playtest-bugreport.py` after a playtest session to extract `Alerts.txt` and `ScriptError.txt` entries into `bugreport.txt`.
+- **Runtime Log Extraction:** Run `python tools/extract-playtest-bugreport.py` after a playtest session to extract `Alerts.txt` and `ScriptError.txt` entries into `<project-data>/runtime/reports/bugreport.txt`.
 
 ---
 
 ## Ledger Maintenance
 
-Maintain the current issue ledger in `wiki/implementation/bug-reports/latest.md`. Keep the active ledger concise. Move durable system facts to canonical topic pages rather than retaining long historical discussions in the active ledger.
+Maintain the current issue ledger in `<project-data>/docs/issues.md`. Keep the active ledger concise. Move durable system facts to canonical topic pages rather than retaining long historical discussions in the active ledger.

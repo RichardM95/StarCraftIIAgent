@@ -17,7 +17,7 @@ Every reported bug or defect must follow:
 reported → root cause confirmed → source fixed → static validation passed → Editor accepted → packaged runtime passed
 ```
 
-1. **`reported`**: Recorded in `wiki/implementation/bug-reports/latest.md` with: map/mission, player/faction config, observed vs expected behavior, exact Editor warning or in-game error (from `bugreport.txt`).
+1. **`reported`**: Recorded in `<project-data>/docs/issues.md` with: map/mission, player/faction config, observed vs expected behavior, exact Editor warning or in-game error (from `<project-data>/runtime/reports/bugreport.txt`).
 2. **`root cause confirmed`**: Root catalog ID, parent inheritance flaw, or Galaxy logic error identified.
 3. **`source fixed`**: Working-tree source files updated.
 4. **`static validation passed`**: `python tools/test-suite.py` runs with zero errors.
@@ -62,17 +62,17 @@ These steps must be performed by the user. The agent prepares everything and pro
 
 1. Run `python tools/extract-playtest-bugreport.py` to extract runtime alerts/errors.
 2. Triage per the issue lifecycle.
-3. Log defects in `wiki/implementation/bug-reports/latest.md`.
+3. Log defects in `<project-data>/docs/issues.md`.
 
 ## Issue Intake Rules
 
 - **Statistic changes:** Before editing XML statistics, record local catalog entry, parent, inherited value, and intended override.
 - **UI & text fixes:** Identify the exact UI surface (world hover, selection panel, command card button, tooltip, or editor text) and its effective localization anchor before modifying `GameStrings.txt` or `ObjectStrings.txt`.
-- **Runtime logs:** Run `python tools/extract-playtest-bugreport.py` after playtest to extract `Alerts.txt` and `ScriptError.txt` into `bugreport.txt`.
+- **Runtime logs:** Run `python tools/extract-playtest-bugreport.py` after playtest to extract `Alerts.txt` and `ScriptError.txt` into `<project-data>/runtime/reports/bugreport.txt`.
 
 ## Ledger Maintenance
 
-- Active ledger: `wiki/implementation/bug-reports/latest.md`
+- Active ledger: `<project-data>/docs/issues.md`
 - Keep the active ledger concise.
 - Move durable system facts to canonical topic pages rather than retaining long historical discussions.
 
@@ -86,6 +86,6 @@ These steps must be performed by the user. The agent prepares everything and pro
 
 - `wiki/guides/editor-handoff.md` — Editor handoff checklist
 - `wiki/implementation/testing-feedback-workflow.md` — issue lifecycle & triage
-- `wiki/implementation/bug-reports/latest.md` — active issue ledger
+- `<project-data>/docs/issues.md` — active issue ledger
 - `wiki/reference/editor-guide.md` — SC2 Editor workflow notes
 - `wiki/guides/simulated-bank-playtests.md` — simulated bank playtest setup

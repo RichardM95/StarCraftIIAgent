@@ -344,3 +344,5 @@ Parameter defaults in `nativelib` do not auto-apply; emit an explicit `<Paramete
 | `DisplayScreenButton` | `83263181` | action | `—` | screenButtonID:int, text:text, width:int, height:int, anchor:preset, offsetX:int, offsetY:int, callback:trigger |
 | `DisplayScreenImage` | `BACFFC3C` | action | `—` | screenImageID:int, image:filepath, blendMode:preset, width:int, height:int, anchor:preset, offsetX:int, offsetY:int |
 | `DisplayScreenLabel` | `C199FB04` | action | `—` | screenLabelID:int, label:text, style:fontstyle, width:int, height:int, anchor:preset, offsetX:int, offsetY:int |
+| `DistanceBetweenPoints` | `00000027` | call | `fixed` | p1:point, p2:point |
+| `DistanceSquaredBetweenPoints` | `F4291BF5` | call | `fixed` | p1:point, p2:point |

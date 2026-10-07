@@ -103,6 +103,8 @@ def find_info_component(mod_dir: Path) -> tuple[Path | None, list[str]]:
         if component.get("Type") == "info" and component.text and component.text.strip():
             relative = PurePosixPath(component.text.strip().replace("\\", "/"))
             info_path = mod_dir.joinpath(*relative.parts)
+            if relative.is_absolute() or not info_path.resolve().is_relative_to(mod_dir.resolve()):
+                return None, [f"{mod_dir.name}: info component escapes component directory"]
             if not info_path.is_file():
                 errors.append(
                     f"{mod_dir.name}: info component does not exist: {component.text.strip()}"
@@ -112,9 +114,14 @@ def find_info_component(mod_dir: Path) -> tuple[Path | None, list[str]]:
     return None, [f"{mod_dir.name}: ComponentList has no Type='info' component"]
 
 
-def read_mod_dependencies(mod_dir: Path) -> tuple[str | None, list[dict[str, Any]], list[str]]:
+def read_mod_dependencies(mod_dir: Path, *, allow_unpacked: bool = False) -> tuple[str | None, list[dict[str, Any]], list[str]]:
     """Return (info component, dependency refs, errors) for one component mod."""
     info_path, errors = find_info_component(mod_dir)
+    # Raw official extracts may retain DocumentInfo without a component list.
+    # Never replace a present but broken component list with guessed metadata.
+    if (allow_unpacked and not (mod_dir / "ComponentList.SC2Components").exists()
+            and (mod_dir / "DocumentInfo").is_file()):
+        info_path, errors = mod_dir / "DocumentInfo", []
     if info_path is None:
         return None, [], errors
     try:
@@ -154,8 +161,11 @@ def _resolve_local_mod(ref: dict[str, Any], mods_dir: Path) -> Path | None:
     return target
 
 
-def build_dependency_graph(primary_mod: Path, mods_dir: Path) -> dict[str, Any]:
-    """Recursively resolve local component dependencies with cycle protection."""
+def build_dependency_graph(primary_mod: Path, mods_dir: Path, *,
+                           campaigns_dir: Path | None = None,
+                           allow_unpacked: bool = False,
+                           strict_external: bool = False) -> dict[str, Any]:
+    """Resolve a component target; optional campaign roots preserve legacy callers."""
     primary_mod = primary_mod.resolve(strict=False)
     mods_dir = mods_dir.resolve(strict=False)
     nodes: dict[str, dict[str, Any]] = {}
@@ -170,7 +180,10 @@ def build_dependency_graph(primary_mod: Path, mods_dir: Path) -> dict[str, Any]:
             return
         visited.add(source_key)
 
-        info_component, refs, node_errors = read_mod_dependencies(mod_dir)
+        if allow_unpacked:
+            info_component, refs, node_errors = read_mod_dependencies(mod_dir, allow_unpacked=True)
+        else:
+            info_component, refs, node_errors = read_mod_dependencies(mod_dir)
         errors.extend(node_errors)
         nodes[source_key] = {
             "name": mod_dir.name,
@@ -186,9 +199,18 @@ def build_dependency_graph(primary_mod: Path, mods_dir: Path) -> dict[str, Any]:
                 "file_path": ref.get("file_path"),
             }
             target = _resolve_local_mod(ref, mods_dir)
+            file_path = ref.get("file_path")
+            if (campaigns_dir is not None and isinstance(file_path, str)
+                    and file_path.casefold().startswith("campaigns/")
+                    and file_path.casefold().endswith((".sc2campaign", ".sc2mod"))):
+                candidate = campaigns_dir.joinpath(*PurePosixPath(file_path).parts[1:]).resolve()
+                if candidate.is_relative_to(campaigns_dir.resolve()):
+                    target = candidate
             if target is None or (ref.get("is_network") and not target.is_dir()):
                 edge["kind"] = "external"
                 edges.append(edge)
+                if strict_external:
+                    errors.append(f"{mod_dir}: unresolved dependency: {ref['raw']}")
                 continue
 
             target_key = _path_key(target)

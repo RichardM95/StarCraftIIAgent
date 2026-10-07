@@ -11,7 +11,7 @@
 > **Galaxy 编辑规则：** 从当前项目的 Triggers 核对手写源码入口和 include 顺序，仅修改手写源码；绝不直接编辑 `Lib*.galaxy`、`MapScript.galaxy` 或其他编译输出。
 >
 
-> **维护规则：** 当设计决策、TODO 或阶段变更改变当前契约时，更新相关 wiki 页面。仅在原因可能丢失时才向 `wiki/log.md` 添加记录。主题页面描述当前状态；替换被取代的指导，而非追加带日期的修复叙述。
+> **维护规则：** 套件 wiki/ 维护可复用的开发规则与参考。项目设计、机制约定与跨次问题保存到项目资料目录（用 `python tools/project-paths.py` 定位），直接更新主题当前状态；必要时记录决策原因，不写修改流水账。
 >
 > **日志规则：** 记录决策和原因，而非实现摘要。链接到规范页面；不要添加冗余的文件列表、验证输出、问题详情或 commit hash。使用 Git 历史查看先前状态。
 >
@@ -19,7 +19,7 @@
 >
 > **研究规则：** 需要帮助或澄清时向用户索取更多信息。若反复搜索未能缩小问题范围，停止并向用户总结当前发现。
 >
-> **设计摄入规则：** 当用户提供设计文档（Word、PDF、Markdown、聊天大纲）时，将持久事实提取到 `wiki/design/` 并在 `DesignDocument.md` 中摘要来源。不要将一次性设计细节仅留在聊天历史中。
+> **设计摄入规则：** 用户提供项目设计材料时，将持久事实写入项目资料 docs/design/，来源摘要写入 docs/sources.md；需要保存项目事实时先选择项目。仅有可复用且带范围与证据的通用发现进入套件 wiki/。
 
 ## 仓库用途
 
@@ -53,8 +53,8 @@
 | `agent-config.json` | 可移植路径配置：工作区、SC2 安装、Mods、战役地图、主模组与递归依赖解析 |
 | `wiki/index.md` | **任务路由器** — 最快到达相关文档的路径 |
 | `wiki/catalog.md` | 完整 wiki 清单；仅在任务路由器不够时使用 |
-| `wiki/log.md` | 持久决策的紧凑记录；Git 保留历史 |
-| `wiki/design/` | 我们在建什么（用户 + 智能体） |
+| `wiki/log.md` | 通用决策说明；项目决策在项目资料目录 |
+| `wiki/design/` | 项目资料定位说明；具体设计在项目 docs/design/ |
 | `wiki/implementation/` | 怎么建（XML 模式、本地化、陷阱、状态） |
 | `wiki/reference/` | 查找表、Actor 架构、SC2 参考 |
 | `wiki/guides/` | 逐步指南（编辑器交接、多 PC 设置、模拟 bank 测试） |
@@ -67,7 +67,8 @@
 | `DataEditorXML/` | XML 导出 — 写 XML 前 grep 或查询 |
 | `<configured mods_dir>/<Dep>.SC2Mod/` | 从主 Mod 递归解析得到的依赖模组组件文件夹 |
 | `<SC2_INSTALL>/Maps/Campaign/` | 战役地图组件文件夹（如 `void/paiur01.SC2Map`） |
-| `DesignDocument.md` | 原始设计来源 / 摘要 |
+| `DesignDocument.md` | 通用能力来源；项目来源摘要在项目 docs/sources.md |
+| `tools/project-paths.py` | 只读查询项目资料、文档、索引、报告和临时路径 |
 | `publish/` | 仅用于发布打包 — 不要编辑 |
 
 ## DataEditorXML 范围

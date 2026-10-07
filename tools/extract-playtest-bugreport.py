@@ -10,7 +10,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
-DEFAULT_OUTPUT = REPO_ROOT / "bugreport.txt"
+from sc2_paths import project_data_dir, ensure_project_data
 
 SESSION_SUFFIXES = (" Alerts.txt", " ScriptError.txt")
 SESSION_WINDOW_SEC = 600
@@ -363,8 +363,8 @@ def main() -> int:
     parser.add_argument(
         "--output",
         type=Path,
-        default=DEFAULT_OUTPUT,
-        help=f"Output file path (default: {DEFAULT_OUTPUT}).",
+        default=None,
+        help="Output file; default: selected project runtime/reports/bugreport.txt. Without a project, supply --output.",
     )
     parser.add_argument(
         "--since",
@@ -373,6 +373,15 @@ def main() -> int:
     )
     args = parser.parse_args()
 
+    data = None
+    if args.output is None:
+        try:
+            data = project_data_dir(REPO_ROOT)
+            if data is None:
+                parser.error("Select a project or supply an explicit --output")
+            args.output = data / "runtime/reports/bugreport.txt"
+        except ValueError as exc:
+            parser.error(str(exc))
     logs_dir = resolve_logs_dir(args.logs_dir)
     session_logs = list_session_logs(logs_dir)
     alerts_file, script_error_file = pick_session_logs(logs_dir, session_logs, since=args.since)
@@ -398,6 +407,8 @@ def main() -> int:
         error_items=error_items,
         skipped_script_errors=skipped_script_errors,
     )
+    if data is not None:
+        ensure_project_data(data)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(report, encoding="utf-8", newline="\n")
 

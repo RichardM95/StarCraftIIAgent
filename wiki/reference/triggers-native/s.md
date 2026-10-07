@@ -259,3 +259,5 @@ Parameter defaults in `nativelib` do not auto-apply; emit an explicit `<Paramete
 | `StringWord` | `A078FB65` | call | `string` | string:string, index:int |
 | `Switch` | `91C49196` | action | `—` | value:anycompare +2sub |
 | `SwitchCase` | `3A1227AB` | action | `—` | value:sameasparent +1sub |
+| `SwooshCamera` | `3766D08E` | action | `—` | player:int, distance1:fixed, distance2:fixed, location:point, duration:fixed |
+| `SynchronousGameStartTimeGet` | `12F29E83` | call | `int` | — |

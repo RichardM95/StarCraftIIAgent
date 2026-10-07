@@ -23,6 +23,7 @@
 | **预览/部署模组到 SC2** | `python tools/deploy-mod.py --dry-run` | 只显示源与目标；核对后去掉 `--dry-run` 复制组件 |
 | **检查 GameStrings/本地化锚点** | `python tools/audit-gamestrings-anchors.py --fill` | 检查 GameData XML 文本引用，并从 `ObjectStrings.txt` 自动恢复缺失键 |
 | **审计命令卡** | `python tools/audit-actor-and-card-integrity.py` | 检测高置信度命令卡槽位冲突和攻击按钮被替换问题 |
+| **定位项目资料和运行目录** | `python tools/project-paths.py` | 只读输出路径，不创建目录 |
 | **提取游戏测试错误与日志** | `python tools/extract-playtest-bugreport.py` | 从 SC2 `GameLogs` 中提取警告和脚本错误，生成便于分诊的 `bugreport.txt` |
 | **检查文档链接** | `python tools/check-doc-links.py` | 扫描仓库 Markdown，查找损坏的本地相对链接 |
 
@@ -51,9 +52,11 @@
 
 ## 2. Catalog 导航与查询
 
+GUI 触发器使用独立的 `sc2-trigger-query.py`：`build` 从明确指定的 Mods/Campaigns 原库构建可重建索引；`libraries` 确认目标库范围；`find`/`show` 查询完整定义；`examples` 查询人工核查的七类案例；`check` 检查引用与参数。没有项目时使用显式 `--reference`；`check --templates` 检查首批 GUI 片段。完整命令与证据边界见 [触发器查询指南](../wiki/reference/trigger-knowledge.md)。
+
 以下工具用于浏览 Blizzard 和自定义 catalog 数据，避免直接读取大型 XML 导出：
 
-- **`sc2-catalog-query.py`**——主要的节省上下文查询工具，使用 `sc2-catalog-graph-out/catalog.sqlite`（或 `graph.json`）：
+- **`sc2-catalog-query.py`**——主要的节省上下文查询工具，使用 `<项目资料>/runtime/catalog/catalog.sqlite`（或 `graph.json`）：
   - 查找对象：`python tools/sc2-catalog-query.py find <term> --source-class local_mod`
   - 检查单位链：`python tools/sc2-catalog-query.py unit-chain <Unit:Id>`
   - 检查生产链：`python tools/sc2-catalog-query.py production-chain <Unit:Id>`
@@ -80,6 +83,8 @@
 - **`extract-playtest-bugreport.py`**（以及 `extract-playtest-bugreport.ps1`）——从 SC2 `GameLogs` 中提取警告与脚本错误，生成清晰的分诊报告 `bugreport.txt`。
 
 静态工具通过只代表 `static validation passed`。没有 SC2 编辑器和实际场景证据时，不得表述为 `Editor accepted` 或 `packaged runtime passed`。
+
+`test-suite.py` 的 `mod/all` 范围还运行 `sc2-trigger-query.py check`，检查主目标 GUI 定义和实际活动依赖，不需要参考索引。可传 `--campaigns-dir` / `--mods-dir`；catalog 排除选项不会裁剪触发器依赖。确认没有可检查 GUI 定义时输出 `not_applicable`，缺失登记或依赖证据仍失败。触发器名称检索同时匹配内部、中文与英文名称；索引 v2 需从原外部根重新构建。完整用法见 [触发器查询](../wiki/reference/trigger-knowledge.md)。
 
 
 

@@ -21,11 +21,11 @@ from xml.sax.saxutils import escape
 from sc2_publication import publish_directory, staged_directory
 from sc2_dependencies import build_dependency_graph, resolve_dependency_root, dependency_state, RECURSION_DISABLED
 from sc2_catalog_inputs import catalog_xml_inputs, index_inputs, inventory, save_manifest
-from sc2_paths import find_project_mods, load_project_config, resolve_configured_path
+from sc2_paths import find_project_mods, load_project_config, resolve_configured_path, project_data_dir, catalog_output_dir, ensure_project_data
 
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_OUT = ROOT / "sc2-catalog-graph-out"
+# Default output is resolved from the selected project at invocation time.
 BUILD_MOD_DIR = None
 BUILD_MODS_DIR = None
 ALLOW_INCOMPLETE_DEPENDENCIES = False
@@ -843,7 +843,7 @@ def main() -> int:
     parser.add_argument("--mod-dir", help="Explicit primary component for investigation")
     parser.add_argument("--mods-dir", help="Explicit dependency Mods root")
     parser.add_argument("--allow-incomplete-dependencies", action="store_true", help="Build an explicitly marked partial investigation index; never validates effective values")
-    parser.add_argument("--out", default=str(DEFAULT_OUT), help="Output directory")
+    parser.add_argument("--out", default=None, help="Output directory (default: project runtime/catalog, or external reference cache)")
     parser.add_argument("--max-object-pages", type=int, default=350, help="Maximum generated local object summary pages")
     parser.add_argument("--sqlite-only", action="store_true", help="Refresh only the SQLite query index; skip JSON, GraphML, and summary pages")
     args = parser.parse_args()
@@ -858,7 +858,14 @@ def main() -> int:
         return 1
     if DEPENDENCY_STATE["status"] == "partial":
         print("WARNING: PARTIAL investigation index: " + "; ".join(DEPENDENCY_STATE["problems"]))
-    out_dir = Path(args.out)
+    mods = find_local_mods()
+    config = load_project_config(ROOT)
+    primary = mods[0] if mods else None
+    out_dir = Path(args.out) if args.out else catalog_output_dir(ROOT, config, primary)
+    if args.out is None:
+        data = project_data_dir(ROOT, config, primary)
+        if data is not None:
+            ensure_project_data(data)
     if not out_dir.is_absolute():
         out_dir = ROOT / out_dir
     out_dir = out_dir.resolve()

@@ -164,3 +164,75 @@ def find_project_mods(
         if candidate.is_dir():
             matches.append(candidate)
     return _unique_paths(matches)
+
+
+def project_identity_path(repo_root: Path, config: Mapping[str, Any]) -> Path | None:
+    """Installed primary identity, independent of workspace_copy's editing source."""
+    project = config.get("project", {})
+    if not isinstance(project, Mapping):
+        raise ValueError("project must be an object")
+    if "primary_mod" not in project:
+        return None
+    primary = project["primary_mod"]
+    mods = _config_value(config, "paths", "mods_dir")
+    if not isinstance(primary, str) or not primary.strip() or not mods:
+        raise ValueError("project.primary_mod and paths.mods_dir must be non-empty strings")
+    mods_root = resolve_configured_path(repo_root, mods)
+    raw = Path(primary)
+    path = (mods_root / raw).resolve()
+    if raw.is_absolute() or not path.is_relative_to(mods_root) or path.suffix.casefold() != ".sc2mod":
+        raise ValueError("project.primary_mod must be a relative .SC2Mod inside paths.mods_dir")
+    return path
+
+
+def project_data_dir(repo_root: Path, config: Mapping[str, Any] | None = None,
+                     primary: Path | None = None) -> Path | None:
+    """Resolve only; no files or directories are created."""
+    config = load_project_config(repo_root) if config is None else config
+    identity = project_identity_path(repo_root, config)
+    project = config.get("project", {})
+    explicit_other = False
+    if primary is not None:
+        primary = primary.resolve()
+        source = _config_value(config, "project", "source_mod") if project.get("source_mode") == "workspace_copy" else None
+        configured_source = resolve_configured_path(repo_root, source) if source else identity
+        explicit_other = primary not in (identity, configured_source)
+        if explicit_other:
+            identity = primary
+    if identity is None:
+        if "data_dir" in project:
+            raise ValueError("project.data_dir requires a selected primary project")
+        return None
+    if "data_dir" in project and not explicit_other:
+        value = project["data_dir"]
+        if not isinstance(value, str) or not value.strip():
+            raise ValueError("project.data_dir must be a non-empty string")
+        result = resolve_configured_path(repo_root, value)
+    else:
+        result = identity.with_name(identity.stem + ".agent").resolve()
+    if result.is_relative_to(repo_root.resolve()):
+        raise ValueError("Project data must be outside the development suite: " + str(result))
+    if any(p.suffix.casefold() in (".sc2mod", ".sc2map") for p in (result, *result.parents)):
+        raise ValueError("Project data must be outside game Components: " + str(result))
+    for path in (result, *result.parents):
+        if path.exists() and not path.is_dir():
+            raise ValueError("Project data path is blocked by a file: " + str(path))
+    return result
+
+
+def catalog_output_dir(repo_root: Path, config: Mapping[str, Any] | None = None,
+                       primary: Path | None = None) -> Path:
+    data = project_data_dir(repo_root, config, primary)
+    return data / "runtime/catalog" if data else repo_root.resolve().with_name(repo_root.name + "-data") / "reference"
+
+
+def ensure_project_data(data: Path) -> None:
+    """Called only for a real write; preserve an existing user's ignore file."""
+    data.mkdir(parents=True, exist_ok=True)
+    ignore = data / ".gitignore"
+    try:
+        with ignore.open("x", encoding="utf-8", newline="\n") as stream:
+            stream.write("runtime/\n")
+    except FileExistsError:
+        if not ignore.is_file():
+            raise ValueError("Project .gitignore is not a file: " + str(ignore))

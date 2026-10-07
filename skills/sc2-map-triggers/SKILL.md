@@ -1,6 +1,6 @@
 ---
 name: sc2-map-triggers
-description: StarCraft II map trigger XML and wiring for the AeonOfIhanrii campaign. Use when editing .SC2Map Triggers, wiring campaign map initialization, bank preload, victory/defeat hooks, or generating trigger XML. Covers GUI action requirement, trigger element schema, event declarations, and per-map setup.
+description: StarCraft II GUI triggers, dependency-aware library queries, official cases and map-to-mod wiring. Use when editing map/mod Triggers, generating GUI XML, selecting library functions, or wiring initialization, bank preload and victory/defeat hooks.
 ---
 
 # SC2 Map Triggers & Wiring
@@ -13,7 +13,11 @@ For new triggers, prefer GUI-editable events, conditions, actions, and GUI custo
 
 ## Critical Rule: Map-to-Mod Calls Must Use GUI Actions
 
-The SC2 linker **silently drops the mod library** unless the map calls a **GUI Action Definition** exported by the mod. Raw Custom Script blocks in maps do NOT count. Define GUI actions in the mod library and call them from map triggers.
+First follow [dependency-aware trigger development](../../wiki/reference/trigger-knowledge.md): confirm the editing target, resolve dependencies, query available definitions, choose a compatible case, write GUI, then validate. `tools/sc2-trigger-query.py libraries` must confirm the library scope before development. Use `find`/`show` for exact parameter, preset and SubFunctionType IDs; `examples` for curated cases; `check` before Editor handoff. Missing dependency evidence allows only explicit reference research, not target acceptance.
+
+For in-game speech, Conversation data, interactive dialogs or cinematic cleanup, load [reviewed dialogue mechanisms](../../wiki/reference/trigger-dialogue-examples.md). When a request mixes these concepts or lacks target/resource inputs, use the relevant [user-agent dialogue examples](../../wiki/reference/trigger-agent-dialogue-examples.md) to resolve the missing information and identify the completion evidence. Read only the relevant section; the examples are guidance, not acceptance records.
+
+Define exported GUI Action Definitions in the mod and call them from map triggers. This is the workspace's conservative linking practice. The earlier claim that Custom Script always causes library removal lacks a recorded Editor version and minimal reproduction; see [evidence scope](../../wiki/reference/trigger-knowledge.md#编辑器行为的证据范围) before treating it as universal engine behavior.
 
 Example: In the map init trigger, call `libMy_InitMission("Map01")` as a GUI action, not via Custom Script.
 
@@ -29,9 +33,7 @@ When wiring a vanilla Blizzard campaign map into the custom campaign:
 
 ## Campaign Map Locations
 
-Maps live under `paths.campaign_maps_dir` from `agent-config.json`:
-- `voidprologue/` — Prologue maps
-- `void/` — Campaign maps (paiur, pshakuras, ppurifier, ptaldarim, pkorhal, pmoebius, pulnar, pstory, sc2epilogue)
+Resolve map paths from the supplied target or `paths.campaign_maps_dir` in `agent-config.json`. Determine available campaign libraries from actual dependencies, not from map folder names.
 
 ## Trigger XML Structure
 
@@ -63,13 +65,13 @@ Key IDs:
 - `IfThenElse` (Ntve `00000137`): if=`00000003`, then=`00000004`, else=`00000005`
 - `PickEachUnitInGroup` (Ntve `C4DC760C`): body=`9441B8B5`; use `UnitGroupLoopCurrent` (Ntve `19CE733E`) for the picked unit
 - `And` (Ntve `00000132`): cond sub-type `00000002`
-- `Or` (Ntve `00000133`): cond sub-type `00000001` — **different from And!** Mixing them silently strips Comparisons on save.
+- `Or` (Ntve `00000133`): cond sub-type `00000001`, different from And. Query the target parent definition; save-time removal claims require versioned Editor evidence.
 
 ## Event Declarations (most common silent-failure)
 
-Events are NOT `<Element Type="Event">`. They are `<Element Type="FunctionCall" Id="X">` (same shape as actions), and the Trigger references them via `<Event Type="FunctionCall" Id="X"/>`. The editor **silently strips** any `<Event Type="Event"/>` refs.
+Official GUI events use `<Element Type="FunctionCall" Id="X">` (same shape as actions), with `<Event Type="FunctionCall" Id="X"/>` on the Trigger. Use this source-backed shape; actual save/code-generation behavior requires Editor evidence.
 
-**Layout requirement:** The event `<Element Type="FunctionCall">` MUST be placed immediately after its Trigger's closing `</Element>` (sibling-adjacent). If far away, the `_Init` codegen silently DROPS the `TriggerAddEvent*(...)` call — the trigger registers but never fires. Verify by reading generated `MapScript.galaxy`.
+Place event declarations beside their Trigger as a conservative handoff convention. Mandatory adjacency and silent registration loss remain unverified across Editor versions; record a saved-source and generated-registration comparison using the [acceptance record](../../wiki/reference/trigger-templates/acceptance.md).
 
 ```xml
 <Element Type="Trigger" Id="D23DC42E">
@@ -117,6 +119,8 @@ After external XML edits, inspect generated `MapScript.galaxy` if behavior is od
 ## Reference
 
 - `wiki/reference/triggers-overview.md` — full trigger XML reference
+- `wiki/reference/trigger-knowledge.md` — dependency-aware queries and curated official cases
+- `wiki/reference/trigger-templates/README.md` — seven GUI fragments and acceptance scenarios
 - `wiki/reference/triggers-cheatsheet.md` — quick function/param IDs
 - `wiki/reference/triggers-native-functions.md` — native function signatures
 - `wiki/reference/triggers-native/` — per-letter native lookup

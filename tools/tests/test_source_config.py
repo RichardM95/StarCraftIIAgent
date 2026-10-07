@@ -31,7 +31,7 @@ class SourceConfigTests(unittest.TestCase):
             config = {"schema_version": 1, "paths": {
                 "workspace_dir": ".", "sc2_install_dir": "install",
                 "mods_dir": "mods", "campaign_maps_dir": "maps"}, "project": {
-                "primary_mod": "Main.SC2Mod", "source_mode": "workspace_copy",
+                "primary_mod": "Main.SC2Mod", "data_dir": str(root.with_name(root.name + "-records")), "source_mode": "workspace_copy",
                 "source_mod": "source/Main.SC2Mod", "resolve_dependencies_recursive": True}}
             with patch.object(validator, "REPO_ROOT", root), redirect_stdout(io.StringIO()):
                 (root / "agent-config.json").write_text(json.dumps(config))

@@ -30,6 +30,8 @@ Full `Ntve` native function lookup split into one page per alphabetic bucket for
 
 ## Full native function reference (3,196 entries)
 
+All 3,196 FunctionDef IDs were reconciled with the supplied official Core NativeLib on 2026-10-07, including eight previously missing rows. Use [the definition query](trigger-knowledge.md) for full parameter IDs, defaults, presets and sub-action definitions, and to confirm target dependency availability.
+
 Every `FunctionDef` in `Ntve` (`Core.SC2Mod` nativelib). Sorted
 alphabetically by name; bucketed by first letter so you can jump.
 

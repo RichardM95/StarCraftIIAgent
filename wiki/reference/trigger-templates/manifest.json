@@ -1,0 +1,74 @@
+{
+  "schema": 1,
+  "kind": "GUI fragments; not a playable map",
+  "native_source": "mods/core.sc2mod/base.sc2data/TriggerLibs/NativeLib.TriggerLib",
+  "native_sha256": "cbb2302825dce57ff9bb8efd44f9b0ed5cb056eee00265e5b711b0824d872396",
+  "patterns": {
+    "initialization": {
+      "triggers": [
+        "70000008"
+      ],
+      "required_libraries": [
+        "Ntve"
+      ],
+      "status": "static validation passed"
+    },
+    "objectives": {
+      "triggers": [
+        "70000018",
+        "70000019"
+      ],
+      "required_libraries": [
+        "Ntve"
+      ],
+      "status": "static validation passed"
+    },
+    "victory-defeat": {
+      "triggers": [
+        "7000001F",
+        "70000025"
+      ],
+      "required_libraries": [
+        "Ntve"
+      ],
+      "status": "static validation passed"
+    },
+    "regions": {
+      "triggers": [
+        "70000033"
+      ],
+      "required_libraries": [
+        "Ntve"
+      ],
+      "status": "static validation passed"
+    },
+    "timers": {
+      "triggers": [
+        "7000003C",
+        "70000045"
+      ],
+      "required_libraries": [
+        "Ntve"
+      ],
+      "status": "static validation passed"
+    },
+    "waves": {
+      "triggers": [
+        "70000058"
+      ],
+      "required_libraries": [
+        "Ntve"
+      ],
+      "status": "static validation passed"
+    },
+    "difficulty": {
+      "triggers": [
+        "7000006C"
+      ],
+      "required_libraries": [
+        "Ntve"
+      ],
+      "status": "static validation passed"
+    }
+  }
+}

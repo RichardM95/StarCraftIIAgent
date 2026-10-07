@@ -109,6 +109,7 @@ def main() -> int:
         help="Run the full suite or only tool, documentation, or mod checks.",
     )
     parser.add_argument("--mods-dir", help="Explicit dependency Mods root for a one-off component")
+    parser.add_argument("--campaigns-dir", help="Explicit dependency Campaigns root for trigger validation")
     dependency_group = parser.add_mutually_exclusive_group()
     dependency_group.add_argument(
         "--include-dependencies",
@@ -136,7 +137,6 @@ def main() -> int:
             [("Tool Unit Tests", [sys.executable, "-m", "unittest", "discover", "-s", "tools/tests", "-p", "test_*.py"])]
             if args.scope == "tools"
             else [
-                ("Issue Lifecycle Ledger Audit", [sys.executable, "tools/audit-issue-lifecycle.py"]),
                 ("Skill Frontmatter Validator", [sys.executable, "tools/audit-skill-frontmatter.py"]),
                 ("Documentation Link Integrity Checker", [sys.executable, "tools/check-doc-links.py"]),
             ]
@@ -223,6 +223,13 @@ def main() -> int:
         ("Documentation Link Integrity Checker", [sys.executable, "tools/check-doc-links.py"]),
     ]
 
+    trigger_command = [sys.executable, 'tools/sc2-trigger-query.py', '--target', mod_dir]
+    for option, value in (('--mods-dir', args.mods_dir), ('--campaigns-dir', args.campaigns_dir)):
+        if value:
+            trigger_command.extend([option, value])
+    trigger_command.append('check')
+    steps.insert(3, ('GUI Trigger Dependency Validator', trigger_command))
+
     primary_static_index = next(
         index for index, (name, _) in enumerate(steps) if name == "Static XML & Galaxy Script Validator"
     )
@@ -240,7 +247,6 @@ def main() -> int:
             for name, command in steps
             if name not in {
                 "Tool Unit Tests",
-                "Issue Lifecycle Ledger Audit",
                 "Skill Frontmatter Validator",
                 "Documentation Link Integrity Checker",
             }

@@ -10,7 +10,7 @@ from pathlib import Path
 from typing import Any
 
 from sc2_dependencies import build_dependency_graph, render_dependency_tree
-from sc2_paths import CONFIG_FILENAME, config_path, load_project_config
+from sc2_paths import CONFIG_FILENAME, config_path, load_project_config, project_identity_path, project_data_dir
 
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
@@ -75,9 +75,12 @@ def primary_mod_config_value(primary_mod: Path, mods_dir: Path) -> str:
     return relative.as_posix()
 
 
-def build_config(primary_mod: Path, layout: dict[str, Path]) -> dict[str, Any]:
+def build_config(primary_mod: Path, layout: dict[str, Path], project_data: str | None = None) -> dict[str, Any]:
     """Preserve unknown config keys while replacing project path selection."""
     config = load_project_config(REPO_ROOT)
+    previous_identity = project_identity_path(REPO_ROOT, config)
+    previous_has_data = previous_identity == primary_mod.resolve() and "data_dir" in config.get("project", {})
+    previous_data = config.get("project", {}).get("data_dir") if previous_has_data else None
     config["schema_version"] = 1
     paths = config.setdefault("paths", {})
     if not isinstance(paths, dict):
@@ -103,6 +106,13 @@ def build_config(primary_mod: Path, layout: dict[str, Path]) -> dict[str, Any]:
         }
     )
     project.pop("dependency_mod_patterns", None)
+    project.pop("data_dir", None)
+    if project_data is not None:
+        project["data_dir"] = project_data
+    elif previous_has_data:
+        project["data_dir"] = previous_data
+    data = project_data_dir(REPO_ROOT, config)
+    project["data_dir"] = config_path_value(data)
     return config
 
 
@@ -120,6 +130,7 @@ def write_config_atomic(config: dict[str, Any]) -> None:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("primary_mod", help="Path to the primary .SC2Mod component folder")
+    parser.add_argument("--project-data-dir", help="Project documentation/runtime directory; default: sibling <primary-name>.agent")
     parser.add_argument("--mods-dir", help="Override the inferred Mods directory")
     parser.add_argument("--sc2-install-dir", help="Override the inferred SC2 install directory")
     parser.add_argument("--campaign-maps-dir", help="Override the inferred campaign maps directory")
@@ -159,7 +170,7 @@ def main() -> int:
                 Path(args.campaign_maps_dir).expanduser() if args.campaign_maps_dir else None
             ),
         )
-        config = build_config(primary_mod, layout)
+        config = build_config(primary_mod, layout, args.project_data_dir)
     except ValueError as exc:
         print(f"ERROR: {exc}")
         return 1
@@ -183,6 +194,7 @@ def main() -> int:
         )
 
     print("PROJECT INITIALIZATION")
+    print("Project data (created only when needed): " + str(project_data_dir(REPO_ROOT, config)))
     print("=" * 60)
     print(f"Workspace:      {REPO_ROOT}")
     print(f"Primary mod:    {primary_mod}")

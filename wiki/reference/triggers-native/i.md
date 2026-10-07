@@ -26,3 +26,5 @@ Parameter defaults in `nativelib` do not auto-apply; emit an explicit `<Paramete
 | `IntToFixed` | `3EA2DE0F` | call | `int` | val:preset |
 | `IntToString` | `00000002` | call | `string` | val:int |
 | `IntToText` | `EAC465A1` | call | `text` | val:int |
+| `ItemGetChargeCount` | `D9E5A4D3` | call | `fixed` | inItem:unit, remainingMax:preset |
+| `ItemSetChargeCount` | `E8D281F2` | action | `—` | inItem:unit, inVal:fixed |

@@ -382,3 +382,5 @@ Parameter defaults in `nativelib` do not auto-apply; emit an explicit `<Paramete
 | `PurchaseItemSetSlot` | `0D9F6082` | action | `—` | purchaseItem:preset, slot:int |
 | `PurchaseItemSetState` | `36228A26` | action | `—` | purchaseItem:preset, state:preset |
 | `PurchaseItemSetTooltipText` | `2CDEF203` | action | `—` | purchaseItem:preset, toolTip:text |
+| `PurchaseSetSelectedPurchaseCategory` | `F0421ADA` | action | `—` | to:playergroup, purchaseCategory:preset |
+| `PurchaseSetSelectedPurchaseItem` | `2FB4126F` | action | `—` | to:playergroup, purchaseItem:preset |

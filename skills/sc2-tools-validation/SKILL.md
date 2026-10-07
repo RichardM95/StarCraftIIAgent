@@ -38,6 +38,7 @@ Unified pre-flight suite. It reads `agent-config.json`, resolves the configured 
 - tool unit tests
 - `validate-agent-config.py` — portable config, primary-mod, and recursive component-dependency checks
 - `validate-mod.py` — XML schema + Galaxy syntax for the primary Mod and selected dependencies
+- `sc2-trigger-query.py check` — primary GUI definitions and their complete active dependency closure, without a reference index; pass `--mods-dir` / `--campaigns-dir` for explicit roots. Catalog exclusions and `--primary-only` do not prune this closure. Missing evidence fails; confirmed targets without GUI definitions report `not_applicable`.
 - `audit-actor-and-card-integrity.py` — primary-Mod command card slot collisions (legacy filename; no Actor binding claim)
 - `audit-gamestrings-anchors.py` — localization anchor checks
 - `check-doc-links.py` — broken Markdown links
@@ -67,7 +68,7 @@ Checks active catalog `Name`/`Tooltip`/`Description` string references against `
 ## Catalog Navigation & Querying
 
 ### `sc2-catalog-query.py` (primary lookup tool)
-Token-efficient catalog lookup over `sc2-catalog-graph-out/catalog.sqlite` (or `graph.json`). Use this INSTEAD of reading raw `DataEditorXML/` dumps.
+Token-efficient catalog lookup over `<project-data>/runtime/catalog/catalog.sqlite` (or `graph.json`). Use this INSTEAD of reading raw `DataEditorXML/` dumps.
 
 Common commands:
 ```bash
@@ -99,7 +100,7 @@ After a `workspace_copy` deployment, open and save the mod in the SC2 Editor to 
 ## Playtest Bug Extraction
 
 ### `extract-playtest-bugreport.py` (and `.ps1`)
-Extracts alerts and script errors from StarCraft II `GameLogs` into a clean report (`bugreport.txt`). Run after playtesting to triage runtime issues.
+Extracts alerts and script errors from StarCraft II `GameLogs` into a clean report (`<project-data>/runtime/reports/bugreport.txt`). Run after playtesting to triage runtime issues.
 
 ## XSD Schemas
 
@@ -169,7 +170,7 @@ Replace example paths with the actual target.
 - Static layer: XML/schema, Galaxy rules, ID & command-card references, duplicate definitions, localization, doc links.
 - Editor layer: open the mod/map with correct dependencies, review warnings, save Components, review normalization diff. Do NOT open vanilla maps with the project mod as an external override.
 - Game layer: minimal-scenario tests — production & actual deduction, command card, attack target, abilities, morph, model/audio, each upgrade level & unlocks.
-- Record feedback in `wiki/implementation/bug-reports/latest.md` with at least: map, player/faction, repro steps, expected/actual, full warnings. Before using the log extractor, verify its path configuration — do not assume the old machine's `GameLogs` path applies.
+- Record feedback in `<project-data>/docs/issues.md` with at least: map, player/faction, repro steps, expected/actual, full warnings. Before using the log extractor, verify its path configuration — do not assume the old machine's `GameLogs` path applies.
 
 ### Source Caveats (from `source-caveats.md`)
 - **Localization tool:** Use the existing `audit-gamestrings-anchors.py`; documentation tool references are checked automatically by `check-doc-links.py` so removed legacy commands do not reappear unnoticed.
