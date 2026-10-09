@@ -16,9 +16,19 @@ sc2-catalog-graph-out/
 # 本地试玩提取日志
 bugreport.txt
 
-# 本地备份与临时工作文件
+# 本地备份与临时工作文件（任意层级）
+backup/
 backups/
+temp/
 tmp/
+**/_backup/
+**/_backups/
+**/_tmp/
+**/_temp/
+tmp*/
+*.bak
+*.tmp
+*.orig
 .sc2-reference-stage-*/
 .sc2-reference-backup-*/
 
