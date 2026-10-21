@@ -14,3 +14,7 @@
 - **Root Cause:**
 - **Fix:**
 - **Validation:**
+- **Editor Validation:**
+- **Runtime Validation:**
+
+`Validation` 记录静态检查的对象、命令/范围与结果。`Editor Validation` 从 `Editor accepted` 起必填，记录受影响组件、重载/编译/保存操作及警告结果；`Runtime Validation` 从 `packaged runtime passed` 起必填，记录运行版本/目标、复现操作与实际结果。未执行的阶段留空并保持相应状态，不用计划步骤代替验收证据。

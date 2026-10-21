@@ -38,6 +38,8 @@ Every handoff and completion report must name the highest gate actually reached.
 
 `tools/audit-issue-lifecycle.py` enforces valid active-ledger status labels and the evidence fields required by each reached gate.
 
+`Validation` records static target/scope, checks and results. `Editor Validation` is required from `Editor accepted`; record the component and reload/compile/save outcome. `Runtime Validation` is required from `packaged runtime passed`; record the tested version/target, reproduction steps and observed outcome. The audit checks record completeness, not whether those actions actually occurred. Existing high-stage records missing evidence fail without automatic rewriting or demotion.
+
 ---
 
 ## Issue Intake Rules

@@ -32,18 +32,14 @@ Now, let’s create a native function so we can actually use the script we wrote
 Then, let’s test it. I create a dialog item and create a button in it using our function. Let’s fire up the test map and we are finished.
 Admittedly, what we did above was incredibly easy to do in the GUI as well, but it was more for demonstration purposes.
 
-When deciding when to write script vs GUI, I have a few rules of thumb:
-1. Write only self-contained functions. Referring to global variables is doable (just add a gv_ prefix before their name), but it’s generally good practice not to. The one exception to this rule is constants, but that should be obvious.
-2. Do any catalog related work in Galaxy. The GUI functions are annoying and working with strings is a lot easier than working with game links.
-3. Annoying type conversions or frequently repeated (loops won’t work) should be done in Galaxy.
-4. Trigger creation should always be done in GUI.
+The examples above illustrate script mechanisms. For implementation choices, follow the workspace's [GUI-first entry](../../skills/sc2-project-entry/SKILL.md#task-routing): use editable GUI definitions for new triggers and retain standalone Galaxy for explicit requests or maintenance of existing scripts. A tutorial preference for scripting Catalog work is not a project requirement.
 
 ## Grammar Specifications and Syntactic Rules
 
 Galaxy Script is a statically typed, imperative language that syntactically resembles C. However, it lacks many modern C/C++ or C# constructs. Violating Galaxy's constraints will cause compile errors or engine script crashes:
 
 1. **Local Variable Scope Hoisting:** All local variables inside a function must be defined at the absolute beginning of the function body, preceding any executable statements, assignments, or function calls. Declaring variables after statements or inside inline block scopes (such as within `if`, `while`, or `for` blocks) is a fatal syntax error.
-2. **Increment / Decrement Operators:** Post-increment (`i++`) and post-decrement (`i--`) are unsupported. You must use explicit compound assignments (`i += 1;` or `i -= 1;`).
+2. **Hand-written compatibility policy:** Prefer `while` and explicit assignment (`i = i + 1;` or `i = i - 1;`). This is the workspace authoring convention; distinguish it from language/API facts verified in the target compiler.
 3. **Include Directives:** Paths must be declared relative to the root directory **without file extensions**. Writing `include "Scripts/Utility.galaxy"` or `#include "Scripts/Utility.h"` causes a compilation failure, whereas `include "Scripts/Utility"` resolves correctly.
 4. **Data Link Representation:** While GUI triggers use typed wrapper objects like `gamelink`, raw Galaxy Script interacts with catalog entries, abilities, and unit types using primitive `string`, and UI/dialog handles using primitive `int`.
 5. **Memory and Structs:** Structs and arrays are pass-by-reference. Galaxy lacks dynamic heap allocation via pointers (`malloc`/`new`). Avoid infinite recursive structures.

@@ -1,23 +1,17 @@
 # Galaxy Language Gotchas
 
-Confirmed compile errors and API surprises in StarCraft II Galaxy Script. Check here before writing any Galaxy code.
+Compatibility notes and source-recorded compiler/API observations. Hand-written code follows the conservative workspace policy below; individual historical parser reports do not establish universal language limits.
 
 For a full Galaxy language primer, see [wiki/reference/galaxy-language.md](../reference/galaxy-language.md).  
 For SC2 bank function signatures, see [wiki/reference/galaxy-bank.md](../reference/galaxy-bank.md).
 
 ---
 
-## Confirmed Compile Errors & Syntax Rules
+## Compatibility Policy and Syntax Notes
 
-### Custom Script XML indentation
+### Custom Script XML structure
 
-When writing a FunctionCall's `<ScriptCode>` in the current Triggers layout,
-prefix every code line with the 16 spaces used by Editor-authored script blocks.
-The Editor's code generation removes this indentation; unindented code can lose
-the first 16 characters of each statement. A reported Bank diagnostic compile
-error showed `if (EventChatMessage(false)` becoming `sage(false)`.
-Check the generated code after Editor save. XML parsing and the ordinary
-catalog/Galaxy validator do not compile embedded Custom Script.
+Use the structure and indentation of an Editor-saved ScriptCode block of the same type in the actual target. Historical notes reported both four-space and sixteen-space trimming, without enough evidence to generalize either. Inspect generated code after saving; XML parsing and the ordinary static validator do not compile embedded scripts.
 
 ```galaxy
 // Array declaration — CORRECT syntax:
@@ -61,16 +55,16 @@ TriggerAddEventUnitCreated(myTrig, null, "Zergling", "");  // specific type
 fixed hp = UnitGetPropertyFixed(u, c_unitPropLifeMax, c_unitPropCurrent);
 // NOT: c_unitPropMax  <-- constant does not exist, causes "Invalid parameter"
 
-// Increments / Decrements — use compound assignment:
-count += 1;
-// NOT: count++; or count--;  <-- unsupported operator, causes parse error
+// Conservative hand-written increment style:
+count = count + 1;
+// Avoid increment/decrement shorthand in hand-written Custom Script.
 
 // Loops — use while (...):
 while (i < 10) {
     // ...
-    i += 1;
+    i = i + 1;
 }
-// NOT: for (i = 0; i < 10; i++)  <-- unsupported in SC2 custom script
+// while plus explicit assignment is the workspace compatibility policy.
 
 // Include directives — relative path without extension:
 include "Scripts/MyGlobals"

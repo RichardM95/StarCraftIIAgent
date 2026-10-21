@@ -48,13 +48,16 @@ class IncompleteDependenciesError(ValueError):
 def dependency_problems(graph: dict) -> list[str]:
     return list(graph.get("errors", [])) + [
         f"missing dependency: {edge['target_name']} (declared by {edge['source']})"
-        for edge in graph.get("missing", [])]
+        for edge in graph.get("missing", [])] + [
+        f"unresolved engine/network dependency: {edge['raw']}"
+        for edge in graph.get('edges', []) if edge.get('kind') == 'external']
 
 
 def dependency_state(graph: dict) -> dict:
     problems = dependency_problems(graph)
     return {"status": "partial" if problems else "complete", "problems": problems,
-            "mods_dir": graph.get("mods_dir"), "primary": graph.get("primary")}
+            "mods_dir": graph.get("mods_dir"), "primary": graph.get("primary"),
+            "official_cache": graph.get("official_cache")}
 
 
 def _path_key(path: Path) -> str:
@@ -164,7 +167,8 @@ def _resolve_local_mod(ref: dict[str, Any], mods_dir: Path) -> Path | None:
 def build_dependency_graph(primary_mod: Path, mods_dir: Path, *,
                            campaigns_dir: Path | None = None,
                            allow_unpacked: bool = False,
-                           strict_external: bool = False) -> dict[str, Any]:
+                           strict_external: bool = False,
+                           official_cache: Path | None | bool = None) -> dict[str, Any]:
     """Resolve a component target; optional campaign roots preserve legacy callers."""
     primary_mod = primary_mod.resolve(strict=False)
     mods_dir = mods_dir.resolve(strict=False)
@@ -173,6 +177,14 @@ def build_dependency_graph(primary_mod: Path, mods_dir: Path, *,
     errors: list[str] = []
     missing: list[dict[str, Any]] = []
     visited: set[str] = set()
+    from sc2_official import cache_for_mods
+    cache = None
+    try:
+        if official_cache is not False:
+            cache = cache_for_mods(mods_dir, Path(official_cache) if official_cache else None)
+    except (OSError, ValueError, KeyError, ET.ParseError) as exc:
+        errors.append('Official cache rejected: ' + str(exc))
+    campaigns_dir = campaigns_dir if campaigns_dir is not None else mods_dir.parent / 'Campaigns'
 
     def visit(mod_dir: Path, stack: tuple[str, ...]) -> None:
         source_key = _path_key(mod_dir)
@@ -180,7 +192,15 @@ def build_dependency_graph(primary_mod: Path, mods_dir: Path, *,
             return
         visited.add(source_key)
 
-        if allow_unpacked:
+        cached = cache is not None and mod_dir.is_relative_to(cache.root)
+        if cached:
+            metadata = cache.metadata(mod_dir)
+            evidence = metadata['dependency_evidence']
+            info_component = (Path(evidence).relative_to(mod_dir.relative_to(cache.root)).as_posix()
+                              if isinstance(evidence, str) else None)
+            refs = [r for raw in metadata['dependencies'] for r in extract_dependency_refs(raw)]
+            node_errors = []
+        elif allow_unpacked:
             info_component, refs, node_errors = read_mod_dependencies(mod_dir, allow_unpacked=True)
         else:
             info_component, refs, node_errors = read_mod_dependencies(mod_dir)
@@ -189,7 +209,11 @@ def build_dependency_graph(primary_mod: Path, mods_dir: Path, *,
             "name": mod_dir.name,
             "path": str(mod_dir),
             "info_component": info_component,
+            "origin": "casc" if cached else "local",
         }
+        if cached:
+            nodes[source_key]['casc'] = {'manifest': str(cache.manifest_path),
+                                       'identity': cache.identity, **metadata}
 
         next_stack = stack + (source_key,)
         for ref in refs:
@@ -206,7 +230,12 @@ def build_dependency_graph(primary_mod: Path, mods_dir: Path, *,
                 candidate = campaigns_dir.joinpath(*PurePosixPath(file_path).parts[1:]).resolve()
                 if candidate.is_relative_to(campaigns_dir.resolve()):
                     target = candidate
-            if target is None or (ref.get("is_network") and not target.is_dir()):
+            # An existing local component, including a broken one, always wins.
+            if cache is not None and isinstance(file_path, str) and (target is None or not target.exists()):
+                cached_target = cache.component(file_path)
+                if cached_target is not None:
+                    target = cached_target
+            if target is None or (ref.get("is_network") and not target.exists()):
                 edge["kind"] = "external"
                 edges.append(edge)
                 if strict_external:
@@ -238,6 +267,8 @@ def build_dependency_graph(primary_mod: Path, mods_dir: Path, *,
         "edges": edges,
         "missing": missing,
         "errors": errors,
+        "official_cache": ({'root': str(cache.root), 'identity': cache.identity,
+                            'manifest': str(cache.manifest_path)} if cache else None),
     }
 
 

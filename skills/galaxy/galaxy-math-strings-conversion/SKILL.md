@@ -6,14 +6,14 @@ description: Integer and fixed-point math, trigonometry, random numbers, type co
 ## Loading Boundary
 
 - **This sub-skill owns:** integer/fixed math, trigonometry, random numbers, type conversions, string/text operations, colors, bitwise ops, and number formatting
-- **Parent root skill (`sc2-galaxy-scripting`) owns:** project conventions, schema/syntax rules, source-of-truth, naming prefixes
+- **Parent root skill (`sc2-galaxy-scripting`) owns:** project source boundaries, compatibility policy and identity
 - **Sibling sub-skills own:** `galaxy-points-regions-geometry` (point/region math), `galaxy-language-fundamentals` (type system), `galaxy-debug-data-catalog` (debug print/output)
 
 # Galaxy Scripting – Math, Strings & Conversion
 
 ## Prerequisite
 
-Load [`sc2-galaxy-scripting`](../../sc2-galaxy-scripting/SKILL.md) first for project-wide Galaxy syntax constraints (variable hoisting, no `++`/`--`, `while` not `for`, include paths without extensions), source-of-truth rules, modular script boundaries, and naming conventions (e.g. `libMy_` function prefix, `libMy_g_` global prefix). This sub-skill owns deep API reference only; project conventions live in the router skill.
+Follow [sc2-galaxy-scripting](../../sc2-galaxy-scripting/SKILL.md) for source boundaries and compatibility policy. This page supplies subsystem/language reference; adapt community examples to the target rather than treating them as project entry instructions.
 
 ## Key References
 

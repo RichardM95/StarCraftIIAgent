@@ -71,7 +71,7 @@ Most catalog fields require child elements with `value="..."`:
 
 ## Hard Rules
 
-- **ASCII-only XML, no `AbilAutoCmd`, no `CBehaviorBuff.InitEffect`, no comment-only catalogs** — see `sc2-project-entry` Hard Rules #5-6 for the canonical list. (`InitialEffect` is a different field — do not confuse them.)
+- Follow [SC2 XML rules](../../AGENTS.md#sc2-modding-xml-规则): comments/attribute values use ASCII; no `AbilAutoCmd`, `CBehaviorBuff.InitEffect` or comment-only catalogs. `InitialEffect` is a different field.
 - **Check for duplicates** before adding a validator/entity that may already exist in the dependency chain.
 
 ## Inheritance & Parent Pitfalls

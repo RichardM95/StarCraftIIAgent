@@ -46,18 +46,19 @@ def dependency_validation_targets(
     config: Mapping[str, object],
     exclusions: set[str],
     explicit_mods: str | None = None,
+    official_cache: Path | None = None,
 ) -> tuple[list[Path], list[str]]:
     """Resolve active component dependencies selected for static validation."""
     try:
         mods_dir = resolve_dependency_root(REPO_ROOT, primary_mod, config, explicit_mods)
     except ValueError as exc:
         return [], [str(exc)]
-    graph = build_dependency_graph(primary_mod, mods_dir)
+    graph = build_dependency_graph(primary_mod, mods_dir, **({"official_cache": official_cache} if official_cache else {}))
     problems = dependency_problems(graph)
     primary_key = str(primary_mod.resolve(strict=False)).casefold()
     targets: list[Path] = []
     for key, node in graph["nodes"].items():
-        if key == primary_key:
+        if key == primary_key or node.get("origin") == "casc":
             continue
         path = Path(node["path"])
         if path.name.casefold() in exclusions:
@@ -108,6 +109,7 @@ def main() -> int:
         default="all",
         help="Run the full suite or only tool, documentation, or mod checks.",
     )
+    parser.add_argument("--official-cache", type=Path, help="Read-only official cache; verifies hashes/XML without authoring lint")
     parser.add_argument("--mods-dir", help="Explicit dependency Mods root for a one-off component")
     parser.add_argument("--campaigns-dir", help="Explicit dependency Campaigns root for trigger validation")
     dependency_group = parser.add_mutually_exclusive_group()
@@ -173,7 +175,7 @@ def main() -> int:
     dependency_problems: list[str] = []
     if include_dependencies:
         dependency_targets, dependency_problems = dependency_validation_targets(
-            mods[0], config, exclusions, args.mods_dir
+            mods[0], config, exclusions, args.mods_dir, args.official_cache
         )
 
     print("=" * 60)
@@ -204,7 +206,7 @@ def main() -> int:
         ),
         (
             "Agent Path Configuration Validator",
-            [sys.executable, "tools/validate-agent-config.py"],
+            [sys.executable, "tools/validate-agent-config.py"] + (["--official-cache", str(args.official_cache)] if args.official_cache else []),
         ),
         (
             "Static XML & Galaxy Script Validator",
@@ -218,15 +220,15 @@ def main() -> int:
             "GameStrings Anchor & Localization Audit",
             [sys.executable, "tools/audit-gamestrings-anchors.py", "--mod-dir", mod_dir],
         ),
-        ("Issue Lifecycle Ledger Audit", [sys.executable, "tools/audit-issue-lifecycle.py"]),
+        ("Issue Lifecycle Ledger Audit", [sys.executable, "tools/audit-issue-lifecycle.py", "--target", mod_dir]),
         ("Skill Frontmatter Validator", [sys.executable, "tools/audit-skill-frontmatter.py"]),
         ("Documentation Link Integrity Checker", [sys.executable, "tools/check-doc-links.py"]),
     ]
 
     trigger_command = [sys.executable, 'tools/sc2-trigger-query.py', '--target', mod_dir]
-    for option, value in (('--mods-dir', args.mods_dir), ('--campaigns-dir', args.campaigns_dir)):
+    for option, value in (('--mods-dir', args.mods_dir), ('--campaigns-dir', args.campaigns_dir), ('--official-cache', args.official_cache)):
         if value:
-            trigger_command.extend([option, value])
+            trigger_command.extend([option, str(value)])
     trigger_command.append('check')
     steps.insert(3, ('GUI Trigger Dependency Validator', trigger_command))
 

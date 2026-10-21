@@ -23,15 +23,19 @@ BASE_FIELDS = ("Status", "Map / Context", "Reproduction", "Observed", "Expected"
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--ledger", type=Path, help="Explicit issue ledger; missing explicit files fail")
+    selection = parser.add_mutually_exclusive_group()
+    selection.add_argument("--ledger", type=Path, help="Explicit issue ledger; missing explicit files fail")
+    selection.add_argument("--target", type=Path, help="Components target whose project ledger is checked")
     args = parser.parse_args()
     try:
-        data = project_data_dir(REPO_ROOT) if args.ledger is None else None
+        if args.target is not None and (not args.target.is_dir() or args.target.suffix.casefold() not in {".sc2mod", ".sc2map"}):
+            raise ValueError("Not a Components target: " + str(args.target))
+        data = project_data_dir(REPO_ROOT, primary=args.target) if args.ledger is None else None
         ledger = args.ledger if args.ledger is not None else data / "docs/issues.md" if data else None
         if args.ledger is None and (ledger is None or not ledger.exists()):
             print("SKIP Issue lifecycle audit: no active project or project ledger: " + str(ledger))
             return 0
-        text = ledger.read_text(encoding="utf-8").split("## Issue Template", 1)[0]
+        text = ledger.read_text(encoding="utf-8-sig").split("## Issue Template", 1)[0]
     except (OSError, ValueError) as exc:
         print("ERROR: " + str(exc))
         return 1
@@ -41,7 +45,7 @@ def main() -> int:
         title = section.splitlines()[0].strip()
         fields = {
             match.group(1): match.group(2).strip()
-            for match in re.finditer(r"(?m)^- \*\*(.+?):\*\*\s*(.*)$", section)
+            for match in re.finditer(r"(?m)^- \*\*(.+?):\*\*[ \t]*([^\r\n]*)$", section)
         }
         for field in BASE_FIELDS:
             if not fields.get(field):
@@ -58,6 +62,10 @@ def main() -> int:
         if stage >= STAGES.index("static validation passed"):
             if not fields.get("Validation"):
                 failures.append(f"{title}: static validation status requires an explicit Validation field")
+        for gate, field in (("Editor accepted", "Editor Validation"),
+                            ("packaged runtime passed", "Runtime Validation")):
+            if stage >= STAGES.index(gate) and not fields.get(field):
+                failures.append(f"{title}: {gate} requires {field} evidence")
     if not sections and "当前无活动问题。" not in text:
         failures.append("active ledger contains no ISSUE sections")
     if failures:

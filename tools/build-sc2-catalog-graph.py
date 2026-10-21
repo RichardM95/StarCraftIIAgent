@@ -28,6 +28,9 @@ ROOT = Path(__file__).resolve().parents[1]
 # Default output is resolved from the selected project at invocation time.
 BUILD_MOD_DIR = None
 BUILD_MODS_DIR = None
+OFFICIAL_CACHE = None
+DEPENDENCY_NODES = {}
+LOCALE = "enUS"
 ALLOW_INCOMPLETE_DEPENDENCIES = False
 DEPENDENCY_STATE = {"status": "complete", "problems": []}
 
@@ -185,7 +188,8 @@ def object_node_id(catalog_family: str, object_id: str) -> str:
 @lru_cache(maxsize=1)
 def find_local_mods() -> tuple[Path, ...]:
     """Return the primary mod followed by active local component dependencies."""
-    global DEPENDENCY_STATE
+    global DEPENDENCY_STATE, DEPENDENCY_NODES
+    DEPENDENCY_NODES = {}
     config = load_project_config(ROOT)
     primary_mods = find_project_mods(ROOT, BUILD_MOD_DIR, config=config)
     DEPENDENCY_STATE = {"status": "complete", "problems": []}
@@ -207,7 +211,8 @@ def find_local_mods() -> tuple[Path, ...]:
         return (primary,)
 
     mods_dir = resolve_dependency_root(ROOT, primary, config, BUILD_MODS_DIR)
-    graph = build_dependency_graph(primary, mods_dir)
+    graph = build_dependency_graph(primary, mods_dir, official_cache=OFFICIAL_CACHE)
+    DEPENDENCY_NODES = graph["nodes"]
     DEPENDENCY_STATE = dependency_state(graph)
     if DEPENDENCY_STATE["status"] == "partial" and not ALLOW_INCOMPLETE_DEPENDENCIES:
         raise ValueError("Incomplete active dependencies: " + "; ".join(DEPENDENCY_STATE["problems"]))
@@ -251,6 +256,16 @@ def source_info(path: Path) -> tuple[str, str]:
             source_class = "local_mod" if index == 0 else "active_component_dependency"
             return source_class, mod_dir.stem
     return "other", path.stem
+
+
+def source_provenance(path: Path) -> dict | None:
+    for node in DEPENDENCY_NODES.values():
+        component = Path(node["path"])
+        if node.get("origin") == "casc" and path.is_relative_to(component):
+            evidence = node["casc"]
+            return {"manifest": evidence["manifest"], "identity": evidence["identity"],
+                    "path": path.relative_to(Path(evidence["manifest"]).parent).as_posix()}
+    return None
 
 
 def input_files() -> list[Path]:
@@ -407,6 +422,9 @@ def read_localization(path: Path, kind: str, nodes: dict[str, dict]) -> None:
                 "label": key,
                 "localization_file": kind,
                 "value_preview": value.strip()[:120],
+                "locale": LOCALE, "source_file": _rel_path(path),
+                "source_class": source_info(path)[0],
+                "casc": source_provenance(path),
             },
         )
 
@@ -451,17 +469,17 @@ def build_graph() -> tuple[dict[str, dict], list[Edge], dict[tuple[str, str], li
                     "file": rel,
                     "tag": elem.tag,
                     "parent": elem.attrib.get("parent"),
+                    "casc": source_provenance(path),
                 }
             )
             node["source_classes"] = sorted(set(node["source_classes"]) | {source_class})
             collect_references(defn, elem, object_id, edges)
 
     for mod_dir in find_local_mods():
-        loc_root = mod_dir / "enUS.SC2Data" / "LocalizedData"
-        if loc_root.is_dir():
-            read_localization(loc_root / "GameStrings.txt", "GameStrings", nodes)
-            read_localization(loc_root / "ObjectStrings.txt", "ObjectStrings", nodes)
-            read_localization(loc_root / "TriggerStrings.txt", "TriggerStrings", nodes)
+        from sc2_official import component_file
+        for name in ("GameStrings", "ObjectStrings", "TriggerStrings"):
+            path = component_file(mod_dir, LOCALE + ".SC2Data/LocalizedData/" + name + ".txt")
+            read_localization(path, name, nodes)
 
     for edge in edges:
         if edge.target.startswith("asset:"):
@@ -838,9 +856,11 @@ def write_summaries(out_dir: Path, nodes: dict[str, dict], edges: list[Edge], de
 
 
 def main() -> int:
-    global BUILD_MOD_DIR, BUILD_MODS_DIR, ALLOW_INCOMPLETE_DEPENDENCIES
+    global BUILD_MOD_DIR, BUILD_MODS_DIR, ALLOW_INCOMPLETE_DEPENDENCIES, OFFICIAL_CACHE, LOCALE
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--mod-dir", help="Explicit primary component for investigation")
+    parser.add_argument("--official-cache", type=Path, help="Read-only official cache")
+    parser.add_argument("--locale", choices=("enUS", "zhCN"), default="enUS", help="Indexed localization language; never fabricate missing text")
     parser.add_argument("--mods-dir", help="Explicit dependency Mods root")
     parser.add_argument("--allow-incomplete-dependencies", action="store_true", help="Build an explicitly marked partial investigation index; never validates effective values")
     parser.add_argument("--out", default=None, help="Output directory (default: project runtime/catalog, or external reference cache)")
@@ -849,6 +869,7 @@ def main() -> int:
     args = parser.parse_args()
 
     BUILD_MOD_DIR, BUILD_MODS_DIR = args.mod_dir, args.mods_dir
+    OFFICIAL_CACHE, LOCALE = args.official_cache, args.locale
     ALLOW_INCOMPLETE_DEPENDENCIES = args.allow_incomplete_dependencies
     find_local_mods.cache_clear()
     try:
@@ -876,6 +897,7 @@ def main() -> int:
     selection = {"workspace_root": str(ROOT.resolve()), "primary": str(mods[0]) if mods else None,
                  "mods_dir": DEPENDENCY_STATE.get("mods_dir"),
                  "recursive": load_project_config(ROOT).get("project", {}).get("resolve_dependencies_recursive", True),
+                 "official_cache": (DEPENDENCY_STATE.get('official_cache') or {}).get('root'), "locale": LOCALE,
                  "explicit": bool(BUILD_MOD_DIR or BUILD_MODS_DIR)}
     if mods and not selection["mods_dir"]:
         selection["mods_dir"] = str(resolve_dependency_root(ROOT, mods[0], load_project_config(ROOT), BUILD_MODS_DIR))

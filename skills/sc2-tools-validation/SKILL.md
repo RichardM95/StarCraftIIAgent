@@ -22,7 +22,8 @@ Load this skill when running any tool from the `tools/` directory: pre-flight te
 | **Find official/partner component examples or strings** | `python tools/sc2-reference-query.py find <term> --family <Family> --component <name> --limit 20` |
 | **Refresh stale catalog query DB** | `python tools/build-sc2-catalog-graph.py --sqlite-only` |
 | **Preview/deploy mod to SC2 install** | `python tools/deploy-mod.py --dry-run` |
-| **Check GameStrings / localization anchors** | `python tools/audit-gamestrings-anchors.py --fill` |
+| **Check GameStrings / localization anchors (read-only)** | `python tools/audit-gamestrings-anchors.py` |
+| **Restore anchors after Editor save (writes files)** | `python tools/audit-gamestrings-anchors.py --fill` |
 | **Audit command cards** | `python tools/audit-actor-and-card-integrity.py` |
 | **Extract playtest errors & logs** | `python tools/extract-playtest-bugreport.py` |
 | **Check documentation links** | `python tools/check-doc-links.py` |
@@ -143,17 +144,17 @@ python tools/sc2-catalog-query.py actor-chain Unit:Marine --limit 10
 
 ### Targeted Static Checks (PowerShell)
 ```powershell
-python tools/test-suite.py --mod-dir "$env:SC2_MODS_PATH\AeonOfIhanrii.SC2Mod"
-python tools/validate-mod.py --mod-dir "$env:SC2_MODS_PATH\AeonOfIhanrii.SC2Mod"
-python tools/audit-actor-and-card-integrity.py --mod-dir "$env:SC2_MODS_PATH\AeonOfIhanrii.SC2Mod"
-python tools/audit-gamestrings-anchors.py --mod-dir "$env:SC2_MODS_PATH\AeonOfIhanrii.SC2Mod"
+python tools/test-suite.py
+python tools/validate-mod.py
+python tools/audit-actor-and-card-integrity.py
+python tools/audit-gamestrings-anchors.py
 python tools/check-doc-links.py
 ```
-Replace example paths with the actual target.
+These commands use the configured source. For a one-off component, add `--mod-dir "<actual Components path>"`; this does not switch project selection.
 
 ### `test-suite.py` Scope Caveats (critical)
 - `test-suite.py` accepts `--mod-dir` and otherwise resolves the configured `project.primary_mod`; `SC2_MODS_PATH` and sibling-layout discovery only supply candidate roots. With no configured project name it fails closed instead of guessing an AeonOfIhanrii target. It passes the resolved absolute target to every mod-aware subtool.
-- Dependency content validation follows `agent-config.json`; the current project scans the complete local component dependency chain with no exclusions. Localization and command-card audits remain primary-Mod scoped because naive per-dependency localization checks do not model inherited strings.
+- Dependency content validation follows `validation.include_dependencies` and `validation.exclude_mods` in `agent-config.json`, with the documented command-line overrides. Read the printed target and selected scope; do not assume all dependencies are scanned. Localization and command-card audits remain primary-Mod scoped because naive per-dependency localization checks do not model inherited strings.
 - The suite now fails when no target mod exists, and `validate-mod.py` reports scanned file counts. Still confirm the printed target is the intended component directory.
 - Command-card slot collisions that may be gated by dependency requirements are non-fatal candidates by default; inspect them with `audit-actor-and-card-integrity.py --strict` before a focused command-card handoff.
 - Do not present a zero-exit run as Editor or packaged-runtime acceptance — the suite remains a static rule set.
@@ -166,11 +167,8 @@ Replace example paths with the actual target.
 - `deploy-mod.py` copies components when source and target differ — verify the target first; without `--dry-run` it is NOT a read-only validation command and does not regenerate compiled libraries.
 
 ### Issue Lifecycle & Feedback
-- Project issue lifecycle: `reported → root cause confirmed → source fixed → static validation passed → Editor accepted → packaged runtime passed`. Advance a stage only with effective-value evidence.
-- Static layer: XML/schema, Galaxy rules, ID & command-card references, duplicate definitions, localization, doc links.
-- Editor layer: open the mod/map with correct dependencies, review warnings, save Components, review normalization diff. Do NOT open vanilla maps with the project mod as an external override.
-- Game layer: minimal-scenario tests — production & actual deduction, command card, attack target, abilities, morph, model/audio, each upgrade level & unlocks.
-- Record feedback in `<project-data>/docs/issues.md` with at least: map, player/faction, repro steps, expected/actual, full warnings. Before using the log extractor, verify its path configuration — do not assume the old machine's `GameLogs` path applies.
+
+Follow the [feedback workflow](../../wiki/implementation/testing-feedback-workflow.md) for gates and evidence, and the [handoff checklist](../../wiki/guides/editor-handoff.md) for Editor/game steps. Ledger checks take `--target` for the actual component, or explicit `--ledger` (mutually exclusive). Missing project ledgers skip; explicit missing ledger files fail. Verify the log source path before extraction.
 
 ### Source Caveats (from `source-caveats.md`)
 - **Localization tool:** Use the existing `audit-gamestrings-anchors.py`; documentation tool references are checked automatically by `check-doc-links.py` so removed legacy commands do not reappear unnoticed.

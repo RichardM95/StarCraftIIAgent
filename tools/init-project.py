@@ -131,6 +131,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("primary_mod", help="Path to the primary .SC2Mod component folder")
     parser.add_argument("--project-data-dir", help="Project documentation/runtime directory; default: sibling <primary-name>.agent")
+    parser.add_argument("--official-cache", type=Path, help="Read-only official cache; does not alter config")
     parser.add_argument("--mods-dir", help="Override the inferred Mods directory")
     parser.add_argument("--sc2-install-dir", help="Override the inferred SC2 install directory")
     parser.add_argument("--campaign-maps-dir", help="Override the inferred campaign maps directory")
@@ -185,7 +186,7 @@ def main() -> int:
             f"{layout['campaign_maps_dir']}"
         )
 
-    graph = build_dependency_graph(primary_mod, layout["mods_dir"])
+    graph = build_dependency_graph(primary_mod, layout["mods_dir"], official_cache=args.official_cache, strict_external=True)
     failures.extend(graph["errors"])
     for edge in graph["missing"]:
         source_name = graph["nodes"][edge["source"]]["name"]

@@ -53,7 +53,7 @@ Read the current canonical page first; history is for prior states, not the work
 3. **Localization ownership mismatch** — player-facing text not anchored in `GameStrings.txt`; editor labels missing from `ObjectStrings.txt`.
 4. **Actor and command-card inheritance traps** — parented actors keep ancestor events; inherited command cards leak buttons from vanilla parents.
 
-Local XML parsing does not catch Editor schema warnings, missing active rows, wrong command-card layer, actor scope collisions, or pruned text. See [xml-patterns.md](xml-patterns.md#editor-round-trip-checklist).
+Local XML parsing does not catch Editor schema warnings, missing active rows, wrong command-card layer, actor scope collisions, or pruned text. See [xml-patterns.md](xml-patterns/editor-roundtrip-and-actors.md#editor-round-trip-checklist).
 
 ## Practical Rules
 
@@ -71,4 +71,4 @@ Refresh the query database with `python tools/build-sc2-catalog-graph.py --sqlit
 
 ## Tool Failure Recovery
 
-If a patch helper reports errors or fails to apply a replacement, restart the session or use exact string replacement while preserving UTF-8 line endings. Run `python tools/test-suite.py` to verify formatting and syntax. Never edit files in `publish/`.
+If a patch helper reports errors or fails to apply a replacement, restart the session or use exact string replacement while preserving UTF-8 line endings. Run the relevant `tools` or `docs` test-suite scope; use `mod` with the actual target only when component source changed. Never edit files in `publish/`.

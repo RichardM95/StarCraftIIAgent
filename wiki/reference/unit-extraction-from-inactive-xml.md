@@ -43,7 +43,7 @@ Trace a candidate unit in this order:
 
 Always compare the candidate IDs against `DataEditorXML/` before copying. Some inactive records are only overrides on top of active campaign records.
 
-A reduced extraction that includes units, effects, behaviors, and actors can still be incomplete if it omits models, sounds, turrets, helper weapons, validators, and editor localization. See the Editor round-trip checklist in [xml-patterns.md](../implementation/xml-patterns.md#editor-round-trip-checklist).
+A reduced extraction that includes units, effects, behaviors, and actors can still be incomplete if it omits models, sounds, turrets, helper weapons, validators, and editor localization. See the Editor round-trip checklist in [xml-patterns.md](../implementation/xml-patterns/editor-roundtrip-and-actors.md#editor-round-trip-checklist).
 
 ## Full Unit vs Override Patch
 

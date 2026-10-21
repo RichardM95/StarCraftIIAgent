@@ -6,4 +6,4 @@
 
 修改数值前核对本地、父对象、依赖与目标覆盖；UI 文字先识别生效表面及键。长期机制约定更新项目主题，不将账本变成历史流水账。
 
-游戏日志在用户要求或明确授权时提取，默认报告在项目 runtime/reports/bugreport.txt。无活动项目时提供显式 --output；原始游戏日志只读。账本审计默认跳过尚未建立的账本，显式 --ledger 必须存在且合法。
+游戏日志在用户要求或明确授权时提取，默认报告在项目 runtime/reports/bugreport.txt。无活动项目时提供显式 --output；原始游戏日志只读。账本审计默认跳过尚未建立的账本，显式 --ledger 必须存在且合法。用 --target 检查指定 Components 的资料账本，与 --ledger 互斥；副本源沿用所选项目的资料归属。统一预检传递实际目标，避免串用当前项目账本。验收证据字段与门槛见 [反馈流程](../../wiki/implementation/testing-feedback-workflow.md#required-outcome-wording)。

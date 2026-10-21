@@ -6,14 +6,14 @@ description: Sound playback, music, camera movement and snapshots, cinematic mod
 ## Loading Boundary
 
 - **This sub-skill owns:** sound playback, music, camera movement/snapshots, cinematic mode, weather, lighting, and environment effects
-- **Parent root skill (`sc2-galaxy-scripting`) owns:** project conventions, schema/syntax rules, source-of-truth, naming prefixes
+- **Parent root skill (`sc2-galaxy-scripting`) owns:** project source boundaries, compatibility policy and identity
 - **Sibling sub-skills own:** `galaxy-actor-and-visuals` (actor-level sound messages), `galaxy-ui-and-dialogs` (HUD messages), `galaxy-players-and-alliances` (player camera)
 
 # Galaxy Scripting – Sound, Camera & Environment
 
 ## Prerequisite
 
-Load [`sc2-galaxy-scripting`](../../sc2-galaxy-scripting/SKILL.md) first for project-wide Galaxy syntax constraints (variable hoisting, no `++`/`--`, `while` not `for`, include paths without extensions), source-of-truth rules, modular script boundaries, and naming conventions (e.g. `libMy_` function prefix, `libMy_g_` global prefix). This sub-skill owns deep API reference only; project conventions live in the router skill.
+Follow [sc2-galaxy-scripting](../../sc2-galaxy-scripting/SKILL.md) for source boundaries and compatibility policy. This page supplies subsystem/language reference; adapt community examples to the target rather than treating them as project entry instructions.
 
 ## Key References
 

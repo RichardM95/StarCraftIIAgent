@@ -6,14 +6,14 @@ description: Trigger declaration, event registration, async execution via Trigge
 ## Loading Boundary
 
 - **This sub-skill owns:** trigger declaration, event registration, async TriggerExecute, the static parameter pattern for Wait-using functions, trigger management, cinematic sequencer queue, and common event types
-- **Parent root skill (`sc2-galaxy-scripting`) owns:** project conventions, schema/syntax rules, source-of-truth, naming prefixes
+- **Parent root skill (`sc2-galaxy-scripting`) owns:** project source boundaries, compatibility policy and identity
 - **Sibling sub-skills own:** `galaxy-units-and-groups` (unit-specific events), `galaxy-ui-and-dialogs` (dialog events), `galaxy-game-systems` (init chain/spawners)
 
 # Galaxy Scripting – Triggers & Functions
 
 ## Prerequisite
 
-Load [`sc2-galaxy-scripting`](../../sc2-galaxy-scripting/SKILL.md) first for project-wide Galaxy syntax constraints (variable hoisting, no `++`/`--`, `while` not `for`, include paths without extensions), source-of-truth rules, modular script boundaries, and naming conventions (e.g. `libMy_` function prefix, `libMy_g_` global prefix). This sub-skill owns deep API reference only; project conventions live in the router skill.
+Follow [sc2-galaxy-scripting](../../sc2-galaxy-scripting/SKILL.md) for source boundaries and compatibility policy. This page supplies subsystem/language reference; adapt community examples to the target rather than treating them as project entry instructions.
 
 ## Key References
 
@@ -65,7 +65,7 @@ typedef funcref<MyCallback_t> MyCallbackRef;
 
 **Rules:**
 - All local variables **must** be declared at the very top of a function, before any statements or function calls.
-- `var++` is not valid. Use `var += 1`.
+- For hand-written compatibility use `while` and explicit assignment (`var = var + 1;`), per the parent skill.
 - `static` makes a function file-private.
 - Lines must not exceed 2048 characters.
 - No `/* */` block comments—only `//` line comments.

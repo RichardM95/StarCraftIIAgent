@@ -8,7 +8,7 @@ Actors control everything visible or audible in the game — unit models, impact
 
 Actor logic is **event-driven**: the actor declares what events it listens for and what it does when they fire. This is the reverse of gameplay data (abilities, effects, weapons), which are forward-declared — an ability says which effect to run; an actor says when to create itself.
 
-For campaign Terran drop pods, `BarracksDropPod` is a `CActorModel` that creates on `Effect.DropTrain.Start` and uses the `BarracksDropPod` model (`DropPodFalling.m3`). The gameplay side is `DropTrainSet` → `MakePrecursor` + `DropTrain`; projects can reuse that chain for Terran field-warp production. See [xml-patterns.md](../implementation/xml-patterns.md#terran-drop-pod-visuals-for-field-warp-production).
+For campaign Terran drop pods, `BarracksDropPod` is a `CActorModel` that creates on `Effect.DropTrain.Start` and uses the `BarracksDropPod` model (`DropPodFalling.m3`). The gameplay side is `DropTrainSet` → `MakePrecursor` + `DropTrain`; projects can reuse that chain for Terran field-warp production. See [xml-patterns.md](../implementation/xml-patterns/production.md#terran-drop-pod-visuals-for-field-warp-production).
 
 Three elements make up every actor event:
 

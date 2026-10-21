@@ -62,24 +62,17 @@ Validated workflow and schema pitfalls for external Trigger XML edits. Read this
     regenerates them on save, but needs them present on load. If you
     must reset, copy from a sibling map — the editor overwrites with
     current hashes on next save.
-15. **Galaxy Custom Script parser quirks** (in `<ScriptCode>` blocks):
-    - `for (init; cond; incr) { … }` — fails. Use `init; while (cond) { …; incr; }`.
-    - `break;` inside loops — fails. Use a sentinel variable in the while condition.
-    - `+=` / `-=` / `++` / `--` — fail. Use explicit `x = x + 1;`.
-    - **PREFIX EVERY LINE with 4 spaces.** The Trigger Editor's Custom
-      Script display strips the first 4 characters of every line. Without
-      the prefix, lines render mangled (`unitgroup` → `group`,
-      `while (…)` → `e (…)`). Galaxy ignores extra indentation so this
-      is safe both ways.
-    - **`//` line comments work**, but multi-hyphen separators don't —
-      Galaxy's tokenizer flags `--` as the unsupported decrement
-      operator even inside `//` comments. Use single hyphens.
-    - **Em-dashes and any non-ASCII** — parser is ASCII-only. Strip
-      smart-quotes, em-dashes, arrows.
-    - **Cascade failure:** any `<ScriptCode>` parse error aborts the
-      WHOLE file load and emits "Orphaned trigger parameter" / "Empty
-      trigger element reference" warnings for everything downstream.
-      Look for the real parse error in `MapScript.galaxy`.
+15. **Embedded Custom Script uses the workspace compatibility policy.**
+    Prefer `while`, explicit assignment and function-top declarations;
+    avoid shorthand increments and use a sentinel for loop exit when needed.
+    These are conservative authoring choices, not a language specification.
+    Copy the target Editor-saved block's structure and indentation; historical
+    four-space and sixteen-space reports do not establish a universal prefix.
+    Inspect generated code after saving. For suspected parse cascades,
+    distinguish the first compilation error from later orphan warnings.
+    Details: [ScriptCode structure](../implementation/galaxy-gotchas.md#custom-script-xml-structure).
+
+
 16. **Galaxy constants that DO NOT exist:** `c_unitStateStructure` — use
     `UnitTypeTestAttribute(UnitGetType(u), c_unitAttributeStructure)`.
     Validated existing: `c_messageAreaDirective`, `c_messageAreaChat`,
@@ -107,7 +100,7 @@ Validated workflow and schema pitfalls for external Trigger XML edits. Read this
     not load.
 20. **Custom Script Action as the body of a USER FunctionDef does NOT
     work reliably** — opaque compile failures even after stripping
-    em-dashes / decrement operators / prefixing 4 spaces. Workaround:
+    em-dashes / decrement operators / changing indentation. Workaround:
     put Custom Script Actions directly in Trigger bodies, OR use pure
     GUI native FunctionCalls in your user FunctionDef.
 21. **FunctionCall elements can only have ONE parent reference at a

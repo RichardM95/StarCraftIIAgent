@@ -1,10 +1,12 @@
 from __future__ import annotations
 
 import importlib.util
+import io
 import sys
 import unittest
 from pathlib import Path
 from unittest.mock import patch
+from contextlib import redirect_stdout
 
 
 TOOLS_DIR = Path(__file__).resolve().parents[1]
@@ -18,6 +20,18 @@ SPEC.loader.exec_module(SUITE)
 
 
 class DependencyValidationTests(unittest.TestCase):
+    def test_explicit_target_reaches_ledger_audit(self):
+        target = Path('Other/Other.SC2Mod').resolve()
+        commands = []
+        with patch.object(sys, 'argv', ['suite', '--scope', 'mod', '--mod-dir', str(target)]), \
+             patch.object(SUITE, 'load_project_config', return_value={}), \
+             patch.object(SUITE, 'find_project_mods', return_value=[target]), \
+             patch.object(SUITE, 'run_step', side_effect=lambda name, cmd, verbose: commands.append(cmd) or True), \
+             redirect_stdout(io.StringIO()):
+            self.assertEqual(SUITE.main(), 0)
+        ledger = next(c for c in commands if 'tools/audit-issue-lifecycle.py' in c)
+        self.assertEqual(ledger[-2:], ['--target', str(target)])
+
     def test_reads_dependency_defaults_and_exclusions(self) -> None:
         include, exclusions = SUITE.validation_settings(
             {

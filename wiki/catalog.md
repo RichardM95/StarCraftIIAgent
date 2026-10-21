@@ -23,6 +23,7 @@
 - [implementation/xml-patterns.md](implementation/xml-patterns.md)
 - [log.md](log.md)
 - [reference/actors.md](reference/actors.md)
+- [reference/official-casc-cache.md](reference/official-casc-cache.md)
 - [reference/attack-waves.md](reference/attack-waves.md)
 - [reference/button-images.md](reference/button-images.md)
 - [reference/data-editor-xml.md](reference/data-editor-xml.md)

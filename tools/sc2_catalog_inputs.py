@@ -6,10 +6,11 @@ import json
 from pathlib import Path
 
 from sc2_dependencies import find_info_component
+from sc2_official import catalog_paths, cache_manifest, component_file
 
 
 MANIFEST_SUFFIX = ".inputs.json"
-MANIFEST_VERSION = 3
+MANIFEST_VERSION = 4
 LOCALIZATION_NAMES = ("GameStrings.txt", "ObjectStrings.txt", "TriggerStrings.txt")
 
 
@@ -19,9 +20,7 @@ def catalog_xml_inputs(root: Path, mods: tuple[Path, ...] | list[Path]) -> list[
         if directory.is_dir():
             files.extend(directory.glob("*.txt"))
     for mod in mods:
-        directory = mod / "Base.SC2Data" / "GameData"
-        if directory.is_dir():
-            files.extend(directory.glob("*.xml"))
+        files.extend(catalog_paths(mod))
     return sorted((path for path in files if path.is_file()), key=lambda path: str(path).casefold())
 
 
@@ -38,8 +37,16 @@ def index_inputs(root: Path, mods: tuple[Path, ...] | list[Path]) -> list[Path]:
         info, _errors = find_info_component(mod)
         if info is not None:
             files.append(info)
-        locale = mod / "enUS.SC2Data" / "LocalizedData"
-        files.extend(path for name in LOCALIZATION_NAMES if (path := locale / name).is_file())
+        for language in ("enUS", "zhCN"):
+            files.extend(path for name in LOCALIZATION_NAMES
+                         if (path := component_file(mod, language + ".SC2Data/LocalizedData/" + name)).is_file())
+        official = cache_manifest(mod)
+        if official:
+            data = json.loads(official.read_text(encoding="utf-8"))
+            files.append(official)
+            files.append(Path(data["identity"]["install"]) / ".build.info")
+            # Include the whole signed inventory: registry, includes and locale availability.
+            files.extend(official.parent / k for k in data["files"] if (official.parent / k).is_file())
     return sorted(set(files), key=lambda path: str(path).casefold())
 
 
@@ -84,7 +91,7 @@ def read_manifest(index_path: Path) -> dict:
     try:
         data = json.loads(path.read_text(encoding="utf-8"))
         state = data.setdefault("dependencies", {"status": "complete", "problems": []})
-        if (data.get("version") not in {1, 2, MANIFEST_VERSION} or not isinstance(data.get("files"), dict)
+        if (data.get("version") not in {1, 2, 3, MANIFEST_VERSION} or not isinstance(data.get("files"), dict)
                 or state.get("status") not in {"complete", "partial"}
                 or not isinstance(state.get("problems"), list)
                 or not all(isinstance(item, str) for item in state["problems"])

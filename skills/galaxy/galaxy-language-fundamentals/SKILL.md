@@ -6,14 +6,14 @@ description: Core Galaxy language syntax, all primitive and engine handle types 
 ## Loading Boundary
 
 - **This sub-skill owns:** Galaxy language syntax, primitive/handle types, naming conventions, include/file structure, structs, arrays, control flow, and the MapScript bootstrap chain
-- **Parent root skill (`sc2-galaxy-scripting`) owns:** project conventions, schema/syntax rules, source-of-truth, naming prefixes
+- **Parent root skill (`sc2-galaxy-scripting`) owns:** project source boundaries, compatibility policy and identity
 - **Sibling sub-skills own:** `galaxy-code-organization` (file layout/include order), `galaxy-math-strings-conversion` (math/string APIs), `galaxy-triggers-and-functions` (trigger/event declaration)
 
 # Galaxy Scripting – Language Fundamentals
 
 ## Prerequisite
 
-Load [`sc2-galaxy-scripting`](../../sc2-galaxy-scripting/SKILL.md) first for project-wide Galaxy syntax constraints (variable hoisting, no `++`/`--`, `while` not `for`, include paths without extensions), source-of-truth rules, modular script boundaries, and naming conventions (e.g. `libMy_` function prefix, `libMy_g_` global prefix). This sub-skill owns deep API reference only; project conventions live in the router skill.
+Follow [sc2-galaxy-scripting](../../sc2-galaxy-scripting/SKILL.md) for source boundaries and compatibility policy. This page supplies subsystem/language reference; adapt community examples to the target rather than treating them as project entry instructions.
 
 Galaxy is the scripting language used in StarCraft II map/mod development. It is a statically-typed, C-like language compiled by the SC2 editor.
 
@@ -41,14 +41,14 @@ Galaxy is the scripting language used in StarCraft II map/mod development. It is
 
 ## File Structure & Includes
 
-Code is split across multiple `.galaxy` files using `include`. The entry point is `MapScript.galaxy`, which hands off to a `scripts/main.galaxy` coordinator:
+Code is split across multiple `.galaxy` files using `include`. The following standalone-project example uses an Editor-generated `MapScript.galaxy` bootstrap and a `scripts/main.galaxy` coordinator; inspect the actual target chain before adopting this layout:
 
 > **⚠️ Auto-Generated Files — NEVER write code in these:**
 > - `MapScript.galaxy` — rebuilt by the editor on every save.
 > - `LibHASH.galaxy` (e.g. `Lib5A1C9904.galaxy`) — the editor-generated library wrapper for an `.SC2Mod`; it wraps calls into `scripts/` via `include`.
 > - `LibHASH_h.galaxy` — the auto-generated library header.
 >
-> **All custom logic belongs in `scripts/` files.** The editor will overwrite the auto-generated files.
+> New triggers use GUI first. For existing or explicitly requested standalone Galaxy, edit only the hand-authored source referenced by the target Triggers; `scripts/` is an example layout. Generated files remain read-only.
 
 ```galaxy
 // MapScript.galaxy (editor-managed — do not add logic here)
@@ -459,7 +459,7 @@ These are the most common mistakes when writing Galaxy — sourced from the offi
 | Rule | Detail |
 |---|---|
 | Variables declared at top | All local variables **must** be declared at the very top of a function — before any statements, conditions, or function calls. The compiler enforces this strictly. |
-| No `++` / `--` operators | `var++` and `var--` are not valid syntax. Use `var += 1` and `var -= 1`. |
+| Hand-written compatibility style | Follow the parent skill: `while` and explicit assignment (`var = var + 1;`). This is workspace policy, not a universal language restriction. |
 | No block comments | `/* */` block comments do not exist in Galaxy. Use only `//` line comments. |
 | `static` = file-private | A `static` function is invisible outside its own `.galaxy` file. Use to avoid polluting the global namespace. |
 | Line length limit | Lines must not exceed 2048 characters (compiler hard limit). |

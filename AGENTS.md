@@ -28,7 +28,7 @@
 ## 智能体技能与指导
 
 ### 技能库
-统一技能库位于 `skills/`，采用 router + sub-skill 布局。SC2 模组/地图实现任务加载 `skills/sc2-project-entry/SKILL.md`，再按主题加载对应技能；普通文档或工具维护任务只读取相关规则与文件。布局概览见 `wiki/index.md#skills-unified`。
+统一技能库位于 `skills/`，采用 router + sub-skill 布局。SC2 模组/地图实现任务加载 `skills/sc2-project-entry/SKILL.md`，再按主题加载对应技能；普通文档或工具维护任务只读取相关规则与文件。布局概览见 [Wiki 路由](wiki/index.md)。
 
 工作区内的 `AGENTS.md`、`agent-config.json`、本地 `skills/` 与工具 `--help`/源码是当前契约。所有规则、工具和样例均从本工作区定位；全局技能只负责入口定位。
 
@@ -58,7 +58,7 @@
 | `wiki/implementation/` | 怎么建（XML 模式、本地化、陷阱、状态） |
 | `wiki/reference/` | 查找表、Actor 架构、SC2 参考 |
 | `wiki/guides/` | 逐步指南（编辑器交接、多 PC 设置、模拟 bank 测试） |
-| `skills/` | **统一技能库**（项目路由、翻译与 galaxy/sc2data 子技能，按需加载） |
+| `skills/` | **统一技能库**（项目路由与 galaxy/sc2data 子技能，按需加载） |
 | `skills/sc2-project-entry/SKILL.md` | 统一入口技能 — 模组身份、硬性规则、任务路由、工具速查 |
 | `skills/galaxy/` | 13 个 Galaxy 子技能（深度 API 参考，在 `sc2-galaxy-scripting` 之后加载） |
 | `skills/sc2data/` | 6 个 SC2 Data 子技能（深度 XML schema 参考，在 `sc2-catalog-xml` 之后加载） |
@@ -101,7 +101,7 @@
 
 ### Galaxy Script 规则
 - 局部变量必须提升到函数体最顶部，在任何可执行语句之前
-- 后缀自增/自减运算符（`++`、`--`）和复合赋值循环（`for (...)`) 在 SC2 Custom Script 中不受支持 — 使用 `i += 1;` 和 `while (...)`
+- 手写 Custom Script 按保守兼容策略使用 `while (...)` 和显式赋值（如 `i = i + 1;`）；这不证明其他语法在所有 Galaxy 环境中无效。具体语言/API 与生成结果按目标证据核对。
 - Include 指令必须使用无扩展名的相对路径（如 `include "Scripts/MyScript"`）
 - 地图内的 `MapScript.galaxy` 编辑是自动生成且保存时会被覆盖 — 在模组脚本块或 `Base.SC2Data/Scripts/` 中编写逻辑
 

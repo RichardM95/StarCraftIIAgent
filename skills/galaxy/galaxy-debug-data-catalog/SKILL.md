@@ -6,14 +6,14 @@ description: Debug output, Data Table key-value storage, Catalog runtime field a
 ## Loading Boundary
 
 - **This sub-skill owns:** debug output, Data Table key-value storage, Catalog runtime field access, UserData, and asset preloading
-- **Parent root skill (`sc2-galaxy-scripting`) owns:** project conventions, schema/syntax rules, source-of-truth, naming prefixes
+- **Parent root skill (`sc2-galaxy-scripting`) owns:** project source boundaries, compatibility policy and identity
 - **Sibling sub-skills own:** `galaxy-game-systems` (bank save/load), `galaxy-triggers-and-functions` (cross-trigger state via triggers), `sc2data-units-abilities` (XML catalog authoring)
 
 # Galaxy Scripting – Debug, Data Table & Catalog
 
 ## Prerequisite
 
-Load [`sc2-galaxy-scripting`](../../sc2-galaxy-scripting/SKILL.md) first for project-wide Galaxy syntax constraints (variable hoisting, no `++`/`--`, `while` not `for`, include paths without extensions), source-of-truth rules, modular script boundaries, and naming conventions (e.g. `libMy_` function prefix, `libMy_g_` global prefix). This sub-skill owns deep API reference only; project conventions live in the router skill.
+Follow [sc2-galaxy-scripting](../../sc2-galaxy-scripting/SKILL.md) for source boundaries and compatibility policy. This page supplies subsystem/language reference; adapt community examples to the target rather than treating them as project entry instructions.
 
 ## Key References
 

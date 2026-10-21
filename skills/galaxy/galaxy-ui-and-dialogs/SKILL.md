@@ -6,14 +6,14 @@ description: Dialog and dialog control creation, XML frame hookup, hero/upgrade 
 ## Loading Boundary
 
 - **This sub-skill owns:** dialog/dialog control creation, XML frame hookup, hero/upgrade panels, scoreboard panels, dialog events, HUD messages, localized text, minimap pings, and the SSF hooked-frame UI pattern
-- **Parent root skill (`sc2-galaxy-scripting`) owns:** project conventions, schema/syntax rules, source-of-truth, naming prefixes
+- **Parent root skill (`sc2-galaxy-scripting`) owns:** project source boundaries, compatibility policy and identity
 - **Sibling sub-skills own:** `galaxy-actor-and-visuals` (actor visuals), `galaxy-triggers-and-functions` (dialog events via triggers), `galaxy-players-and-alliances` (player-specific UI), `sc2data-actors-visuals` (SC2Layout XML)
 
 # Galaxy Scripting – UI & Dialogs
 
 ## Prerequisite
 
-Load [`sc2-galaxy-scripting`](../../sc2-galaxy-scripting/SKILL.md) first for project-wide Galaxy syntax constraints (variable hoisting, no `++`/`--`, `while` not `for`, include paths without extensions), source-of-truth rules, modular script boundaries, and naming conventions (e.g. `libMy_` function prefix, `libMy_g_` global prefix). This sub-skill owns deep API reference only; project conventions live in the router skill.
+Follow [sc2-galaxy-scripting](../../sc2-galaxy-scripting/SKILL.md) for source boundaries and compatibility policy. This page supplies subsystem/language reference; adapt community examples to the target rather than treating them as project entry instructions.
 
 ## Key References
 

@@ -59,13 +59,9 @@ Distilled from `references/project-and-sources.md` and `references/source-caveat
 ### Sibling Dependency Mods
 Do not infer active dependencies by enumerating sibling folders under `Mods/`. Start at the primary mod, use `ComponentList.SC2Components` to locate its info component, read `<Dependencies>`, and recursively repeat for each locally resolved component mod. Presence on disk alone does not prove a dependency is active.
 
-### New Mod Identity Rule
-- A new mod must adopt its own identity and naming prefix. Do not blanket-replace `libEpi_` / `libEpi_g_` / `AeonOfIhanriiBank` / `LegacyoftheIhanrii` strings in user mods — those are AeonOfIhanrii-specific. Old docs referencing `CCM`, `TF`, or fixed deploy paths are historical examples only; resolve current locations from `agent-config.json`.
-- Always confirm actual mod identity, deploy path, and naming prefix from the project's `AGENTS.md` / library XML / GUI Action Definition before writing code.
+### Project identity and reference scope
 
-### Source Caveats (from `source-caveats.md`)
-- **Old project prefix conflict:** Source docs mix `CCM`, `TF`, and `libEpi_` prefixes. Decide per current project identity; do not unify-replace across all user mods.
-- **Export override conflict (cross-ref):** Inactive XML folders may include Coop Commanders references, and complete inactive XML folders may not exist. See `sc2-catalog-xml` Source Caveats for the operational rule.
+Read project identity and naming from the actual configured source; preserve existing interfaces and use unique names for new projects. Historical prefixes, Bank names and deploy paths are examples, not defaults. Inactive exports provide reference evidence only; see `sc2-catalog-xml` for extraction limits.
 
 ## Tool Commands
 

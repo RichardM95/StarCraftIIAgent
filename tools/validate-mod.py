@@ -18,12 +18,12 @@ CATALOG_XSD = SCHEMAS_DIR / "Catalog.xsd"
 GAMEDATA_XSD = SCHEMAS_DIR / "GameData.xsd"
 LAYOUT_XSD = SCHEMAS_DIR / "SC2Layout.xsd"
 
-# Prohibited patterns in Galaxy scripts (SC2 custom script quirks)
-# Note: +=, -=, *=, /=, %= ARE supported in Galaxy; only ++, -- and C-style for(;;) are not.
+# Conservative hand-written compatibility checks, not a Galaxy compiler.
+# Compound assignment is allowed here; embedded ScriptCode still needs Editor validation.
 DISALLOWED_GALAXY_PATTERNS = [
-    (re.compile(r"\bfor\s*\([^;]+;[^;]+;[^)]+\)"), "for (...) loop is unsupported in SC2 Custom Script; use while (...)"),
-    (re.compile(r"\bbreak\s*;"), "break; is unsupported in SC2 Custom Script loops; use sentinel variables"),
-    (re.compile(r"(?<![\w])\w+\s*(\+\+|\-\-)\s*[^;]*;"), "Post-increment/decrement (++, --) is unsupported in Galaxy Custom Script; use i += 1 or i -= 1"),
+    (re.compile(r"\bfor\s*\([^;]+;[^;]+;[^)]+\)"), "Workspace compatibility policy: use while (...) in hand-written code"),
+    (re.compile(r"\bbreak\s*;"), "Workspace compatibility policy: use a sentinel condition for loop exit"),
+    (re.compile(r"(?<![\w])\w+\s*(\+\+|\-\-)\s*[^;]*;"), "Workspace compatibility policy: use explicit assignment instead of ++ or --"),
     (re.compile(r"[^\x00-\x7F]"), "Non-ASCII character detected in code (smart quotes, em-dashes, arrows, etc.)"),
 ]
 

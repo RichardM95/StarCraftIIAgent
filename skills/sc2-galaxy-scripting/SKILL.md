@@ -10,11 +10,11 @@ description: StarCraft II Galaxy scripting rules and gotchas for the selected pr
 Load this skill when the task involves Galaxy script (`.galaxy` files): writing trigger actions, bank persistence, dialog/UI code, unit events, or any custom script block. Also load when debugging "function not found", parse errors, or linker drops.
 Do not select standalone Galaxy for a new trigger merely because SC2 compiles GUI triggers to Galaxy. Follow `sc2-map-triggers` for GUI-first authoring; use this skill for an explicitly requested Galaxy implementation, existing script maintenance, or a necessary embedded Custom Script block.
 
-This skill is the **Galaxy router**. It owns project-wide syntax constraints, source-of-truth rules, modular script boundaries, and deployment. For deep Galaxy API work (specific native calls, subsystem APIs, struct/enum references), route to the appropriate `galaxy-*` sub-skill under `skills/galaxy/` after loading this skill.
+This skill is the **Galaxy router**. It owns project compatibility policy, source-of-truth rules, modular script boundaries, and deployment. For deep Galaxy API work (specific native calls, subsystem APIs, struct/enum references), route to the appropriate `galaxy-*` sub-skill under `skills/galaxy/` after loading this skill.
 
 ## Galaxy Sub-Skill Router
 
-For deep Galaxy script API work, load the matching `galaxy-*` sub-skill under `skills/galaxy/`. This skill retains the project-wide **syntax constraints** and **source-of-truth** rules that all sub-skills obey.
+For deep Galaxy script API work, load the matching `galaxy-*` sub-skill under `skills/galaxy/`. This skill retains the project **compatibility policy** and **source-of-truth** rules that all sub-skills obey.
 
 | Task | Sub-skill | Path |
 |---|---|---|
@@ -40,73 +40,13 @@ For deep Galaxy script API work, load the matching `galaxy-*` sub-skill under `s
 - **Do NOT edit:** `Lib*.galaxy` (compiled library wrappers, auto-generated and overwritten on Editor save) or `MapScript.galaxy` inside maps (auto-generated).
 - **Deploy:** In `workspace_copy` mode, preview then use `python tools/deploy-mod.py` to copy component sources to SC2. In `in_place` mode no deployment is needed. The SC2 Editor, not this tool, regenerates compiled wrappers on save.
 
-## Critical Syntax Rules (confirmed compile errors)
+## Compatibility policy and reference
 
-```galaxy
-// Array declaration — CORRECT:
-string[90] arr;
-// NOT: string arr[90];
+For hand-written code use `while`, explicit assignment (`i = i + 1;`), and function-top declarations with runtime assignments after them. These are conservative workspace conventions, not proof that all alternatives are unsupported by the Galaxy language.
 
-// Dialog/dialogitem variables are primitive int:
-int myDialog;
-int myButton;
+The [syntax notes](../../wiki/implementation/galaxy-gotchas.md) own the detailed examples and compilation caveats; the language sub-skill supplies type/API reference. Preserve whole function boundaries, avoid duplicate definitions, and inspect the actual include/call order.
 
-// Global initializers — integer/fixed literals only:
-int gMyCount = 0;
-// NOT: int gMyDialog = c_invalidDialog;  // compile error
-
-// Trigger action function signature:
-bool MyAction(bool testConds, bool runActions) { ... }
-
-// Get triggering unit:
-lv_u = EventUnit();
-// NOT: UnitFromEvent()  // does not exist
-
-// Call Galaxy function from GUI trigger (use #PARAM):
-libMy_SetCurrentMap(#PARAM(name));
-
-// Local variables — MUST be at the TOP of function body, no inline init:
-bool MyFunc(bool testConds, bool runActions) {
-    trigger orbTrig;   // declared at top, no initializer
-    if (!runActions) { return true; }
-    orbTrig = TriggerCreate("Foo");  // assigned in body
-    // NOT: trigger orbTrig = TriggerCreate("Foo");  // parse error
-    // NOT: declared inside if/else/while  // invalid
-}
-
-// Unit created event — 4 params:
-TriggerAddEventUnitCreated(myTrig, null, null, "");  // any unit
-TriggerAddEventUnitCreated(myTrig, null, "Zergling", "");  // specific type
-// NOT: TriggerAddEventUnitBirth(myTrig, null)
-// NOT: TriggerAddEventUnitCreated(myTrig, null, null)  // needs 4th ""
-
-// Read current max life:
-fixed hp = UnitGetPropertyFixed(u, c_unitPropLifeMax, c_unitPropCurrent);
-// NOT: c_unitPropMax  // constant does not exist
-
-// Increments/decrements — compound assignment only:
-count += 1;
-// NOT: count++ or count--  // unsupported
-
-// Loops — while only:
-while (i < 10) { i += 1; }
-// NOT: for (i=0; i<10; i++)  // unsupported
-
-// Include directives — relative path, no extension:
-include "Scripts/libMy_Globals"
-// NOT: include "Scripts/libMy_Globals.galaxy"
-// NOT: #include "Scripts/libMy_Globals.h"
-
-// Dynamic catalog reflection paths mirror XML element tree:
-CatalogFieldValueSet(c_gameCatalogUnit, "Marine", "Armor", player, "1");
-CatalogFieldValueSet(c_gameCatalogUnit, "Marine", "CostResource[Minerals]", player, "75");
-```
-
-## Modular Script Boundary Rules
-
-1. **Top-level declarations:** Every included `.galaxy` file MUST begin with declarations at brace depth 0 and end with a closed function brace `}`. Splitting a function body across file boundaries produces compilation errors.
-2. **No duplicate functions:** Defining the same function name across multiple included scripts fails with `"function already defined: <name>"`.
-3. **Forward references:** Functions must be **defined before they are called** within script blocks. GUI trigger calls are linked independently, but script-to-script calls require the callee to appear first in compilation order.
+For embedded ScriptCode, copy the structure/indentation of an Editor-saved block of the same type in the target component and inspect generated code after saving. No universal four-space or sixteen-space prefix is established. XML parsing and the static validator do not compile embedded scripts.
 
 ## Existing Script Includes
 
@@ -116,21 +56,9 @@ For maintenance of existing Galaxy, inspect the target library and its saved Cus
 
 Define exported GUI actions in the mod and call them from map triggers. This is the conservative workspace wiring practice; verify actual generated output. The universal linker claim lacks a versioned reproduction; see [evidence scope](../../wiki/reference/trigger-knowledge.md#编辑器行为的证据范围).
 
-## Community Error Triage
+## Project identity and error triage
 
-| Error | Cause | Fix |
-|---|---|---|
-| `Can only pass basic types` | Structs/arrays as function args | Pass scalar IDs/indices or use globals |
-| `struct forward declaration not supported` | Struct used before definition | Define structs before functions/vars that use them |
-| `Bulk copy not supported` | Array/struct assignment by value | Copy scalar elements explicitly |
-| `Could not allocate Global Memory` / `e_globalsTooLarge` | Global arrays too big | Keep project state compact |
-| `failed: 32k - 1 size limit to local variables` | Huge local arrays | Allocate small globals or split |
-| `Registry overflow` | Too many string/text/point refs in one expression | Break into smaller statements |
-| `Internal compiler error` | Line or string > ~2046 chars | Split long lines/strings |
-
-## Project Identity
-
-Read library IDs, function/global prefixes and Bank names from the target source. Preserve existing interfaces; select unique names only for a new project. Historical examples are not defaults.
+Library IDs, function/global prefixes and Bank names come from the actual target source. Preserve existing interfaces. Use [syntax/error notes](../../wiki/implementation/galaxy-gotchas.md#community-error-triage) for compiler symptoms rather than maintaining a second table here.
 
 ## Reference
 
@@ -139,22 +67,6 @@ Read library IDs, function/global prefixes and Bank names from the target source
 - Gotchas source: `wiki/implementation/galaxy-gotchas.md`
 - Bank system design: `wiki/implementation/bank-system.md`
 
-## Chinese Task Knowledge (Merged)
+## Native and event lookup
 
-Distilled from `references/galaxy-and-triggers.md` (Galaxy portion) and `references/source-caveats.md`. Duplicates with the syntax rules above omitted.
-
-### Native Lookup Discipline
-- Do not guess native names, parameters, or constants. Query `wiki/reference/triggers-native/` by name; for the final Galaxy signature, cross-check actual `natives.galaxy` or Editor-generated output.
-- For unit events, query `EventUnit` and the actual target-event API — avoid "nearest unit" style inferences. Plain unit creation, entering the map, training completion, and warp completion are different event semantics; pick the one matching the requirement and verify de-duplication.
-
-### Conservative Loop / Increment Style
-- Prefer `i = i + 1;` and `while (...)` over `i += 1;` in hand-written Custom Script when in doubt. Source docs disagree on whether `+=` and `break` are supported across all Galaxy contexts (`galaxy-gotchas.md` recommends `+=`; `triggers-workflow-gotchas.md` reports failures inside `ScriptCode`). Distinguish script contexts and let the Editor compile.
-
-### Local Variable Initialization
-- For compatibility with the source-recorded Custom Script environment, separate declaration from runtime initialization — declare at the top of the function body, assign in executable statements.
-
-### Module Compilation Order
-- Do not split a function body across files; do not define the same function twice. Arrange project script order so callees appear before callers within script blocks (GUI trigger calls link independently).
-
-### Source Caveats (from `source-caveats.md`)
-- **Galaxy operator conflict:** `galaxy-gotchas.md` recommends `+=`; `triggers-workflow-gotchas.md` reports `+=` failing in `ScriptCode` contexts and `break` having context-dependent behavior. For new hand-written Custom Script, use explicit assignment and `while`; distinguish script context, then let the Editor compile.
+Query exact native names, parameters and constants from the target definitions and cross-check actual native declarations or Editor-generated output. Unit creation, training, warp completion, morph and re-entry have distinct semantics; select the required event and verify per-unit de-duplication. Timer scans use their current iteration object, not an unrelated event response.

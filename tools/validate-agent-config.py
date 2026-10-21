@@ -2,6 +2,7 @@
 """Validate agent-config.json and its configured SC2 project paths."""
 from __future__ import annotations
 
+import argparse
 import sys
 from collections.abc import Mapping
 from pathlib import Path
@@ -20,7 +21,10 @@ REQUIRED_PATHS = (
 OPTIONAL_EXISTENCE_PATHS = {"campaign_maps_dir"}
 
 
-def main() -> int:
+def main(argv=()) -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--official-cache", type=Path)
+    args = parser.parse_args(argv)
     path = config_path(REPO_ROOT)
     if not path.is_file():
         print(f"ERROR: Missing {path}")
@@ -131,7 +135,7 @@ def main() -> int:
 
     dependency_graph = None
     if recursive and primary_path is not None and primary_path.is_dir() and "mods_dir" in resolved_paths:
-        dependency_graph = build_dependency_graph(primary_path, resolved_paths["mods_dir"])
+        dependency_graph = build_dependency_graph(primary_path, resolved_paths["mods_dir"], official_cache=args.official_cache, strict_external=True)
         failures.extend(dependency_graph["errors"])
         for edge in dependency_graph["missing"]:
             failures.append(
@@ -163,4 +167,4 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    raise SystemExit(main(None))

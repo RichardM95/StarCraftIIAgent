@@ -11,7 +11,7 @@ from pathlib import Path
 from typing import Iterable
 
 from sc2_dependencies import build_dependency_graph, resolve_dependency_root, dependency_state, IncompleteDependenciesError, RECURSION_DISABLED
-from sc2_catalog_inputs import changed_input, index_inputs, manifest_path, read_manifest
+from sc2_catalog_inputs import changed_input, index_inputs, manifest_path, read_manifest, MANIFEST_VERSION
 from sc2_paths import catalog_output_dir, find_project_mods, load_project_config, resolve_configured_path
 
 
@@ -324,12 +324,12 @@ class JsonCatalogStore(CatalogStore):
         return rows
 
 
-def stale_default_index_input(store: CatalogStore, *, verify_hashes: bool = False, allow_incomplete_dependencies: bool = False) -> Path | None:
+def stale_default_index_input(store: CatalogStore, *, verify_hashes: bool = False, allow_incomplete_dependencies: bool = False, official_cache: Path | None = None) -> Path | None:
     """Find a changed default-index input, including added or removed files."""
     if not isinstance(store, (SqliteCatalogStore, JsonCatalogStore)):
         return None
     manifest = read_manifest(store.path)
-    if manifest.get("version") != 3:
+    if manifest.get("version") != MANIFEST_VERSION:
         return manifest_path(store.path)
     selection = manifest["selection"]
     workspace = Path(selection["workspace_root"])
@@ -346,7 +346,10 @@ def stale_default_index_input(store: CatalogStore, *, verify_hashes: bool = Fals
                 raise IncompleteDependenciesError(RECURSION_DISABLED)
             print("WARNING: PARTIAL current dependency investigation: " + RECURSION_DISABLED, file=sys.stderr)
         else:
-            graph = build_dependency_graph(primary, Path(selection["mods_dir"]))
+            recorded_cache = selection.get("official_cache")
+            if official_cache and str(official_cache.resolve()) != recorded_cache:
+                return manifest_path(store.path)
+            graph = build_dependency_graph(primary, Path(selection["mods_dir"]), official_cache=recorded_cache)
             state = dependency_state(graph)
             if state["status"] == "partial":
                 if not allow_incomplete_dependencies:
@@ -393,7 +396,16 @@ def load_store(args: argparse.Namespace) -> CatalogStore:
         if not allow_partial:
             reject("Partial dependency index requires --allow-incomplete-dependencies: " + "; ".join(state["problems"]))
         print("WARNING: PARTIAL dependency index, investigation only: " + "; ".join(state["problems"]), file=sys.stderr)
-    if manifest["version"] != 3:
+    if manifest["version"] != MANIFEST_VERSION:
+        selection = manifest.get('selection')
+        if (manifest['version'] == 3 and isinstance(artifact_id, str) and artifact_id
+                and artifact_id == manifest.get('build_id') and isinstance(selection, dict)
+                and isinstance(selection.get('workspace_root'), str)
+                and (not selection.get('primary') or selection.get('mods_dir'))):
+            if not args.allow_stale:
+                reject('Catalog manifest version 3 requires rebuild; --allow-stale permits historical inspection only')
+            print('WARNING: Historical version 3 index; official cache completeness is unverified; rebuild required', file=sys.stderr)
+            return store
         if artifact_id:
             reject("Bound index is paired with a legacy manifest; rebuild required")
         if not args.allow_stale:
@@ -408,7 +420,7 @@ def load_store(args: argparse.Namespace) -> CatalogStore:
     print("Index scope: " + str(selection.get("primary") or "reference-only") + " [build_id=" + artifact_id + "]", file=sys.stderr)
     try:
         stale_input = stale_default_index_input(store, verify_hashes=getattr(args, "verify_input_hashes", False),
-                                                allow_incomplete_dependencies=allow_partial)
+                                                allow_incomplete_dependencies=allow_partial, official_cache=getattr(args, "official_cache", None))
         message = f"Catalog index is stale; changed input: {stale_input}" if stale_input is not None else None
     except IncompleteDependenciesError as exc:
         reject(str(exc) + "; use --allow-incomplete-dependencies only for partial investigation")
@@ -832,6 +844,7 @@ def command_production_chain(args: argparse.Namespace) -> None:
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--graph", default=None, help="Graph path; default: selected project catalog, or sibling of explicit --db")
+    parser.add_argument("--official-cache", type=Path, help="Cache identity must match the indexed selection; otherwise rebuild")
     parser.add_argument("--db", default=None, help="SQLite path; default: selected project catalog (explicit --graph keeps its own scope)")
     parser.add_argument("--allow-incomplete-dependencies", action="store_true", help="Explicitly permit marked partial dependency investigation; independent of --allow-stale")
     parser.add_argument("--allow-stale", action="store_true", help="Permit explicitly marked historical inspection when the default index is outdated or current project configuration cannot be verified")

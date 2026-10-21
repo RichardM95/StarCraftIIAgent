@@ -12,9 +12,10 @@
 |---|---|---|
 | **通过一个 Mod 路径初始化/选择项目** | `python tools/init-project.py "<primary.SC2Mod>"` | 推导 SC2 布局、校验递归依赖并安全写入 `agent-config.json` |
 | **提交前验证修改** | `python tools/test-suite.py` | 完整预检；工具或文档维护可加 `--scope tools` / `--scope docs`，模组专项可加 `--scope mod` |
-| **检查问题生命周期账本** | `python tools/audit-issue-lifecycle.py` | 校验活动问题的状态标签与已达到阶段所需证据字段 |
+| **检查问题生命周期账本** | `python tools/audit-issue-lifecycle.py` | 校验目标项目的问题状态与阶段证据；可传 --target 或 --ledger，二者互斥 |
 | **校验 GameData XML 与 Galaxy** | `python tools/validate-mod.py` | 使用正式 XSD 校验 GameData XML，并检查 Galaxy 变量提升、非法语法和 include 路径 |
 | **检查递归模组依赖** | `python tools/inspect-mod-dependencies.py` | 从 ComponentList 的 info 组件出发，递归解析本地 `.SC2Mod` 依赖 |
+| **诊断或同步官方 CASC 来源** | `python tools/sc2-official-cache.py probe --casc-dll "<DLL>"` | [只读探测与显式同步](../wiki/reference/official-casc-cache.md)；sync 默认预览，通过校验并加 --apply 才发布共用缓存 |
 | **查询单位、技能或数据链** | `python tools/sc2-catalog-query.py <cmd>` | 节省上下文的 catalog 查询：查找对象、解析引用并输出依赖链，无需载入大型 XML |
 | **查询精确样例对象** | `python tools/sc2-reference-query.py object Unit:Marine --component liberty` | 返回组件中的完整 XML 对象；可用 `--max-chars` 限制输出 |
 | **核对或更新组件快照** | `python tools/refresh-sc2-reference.py --mods <目录> --campaigns <目录> --cm <目录>` | 默认只核对；确认差异后加 `--apply`，保留旧版备份 |
@@ -25,7 +26,7 @@
 | **审计命令卡** | `python tools/audit-actor-and-card-integrity.py` | 检测高置信度命令卡槽位冲突和攻击按钮被替换问题 |
 | **定位项目资料和运行目录** | `python tools/project-paths.py` | 只读输出路径，不创建目录 |
 | **提取游戏测试错误与日志** | `python tools/extract-playtest-bugreport.py` | 从 SC2 `GameLogs` 中提取警告和脚本错误，生成便于分诊的 `bugreport.txt` |
-| **检查文档链接** | `python tools/check-doc-links.py` | 扫描仓库 Markdown，查找损坏的本地相对链接 |
+| **检查文档链接** | `python tools/check-doc-links.py` | 检查本地 Markdown 文件、章节锚点和工具引用；跳过生成及临时目录 |
 
 ---
 
@@ -65,13 +66,13 @@ GUI 触发器使用独立的 `sc2-trigger-query.py`：`build` 从明确指定的
   - 查找未解析引用：`python tools/sc2-catalog-query.py unresolved --contains <term>`
 - 默认索引用输入清单检查文件增删、大小与修改时间；未选择项目时仍检查参考资料，项目配置失效或源目录缺失时明确停止。查询发现过期会指出文件并停止。怀疑文件内容被替换但大小、时间都被保留时，在子命令前加 `--verify-input-hashes` 做严格校验（会多读一遍输入）。需要当前数据时运行一次 `python tools/build-sc2-catalog-graph.py --sqlite-only`；仅为查看旧快照可加 `--allow-stale`，输出会标记为历史检查，不能据此声称当前项目值已确认。SQLite 与完整图各有清单：`--sqlite-only` 不会把旧 `graph.json` 标记为已更新。
 - **`build-sc2-catalog-graph.py`**——从顶层 TXT 参考导出、非活动导出、配置的主 Mod 与递归解析的本地组件依赖构建索引。日常刷新用 `--sqlite-only`，跳过大型 JSON、GraphML 和对象摘要；需要完整图报告时不加参数。主模组定义标记为 `local_mod`，依赖定义标记为 `active_component_dependency`。构建在创建输出目录前检查活动依赖；缺失或损坏默认停止。
-- 索引输入清单版本为3，包含实际 `Type="info"` 文件与依赖完整性状态。旧版或缺少清单的索引必须重建；清单不替代当前组件证据。缺失依赖问题逐项保留，不伪造补齐结果。`project.resolve_dependencies_recursive=false`也属于受限主组件调查：构建与查询必须显式允许部分调查，并标明递归被配置关闭。
+- 索引输入清单版本为4，包含实际 `Type="info"` 文件与依赖完整性状态。旧版或缺少清单的索引必须重建；清单不替代当前组件证据。缺失依赖问题逐项保留，不伪造补齐结果。`project.resolve_dependencies_recursive=false`也属于受限主组件调查：构建与查询必须显式允许部分调查，并标明递归被配置关闭。
 - 部分调查需要显式 `--allow-incomplete-dependencies`：构建保存 `partial` 和缺失/损坏清单；每次查询再次带该参数并显示部分调查警告。它只允许读取现有数据，不能据此确认完整有效值、写回或通过依赖验收；`--allow-stale` 仅允许历史快照，不能代替部分依赖权限。inspection工具的JSON也包含依赖状态。
 - 临时组件调查示例：`python tools/inspect-mod-dependencies.py --mod-dir "<组件>" --mods-dir "<Mods>" --json`；预检对应 `python tools/test-suite.py --mod-dir "<组件>" --mods-dir "<Mods>" --include-dependencies`。非标准布局必须给出依赖根，不猜父目录。
 - 顶层 `DataEditorXML/*.txt` 在图中标记为 `reference_export`；只有递归确认的组件依赖标记为 `active_component_dependency`。参考导出中的对象不能证明运行时已加载。
 - **`sc2-reference-query.py`**——按需检索官方与合作组件原始样例及英文/中文本地化。先用 `components` 看组件列表，再用 `find` 指定 `--component`、`--area gamedata|enus|zhcn`、`--family` 和 `--limit`。输出相对路径与行号。顶层 TXT 有部分内容与样例 XML 完全重复，通常先查询 catalog 图，再针对具体实现查样例；样例不参与活动依赖判定，也不要求重建图数据库。
 - **`refresh-sc2-reference.py`**——提供三个来源类别目录后，默认逐文件核对路径、大小与 SHA-256；加 `--apply` 才更新快照，先在暂存目录验证，并保留旧版备份。工作区目标路径由工具自身位置推导；来源目录作为单次参数传入。
-- **`check-doc-links.py`**——校验本地 Markdown 链接目标，并排除生成目录和发布目录。
+- **`check-doc-links.py`**——校验本地 Markdown 文件、章节/HTML 锚点和工具引用，支持中文及重复标题；链接检查跳过代码围栏，围栏中的工具命令仍检查。单次遍历剪枝生成、备份、临时及发布目录，不检查网络链接。
 
 > Catalog 数据库是导航快照，可能包含非活动来源。数据库中存在 provider 不等于运行时已经启用；重要结论仍需核对当前 XML、依赖声明与来源路径。
 
@@ -90,7 +91,7 @@ GUI 触发器使用独立的 `sc2-trigger-query.py`：`build` 从明确指定的
 
 ## 索引与部署发布
 
-索引SQLite与JSON各自嵌入build_id，并与各自manifest绑定。所有路径的索引都按记录的工作区、主组件、依赖根和递归范围检查输入增删、信息文件及可选哈希；显式主组件构建不要求把它登记成活动项目。查询显示实际范围。build_id不一致、缺失或v3身份损坏不能由`--allow-stale`放行。旧版索引仅能显式历史检查，原部分状态仍独立要求`--allow-incomplete-dependencies`。
+索引SQLite与JSON各自嵌入build_id，并与各自manifest绑定。所有路径的索引都按记录的工作区、主组件、依赖根和递归范围检查输入增删、信息文件及可选哈希；显式主组件构建不要求把它登记成活动项目。查询显示实际范围。build_id不一致、缺失或当前版本身份损坏不能由`--allow-stale`放行。旧版索引仅能显式历史检查，原部分状态仍独立要求`--allow-incomplete-dependencies`。
 
 构建完整输出暂存在同级目录，核对输入未改变后切换。`--sqlite-only`保留旧JSON及报告，全文构建保留非本次工具输出；失败保持旧索引与manifest配对。
 

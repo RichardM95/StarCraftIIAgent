@@ -185,12 +185,12 @@ def registered_files(component: Path) -> tuple[list[Path], list[str]]:
 
 
 class Target:
-    def __init__(self, path: Path, mods: Path, campaigns: Path | None):
+    def __init__(self, path: Path, mods: Path, campaigns: Path | None, *, official_cache: Path | None = None):
         self.path = path.resolve()
         if not self.path.is_dir() or self.path.suffix.casefold() not in {".sc2mod", ".sc2map", ".sc2campaign"}:
             raise ValueError(f"Not a Components target: {path}")
         self.graph = build_dependency_graph(self.path, mods, campaigns_dir=campaigns,
-                                            allow_unpacked=True, strict_external=True)
+                                            allow_unpacked=True, strict_external=True, official_cache=official_cache)
         self.problems = dependency_problems(self.graph)
         self.documents = []
         self.providers = defaultdict(list)
@@ -230,6 +230,9 @@ class Target:
                              "Base.SC2Data/TriggerLibs/LibraryList.xml",
                              "enUS.SC2Data/LocalizedData/TriggerStrings.txt", "zhCN.SC2Data/LocalizedData/TriggerStrings.txt"):
                 self.input_candidates.add(child_path(component, relative))
+        official = self.graph.get("official_cache")
+        if official:
+            self.input_candidates.update((Path(official["manifest"]), Path(official["identity"]["install"]) / ".build.info"))
         self.inputs = inventory(sorted(p for p in self.input_candidates if p.is_file()))
         for d in self.documents:
             if self.inputs[d.path.as_posix()]["sha256"] != d.sha256:
@@ -253,6 +256,8 @@ class Target:
                 "problems": self.problems,
                 "libraries": [{"library": lib, "source": str(d.path), "sha256": d.sha256,
                                "source_class": "target_local" if d.component == self.path else "active_dependency",
+                               "origin": self.graph["nodes"].get(str(d.component).casefold(), {}).get("origin", "local"),
+                               "casc": self.graph["nodes"].get(str(d.component).casefold(), {}).get("casc"),
                                "dependency_path": self.routes.get(str(d.component).casefold(), [])}
                               for d in self.documents for lib in sorted(d.libraries)]}
 

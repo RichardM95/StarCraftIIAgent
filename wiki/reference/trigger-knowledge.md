@@ -47,6 +47,8 @@ python tools/sc2-trigger-query.py --target "<地图.SC2Map>" --mods-dir "<目标
 
 目前工具不会从文件夹名称推断官方依赖关系，也不会自动注入 Core。明确声明且能解析的 Core 提供 Ntve；否则含 Ntve 的目标引用不能通过确认。未解析的网络依赖、缺失元数据/库文件和有歧义的定义都使目标状态成为 `unconfirmed`。
 
+官方文件可由 [CASC 共用缓存](official-casc-cache.md) 提供；查询支持 `--official-cache`，默认仅定位目标安装/构建的缓存。组件元数据与已核对引擎表是不同来源；当前引擎表尚不能证明 Core/bootstrap，因此仍阻止发布完整缓存。GUI、Catalog 与预检共用解析器，不从参考库补冒活动来源。
+
 ## GUI 结构与迁移
 
 函数定义中的 Parameter 顺序用于展示签名。调用中的 Param 通过 `ParameterDef` 绑定，XML sibling 顺序可以不同。已核对官方 `sc2tutorial` 的 `Terran MakeBarracks CreateObjective`：参数引用排列与 Ntve ObjectiveCreate 的签名顺序不同，但归属对应。检查参数归属、覆盖与重复，不能仅比较顺序。

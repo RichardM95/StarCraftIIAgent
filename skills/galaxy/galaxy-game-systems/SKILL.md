@@ -6,14 +6,14 @@ description: Bank save/load, spawner and wave systems, jungle/camp respawn, reso
 ## Loading Boundary
 
 - **This sub-skill owns:** bank save/load, spawner and wave systems, jungle/camp respawn, resource rewards, hero revive/death, tech tree upgrades, and game attribute lobby options
-- **Parent root skill (`sc2-galaxy-scripting`) owns:** project conventions, schema/syntax rules, source-of-truth, naming prefixes
+- **Parent root skill (`sc2-galaxy-scripting`) owns:** project source boundaries, compatibility policy and identity
 - **Sibling sub-skills own:** `galaxy-ai-and-techtree` (AI wave behavior), `galaxy-ui-and-dialogs` (UI), `galaxy-debug-data-catalog` (Data Table cross-trigger state), `galaxy-players-and-alliances` (player resources)
 
 # Galaxy Scripting – Game Systems
 
 ## Prerequisite
 
-Load [`sc2-galaxy-scripting`](../../sc2-galaxy-scripting/SKILL.md) first for project-wide Galaxy syntax constraints (variable hoisting, no `++`/`--`, `while` not `for`, include paths without extensions), source-of-truth rules, modular script boundaries, and naming conventions (e.g. `libMy_` function prefix, `libMy_g_` global prefix). This sub-skill owns deep API reference only; project conventions live in the router skill.
+Follow [sc2-galaxy-scripting](../../sc2-galaxy-scripting/SKILL.md) for source boundaries and compatibility policy. This page supplies subsystem/language reference; adapt community examples to the target rather than treating them as project entry instructions.
 
 ## Key References
 

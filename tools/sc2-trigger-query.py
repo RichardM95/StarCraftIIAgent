@@ -25,6 +25,7 @@ def parser():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--db", type=Path, help="SQLite index; default follows project/reference runtime paths")
     p.add_argument("--target", type=Path, help="Explicit Components map/mod/campaign; defaults to configured editing source")
+    p.add_argument("--official-cache", type=Path, help="Read-only build-bound official cache")
     p.add_argument("--mods-dir", type=Path, help="Dependency Mods root")
     p.add_argument("--campaigns-dir", type=Path, help="Dependency Campaigns root")
     p.add_argument("--reference", action="store_true", help="Explicit reference research, never certifies target availability")
@@ -79,7 +80,7 @@ def target_for(args, config):
     if (campaigns is None and use_config and install is not None
             and configured_mods == mods.resolve()):
         campaigns = install / "Campaigns"
-    target = Target(path, mods, campaigns)
+    target = Target(path, mods, campaigns, official_cache=getattr(args, "official_cache", None))
     if path in configured_sources and config.get("project", {}).get("resolve_dependencies_recursive") is False:
         target.problems.append(RECURSION_DISABLED)
     return target
