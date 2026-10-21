@@ -55,6 +55,10 @@ python tools/sc2-trigger-query.py --target "<地图.SC2Map>" --mods-dir "<目标
 
 移植本地片段前，为声明和引用重新分配 ID，并同步 TriggerStrings 与 GameStrings。`tools/sc2_triggers.py` 的纯函数 `remap_local_ids(raw, strings, occupied)` 返回新 XML 和新字符串映射，接受地图本地片段；`occupied` 应包含目标全部已有元素及字符串锚点 ID。导入模组 Library 时还需显式设置归属，不能直接使用地图本地引用。
 
+声明了 Variable 元素还不够：全局变量须通过 Root 或其可达 Category 的 Item 登记；局部变量和结构体字段由各自 FunctionDef、Trigger 或 Structure 的 Variable 引用声明。变量读取引用不能代替声明。多个变量的初始值 Param、多个动作的 FunctionCall/Param 实例分别分配 ID；FunctionDef、ParamDef、Preset 和 Variable 的读取可以复用。参见[归档证据 S1](../../docs/agents/retrospective.md)。
+
+现有 `check` 对目标自身文档附加以上结构检查，独立于缺失的外部库定义；不会因此豁免依赖错误。没有 Root 的参考片段不推断全局登记；ParamDef 默认模板不当作执行实例所有权；不会自动删除或复制源节点。旧流程清理仍需核对孤立调用与参数，保留受调用图引用的节点。
+
 ## 验证范围
 
 定义查询先解析目标已加载的根定义，再检查活动定义的间接引用。参考定义与活动来源的文件指纹不同会报告来源差异，即使 Library/Type/Id 相同也不直接确认兼容。相同指纹的组件副本可匹配，但仍需目标实际加载。只有案例迁移允许精选 `local_graph` 中、已核查的来源地图本地节点；未核查的节点或外部库都必须由目标解析。兼容性输出前重新核对目标输入。

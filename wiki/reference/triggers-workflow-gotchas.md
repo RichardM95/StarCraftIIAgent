@@ -36,11 +36,11 @@ Validated workflow and schema pitfalls for external Trigger XML edits. Read this
    including local variables and ParamDefs inside FunctionDefs. Missing
    entries cause the editor to invent a garbage hash for the Galaxy
    symbol name. Easy to miss for inner elements.
-9. **`TriggerAddEventUnitCreated` is unreliable for "any unit spawn"** —
-   fires inconsistently across train / spawn / warp-in. Use
-   `TriggerAddEventUnitRegion` (Ntve `00000041`) with region = Entire Map
-   and default Enter state instead — catches all unit appearances
-   uniformly.
+9. **Unit appearance events have different semantics.** Test creation,
+   training, warp completion, morph, revive and re-entry for the actual
+   requirement. An Entire Map enter event is a possible fallback, not
+   proof of exactly-once creation. Check per-unit existing state before
+   granting unique effects; see [runtime diagnostics](../implementation/runtime-diagnostics.md).
 10. **Don't filter "is this an enemy" by player ID range** like `2..16`.
     Maps mix allies and enemies in that range. Use `PlayerIsEnemy`
     (Ntve `CA3AB9A9`, signature `(source, target, relation)` with

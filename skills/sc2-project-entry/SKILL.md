@@ -13,7 +13,7 @@ When the user supplies a primary Components `.SC2Mod` folder path and asks to in
 
 ## Project Rules
 
-`AGENTS.md` owns the current mod identity, editing scope, Galaxy/XML constraints, and key paths. Read `agent-config.json` for machine-specific paths. Use the relevant specialist skill for detailed implementation rules; do not maintain a second copy here.
+`AGENTS.md` owns editing scope and Galaxy/XML constraints. Read `agent-config.json` for the selected project and paths, then verify its identity from the actual source. Use the relevant specialist skill for detailed implementation rules; do not maintain a second copy here.
 
 ## Task Routing
 

@@ -5,3 +5,5 @@
 Catalog 事实先用 tools/sc2-catalog-query.py 查询当前项目与活动依赖，再核对原始 XML。需要官方或合作先例时使用 tools/sc2-reference-query.py 限定组件、类型、语言和数量。参考样例不证明当前有效值。同一任务复用未变化的证据。
 
 项目设计、实现事实分别进入项目 docs/design/ 与 docs/implementation/。临时输出按需保存 runtime/tmp/，测试与日志报告使用 runtime/reports/；不要为一次查询创建持久文档。
+
+用户要求从归档聊天吸收经验时，按[经验来源与取舍](retrospective.md)核对后续更正、当前源码和实测证据，再修订已有主题或检查器。历史建议、候选修正及未复测的性能判断保留其证据边界。

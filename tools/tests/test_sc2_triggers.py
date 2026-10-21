@@ -12,7 +12,7 @@ from unittest.mock import patch
 TOOLS = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(TOOLS))
 from sc2_dependencies import build_dependency_graph, dependency_problems
-from sc2_triggers import Document, Index, Target, build_index, check, describe, remap_local_ids, references, walk
+from sc2_triggers import Document, Index, Target, build_index, check, describe, editable_structure_errors, remap_local_ids, references, walk
 import xml.etree.ElementTree as ET
 
 spec = importlib.util.spec_from_file_location("trigger_query", TOOLS / "sc2-trigger-query.py")
@@ -49,6 +49,48 @@ class TriggerTests(unittest.TestCase):
 
     def tearDown(self):
         self.tmp.cleanup()
+
+    def test_shared_variable_initializers_fail_target_check(self):
+        body = '<Element Type="Variable" Id="00000001"><Value Type="Param" Id="00000003"/></Element>'
+        body += '<Element Type="Variable" Id="00000002"><Value Type="Param" Id="00000003"/></Element>'
+        body += '<Element Type="Param" Id="00000003"><Value>0</Value><ValueType Type="int"/></Element>'
+        p = component(self.root / 'Map.SC2Map', body=body)
+        self.assertIn('shared GUI node', str(check(Target(p, self.mods, self.campaigns))['errors']))
+        (p / 'Triggers').write_text((p / 'Triggers').read_text().replace(
+            '<Element Type="Variable" Id="00000002"><Value Type="Param" Id="00000003"/>',
+            '<Element Type="Variable" Id="00000002"><Value Type="Param" Id="00000004"/>').replace(
+            '</TriggerData>', '<Element Type="Param" Id="00000004"><Value>0</Value><ValueType Type="int"/></Element></TriggerData>'))
+        self.assertEqual(check(Target(p, self.mods, self.campaigns))['status'], 'static validation passed')
+
+    def test_shared_call_instances_but_reusable_definitions(self):
+        body = definition() + call('', extra='<Parameter Type="Param" Id="A0000002"/>')
+        body += '<Element Type="Param" Id="A0000002"><FunctionCall Type="FunctionCall" Id="A0000003"/></Element>'
+        body += '<Element Type="Param" Id="A0000004"><FunctionCall Type="FunctionCall" Id="A0000003"/></Element>'
+        body += '<Element Type="FunctionCall" Id="A0000003"><FunctionDef Type="FunctionDef" Id="00000001"/></Element>'
+        p = component(self.root / 'Map.SC2Map', body=body)
+        self.assertIn('shared GUI node', str(editable_structure_errors(Document(p / 'Triggers'))))
+        raw = (p / 'Triggers').read_bytes().replace(
+            b'<Element Type="Param" Id="A0000004"><FunctionCall Type="FunctionCall" Id="A0000003"/></Element>', b'')
+        self.assertEqual(editable_structure_errors(Document(p / 'Triggers', raw=raw)), [])
+
+    def test_global_registration_local_scope_and_category_cycles(self):
+        body = '<Root><Item Type="Category" Id="00000001"/></Root>'
+        body += '<Element Type="Category" Id="00000001"><Item Type="Category" Id="00000001"/><Item Type="Variable" Id="00000002"/></Element>'
+        body += '<Element Type="Variable" Id="00000002"/><Element Type="Variable" Id="00000003"/>'
+        body += '<Element Type="Variable" Id="00000004"/><Element Type="FunctionDef" Id="00000005"><Variable Type="Variable" Id="00000004"/></Element>'
+        body += '<Element Type="Variable" Id="00000006"/><Element Type="Structure" Id="00000007"><Variable Type="Variable" Id="00000006"/></Element>'
+        p = component(self.mods / 'Main.SC2Mod', body=body, library='Main')
+        result = editable_structure_errors(Document(p / 'Triggers'))
+        self.assertEqual(len(result), 1)
+        self.assertIn('00000003', result[0])
+        self.assertIn('unregistered global variable', str(check(Target(p, self.mods, self.campaigns))['errors']))
+
+    def test_definition_defaults_can_share_templates(self):
+        body = '<Element Type="Param" Id="00000001"><Value>0</Value></Element>'
+        for ident in ('00000002', '00000003'):
+            body += f'<Element Type="ParamDef" Id="{ident}"><Default Type="Param" Id="00000001"/></Element>'
+        p = component(self.root / 'Map.SC2Map', body=body)
+        self.assertEqual(editable_structure_errors(Document(p / 'Triggers')), [])
 
     def test_unloaded_void_rejected_and_transitive_campaign_loaded(self):
         liberty = component(self.mods / "Liberty.SC2Mod", body=definition(), library="Lbty")

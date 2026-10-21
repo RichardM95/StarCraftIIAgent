@@ -1,6 +1,6 @@
 ---
 name: sc2-catalog-xml
-description: StarCraft II GameData XML authoring for the AeonOfIhanrii campaign. Use when creating or modifying units, abilities, actors, behaviors, effects, weapons, upgrades, requirements, validators, or footprints. Covers schema rules, parent inheritance, effective-value evidence, localization, and editor round-trip safety.
+description: StarCraft II GameData XML authoring for the selected project. Use when creating or modifying units, abilities, actors, behaviors, effects, weapons, upgrades, requirements, validators, or footprints. Covers schema rules, parent inheritance, effective-value evidence, localization, and editor round-trip safety.
 ---
 
 # SC2 Catalog XML Authoring

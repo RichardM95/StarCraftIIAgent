@@ -1,6 +1,6 @@
 ---
 name: sc2-localization
-description: StarCraft II localization files (GameStrings.txt, ObjectStrings.txt, TriggerStrings.txt) for the AeonOfIhanrii campaign. Use when adding or fixing player-facing text, Data Editor display names, trigger display names, or string anchors. Covers file formats, key conventions, XML anchor rules, and automated restoration via audit-gamestrings-anchors.py.
+description: StarCraft II localization files (GameStrings.txt, ObjectStrings.txt, TriggerStrings.txt) for the selected project. Use when adding or fixing player-facing text, Data Editor display names, trigger display names, or string anchors. Covers file formats, key conventions, XML anchor rules, and automated restoration via audit-gamestrings-anchors.py.
 ---
 
 # SC2 Localization & String Anchors

@@ -1,5 +1,9 @@
 # Production and Command-Card XML Patterns
 
+## Dependency production-command migrations
+
+When an active dependency changes a production ability, command index or unit ID, query the old and new effective chains before editing overrides. Audit producer AbilArray/CardLayouts, train/build InfoArray, requirements, ArmyUnit/ArmyCategory AbilCommandArray, Upgrade references, Actor events and localization together. A correct command card alone does not prove campaign unlock/disable logic uses the new command. Compare inherited Actor event arrays before adding replacements: a dependency may already supply the new event. Missing a new unlock row is a design question, not automatic permission to add it. Evidence: [archive S4](../../../docs/agents/retrospective.md).
+
 ## Unit/Structure Cost Modification
 
 `Operation="Multiply"` does **NOT** work for `CostResource` fields. Use `Add`/`Subtract`/`Set`:

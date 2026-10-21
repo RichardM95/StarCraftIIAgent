@@ -375,13 +375,54 @@ def walk(start: list[tuple[Document, tuple]], resolve, *, validate: bool = True,
             "truncated": len(nodes) < len(recorded) or len(resources) < resource_count}
 
 
+def editable_structure_errors(d: Document) -> list[str]:
+    """Check mutable GUI nodes and variable declarations without library metadata."""
+    errors = []
+    owners = defaultdict(list)
+    locals_ = set()
+    for key, element in d.elements.items():
+        if key[1] in {"FunctionDef", "Trigger", "Structure"}:
+            locals_.update(ref_key(r, key) for r in element.findall("Variable"))
+        # ParamDef defaults are reusable definition templates, not call instances.
+        if key[1] == "ParamDef":
+            continue
+        for r in references(element, key):
+            if r in d.elements and r[1] in {"FunctionCall", "Param"}:
+                owners[r].append(key)
+    for key, parents in owners.items():
+        if len(parents) > 1:
+            errors.append(f"{d.path}: shared GUI node {key}: {parents}")
+
+    containers = [(d.root, d.standard)] + [(e, e.get("Id", "")) for e in d.root.findall("Library")]
+    for container, library in containers:
+        root = container.find("Root")
+        if root is None:
+            continue  # Reference fragments need not contain an Editor tree.
+        registered = set()
+        pending = [ref_key(r, (library, "", "")) for r in root.findall("Item")]
+        while pending:
+            key = pending.pop()
+            if key in registered:
+                continue
+            registered.add(key)
+            element = d.elements.get(key)
+            if element is not None and key[1] == "Category":
+                pending.extend(ref_key(r, key) for r in element.findall("Item"))
+        for key in d.elements:
+            if key[0] == library and key[1] == "Variable" and key not in locals_ and key not in registered:
+                errors.append(f"{d.path}: unregistered global variable {key}; add a Root/Category Item")
+    return errors
+
+
 def check(target: Target) -> dict:
     target.refresh()
     starts = [(d, k) for d in target.documents if d.component == target.path
               for k in d.elements if k[1] in {"Trigger", "FunctionDef", "Variable", "Preset", "FunctionCall"}]
     result = walk(starts, target.resolve)
     target.refresh()
-    result["errors"] = target.problems + result["errors"]
+    structure_errors = [error for d in target.documents if d.component == target.path
+                        for error in editable_structure_errors(d)]
+    result["errors"] = target.problems + structure_errors + result["errors"]
     result["status"] = "failed" if result["errors"] else ("not_applicable" if not starts else "static validation passed")
     if result["status"] == "not_applicable":
         result["note"] = "No checkable GUI definitions in the target; dependency registration and metadata confirmed"

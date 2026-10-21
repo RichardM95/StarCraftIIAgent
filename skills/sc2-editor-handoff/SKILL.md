@@ -1,6 +1,6 @@
 ---
 name: sc2-editor-handoff
-description: StarCraft II Editor handoff workflow and issue lifecycle for the AeonOfIhanrii campaign. Use after code/XML changes to verify Editor acceptance, save as Components, run playtests, and track defects through the 6-stage lifecycle. Covers what the agent can and cannot do in the SC2 Editor.
+description: StarCraft II Editor handoff workflow and issue lifecycle for the selected project. Use after code/XML changes to verify Editor acceptance, save as Components, run playtests, and track defects through the 6-stage lifecycle. Covers what the agent can and cannot do in the SC2 Editor.
 ---
 
 # SC2 Editor Handoff & Issue Lifecycle
@@ -20,7 +20,7 @@ reported → root cause confirmed → source fixed → static validation passed 
 1. **`reported`**: Recorded in `<project-data>/docs/issues.md` with: map/mission, player/faction config, observed vs expected behavior, exact Editor warning or in-game error (from `<project-data>/runtime/reports/bugreport.txt`).
 2. **`root cause confirmed`**: Root catalog ID, parent inheritance flaw, or Galaxy logic error identified.
 3. **`source fixed`**: Working-tree source files updated.
-4. **`static validation passed`**: `python tools/test-suite.py` runs with zero errors.
+4. **`static validation passed`**: the required checks for the affected target/scope pass with zero errors; partial checks do not certify a blocked full check.
 5. **`Editor accepted`**: SC2 Editor opens modified mod/map cleanly — no XML schema warnings, missing dependency errors, or trigger compile failures.
 6. **`packaged runtime passed`**: Change tested and verified in-game.
 
@@ -36,6 +36,8 @@ reported → root cause confirmed → source fixed → static validation passed 
 These steps must be performed by the user. The agent prepares everything and provides a precise handoff checklist.
 
 ## Editor Handoff Checklists
+
+Use [source-to-runtime verification](../../wiki/guides/editor-handoff.md#源码到运行时的核对) to check regenerated actions, variable declarations and registration before retesting. Reuse an existing document-closed confirmation while it remains valid; provide only the affected handoff steps.
 
 ### After Galaxy Script Changes
 

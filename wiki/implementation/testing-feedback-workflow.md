@@ -24,7 +24,7 @@ graph LR
    - Exact SC2 Editor warning text or in-game error log (from `<project-data>/runtime/reports/bugreport.txt`)
 2. **`root cause confirmed`**: The root catalog ID, parent inheritance flaw, or Galaxy script logic error is identified.
 3. **`source fixed`**: Working-tree source files (`Base.SC2Data/GameData/*.xml`, `Base.SC2Data/Scripts/*.galaxy`, etc.) are updated.
-4. **`static validation passed`**: `python tools/test-suite.py` executes with zero errors.
+4. **`static validation passed`**: the required checks for the affected target/scope execute with zero errors. Report that scope; a passing subset does not certify a blocked full check.
 5. **`Editor accepted`**: The SC2 Editor opens the modified mod/map cleanly without XML schema warnings, missing dependency errors, or trigger compile failures.
 6. **`packaged runtime passed`**: The change is tested and verified in-game.
 
@@ -41,6 +41,8 @@ Every handoff and completion report must name the highest gate actually reached.
 ---
 
 ## Issue Intake Rules
+
+For runtime symptoms use [runtime diagnostics](runtime-diagnostics.md). A candidate patch and its static checks do not establish causality; keep an unconfirmed original symptom at `reported`, and report patch/check evidence separately. When an earlier hypothesis fails, remove its unsupported workaround before adding a new one.
 
 - **Statistic Changes:** Before editing XML statistics, record the local catalog entry, parent, inherited value, and intended override in the ledger.
 - **UI & Text Fixes:** Identify the exact UI surface (world hover, selection card, command card button, tooltip, or editor text) and its effective localization anchor before modifying `GameStrings.txt` or `ObjectStrings.txt`.

@@ -43,7 +43,7 @@
 
 ## 项目状态
 
-当前尚未选择项目，工作区没有活动的 `agent-config.json`。用户提供主 Components `.SC2Mod` 路径后，运行 `python tools/init-project.py "<路径>"`，再从配置和 Triggers 核对项目身份、源码入口和依赖。Bank、Library ID、函数前缀均以新项目证据为准。
+当前选择以本机 `agent-config.json` 为准；缺失时才视为未选择项目。用户提供主 Components `.SC2Mod` 路径后，运行 `python tools/init-project.py "<路径>"`，再从配置和 Triggers 核对项目身份、源码入口和依赖。Bank、Library ID、函数前缀均以项目证据为准。
 
 ## 关键文件位置
 
@@ -85,7 +85,7 @@
 生成或改造触发器时，先用触发器编辑器可编辑的事件、条件、动作和 GUI 自定义定义实现。仅当 GUI 无法合理表达局部逻辑时，才在该触发器中嵌入最小必要的自定义代码；不要因此默认新建独立 Galaxy 脚本。只有用户明确要求使用 Galaxy，或任务本身是维护既有 Galaxy 源码时，才走独立脚本实现。无论采用哪种方式，均不得手改编辑器生成的 `MapScript.galaxy` 或 `Lib*.galaxy`。
 
 ### 地图调用必须使用 GUI action，而非 Custom Script
-SC2 链接器会在地图未调用 GUI action 时静默丢弃模组库。在模组中定义这些 action。
+在模组中定义导出的 GUI action 并从地图调用，按此保守接线实践交接；编译输出仍需核对。链接器行为的已知证据范围见 [触发器查询](wiki/reference/trigger-knowledge.md#编辑器行为的证据范围)。
 
 ### Catalog 和 XML 编写
 - 写 XML 前运行 `python tools/sc2-catalog-query.py`；需要字段形状或案例时精确查询 `DataEditorXML/*.txt` 或 `python tools/sc2-reference-query.py`。字段名和 ID 区分大小写。组件样例不代表活动依赖。

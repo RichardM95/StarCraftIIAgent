@@ -1,140 +1,35 @@
 ---
 name: sc2-bank-system
-description: StarCraft II bank (.SC2Bank) campaign persistence for the AeonOfIhanrii campaign. Use when designing or editing campaign progress saves, player choices, unlocks, difficulty tracking, or mission completion state. Covers schema versioning, section design, BankLoad/Save workflow, and native Galaxy bank function signatures.
+description: StarCraft II campaign Bank persistence, progress migration and save/transition diagnosis. Use when editing mission saves, unlocks, player choices or Bank loading, saving and schema compatibility.
 ---
 
-# SC2 Bank System & Campaign Persistence
+# SC2 Bank System
 
-## When to Use
+## Project contract
 
-Load this skill when the task involves campaign persistence: writing or editing bank initialization, mission victory saves, unlock state, difficulty tracking, or any code that calls `BankLoad` / `BankSave` / `BankValueGet*` / `BankValueSet*`. Also load when designing the section/key schema for a new campaign or migrating an existing bank across releases.
+Read the target Triggers and current [project data](../../docs/agents/project-data.md) for Bank name, player, sections, keys, exported GUI actions and backup/restore order. Preserve existing saves. New keys or schema versions belong to the selected project's design, not to a universal section template.
 
-## Persistence Design Principles
+Prefer editable GUI actions for new persistence work. For existing Galaxy maintenance or explicit Galaxy requests, follow `sc2-galaxy-scripting` and verify exact native signatures. Generated scripts are read-only evidence.
 
-1. **Schema versioning:** Always include a `SchemaVersion` integer in the `Meta` section. If the schema evolves between releases, migration triggers can safely translate old saves without corrupting player progress.
-2. **Deterministic sections:** Group data logically into dedicated sections:
-   - `<Section name="Meta">`: `SchemaVersion`, `CampaignCompleted`, `Difficulty`, `LastPlayedMission`.
-   - `<Section name="Missions">`: Per-mission completion state, bonus objectives, high scores.
-   - `<Section name="Choices">`: Faction, commander, technology, or army loadout selections.
-   - `<Section name="Upgrades">`: Global currency, tech unlocks, purchased research tiers.
-3. **Safety & validation:** Verify key existence before reading. SC2 bank read functions return default empty values (`""` or `0`) if a key is absent — always guard with `BankKeyExists` before interpreting a value as meaningful.
-4. **Preload & save windows:** Preload banks during map initialization (`BankPreLoad` / `BankLoad`). Save banks at milestone triggers or victory cinematics (`BankSave`).
+## Read, apply and save
 
-## Bank File Location
+1. Confirm the destination map's preload declaration and actual library initialization; a mod dependency alone does not establish either.
+2. Distinguish opening/loading a Bank, reading keys, and applying those values to runtime variables, unlocks and technology. Check key existence/type before interpreting a default zero or empty value.
+3. Save after milestone writes, before the relevant unload/transition. A later backup or reload must not overwrite freshly earned progress. Match the project's synchronous/asynchronous action semantics.
+4. During migration, preserve already earned unlocks and unrelated keys; backfill only absent/new fields. Reset or removal requires the intended project behavior.
+5. Validate fresh Bank, existing Bank, ordinary save/load, victory transition and cross-map initialization separately. Record which scenario actually passed.
 
-- **Windows:** `Documents\StarCraft II\Banks\<BankName>.SC2Bank` (or `OneDrive\Documents\StarCraft II\Banks\` on OneDrive-redirected profiles).
-- **Mac:** `~/Library/Application Support/Blizzard/StarCraft II/Banks/<BankName>.SC2Bank`.
+## Progress appears lost
 
-Banks are local XML files stored per player — not synchronized across the network.
+Use the [Bank diagnostic](../../wiki/implementation/bank-system.md). Compare the disk file, loaded handle/player, in-memory variables and destination map application chain before changing data. An ordinary save can restore existing runtime state while a transition starts another map that must read/apply its own state.
 
-## Mod Identity (AeonOfIhanrii)
+## API lookup
 
-- Bank name constant: `"AeonOfIhanriiBank"`
-- Galaxy function prefix: `libEpi_` (e.g. `libEpi_Bank_Init`, `libEpi_Bank_SaveMissionVictory`)
-- Always preload the bank during early map initialization via the mod's GUI action, not via raw Custom Script in the map.
+The [B function index](../../wiki/reference/triggers-native/b.md) records GUI definitions, IDs and parameters. GUI action names are not automatically callable Galaxy signatures: query the target with `tools/sc2-trigger-query.py` and inspect Editor-generated code or actual native declarations for script use. Do not copy old `BankValueGetInt` / `BankValueSetInt` or single-argument `BankPreLoad` examples; they were removed because their signatures were not supported by the referenced definitions.
 
-## Galaxy Bank Architecture Example
+## References
 
-```galaxy
-const string c_bankName = "MyCampaignBank";
-const int c_currentBankSchema = 2;
-
-bank gBank;
-
-// Initialize a fresh bank with current schema defaults.
-void libMy_Bank_InitDefaults(bank lp_bank) {
-    BankValueSetInt(lp_bank, "Meta", "SchemaVersion", c_currentBankSchema);
-    BankValueSetInt(lp_bank, "Meta", "CampaignCompleted", 0);
-    BankValueSetInt(lp_bank, "Meta", "Difficulty", 1);
-    BankValueSetString(lp_bank, "Meta", "LastPlayedMission", "");
-}
-
-// v1 -> v2 migration: introduced Difficulty and LastPlayedMission keys.
-// Backfill them with safe defaults for saves made under the v1 schema.
-void libMy_Bank_MigrateV1ToV2(bank lp_bank) {
-    BankValueSetInt(lp_bank, "Meta", "Difficulty", 1);
-    BankValueSetString(lp_bank, "Meta", "LastPlayedMission", "");
-}
-
-// Placeholder for the next schema gap. Uncomment and extend when
-// c_currentBankSchema increments past 2 (rename keys, normalize enums,
-// add new fields, etc.).
-// void libMy_Bank_MigrateV2ToV3(bank lp_bank) {
-//     // Example: shift Difficulty enum from 1..4 to 0..3, then add new key.
-// }
-
-void libMy_Bank_Init(int lp_player) {
-    int lv_existingSchema;
-
-    BankPreLoad(c_bankName);
-    gBank = BankLoad(c_bankName, lp_player);
-
-    if (!BankSectionExists(gBank, "Meta")) {
-        libMy_Bank_InitDefaults(gBank);
-        BankSave(gBank);
-        return;
-    }
-
-    lv_existingSchema = BankValueGetInt(gBank, "Meta", "SchemaVersion");
-
-    // Apply migration chain step by step. Each branch translates one schema gap;
-    // they run sequentially so a v1 save reaches v2 before v3 logic (if any) runs.
-    if (lv_existingSchema < 2) {
-        libMy_Bank_MigrateV1ToV2(gBank);
-    }
-    // if (lv_existingSchema < 3) { libMy_Bank_MigrateV2ToV3(gBank); }
-
-    if (lv_existingSchema < c_currentBankSchema) {
-        BankValueSetInt(gBank, "Meta", "SchemaVersion", c_currentBankSchema);
-        BankSave(gBank);
-    }
-}
-
-void libMy_Bank_SaveMissionVictory(int lp_player, string lp_missionId) {
-    BankValueSetInt(gBank, "Missions", lp_missionId + "_Completed", 1);
-    BankSave(gBank);
-}
-```
-
-## Core Native Functions
-
-| Function | Purpose |
-|---|---|
-| `BankLoad(name, player)` | Open or create a bank file |
-| `BankSave(bank)` | Write in-memory values to disk (writes are NOT auto-persisted) |
-| `BankSectionExists(bank, section)` | Check whether a section exists |
-| `BankKeyExists(bank, section, key)` | Check whether a key exists |
-| `BankValueSetFromInt/Fixed/String/Text(...)` | Store a typed value |
-| `BankValueGetAsInt/Fixed/String/Text(...)` | Read a typed value (returns default empty/zero if key absent) |
-| `BankSectionRemove(bank, section)` | Delete a whole section |
-| `BankKeyRemove(bank, section, key)` | Delete a single key |
-| `BankSectionCount/Name(...)` | Iterate sections |
-| `BankKeyCount/Name(...)` | Iterate keys inside a section |
-
-## Hard Rules
-
-- **`BankSave` is required** — writes are not persisted automatically. Forgetting `BankSave` after a `Set*` call silently drops the change on map unload.
-- **Missing keys read as zero or empty** — never interpret `BankValueGetAsInt(...) == 0` as "player completed nothing" without first checking `BankKeyExists`. A missing key and a stored `0` are indistinguishable on read.
-- **Prefer GUI bank triggers for new work.** Direct natives remain useful for reading legacy maps and understanding Blizzard examples. Embed a small Custom Script action only when the GUI cannot reasonably express that operation. Use `Epi_Main.galaxy` or `Base.SC2Data/Scripts/` for explicitly requested Galaxy work or maintenance of existing script logic; deploy only in `workspace_copy` mode, then save in the Editor to regenerate compiled libraries.
-- **Never trust bank state across clients** — banks are local per player. Cross-player comparisons must exchange data via trigger sync or game state, not bank reads.
-
-## Reference
-
-- `wiki/implementation/bank-system.md` — full persistence architecture
-- `wiki/reference/galaxy-bank.md` — native function signatures
-- `wiki/implementation/galaxy-gotchas.md` — Galaxy syntax rules that apply to bank code
-- `wiki/implementation/per-map-setup.md` — bank preload checklist per map
-
-## Chinese Task Knowledge (Merged)
-
-Distilled from `references/galaxy-and-triggers.md` (persistence portion) and `references/source-caveats.md`.
-
-### Bank API Naming Caveat
-- `wiki/implementation/bank-system.md`'s example uses `BankValueGetInt` / `BankValueSetInt` and a single-argument `BankPreLoad`. The native table in `wiki/reference/galaxy-bank.md` and `triggers-native/b.md` uses `BankValueGetAsInt` / `BankValueSetFromInt`, and `BankPreload(name, player)` takes two arguments. Do not copy the example verbatim — keep the architecture but use the correct native names.
-- Cross-check GUI bank wiring and the actually generated script together. Do not treat the old project's "GUI-only bank API" conclusion as a general engine limit.
-
-### Schema Migration Caveat
-- When migrating old schema versions, preserve already-earned progress. Do not blindly apply a sample reset to completion state. The actual player, Bank name, preload stage, and file path come from the project and runtime environment — do not hardcode them.
-
-### Source Caveats (from `source-caveats.md`)
-- **Bank API conflict:** `bank-system.md` uses `GetInt`/`SetInt`/single-arg `BankPreLoad`; `galaxy-bank.md` and `triggers-native/b.md` use `GetAsInt`/`SetFromInt` and `BankPreload(name, player)`. Always consult the native definition and the actually generated script. Keep the architecture idea, do not copy the example.
+- [Bank investigation and boundaries](../../wiki/implementation/bank-system.md)
+- [Bank API reference boundaries](../../wiki/reference/galaxy-bank.md)
+- [Map initialization wiring](../../wiki/implementation/per-map-setup.md)
+- [Editor handoff](../../wiki/guides/editor-handoff.md)

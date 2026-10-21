@@ -141,12 +141,14 @@ Distilled from `references/galaxy-and-triggers.md` (Triggers portion). Duplicate
 - A `<FunctionCall>` subtree must not reuse one ID across multiple parent references — copy to a new ID and remove orphan references.
 
 ### Array & Variable Layout
+- Global Variable declarations also need a Root/reachable Category Item. FunctionDef/Trigger locals and Structure fields use their owning Variable declarations. Give each variable initializer its own Param instance; reusable definitions are distinct from mutable FunctionCall/Param instances. The target `check` catches these cases; see [structure and migration](../../wiki/reference/trigger-knowledge.md#gui-结构与迁移).
 - `ArraySize` is nested inside `VariableType`. Source docs note that GUI `Value=N` represents indices `0..N`, distinct from direct Galaxy array-length syntax — handle them differently.
 - For every declared element (especially variables / `ParamDef`), add matching `TriggerStrings.txt` names. `TriggerStrings.txt` is plain text — do NOT HTML-escape characters. `Triggers` XML follows standard XML escaping rules.
 
 ### Editor Save & Regeneration Safety
+- Follow the [source-to-runtime verification](../../wiki/guides/editor-handoff.md#源码到运行时的核对) before interpreting a retest. For repeated creation, objective ordering, UI or AI scanning issues, use [runtime diagnostics](../../wiki/implementation/runtime-diagnostics.md).
 - Source records: triggers with events but no action, or empty `<Comment>` elements, cause mod-Editor save problems. Always give event triggers a valid action; use non-empty `<Comment>` content and a name.
 - After save, reopen the map and force one trigger edit to make the Editor regenerate, then verify `InitTriggers` and `TriggerAddEvent*` calls. Visible in the trigger tree does not prove the event is registered.
 
 ### Map ↔ Mod Library Wiring
-- The map references the target mod in active dependencies and calls the init function via the mod-exported GUI Action Definition. Pure Custom Script references can cause the linker to drop the mod library; verify the actual compiled output.
+- The map references the target mod in active dependencies and calls the init function via the mod-exported GUI Action Definition. Verify the actual compiled output; the evidence scope for broader linker claims is defined above.

@@ -1,6 +1,6 @@
 ---
 name: sc2-actor-system
-description: StarCraft II actor system (events, terms, messages, parents) for the AeonOfIhanrii campaign. Use when creating or modifying CActorUnit/CActorAction/CActorModel/CActorBeam/CActorSound actors, troubleshooting VFX/audio/visibility issues, or extracting actors from inactive XML. Covers actor event-driven model, parent actor selection, missile defaults, texture swaps, indexed construction events, and editor round-trip pitfalls.
+description: StarCraft II actor system (events, terms, messages, parents) for the selected project. Use when creating or modifying CActorUnit/CActorAction/CActorModel/CActorBeam/CActorSound actors, troubleshooting VFX/audio/visibility issues, or extracting actors from inactive XML. Covers actor event-driven model, parent actor selection, missile defaults, texture swaps, indexed construction events, and editor round-trip pitfalls.
 ---
 
 # SC2 Actor System

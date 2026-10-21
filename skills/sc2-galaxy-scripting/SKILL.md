@@ -1,6 +1,6 @@
 ---
 name: sc2-galaxy-scripting
-description: StarCraft II Galaxy scripting rules and gotchas for the AeonOfIhanrii campaign. Use when writing, editing, or debugging .galaxy files, trigger custom scripts, bank logic, or UI/dialog code. Covers syntax constraints, source-of-truth, modular script boundaries, and deployment.
+description: StarCraft II Galaxy scripting rules and gotchas for the selected project. Use when writing, editing, or debugging .galaxy files, trigger custom scripts, bank logic, or UI/dialog code. Covers syntax constraints, source-of-truth, modular script boundaries, and deployment.
 ---
 
 # SC2 Galaxy Scripting
@@ -36,7 +36,7 @@ For deep Galaxy script API work, load the matching `galaxy-*` sub-skill under `s
 
 ## Source of Truth
 
-- **Edit only:** `<SC2_MODS_PATH>/AeonOfIhanrii.SC2Mod/Base.SC2Data/Epi_Main.galaxy` (primary custom script block) or modular scripts under `*.SC2Mod/Base.SC2Data/Scripts/`.
+- **Edit only:** the hand-authored source referenced by the actual target Triggers and its include chain. Resolve the source component from `agent-config.json`. A historical script filename is not proof that the current project still uses it.
 - **Do NOT edit:** `Lib*.galaxy` (compiled library wrappers, auto-generated and overwritten on Editor save) or `MapScript.galaxy` inside maps (auto-generated).
 - **Deploy:** In `workspace_copy` mode, preview then use `python tools/deploy-mod.py` to copy component sources to SC2. In `in_place` mode no deployment is needed. The SC2 Editor, not this tool, regenerates compiled wrappers on save.
 
@@ -108,21 +108,13 @@ CatalogFieldValueSet(c_gameCatalogUnit, "Marine", "CostResource[Minerals]", play
 2. **No duplicate functions:** Defining the same function name across multiple included scripts fails with `"function already defined: <name>"`.
 3. **Forward references:** Functions must be **defined before they are called** within script blocks. GUI trigger calls are linked independently, but script-to-script calls require the callee to appear first in compilation order.
 
-## GUI Include Injection Pattern
+## Existing Script Includes
 
-`Lib67AA1763.galaxy` is auto-generated and overwrites manual `include` statements on save. To persistently include `Epi_Main.galaxy`:
-
-1. Open `AeonOfIhanrii.SC2Mod` in SC2 Editor → Triggers (F6).
-2. Select the `LegacyoftheIhanrii` library.
-3. Create a new Custom Script (Ctrl+Alt+T) named `Epi_Include`.
-4. Add single line: `include "Epi_Main"`.
-5. Save mod (Ctrl+S) — Editor injects `include "Epi_Include"` into `Lib67AA1763.galaxy` after `include "Lib67AA1763_h"`.
-
-Do NOT paste `Epi_Main.galaxy` content directly into a GUI Custom Script block — it contains non-ASCII comments and the GUI block enforces ASCII-only with 4-space line prefixes.
+For maintenance of existing Galaxy, inspect the target library and its saved Custom Script/include declarations first. Preserve include order and verify generated output after an Editor save; edit the hand-authored entry, not the generated wrapper. If a feature has migrated to GUI, maintain that GUI source rather than recreating its old external script. New standalone scripts require the implementation choice described above.
 
 ## Map-to-Mod Calls Must Use GUI Actions
 
-The SC2 linker silently drops the mod library unless the map calls a **GUI action** defined in the mod. Custom Script blocks in maps do not count. Define GUI actions in the mod library and call them from map triggers.
+Define exported GUI actions in the mod and call them from map triggers. This is the conservative workspace wiring practice; verify actual generated output. The universal linker claim lacks a versioned reproduction; see [evidence scope](../../wiki/reference/trigger-knowledge.md#编辑器行为的证据范围).
 
 ## Community Error Triage
 
@@ -136,11 +128,9 @@ The SC2 linker silently drops the mod library unless the map calls a **GUI actio
 | `Registry overflow` | Too many string/text/point refs in one expression | Break into smaller statements |
 | `Internal compiler error` | Line or string > ~2046 chars | Split long lines/strings |
 
-## Naming Conventions
+## Project Identity
 
-- Galaxy function prefix: `libEpi_`
-- Galaxy global prefix: `libEpi_g_`
-- Bank name: `"AeonOfIhanriiBank"`
+Read library IDs, function/global prefixes and Bank names from the target source. Preserve existing interfaces; select unique names only for a new project. Historical examples are not defaults.
 
 ## Reference
 
