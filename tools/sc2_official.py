@@ -68,73 +68,93 @@ def cache_manifest(component: Path) -> Path | None:
     return next((p / MANIFEST for p in component.parents if (p / MANIFEST).is_file()), None)
 
 
-def catalog_paths(component: Path) -> list[Path]:
-    """CASC uses its real GameData entry/include closure; local scope stays unchanged."""
-    if cache_manifest(component) is None:
-        return sorted((component / 'Base.SC2Data/GameData').glob('*.xml'))
-    base = component_file(component, 'Base.SC2Data')
-    entry = component_file(base, 'GameData.xml')
-    pending = [entry] if entry.is_file() else []
-    seen, catalogs = set(), []
-    while pending:
-        path = pending.pop(0)
-        if path in seen:
-            continue
-        seen.add(path)
-        root = ET.parse(path).getroot()
-        if root.tag == 'Catalog':
-            catalogs.append(path)
-        elif root.tag == 'Includes':
-            for entry in root:
-                if entry.tag != 'Catalog' or not entry.get('path'):
-                    raise ValueError('Unsupported GameData include: ' + str(path))
-                pending.append(component_file(base, entry.get('path')))
-        else:
-            raise ValueError('Unsupported GameData root: ' + str(path))
-    return catalogs
-
-
-def verify_closure(files: dict[str, bytes], logical: str) -> None:
-    """Verify references using the original registration XML, never synthesize files."""
-    base = logical + '/base.sc2data/'
-    component_list = logical + '/componentlist.sc2components'
-    if component_list in files:
-        for entry in ET.fromstring(files[component_list]).findall('DataComponent'):
-            if entry.get('Type') in {'info', 'trig'}:
-                relative = (entry.text or '').strip().replace('\\', '/').lower()
-                safe_path(Path('/snapshot').resolve(), relative)
-                if logical + '/' + relative not in files:
-                    raise ValueError('Missing registered component: ' + logical + '/' + relative)
-    pending, seen = [base + 'gamedata.xml'], set()
+def catalog_closure(names: set[str], xml_for) -> list[str]:
+    """One registration/closure rule for both a snapshot and its Catalog consumer."""
+    base, entry = 'base.sc2data/', 'base.sc2data/gamedata.xml'
+    if entry not in names:
+        listing = 'componentlist.sc2components'
+        has_xml = any(n.startswith(base + 'gamedata/') and n.endswith('.xml') for n in names)
+        if has_xml:
+            raise ValueError('GameData XML exists without its GameData.xml loading entry')
+        if listing not in names:
+            raise ValueError('GameData absence is unconfirmed: no original component registration')
+        root = xml_for(listing)
+        if (root.tag != 'Components' or any(e.tag != 'DataComponent' or e.get('Type') not in
+                {'info', 'trig', 'text'} for e in root)):
+            raise ValueError('GameData loading entry missing or component registration unsupported')
+        return []
+    pending, seen, catalogs = [entry], set(), []
     while pending:
         name = pending.pop()
         if name in seen:
             continue
         seen.add(name)
-        if name not in files:
-            # A component with no GameData entry can be a pure trigger dependency.
-            if name == base + 'gamedata.xml':
-                break
+        if name not in names:
             raise ValueError('Missing GameData include: ' + name)
-        root = ET.fromstring(files[name])
-        if root.tag == 'Includes':
-            for entry in root:
-                if entry.tag != 'Catalog' or not entry.get('path'):
+        root = xml_for(name)
+        if root.tag == 'Catalog':
+            catalogs.append(name)
+        elif root.tag == 'Includes':
+            for child in root:
+                if child.tag != 'Catalog' or not child.get('path', '').strip():
                     raise ValueError('Unsupported GameData include: ' + name)
-                relative = entry.get('path').replace('\\', '/').lower()
+                relative = child.get('path').replace('\\', '/').lower()
                 safe_path(Path('/snapshot').resolve(), relative)
                 pending.append(base + relative)
-        elif root.tag != 'Catalog':
+        else:
             raise ValueError('Unsupported GameData root: ' + name)
-    listing = base + 'triggerlibs/librarylist.xml'
-    if listing in files:
-        for entry in ET.fromstring(files[listing]):
+    return catalogs
+
+
+def validation_tree(raw: bytes, name: str) -> ET.Element:
+    root = ET.fromstring(raw)
+    # Closure validation needs Catalog/definition root types, not their large bodies.
+    if root.tag == 'Catalog' or name.endswith(('/triggers', '.triggerlib', '.sc2lib')):
+        return ET.Element(root.tag)
+    return root
+
+
+def catalog_paths(component: Path) -> list[Path]:
+    """Official sources need load evidence; retain the local mod scan scope."""
+    if cache_manifest(component) is None:
+        return sorted((component / 'Base.SC2Data/GameData').glob('*.xml'))
+    directory = component_file(component, 'Base.SC2Data/GameData')
+    paths = list(directory.rglob('*.xml')) if directory.is_dir() else []
+    paths.extend(component_file(component, n) for n in
+                 ('Base.SC2Data/GameData.xml', 'ComponentList.SC2Components'))
+    candidates = {p.relative_to(component).as_posix().lower(): p for p in paths if p.is_file()}
+    closure = catalog_closure(set(candidates), lambda n: ET.parse(candidates[n]).getroot())
+    return [candidates[n] for n in closure]
+
+
+def verify_closure(files: dict[str, bytes], logical: str, parsed: dict | None = None) -> None:
+    """Verify original registrations; parsed XML is reused within this operation."""
+    parsed = {} if parsed is None else parsed
+    prefix = logical + '/'
+    names = {key[len(prefix):] for key in files if key.startswith(prefix)}
+    def xml_for(name):
+        key = prefix + name
+        if key not in parsed:
+            parsed[key] = ET.fromstring(files[key])
+        return parsed[key]
+    catalog_closure(names, xml_for)
+    component_list = 'componentlist.sc2components'
+    if component_list in names:
+        for entry in xml_for(component_list).findall('DataComponent'):
+            if entry.get('Type') in {'info', 'trig'}:
+                relative = (entry.text or '').strip().replace('\\', '/').lower()
+                safe_path(Path('/snapshot').resolve(), relative)
+                if relative not in names:
+                    raise ValueError('Missing registered component: ' + logical + '/' + relative)
+    listing = 'base.sc2data/triggerlibs/librarylist.xml'
+    if listing in names:
+        for entry in xml_for(listing):
             external = entry.get('external')
             if not external:
                 raise ValueError('Unsupported inline library registration: ' + listing)
-            stem = base + external.replace('\\', '/').lower()
+            stem = 'base.sc2data/' + external.replace('\\', '/').lower()
             safe_path(Path('/snapshot').resolve(), stem)
-            if sum(stem + ext in files for ext in ('.triggerlib', '.sc2lib')) != 1:
+            if sum(stem + ext in names for ext in ('.triggerlib', '.sc2lib')) != 1:
                 raise ValueError('Missing/ambiguous registered library: ' + stem)
 
 
@@ -155,16 +175,19 @@ class OfficialCache:
         engine = self.data.get('engine')
         if engine:
             raise ValueError('Engine table alone does not establish Core/bootstrap completeness')
+        raw_files, parsed = {}, {}
         for relative, entry in files.items():
             path = safe_path(self.root, relative)
             if not isinstance(entry, dict):
                 raise ValueError('Invalid official file inventory entry: ' + relative)
-            if (relative != relative.lower() or not wanted(relative) or file_digest(path) != entry['sha256']
+            raw = path.read_bytes()
+            raw_files[relative] = raw
+            if (relative != relative.lower() or not wanted(relative) or hashlib.sha256(raw).hexdigest() != entry['sha256']
                     or path.stat().st_size != entry.get('size')
                     or entry.get('casc_path', '').replace('\\', '/').lower() != relative):
                 raise ValueError('Missing, damaged or disallowed official cache input: ' + relative)
             if path.suffix in {'.xml', '.triggerlib', '.sc2lib', '.sc2components'} or path.name == 'triggers':
-                ET.parse(path)
+                parsed[relative] = validation_tree(raw, relative)
         for relative, entry in components.items():
             safe_path(self.root, relative)
             if not isinstance(entry, dict):
@@ -173,10 +196,10 @@ class OfficialCache:
             if not isinstance(evidence, str) or evidence not in files or not evidence.startswith(relative + '/'):
                 raise ValueError('Component dependency evidence missing: ' + relative)
             # Never trust a dependency list supplied without its original XML.
-            dependencies = dependency_values((self.root / evidence).read_bytes())
+            dependencies = dependency_values(raw_files[evidence], parsed.get(evidence))
             if dependencies != entry.get('dependencies'):
                 raise ValueError('Component metadata differs from cache manifest: ' + relative)
-            verify_closure({k: safe_path(self.root, k).read_bytes() for k in files if k.startswith(relative + '/')}, relative)
+            verify_closure(raw_files, relative, parsed)
 
     def component(self, logical: str) -> Path | None:
         key = logical.replace('\\', '/').lower()
@@ -200,11 +223,11 @@ def cache_for_mods(mods: Path, explicit: Path | None = None) -> OfficialCache | 
     return OfficialCache(root, install)
 
 
-def dependency_values(raw: bytes) -> list[str]:
+def dependency_values(raw: bytes, root: ET.Element | None = None) -> list[str]:
     text = raw.decode('utf-8-sig')
     if not re.sub(r'^\s*<\?xml[^?]*\?>', '', text, count=1).strip():
         return []
-    root = ET.fromstring(text)
+    root = ET.fromstring(text) if root is None else root
     if root.tag not in {'DocInfo', 'DocumentInfo', 'DocHeader', 'DocumentHeader'}:
         raise ValueError('Unsupported official dependency metadata root: ' + root.tag)
     return [e.text.strip() for e in root.findall('./Dependencies/Value') if e.text and e.text.strip()]
@@ -246,15 +269,10 @@ def probe(install: Path, dll: Path, timeout=60) -> dict:
 
 
 def snapshot(reader, target: Path, mods: Path) -> tuple[dict, dict[str, bytes]]:
-    """Only explicitly declared components; unknown bootstrap relationships stay incomplete."""
+    """Resolve original dependency metadata before reading the component payload."""
     from sc2_dependencies import build_dependency_graph, extract_dependency_refs
     pending, problems, scanned = [], [], set()
-    engine, engine_error, used_engine = None, None, False
-    try:
-        from sc2_engine_dependencies import engine_registry
-        engine = engine_registry(mods.parent, identity(mods.parent)['version'])
-    except (OSError, ValueError) as exc:
-        engine_error = str(exc)
+    engine, engine_error, engine_checked, used_engine = None, None, False, False
     def scan_local(component):
         if component in scanned:
             return
@@ -267,63 +285,102 @@ def snapshot(reader, target: Path, mods: Path) -> tuple[dict, dict[str, bytes]]:
             elif edge.get('kind') == 'external' and not edge.get('file_path'):
                 problems.append('Unmapped network dependency: ' + edge['raw'])
     scan_local(target)
-    names = {}
+    names, grouped = {}, {}
     for name in reader.names():
         key = name.replace('\\', '/').lower()
         if key in names and names[key] != name:
             raise ValueError('Ambiguous CASC filename casing: ' + key)
         if wanted(key):
+            safe_path(Path('/snapshot').resolve(), key)
             names[key] = name
-    components, files, unavailable = {}, {}, {}
+            parts = key.split('/')
+            end = next(i for i, p in enumerate(parts) if p.endswith(('.sc2mod', '.sc2campaign')))
+            logical = '/'.join(parts[:end + 1])
+            grouped.setdefault(logical, []).append(key)
+    components, files, unavailable, parsed = {}, {}, {}, {}
+    attempted, visited, info_files = set(), set(), set()
+    def read_file(key):
+        if key not in names or key in attempted:
+            return files.get(key)
+        attempted.add(key)
+        try:
+            raw = reader.read(names[key])
+        except (OSError, ValueError) as exc:
+            raw = None
+            unavailable[key] = str(exc)
+        if raw is None:
+            unavailable.setdefault(key, 'CASC file not locally readable')
+            if '/enus.sc2data/' not in key and '/zhcn.sc2data/' not in key:
+                problems.append('CASC file not locally readable: ' + key)
+        else:
+            files[key] = raw
+        return raw
+    def xml_for(key):
+        if key not in parsed:
+            parsed[key] = validation_tree(files[key], key)
+        return parsed[key]
+    def result(phase):
+        return {'components': components, 'problems': sorted(set(problems)),
+                'unavailable_files': unavailable, 'source_paths': {k: names[k] for k in files},
+                'engine': engine if used_engine else None, 'engine_diagnostic': engine_error,
+                'extraction_phase': phase, 'status': 'partial' if problems else 'complete'}, files
     while pending:
         logical = pending.pop(0)
         safe_path(Path('/snapshot').resolve(), logical)
-        if logical in components:
+        if logical in visited:
             continue
-        candidates = [k for k in names if k.startswith(logical + '/')]
-        if not candidates:
+        visited.add(logical)
+        if logical not in grouped:
             problems.append('Official component not present in CASC: ' + logical)
             continue
         components[logical] = {}
-        for key in candidates:
-            try:
-                raw = reader.read(names[key])
-            except (OSError, ValueError) as exc:
-                raw = None
-                unavailable[key] = str(exc)
-            if raw is None:
-                unavailable.setdefault(key, 'CASC file not locally readable')
-                if '/enus.sc2data/' not in key and '/zhcn.sc2data/' not in key:
-                    problems.append('CASC file not locally readable: ' + key)
-                continue
-            files[key] = raw
-        listing = logical + '/componentlist.sc2components'
-        evidence = logical + '/documentinfo'
-        if listing in files:
-            root = ET.fromstring(files[listing])
-            info = next((e.text for e in root.findall('DataComponent') if e.get('Type') == 'info' and e.text), None)
-            if not info:
-                problems.append('Component list has no info registration: ' + logical)
-                continue
-            evidence = logical + '/' + info.replace('\\', '/').strip().lower()
-        if evidence in files:
-            deps = dependency_values(files[evidence])
-        elif listing not in files and engine and logical in engine['dependencies']:
-            deps = ['file:' + p for p in engine['dependencies'][logical]]
-            evidence = {'kind': 'engine_table', 'row_offset': engine['rows'][logical]}
-            used_engine = True
-        else:
-            problems.append('No supported, original dependency metadata for ' + logical)
+        listing, evidence = logical + '/componentlist.sc2components', logical + '/documentinfo'
+        try:
+            if listing in names:
+                if read_file(listing) is None:
+                    continue
+                root = xml_for(listing)
+                if root.tag != 'Components':
+                    raise ValueError('Unsupported component registration: ' + logical)
+                info = next((e.text for e in root.findall('DataComponent') if e.get('Type') == 'info' and e.text), None)
+                if not info:
+                    raise ValueError('Component list has no info registration: ' + logical)
+                evidence = logical + '/' + info.replace('\\', '/').strip().lower()
+                safe_path(Path('/snapshot').resolve(), evidence)
+            if evidence in names:
+                raw = read_file(evidence)
+                if raw is None:
+                    continue
+                deps = dependency_values(raw)
+                info_files.add(evidence)
+            elif listing not in names:
+                if not engine_checked:
+                    engine_checked = True
+                    try:
+                        from sc2_engine_dependencies import engine_registry
+                        engine = engine_registry(mods.parent, identity(mods.parent)['version'])
+                    except (OSError, ValueError) as exc:
+                        engine_error = str(exc)
+                if not engine or logical not in engine['dependencies']:
+                    raise ValueError('No supported, original dependency metadata for ' + logical)
+                deps = ['file:' + p for p in engine['dependencies'][logical]]
+                evidence = {'kind': 'engine_table', 'row_offset': engine['rows'][logical]}
+                used_engine = True
+            else:
+                raise ValueError('No supported, original dependency metadata for ' + logical)
+        except (ValueError, ET.ParseError) as exc:
+            problems.append(str(exc))
             continue
+        registration = logical + '/base.sc2data/triggerlibs/librarylist.xml'
         components[logical] = {'dependency_evidence': evidence, 'dependencies': deps,
-                              'library_registration': (logical + '/base.sc2data/triggerlibs/librarylist.xml'
-                                                       if logical + '/base.sc2data/triggerlibs/librarylist.xml' in files else None)}
+                              'library_registration': registration if registration in names else None}
         for raw in deps:
             for ref in extract_dependency_refs(raw):
                 path = ref.get('file_path')
                 if not path:
                     problems.append('Unmapped official dependency: ' + raw)
                 elif path.lower().startswith(('mods/', 'campaigns/')):
+                    safe_path(mods.parent, path)
                     local = mods.parent.joinpath(*PurePosixPath(path).parts)
                     if not local.is_dir():
                         pending.append(path.lower())
@@ -331,21 +388,23 @@ def snapshot(reader, target: Path, mods: Path) -> tuple[dict, dict[str, bytes]]:
                         scan_local(local)
                 else:
                     problems.append('Unsupported dependency path: ' + raw)
-        # Preserve source XML and fail on any XML parse problem; do not lint official style.
-        for key in candidates:
-            if key in files and key.endswith(('.xml', '.triggerlib', '.sc2lib', '.sc2components')):
-                ET.fromstring(files[key])
-        try:
-            verify_closure(files, logical)
-        except ValueError as exc:
-            problems.append(str(exc))
     if used_engine:
         problems.append('Engine table does not prove implicit Core/bootstrap loading; complete active graph remains unconfirmed')
-    return {'components': components, 'problems': sorted(set(problems)),
-            'unavailable_files': unavailable,
-            'source_paths': {k: names[k] for k in files},
-            'engine': engine if used_engine else None, 'engine_diagnostic': engine_error,
-            'status': 'partial' if problems else 'complete'}, files
+    if problems:
+        return result('metadata')
+    for logical in components:
+        for key in grouped[logical]:
+            raw = read_file(key)
+            if raw is not None and key not in info_files and (key.endswith(('.xml', '.triggerlib', '.sc2lib', '.sc2components')) or key.endswith('/triggers')):
+                try:
+                    xml_for(key)
+                except ET.ParseError as exc:
+                    problems.append(key + ': ' + str(exc))
+        try:
+            verify_closure(files, logical, parsed)
+        except (ValueError, ET.ParseError) as exc:
+            problems.append(logical + ': ' + str(exc))
+    return result('payload')
 
 
 def publish_snapshot(destination: Path, info: dict, dll: Path, contents: dict, files: dict[str, bytes]):

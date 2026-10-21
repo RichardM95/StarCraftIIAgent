@@ -19,6 +19,7 @@ def load(name,file):
 BUILDER=load("dependency_contract_builder","build-sc2-catalog-graph.py")
 QUERY=load("dependency_contract_query","sc2-catalog-query.py")
 SUITE=load("dependency_contract_suite","test-suite.py")
+INSPECT=load("dependency_contract_inspect","inspect-mod-dependencies.py")
 
 def component(path,reference="",info="DocumentInfo"):
     path.mkdir(parents=True)
@@ -28,6 +29,38 @@ def component(path,reference="",info="DocumentInfo"):
 
 class DependencyContractTests(unittest.TestCase):
     def tearDown(self):BUILDER.find_local_mods.cache_clear()
+    def test_foreign_catalog_build_records_its_actual_recursive_scope(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp)
+            old=component(root/'old/Mods/Main.SC2Mod')
+            target=component(root/'new/Mods/Main.SC2Mod','file:Mods/Shared.SC2Mod')
+            shared=component(root/'new/Mods/Shared.SC2Mod')
+            config={'paths':{'mods_dir':str(old.parent)},'project':{'primary_mod':old.name,'resolve_dependencies_recursive':False}}
+            (root/'agent-config.json').write_text(json.dumps(config))
+            out=root/'index'
+            with patch.object(BUILDER,'ROOT',root),patch.multiple(BUILDER,BUILD_MOD_DIR=None,BUILD_MODS_DIR=None,OFFICIAL_CACHE=None,ALLOW_INCOMPLETE_DEPENDENCIES=False),patch.object(sys,'argv',['builder','--mod-dir',str(target),'--sqlite-only','--out',str(out)]),redirect_stdout(io.StringIO()):
+                self.assertEqual(BUILDER.main(),0)
+            manifest=json.loads(manifest_path(out/'catalog.sqlite').read_text())
+            self.assertIs(manifest['selection']['recursive'],True)
+            self.assertEqual(Path(manifest['selection']['mods_dir']),shared.parent)
+            self.assertEqual(manifest['dependencies']['status'],'complete')
+            args=argparse.Namespace(db=str(out/'catalog.sqlite'),graph=None,allow_stale=False)
+            store=QUERY.load_store(args);store.close()
+
+    def test_inspector_campaign_override_is_independent_of_current_project(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp)
+            old=component(root/'old/Mods/Main.SC2Mod')
+            target=component(root/'new/Mods/Main.SC2Mod','file:Campaigns/Story.SC2Campaign')
+            story=component(root/'archive/Story.SC2Campaign')
+            config={'paths':{'mods_dir':str(old.parent)},'project':{'primary_mod':old.name}}
+            with patch.object(INSPECT,'REPO_ROOT',root),patch.object(INSPECT,'load_project_config',return_value=config), \
+                 patch.object(sys,'argv',['inspect','--mod-dir',str(target),'--campaigns-dir','archive','--json']),redirect_stdout(io.StringIO()) as output:
+                self.assertEqual(INSPECT.main(),0)
+            graph=json.loads(output.getvalue())
+            self.assertEqual(graph['dependency_status']['status'],'complete')
+            self.assertIn(str(story.resolve()).casefold(),graph['nodes'])
+
     def test_foreign_nested_mod_uses_its_mods_ancestor_and_override(self):
         with tempfile.TemporaryDirectory() as tmp:
             root=Path(tmp);old=component(root/"Old"/"Mods"/"Main.SC2Mod")

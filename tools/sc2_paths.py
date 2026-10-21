@@ -166,6 +166,11 @@ def find_project_mods(
     return _unique_paths(matches)
 
 
+def is_project_source(repo_root: Path, target: Path, config: Mapping[str, Any]) -> bool:
+    """Project-specific switches only apply to the configured editing source."""
+    return target.resolve() in [p.resolve() for p in find_project_mods(repo_root, config=config)]
+
+
 def project_identity_path(repo_root: Path, config: Mapping[str, Any]) -> Path | None:
     """Installed primary identity, independent of workspace_copy's editing source."""
     project = config.get("project", {})

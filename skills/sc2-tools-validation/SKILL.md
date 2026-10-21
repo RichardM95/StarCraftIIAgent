@@ -51,10 +51,10 @@ Comprehensive static checks:
 - Formal W3C XSD schema validation on GameData XML (`tools/schemas/sc2-xsd/Catalog.xsd`) using `lxml` or `xmllint`; missing backends fail validation
 - UI layout XML parsing plus engine-compatible root, top-level child, and ASCII checks; `SC2Layout.xsd` is reference-only because it does not cover all Editor output
 - ASCII-only XML comment/attribute checks and rejection of comment-only catalogs
-- Galaxy script AST/syntax validation (variable hoisting, include paths, forbidden operators, non-ASCII characters)
+- Pattern-based Galaxy checks for variable placement, include paths, non-ASCII characters and workspace compatibility policy; these checks do not compile Galaxy
 
 ### `inspect-mod-dependencies.py`
-Starts from the configured primary mod, uses `ComponentList.SC2Components` to locate the info component (normally `DocumentInfo`), parses its dependency declarations, and repeats for every locally resolved `.SC2Mod`. Shared dependencies are expanded once, cycles are marked, and missing pure local `file:Mods` dependencies fail validation. Engine and Battle.net dependencies remain visible but do not require unpacked component folders.
+Starts from the actual target and recursively follows registered dependency metadata. Local components take priority; missing official components may come from a matching verified cache. Unresolved engine/Battle.net references remain partial. Use `--mods-dir`, `--campaigns-dir` and `--official-cache` for a one-off target; see [dependency and CASC evidence](../../wiki/reference/official-casc-cache.md).
 
 ### `audit-actor-and-card-integrity.py`
 Detects:

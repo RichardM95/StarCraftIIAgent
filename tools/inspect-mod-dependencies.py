@@ -19,6 +19,7 @@ def main() -> int:
     parser.add_argument("--mod-dir", help="Primary .SC2Mod component directory")
     parser.add_argument("--official-cache", type=Path, help="Read-only build-bound official cache")
     parser.add_argument("--mods-dir", help="Explicit dependency Mods root")
+    parser.add_argument("--campaigns-dir", type=Path, help="Explicit dependency Campaigns root")
     parser.add_argument("--allow-incomplete-dependencies", action="store_true", help="Explicit partial read-only dependency investigation; does not certify completeness")
     parser.add_argument("--json", action="store_true", help="Print machine-readable JSON")
     args = parser.parse_args()
@@ -39,7 +40,9 @@ def main() -> int:
     except ValueError as exc:
         print(f"ERROR: {exc}")
         return 1
-    graph = build_dependency_graph(mods[0], mods_dir, official_cache=args.official_cache)
+    campaigns = resolve_configured_path(REPO_ROOT, str(args.campaigns_dir)) if args.campaigns_dir is not None else None
+    graph = build_dependency_graph(mods[0], mods_dir, official_cache=args.official_cache,
+                                   campaigns_dir=campaigns)
     state = dependency_state(graph)
     graph["dependency_status"] = state
     if state["status"] == "partial" and args.allow_incomplete_dependencies:

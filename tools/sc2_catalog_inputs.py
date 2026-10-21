@@ -6,7 +6,7 @@ import json
 from pathlib import Path
 
 from sc2_dependencies import find_info_component
-from sc2_official import catalog_paths, cache_manifest, component_file
+from sc2_official import catalog_paths, cache_manifest, component_file, safe_path
 
 
 MANIFEST_SUFFIX = ".inputs.json"
@@ -26,6 +26,7 @@ def catalog_xml_inputs(root: Path, mods: tuple[Path, ...] | list[Path]) -> list[
 
 def index_inputs(root: Path, mods: tuple[Path, ...] | list[Path]) -> list[Path]:
     files = catalog_xml_inputs(root, mods)
+    manifests = set()
     config = root / "agent-config.json"
     if config.is_file():
         files.append(config)
@@ -42,11 +43,12 @@ def index_inputs(root: Path, mods: tuple[Path, ...] | list[Path]) -> list[Path]:
                          if (path := component_file(mod, language + ".SC2Data/LocalizedData/" + name)).is_file())
         official = cache_manifest(mod)
         if official:
-            data = json.loads(official.read_text(encoding="utf-8"))
-            files.append(official)
-            files.append(Path(data["identity"]["install"]) / ".build.info")
-            # Include the whole signed inventory: registry, includes and locale availability.
-            files.extend(official.parent / k for k in data["files"] if (official.parent / k).is_file())
+            manifests.add(official)
+    for official in sorted(manifests):
+        data = json.loads(official.read_text(encoding="utf-8"))
+        files.extend((official, Path(data["identity"]["install"]) / ".build.info"))
+        # Include each cache inventory once: registries, includes and available locales.
+        files.extend(path for k in data["files"] if (path := safe_path(official.parent, k)).is_file())
     return sorted(set(files), key=lambda path: str(path).casefold())
 
 

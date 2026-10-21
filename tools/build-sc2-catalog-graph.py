@@ -21,7 +21,7 @@ from xml.sax.saxutils import escape
 from sc2_publication import publish_directory, staged_directory
 from sc2_dependencies import build_dependency_graph, resolve_dependency_root, dependency_state, RECURSION_DISABLED
 from sc2_catalog_inputs import catalog_xml_inputs, index_inputs, inventory, save_manifest
-from sc2_paths import find_project_mods, load_project_config, resolve_configured_path, project_data_dir, catalog_output_dir, ensure_project_data
+from sc2_paths import find_project_mods, load_project_config, resolve_configured_path, project_data_dir, catalog_output_dir, ensure_project_data, is_project_source
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -192,20 +192,20 @@ def find_local_mods() -> tuple[Path, ...]:
     DEPENDENCY_NODES = {}
     config = load_project_config(ROOT)
     primary_mods = find_project_mods(ROOT, BUILD_MOD_DIR, config=config)
-    DEPENDENCY_STATE = {"status": "complete", "problems": []}
+    DEPENDENCY_STATE = {"status": "complete", "problems": [], "recursive": True}
     if not primary_mods:
         if config or BUILD_MOD_DIR:
             raise ValueError("Configured or explicit project source is missing or invalid")
         return ()
     primary = primary_mods[0].resolve(strict=False)
-    project = config.get("project", {})
+    project = config.get("project", {}) if is_project_source(ROOT, primary, config) else {}
     recursive = (
         project.get("resolve_dependencies_recursive", True)
         if isinstance(project, dict)
         else True
     )
     if not recursive:
-        DEPENDENCY_STATE = {"status": "partial", "problems": [RECURSION_DISABLED]}
+        DEPENDENCY_STATE = {"status": "partial", "problems": [RECURSION_DISABLED], "recursive": False}
         if not ALLOW_INCOMPLETE_DEPENDENCIES:
             raise ValueError(RECURSION_DISABLED + "; use --allow-incomplete-dependencies for partial investigation")
         return (primary,)
@@ -214,6 +214,7 @@ def find_local_mods() -> tuple[Path, ...]:
     graph = build_dependency_graph(primary, mods_dir, official_cache=OFFICIAL_CACHE)
     DEPENDENCY_NODES = graph["nodes"]
     DEPENDENCY_STATE = dependency_state(graph)
+    DEPENDENCY_STATE['recursive'] = recursive
     if DEPENDENCY_STATE["status"] == "partial" and not ALLOW_INCOMPLETE_DEPENDENCIES:
         raise ValueError("Incomplete active dependencies: " + "; ".join(DEPENDENCY_STATE["problems"]))
     dependencies = sorted(
@@ -896,7 +897,7 @@ def main() -> int:
     input_inventory = inventory(indexed_files)
     selection = {"workspace_root": str(ROOT.resolve()), "primary": str(mods[0]) if mods else None,
                  "mods_dir": DEPENDENCY_STATE.get("mods_dir"),
-                 "recursive": load_project_config(ROOT).get("project", {}).get("resolve_dependencies_recursive", True),
+                 "recursive": DEPENDENCY_STATE['recursive'],
                  "official_cache": (DEPENDENCY_STATE.get('official_cache') or {}).get('root'), "locale": LOCALE,
                  "explicit": bool(BUILD_MOD_DIR or BUILD_MODS_DIR)}
     if mods and not selection["mods_dir"]:

@@ -22,7 +22,8 @@
 | **查找官方/合作组件案例或本地化** | `python tools/sc2-reference-query.py find <term> --family <Family> --component <name> --limit 20` | 按组件、数据类型和语言限定只读样例搜索 |
 | **刷新 catalog 查询数据库** | `python tools/build-sc2-catalog-graph.py --sqlite-only` | 输入变化时只更新查询用 SQLite；完整图与报告去掉此参数 |
 | **预览/部署模组到 SC2** | `python tools/deploy-mod.py --dry-run` | 只显示源与目标；核对后去掉 `--dry-run` 复制组件 |
-| **检查 GameStrings/本地化锚点** | `python tools/audit-gamestrings-anchors.py --fill` | 检查 GameData XML 文本引用，并从 `ObjectStrings.txt` 自动恢复缺失键 |
+| **检查 GameStrings/本地化锚点** | `python tools/audit-gamestrings-anchors.py` | 只读检查 GameData XML 文本引用与缺失键 |
+| **Editor 保存后恢复字符串锚点** | `python tools/audit-gamestrings-anchors.py --fill` | 写入当前源，从 `ObjectStrings.txt` 恢复缺失键 |
 | **审计命令卡** | `python tools/audit-actor-and-card-integrity.py` | 检测高置信度命令卡槽位冲突和攻击按钮被替换问题 |
 | **定位项目资料和运行目录** | `python tools/project-paths.py` | 只读输出路径，不创建目录 |
 | **提取游戏测试错误与日志** | `python tools/extract-playtest-bugreport.py` | 从 SC2 `GameLogs` 中提取警告和脚本错误，生成便于分诊的 `bugreport.txt` |

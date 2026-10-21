@@ -212,6 +212,87 @@ class CacheTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'registered library'):
             official.verify_closure(self.files, 'mods/core.sc2mod')
 
+    def test_missing_catalog_entry_never_certifies_existing_or_declared_data(self):
+        original = dict(self.files)
+        entry = 'mods/core.sc2mod/base.sc2data/gamedata.xml'
+        for mode in ('xml_present', 'gada_registered', 'unknown_registration', 'unknown_component_type'):
+            with self.subTest(mode=mode):
+                self.files = dict(original)
+                del self.files[entry]
+                if mode != 'xml_present':
+                    self.files = {k:v for k,v in self.files.items() if '/gamedata/' not in k}
+                listing = 'mods/core.sc2mod/componentlist.sc2components'
+                if mode == 'gada_registered':
+                    self.files[listing] = self.files[listing].replace(b'</Components>', b'<DataComponent Type="gada">GameData</DataComponent></Components>')
+                if mode == 'unknown_registration':
+                    del self.files[listing]
+                if mode == 'unknown_component_type':
+                    self.files[listing] = self.files[listing].replace(b'</Components>', b'<DataComponent Type="future">Unknown</DataComponent></Components>')
+                contents, _ = official.snapshot(Reader(self.files), self.target, self.mods)
+                self.assertEqual(contents['status'], 'partial')
+                self.assertIn('GameData', str(contents['problems']))
+
+    def test_old_complete_cache_with_missing_entry_is_rejected_by_both_consumers(self):
+        self.sync()
+        manifest = self.cache / official.MANIFEST
+        data = json.loads(manifest.read_text(encoding='utf-8'))
+        entry = 'mods/core.sc2mod/base.sc2data/gamedata.xml'
+        del data['files'][entry]
+        (self.cache / entry).unlink()
+        manifest.write_text(json.dumps(data), encoding='utf-8')
+        self.assertIn('GameData', str(self.graph()['errors']))
+        with self.assertRaisesRegex(ValueError, 'GameData'):
+            official.catalog_paths(self.cache / 'mods/core.sc2mod')
+
+    def test_input_inventory_reads_each_cache_manifest_once(self):
+        self.sync()
+        mods = [Path(n['path']) for n in self.graph()['nodes'].values()]
+        original, reads = Path.read_text, []
+        def read(path, *args, **kwargs):
+            if path.name == official.MANIFEST:
+                reads.append(path)
+            return original(path, *args, **kwargs)
+        with patch.object(Path, 'read_text', read):
+            index_inputs(self.suite, mods)
+        self.assertEqual(reads, [self.cache / official.MANIFEST])
+
+    def test_cache_validation_reads_files_and_parses_xml_once_per_operation(self):
+        self.sync()
+        read_bytes, fromstring = Path.read_bytes, official.ET.fromstring
+        reads, parses = [], []
+        def read(path):
+            reads.append(path)
+            return read_bytes(path)
+        def parse(raw, *args, **kwargs):
+            parses.append(raw)
+            return fromstring(raw, *args, **kwargs)
+        with patch.object(Path, 'read_bytes', read), patch.object(official.ET, 'fromstring', parse):
+            official.OfficialCache(self.cache, self.install)
+        self.assertEqual(len(reads), len(set(reads)))
+        for key, raw in self.files.items():
+            if key.endswith(('librarylist.xml', '/a.xml', '/b.xml', '.triggerlib')):
+                self.assertEqual(parses.count(raw), 1)
+
+    def test_bootstrap_blocker_stops_before_payload_reads(self):
+        self.files.pop('campaigns/void.sc2campaign/documentinfo')
+        self.files.pop('campaigns/void.sc2campaign/componentlist.sc2components')
+        engine = {'dependencies': {'campaigns/void.sc2campaign': ['mods/core.sc2mod']},
+                  'rows': {'campaigns/void.sc2campaign': 1234}}
+        reader = Reader(self.files)
+        reads = []
+        original = reader.read
+        def read(name):
+            reads.append(name)
+            self.assertNotIn('/base.sc2data/', name)
+            self.assertNotIn('/localizeddata/', name)
+            return original(name)
+        reader.read = read
+        with patch('sc2_engine_dependencies.engine_registry', return_value=engine):
+            contents, files = official.snapshot(reader, self.target, self.mods)
+        self.assertEqual(contents['status'], 'partial')
+        self.assertIn('Core/bootstrap', str(contents['problems']))
+        self.assertEqual(len(reads), len(files))
+
     def test_preview_and_blocked_apply_do_not_write(self):
         result = {'status': 'read_verified', 'encoding': 'ansi', 'identity': official.identity(self.install)}
         options = ['sync', '--sc2-install-dir', str(self.install), '--casc-dll', str(self.dll), '--target', str(self.target), '--mods-dir', str(self.mods), '--official-cache', str(self.cache)]

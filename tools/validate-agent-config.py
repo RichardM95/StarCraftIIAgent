@@ -7,7 +7,7 @@ import sys
 from collections.abc import Mapping
 from pathlib import Path
 
-from sc2_dependencies import build_dependency_graph
+from sc2_dependencies import build_dependency_graph, resolve_dependency_root
 from sc2_paths import CONFIG_FILENAME, config_path, load_project_config, resolve_configured_path, project_data_dir
 
 
@@ -24,6 +24,8 @@ OPTIONAL_EXISTENCE_PATHS = {"campaign_maps_dir"}
 def main(argv=()) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--official-cache", type=Path)
+    parser.add_argument("--mods-dir", help="One-off dependency Mods root; config remains unchanged")
+    parser.add_argument("--campaigns-dir", type=Path, help="One-off dependency Campaigns root")
     args = parser.parse_args(argv)
     path = config_path(REPO_ROOT)
     if not path.is_file():
@@ -135,13 +137,19 @@ def main(argv=()) -> int:
 
     dependency_graph = None
     if recursive and primary_path is not None and primary_path.is_dir() and "mods_dir" in resolved_paths:
-        dependency_graph = build_dependency_graph(primary_path, resolved_paths["mods_dir"], official_cache=args.official_cache, strict_external=True)
-        failures.extend(dependency_graph["errors"])
-        for edge in dependency_graph["missing"]:
-            failures.append(
-                f"missing recursive mod dependency: {edge['target_name']} "
-                f"(declared by {dependency_graph['nodes'][edge['source']]['name']})"
-            )
+        try:
+            mods_root = resolve_dependency_root(REPO_ROOT, primary_path, config, args.mods_dir)
+            campaigns = resolve_configured_path(REPO_ROOT, str(args.campaigns_dir)) if args.campaigns_dir is not None else None
+            dependency_graph = build_dependency_graph(primary_path, mods_root,
+                campaigns_dir=campaigns, official_cache=args.official_cache, strict_external=True)
+            failures.extend(dependency_graph["errors"])
+            for edge in dependency_graph["missing"]:
+                failures.append(
+                    f"missing recursive mod dependency: {edge['target_name']} "
+                    f"(declared by {dependency_graph['nodes'][edge['source']]['name']})"
+                )
+        except ValueError as exc:
+            failures.append(str(exc))
 
     print(f"Configuration: {path}")
     for key in REQUIRED_PATHS:

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import importlib.util
 import io
+import tempfile
 import sys
 import unittest
 from pathlib import Path
@@ -20,6 +21,56 @@ SPEC.loader.exec_module(SUITE)
 
 
 class DependencyValidationTests(unittest.TestCase):
+    def fixture(self, root, relative, dependency=''):
+        p = root / relative
+        p.mkdir(parents=True)
+        (p / 'ComponentList.SC2Components').write_text('<Components><DataComponent Type="info">DocumentInfo</DataComponent></Components>')
+        (p / 'DocumentInfo').write_text('<DocInfo><Dependencies>' +
+            ('<Value>file:' + dependency + '</Value>' if dependency else '') + '</Dependencies></DocInfo>')
+        return p
+
+    def commands(self, root, target, config, *flags):
+        commands = []
+        with patch.object(SUITE, 'REPO_ROOT', root), patch.object(SUITE, 'load_project_config', return_value=config), \
+             patch.object(sys, 'argv', ['suite', '--scope', 'mod', '--mod-dir', str(target), *flags]), \
+             patch.object(SUITE, 'run_step', side_effect=lambda name, cmd, verbose: commands.append(cmd) or True), redirect_stdout(io.StringIO()):
+            self.assertEqual(SUITE.main(), 0)
+        return commands
+
+    def test_foreign_target_checks_its_own_roots_and_does_not_inherit_defaults(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            old = self.fixture(root, 'old/Mods/Main.SC2Mod')
+            target = self.fixture(root, 'new/Mods/Main.SC2Mod', 'Mods/Shared.SC2Mod')
+            shared = self.fixture(root, 'new/Mods/Shared.SC2Mod')
+            config = {'paths': {'mods_dir': str(old.parent)}, 'project': {'primary_mod': old.name, 'resolve_dependencies_recursive': False},
+                      'validation': {'include_dependencies': True, 'exclude_mods': ['Shared.SC2Mod']}}
+            campaigns, cache = root / 'archive', root / 'cache'
+            commands = self.commands(root, target, config, '--mods-dir', str(target.parent), '--campaigns-dir', str(campaigns), '--official-cache', str(cache))
+            self.assertFalse(any('tools/validate-agent-config.py' in c for c in commands))
+            inspector = next(c for c in commands if 'tools/inspect-mod-dependencies.py' in c)
+            gui = next(c for c in commands if 'tools/sc2-trigger-query.py' in c)
+            for cmd in (inspector, gui):
+                for option, value in (('--mods-dir', target.parent), ('--campaigns-dir', campaigns), ('--official-cache', cache)):
+                    self.assertEqual(cmd[cmd.index(option) + 1], str(value))
+            self.assertFalse(any(str(shared) in c for c in commands))
+            # Explicit scanning wins and the old project's exclusion does not leak.
+            commands = self.commands(root, target, config, '--include-dependencies')
+            self.assertTrue(any('tools/validate-mod.py' in c and str(shared) in c for c in commands))
+
+    def test_workspace_copy_is_current_project_and_campaign_override_reaches_scan(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            source = self.fixture(root, 'source/Main.SC2Mod', 'Campaigns/Story.SC2Campaign')
+            mods = root / 'game/Mods'; mods.mkdir(parents=True)
+            story = self.fixture(root, 'archive/Story.SC2Campaign')
+            config = {'paths': {'mods_dir': str(mods)}, 'project': {'primary_mod': source.name,
+                'source_mode': 'workspace_copy', 'source_mod': str(source)}, 'validation': {'include_dependencies': True}}
+            commands = self.commands(root, source, config, '--campaigns-dir', 'archive')
+            validator = next(c for c in commands if 'tools/validate-agent-config.py' in c)
+            self.assertEqual(validator[-2:], ['--campaigns-dir', str(story.parent)])
+            self.assertTrue(any('tools/validate-mod.py' in c and str(story) in c for c in commands))
+
     def test_explicit_target_reaches_ledger_audit(self):
         target = Path('Other/Other.SC2Mod').resolve()
         commands = []

@@ -15,6 +15,27 @@ validator = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(validator)
 
 class SourceConfigTests(unittest.TestCase):
+    def test_one_off_dependency_roots_do_not_rewrite_configuration(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            for relative, ref in (('game/Mods/Main.SC2Mod', 'Mods/Shared.SC2Mod'),
+                                  ('alternate/Mods/Shared.SC2Mod', 'Campaigns/Story.SC2Campaign'),
+                                  ('archive/Story.SC2Campaign', None)):
+                mod = root / relative; mod.mkdir(parents=True)
+                (mod / 'ComponentList.SC2Components').write_text('<Components><DataComponent Type="info">DocumentInfo</DataComponent></Components>')
+                (mod / 'DocumentInfo').write_text('<DocInfo><Dependencies>' +
+                    ('<Value>file:' + ref + '</Value>' if ref else '') + '</Dependencies></DocInfo>')
+            (root / 'maps').mkdir()
+            config = {'schema_version': 1, 'paths': {'workspace_dir': '.', 'sc2_install_dir': 'game',
+                'mods_dir': 'game/Mods', 'campaign_maps_dir': 'maps'}, 'project': {'primary_mod': 'Main.SC2Mod',
+                'data_dir': str(root.with_name(root.name + '-records'))}}
+            path = root / 'agent-config.json'; path.write_text(json.dumps(config))
+            before = path.read_bytes()
+            with patch.object(validator, 'REPO_ROOT', root), redirect_stdout(io.StringIO()):
+                self.assertEqual(validator.main(), 1)
+                self.assertEqual(validator.main(['--mods-dir', 'alternate/Mods', '--campaigns-dir', 'archive']), 0)
+            self.assertEqual(path.read_bytes(), before)
+
     def test_copy_without_deployment_validates_and_missing_source_fails(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

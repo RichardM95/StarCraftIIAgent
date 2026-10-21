@@ -18,6 +18,7 @@ from sc2_paths import (
     config_path,
     find_project_mods,
     load_project_config,
+    is_project_source,
     resolve_configured_path,
 )
 
@@ -47,13 +48,19 @@ def dependency_validation_targets(
     exclusions: set[str],
     explicit_mods: str | None = None,
     official_cache: Path | None = None,
+    campaigns_dir: Path | None = None,
 ) -> tuple[list[Path], list[str]]:
     """Resolve active component dependencies selected for static validation."""
     try:
         mods_dir = resolve_dependency_root(REPO_ROOT, primary_mod, config, explicit_mods)
     except ValueError as exc:
         return [], [str(exc)]
-    graph = build_dependency_graph(primary_mod, mods_dir, **({"official_cache": official_cache} if official_cache else {}))
+    overrides = {}
+    if official_cache is not None:
+        overrides['official_cache'] = official_cache
+    if campaigns_dir is not None:
+        overrides['campaigns_dir'] = campaigns_dir
+    graph = build_dependency_graph(primary_mod, mods_dir, **overrides)
     problems = dependency_problems(graph)
     primary_key = str(primary_mod.resolve(strict=False)).casefold()
     targets: list[Path] = []
@@ -111,7 +118,7 @@ def main() -> int:
     )
     parser.add_argument("--official-cache", type=Path, help="Read-only official cache; verifies hashes/XML without authoring lint")
     parser.add_argument("--mods-dir", help="Explicit dependency Mods root for a one-off component")
-    parser.add_argument("--campaigns-dir", help="Explicit dependency Campaigns root for trigger validation")
+    parser.add_argument("--campaigns-dir", type=Path, help="Explicit dependency Campaigns root for all dependency checks")
     dependency_group = parser.add_mutually_exclusive_group()
     dependency_group.add_argument(
         "--include-dependencies",
@@ -162,7 +169,11 @@ def main() -> int:
         )
         return 2
     mod_dir = str(mods[0])
-    configured_include, configured_exclusions = validation_settings(config)
+    args.mods_dir = str(resolve_configured_path(REPO_ROOT, args.mods_dir)) if args.mods_dir else None
+    args.campaigns_dir = resolve_configured_path(REPO_ROOT, str(args.campaigns_dir)) if args.campaigns_dir is not None else None
+    args.official_cache = resolve_configured_path(REPO_ROOT, str(args.official_cache)) if args.official_cache is not None else None
+    selected_project = is_project_source(REPO_ROOT, mods[0], config)
+    configured_include, configured_exclusions = validation_settings(config if selected_project else {})
     include_dependencies = (
         configured_include
         if args.include_dependencies is None
@@ -175,7 +186,7 @@ def main() -> int:
     dependency_problems: list[str] = []
     if include_dependencies:
         dependency_targets, dependency_problems = dependency_validation_targets(
-            mods[0], config, exclusions, args.mods_dir, args.official_cache
+            mods[0], config, exclusions, args.mods_dir, args.official_cache, args.campaigns_dir
         )
 
     print("=" * 60)
@@ -190,6 +201,16 @@ def main() -> int:
             print(f"Excluded component mods: {', '.join(sorted(exclusions))}")
     print()
 
+    dependency_options = []
+    for option, value in (('--mods-dir', args.mods_dir), ('--campaigns-dir', args.campaigns_dir),
+                          ('--official-cache', args.official_cache)):
+        if value is not None:
+            dependency_options.extend([option, str(value)])
+    target_check = (
+        ('Agent Path Configuration Validator', [sys.executable, 'tools/validate-agent-config.py', *dependency_options])
+        if selected_project else
+        ('Target Dependency Validator', [sys.executable, 'tools/inspect-mod-dependencies.py', '--mod-dir', mod_dir, *dependency_options])
+    )
     steps = [
         (
             "Tool Unit Tests",
@@ -204,10 +225,7 @@ def main() -> int:
                 "test_*.py",
             ],
         ),
-        (
-            "Agent Path Configuration Validator",
-            [sys.executable, "tools/validate-agent-config.py"] + (["--official-cache", str(args.official_cache)] if args.official_cache else []),
-        ),
+        target_check,
         (
             "Static XML & Galaxy Script Validator",
             [sys.executable, "tools/validate-mod.py", "--mod-dir", mod_dir],
@@ -225,10 +243,7 @@ def main() -> int:
         ("Documentation Link Integrity Checker", [sys.executable, "tools/check-doc-links.py"]),
     ]
 
-    trigger_command = [sys.executable, 'tools/sc2-trigger-query.py', '--target', mod_dir]
-    for option, value in (('--mods-dir', args.mods_dir), ('--campaigns-dir', args.campaigns_dir), ('--official-cache', args.official_cache)):
-        if value:
-            trigger_command.extend([option, str(value)])
+    trigger_command = [sys.executable, 'tools/sc2-trigger-query.py', '--target', mod_dir, *dependency_options]
     trigger_command.append('check')
     steps.insert(3, ('GUI Trigger Dependency Validator', trigger_command))
 
