@@ -11,6 +11,7 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 
 from sc2_paths import find_project_mods
+from sc2_components import component_path, parse_xml, archive_of, verify_archives, component_session
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 SCHEMAS_DIR = REPO_ROOT / "tools" / "schemas" / "sc2-xsd"
@@ -44,6 +45,7 @@ def find_script_blocks(mod_dirs: list[Path] | None = None) -> list[Path]:
     selected_mods = mod_dirs if mod_dirs is not None else find_local_mods()
     # Mod-level custom script files (e.g. My_Main.galaxy included into compiled libs)
     for mod_dir in selected_mods:
+        mod_dir = component_path(mod_dir)
         blocks.extend(mod_dir.glob("Base.SC2Data/*.galaxy"))
         scripts_dir = mod_dir / "Base.SC2Data" / "Scripts"
         if scripts_dir.is_dir():
@@ -93,7 +95,8 @@ def validate_xml_schemas(gamedata_dir: Path) -> tuple[list[str], str]:
         checked_count = 0
         for xml_file in sorted(gamedata_dir.glob("*.xml")):
             try:
-                doc = lxml_etree.parse(str(xml_file))
+                with xml_file.open('rb') as stream:
+                    doc = lxml_etree.parse(stream)
                 root = doc.getroot()
                 schema = gamedata_schema if root.tag == "Includes" and gamedata_schema is not None else catalog_schema
                 if not schema.validate(doc):
@@ -116,7 +119,7 @@ def validate_xml_schemas(gamedata_dir: Path) -> tuple[list[str], str]:
     schema_groups: dict[Path, list[Path]] = {CATALOG_XSD: [], GAMEDATA_XSD: []}
     for xml_file in sorted(gamedata_dir.glob("*.xml")):
         try:
-            root = ET.parse(xml_file).getroot()
+            root = parse_xml(xml_file).getroot()
         except ET.ParseError:
             # The ordinary XML parser reports this with a clearer message.
             continue
@@ -126,6 +129,14 @@ def validate_xml_schemas(gamedata_dir: Path) -> tuple[list[str], str]:
     checked_count = 0
     for schema_path, xml_files in schema_groups.items():
         if not xml_files:
+            continue
+        if any(archive_of(p) for p in xml_files):
+            for xml_file in xml_files:
+                result = subprocess.run([xmllint, '--noout', '--schema', str(schema_path), '-'],
+                    input=xml_file.read_bytes(), capture_output=True)
+                checked_count += 1
+                if result.returncode:
+                    issues.append(f'XSD Schema Error ({xml_file}): {result.stderr.decode(errors="replace")}')
             continue
         result = subprocess.run(
             [
@@ -180,6 +191,7 @@ def validate_catalog_root(root: ET.Element, file_name: str) -> list[str]:
 
 
 def validate_xml_catalogs(mod_dir: Path) -> tuple[list[str], str]:
+    mod_dir = component_path(mod_dir)
     issues: list[str] = []
     gamedata_dir = mod_dir / "Base.SC2Data" / "GameData"
     if not gamedata_dir.is_dir():
@@ -189,7 +201,7 @@ def validate_xml_catalogs(mod_dir: Path) -> tuple[list[str], str]:
     for xml_file in xml_files:
         try:
             parser = ET.XMLParser(target=ET.TreeBuilder(insert_comments=True))
-            tree = ET.parse(xml_file, parser=parser)
+            tree = parse_xml(xml_file, parser=parser)
             root = tree.getroot()
         except ET.ParseError as e:
             issues.append(f"XML parse error in {xml_file.name}: {e}")
@@ -203,6 +215,7 @@ def validate_xml_catalogs(mod_dir: Path) -> tuple[list[str], str]:
 
 
 def validate_ui_layouts(mod_dir: Path) -> list[str]:
+    mod_dir = component_path(mod_dir)
     issues: list[str] = []
     layout_dir = mod_dir / "Base.SC2Data" / "UI" / "Layout"
     layout_files = []
@@ -217,7 +230,7 @@ def validate_ui_layouts(mod_dir: Path) -> list[str]:
 
     for layout_file in layout_files:
         try:
-            tree = ET.parse(layout_file)
+            tree = parse_xml(layout_file)
             root = tree.getroot()
         except ET.ParseError as e:
             issues.append(f"SC2Layout XML parse error in {layout_file.name}: {e}")
@@ -245,6 +258,8 @@ def validate_ui_layouts(mod_dir: Path) -> list[str]:
 
 
 def validate_galaxy_file(file_path: Path, mod_dir: Path | None = None) -> list[str]:
+    file_path = component_path(file_path)
+    mod_dir = component_path(mod_dir) if mod_dir is not None else None
     issues: list[str] = []
     if not file_path.is_file():
         issues.append(f"Galaxy file not found: {file_path}")
@@ -336,6 +351,7 @@ def validate_galaxy_file(file_path: Path, mod_dir: Path | None = None) -> list[s
 
 
 def validate_galaxy_scripts(mod_dir: Path | None) -> list[str]:
+    mod_dir = component_path(mod_dir) if mod_dir is not None else None
     issues: list[str] = []
     script_blocks = find_script_blocks([mod_dir] if mod_dir is not None else [])
     for block in script_blocks:
@@ -365,6 +381,7 @@ def validate_galaxy_scripts(mod_dir: Path | None) -> list[str]:
     return issues
 
 
+@component_session
 def main() -> int:
     parser = argparse.ArgumentParser(
         description="Run static validation checks on SC2 XML catalogs, UI layouts, and Galaxy scripts."
@@ -409,6 +426,7 @@ def main() -> int:
 
     galaxy_issues = validate_galaxy_scripts(primary_mod)
 
+    verify_archives()
     total_issues = len(xml_issues) + len(layout_issues) + len(galaxy_issues)
 
     print("\n" + "=" * 60)

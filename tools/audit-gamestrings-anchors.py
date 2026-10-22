@@ -9,6 +9,7 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 
 from sc2_paths import find_project_mods
+from sc2_components import component_path, require_editable, verify_archives, component_session
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 
@@ -73,6 +74,7 @@ def parse_string_map(path: Path) -> dict[str, str]:
 
 
 def fill_from_objectstrings(strings_path: Path, object_path: Path, keys: set[str], missing: list[str]) -> int:
+    require_editable(strings_path)
     obj = parse_string_map(object_path)
     game = parse_string_map(strings_path)
     lines = []
@@ -109,6 +111,9 @@ def fill_from_objectstrings(strings_path: Path, object_path: Path, keys: set[str
 
 
 def audit_mod_localization(mod_dir: Path, fill: bool = False, locale: str = "enUS") -> list[str]:
+    if fill:
+        require_editable(mod_dir)
+    mod_dir = component_path(mod_dir)
     issues: list[str] = []
     game_data = mod_dir / "Base.SC2Data" / "GameData"
     strings_path = mod_dir / f"{locale}.SC2Data" / "LocalizedData" / "GameStrings.txt"
@@ -136,6 +141,7 @@ def audit_mod_localization(mod_dir: Path, fill: bool = False, locale: str = "enU
     return issues
 
 
+@component_session
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--fill", action="store_true", help="Auto-fill missing GameStrings from ObjectStrings")
@@ -152,6 +158,11 @@ def main() -> int:
     all_issues: list[str] = []
     audited_mods = 0
     for mod in mods:
+        if args.fill:
+            try:
+                require_editable(mod)
+            except ValueError as exc:
+                parser.error(str(exc))
         game_data = mod / "Base.SC2Data" / "GameData"
         strings_path = mod / f"{args.locale}.SC2Data" / "LocalizedData" / "GameStrings.txt"
         if not game_data.is_dir():
@@ -163,6 +174,7 @@ def main() -> int:
         audited_mods += 1
         all_issues.extend(audit_mod_localization(mod, fill=args.fill, locale=args.locale))
 
+    verify_archives()
     print("=" * 60)
     print("GAMESTRINGS ANCHOR AUDIT")
     print("=" * 60)

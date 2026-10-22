@@ -188,6 +188,7 @@ def main() -> int:
 
     graph = build_dependency_graph(primary_mod, layout["mods_dir"], official_cache=args.official_cache, strict_external=True)
     failures.extend(graph["errors"])
+    failures.extend(graph.get('official_problems', []))
     for edge in graph["missing"]:
         source_name = graph["nodes"][edge["source"]]["name"]
         failures.append(

@@ -15,7 +15,8 @@ from functools import lru_cache
 from pathlib import Path
 
 from sc2_catalog_inputs import file_digest, inventory
-from sc2_dependencies import build_dependency_graph, dependency_problems
+from sc2_dependencies import build_dependency_graph, dependency_problems, dependency_state, official_research_allowed
+from sc2_components import component_path, component_exists, parse_xml, archive_of, verify_archives, provenance, source_for
 
 VERSION = 2
 SEARCH_TYPES = {"FunctionDef", "Trigger", "Preset", "PresetValue", "ParamDef", "SubFuncType", "Variable"}
@@ -24,6 +25,7 @@ RESOURCE_TAGS = {"ValueUnit", "ValuePoint", "ValueRegion", "ValueDoodad", "Value
 
 def child_path(root: Path, relative: str) -> Path:
     """Resolve extract casing portably; reject references outside the component."""
+    root = component_path(root)
     relative = relative.replace("\\", "/")
     candidate = root.joinpath(*relative.split("/")).resolve()
     if not candidate.is_relative_to(root.resolve()):
@@ -50,6 +52,14 @@ def component_of(path: Path) -> Path:
 def source_inputs(roots: list[Path]) -> list[Path]:
     files = set()
     for root in roots:
+        if archive_of(root):
+            component = component_path(root)
+            files.update(p for p in component.rglob('*') if p.name.casefold() in {
+                'triggers', 'librarylist.xml', 'triggerstrings.txt', 'gamestrings.txt', 'documentinfo',
+                'documentheader', 'componentlist.sc2components', 'mapscript.galaxy'}
+                or p.suffix.casefold() in {'.sc2lib', '.triggerlib'})
+            files.add(archive_of(root))
+            continue
         if not root.is_dir():
             raise ValueError(f"Reference root missing: {root}")
         for directory, dirs, names in os.walk(root):
@@ -92,10 +102,12 @@ def trigger_strings(component: Path) -> dict[str, str]:
 class Document:
     def __init__(self, path: Path, raw: bytes | None = None, names: dict | None = None,
                  localized_names: dict | None = None):
+        path = component_path(path)
         self.path = path.resolve()
         self.component = component_of(path)
         raw = raw if raw is not None else path.read_bytes()
         self.sha256 = hashlib.sha256(raw).hexdigest()
+        self.archive = provenance(path, member_sha256=self.sha256)
         self.root = ET.fromstring(raw)
         self.localized_names = localized_strings(self.component) if localized_names is None else localized_names
         self.names = (self.localized_names.get('zhCN', {}) | self.localized_names.get('enUS', {})
@@ -151,11 +163,12 @@ def xml(e: ET.Element) -> str:
     return ET.tostring(e, encoding="unicode")
 
 
-def registered_files(component: Path) -> tuple[list[Path], list[str]]:
+def registered_files(component: Path, *, official_absence=False) -> tuple[list[Path], list[str]]:
+    component = component_path(component)
     files, problems = [], []
     listing = child_path(component, "ComponentList.SC2Components")
     if listing.is_file():
-        tree = ET.parse(listing).getroot()
+        tree = parse_xml(listing).getroot()
         if any(e.get('Type') == 'trig' and not (e.text or '').strip() for e in tree.findall('DataComponent')):
             problems.append(f"{listing}: empty trigger component registration")
         files.extend(child_path(component, e.text.strip()) for e in tree.findall("DataComponent")
@@ -163,10 +176,10 @@ def registered_files(component: Path) -> tuple[list[Path], list[str]]:
     elif (component / "Triggers").is_file():
         files.append(component / "Triggers")
     liblist = child_path(component, "Base.SC2Data/TriggerLibs/LibraryList.xml")
-    if not listing.is_file() and not files and not liblist.is_file():
+    if not listing.is_file() and not files and not liblist.is_file() and not official_absence:
         problems.append(f"{component}: missing trigger registration metadata; absence cannot be confirmed")
     if liblist.is_file():
-        for e in ET.parse(liblist).getroot():
+        for e in parse_xml(liblist).getroot():
             external = e.get("external")
             if external:
                 stem = "Base.SC2Data/" + external
@@ -185,13 +198,16 @@ def registered_files(component: Path) -> tuple[list[Path], list[str]]:
 
 
 class Target:
-    def __init__(self, path: Path, mods: Path, campaigns: Path | None, *, official_cache: Path | None = None):
+    def __init__(self, path: Path, mods: Path, campaigns: Path | None, *, official_cache: Path | None = None,
+                 allow_partial_official_cache=False):
         self.path = path.resolve()
-        if not self.path.is_dir() or self.path.suffix.casefold() not in {".sc2mod", ".sc2map", ".sc2campaign"}:
+        if not component_exists(self.path):
             raise ValueError(f"Not a Components target: {path}")
         self.graph = build_dependency_graph(self.path, mods, campaigns_dir=campaigns,
-                                            allow_unpacked=True, strict_external=True, official_cache=official_cache)
+                                            allow_unpacked=True, strict_external=True, official_cache=official_cache,
+                                            allow_partial_official_cache=allow_partial_official_cache)
         self.problems = dependency_problems(self.graph)
+        self.official_research = official_research_allowed(dependency_state(self.graph))
         self.documents = []
         self.providers = defaultdict(list)
         self.routes = {str(self.path).casefold(): [str(self.path)]}
@@ -202,10 +218,12 @@ class Target:
                 if e["source"] == source and e.get("exists") and e["target"] not in self.routes:
                     self.routes[e["target"]] = self.routes[source] + [e["target_path"]]
                     pending.append(e["target"])
-        for node in self.graph["nodes"].values():
-            component = Path(node["path"])
+        self.source_nodes = {**self.graph['nodes'], **self.graph.get('research_nodes', {})}
+        for node in self.source_nodes.values():
+            component = component_path(node["path"])
             try:
-                files, errors = registered_files(component)
+                absence = (node.get('casc') or {}).get('trigger_registration') or {}
+                files, errors = registered_files(component, official_absence=absence.get('status') == 'absent')
                 self.problems.extend(errors)
                 for p in files:
                     d = Document(p)
@@ -224,8 +242,8 @@ class Target:
             if len(providers) > 1:
                 self.problems.append(f"Ambiguous definition {key}: " + ", ".join(str(d.path) for d, _ in providers))
         self.input_candidates = {d.path for d in self.documents}
-        for node in self.graph["nodes"].values():
-            component = Path(node["path"])
+        for node in self.source_nodes.values():
+            component = component_path(node["path"])
             for relative in ("ComponentList.SC2Components", node.get("info_component") or "DocumentInfo",
                              "Base.SC2Data/TriggerLibs/LibraryList.xml",
                              "enUS.SC2Data/LocalizedData/TriggerStrings.txt", "zhCN.SC2Data/LocalizedData/TriggerStrings.txt"):
@@ -233,12 +251,15 @@ class Target:
         official = self.graph.get("official_cache")
         if official:
             self.input_candidates.update((Path(official["manifest"]), Path(official["identity"]["install"]) / ".build.info"))
+            if official.get('engine') and official['engine'].get('path'):
+                self.input_candidates.add(Path(official['engine']['path']))
         self.inputs = inventory(sorted(p for p in self.input_candidates if p.is_file()))
         for d in self.documents:
             if self.inputs[d.path.as_posix()]["sha256"] != d.sha256:
                 self.problems.append(f"Target source changed while loading: {d.path}")
 
     def refresh(self):
+        verify_archives()
         current = inventory(sorted(p for p in self.input_candidates if p.is_file()))
         if current != self.inputs and "Target inputs changed; rerun the query" not in self.problems:
             self.problems.append("Target inputs changed; rerun the query")
@@ -253,11 +274,12 @@ class Target:
     def libraries(self) -> dict:
         self.refresh()
         return {"target": str(self.path), "status": "unconfirmed" if self.problems else "confirmed",
-                "problems": self.problems,
-                "libraries": [{"library": lib, "source": str(d.path), "sha256": d.sha256,
-                               "source_class": "target_local" if d.component == self.path else "active_dependency",
-                               "origin": self.graph["nodes"].get(str(d.component).casefold(), {}).get("origin", "local"),
-                               "casc": self.graph["nodes"].get(str(d.component).casefold(), {}).get("casc"),
+                "problems": self.problems, 'dependency_status': dependency_state(self.graph),
+                "libraries": [{"library": lib, "source": str(d.path), "sha256": d.sha256, "archive": d.archive,
+                               "source_class": "target_local" if d.component == self.path else
+                                    "official_reference" if self.source_nodes.get(str(d.component).casefold(), {}).get('scope') == 'research_only' else "active_dependency",
+                               "origin": self.source_nodes.get(str(d.component).casefold(), {}).get("origin", "local"),
+                               "casc": self.source_nodes.get(str(d.component).casefold(), {}).get("casc"),
                                "dependency_path": self.routes.get(str(d.component).casefold(), [])}
                               for d in self.documents for lib in sorted(d.libraries)]}
 
@@ -499,6 +521,8 @@ class Index:
                 old = previous[p.as_posix()]
                 stat = p.stat()
                 if (stat.st_size != old["size"] or stat.st_mtime_ns != old["mtime_ns"]
+                        or (archive_of(p) and source_for(p).sha256 !=
+                            ((old.get('source') or {}).get('archive_sha256') if Path(p) != archive_of(p) else old['sha256']))
                         or (verify_hashes and file_digest(p) != old["sha256"])):
                     raise ValueError(f"Trigger index stale: {p}; rebuild")
         except Exception:
@@ -550,7 +574,7 @@ def describe(d: Document, key: tuple, resolve) -> dict:
                "type": key[1], "id": key[2], "name": d.name(key), "names": d.aliases(key), "xml": xml(element),
                "flags": [e.tag for e in element if e.tag.startswith("Flag")],
                "return_type": xml(element.find("ReturnType")) if element.find("ReturnType") is not None else None,
-               "sha256": d.sha256, "parameters": [], "subfunctions": [], "presets": [], "errors": []}
+               "sha256": d.sha256, "archive": d.archive, "parameters": [], "subfunctions": [], "presets": [], "errors": []}
     for tag, output in (("Parameter", "parameters"), ("SubFunctionType", "subfunctions"), ("Item", "presets")):
         for ref in element.findall(tag):
             if not ref.get("Type"):

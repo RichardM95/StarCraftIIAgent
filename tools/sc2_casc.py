@@ -56,15 +56,16 @@ def wanted(name: str) -> bool:
 
 class CascProcess:
     """One storage handle per child; timeout or a native crash kills only the child."""
-    def __init__(self, dll: Path, install: Path, encoding='ansi', timeout=60):
+    def __init__(self, dll: Path, install: Path, encoding='ansi', timeout=60, *, _command=None, _label='CASC'):
         if timeout <= 0:
             raise ValueError('CASC timeout must be positive')
         if pe_bits(dll) != struct.calcsize('P') * 8:
-            raise ValueError('CascLib/Python bitness mismatch')
+            raise ValueError(_label + '/Python bitness mismatch')
         self.timeout = timeout
+        self.label = _label
         self.messages = queue.Queue()
         env = dict(os.environ, PYTHONIOENCODING='utf-8', PYTHONDONTWRITEBYTECODE='1')
-        self.process = subprocess.Popen([sys.executable, '-B', str(Path(__file__).resolve()),
+        self.process = subprocess.Popen(_command or [sys.executable, '-B', str(Path(__file__).resolve()),
                                          str(dll), str(install), encoding],
                                         stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
                                         encoding='utf-8', env=env)
@@ -76,7 +77,7 @@ class CascProcess:
             except Exception as exc:
                 self.messages.put({'error': 'Worker protocol: ' + str(exc)})
             finally:
-                self.messages.put({'error': 'CASC child exited; native crash or startup failure'})
+                self.messages.put({'error': self.label + ' child exited; native crash or startup failure'})
         def receive_errors():
             try:
                 self.stderr.extend(self.process.stderr)
@@ -97,7 +98,7 @@ class CascProcess:
             response = self.messages.get(timeout=self.timeout)
         except queue.Empty:
             self.close()
-            raise ValueError('CASC child timed out')
+            raise ValueError(getattr(self, 'label', 'CASC') + ' child timed out')
         if 'error' in response:
             self.close()
             raise ValueError(response['error'] + '; ' + ''.join(self.stderr)[-1500:])
@@ -108,7 +109,8 @@ class CascProcess:
             self.process.stdin.write(json.dumps({'op': op, **kwargs}) + '\n')
             self.process.stdin.flush()
         except (OSError, ValueError) as exc:
-            raise ValueError('CASC child pipe closed') from exc
+            self.close()
+            raise ValueError(getattr(self, 'label', 'CASC') + ' child pipe closed') from exc
         response = self._receive()
         if response.get('request_error'):
             raise ValueError(response['request_error'])

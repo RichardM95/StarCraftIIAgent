@@ -1,0 +1,12 @@
+{
+  "name": "StormLib",
+  "file_version": "9.26.0.3",
+  "source": "https://github.com/ladislav-zezula/StormLib/tree/v9.26",
+  "license": "https://github.com/ladislav-zezula/StormLib/blob/master/LICENSE",
+  "local_origin": "E:/Program Files (x86)/SC2EditorTool/StormLib.dll",
+  "sha256": "b8de24ca85b0b1919cf76d01394feef4d4cb065eb0df3a7480e3b2a1145aae79",
+  "bits": 64,
+  "archive_charset": "Unicode",
+  "member_charset": "UTF-8",
+  "build_provenance": "Existing toolbox binary; upstream source revision/build settings not independently reproduced"
+}

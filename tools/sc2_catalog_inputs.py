@@ -7,30 +7,44 @@ from pathlib import Path
 
 from sc2_dependencies import find_info_component
 from sc2_official import catalog_paths, cache_manifest, component_file, safe_path
+from sc2_components import component_path, archive_of, provenance, verify_archives, source_for
 
 
 MANIFEST_SUFFIX = ".inputs.json"
-MANIFEST_VERSION = 4
+MANIFEST_VERSION = 8
 LOCALIZATION_NAMES = ("GameStrings.txt", "ObjectStrings.txt", "TriggerStrings.txt")
 
 
-def catalog_xml_inputs(root: Path, mods: tuple[Path, ...] | list[Path]) -> list[Path]:
+def catalog_xml_inputs(root: Path, mods: tuple[Path, ...] | list[Path], *, official_research=False, manifests=None) -> list[Path]:
     files: list[Path] = []
+    manifests = {} if manifests is None else manifests
+    registrations = {}
     for directory in (root / "DataEditorXML", root / "XMLFromDependenciesWeDontUse"):
         if directory.is_dir():
-            files.extend(directory.glob("*.txt"))
+            files.extend(sorted(directory.glob("*.txt")))
     for mod in mods:
-        files.extend(catalog_paths(mod))
-    return sorted((path for path in files if path.is_file()), key=lambda path: str(path).casefold())
+        manifest = cache_manifest(mod)
+        if manifest and manifest not in manifests:
+            manifests[manifest] = json.loads(manifest.read_text(encoding='utf-8'))
+        if manifest and not official_research and manifest not in registrations:
+            from sc2_engine_dependencies import catalog_registration
+            data = manifests[manifest]
+            registrations[manifest] = (catalog_registration(Path(data['identity']['install']), data['identity'], data['engine'])
+                                       if data.get('engine') else False)
+        files.extend(catalog_paths(mod, research=official_research, manifest_data=manifests.get(manifest),
+                                   registration=registrations.get(manifest, False)))
+    return list(dict.fromkeys(path for path in files if path.is_file()))
 
 
-def index_inputs(root: Path, mods: tuple[Path, ...] | list[Path]) -> list[Path]:
-    files = catalog_xml_inputs(root, mods)
+def index_inputs(root: Path, mods: tuple[Path, ...] | list[Path], *, official_research=False) -> list[Path]:
+    data_by_manifest = {}
+    files = catalog_xml_inputs(root, mods, official_research=official_research, manifests=data_by_manifest)
     manifests = set()
     config = root / "agent-config.json"
     if config.is_file():
         files.append(config)
     for mod in mods:
+        mod = component_path(mod)
         for name in ("ComponentList.SC2Components", "DocumentInfo"):
             path = mod / name
             if path.is_file():
@@ -44,11 +58,22 @@ def index_inputs(root: Path, mods: tuple[Path, ...] | list[Path]) -> list[Path]:
         official = cache_manifest(mod)
         if official:
             manifests.add(official)
+        archive = archive_of(mod)
+        if archive:
+            files.append(archive)
+            files.extend(Path(__file__).with_name(name) for name in ('sc2_components.py', 'sc2_mpq.py', 'sc2_casc.py'))
+            files.append(Path(__file__).parent / 'vendor/stormlib/StormLib.dll')
     for official in sorted(manifests):
-        data = json.loads(official.read_text(encoding="utf-8"))
+        data = data_by_manifest.get(official)
+        if data is None:
+            data = json.loads(official.read_text(encoding="utf-8"))
         files.extend((official, Path(data["identity"]["install"]) / ".build.info"))
+        if data.get('engine') and data['engine'].get('path'):
+            files.append(Path(data['engine']['path']))
         # Include each cache inventory once: registries, includes and available locales.
         files.extend(path for k in data["files"] if (path := safe_path(official.parent, k)).is_file())
+    if manifests:
+        files.extend(Path(__file__).with_name(name) for name in ('sc2_official.py', 'sc2_engine_dependencies.py', 'sc2_dependencies.py'))
     return sorted(set(files), key=lambda path: str(path).casefold())
 
 
@@ -65,6 +90,7 @@ def file_digest(path: Path) -> str:
 
 
 def inventory(paths: list[Path]) -> dict[str, dict[str, int | str]]:
+    verify_archives()
     result = {}
     for path in paths:
         stat = path.stat()
@@ -73,6 +99,10 @@ def inventory(paths: list[Path]) -> dict[str, dict[str, int | str]]:
             "mtime_ns": stat.st_mtime_ns,
             "sha256": file_digest(path),
         }
+        if archive_of(path) and Path(path) != archive_of(path):
+            entry = result[path.resolve(strict=False).as_posix()]
+            entry['source'] = provenance(path, member_sha256=entry['sha256'])
+    verify_archives()
     return result
 
 
@@ -93,7 +123,7 @@ def read_manifest(index_path: Path) -> dict:
     try:
         data = json.loads(path.read_text(encoding="utf-8"))
         state = data.setdefault("dependencies", {"status": "complete", "problems": []})
-        if (data.get("version") not in {1, 2, 3, MANIFEST_VERSION} or not isinstance(data.get("files"), dict)
+        if (data.get("version") not in {1, 2, 3, 4, 5, 6, 7, MANIFEST_VERSION} or not isinstance(data.get("files"), dict)
                 or state.get("status") not in {"complete", "partial"}
                 or not isinstance(state.get("problems"), list)
                 or not all(isinstance(item, str) for item in state["problems"])
@@ -128,6 +158,11 @@ def changed_input(
             stat = item.stat()
             if stat.st_size != previous.get("size") or stat.st_mtime_ns != previous.get("mtime_ns"):
                 return item
+            if archive_of(item):
+                current_archive = source_for(item).sha256
+                recorded_archive = (previous.get('source') or {}).get('archive_sha256') if Path(item) != archive_of(item) else previous.get('sha256')
+                if recorded_archive != current_archive:
+                    return item
             if verify_hashes and file_digest(item) != previous.get("sha256"):
                 return item
         except OSError:

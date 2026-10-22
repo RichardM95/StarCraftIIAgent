@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import importlib.util
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 from unittest.mock import patch
@@ -69,6 +70,70 @@ class CatalogBuilderDependencyTests(unittest.TestCase):
                 BUILDER.source_info(BUILDER.ROOT / "DataEditorXML" / "Liberty Mod Units.txt")[0],
                 "reference_export",
             )
+
+
+class LocalizationPrecedenceTests(unittest.TestCase):
+    def setUp(self):
+        temporary = tempfile.TemporaryDirectory()
+        self.addCleanup(temporary.cleanup)
+        self.root = Path(temporary.name)
+        self.sources = {}
+        for name, source_class, value in (
+            ("Reference", "reference_export", "REFERENCE"),
+            ("First", "active_component_dependency", "FIRST"),
+            ("Second", "active_component_dependency", "SECOND"),
+            ("Main", "local_mod", "LOCAL"),
+        ):
+            path = self.root / (name + ".txt")
+            path.write_text("Unit/Name/Shared=" + value, encoding="utf-8")
+            self.sources[name] = path
+        self.classes = dict(zip(self.sources.values(), (
+            "reference_export", "active_component_dependency", "active_component_dependency", "local_mod")))
+        for active in (
+            patch.object(BUILDER, "source_info", side_effect=lambda p: (self.classes[p], p.stem)),
+            patch.object(BUILDER, "source_provenance", return_value={"loading_status": "unconfirmed"}),
+        ):
+            active.start()
+            self.addCleanup(active.stop)
+
+    def read(self, names):
+        nodes = {}
+        for name in names:
+            BUILDER.read_localization(self.sources[name], "GameStrings", nodes)
+        return nodes["loc:Unit/Name/Shared"]
+
+    def test_reference_never_hides_active_text_and_local_override_wins(self):
+        for order in (("Reference", "First"), ("First", "Reference")):
+            with self.subTest(order=order):
+                node = self.read(order)
+                self.assertEqual(node["value_preview"], "FIRST")
+                self.assertEqual(node["source_class"], "active_component_dependency")
+                self.assertEqual(len(node["values"]), 2)
+        for order in (("Main", "First", "Reference"), ("Reference", "First", "Main")):
+            node = self.read(order)
+            self.assertEqual(node["value_preview"], "LOCAL")
+            self.assertEqual(node["source_class"], "local_mod")
+            self.assertEqual(node["value_status"], "resolved")
+            self.assertTrue(all(value["casc"] for value in node["values"]))
+
+    def test_conflicting_dependencies_are_ambiguous_in_either_order(self):
+        for order in (("First", "Second", "Reference"), ("Second", "Reference", "First")):
+            with self.subTest(order=order):
+                node = self.read(order)
+                self.assertEqual(node["value_status"], "ambiguous")
+                self.assertNotIn("value_preview", node)
+                self.assertNotIn("source_file", node)
+                self.assertEqual(len(node["values"]), 3)
+        node = self.read(("First", "Second", "Main"))
+        self.assertEqual(node["value_status"], "resolved")
+        self.assertEqual(node["value_preview"], "LOCAL")
+
+    def test_identical_values_keep_each_provider_and_reference_stays_reference(self):
+        self.sources["Second"].write_text("Unit/Name/Shared=FIRST", encoding="utf-8")
+        node = self.read(("First", "Second"))
+        self.assertEqual(node["value_status"], "resolved")
+        self.assertEqual(len(node["values"]), 2)
+        self.assertEqual(self.read(("Reference",))["value_status"], "reference_only")
 
 
 if __name__ == "__main__":

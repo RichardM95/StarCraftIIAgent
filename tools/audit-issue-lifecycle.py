@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import re
 from sc2_paths import project_data_dir
+from sc2_components import component_exists
 import sys
 from pathlib import Path
 
@@ -28,7 +29,7 @@ def main() -> int:
     selection.add_argument("--target", type=Path, help="Components target whose project ledger is checked")
     args = parser.parse_args()
     try:
-        if args.target is not None and (not args.target.is_dir() or args.target.suffix.casefold() not in {".sc2mod", ".sc2map"}):
+        if args.target is not None and not component_exists(args.target):
             raise ValueError("Not a Components target: " + str(args.target))
         data = project_data_dir(REPO_ROOT, primary=args.target) if args.ledger is None else None
         ledger = args.ledger if args.ledger is not None else data / "docs/issues.md" if data else None

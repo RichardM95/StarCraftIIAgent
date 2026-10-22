@@ -19,16 +19,20 @@ from typing import Iterable
 from xml.sax.saxutils import escape
 
 from sc2_publication import publish_directory, staged_directory
-from sc2_dependencies import build_dependency_graph, resolve_dependency_root, dependency_state, RECURSION_DISABLED
+from sc2_dependencies import build_dependency_graph, resolve_dependency_root, dependency_state, RECURSION_DISABLED, official_research_allowed
 from sc2_catalog_inputs import catalog_xml_inputs, index_inputs, inventory, save_manifest
 from sc2_paths import find_project_mods, load_project_config, resolve_configured_path, project_data_dir, catalog_output_dir, ensure_project_data, is_project_source
+from sc2_components import parse_xml, provenance, verify_archives, component_session
 
 
 ROOT = Path(__file__).resolve().parents[1]
 # Default output is resolved from the selected project at invocation time.
 BUILD_MOD_DIR = None
 BUILD_MODS_DIR = None
+BUILD_CAMPAIGNS_DIR = None
 OFFICIAL_CACHE = None
+ALLOW_PARTIAL_OFFICIAL_CACHE = False
+OFFICIAL_RESEARCH = False
 DEPENDENCY_NODES = {}
 LOCALE = "enUS"
 ALLOW_INCOMPLETE_DEPENDENCIES = False
@@ -211,20 +215,18 @@ def find_local_mods() -> tuple[Path, ...]:
         return (primary,)
 
     mods_dir = resolve_dependency_root(ROOT, primary, config, BUILD_MODS_DIR)
-    graph = build_dependency_graph(primary, mods_dir, official_cache=OFFICIAL_CACHE)
-    DEPENDENCY_NODES = graph["nodes"]
+    graph = build_dependency_graph(primary, mods_dir, campaigns_dir=BUILD_CAMPAIGNS_DIR, official_cache=OFFICIAL_CACHE,
+                                   allow_partial_official_cache=ALLOW_PARTIAL_OFFICIAL_CACHE)
+    DEPENDENCY_NODES = {**graph['nodes'], **graph.get('research_nodes', {})}
     DEPENDENCY_STATE = dependency_state(graph)
     DEPENDENCY_STATE['recursive'] = recursive
-    if DEPENDENCY_STATE["status"] == "partial" and not ALLOW_INCOMPLETE_DEPENDENCIES:
+    if (DEPENDENCY_STATE["status"] == "partial" and not ALLOW_INCOMPLETE_DEPENDENCIES
+            and not (OFFICIAL_RESEARCH and official_research_allowed(DEPENDENCY_STATE))):
         raise ValueError("Incomplete active dependencies: " + "; ".join(DEPENDENCY_STATE["problems"]))
-    dependencies = sorted(
-        (
-            Path(node["path"]).resolve(strict=False)
-            for key, node in graph["nodes"].items()
-            if key != graph["primary"]
-        ),
-        key=lambda path: str(path).casefold(),
-    )
+    # Traversal records declarations; it is not proof of engine override order.
+    keys = graph.get('traversal_order', list(graph['nodes'])) + list(graph.get('research_nodes', {}))
+    dependencies = list(dict.fromkeys(Path(DEPENDENCY_NODES[key]['path']).resolve(strict=False)
+                                     for key in keys if key != graph['primary']))
     return (primary, *dependencies)
 
 
@@ -254,31 +256,39 @@ def source_info(path: Path) -> tuple[str, str]:
             return "inactive_dependency", path.stem
     for index, mod_dir in enumerate(find_local_mods()):
         if _is_relative_to(path, mod_dir):
+            if DEPENDENCY_NODES.get(str(mod_dir).casefold(), {}).get('scope') == 'research_only':
+                return 'reference_export', mod_dir.stem
             source_class = "local_mod" if index == 0 else "active_component_dependency"
             return source_class, mod_dir.stem
     return "other", path.stem
 
 
+@lru_cache(maxsize=4096)
 def source_provenance(path: Path) -> dict | None:
     for node in DEPENDENCY_NODES.values():
         component = Path(node["path"])
         if node.get("origin") == "casc" and path.is_relative_to(component):
             evidence = node["casc"]
             return {"manifest": evidence["manifest"], "identity": evidence["identity"],
+                    'loading_status': 'unconfirmed' if node.get('scope') == 'research_only' else 'confirmed',
                     "path": path.relative_to(Path(evidence["manifest"]).parent).as_posix()}
     return None
 
 
+@lru_cache(maxsize=4096)
+def archive_provenance(path: Path) -> dict | None:
+    return provenance(path)
+
+
 def input_files() -> list[Path]:
-    return catalog_xml_inputs(ROOT, find_local_mods())
+    return catalog_xml_inputs(ROOT, find_local_mods(), official_research=OFFICIAL_RESEARCH or ALLOW_PARTIAL_OFFICIAL_CACHE)
 
 
-def parse_xml_file(path: Path) -> ET.Element | None:
+def parse_xml_file(path: Path) -> ET.Element:
     try:
-        return ET.parse(path).getroot()
+        return parse_xml(path).getroot()
     except ET.ParseError as exc:
-        print(f"warn: failed to parse {_rel_path(path)}: {exc}")
-        return None
+        raise ValueError(f"Cannot parse catalog input {_rel_path(path)}: {exc}") from exc
 
 
 def catalog_family(tag: str) -> str:
@@ -415,19 +425,25 @@ def read_localization(path: Path, kind: str, nodes: dict[str, dict]) -> None:
         key, value = line.split("=", 1)
         key = key.strip()
         nid = node_id("loc", key)
-        nodes.setdefault(
-            nid,
-            {
-                "id": nid,
-                "kind": "localization",
-                "label": key,
-                "localization_file": kind,
-                "value_preview": value.strip()[:120],
-                "locale": LOCALE, "source_file": _rel_path(path),
-                "source_class": source_info(path)[0],
-                "casc": source_provenance(path),
-            },
-        )
+        node = nodes.setdefault(nid, {"id": nid, "kind": "localization", "label": key, "locale": LOCALE,
+                                     "values": []})
+        node["values"].append({"value": value.strip(), "localization_file": kind,
+                               "source_file": _rel_path(path), "source_class": source_info(path)[0],
+                               "casc": source_provenance(path), "archive": archive_provenance(path)})
+        # No proven ordering between sibling dependencies: retain conflicting values.
+        priority = {"local_mod": 2, "active_component_dependency": 1}
+        highest = max(priority.get(v["source_class"], 0) for v in node["values"])
+        candidates = [v for v in node["values"] if priority.get(v["source_class"], 0) == highest]
+        node["source_classes"] = sorted({v["source_class"] for v in node["values"]})
+        for field in ("value_preview", "localization_file", "source_file", "source_class", "casc", "archive"):
+            node.pop(field, None)
+        if len({v["value"] for v in candidates}) > 1:
+            node["value_status"] = "ambiguous"
+        else:
+            chosen = candidates[0]
+            node.update({k: v for k, v in chosen.items() if k != "value"})
+            node["value_preview"] = chosen["value"][:120]
+            node["value_status"] = "resolved" if highest else "reference_only"
 
 
 def build_graph() -> tuple[dict[str, dict], list[Edge], dict[tuple[str, str], list[Definition]]]:
@@ -437,9 +453,11 @@ def build_graph() -> tuple[dict[str, dict], list[Edge], dict[tuple[str, str], li
 
     for path in input_files():
         root = parse_xml_file(path)
-        if root is None:
-            continue
         source_class, source_name = source_info(path)
+        if root.tag != 'Catalog':
+            if root.tag == 'Includes' or (source_provenance(path) and (OFFICIAL_RESEARCH or ALLOW_PARTIAL_OFFICIAL_CACHE)):
+                continue
+            raise ValueError('Unsupported catalog input root ' + root.tag + ': ' + _rel_path(path))
         rel = _rel_path(path)
         for elem in root:
             object_id = elem.attrib.get("id")
@@ -471,6 +489,7 @@ def build_graph() -> tuple[dict[str, dict], list[Edge], dict[tuple[str, str], li
                     "tag": elem.tag,
                     "parent": elem.attrib.get("parent"),
                     "casc": source_provenance(path),
+                    "archive": archive_provenance(path),
                 }
             )
             node["source_classes"] = sorted(set(node["source_classes"]) | {source_class})
@@ -856,23 +875,34 @@ def write_summaries(out_dir: Path, nodes: dict[str, dict], edges: list[Edge], de
     (summaries / "object-pages.md").write_text("\n".join(page_index) + "\n", encoding="utf-8")
 
 
+@component_session
 def main() -> int:
-    global BUILD_MOD_DIR, BUILD_MODS_DIR, ALLOW_INCOMPLETE_DEPENDENCIES, OFFICIAL_CACHE, LOCALE
+    global BUILD_MOD_DIR, BUILD_MODS_DIR, BUILD_CAMPAIGNS_DIR, ALLOW_INCOMPLETE_DEPENDENCIES, OFFICIAL_CACHE, LOCALE, ALLOW_PARTIAL_OFFICIAL_CACHE, OFFICIAL_RESEARCH
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--mod-dir", help="Explicit primary component for investigation")
     parser.add_argument("--official-cache", type=Path, help="Read-only official cache")
+    parser.add_argument('--official-research', action='store_true', help='Use verified official sources for research; loading uncertainty is never active-value evidence')
+    parser.add_argument('--allow-partial-official-cache', action='store_true', help='Explicit partial official source research; also requires --allow-incomplete-dependencies')
     parser.add_argument("--locale", choices=("enUS", "zhCN"), default="enUS", help="Indexed localization language; never fabricate missing text")
     parser.add_argument("--mods-dir", help="Explicit dependency Mods root")
+    parser.add_argument("--campaigns-dir", type=Path, help="Explicit dependency Campaigns root")
     parser.add_argument("--allow-incomplete-dependencies", action="store_true", help="Build an explicitly marked partial investigation index; never validates effective values")
     parser.add_argument("--out", default=None, help="Output directory (default: project runtime/catalog, or external reference cache)")
     parser.add_argument("--max-object-pages", type=int, default=350, help="Maximum generated local object summary pages")
     parser.add_argument("--sqlite-only", action="store_true", help="Refresh only the SQLite query index; skip JSON, GraphML, and summary pages")
     args = parser.parse_args()
+    if args.allow_partial_official_cache and (not args.official_cache or not args.allow_incomplete_dependencies):
+        parser.error('--allow-partial-official-cache requires --official-cache and --allow-incomplete-dependencies')
 
     BUILD_MOD_DIR, BUILD_MODS_DIR = args.mod_dir, args.mods_dir
+    BUILD_CAMPAIGNS_DIR = resolve_configured_path(ROOT, str(args.campaigns_dir)) if args.campaigns_dir is not None else None
     OFFICIAL_CACHE, LOCALE = args.official_cache, args.locale
+    ALLOW_PARTIAL_OFFICIAL_CACHE = args.allow_partial_official_cache
+    OFFICIAL_RESEARCH = args.official_research
     ALLOW_INCOMPLETE_DEPENDENCIES = args.allow_incomplete_dependencies
     find_local_mods.cache_clear()
+    source_provenance.cache_clear()
+    archive_provenance.cache_clear()
     try:
         find_local_mods()
     except ValueError as exc:
@@ -893,28 +923,41 @@ def main() -> int:
     out_dir = out_dir.resolve()
     out_dir.parent.mkdir(parents=True, exist_ok=True)
     mods = find_local_mods()
-    indexed_files = index_inputs(ROOT, mods)
+    indexed_files = index_inputs(ROOT, mods, official_research=OFFICIAL_RESEARCH or ALLOW_PARTIAL_OFFICIAL_CACHE)
     input_inventory = inventory(indexed_files)
     selection = {"workspace_root": str(ROOT.resolve()), "primary": str(mods[0]) if mods else None,
                  "mods_dir": DEPENDENCY_STATE.get("mods_dir"),
+                 "campaigns_dir": DEPENDENCY_STATE.get("campaigns_dir"),
                  "recursive": DEPENDENCY_STATE['recursive'],
                  "official_cache": (DEPENDENCY_STATE.get('official_cache') or {}).get('root'), "locale": LOCALE,
-                 "explicit": bool(BUILD_MOD_DIR or BUILD_MODS_DIR)}
+                 'allow_partial_official_cache': ALLOW_PARTIAL_OFFICIAL_CACHE,
+                 'official_research': OFFICIAL_RESEARCH,
+                 "explicit": bool(BUILD_MOD_DIR or BUILD_MODS_DIR or BUILD_CAMPAIGNS_DIR)}
     if mods and not selection["mods_dir"]:
         selection["mods_dir"] = str(resolve_dependency_root(ROOT, mods[0], load_project_config(ROOT), BUILD_MODS_DIR))
+    if mods and not selection["campaigns_dir"]:
+        selection["campaigns_dir"] = str(BUILD_CAMPAIGNS_DIR or Path(selection["mods_dir"]).parent / "Campaigns")
     build_id = uuid.uuid4().hex
     with staged_directory(out_dir) as stage:
         if out_dir.exists():
             shutil.copytree(out_dir, stage, dirs_exist_ok=True)
-        nodes, edges, definitions = build_graph()
+        try:
+            nodes, edges, definitions = build_graph()
+        except (ValueError, OSError) as exc:
+            print(f"ERROR: {exc}; previous index was preserved")
+            return 1
         if not args.sqlite_only:
             write_json(stage, nodes, edges, definitions, build_id=build_id)
         write_sqlite(stage, nodes, edges, build_id=build_id)
         if not args.sqlite_only:
             write_graphml(stage, nodes, edges)
             write_summaries(stage, nodes, edges, definitions, args.max_object_pages)
-        if inventory(index_inputs(ROOT, mods)) != input_inventory:
-            raise RuntimeError("Index inputs changed during build; previous index was preserved")
+        final_inventory = inventory(index_inputs(ROOT, mods, official_research=OFFICIAL_RESEARCH or ALLOW_PARTIAL_OFFICIAL_CACHE))
+        if final_inventory != input_inventory:
+            changed = [key for key in sorted(set(final_inventory) | set(input_inventory))
+                       if final_inventory.get(key) != input_inventory.get(key)]
+            print('ERROR: Index inputs changed during build; previous index was preserved: ' + '; '.join(changed[:8]))
+            return 1
         save_manifest(stage / "catalog.sqlite", input_inventory, dependencies=DEPENDENCY_STATE,
                       build_id=build_id, selection=selection)
         if not args.sqlite_only:

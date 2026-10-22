@@ -8,6 +8,7 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 
 from sc2_paths import find_project_mods
+from sc2_components import component_path, parse_xml, verify_archives, component_session
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 
@@ -85,6 +86,7 @@ def find_local_mods(explicit: str | None = None) -> list[Path]:
 
 
 def check_command_card_layouts(game_data_dir: Path) -> tuple[list[str], list[str]]:
+    game_data_dir = component_path(game_data_dir)
     errors: list[str] = []
     warnings: list[str] = []
     unit_xml = game_data_dir / "UnitData.xml"
@@ -95,7 +97,7 @@ def check_command_card_layouts(game_data_dir: Path) -> tuple[list[str], list[str
             return errors, warnings
 
     try:
-        tree = ET.parse(unit_xml)
+        tree = parse_xml(unit_xml)
         root = tree.getroot()
     except Exception as e:
         errors.append(f"Failed to parse {unit_xml.name}: {e}")
@@ -105,7 +107,7 @@ def check_command_card_layouts(game_data_dir: Path) -> tuple[list[str], list[str
     abil_xml = game_data_dir / "AbilData.xml"
     if abil_xml.is_file():
         try:
-            for ability in ET.parse(abil_xml).getroot():
+            for ability in parse_xml(abil_xml).getroot():
                 ability_id = ability.get("id", "")
                 for info in ability.findall("InfoArray"):
                     button = info.find("Button")
@@ -121,7 +123,7 @@ def check_command_card_layouts(game_data_dir: Path) -> tuple[list[str], list[str
     req_xml = game_data_dir / "RequirementData.xml"
     if req_xml.is_file():
         try:
-            for requirement in ET.parse(req_xml).getroot().findall("CRequirement"):
+            for requirement in parse_xml(req_xml).getroot().findall("CRequirement"):
                 show = requirement.find("NodeArray[@index='Show']")
                 if show is not None:
                     show_nodes[requirement.get("id", "")] = show.get("Link", "")
@@ -183,6 +185,7 @@ def check_command_card_layouts(game_data_dir: Path) -> tuple[list[str], list[str
     return errors, warnings
 
 
+@component_session
 def main() -> int:
     parser = argparse.ArgumentParser(
         description="Audit command card layouts for high-confidence slot collisions."
@@ -219,6 +222,7 @@ def main() -> int:
         all_errors.extend(errors)
         all_warnings.extend(warnings)
 
+    verify_archives()
     print("=" * 60)
     print("COMMAND CARD INTEGRITY AUDIT")
     print("=" * 60)

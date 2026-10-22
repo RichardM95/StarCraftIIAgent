@@ -46,6 +46,60 @@ def confined(path, parent):
     return path
 
 
+def publish_component(stage, target, *, expected=None, fingerprint):
+    """Publish a staged file/directory, retaining every replaced original.
+
+    Unlike rotating generated indexes, source conversions never retire backups.
+    The caller owns stage.parent via staged_directory(target).
+    """
+    stage, target = Path(stage), Path(target)
+    parent = target.parent.resolve()
+    confined(target, parent)
+    confined(stage.parent, parent)
+    if stage.parent.name.startswith('.' + target.name + '.stage-') is False:
+        raise ValueError('Conversion stage is not owned by this target')
+    confined(stage, stage.parent)
+    lock = confined(parent / ('.' + target.name + '.sc2-convert.lock'), parent)
+    lock.mkdir()
+    backup = confined(parent / ('.' + target.name + '.sc2-backup-' + uuid.uuid4().hex), parent)
+    owner = backup.with_name(backup.name + '.owner.json')
+    moved = installed = owner_created = False
+    try:
+        if target.exists():
+            if expected is None:
+                raise FileExistsError('Output already exists: ' + str(target))
+            with owner.open('x', encoding='utf-8') as stream:
+                owner_created = True
+                json.dump({'tool': 'SC2ModAgent', 'kind': 'component-conversion', 'version': 1,
+                           'target': str(target.resolve()), 'backup': str(backup), 'fingerprint': expected}, stream)
+            target.rename(backup)
+            moved = True
+            if fingerprint(backup) != expected:
+                raise ValueError('Source changed before publication; restoring original')
+        elif expected is not None:
+            raise ValueError('Source disappeared before publication')
+        stage.rename(target)
+        installed = True
+    except Exception as original:
+        try:
+            if installed:
+                target.rename(stage)
+            if moved:
+                backup.rename(target)
+            if owner_created:
+                owner.unlink(missing_ok=True)
+        except Exception as recovery:
+            raise PublicationRecoveryError(f'Conversion recovery incomplete; preserve stage={stage}, target={target}, '
+                f'backup={backup}, owner={owner}; original={original!r}; recovery={recovery!r}') from original
+        raise
+    finally:
+        try:
+            lock.rmdir()
+        except OSError as exc:
+            warnings.warn('Conversion lock cleanup pending: ' + str(lock) + ': ' + str(exc))
+    return backup if moved else None
+
+
 def publish_directory(stage, target, kind):
     stage, target = Path(stage).resolve(), Path(target).resolve()
     parent = target.parent

@@ -13,4 +13,6 @@ def stamp(database, root, mods=(), dependencies=None, recursive=True):
     state=dependencies or ({"status":"partial","problems":[RECURSION_DISABLED]} if not recursive else {"status":"complete","problems":[]})
     save_manifest(database, inventory(index_inputs(root,mods)),dependencies=state,build_id=build_id,
                   selection={"workspace_root":str(root),"primary":str(primary) if primary else None,
-                             "mods_dir":str(primary.parent) if primary else None,"recursive":recursive,"explicit":True})
+                             "mods_dir":str(primary.parent) if primary else None,
+                             "campaigns_dir":str(primary.parent.parent/'Campaigns') if primary else None,
+                             "recursive":recursive,"explicit":True})

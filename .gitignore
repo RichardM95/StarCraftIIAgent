@@ -45,3 +45,5 @@ reports/
 **/.*.sc2-previous.owner.json
 **/.*.sc2-retired-*/
 **/.*.sc2-publish.lock/
+**/.*.sc2-convert.lock/
+**/.*.sc2-backup-*

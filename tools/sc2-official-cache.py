@@ -25,6 +25,7 @@ def main(argv=None):
     p.add_argument('--official-cache', type=Path)
     p.add_argument('--timeout', type=int, default=60)
     p.add_argument('--apply', action='store_true')
+    p.add_argument('--allow-partial', action='store_true', help='Extract/publish an explicitly incomplete research cache; never certifies loading')
     args = p.parse_args(argv)
     try:
         config = load_project_config(ROOT)
@@ -35,8 +36,8 @@ def main(argv=None):
                 raise ValueError('Pass --sc2-install-dir or configure an installation')
             install = resolve_configured_path(ROOT, value)
         install = install.resolve()
-        if args.apply and args.command != 'sync':
-            raise ValueError('--apply is only supported by sync')
+        if (args.apply or args.allow_partial) and args.command != 'sync':
+            raise ValueError('--apply and --allow-partial are only supported by sync')
         result = probe(install, args.casc_dll.resolve(), args.timeout)
         if result['status'] != 'read_verified' or args.command == 'probe':
             print(json.dumps(result, ensure_ascii=False, indent=2))
@@ -48,14 +49,16 @@ def main(argv=None):
         if mods.parent.resolve() != install:
             raise ValueError('Dependency installation differs from --sc2-install-dir')
         with CascProcess(args.casc_dll.resolve(), install, result['encoding'], args.timeout) as reader:
-            contents, files = snapshot(reader, targets[0], mods)
+            contents, files = snapshot(reader, targets[0], mods, allow_partial=args.allow_partial)
         destination = args.official_cache or default_cache(install)
+        if not args.official_cache and contents['status'] == 'partial' and args.allow_partial:
+            destination = destination.with_name(destination.name + '-partial')
         summary = {**contents, 'identity': result['identity'], 'destination': str(destination),
                    'probe': result, 'files': len(files), 'bytes': sum(map(len, files.values())), 'applied': False}
-        if args.apply and contents['problems']:
+        if args.apply and contents['problems'] and not args.allow_partial:
             summary['apply_blocked'] = 'Incomplete metadata; previous cache preserved'
         elif args.apply:
-            publish_snapshot(destination, result['identity'], args.casc_dll, contents, files)
+            publish_snapshot(destination, result['identity'], args.casc_dll, contents, files, allow_partial=args.allow_partial)
             summary['applied'] = True
         print(json.dumps(summary, ensure_ascii=False, indent=2))
         return int(bool(contents['problems']))

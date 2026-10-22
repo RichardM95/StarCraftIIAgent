@@ -29,6 +29,125 @@ def component(path,reference="",info="DocumentInfo"):
 
 class DependencyContractTests(unittest.TestCase):
     def tearDown(self):BUILDER.find_local_mods.cache_clear()
+    def test_malformed_catalog_never_publishes_or_replaces_previous_index(self):
+        for source in ('primary', 'dependency', 'reference'):
+            with self.subTest(source=source), tempfile.TemporaryDirectory() as tmp:
+                root = Path(tmp)
+                main = component(root/'Mods/Main.SC2Mod', 'file:Mods/Shared.SC2Mod')
+                shared = component(root/'Mods/Shared.SC2Mod')
+                catalog = main/'Base.SC2Data/GameData/Units.xml'
+                catalog.parent.mkdir(parents=True)
+                catalog.write_text('<Catalog><CUnit id="Saved"/></Catalog>')
+                out = root/'index'
+                args = ['builder', '--mod-dir', str(main), '--out', str(out), '--max-object-pages', '1']
+                with patch.object(BUILDER, 'ROOT', root), patch.multiple(BUILDER, BUILD_MOD_DIR=None,
+                        BUILD_MODS_DIR=None, BUILD_CAMPAIGNS_DIR=None, OFFICIAL_CACHE=None,
+                        ALLOW_INCOMPLETE_DEPENDENCIES=False), redirect_stdout(io.StringIO()):
+                    with patch.object(sys, 'argv', args):
+                        self.assertEqual(BUILDER.main(), 0)
+                    before = {p.relative_to(out): p.read_bytes() for p in out.rglob('*') if p.is_file()}
+                    broken = {'primary': catalog, 'dependency': shared/'Base.SC2Data/GameData/Units.xml',
+                              'reference': root/'DataEditorXML/Broken.txt'}[source]
+                    broken.parent.mkdir(parents=True, exist_ok=True)
+                    broken.write_text('<Catalog><CUnit id="Lost">')
+                    # A partial dependency permit never permits damaged input files.
+                    with patch.object(sys, 'argv', [*args, '--allow-incomplete-dependencies']):
+                        self.assertEqual(BUILDER.main(), 1)
+                    self.assertEqual(before, {p.relative_to(out): p.read_bytes() for p in out.rglob('*') if p.is_file()})
+                    with patch.object(sys, 'argv', ['builder', '--mod-dir', str(main), '--out', str(root/'new-index'), '--sqlite-only']):
+                        self.assertEqual(BUILDER.main(), 1)
+                    self.assertFalse((root/'new-index').exists())
+                    self.assertFalse(list(root.glob('.*.stage-*')))
+
+    def test_campaign_root_is_shared_by_build_query_and_freshness(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            old = component(root/'old/Mods/Main.SC2Mod')
+            main = component(root/'new/Mods/Main.SC2Mod', 'file:Campaigns/Story.SC2Campaign')
+            story = component(root/'archive/Story.SC2Campaign')
+            units = story/'Base.SC2Data/GameData/Units.xml'
+            units.parent.mkdir(parents=True)
+            units.write_text('<Catalog><CUnit id="Archived"/></Catalog>')
+            config = {'paths': {'mods_dir': str(old.parent)}, 'project': {'primary_mod': old.name}}
+            (root/'agent-config.json').write_text(json.dumps(config))
+            out = root/'index'
+            argv = ['builder', '--mod-dir', str(main), '--campaigns-dir', 'archive', '--out', str(out)]
+            with patch.object(BUILDER, 'ROOT', root), patch.multiple(BUILDER, BUILD_MOD_DIR=None,
+                    BUILD_MODS_DIR=None, BUILD_CAMPAIGNS_DIR=None, OFFICIAL_CACHE=None,
+                    ALLOW_INCOMPLETE_DEPENDENCIES=False), \
+                    patch.object(sys, 'argv', argv), redirect_stdout(io.StringIO()):
+                self.assertEqual(BUILDER.main(), 0)
+            manifest = json.loads(manifest_path(out/'catalog.sqlite').read_text())
+            self.assertEqual(manifest['selection']['campaigns_dir'], str(root/'archive'))
+            self.assertEqual(manifest['dependencies']['campaigns_dir'], str(root/'archive'))
+            self.assertEqual(manifest['dependencies']['status'], 'complete')
+            with patch.object(QUERY, 'ROOT', root), redirect_stderr(io.StringIO()):
+                args = QUERY.build_parser().parse_args(['--db', str(out/'catalog.sqlite'), 'stats'])
+                store = QUERY.load_store(args)
+                self.assertIsNotNone(store.get_node('object:Unit:Archived'))
+                store.close()
+                graph_store = QUERY.JsonCatalogStore(out/'graph.json')
+                self.assertIsNone(QUERY.stale_default_index_input(graph_store))
+                self.assertIsNotNone(graph_store.get_node('object:Unit:Archived'))
+                args.campaigns_dir = Path('archive')
+                store = QUERY.load_store(args); store.close()
+                args.campaigns_dir = root/'wrong'
+                with self.assertRaises(SystemExit): QUERY.load_store(args)
+                args.campaigns_dir = None
+                units.write_text('<Catalog><CUnit id="Changed"/></Catalog>')
+                with self.assertRaises(SystemExit): QUERY.load_store(args)
+                self.assertEqual(QUERY.stale_default_index_input(graph_store), units)
+
+    def test_localization_conflicts_survive_both_indexes_and_are_visible_in_queries(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            main = component(root/'Mods/Main.SC2Mod', 'file:Mods/Shared.SC2Mod')
+            shared = component(root/'Mods/Shared.SC2Mod', 'file:Mods/Other.SC2Mod')
+            other = component(root/'Mods/Other.SC2Mod')
+            for mod, text in ((shared, 'FIRST'), (other, 'SECOND')):
+                strings = mod/'enUS.SC2Data/LocalizedData/GameStrings.txt'
+                strings.parent.mkdir(parents=True)
+                strings.write_text('Unit/Name/Shared=' + text)
+            out = root/'index'
+            with patch.object(BUILDER, 'ROOT', root), patch.multiple(BUILDER, BUILD_MOD_DIR=None,
+                    BUILD_MODS_DIR=None, BUILD_CAMPAIGNS_DIR=None, OFFICIAL_CACHE=None,
+                    ALLOW_INCOMPLETE_DEPENDENCIES=False), patch.object(sys, 'argv',
+                    ['builder', '--mod-dir', str(main), '--out', str(out)]), redirect_stdout(io.StringIO()):
+                self.assertEqual(BUILDER.main(), 0)
+            store = QUERY.SqliteCatalogStore(out/'catalog.sqlite')
+            try:
+                node = store.get_node('loc:Unit/Name/Shared')
+                self.assertEqual(node, QUERY.JsonCatalogStore(out/'graph.json').get_node('loc:Unit/Name/Shared'))
+                self.assertEqual(node['value_status'], 'ambiguous')
+                self.assertNotIn('value_preview', node)
+                self.assertEqual({v['value'] for v in node['values']}, {'FIRST', 'SECOND'})
+                for command in ('show', 'providers'):
+                    args = QUERY.build_parser().parse_args([command, 'loc:Unit/Name/Shared'])
+                    with patch.object(QUERY, 'load_store', return_value=store), redirect_stdout(io.StringIO()) as output:
+                        getattr(QUERY, 'command_' + command)(args)
+                    self.assertIn('ambiguous', output.getvalue())
+                    self.assertIn('FIRST', output.getvalue())
+                    self.assertIn('SECOND', output.getvalue())
+            finally:
+                store.close()
+
+    def test_version_four_index_requires_rebuild_or_explicit_history(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            database = root/'catalog.sqlite'
+            sqlite3.connect(database).close()
+            stamp(database, root)
+            path = manifest_path(database)
+            legacy = json.loads(path.read_text())
+            legacy['version'] = 4
+            path.write_text(json.dumps(legacy))
+            args = QUERY.build_parser().parse_args(['--db', str(database), 'stats'])
+            with self.assertRaises(SystemExit): QUERY.load_store(args)
+            args.allow_stale = True
+            with redirect_stderr(io.StringIO()) as output:
+                store = QUERY.load_store(args); store.close()
+            self.assertIn('Historical version 4', output.getvalue())
+
     def test_foreign_catalog_build_records_its_actual_recursive_scope(self):
         with tempfile.TemporaryDirectory() as tmp:
             root=Path(tmp)

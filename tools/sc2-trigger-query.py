@@ -8,6 +8,7 @@ import sqlite3
 import sys
 import xml.etree.ElementTree as ET
 from pathlib import Path
+from sc2_components import component_session
 
 from sc2_paths import catalog_output_dir, find_project_mods, load_project_config, resolve_configured_path
 from sc2_dependencies import RECURSION_DISABLED
@@ -24,8 +25,9 @@ def emit(value):
 def parser():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--db", type=Path, help="SQLite index; default follows project/reference runtime paths")
-    p.add_argument("--target", type=Path, help="Explicit Components map/mod/campaign; defaults to configured editing source")
+    p.add_argument("--target", type=Path, help="Components directory or packed map/mod/campaign; defaults to configured source")
     p.add_argument("--official-cache", type=Path, help="Read-only build-bound official cache")
+    p.add_argument('--allow-partial-official-cache', action='store_true', help='Explicit partial-cache research only; target remains unconfirmed')
     p.add_argument("--mods-dir", type=Path, help="Dependency Mods root")
     p.add_argument("--campaigns-dir", type=Path, help="Dependency Campaigns root")
     p.add_argument("--reference", action="store_true", help="Explicit reference research, never certifies target availability")
@@ -80,7 +82,8 @@ def target_for(args, config):
     if (campaigns is None and use_config and install is not None
             and configured_mods == mods.resolve()):
         campaigns = install / "Campaigns"
-    target = Target(path, mods, campaigns, official_cache=getattr(args, "official_cache", None))
+    target = Target(path, mods, campaigns, official_cache=getattr(args, "official_cache", None),
+                    allow_partial_official_cache=getattr(args, 'allow_partial_official_cache', False))
     if path in configured_sources and config.get("project", {}).get("resolve_dependencies_recursive") is False:
         target.problems.append(RECURSION_DISABLED)
     return target
@@ -121,9 +124,12 @@ def compatibility(target, d, key, *, case=None):
             "note": "Map objects, resource links and local IDs require migration; library compatibility is not runtime acceptance"}
 
 
+@component_session
 def main(argv=None):
     p = parser()
     args = p.parse_args(argv)
+    if args.allow_partial_official_cache and (not args.official_cache or args.command in {'build', 'check'}):
+        p.error('--allow-partial-official-cache requires --official-cache and a read-only research query, not build/check')
     index = None
     try:
         config = load_project_config(ROOT)
@@ -142,10 +148,13 @@ def main(argv=None):
                 raise ValueError("No target selected; pass --target or initialize a project")
             result = target.libraries() if args.command == "libraries" else check(target)
             emit(result)
+            if args.command == 'libraries' and target.official_research:
+                return 0
             return int(bool(result.get("problems") or result.get("errors")))
         if target is None and not args.reference:
             raise ValueError("No target selected; use --reference for reference-only research")
-        if target is not None and target.problems and not args.reference:
+        research = target is not None and target.official_research
+        if target is not None and target.problems and not args.reference and not args.allow_partial_official_cache and not research:
             emit(target.libraries())
             return 1
         if args.command in {"find", "show"} and not args.reference:
@@ -233,13 +242,18 @@ def main(argv=None):
             d, key = matches[0]
             result = describe(d, key, index.resolve if index else target.resolve)
             result["compatibility"] = compatibility(target, d, key)
+            if target is not None:
+                result['source_class'] = 'target_local' if d.component == target.path else (
+                    'official_reference' if target.source_nodes.get(str(d.component).casefold(), {}).get('scope') == 'research_only' else 'active_dependency')
             emit(result)
-            return int(bool(result["errors"] or (not args.reference and result["compatibility"]["problems"])))
+            return int(bool(result["errors"] or (not args.reference and not args.allow_partial_official_cache and not research and result["compatibility"]["problems"])))
         available = []
         rejected = []
+        states = {}
         for d, key in matches:
             state = compatibility(target, d, key)
-            if state["problems"]:
+            states[(d.path, key)] = state
+            if state["problems"] and not args.allow_partial_official_cache and not research:
                 rejected.append({"source": str(d.path), "reference": list(key), "problems": state["problems"]})
             else:
                 available.append((d, key))
@@ -247,8 +261,10 @@ def main(argv=None):
                     break
         if rejected:
             print(json.dumps({"rejected_unconfirmed_definitions": rejected}, ensure_ascii=False), file=sys.stderr)
-        emit([{ "source": str(d.path), "library": k[0], "type": k[1], "id": k[2], "name": d.name(k),
-                "names": d.aliases(k), "source_class": "target_local" if d.component == target.path else "active_dependency"}
+        emit([{ "source": str(d.path), "archive": d.archive, "library": k[0], "type": k[1], "id": k[2], "name": d.name(k),
+                "names": d.aliases(k), "source_class": "target_local" if d.component == target.path else
+                    "official_reference" if target.source_nodes.get(str(d.component).casefold(), {}).get('scope') == 'research_only' else "active_dependency",
+                "compatibility": states[(d.path, k)]}
               for d, k in available[:args.limit]])
         return 0
     except (ValueError, OSError, ET.ParseError, sqlite3.Error) as exc:

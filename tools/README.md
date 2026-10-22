@@ -39,13 +39,13 @@
 - **`test-suite.py`**——面向 AI 智能体与开发者的统一测试入口。它会发现配置的主模组、打印精确目标，并在没有找到模组时失败，而不是误报成功。默认遵循 `agent-config.json` 的依赖校验策略；可用 `--primary-only`、`--include-dependencies` 或可重复的 `--exclude-mod` 做单次覆盖。它运行工具单测，并调用 `validate-agent-config.py`、针对主模组和选定依赖的 `validate-mod.py`、`audit-actor-and-card-integrity.py`、`audit-gamestrings-anchors.py`、`audit-skill-frontmatter.py` 与 `check-doc-links.py`。
 - **定向预检**——`--scope tools` 只运行工具单测；`--scope docs` 运行问题账本、技能格式和文档链接检查；`--scope mod` 运行项目配置、主模组、依赖与模组专项审计。交接或提交前仍运行完整预检。
 - **`validate-agent-config.py`**——校验配置 schema、必需目录和主模组，然后递归验证本地组件依赖图。跨盘符绝对路径以及尚未创建的可选战役地图目录只产生警告，避免误判失败。
-- **`inspect-mod-dependencies.py`**——读取每个模组的 `ComponentList.SC2Components`，定位 `Type="info"` 组件，解析 `<Dependencies>`，并在共享节点与循环保护下递归跟踪本地组件模组。使用 `--json` 获取机器可读输出。检查工具、预检套件与索引共用依赖根规则：配置的编辑源使用配置 Mods；临时显式组件寻找自己的 Mods 祖先；无法推导时必须传 `--mods-dir`，不使用另一安装的同名依赖。
+- **`inspect-mod-dependencies.py`**——读取每个模组的 `ComponentList.SC2Components`，定位 `Type="info"` 组件，解析 `<Dependencies>`，并在共享节点与循环保护下递归跟踪本地组件模组。使用 `--json` 获取机器可读输出：边保留声明序号、原文和关系证据，`traversal_order` 是后序遍历，`loading_order` 单独记录已确认的组件优先级；已知 Core 基础规则与官方内置链不再被一律降为研究，XML 字段合并顺序仍独立。循环失败；目标加载未知与缓存文件完整性分开评估。检查工具、预检套件与索引共用依赖根规则：配置的编辑源使用配置 Mods；临时显式组件寻找自己的 Mods 祖先；无法推导时必须传 `--mods-dir`，不使用另一安装的同名依赖。
 - **`audit-skill-frontmatter.py`**——校验所有 `SKILL.md` 的 frontmatter：检查 YAML 块、`name` 是否与目录匹配、`description` 是否存在且为非空单行，以及正文是否非空。
 - **`validate-mod.py`**——综合静态校验器：
   - 使用 `lxml` 或 `xmllint` 后备，对 GameData XML 执行正式 W3C XSD 校验（`tools/schemas/sc2-xsd/Catalog.xsd`）；两种后端都不存在时校验会失败关闭。
   - 解析 UI layout XML，并执行兼容引擎的根元素、顶层子元素与 ASCII 检查。随附的 `SC2Layout.xsd` 仅用于 IDE/参考，不作为强制校验，因为其命名空间和字段限制无法覆盖所有编辑器输出。
   - 执行项目 XML 规则，包括注释/属性仅 ASCII，以及拒绝只有注释的 catalog。
-  - 校验 Galaxy 脚本 AST/语法，包括函数内变量提升、include 路径、禁用运算符和非 ASCII 字符。
+  - 执行 Galaxy 静态模式检查，包括函数内变量提升、include 路径、禁用运算符和非 ASCII 字符。
 - **`audit-actor-and-card-integrity.py`**——命令卡静态检查器。文件名为兼容旧工作流而保留，但不代表覆盖 Actor 绑定。高置信度错误会正常失败；由于活动依赖中的 Requirement 可能使共享槽位成为有意设计，歧义候选只做汇总。使用 `--show-warnings` 查看候选，或使用 `--strict` 让所有未解决候选导致失败。
 - **`audit-gamestrings-anchors.py`**——检查活动 catalog 的 `Name`、`Tooltip`、`Description` 引用是否存在于 `GameStrings.txt`。编辑器保存后可用 `--fill` 从 `ObjectStrings.txt` 恢复缺失键。
 - **`schemas/sc2-xsd/`**——随附的 SC2 GameData 与组件/IDE 参考 XSD。CLI 会强制校验 Catalog/GameData schema；出于上述兼容原因，`SC2Layout.xsd` 仅作参考。
@@ -65,10 +65,10 @@ GUI 触发器使用独立的 `sc2-trigger-query.py`：`build` 从明确指定的
   - 检查 Actor 链：`python tools/sc2-catalog-query.py actor-chain <Actor:Id>`
   - 跟踪依赖：`python tools/sc2-catalog-query.py show <Family:Id> --limit 30 --depth 2`
   - 查找未解析引用：`python tools/sc2-catalog-query.py unresolved --contains <term>`
-- 默认索引用输入清单检查文件增删、大小与修改时间；未选择项目时仍检查参考资料，项目配置失效或源目录缺失时明确停止。查询发现过期会指出文件并停止。怀疑文件内容被替换但大小、时间都被保留时，在子命令前加 `--verify-input-hashes` 做严格校验（会多读一遍输入）。需要当前数据时运行一次 `python tools/build-sc2-catalog-graph.py --sqlite-only`；仅为查看旧快照可加 `--allow-stale`，输出会标记为历史检查，不能据此声称当前项目值已确认。SQLite 与完整图各有清单：`--sqlite-only` 不会把旧 `graph.json` 标记为已更新。
-- **`build-sc2-catalog-graph.py`**——从顶层 TXT 参考导出、非活动导出、配置的主 Mod 与递归解析的本地组件依赖构建索引。日常刷新用 `--sqlite-only`，跳过大型 JSON、GraphML 和对象摘要；需要完整图报告时不加参数。主模组定义标记为 `local_mod`，依赖定义标记为 `active_component_dependency`。构建在创建输出目录前检查活动依赖；缺失或损坏默认停止。
-- 索引输入清单版本为4，包含实际 `Type="info"` 文件与依赖完整性状态。旧版或缺少清单的索引必须重建；清单不替代当前组件证据。缺失依赖问题逐项保留，不伪造补齐结果。`project.resolve_dependencies_recursive=false`也属于受限主组件调查：构建与查询必须显式允许部分调查，并标明递归被配置关闭。
-- 部分调查需要显式 `--allow-incomplete-dependencies`：构建保存 `partial` 和缺失/损坏清单；每次查询再次带该参数并显示部分调查警告。它只允许读取现有数据，不能据此确认完整有效值、写回或通过依赖验收；`--allow-stale` 仅允许历史快照，不能代替部分依赖权限。inspection工具的JSON也包含依赖状态。
+- 默认索引用输入清单检查文件增删、大小与修改时间。已选择项目的默认 SQLite 缺失、过期或需要升级时，查询会先自动重建，再继续原命令；有效索引不重建。显式 `--db` / `--graph`、未选择项目的参考索引保持只读。严格只读查询加 `--no-auto-rebuild`；`--allow-stale` 关闭自动刷新并标记历史调查。项目配置失效、源缺失、身份冲突或清单损坏时停止并提示修复。怀疑同大小、同时间的内容替换时，加 `--verify-input-hashes`。手动刷新仍可运行 `python tools/build-sc2-catalog-graph.py --sqlite-only`；完整图与报告需去掉此参数。
+- **`build-sc2-catalog-graph.py`**——从顶层 TXT 参考导出、非活动导出、配置的主 Mod 与递归解析的本地组件依赖构建索引。日常刷新用 `--sqlite-only`，跳过大型 JSON、GraphML 和对象摘要；需要完整图报告时不加参数。主模组定义标记为 `local_mod`，依赖定义标记为 `active_component_dependency`。构建在创建输出目录前检查活动依赖；缺失或损坏默认停止。`--official-research` 仅开放经过校验、加载关系未确认的官方缓存来源，归入 `reference_export`；默认项目自动刷新使用此模式。
+- 索引输入清单版本为7，包含实际 `Type="info"` 文件、关系与遍历记录、加载规则证据及依赖完整性状态。旧版索引需重建；可验证的默认项目索引自动升级，身份不明或清单损坏时需显式处理。清单不替代当前组件证据。缺失依赖问题逐项保留，不伪造补齐结果。`project.resolve_dependencies_recursive=false`也属于受限主组件调查：构建与查询必须显式允许部分调查，并标明递归被配置关闭。
+- 官方研究模式的默认定位、分项证据与严格验收边界见 [CASC 缓存](../wiki/reference/official-casc-cache.md#官方研究查询)。其他部分调查需要显式 `--allow-incomplete-dependencies`：构建保存 `partial` 和缺失/损坏清单；每次查询再次带该参数并显示部分调查警告。它只允许读取现有数据，不能据此确认完整有效值、写回或通过依赖验收；`--allow-stale` 仅允许历史快照，不能代替部分依赖权限。inspection工具的JSON也包含依赖状态。
 - 临时组件调查示例：`python tools/inspect-mod-dependencies.py --mod-dir "<组件>" --mods-dir "<Mods>" --json`；预检对应 `python tools/test-suite.py --mod-dir "<组件>" --mods-dir "<Mods>" --include-dependencies`。非标准布局必须给出依赖根，不猜父目录。
 - 顶层 `DataEditorXML/*.txt` 在图中标记为 `reference_export`；只有递归确认的组件依赖标记为 `active_component_dependency`。参考导出中的对象不能证明运行时已加载。
 - **`sc2-reference-query.py`**——按需检索官方与合作组件原始样例及英文/中文本地化。先用 `components` 看组件列表，再用 `find` 指定 `--component`、`--area gamedata|enus|zhcn`、`--family` 和 `--limit`。输出相对路径与行号。顶层 TXT 有部分内容与样例 XML 完全重复，通常先查询 catalog 图，再针对具体实现查样例；样例不参与活动依赖判定，也不要求重建图数据库。
@@ -90,10 +90,40 @@ GUI 触发器使用独立的 `sc2-trigger-query.py`：`build` 从明确指定的
 
 
 
+## 打包组件与格式转换
+
+依赖调查、GUI 查询、Catalog 和只读静态检查支持 Components 目录及 MPQ 形式的 `.SC2Mod`、`.SC2Map`、`.SC2Campaign`，依赖链可混用两种形式。直接读取归档成员，无需用户解包，也不生成永久 Components 副本。来源保留原归档路径、SHA-256、内部路径、locale 和成员哈希；损坏本地归档不会被官方缓存遮盖。初始化仍接收 Components，编辑、部署及字符串 `--fill` 要先显式解包。
+
+入口为 [sc2-archive.py](sc2-archive.py)。转换默认预览；加 `--apply` 才写入。另存输出必须不存在且与源分离，扩展名保持一致；原地转换必须显式使用 `--in-place`。
+
+```powershell
+python tools/sc2-archive.py probe "<packed.SC2Mod>"
+python tools/sc2-archive.py unpack "<packed.SC2Mod>" --output "<new Components.SC2Mod>"
+python tools/sc2-archive.py unpack "<packed.SC2Mod>" --output "<new Components.SC2Mod>" --apply
+python tools/sc2-archive.py pack "<Components.SC2Mod>" --output "<new packed.SC2Mod>" --apply
+python tools/sc2-archive.py unpack "<packed.SC2Mod>" --in-place --apply
+python tools/sc2-archive.py restore "<backup path from result>"
+python tools/sc2-archive.py restore "<backup path from result>" --apply
+```
+
+原地转换保留同级 `.sc2-backup-<id>` 原件与所有权记录；恢复校验备份并保留当前版本，不自动轮换删除。先暂存、逐成员核对集合和哈希、复核源，再发布；移走源后再次验证指纹。发布失败回滚，恢复失败时保留并报告相关路径。未知锁或备份不覆盖，`publish/` 禁止作为目标，符号链接和联接拒绝转换。
+
+完整转换保留普通资源与二进制成员，排除根级 MPQ 索引、属性、签名以及 `.git`、`.hg`、`.svn`、`.sc2editortool`；预览列出排除项。新 MPQ 重建索引和属性，不保留原签名、归档字节或空目录。无法完整枚举、大小写/路径冲突、多 locale 变体会失败；单一非中性 MPQ locale 可查询，但 Components 无法表达该容器元数据，故拒绝转换。工具不尝试修复或解保护归档。
+
+StormLib 固定二进制及许可位于 [vendor/stormlib](vendor/stormlib/)。ABI 核对和原生调用在子进程中进行，不搜索系统 PATH；普通请求默认 60 秒，转换默认 1800 秒，可用 `--timeout` 调整。资源上限为 20 万成员、单文件 2 GiB、累计读取 16 GiB；超限明确失败。CASC 官方缓存仍通过原有 CascLib 显式同步，普通查询不提取 CASC、不联网。转换内容校验不代表 `Editor accepted` 或 `packaged runtime passed`。
+
 ## 索引与部署发布
 
 索引SQLite与JSON各自嵌入build_id，并与各自manifest绑定。所有路径的索引都按记录的工作区、主组件、依赖根和递归范围检查输入增删、信息文件及可选哈希；显式主组件构建不要求把它登记成活动项目。查询显示实际范围。build_id不一致、缺失或当前版本身份损坏不能由`--allow-stale`放行。旧版索引仅能显式历史检查，原部分状态仍独立要求`--allow-incomplete-dependencies`。
 
 构建完整输出暂存在同级目录，核对输入未改变后切换。`--sqlite-only`保留旧JSON及报告，全文构建保留非本次工具输出；失败保持旧索引与manifest配对。
+
+默认项目查询的自动刷新只更新 SQLite。`--locale enUS|zhCN` 指定语言；否则复用同项目索引的语言，首次默认为 enUS。刷新复用记录的 Campaigns 覆盖及匹配安装/构建的官方缓存，显式参数优先。部分依赖和部分缓存仍须逐次显式许可；自动刷新不提取 CASC 或联网。
+
+刷新先关闭读取连接，取得同目录锁并复检；其他查询最多等待 30 秒。构建子进程最多运行 300 秒，只写临时目录，完成校验后由主进程发布。失败保留旧索引并输出诊断、手动重建命令及尚存暂存路径；不会自动返回旧结果。刷新过程写 stderr，stdout 保留查询结果格式。已有锁需要等待或调查，工具不会删除未知锁。
+
+Catalog 构建遇到 XML 解析失败会中止发布并保留旧索引；`--allow-incomplete-dependencies` 不允许跳过损坏输入。`build-sc2-catalog-graph.py --campaigns-dir "<目录>"` 与依赖/GUI 检查使用同一目录覆盖；索引记录实际 Mods、Campaigns 根目录，查询默认复用记录的范围，另传 `sc2-catalog-query.py --campaigns-dir "<目录>"` 必须与之匹配，否则需要重建。
+
+本地化节点保留各来源的完整文本、文件、来源分类及 CASC/MPQ 证据。主模组文本优先于活动依赖，活动依赖优先于参考来源；同级来源文本不同则标为 `ambiguous`，不输出单一当前值。`show loc:<键>` 和 `providers loc:<键>` 可查看候选与来源；纯参考结果标为 `reference_only`。输入清单版本 8 纳入原归档身份和成员证据；默认项目按需重建旧索引，显式索引保持只读，`--allow-stale` 仅用于明确的历史调查。归档 SHA-256 即使在大小、时间戳相同时也参与新鲜度检查。建索引期间源变化会中止发布并保留旧索引。
 
 部署先暂存与逐文件核验，再切换。`--clean`生成纯源副本，普通部署先复制现有目标再覆盖源，保留目标额外文件；源在复制过程中变化则停止。成功后保留一份同级工具拥有上一版，轮换只清理带正确所有权标记的工具备份，拒绝人工碰撞与symlink/junction。切换失败回退；恢复失败保留暂存、目标、上一版等相关路径并逐项报告，禁止自动清理这些取证目录。锁清理问题不会掩盖主错误。

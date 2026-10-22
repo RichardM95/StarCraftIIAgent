@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import sys
 import unittest
+import tempfile
 from pathlib import Path
 from unittest.mock import patch
 
@@ -10,7 +11,7 @@ TOOLS_DIR = Path(__file__).resolve().parents[1]
 if str(TOOLS_DIR) not in sys.path:
     sys.path.insert(0, str(TOOLS_DIR))
 
-from sc2_dependencies import build_dependency_graph, extract_dependency_refs, render_dependency_tree
+from sc2_dependencies import build_dependency_graph, extract_dependency_refs, render_dependency_tree, dependency_state
 
 
 class DependencyReferenceTests(unittest.TestCase):
@@ -38,6 +39,31 @@ class DependencyReferenceTests(unittest.TestCase):
 
 
 class DependencyGraphTests(unittest.TestCase):
+    def test_declared_postorder_custom_info_shared_nodes_and_cycle_diagnostics(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            mods = Path(tmp)/'Mods'
+            declarations = {'Main': ['Zed', 'Alpha', 'Zed'], 'Zed': ['Deep'], 'Alpha': ['Deep'], 'Deep': []}
+            for name, deps in declarations.items():
+                p = mods/(name+'.SC2Mod'); p.mkdir(parents=True)
+                (p/'ComponentList.SC2Components').write_text('<Components><DataComponent Type="info">CustomInfo</DataComponent></Components>')
+                (p/'CustomInfo').write_text('<DocInfo><Dependencies>'+''.join('<Value>file:Mods/'+d+'.SC2Mod</Value>' for d in deps)+'</Dependencies></DocInfo>')
+                (p/'DocumentInfo').write_text('<DocInfo/>')  # Must not replace the registered source.
+            primary = mods/'Main.SC2Mod'
+            graph = build_dependency_graph(primary, mods, official_cache=False)
+            self.assertEqual([Path(graph['nodes'][k]['path']).stem for k in graph['traversal_order']], ['Deep','Zed','Alpha','Main'])
+            direct = [e for e in graph['edges'] if e['source']==graph['primary']]
+            self.assertEqual([e['ordinal'] for e in direct], [0,1,2])
+            self.assertTrue(all(e['relation']=='declared' and e['evidence'].endswith('CustomInfo') for e in direct))
+            self.assertEqual(dependency_state(graph)['status'], 'complete')
+            self.assertEqual(graph['loading_order']['status'], 'confirmed')
+            (mods/'Deep.SC2Mod/CustomInfo').write_text('<DocInfo><Dependencies><Value>file:Mods/Main.SC2Mod</Value></Dependencies></DocInfo>')
+            graph = build_dependency_graph(primary, mods, official_cache=False)
+            self.assertIn('Dependency cycle: Main.SC2Mod -> Zed.SC2Mod -> Deep.SC2Mod -> Main.SC2Mod', graph['errors'])
+            (primary/'CustomInfo').write_text('<Broken/>')
+            graph = build_dependency_graph(primary, mods, official_cache=False)
+            self.assertIn('invalid CustomInfo root', str(graph['errors']))
+            self.assertEqual(len(graph['nodes']),1)
+
     def test_recurses_marks_cycles_and_reports_missing_local_mods(self) -> None:
         mods_dir = Path("E:/Games/StarCraft II/Mods")
         primary = mods_dir / "Main.SC2Mod"

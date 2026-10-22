@@ -10,6 +10,7 @@ import tempfile
 from pathlib import Path
 
 from sc2_publication import publish_directory, staged_directory
+from sc2_components import require_editable
 from sc2_catalog_inputs import file_digest
 from sc2_paths import find_project_mods, load_project_config, resolve_configured_path
 
@@ -63,6 +64,7 @@ def deploy_mod(
     *,
     relative_destination: str | None = None,
 ) -> Path:
+    require_editable(source)
     if not source.is_dir():
         raise SystemExit(f"Source mod directory not found: {source}")
 
@@ -140,6 +142,10 @@ def main() -> int:
         return 1
 
     source_mod = mods[0]
+    try:
+        require_editable(source_mod)
+    except ValueError as exc:
+        parser.error(str(exc))
     mods_dir = resolve_mods_dir(args.mods_dir)
     config = {} if args.source else load_project_config(REPO_ROOT)
     project = config.get("project", {}) if isinstance(config.get("project"), dict) else {}

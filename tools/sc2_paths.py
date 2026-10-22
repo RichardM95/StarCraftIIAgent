@@ -11,6 +11,7 @@ import json
 from collections.abc import Mapping
 from pathlib import Path
 from typing import Any
+from sc2_components import component_path, component_exists
 
 
 CONFIG_FILENAME = "agent-config.json"
@@ -110,7 +111,7 @@ def find_project_mods(
         if not path.is_absolute():
             path = repo_root / path
         path = path.resolve(strict=False)
-        return [path] if path.is_dir() else []
+        return [component_path(path)] if component_exists(path) else []
 
     config = load_project_config(repo_root) if config is None else config
 
@@ -121,7 +122,7 @@ def find_project_mods(
         if not source:
             return []
         path = resolve_configured_path(repo_root, source)
-        return [path] if path.is_dir() and path.suffix.casefold() == ".sc2mod" else []
+        return [component_path(path)] if component_exists(path) and path.suffix.casefold() == ".sc2mod" else []
     if source_mode != "in_place":
         return []
 
@@ -141,7 +142,7 @@ def find_project_mods(
             path.relative_to(root)
         except ValueError:
             return []
-        return [path] if path.is_dir() else []
+        return [component_path(path)] if component_exists(path) else []
 
     mod_name = (
         primary_name
@@ -161,8 +162,8 @@ def find_project_mods(
             candidate.relative_to(resolved_root)
         except ValueError:
             continue
-        if candidate.is_dir():
-            matches.append(candidate)
+        if component_exists(candidate):
+            matches.append(component_path(candidate))
     return _unique_paths(matches)
 
 

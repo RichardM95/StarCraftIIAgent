@@ -18,6 +18,8 @@ Load this skill when running any tool from the `tools/` directory: pre-flight te
 | **Check only tools, docs, or mod** | `python tools/test-suite.py --scope tools|docs|mod` |
 | **Validate GameData XML & Galaxy** | `python tools/validate-mod.py` |
 | **Inspect recursive mod dependencies** | `python tools/inspect-mod-dependencies.py` |
+| **Diagnose a packed component** | `python tools/sc2-archive.py probe "<packed.SC2Mod>"` |
+| **Preview unpacking to Components** | `python tools/sc2-archive.py unpack "<source>" --output "<new target>"` |
 | **Inspect units/abilities/data chains** | `python tools/sc2-catalog-query.py <cmd>` |
 | **Find official/partner component examples or strings** | `python tools/sc2-reference-query.py find <term> --family <Family> --component <name> --limit 20` |
 | **Refresh stale catalog query DB** | `python tools/build-sc2-catalog-graph.py --sqlite-only` |
@@ -54,7 +56,11 @@ Comprehensive static checks:
 - Pattern-based Galaxy checks for variable placement, include paths, non-ASCII characters and workspace compatibility policy; these checks do not compile Galaxy
 
 ### `inspect-mod-dependencies.py`
-Starts from the actual target and recursively follows registered dependency metadata. Local components take priority; missing official components may come from a matching verified cache. Unresolved engine/Battle.net references remain partial. Use `--mods-dir`, `--campaigns-dir` and `--official-cache` for a one-off target; see [dependency and CASC evidence](../../wiki/reference/official-casc-cache.md).
+Starts from the actual target and recursively follows registered dependency metadata. Preserve the registered info source and declaration ordinals. Dependency postorder preserves declarations. Known SC2 rules confirm Core first and component dependency precedence; XML field merge ordering remains separate. Includes resolve relative to the including file; cycles, missing references and escapes fail. Local components take priority; missing official components may come from a matching verified cache. Unresolved engine/Battle.net references remain partial. Use `--mods-dir`, `--campaigns-dir` and `--official-cache` for a one-off target; see [dependency and CASC evidence](../../wiki/reference/official-casc-cache.md).
+
+### Packed components
+
+Queries and read-only checks accept MPQ components and Components directories through the shared reader. Preserve original archive/member provenance; ordinary queries do not convert the source. Editing, deployment and string `--fill` require a Components directory. Use explicit conversion commands from the [archive guide](../../tools/README.md#打包组件与格式转换): preview first, add `--apply` for writes; `--in-place` retains a verified backup, and `restore` retains the displaced version. Test conversions on disposable copies.
 
 ### `audit-actor-and-card-integrity.py`
 Detects:
@@ -161,7 +167,7 @@ These commands use the configured source. For a one-off component, add `--mod-di
 
 ### Database Caveats
 - Default catalog queries check manifest additions, removals and changed inputs even without an active mod. Missing/invalid configured sources block current-data queries; rebuild only after repairing configuration. `--allow-stale` permits explicit historical inspection and prints a historical-only warning. `reference_export` is a TXT reference source, while `active_component_dependency` comes from the resolved component chain. Cross-check current XML, dependency declarations, and source path.
-- Refresh with `python tools/build-sc2-catalog-graph.py --sqlite-only` when the query index is missing or stale. Verify its input config covers the target mod first. Do not rebuild for a single sample lookup.
+- Default-project queries refresh missing, stale or upgradeable SQLite indexes automatically. Use `--no-auto-rebuild` for strictly read-only work; explicit indexes and `--allow-stale` never auto-refresh. For locale, cache, locking and recovery behavior, read the [index guide](../../tools/README.md#索引与部署发布). Manual refresh remains `python tools/build-sc2-catalog-graph.py --sqlite-only`; full reports require a full build.
 - Search the component snapshot only for a question the graph and selected dumps do not answer; keep source, component, family, area, and result limit narrow.
 - `audit-gamestrings-anchors.py --fill --mod-dir '<ActualPath>'` rewrites localization files. After Editor save, use it to restore anchors and review the diff.
 - `deploy-mod.py` copies components when source and target differ — verify the target first; without `--dry-run` it is NOT a read-only validation command and does not regenerate compiled libraries.
@@ -178,7 +184,7 @@ Follow the [feedback workflow](../../wiki/implementation/testing-feedback-workfl
 
 All investigation tools use the shared dependency-root resolver. A configured editing source keeps configured Mods; a one-off explicit component uses its own Mods ancestor. If neither applies, pass `--mods-dir` to inspection/build or the test suite. Never silently use another installation's same-name mod.
 
-Current catalog builds/queries stop for missing or damaged component dependencies. `--allow-incomplete-dependencies` permits explicitly marked partial read-only investigation; the v3 manifest stores problems and each query repeats the warning. It does not authorize effective-value confirmation, source writes or dependency validation. `--allow-stale` is independent historical permission. Rebuild old/missing manifests and include the actual component-list info file.
+Current catalog builds/queries stop for missing or damaged component dependencies. Default project refresh uses `--official-research` for verified official sources whose loading remains unconfirmed; GUI find/show/libraries/examples share this research boundary. This does not certify active loading or relax strict checks. See [official research evidence](../../wiki/reference/official-casc-cache.md#官方研究查询). `--allow-incomplete-dependencies` permits explicitly marked partial source investigation; the v7 manifest stores problems and each query repeats the warning. It does not authorize effective-value confirmation, source writes or dependency validation. Automatic index refresh preserves these permission gates. `--allow-stale` is independent historical permission. Damaged or unbound manifests require explicit rebuilding; include the actual component-list info file.
 
 Deployment preserves no-op for identical paths and rejects both ancestor/descendant overlaps before dry-run, cleaning or copying.
 

@@ -45,9 +45,9 @@ python tools/sc2-trigger-query.py --target "<地图.SC2Map>" --mods-dir "<目标
 
 2026-10-07 对用户提供的 SC2GameData 提取库进行了核对：`challenges`、`frontiers`、`voidprologue`、`alliedcommanders` 保留依赖声明；`core/liberty/swarm/void.sc2mod` 保留库登记和定义，但缺少组件清单及 DocumentInfo/DocumentHeader。已检查的 Liberty、Swarm、Void 的 StandardInfo 没有 Dependencies。这些缺口不证明原游戏没有依赖。
 
-目前工具不会从文件夹名称推断官方依赖关系，也不会自动注入 Core。明确声明且能解析的 Core 提供 Ntve；否则含 Ntve 的目标引用不能通过确认。未解析的网络依赖、缺失元数据/库文件和有歧义的定义都使目标状态成为 `unconfirmed`。
+工具按真实声明、已核对官方内置链及 SC2 的 Core 基础规则解析加载范围。Core 为隐式基础层，Ntve 仍必须来自其真实登记的 NativeLib；同名本地伪造库、未映射网络引用、损坏登记和定义歧义继续失败。官方纯数据包可以用已验证的完整 CASC 枚举确认没有 GUI 库，不能仅凭普通目录没找到文件推断没有库。
 
-官方文件可由 [CASC 共用缓存](official-casc-cache.md) 提供；查询支持 `--official-cache`，默认仅定位目标安装/构建的缓存。组件元数据与已核对引擎表是不同来源；当前引擎表尚不能证明 Core/bootstrap，因此仍阻止发布完整缓存。GUI、Catalog 与预检共用解析器，不从参考库补冒活动来源。
+官方来源共用 [CASC 缓存规则](official-casc-cache.md)。适用构建及原始文件全部通过时进入活动范围；其他已验证但加载未确认的来源仍可供 `find/show/libraries/examples` 研究，目标兼容性保持 `unconfirmed`，严格 `check` 不放行。完整缓存存在但损坏时停止，不回退部分缓存。
 
 ## GUI 结构与迁移
 

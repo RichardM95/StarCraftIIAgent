@@ -7,8 +7,9 @@ import sys
 from collections.abc import Mapping
 from pathlib import Path
 
-from sc2_dependencies import build_dependency_graph, resolve_dependency_root
+from sc2_dependencies import build_dependency_graph, resolve_dependency_root, read_mod_dependencies
 from sc2_paths import CONFIG_FILENAME, config_path, load_project_config, resolve_configured_path, project_data_dir
+from sc2_components import component_exists, archive_of, component_session
 
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
@@ -21,6 +22,7 @@ REQUIRED_PATHS = (
 OPTIONAL_EXISTENCE_PATHS = {"campaign_maps_dir"}
 
 
+@component_session
 def main(argv=()) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--official-cache", type=Path)
@@ -91,7 +93,7 @@ def main(argv=()) -> int:
             if primary_path is not None and primary_path.suffix.casefold() != ".sc2mod":
                 failures.append("project.primary_mod must end with .SC2Mod")
             if (project.get("source_mode", "in_place") != "workspace_copy"
-                    and primary_path is not None and not primary_path.is_dir()):
+                    and primary_path is not None and not component_exists(primary_path)):
                 failures.append(f"project.primary_mod directory not found: {primary_path}")
 
     recursive = project.get("resolve_dependencies_recursive", True)
@@ -110,7 +112,7 @@ def main(argv=()) -> int:
             primary_path = resolve_configured_path(REPO_ROOT, source_mod)
             if primary_path.suffix.casefold() != ".sc2mod":
                 failures.append("project.source_mod must end with .SC2Mod")
-            if not primary_path.is_dir():
+            if not component_exists(primary_path):
                 failures.append(f"project.source_mod directory not found: {primary_path}")
 
     try:
@@ -136,13 +138,14 @@ def main(argv=()) -> int:
             failures.append(f"validation.exclude_mods entry must end with .SC2Mod: {name}")
 
     dependency_graph = None
-    if recursive and primary_path is not None and primary_path.is_dir() and "mods_dir" in resolved_paths:
+    if recursive and primary_path is not None and component_exists(primary_path) and "mods_dir" in resolved_paths:
         try:
             mods_root = resolve_dependency_root(REPO_ROOT, primary_path, config, args.mods_dir)
             campaigns = resolve_configured_path(REPO_ROOT, str(args.campaigns_dir)) if args.campaigns_dir is not None else None
             dependency_graph = build_dependency_graph(primary_path, mods_root,
                 campaigns_dir=campaigns, official_cache=args.official_cache, strict_external=True)
             failures.extend(dependency_graph["errors"])
+            failures.extend(dependency_graph.get('official_problems', []))
             for edge in dependency_graph["missing"]:
                 failures.append(
                     f"missing recursive mod dependency: {edge['target_name']} "
@@ -151,11 +154,19 @@ def main(argv=()) -> int:
         except ValueError as exc:
             failures.append(str(exc))
 
+    if not recursive and primary_path is not None and archive_of(primary_path):
+        try:
+            failures.extend(read_mod_dependencies(primary_path)[2])
+        except (OSError, ValueError) as exc:
+            failures.append(str(exc))
+
     print(f"Configuration: {path}")
     for key in REQUIRED_PATHS:
         if key in resolved_paths:
             print(f"  {key}: {resolved_paths[key]}")
     print(f"  source_mode: {source_mode}")
+    if primary_path is not None and archive_of(primary_path):
+        print('  source_access: readable MPQ; editing requires explicit unpack to Components')
     if dependency_graph is not None:
         print(f"  recursive_component_mods: {len(dependency_graph['nodes'])}")
 
