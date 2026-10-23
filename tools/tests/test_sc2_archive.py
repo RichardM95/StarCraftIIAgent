@@ -1,9 +1,11 @@
 """Real bundled-DLL round trips and shared read-only component contracts."""
+
+import os
+os.environ["SC2AGENT_UI_LANGUAGE"] = "en"
 import base64
 import importlib.util
 import io
 import json
-import os
 import queue
 import struct
 import subprocess

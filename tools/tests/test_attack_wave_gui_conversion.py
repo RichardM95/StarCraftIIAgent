@@ -1,3 +1,6 @@
+
+import os
+os.environ["SC2AGENT_UI_LANGUAGE"] = "en"
 import importlib.util
 import sys
 import unittest

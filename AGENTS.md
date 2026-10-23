@@ -1,8 +1,14 @@
 # AGENTS.md — 入口文件
 
+[English](AGENTS.en.md)
+
 **作者：扯蛋虾米。** 统一作者声明见 `AUTHORS.md`。
 
 **本文件是工作区规则入口。** 需要项目路径时读取 `agent-config.json`；需要领域文档时从 `wiki/index.md` 路由；仅在路由器未覆盖时打开 `wiki/catalog.md`。`README.md` 是面向人类的概述，`wiki/reference/editor-guide.md` 是 SC2 Editor 工作流笔记。
+
+## 使用语言
+
+按[语言选择规则](wiki/guides/agent-language.md)输出：用户明确语言指令优先，其次固定个人偏好、当前用户自然语言、系统语言。首次需要偏好时运行 `python tools/agent-language.py --json` 只读查询；不因路径、代码或引用中的英文切换语言。工具调用显式传 `--ui-language zh-CN` 或 `--ui-language en`。优先阅读所选语言的使用指南；技能与技术资料保持单一规则来源，按所选语言解释。界面语言不改变 SC2 `--locale`、项目配置、对象 ID 或精确验收状态。普通查询不保存偏好。
 
 > **项目初始化规则：** 当用户给出主 `.SC2Mod` Components 文件夹路径并要求初始化或选择项目时，直接运行 `python tools/init-project.py "<主Mod文件夹路径>"`。该工具负责推导 SC2/Mods/Maps 路径、递归解析依赖并写入 `agent-config.json`；不要要求用户手工编辑 JSON。仅当目录不是标准 `<StarCraft II>/Mods/<Name>.SC2Mod` 布局且无法推导时，才询问缺失路径。初始化后检查“模组身份”是否与所选项目相符，不要猜测 Bank、Library ID 或代码前缀。
 

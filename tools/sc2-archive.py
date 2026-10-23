@@ -9,9 +9,11 @@ from pathlib import Path
 from sc2_archive import convert, probe, restore
 from sc2_components import close_components
 
+from sc2_i18n import UIArgumentParser, run_cli
+
 
 def main(argv=None):
-    parser = argparse.ArgumentParser(description=__doc__)
+    parser = UIArgumentParser(description=__doc__)
     sub = parser.add_subparsers(dest='command', required=True)
     p = sub.add_parser('probe', help='Read-only container/DLL/component diagnostics')
     p.add_argument('source', type=Path)
@@ -43,4 +45,4 @@ def main(argv=None):
 
 
 if __name__ == '__main__':
-    raise SystemExit(main())
+    raise SystemExit(run_cli(main))

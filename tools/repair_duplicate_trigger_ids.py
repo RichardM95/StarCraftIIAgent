@@ -10,6 +10,8 @@ import xml.etree.ElementTree as ET
 from collections import defaultdict
 from pathlib import Path
 
+from sc2_i18n import UIArgumentParser, tr, run_cli
+
 
 ELEMENT_RE = re.compile(
     r'(?m)^    <Element Type="(?P<type>[^"]+)" Id="(?P<id>[0-9A-F]{8})">'
@@ -69,7 +71,7 @@ def duplicate_ids(text: str) -> list[str]:
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(
+    parser = UIArgumentParser(
         description=(
             "Repair globally duplicated SC2 Trigger Element IDs only when each collision "
             "uses distinct element types."
@@ -88,7 +90,7 @@ def main() -> int:
     ET.fromstring(text)
 
     repairs = find_repairs(text)
-    print(f"Repairable duplicate declarations: {len(repairs)}")
+    print(tr('Repairable duplicate declarations: {p0}', p0=len(repairs)))
     for old_id, element_type, new_id in repairs:
         print(f"  {old_id} ({element_type}) -> {new_id}")
     if not args.apply or not repairs:
@@ -114,13 +116,13 @@ def main() -> int:
     finally:
         if temporary.exists():
             temporary.unlink()
-    print(f"Applied repairs: {len(repairs)}")
+    print(tr('Applied repairs: {p0}', p0=len(repairs)))
     return 0
 
 
 if __name__ == "__main__":
     try:
-        raise SystemExit(main())
+        raise SystemExit(run_cli(main))
     except Exception as error:
-        print(f"ERROR: {error}", file=sys.stderr)
+        print(tr('ERROR: {p0}', p0=error), file=sys.stderr)
         raise SystemExit(2)

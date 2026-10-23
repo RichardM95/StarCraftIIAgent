@@ -6,6 +6,8 @@ import sys
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
+from sc2_i18n import UIArgumentParser, tr, run_cli
+
 
 MARKER = "AttackWaveModifier unit quantities scaled by 75 percent with ceiling."
 ELEMENT_RE = re.compile(
@@ -87,7 +89,7 @@ def extract(path: Path) -> tuple[dict[str, int], list[int], str]:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser()
+    parser = UIArgumentParser()
     parser.add_argument("before", type=Path)
     parser.add_argument("after", type=Path)
     args = parser.parse_args()
@@ -108,13 +110,13 @@ def main() -> int:
             raise RuntimeError(f"Bad script scaling in {args.after}: #{index} {old} -> {new}")
     changed = sum(before_xml[key] != after_xml[key] for key in before_xml)
     changed += sum(old != new for old, new in zip(before_script, after_script))
-    print(f"{args.after.parent.name}: verified {len(before_xml) + len(before_script)} values ({changed} changed)")
+    print(tr('{p0}: verified {p1} values ({p2} changed)', p0=args.after.parent.name, p1=len(before_xml) + len(before_script), p2=changed))
     return 0
 
 
 if __name__ == "__main__":
     try:
-        raise SystemExit(main())
+        raise SystemExit(run_cli(main))
     except Exception as error:
-        print(f"ERROR: {error}", file=sys.stderr)
+        print(tr('ERROR: {p0}', p0=error), file=sys.stderr)
         raise SystemExit(2)

@@ -8,6 +8,9 @@ import sys
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "tools"))
+from sc2_i18n import UIArgumentParser, tr, run_cli
+
 
 MARKER = "AttackWaveModifier unit quantities scaled by 75 percent with ceiling."
 ELEMENT_RE = re.compile(
@@ -176,7 +179,7 @@ def scale_map(triggers: Path, apply: bool, backup: Path | None) -> int:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(
+    parser = UIArgumentParser(
         description="Scale AttackWaveModifier unit quantities to ceil(value * 0.75)."
     )
     parser.add_argument("triggers", type=Path)
@@ -188,7 +191,7 @@ def main() -> int:
 
 if __name__ == "__main__":
     try:
-        raise SystemExit(main())
+        raise SystemExit(run_cli(main))
     except Exception as error:
-        print(f"ERROR: {error}", file=sys.stderr)
+        print(tr('ERROR: {p0}', p0=error), file=sys.stderr)
         raise SystemExit(2)

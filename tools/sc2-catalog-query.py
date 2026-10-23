@@ -22,6 +22,8 @@ from sc2_catalog_inputs import changed_input, index_inputs, manifest_path, read_
 from sc2_paths import catalog_output_dir, find_project_mods, load_project_config, resolve_configured_path, ensure_project_data
 from sc2_components import component_exists, component_session
 
+from sc2_i18n import UIArgumentParser, tr, child_env, run_cli
+
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_GRAPH = ROOT / "sc2-catalog-graph-out" / "graph.json"
@@ -158,13 +160,13 @@ def load_store(args: argparse.Namespace) -> CatalogStore:
             return read_store(args, context)
         except RefreshRequired as needed:
             manifest = needed.manifest
-            print("Catalog refresh required: " + str(needed), file=sys.stderr)
+            print(tr('Catalog refresh required: {p0}', p0=str(needed)), file=sys.stderr)
         except (ValueError, OSError, sqlite3.Error, SystemExit):
             # A concurrent directory switch can briefly hide the SQLite/manifest
             # pair. Recheck under its refresh lock before diagnosing corruption.
             if not context["out"].with_name("." + context["out"].name + ".sc2-refresh.lock").exists():
                 raise
-            print("Catalog refresh in progress; waiting to verify the index", file=sys.stderr)
+            print(tr('Catalog refresh in progress; waiting to verify the index'), file=sys.stderr)
         with refresh_lock(context["out"]):
             if auto_context(args) != context:
                 raise ValueError("Project configuration changed while waiting; rerun the query")
@@ -174,7 +176,7 @@ def load_store(args: argparse.Namespace) -> CatalogStore:
                 manifest = needed.manifest
             command = rebuild_command(args, context, manifest)
             ensure_project_data(context["out"].parent.parent)
-            print("Rebuilding query index: " + command_text(command), file=sys.stderr)
+            print(tr('Rebuilding query index: {p0}', p0=command_text(command)), file=sys.stderr)
             # The child publishes only inside our stage: killing it cannot interrupt
             # a switch of the real index. The parent validates and publishes last.
             with staged_directory(context["out"]) as stage:
@@ -184,7 +186,7 @@ def load_store(args: argparse.Namespace) -> CatalogStore:
                 try:
                     result = subprocess.run(build_command, cwd=ROOT, capture_output=True, text=True, encoding="utf-8",
                                             errors="replace", timeout=BUILD_TIMEOUT,
-                                            env={**os.environ, "PYTHONIOENCODING": "utf-8"})
+                                            env=child_env())
                 except subprocess.TimeoutExpired as exc:
                     raise ValueError(f"Catalog build timed out after {BUILD_TIMEOUT}s; previous index preserved") from exc
                 for output in (result.stdout, result.stderr):
@@ -210,7 +212,7 @@ def load_store(args: argparse.Namespace) -> CatalogStore:
                                     ignore=lambda directory, names: ["catalog.sqlite", "catalog.sqlite.inputs.json"]
                                     if Path(directory) == context["out"] else [])
                 publish_directory(built, context["out"], "catalog-index")
-            print("Catalog query index refreshed: " + str(context["out"]), file=sys.stderr)
+            print(tr('Catalog query index refreshed: {p0}', p0=str(context["out"])), file=sys.stderr)
             try:
                 return read_store(args, context)
             except RefreshRequired as exc:
@@ -272,21 +274,20 @@ def edge_source_family(store: "CatalogStore", edge: dict) -> str:
 def emit_node_header(store: "CatalogStore", node_id: str) -> None:
     node = store.get_node(node_id) or {}
     print(f"# {label(node, node_id)}")
-    print(f"- id: `{node_id}`")
+    print(tr('- id: `{p0}`', p0=node_id))
     if node.get("catalog_family"):
-        print(f"- family: `{node.get('catalog_family')}`")
+        print(tr('- family: `{p0}`', p0=node.get('catalog_family')))
     if node.get("source_classes"):
-        print(f"- sources: {', '.join(node.get('source_classes', []))}")
+        print(tr('- sources: {p0}', p0=', '.join(node.get('source_classes', []))))
     definitions = node.get("definitions", [])
     if definitions:
-        print("- definitions:")
+        print(tr('- definitions:'))
         for definition in definitions[:4]:
             print(
-                f"  - {compact_file(definition.get('file', ''))} "
-                f"`{definition.get('tag', '')}` parent `{definition.get('parent') or ''}`"
+                tr('  - {p0} `{p1}` parent `{p2}`', p0=compact_file(definition.get('file', '')), p1=definition.get('tag', ''), p2=definition.get('parent') or '')
             )
         if len(definitions) > 4:
-            print(f"  - ... {len(definitions) - 4} more")
+            print(tr('  - ... {p0} more', p0=len(definitions) - 4))
 
 
 def dedupe_edges(edges: Iterable[dict]) -> list[dict]:
@@ -314,14 +315,14 @@ def filter_source_class(edges: Iterable[dict], source_class: str | None) -> list
 
 def print_group(title: str, edges: Iterable[dict], store: "CatalogStore", direction: str, limit: int) -> None:
     rows = dedupe_edges(edges)
-    print(f"\n## {title} ({len(rows)})")
+    print(tr("\n## {title} ({count})", title=tr(title), count=len(rows)))
     if not rows:
-        print("- None")
+        print(tr('- None'))
         return
     for edge in rows[:limit]:
         print_edge(edge, store, direction)
     if len(rows) > limit:
-        print(f"- ... {len(rows) - limit} more")
+        print(tr('- ... {p0} more', p0=len(rows) - limit))
 
 
 class CatalogStore:
@@ -547,7 +548,7 @@ def stale_default_index_input(store: CatalogStore, *, verify_hashes: bool = Fals
         if not selection.get("recursive", True):
             if not allow_incomplete_dependencies:
                 raise IncompleteDependenciesError(RECURSION_DISABLED)
-            print("WARNING: PARTIAL current dependency investigation: " + RECURSION_DISABLED, file=sys.stderr)
+            print(tr('WARNING: PARTIAL current dependency investigation: {p0}', p0=RECURSION_DISABLED), file=sys.stderr)
         else:
             recorded_cache = selection.get("official_cache")
             if official_cache and str(official_cache.resolve()) != recorded_cache:
@@ -562,7 +563,7 @@ def stale_default_index_input(store: CatalogStore, *, verify_hashes: bool = Fals
             if state["status"] == "partial":
                 if not allow_incomplete_dependencies and not (research and official_research_allowed(state)):
                     raise IncompleteDependenciesError("Incomplete active dependencies: " + "; ".join(state["problems"]))
-                print("WARNING: PARTIAL current dependency investigation: " + "; ".join(state["problems"]), file=sys.stderr)
+                print(tr('WARNING: PARTIAL current dependency investigation: {p0}', p0="; ".join(state["problems"])), file=sys.stderr)
             mods = [Path(node["path"]) for node in {**graph['nodes'], **graph.get('research_nodes', {})}.values()]
     return changed_input(store.path, index_inputs(workspace, mods,
                          official_research=selection.get('official_research', False) or selection.get('allow_partial_official_cache', False)), verify_hashes=verify_hashes)
@@ -617,7 +618,7 @@ def read_store(args: argparse.Namespace, context: dict | None = None) -> Catalog
     except ValueError as exc:
         if artifact_id or not args.allow_stale:
             reject("Index/manifest integrity cannot be verified; rebuild required: " + str(exc))
-        print("WARNING: Historical legacy index only; no verified manifest: " + str(exc), file=sys.stderr)
+        print(tr('WARNING: Historical legacy index only; no verified manifest: {p0}', p0=str(exc)), file=sys.stderr)
         return store
     state = manifest["dependencies"]
     try:
@@ -634,7 +635,7 @@ def read_store(args: argparse.Namespace, context: dict | None = None) -> Catalog
         if not allow_partial and not (manifest['version'] in {6, 7, MANIFEST_VERSION}
                 and manifest.get('selection', {}).get('official_research') and official_research_allowed(state)):
             reject("Partial dependency index requires --allow-incomplete-dependencies: " + "; ".join(state["problems"]))
-        print("WARNING: PARTIAL dependency index, investigation only: " + "; ".join(state["problems"]), file=sys.stderr)
+        print(tr('WARNING: PARTIAL dependency index, investigation only: {p0}', p0="; ".join(state["problems"])), file=sys.stderr)
     if manifest["version"] != MANIFEST_VERSION:
         selection = manifest.get('selection')
         if (manifest['version'] in {3, 4, 5, 6, 7} and isinstance(artifact_id, str) and artifact_id
@@ -643,20 +644,20 @@ def read_store(args: argparse.Namespace, context: dict | None = None) -> Catalog
                 and (not selection.get('primary') or selection.get('mods_dir'))):
             if not args.allow_stale:
                 reject(f"Catalog manifest version {manifest['version']} requires rebuild; --allow-stale permits historical inspection only", True)
-            print(f"WARNING: Historical version {manifest['version']} index; source scope/localization is unverified; rebuild required", file=sys.stderr)
+            print(tr('WARNING: Historical version {p0} index; source scope/localization is unverified; rebuild required', p0=manifest['version']), file=sys.stderr)
             return store
         if artifact_id:
             reject("Bound index is paired with a legacy manifest; rebuild required")
         if not args.allow_stale:
             reject("Legacy manifest requires rebuild; --allow-stale permits historical inspection only")
-        print("WARNING: Historical legacy index only; build identity is unverified; rebuild required", file=sys.stderr)
+        print(tr('WARNING: Historical legacy index only; build identity is unverified; rebuild required'), file=sys.stderr)
         return store
     selection = manifest.get("selection")
     if (not isinstance(artifact_id, str) or not artifact_id or artifact_id != manifest.get("build_id")
             or not isinstance(selection, dict) or not isinstance(selection.get("workspace_root"), str)
             or (selection.get("primary") and (not selection.get("mods_dir") or not selection.get("campaigns_dir")))):
         reject("Index/manifest build_id or input identity mismatch; rebuild required (cannot be waived by --allow-stale)")
-    print("Index scope: " + str(selection.get("primary") or "reference-only") + " [build_id=" + artifact_id + "]", file=sys.stderr)
+    print(tr("Index scope: {scope} [build_id={build}]", scope=str(selection.get("primary") or "reference-only"), build=artifact_id), file=sys.stderr)
     if context is not None and (selection["mods_dir"] != str(context["mods_dir"])
                                 or selection.get("recursive", True) != context["recursive"]):
         reject("Current project's dependency scope changed", True)
@@ -665,7 +666,7 @@ def read_store(args: argparse.Namespace, context: dict | None = None) -> Catalog
         reject('Default query requires the current official research source policy', True)
     if getattr(args, "locale", None) and args.locale != selection.get("locale"):
         if args.allow_stale:
-            print("WARNING: Historical index locale differs from --locale", file=sys.stderr)
+            print(tr('WARNING: Historical index locale differs from --locale'), file=sys.stderr)
         else:
             reject("Index locale differs from --locale", True)
     stale_input = None
@@ -681,7 +682,7 @@ def read_store(args: argparse.Namespace, context: dict | None = None) -> Catalog
         message = f"Cannot verify current catalog index: {exc}"
     if message:
         if args.allow_stale:
-            print("WARNING: Historical inspection only. " + message, file=sys.stderr)
+            print(tr('WARNING: Historical inspection only. {p0}', p0=message), file=sys.stderr)
         else:
             reject(message + "\nRebuild the selected index, or pass --allow-stale only for historical inspection", stale_input is not None)
 
@@ -691,11 +692,11 @@ def read_store(args: argparse.Namespace, context: dict | None = None) -> Catalog
 def command_stats(args: argparse.Namespace) -> None:
     store = load_store(args)
     nodes, edges, kinds, families, sources = store.stats()
-    print(f"Nodes: {nodes}")
-    print(f"Edges: {edges}")
-    print("Node kinds: " + ", ".join(f"{k}={v}" for k, v in kinds.most_common(8)))
-    print("Catalog families: " + ", ".join(f"{k}={v}" for k, v in families.most_common(12)))
-    print("Source classes: " + ", ".join(f"{k}={v}" for k, v in sources.most_common()))
+    print(tr('Nodes: {p0}', p0=nodes))
+    print(tr('Edges: {p0}', p0=edges))
+    print(tr('Node kinds: {p0}', p0=", ".join(f"{k}={v}" for k, v in kinds.most_common(8))))
+    print(tr('Catalog families: {p0}', p0=", ".join(f"{k}={v}" for k, v in families.most_common(12))))
+    print(tr('Source classes: {p0}', p0=", ".join(f"{k}={v}" for k, v in sources.most_common())))
 
 
 def command_find(args: argparse.Namespace) -> None:
@@ -712,22 +713,22 @@ def command_find(args: argparse.Namespace) -> None:
             detail.append(node["catalog_family"])
         if node.get("source_classes"):
             detail.append(",".join(node["source_classes"]))
-        print(f"- `{label(node, nid)}` id=`{nid}` {'; '.join(detail)}")
+        print(tr('- `{p0}` id=`{p1}` {p2}', p0=label(node, nid), p1=nid, p2='; '.join(detail)))
     if len(candidates) > args.limit:
-        print(f"... {len(candidates) - args.limit} more")
+        print(tr('... {p0} more', p0=len(candidates) - args.limit))
 
 
 def print_localization(node: dict, limit: int) -> None:
-    print(f"- value status: {node.get('value_status', 'unverified')}")
+    print(tr('- value status: {p0}', p0=node.get('value_status', 'unverified')))
     if "value_preview" in node:
-        print("- value: " + json.dumps(node["value_preview"], ensure_ascii=False))
+        print(tr('- value: {p0}', p0=json.dumps(node["value_preview"], ensure_ascii=False)))
     values = node.get("values", [])
-    print(f"- text providers ({len(values)}):")
+    print(tr('- text providers ({p0}):', p0=len(values)))
     for entry in values[:limit]:
         text = json.dumps(entry["value"][:120], ensure_ascii=False)
         print(f"  - [{entry['source_class']}] {compact_file(entry['source_file'])}: {text}")
     if len(values) > limit:
-        print(f"  - ... {len(values) - limit} more")
+        print(tr('  - ... {p0} more', p0=len(values) - limit))
 
 
 def command_show(args: argparse.Namespace) -> None:
@@ -735,43 +736,42 @@ def command_show(args: argparse.Namespace) -> None:
     nid = store.resolve_one(args.id, args.family)
     node = store.get_node(nid) or {}
     print(f"# {label(node, nid)}")
-    print(f"- id: `{nid}`")
-    print(f"- kind: `{node.get('kind', '')}`")
+    print(tr('- id: `{p0}`', p0=nid))
+    print(tr('- kind: `{p0}`', p0=node.get('kind', '')))
     if node.get("catalog_family"):
-        print(f"- family: `{node.get('catalog_family')}`")
+        print(tr('- family: `{p0}`', p0=node.get('catalog_family')))
     if node.get("source_classes"):
-        print(f"- sources: {', '.join(node.get('source_classes', []))}")
+        print(tr('- sources: {p0}', p0=', '.join(node.get('source_classes', []))))
     if node.get("kind") == "localization":
         print_localization(node, args.definitions)
     definitions = node.get("definitions", [])
     if definitions:
-        print("- definitions:")
+        print(tr('- definitions:'))
         for definition in definitions[: args.definitions]:
             print(
-                f"  - {compact_file(definition.get('file', ''))} "
-                f"`{definition.get('tag', '')}` parent `{definition.get('parent') or ''}`"
+                tr('  - {p0} `{p1}` parent `{p2}`', p0=compact_file(definition.get('file', '')), p1=definition.get('tag', ''), p2=definition.get('parent') or '')
             )
         if len(definitions) > args.definitions:
-            print(f"  - ... {len(definitions) - args.definitions} more")
+            print(tr('  - ... {p0} more', p0=len(definitions) - args.definitions))
 
     out_edges = sorted(store.edges_out(nid), key=edge_sort_key)
     in_edges = sorted(store.edges_in(nid), key=edge_sort_key)
     if args.source_class:
         out_edges = [edge for edge in out_edges if edge.get("source_class") == args.source_class]
         in_edges = [edge for edge in in_edges if edge.get("source_class") == args.source_class]
-    print(f"\n## Outgoing ({len(out_edges)})")
+    print(tr('\n## Outgoing ({p0})', p0=len(out_edges)))
     for edge in out_edges[: args.limit]:
         print_edge(edge, store, "out")
     if len(out_edges) > args.limit:
-        print(f"- ... {len(out_edges) - args.limit} more")
-    print(f"\n## Incoming ({len(in_edges)})")
+        print(tr('- ... {p0} more', p0=len(out_edges) - args.limit))
+    print(tr('\n## Incoming ({p0})', p0=len(in_edges)))
     for edge in in_edges[: args.limit]:
         print_edge(edge, store, "in")
     if len(in_edges) > args.limit:
-        print(f"- ... {len(in_edges) - args.limit} more")
+        print(tr('- ... {p0} more', p0=len(in_edges) - args.limit))
 
     if args.depth > 1:
-        print(f"\n## Reachable depth {args.depth}")
+        print(tr('\n## Reachable depth {p0}', p0=args.depth))
         seen = {nid}
         queue = deque([(nid, 0)])
         emitted = 0
@@ -785,7 +785,7 @@ def command_show(args: argparse.Namespace) -> None:
                     continue
                 seen.add(target)
                 queue.append((target, depth + 1))
-                print(f"- d{depth + 1}: `{label(store.get_node(target), target)}` via {edge.get('type')}")
+                print(tr('- d{p0}: `{p1}` via {p2}', p0=depth + 1, p1=label(store.get_node(target), target), p2=edge.get('type')))
                 emitted += 1
                 if emitted >= args.limit:
                     break
@@ -795,33 +795,31 @@ def command_providers(args: argparse.Namespace) -> None:
     store = load_store(args)
     nid = store.resolve_one(args.id, args.family)
     node = store.get_node(nid) or {}
-    print(f"# Providers for {label(node, nid)}")
+    print(tr('# Providers for {p0}', p0=label(node, nid)))
     if node.get("kind") == "localization":
         print_localization(node, len(node.get("values", [])))
         return
     definitions = node.get("definitions", [])
     if not definitions:
-        print("- No catalog definitions on this node.")
+        print(tr('- No catalog definitions on this node.'))
         return
     for definition in definitions:
         print(
-            f"- {definition.get('source_class')} `{definition.get('source_name')}`: "
-            f"{compact_file(definition.get('file', ''))} `{definition.get('tag', '')}` "
-            f"parent `{definition.get('parent') or ''}`"
+            tr('- {p0} `{p1}`: {p2} `{p3}` parent `{p4}`', p0=definition.get('source_class'), p1=definition.get('source_name'), p2=compact_file(definition.get('file', '')), p3=definition.get('tag', ''), p4=definition.get('parent') or '')
         )
 
 
 def command_unresolved(args: argparse.Namespace) -> None:
     store = load_store(args)
     rows = store.unresolved_edges(args.source_class, args.contains)
-    print(f"Unresolved {args.source_class} object refs: {len(rows)}")
+    print(tr('Unresolved {p0} object refs: {p1}', p0=args.source_class, p1=len(rows)))
     for edge in rows[: args.limit]:
         print(
             f"- `{label(store.get_node(edge['source']), edge['source'])}` --{edge.get('type')}--> "
             f"`{edge['target']}` [{compact_file(edge.get('source_file', ''))}; {edge.get('evidence', '')}]"
         )
     if len(rows) > args.limit:
-        print(f"... {len(rows) - args.limit} more")
+        print(tr('... {p0} more', p0=len(rows) - args.limit))
 
 
 def iter_neighbors(store: CatalogStore, node_id: str, directed: bool) -> Iterable[tuple[str, dict]]:
@@ -854,9 +852,9 @@ def command_path(args: argparse.Namespace) -> None:
             seen.add(nxt)
             queue.append((nxt, next_path))
     if not found:
-        print(f"No path within depth {args.max_depth}: `{label(store.get_node(start), start)}` -> `{label(store.get_node(goal), goal)}`")
+        print(tr('No path within depth {p0}: `{p1}` -> `{p2}`', p0=args.max_depth, p1=label(store.get_node(start), start), p2=label(store.get_node(goal), goal)))
         return
-    print(f"Path length {len(found)}")
+    print(tr('Path length {p0}', p0=len(found)))
     for source, target, edge in found:
         arrow = "->" if edge["source"] == source else "<-"
         print(f"- `{label(store.get_node(source), source)}` {arrow} {edge.get('type')} `{label(store.get_node(target), target)}`")
@@ -991,9 +989,9 @@ def command_actor_chain(args: argparse.Namespace) -> None:
     store = load_store(args)
     actor_ids = actor_seed_ids(store, args.id, args.source_class)
     if not actor_ids:
-        print(f"No actors found for `{args.id}`")
+        print(tr('No actors found for `{p0}`', p0=args.id))
         return
-    print(f"# Actor Chain: {args.id}")
+    print(tr('# Actor Chain: {p0}', p0=args.id))
     for actor_id in actor_ids[: args.actors]:
         emit_node_header(store, actor_id)
         out_edges = filter_source_class(store.edges_out(actor_id), args.source_class)
@@ -1030,7 +1028,7 @@ def command_actor_chain(args: argparse.Namespace) -> None:
             args.limit,
         )
     if len(actor_ids) > args.actors:
-        print(f"\n... {len(actor_ids) - args.actors} more actors omitted")
+        print(tr('\n... {p0} more actors omitted', p0=len(actor_ids) - args.actors))
 
 
 def command_production_chain(args: argparse.Namespace) -> None:
@@ -1051,7 +1049,7 @@ def command_production_chain(args: argparse.Namespace) -> None:
         print_group("Production Abilities", producer_edges, store, "in", args.limit)
         for edge in dedupe_edges(producer_edges)[: args.expand]:
             abil_id = edge["source"]
-            print(f"\n# Production Ability Detail: {label(store.get_node(abil_id), abil_id)}")
+            print(tr('\n# Production Ability Detail: {p0}', p0=label(store.get_node(abil_id), abil_id)))
             abil_edges = filter_source_class(store.edges_out(abil_id), args.source_class)
             print_group(
                 "Produced Units",
@@ -1113,7 +1111,7 @@ def command_production_chain(args: argparse.Namespace) -> None:
 
 
 def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(description=__doc__)
+    parser = UIArgumentParser(description=__doc__)
     parser.add_argument("--graph", default=None, help="Graph path; default: selected project catalog, or sibling of explicit --db")
     parser.add_argument("--official-cache", type=Path, help="Cache identity must match the indexed selection; otherwise rebuild")
     parser.add_argument("--campaigns-dir", type=Path, help="Must match indexed Campaigns root; defaults to the recorded selection")
@@ -1204,4 +1202,4 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    raise SystemExit(run_cli(main))

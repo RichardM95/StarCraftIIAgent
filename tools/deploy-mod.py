@@ -14,6 +14,8 @@ from sc2_components import require_editable
 from sc2_catalog_inputs import file_digest
 from sc2_paths import find_project_mods, load_project_config, resolve_configured_path
 
+from sc2_i18n import UIArgumentParser, tr, run_cli
+
 REPO_ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_SC2_MODS_DIR = Path(r"C:\Program Files (x86)\StarCraft II\Mods")
 
@@ -79,14 +81,14 @@ def deploy_mod(
     except ValueError as exc:
         raise SystemExit("Deployment target must stay inside the Mods directory") from exc
 
-    print(f"Deploying component mod:\n  Source: {source}\n  Target: {destination}")
+    print(tr('Deploying component mod:\n  Source: {p0}\n  Target: {p1}', p0=source, p1=destination))
     if source == destination:
-        print("Source already is the configured target; no copy was performed.")
+        print(tr('Source already is the configured target; no copy was performed.'))
         return destination
     if source.is_relative_to(destination) or destination.is_relative_to(source):
         raise SystemExit("Source and deployment target must not contain one another")
     if dry_run:
-        print("Dry run; no files were changed.")
+        print(tr('Dry run; no files were changed.'))
         return destination
 
     def ignored(name):
@@ -118,16 +120,16 @@ def deploy_mod(
 
     manifest = destination / "ComponentList.SC2Components"
     if manifest.is_file():
-        print(f"Deployment complete. Verified {manifest.name}.")
+        print(tr('Deployment complete. Verified {p0}.', p0=manifest.name))
     else:
-        print("Deployment complete.")
-    print("Generated Galaxy files were copied unchanged; save in the SC2 Editor to regenerate them.")
+        print(tr('Deployment complete.'))
+    print(tr('Generated Galaxy files were copied unchanged; save in the SC2 Editor to regenerate them.'))
 
     return destination
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(
+    parser = UIArgumentParser(
         description="Deploy .SC2Mod component folder to SC2 Mods directory."
     )
     parser.add_argument("--source", help="Explicit source .SC2Mod folder; deploy by folder name. Automatic deployment preserves project.primary_mod subdirectories.")
@@ -138,7 +140,7 @@ def main() -> int:
 
     mods = find_local_mods(args.source)
     if not mods:
-        print("No .SC2Mod directory found to deploy.")
+        print(tr('No .SC2Mod directory found to deploy.'))
         return 1
 
     source_mod = mods[0]
@@ -158,4 +160,4 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    sys.exit(run_cli(main))

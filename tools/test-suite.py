@@ -22,6 +22,8 @@ from sc2_paths import (
     resolve_configured_path,
 )
 
+from sc2_i18n import UIArgumentParser, tr, child_env, run_cli, render
+
 REPO_ROOT = Path(__file__).resolve().parent.parent
 
 
@@ -75,9 +77,11 @@ def dependency_validation_targets(
 
 
 def run_step(name: str, cmd: list[str], verbose: bool) -> bool:
-    print(f"--> Running {name}...")
+    name = render(name)
+    print(tr('--> Running {p0}...', p0=name))
     start = time.time()
-    res = subprocess.run(cmd, cwd=str(REPO_ROOT), capture_output=True, text=True)
+    res = subprocess.run(cmd, cwd=str(REPO_ROOT), capture_output=True, text=True, encoding="utf-8", errors="replace",
+                         env=child_env(language="en" if "unittest" in cmd else None))
     elapsed = time.time() - start
     if res.returncode == 0:
         print(f"    [PASS] {name} ({elapsed:.2f}s)")
@@ -95,7 +99,7 @@ def run_step(name: str, cmd: list[str], verbose: bool) -> bool:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(
+    parser = UIArgumentParser(
         description="Run fast static pre-flight checks and linters."
     )
     parser.add_argument(
@@ -148,9 +152,10 @@ def main() -> int:
             else [
                 ("Skill Frontmatter Validator", [sys.executable, "tools/audit-skill-frontmatter.py"]),
                 ("Documentation Link Integrity Checker", [sys.executable, "tools/check-doc-links.py"]),
+                ("Documentation Translation Audit", [sys.executable, "tools/audit-doc-translations.py"]),
             ]
         )
-        print(f"SC2 PRE-FLIGHT: {args.scope} scope")
+        print(tr('SC2 PRE-FLIGHT: {p0} scope', p0=args.scope))
         results = [run_step(name, command, args.verbose) for name, command in scoped_steps]
         return 0 if all(results) else 1
 
@@ -158,14 +163,14 @@ def main() -> int:
         config = load_project_config(REPO_ROOT)
         mods = find_project_mods(REPO_ROOT, args.mod_dir)
     except ValueError as exc:
-        print(f"ERROR: {exc}")
-        print("Repair agent-config.json or rerun tools/init-project.py with the primary Mod path.")
+        print(tr('ERROR: {p0}', p0=exc))
+        print(tr('Repair agent-config.json or rerun tools/init-project.py with the primary Mod path.'))
         return 2
     if not mods:
         requested = args.mod_dir or "the configured primary project mod"
-        print(f"ERROR: Could not find {requested}.")
+        print(tr('ERROR: Could not find {p0}.', p0=requested))
         print(
-            "Pass --mod-dir or correct agent-config.json (SC2_MODS_PATH is only a fallback without a configured primary)."
+            tr('Pass --mod-dir or correct agent-config.json (SC2_MODS_PATH is only a fallback without a configured primary).')
         )
         return 2
     mod_dir = str(mods[0])
@@ -190,15 +195,15 @@ def main() -> int:
         )
 
     print("=" * 60)
-    print("SC2 CUSTOM CAMPAIGN PRE-FLIGHT TEST SUITE")
+    print(tr('SC2 CUSTOM CAMPAIGN PRE-FLIGHT TEST SUITE'))
     print("=" * 60)
     if config_path(REPO_ROOT).is_file():
-        print(f"Path config: {config_path(REPO_ROOT)}")
-    print(f"Target mod: {mod_dir}")
+        print(tr('Path config: {p0}', p0=config_path(REPO_ROOT)))
+    print(tr('Target mod: {p0}', p0=mod_dir))
     if include_dependencies:
-        print(f"Dependency validation targets: {len(dependency_targets)}")
+        print(tr('Dependency validation targets: {p0}', p0=len(dependency_targets)))
         if exclusions:
-            print(f"Excluded component mods: {', '.join(sorted(exclusions))}")
+            print(tr('Excluded component mods: {p0}', p0=', '.join(sorted(exclusions))))
     print()
 
     dependency_options = []
@@ -243,6 +248,8 @@ def main() -> int:
         ("Documentation Link Integrity Checker", [sys.executable, "tools/check-doc-links.py"]),
     ]
 
+    steps.append(("Documentation Translation Audit", [sys.executable, "tools/audit-doc-translations.py"]))
+
     trigger_command = [sys.executable, 'tools/sc2-trigger-query.py', '--target', mod_dir, *dependency_options]
     trigger_command.append('check')
     steps.insert(3, ('GUI Trigger Dependency Validator', trigger_command))
@@ -252,7 +259,7 @@ def main() -> int:
     )
     dependency_steps = [
         (
-            f"Dependency Static Validator [{target.name}]",
+            tr("Dependency Static Validator [{name}]", name=target.name),
             [sys.executable, "tools/validate-mod.py", "--mod-dir", str(target)],
         )
         for target in dependency_targets
@@ -266,6 +273,7 @@ def main() -> int:
                 "Tool Unit Tests",
                 "Skill Frontmatter Validator",
                 "Documentation Link Integrity Checker",
+                "Documentation Translation Audit",
             }
         ]
 
@@ -274,7 +282,7 @@ def main() -> int:
     passed_steps = 0
     if dependency_problems:
         all_passed = False
-        print("Dependency resolution failed:")
+        print(tr('Dependency resolution failed:'))
         for problem in dependency_problems:
             print(f"  - {problem}")
         print()
@@ -288,14 +296,14 @@ def main() -> int:
     total_elapsed = time.time() - start_total
     print("=" * 60)
     if all_passed:
-        print(f"ALL {passed_steps} STATIC PRE-FLIGHT CHECKS PASSED in {total_elapsed:.2f}s.")
+        print(tr('ALL {p0} STATIC PRE-FLIGHT CHECKS PASSED in {p1:.2f}s.', p0=passed_steps, p1=total_elapsed))
         print("=" * 60)
         return 0
     else:
-        print(f"TEST SUITE FAILED in {total_elapsed:.2f}s. Please resolve issues above.")
+        print(tr('TEST SUITE FAILED in {p0:.2f}s. Please resolve issues above.', p0=total_elapsed))
         print("=" * 60)
         return 1
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    sys.exit(run_cli(main))

@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "fingerprint": "sha256 of UTF-8 source with LF line endings and no BOM",
+  "pages": [
+    {
+      "source": "AGENT.md",
+      "english": "AGENT.en.md"
+    },
+    {
+      "source": "AGENTS.md",
+      "english": "AGENTS.en.md"
+    },
+    {
+      "source": "AUTHORS.md",
+      "english": "AUTHORS.en.md"
+    },
+    {
+      "source": "docs/agents/domain.md",
+      "english": "docs/agents/domain.en.md"
+    },
+    {
+      "source": "docs/agents/issue-tracker.md",
+      "english": "docs/agents/issue-tracker.en.md"
+    },
+    {
+      "source": "docs/agents/project-data.md",
+      "english": "docs/agents/project-data.en.md"
+    },
+    {
+      "source": "docs/agents/research.md",
+      "english": "docs/agents/research.en.md"
+    },
+    {
+      "source": "docs/agents/retrospective.md",
+      "english": "docs/agents/retrospective.en.md"
+    },
+    {
+      "source": "README.md",
+      "english": "README.en.md"
+    },
+    {
+      "source": "setup.md",
+      "english": "setup.en.md"
+    },
+    {
+      "source": "tools/README.md",
+      "english": "tools/README.en.md"
+    },
+    {
+      "source": "wiki/catalog.md",
+      "english": "wiki/catalog.en.md"
+    },
+    {
+      "source": "wiki/guides/agent-language.md",
+      "english": "wiki/guides/agent-language.en.md"
+    },
+    {
+      "source": "wiki/guides/editor-handoff.md",
+      "english": "wiki/guides/editor-handoff.en.md"
+    },
+    {
+      "source": "wiki/guides/multi-pc-setup.md",
+      "english": "wiki/guides/multi-pc-setup.en.md"
+    },
+    {
+      "source": "wiki/guides/project-initialization.md",
+      "english": "wiki/guides/project-initialization.en.md"
+    },
+    {
+      "source": "wiki/implementation/runtime-diagnostics.md",
+      "english": "wiki/implementation/runtime-diagnostics.en.md"
+    },
+    {
+      "source": "wiki/implementation/testing-feedback-workflow.md",
+      "english": "wiki/implementation/testing-feedback-workflow.en.md"
+    },
+    {
+      "source": "wiki/index.md",
+      "english": "wiki/index.en.md"
+    },
+    {
+      "source": "wiki/reference/official-casc-cache.md",
+      "english": "wiki/reference/official-casc-cache.en.md"
+    },
+    {
+      "source": "wiki/reference/trigger-agent-dialogue-examples.md",
+      "english": "wiki/reference/trigger-agent-dialogue-examples.en.md",
+      "scenarios": 44,
+      "dialogues": 2
+    },
+    {
+      "source": "wiki/reference/trigger-dialogue-examples.md",
+      "english": "wiki/reference/trigger-dialogue-examples.en.md"
+    },
+    {
+      "source": "wiki/reference/trigger-knowledge.md",
+      "english": "wiki/reference/trigger-knowledge.en.md"
+    }
+  ]
+}

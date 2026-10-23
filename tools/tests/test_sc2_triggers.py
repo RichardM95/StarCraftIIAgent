@@ -1,4 +1,7 @@
 """Dependency and migration boundaries, independent of a local SC2 install."""
+
+import os
+os.environ["SC2AGENT_UI_LANGUAGE"] = "en"
 import importlib.util
 import io
 import json

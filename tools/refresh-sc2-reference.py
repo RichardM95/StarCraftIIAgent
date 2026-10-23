@@ -11,6 +11,8 @@ import sys
 import tempfile
 from pathlib import Path
 
+from sc2_i18n import UIArgumentParser, tr, run_cli
+
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_TARGET = ROOT / "DataEditorXML" / "SC2GameDataComponents"
@@ -105,7 +107,7 @@ def refresh(files: dict[Path, Path], target: Path, readme_text: str) -> Path:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description=__doc__)
+    parser = UIArgumentParser(description=__doc__)
     parser.add_argument("--mods", type=Path, required=True)
     parser.add_argument("--campaigns", type=Path, required=True)
     parser.add_argument("--cm", type=Path, required=True)
@@ -119,8 +121,8 @@ def main() -> int:
         if not files or not target.is_dir():
             raise ValueError("source selection or existing snapshot is empty")
         missing, extra, changed, size = compare(files, target)
-        print(f"packages={packages} files={len(files)} bytes={size}")
-        print(f"missing={len(missing)} extra={len(extra)} changed={len(changed)}")
+        print(tr('packages={p0} files={p1} bytes={p2}', p0=packages, p1=len(files), p2=size))
+        print(tr('missing={p0} extra={p1} changed={p2}', p0=len(missing), p1=len(extra), p2=len(changed)))
         readme_text = updated_readme(target / "README.md", packages, len(files), size)
         readme_changed = readme_text != (target / "README.md").read_text(encoding="utf-8")
         if not (missing or extra or changed or readme_changed):
@@ -131,12 +133,12 @@ def main() -> int:
         if not args.apply:
             return 1
         backup = refresh(files, target, readme_text)
-        print(f"refreshed; previous snapshot retained at {backup}")
+        print(tr('refreshed; previous snapshot retained at {p0}', p0=backup))
         return 0
     except (OSError, ValueError) as exc:
-        print(f"error: {exc}", file=sys.stderr)
+        print(tr('error: {p0}', p0=exc), file=sys.stderr)
         return 2
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    raise SystemExit(run_cli(main))

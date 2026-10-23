@@ -1,8 +1,10 @@
 """Default-project refresh uses real builds in isolated fixtures, never the game."""
+
+import os
+os.environ["SC2AGENT_UI_LANGUAGE"] = "en"
 import importlib.util
 import io
 import json
-import os
 import struct
 import shutil
 import subprocess
@@ -165,12 +167,31 @@ class AutoRefreshTests(unittest.TestCase):
         self.query()
         self.assertEqual(len(self.commands), 3)
 
+    def test_ui_language_does_not_rebuild_or_change_selection(self):
+        self.query('--ui-language', 'en')
+        original = self.saved_index()
+        before_manifest = self.manifest()
+        for language in ('zh-CN', 'en', 'auto'):
+            self.query('--ui-language', language)
+        self.assertEqual(len(self.commands), 1)
+        self.assertEqual(self.saved_index(), original)
+        self.assertEqual(self.manifest(), before_manifest)
+        self.assertNotIn('ui_language', json.dumps(before_manifest))
+        preference = self.root/'personal-preferences.json'
+        preference.write_text('{"ui_language":"zh-CN"}')
+        with patch.dict(os.environ, {'SC2AGENT_PREFERENCES_FILE': str(preference)}):
+            os.environ.pop('SC2AGENT_UI_LANGUAGE', None)
+            self.query()
+        self.assertEqual(len(self.commands), 1)
+        self.assertEqual(self.saved_index(), original)
+
+
     def test_real_cli_subprocess_builds_and_preserves_query_stdout(self):
         tools = self.suite/'tools'
         tools.mkdir()
         for name in ('sc2-catalog-query.py', 'build-sc2-catalog-graph.py', 'sc2_paths.py',
                      'sc2_dependencies.py', 'sc2_catalog_inputs.py', 'sc2_official.py',
-                     'sc2_casc.py', 'sc2_publication.py', 'sc2_components.py', 'sc2_mpq.py'):
+                     'sc2_i18n.py', 'sc2_ui_messages.json', 'sc2_casc.py', 'sc2_publication.py', 'sc2_components.py', 'sc2_mpq.py'):
             shutil.copyfile(TOOLS/name, tools/name)
         command = [sys.executable, str(tools/'sc2-catalog-query.py'), '--locale', 'zhCN', 'stats']
         result = REAL_RUN(command, capture_output=True, text=True, encoding='utf-8', timeout=30)

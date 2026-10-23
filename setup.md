@@ -1,5 +1,7 @@
 # 安装与配置指南——自定义战役智能体起始套件
 
+[English](setup.en.md)
+
 > **作者：扯蛋虾米。** 项目统一作者声明见 [AUTHORS.md](AUTHORS.md)。
 
 本仓库是一个用于制作《星际争霸 II》自定义战役的**起始工作区**，面向 Cursor、Claude Code、Codex、Antigravity 等 AI 编码智能体，工作流源自 Custom Campaign Manager（CCM）社区的实践经验。
@@ -7,7 +9,7 @@
 你需要准备：战役构想、任意格式的设计文档、可用的 SC2 编辑器，以及战役地图或模组。  
 本套件提供：智能体规则（`AGENTS.md`）、预飞行检查与 schema 校验工具（`tools/`）、节省上下文的 catalog 查询工具、完整的 wiki 知识库（`wiki/`）和 `DataEditorXML/` 参考导出。
 
-> 当前工作区为 **StarCraftIIAgent**，尚未选择活动项目。独立打开本目录后提供主 Components 模组路径；项目身份从当前配置和组件证据核对。
+> 当前工作区为 **StarCraftIIAgent**，活动项目以本机 `agent-config.json` 为准。独立打开本目录后提供主 Components 模组路径；项目身份从当前配置和组件证据核对。
 
 如果只需要完成首次安装或选择一个已有项目，请直接参阅[项目初始化配置](wiki/guides/project-initialization.md)。
 

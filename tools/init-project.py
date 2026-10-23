@@ -12,6 +12,8 @@ from typing import Any
 from sc2_dependencies import build_dependency_graph, render_dependency_tree
 from sc2_paths import CONFIG_FILENAME, config_path, load_project_config, project_identity_path, project_data_dir
 
+from sc2_i18n import UIArgumentParser, tr, run_cli
+
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 
@@ -128,7 +130,7 @@ def write_config_atomic(config: dict[str, Any]) -> None:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description=__doc__)
+    parser = UIArgumentParser(description=__doc__)
     parser.add_argument("primary_mod", help="Path to the primary .SC2Mod component folder")
     parser.add_argument("--project-data-dir", help="Project documentation/runtime directory; default: sibling <primary-name>.agent")
     parser.add_argument("--official-cache", type=Path, help="Read-only official cache; does not alter config")
@@ -157,7 +159,7 @@ def main() -> int:
         failures.append(f"Primary mod is not a Components folder: {primary_mod}")
     if failures:
         for failure in failures:
-            print(f"ERROR: {failure}")
+            print(tr('ERROR: {p0}', p0=failure))
         return 1
 
     try:
@@ -173,7 +175,7 @@ def main() -> int:
         )
         config = build_config(primary_mod, layout, args.project_data_dir)
     except ValueError as exc:
-        print(f"ERROR: {exc}")
+        print(tr('ERROR: {p0}', p0=exc))
         return 1
 
     warnings: list[str] = []
@@ -195,46 +197,45 @@ def main() -> int:
             f"Missing local dependency {edge['target_name']} declared by {source_name}"
         )
 
-    print("PROJECT INITIALIZATION")
-    print("Project data (created only when needed): " + str(project_data_dir(REPO_ROOT, config)))
+    print(tr('PROJECT INITIALIZATION'))
+    print(tr('Project data (created only when needed): {p0}', p0=str(project_data_dir(REPO_ROOT, config))))
     print("=" * 60)
-    print(f"Workspace:      {REPO_ROOT}")
-    print(f"Primary mod:    {primary_mod}")
-    print(f"SC2 install:    {layout['sc2_install_dir']}")
-    print(f"Mods directory: {layout['mods_dir']}")
-    print(f"Campaign maps:  {layout['campaign_maps_dir']}")
+    print(tr('Workspace:      {p0}', p0=REPO_ROOT))
+    print(tr('Primary mod:    {p0}', p0=primary_mod))
+    print(tr('SC2 install:    {p0}', p0=layout['sc2_install_dir']))
+    print(tr('Mods directory: {p0}', p0=layout['mods_dir']))
+    print(tr('Campaign maps:  {p0}', p0=layout['campaign_maps_dir']))
     print()
     for line in render_dependency_tree(graph):
         print(line)
     print()
-    print(f"Recursive local component mods: {len(graph['nodes'])}")
+    print(tr('Recursive local component mods: {p0}', p0=len(graph['nodes'])))
 
     if warnings:
-        print(f"Initialization warnings ({len(warnings)}):")
+        print(tr('Initialization warnings ({p0}):', p0=len(warnings)))
         for warning in warnings:
             print(f"  - {warning}")
 
     if failures:
-        print(f"Initialization checks found {len(failures)} issue(s):")
+        print(tr('Initialization checks found {p0} issue(s):', p0=len(failures)))
         for failure in failures:
             print(f"  - {failure}")
         if not args.allow_incomplete:
-            print(f"Configuration was not changed. Use --allow-incomplete only if intentional.")
+            print(tr('Configuration was not changed. Use --allow-incomplete only if intentional.'))
             return 1
 
     if args.dry_run:
-        print("\nDry run; configuration was not changed.")
+        print(tr('\nDry run; configuration was not changed.'))
         print(json.dumps(config, ensure_ascii=False, indent=2))
         return 0
 
     write_config_atomic(config)
-    print(f"\nConfigured project successfully: {config_path(REPO_ROOT)}")
+    print(tr('\nConfigured project successfully: {p0}', p0=config_path(REPO_ROOT)))
     print(
-        "Project identity was not guessed; verify AGENTS.md Library ID, Bank, "
-        "script block, and code prefixes before implementation."
+        tr('Project identity was not guessed; verify AGENTS.md Library ID, Bank, script block, and code prefixes before implementation.')
     )
     return 0
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    sys.exit(run_cli(main))

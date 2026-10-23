@@ -1,5 +1,7 @@
 # CASC 官方依赖缓存
 
+[English](official-casc-cache.en.md)
+
 入口为 [sc2-official-cache.py](../../tools/sc2-official-cache.py)。CASC 只在显式 `probe` / `sync` 中打开；依赖、GUI、Catalog 和预检只消费已发布官方缓存，不加载 CascLib、不自动提取 CASC 或联网。本地打包组件通过 StormLib 只读访问，见[格式转换与归档读取](../../tools/README.md#打包组件与格式转换)。命令不改写项目配置、游戏或模组。
 
 ## 诊断与同步

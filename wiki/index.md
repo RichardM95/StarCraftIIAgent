@@ -1,5 +1,7 @@
 # Wiki 任务路由器
 
+[English](index.en.md)
+
 先阅读 [工作区规则](../AGENTS.md)，当前选择以本机 `agent-config.json` 为准。用户提供主 Components 模组路径后运行 `python tools/init-project.py "<路径>"`。
 
 - 技能：[统一入口](../skills/sc2-project-entry/SKILL.md)，按任务加载专用技能及 Galaxy、SC2 Data 子技能。
@@ -16,3 +18,5 @@
 - 项目设计定位：[说明](design/README.md)；套件通用能力：[来源](../DesignDocument.md)。
 - 项目资料：[路径与归属](../docs/agents/project-data.md)、[问题模板](implementation/bug-reports/latest.md)。
 - 全部页面：[catalog.md](catalog.md)。大型参考库 `DataEditorXML/` 与 `wiki/reference/triggers-native/` 按具体 ID 查询。
+
+- 使用语言：[自动选择与个人偏好](guides/agent-language.md)。

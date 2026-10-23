@@ -1,5 +1,7 @@
 # 游戏内对白、Conversation 与对话框案例
 
+[English](trigger-dialogue-examples.en.md)
+
 这是 [触发器知识入口](trigger-knowledge.md) 的按需参考。先区分三个对象：Transmission 是任务中的语音/头像/字幕消息；Conversation data 是含角色、台词与摄像机绑定的剧情数据；Dialog 是交互控件。名字含 Conversation 的触发器不一定调用 Conversation 系统。
 
 新增 20 个精选官方案例，连同原有七类共 27 个案例。来源定位、文件指纹、本地调用图、变量、资源引用与完整引用闭包统计保存在 [案例记录](trigger-cases.json)。以下说明来自根事件/动作和可达 GUI 调用的核查，不把名称命中当作机制证明。官方原例并非可直接移植的最小模板；当前七类模板的静态状态不延伸到这些新案例，也没有新的 Editor/游戏验收证据。

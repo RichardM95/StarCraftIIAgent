@@ -11,6 +11,8 @@ from pathlib import Path
 from sc2_paths import find_project_mods
 from sc2_components import component_path, require_editable, verify_archives, component_session
 
+from sc2_i18n import UIArgumentParser, tr, run_cli
+
 REPO_ROOT = Path(__file__).resolve().parent.parent
 
 STRING_KEY_PATTERN = (
@@ -132,7 +134,7 @@ def audit_mod_localization(mod_dir: Path, fill: bool = False, locale: str = "enU
     missing = sorted(ref for ref in refs if ref not in keys)
     if missing and fill:
         added = fill_from_objectstrings(strings_path, object_path, keys, missing)
-        print(f"[{mod_dir.name}] Auto-filled {added} missing key(s) into GameStrings.txt.")
+        print(tr('[{p0}] Auto-filled {p1} missing key(s) into GameStrings.txt.', p0=mod_dir.name, p1=added))
         missing = sorted(ref for ref in refs if ref not in keys)
 
     for m in missing:
@@ -143,7 +145,7 @@ def audit_mod_localization(mod_dir: Path, fill: bool = False, locale: str = "enU
 
 @component_session
 def main() -> int:
-    parser = argparse.ArgumentParser(description=__doc__)
+    parser = UIArgumentParser(description=__doc__)
     parser.add_argument("--fill", action="store_true", help="Auto-fill missing GameStrings from ObjectStrings")
     parser.add_argument("--mod-dir", help="Explicit path to .SC2Mod directory")
     parser.add_argument("--locale", default="enUS", choices=("enUS", "zhCN", "zhTW", "koKR", "deDE", "esES", "esMX", "frFR", "itIT", "plPL", "ptBR", "ruRU"), help="Localization directory to audit (default: enUS)")
@@ -151,8 +153,8 @@ def main() -> int:
 
     mods = find_local_mods(args.mod_dir)
     if not mods:
-        print("ERROR: No .SC2Mod directory found to audit.")
-        print("Pass --mod-dir or correct agent-config.json (SC2_MODS_PATH is a fallback).")
+        print(tr('ERROR: No .SC2Mod directory found to audit.'))
+        print(tr('Pass --mod-dir or correct agent-config.json (SC2_MODS_PATH is a fallback).'))
         return 2
 
     all_issues: list[str] = []
@@ -176,19 +178,19 @@ def main() -> int:
 
     verify_archives()
     print("=" * 60)
-    print("GAMESTRINGS ANCHOR AUDIT")
+    print(tr('GAMESTRINGS ANCHOR AUDIT'))
     print("=" * 60)
-    print(f"Target: {mods[0]}")
-    print(f"Audited mod directories: {audited_mods}")
+    print(tr('Target: {p0}', p0=mods[0]))
+    print(tr('Audited mod directories: {p0}', p0=audited_mods))
     if all_issues:
         for issue in all_issues:
-            print(f"  [MISSING STRING] {issue}")
-        print(f"\nAudit completed with {len(all_issues)} missing string anchor(s).")
+            print(tr('  [MISSING STRING] {p0}', p0=issue))
+        print(tr('\nAudit completed with {p0} missing string anchor(s).', p0=len(all_issues)))
         return 1
     else:
-        print("All GameData string anchors verified in GameStrings.txt.")
+        print(tr('All GameData string anchors verified in GameStrings.txt.'))
         return 0
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    sys.exit(run_cli(main))

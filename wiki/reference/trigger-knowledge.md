@@ -1,5 +1,7 @@
 # 触发器查询、依赖与案例
 
+[English](trigger-knowledge.en.md)
+
 本页是 GUI 触发器开发的查询入口。原始定义、官方案例与目标可用性分别保留来源；参考命中不等于目标已经加载。
 
 按需参考：[游戏内对白与对话框的 20 个新案例](trigger-dialogue-examples.md)、[用户与智能体的对话示例](trigger-agent-dialogue-examples.md)。游戏案例现覆盖 11 类机制、27 个精选入口；原七类 GUI 模板的验证范围保持独立。

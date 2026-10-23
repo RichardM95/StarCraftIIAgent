@@ -5,6 +5,10 @@ description: StarCraft II mod and campaign implementation entry point. Use for S
 
 # SC2 Project Entry (Unified Router)
 
+## User language
+
+Follow [the shared language policy](../../wiki/guides/agent-language.en.md). Read the personal preference only when needed; explicit user language wins, then a fixed preference, the user's natural language, and system language. Pass the chosen `--ui-language en` or `--ui-language zh-CN` to public tools. Keep skill IDs, commands, object IDs and lifecycle labels unchanged. UI language is independent of SC2 `--locale`; explain original technical references in the user's language. Do not create duplicate translated skills.
+
 ## When to Use
 
 Load this skill for SC2 mod or campaign implementation. Read `agent-config.json` when project paths matter and `AGENTS.md` for repository rules. For documentation or tool-only maintenance, use the relevant file directly. Specialist skills (galaxy-scripting, catalog-xml, map-triggers, tools-validation, editor-handoff, etc.) provide the task-specific detail.

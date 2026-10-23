@@ -13,6 +13,8 @@ import xml.etree.ElementTree as ET
 
 from sc2_dependencies import find_info_component, extract_dependency_refs
 
+from sc2_i18n import UIArgumentParser, run_cli
+
 OLD = 'LegacyofthePurifiers.SC2Mod'
 NEW = 'AeonOfIhanrii.SC2Mod'
 
@@ -52,7 +54,7 @@ def build_header(data, values, tail):
 
 
 def main():
-    parser = argparse.ArgumentParser(description=__doc__)
+    parser = UIArgumentParser(description=__doc__)
     parser.add_argument('roots', nargs='+', type=Path)
     parser.add_argument('--report', required=True, type=Path)
     parser.add_argument('--apply', action='store_true')
@@ -129,4 +131,4 @@ def main():
 
 
 if __name__ == '__main__':
-    raise SystemExit(main())
+    raise SystemExit(run_cli(main))

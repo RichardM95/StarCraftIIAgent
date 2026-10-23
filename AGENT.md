@@ -1,5 +1,7 @@
 # 星际Ⅱ模组开发智能体
 
+[English](AGENT.en.md)
+
 作者：扯蛋虾米。统一作者声明见 [AUTHORS.md](AUTHORS.md)。
 
 负责模组与地图开发、数据调查及机制核对。

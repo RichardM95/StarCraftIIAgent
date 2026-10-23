@@ -5,10 +5,12 @@ import json
 import argparse
 from sc2_paths import project_data_dir, catalog_output_dir, load_project_config
 
+from sc2_i18n import UIArgumentParser, run_cli
+
 ROOT = Path(__file__).resolve().parents[1]
 
 def main():
-    argparse.ArgumentParser(description=__doc__).parse_args()
+    UIArgumentParser(description=__doc__).parse_args()
     try:
         config = load_project_config(ROOT)
         data = project_data_dir(ROOT, config)
@@ -24,4 +26,4 @@ def main():
         return 1
 
 if __name__ == '__main__':
-    raise SystemExit(main())
+    raise SystemExit(run_cli(main))

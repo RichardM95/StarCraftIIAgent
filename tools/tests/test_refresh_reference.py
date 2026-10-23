@@ -1,5 +1,8 @@
 from __future__ import annotations
 
+import os
+os.environ["SC2AGENT_UI_LANGUAGE"] = "en"
+
 from pathlib import Path
 import subprocess
 import sys

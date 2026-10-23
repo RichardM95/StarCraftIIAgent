@@ -10,6 +10,8 @@ from pathlib import Path
 from sc2_paths import find_project_mods
 from sc2_components import component_path, parse_xml, verify_archives, component_session
 
+from sc2_i18n import UIArgumentParser, tr, run_cli
+
 REPO_ROOT = Path(__file__).resolve().parent.parent
 
 # Mutually exclusive pairs or state toggles allowed to share the same slot
@@ -187,7 +189,7 @@ def check_command_card_layouts(game_data_dir: Path) -> tuple[list[str], list[str
 
 @component_session
 def main() -> int:
-    parser = argparse.ArgumentParser(
+    parser = UIArgumentParser(
         description="Audit command card layouts for high-confidence slot collisions."
     )
     parser.add_argument("--mod-dir", help="Explicit path to .SC2Mod component directory")
@@ -205,8 +207,8 @@ def main() -> int:
 
     mods = find_local_mods(args.mod_dir)
     if not mods:
-        print("ERROR: No .SC2Mod directory found to audit.")
-        print("Pass --mod-dir or correct agent-config.json (SC2_MODS_PATH is a fallback).")
+        print(tr('ERROR: No .SC2Mod directory found to audit.'))
+        print(tr('Pass --mod-dir or correct agent-config.json (SC2_MODS_PATH is a fallback).'))
         return 2
 
     all_errors: list[str] = []
@@ -224,31 +226,30 @@ def main() -> int:
 
     verify_archives()
     print("=" * 60)
-    print("COMMAND CARD INTEGRITY AUDIT")
+    print(tr('COMMAND CARD INTEGRITY AUDIT'))
     print("=" * 60)
-    print(f"Target: {mods[0]}")
-    print(f"Audited mod directories: {audited_mods}")
+    print(tr('Target: {p0}', p0=mods[0]))
+    print(tr('Audited mod directories: {p0}', p0=audited_mods))
     for issue in all_errors:
-        print(f"  [INTEGRITY ERROR] {issue}")
+        print(tr('  [INTEGRITY ERROR] {p0}', p0=issue))
     if args.show_warnings or args.strict:
         for warning in all_warnings:
-            print(f"  [COLLISION CANDIDATE] {warning}")
+            print(tr('  [COLLISION CANDIDATE] {p0}', p0=warning))
     elif all_warnings:
         print(
-            f"Collision candidates requiring dependency/requirement review: {len(all_warnings)} "
-            "(use --show-warnings or --strict for details)"
+            tr('Collision candidates requiring dependency/requirement review: {p0} (use --show-warnings or --strict for details)', p0=len(all_warnings))
         )
 
     if all_errors:
-        print(f"\nAudit failed with {len(all_errors)} high-confidence error(s).")
+        print(tr('\nAudit failed with {p0} high-confidence error(s).', p0=len(all_errors)))
         return 1
     if args.strict and all_warnings:
-        print(f"\nStrict audit failed with {len(all_warnings)} collision candidate(s).")
+        print(tr('\nStrict audit failed with {p0} collision candidate(s).', p0=len(all_warnings)))
         return 1
 
-    print("No high-confidence command-card errors found.")
+    print(tr('No high-confidence command-card errors found.'))
     return 0
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    sys.exit(run_cli(main))

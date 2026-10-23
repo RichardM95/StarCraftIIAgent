@@ -1,5 +1,7 @@
 # 运行时排错与机制边界
 
+[English](runtime-diagnostics.en.md)
+
 适用于卡顿、闪退、UI 异常、技能状态与关卡事件排错。来源编号见[伊罕利开发经验](../../docs/agents/retrospective.md)；这些是调查方法和局部案例，不是所有 SC2 版本的引擎定律。状态门槛见[反馈流程](testing-feedback-workflow.md)。
 
 ## 先证明运行的是本次修改

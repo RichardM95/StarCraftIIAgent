@@ -24,6 +24,8 @@ from sc2_catalog_inputs import catalog_xml_inputs, index_inputs, inventory, save
 from sc2_paths import find_project_mods, load_project_config, resolve_configured_path, project_data_dir, catalog_output_dir, ensure_project_data, is_project_source
 from sc2_components import parse_xml, provenance, verify_archives, component_session
 
+from sc2_i18n import UIArgumentParser, tr, run_cli
+
 
 ROOT = Path(__file__).resolve().parents[1]
 # Default output is resolved from the selected project at invocation time.
@@ -878,7 +880,7 @@ def write_summaries(out_dir: Path, nodes: dict[str, dict], edges: list[Edge], de
 @component_session
 def main() -> int:
     global BUILD_MOD_DIR, BUILD_MODS_DIR, BUILD_CAMPAIGNS_DIR, ALLOW_INCOMPLETE_DEPENDENCIES, OFFICIAL_CACHE, LOCALE, ALLOW_PARTIAL_OFFICIAL_CACHE, OFFICIAL_RESEARCH
-    parser = argparse.ArgumentParser(description=__doc__)
+    parser = UIArgumentParser(description=__doc__)
     parser.add_argument("--mod-dir", help="Explicit primary component for investigation")
     parser.add_argument("--official-cache", type=Path, help="Read-only official cache")
     parser.add_argument('--official-research', action='store_true', help='Use verified official sources for research; loading uncertainty is never active-value evidence')
@@ -906,10 +908,10 @@ def main() -> int:
     try:
         find_local_mods()
     except ValueError as exc:
-        print(f"ERROR: {exc}")
+        print(tr('ERROR: {p0}', p0=exc))
         return 1
     if DEPENDENCY_STATE["status"] == "partial":
-        print("WARNING: PARTIAL investigation index: " + "; ".join(DEPENDENCY_STATE["problems"]))
+        print(tr('WARNING: PARTIAL investigation index: {p0}', p0="; ".join(DEPENDENCY_STATE["problems"])))
     mods = find_local_mods()
     config = load_project_config(ROOT)
     primary = mods[0] if mods else None
@@ -944,7 +946,7 @@ def main() -> int:
         try:
             nodes, edges, definitions = build_graph()
         except (ValueError, OSError) as exc:
-            print(f"ERROR: {exc}; previous index was preserved")
+            print(tr('ERROR: {p0}; previous index was preserved', p0=exc))
             return 1
         if not args.sqlite_only:
             write_json(stage, nodes, edges, definitions, build_id=build_id)
@@ -956,7 +958,7 @@ def main() -> int:
         if final_inventory != input_inventory:
             changed = [key for key in sorted(set(final_inventory) | set(input_inventory))
                        if final_inventory.get(key) != input_inventory.get(key)]
-            print('ERROR: Index inputs changed during build; previous index was preserved: ' + '; '.join(changed[:8]))
+            print(tr('ERROR: Index inputs changed during build; previous index was preserved: {p0}', p0='; '.join(changed[:8])))
             return 1
         save_manifest(stage / "catalog.sqlite", input_inventory, dependencies=DEPENDENCY_STATE,
                       build_id=build_id, selection=selection)
@@ -965,18 +967,18 @@ def main() -> int:
                           build_id=build_id, selection=selection)
         publish_directory(stage, out_dir, "catalog-index")
 
-    print(f"nodes: {len(nodes)}")
-    print(f"edges: {len(edges)}")
+    print(tr('nodes: {p0}', p0=len(nodes)))
+    print(tr('edges: {p0}', p0=len(edges)))
     if not args.sqlite_only:
         local_duplicates = json.loads((out_dir / "duplicates-local.json").read_text(encoding="utf-8"))
         unresolved = json.loads((out_dir / "unresolved-local-references.json").read_text(encoding="utf-8"))
-        print(f"local duplicate ids: {len(local_duplicates)}")
-        print(f"unresolved local object refs: {len(unresolved)}")
+        print(tr('local duplicate ids: {p0}', p0=len(local_duplicates)))
+        print(tr('unresolved local object refs: {p0}', p0=len(unresolved)))
     else:
-        print("SQLite query index refreshed; other generated reports were not regenerated")
-    print(f"output: {out_dir}")
+        print(tr('SQLite query index refreshed; other generated reports were not regenerated'))
+    print(tr('output: {p0}', p0=out_dir))
     return 0
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    raise SystemExit(run_cli(main))

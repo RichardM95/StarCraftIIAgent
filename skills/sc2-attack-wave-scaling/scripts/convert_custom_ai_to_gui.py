@@ -15,6 +15,9 @@ from pathlib import Path
 from convert_custom_ai_to_trigger_scripts import convert as stage_conversion
 from convert_migrated_scripts_to_gui import convert as gui_conversion
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "tools"))
+from sc2_i18n import UIArgumentParser, tr, run_cli
+
 
 GUI_MARKER = "Migrated AI personality waves converted to GUI actions."
 STOP_PERSONALITY_FUNCTION = ("Ntve", "898E65C3")
@@ -719,7 +722,7 @@ def convert(
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(
+    parser = UIArgumentParser(
         description=(
             "Convert CustomAI personality waves directly to ordinary GUI trigger trees. "
             "The target map is never written with staged ScriptCode."
@@ -746,7 +749,7 @@ def main() -> int:
 
 if __name__ == "__main__":
     try:
-        raise SystemExit(main())
+        raise SystemExit(run_cli(main))
     except Exception as error:
-        print(f"ERROR: {error}", file=sys.stderr)
+        print(tr('ERROR: {p0}', p0=error), file=sys.stderr)
         raise SystemExit(2)

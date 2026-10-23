@@ -1,4 +1,7 @@
 """Offline evidence/cache/consumer integration, never needs the installed game."""
+
+import os
+os.environ["SC2AGENT_UI_LANGUAGE"] = "en"
 import ctypes as C
 import hashlib
 import importlib.util

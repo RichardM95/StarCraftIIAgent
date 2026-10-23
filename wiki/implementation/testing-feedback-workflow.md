@@ -1,5 +1,7 @@
 # Testing Feedback and Issue Lifecycle
 
+[English](testing-feedback-workflow.en.md)
+
 Use this page to triage bug reports, playtest feedback, and editor warnings.
 
 ---

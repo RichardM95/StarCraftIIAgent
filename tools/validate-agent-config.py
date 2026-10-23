@@ -11,6 +11,8 @@ from sc2_dependencies import build_dependency_graph, resolve_dependency_root, re
 from sc2_paths import CONFIG_FILENAME, config_path, load_project_config, resolve_configured_path, project_data_dir
 from sc2_components import component_exists, archive_of, component_session
 
+from sc2_i18n import UIArgumentParser, tr
+
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 REQUIRED_PATHS = (
@@ -24,20 +26,20 @@ OPTIONAL_EXISTENCE_PATHS = {"campaign_maps_dir"}
 
 @component_session
 def main(argv=()) -> int:
-    parser = argparse.ArgumentParser(description=__doc__)
+    parser = UIArgumentParser(description=__doc__)
     parser.add_argument("--official-cache", type=Path)
     parser.add_argument("--mods-dir", help="One-off dependency Mods root; config remains unchanged")
     parser.add_argument("--campaigns-dir", type=Path, help="One-off dependency Campaigns root")
     args = parser.parse_args(argv)
     path = config_path(REPO_ROOT)
     if not path.is_file():
-        print(f"ERROR: Missing {path}")
+        print(tr('ERROR: Missing {p0}', p0=path))
         return 1
 
     try:
         config = load_project_config(REPO_ROOT)
     except ValueError as exc:
-        print(f"ERROR: {exc}")
+        print(tr('ERROR: {p0}', p0=exc))
         return 1
 
     failures: list[str] = []
@@ -160,28 +162,28 @@ def main(argv=()) -> int:
         except (OSError, ValueError) as exc:
             failures.append(str(exc))
 
-    print(f"Configuration: {path}")
+    print(tr('Configuration: {p0}', p0=path))
     for key in REQUIRED_PATHS:
         if key in resolved_paths:
             print(f"  {key}: {resolved_paths[key]}")
-    print(f"  source_mode: {source_mode}")
+    print(tr('  source_mode: {p0}', p0=source_mode))
     if primary_path is not None and archive_of(primary_path):
-        print('  source_access: readable MPQ; editing requires explicit unpack to Components')
+        print(tr('  source_access: readable MPQ; editing requires explicit unpack to Components'))
     if dependency_graph is not None:
-        print(f"  recursive_component_mods: {len(dependency_graph['nodes'])}")
+        print(tr('  recursive_component_mods: {p0}', p0=len(dependency_graph['nodes'])))
 
     if warnings:
-        print(f"{CONFIG_FILENAME} warnings ({len(warnings)}):")
+        print(tr('{p0} warnings ({p1}):', p0=CONFIG_FILENAME, p1=len(warnings)))
         for warning in warnings:
             print(f"  - {warning}")
 
     if failures:
-        print(f"{CONFIG_FILENAME} validation failed ({len(failures)} issue(s)):")
+        print(tr('{p0} validation failed ({p1} issue(s)):', p0=CONFIG_FILENAME, p1=len(failures)))
         for failure in failures:
             print(f"  - {failure}")
         return 1
 
-    print(f"{CONFIG_FILENAME} OK")
+    print(tr('{p0} OK', p0=CONFIG_FILENAME))
     return 0
 
 

@@ -10,6 +10,9 @@ import sys
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "tools"))
+from sc2_i18n import UIArgumentParser, tr, run_cli
+
 
 ELEMENT_RE = re.compile(
     r'^    <Element Type="(?P<type>[^"]+)" Id="(?P<id>[0-9A-F]{8})">\r?\n'
@@ -599,7 +602,7 @@ def convert(triggers: Path, apply: bool, backup: Path | None) -> int:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Convert staged AI personality ScriptCode actions to pure GUI trigger calls.")
+    parser = UIArgumentParser(description="Convert staged AI personality ScriptCode actions to pure GUI trigger calls.")
     parser.add_argument("triggers", type=Path)
     parser.add_argument("--apply", action="store_true")
     parser.add_argument("--backup", type=Path)
@@ -609,7 +612,7 @@ def main() -> int:
 
 if __name__ == "__main__":
     try:
-        raise SystemExit(main())
+        raise SystemExit(run_cli(main))
     except Exception as error:
-        print(f"ERROR: {error}", file=sys.stderr)
+        print(tr('ERROR: {p0}', p0=error), file=sys.stderr)
         raise SystemExit(2)

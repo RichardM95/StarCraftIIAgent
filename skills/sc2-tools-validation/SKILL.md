@@ -5,6 +5,10 @@ description: StarCraft II mod development tooling for the active project. Use wh
 
 # SC2 Tools & Validation
 
+## User language
+
+Follow [the shared language policy](../../wiki/guides/agent-language.en.md). Read the personal preference only when needed; explicit user language wins, then a fixed preference, the user's natural language, and system language. Pass the chosen `--ui-language en` or `--ui-language zh-CN` to public tools. Keep skill IDs, commands, object IDs and lifecycle labels unchanged. UI language is independent of SC2 `--locale`; explain original technical references in the user's language. Do not create duplicate translated skills.
+
 ## When to Use
 
 Load this skill when running any tool from the `tools/` directory: pre-flight tests, XML validation, Galaxy syntax checks, catalog queries, deployment, or playtest bug extraction.

@@ -17,6 +17,8 @@ import re
 import sys
 from pathlib import Path
 
+from sc2_i18n import UIArgumentParser, tr, run_cli
+
 REPO_ROOT = Path(__file__).resolve().parent.parent
 SKILLS_ROOT = REPO_ROOT / "skills"
 
@@ -95,7 +97,7 @@ def validate_skill(skill_file: Path, root: Path) -> list[str]:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description=__doc__)
+    parser = UIArgumentParser(description=__doc__)
     parser.add_argument(
         "--skills-root",
         default=str(SKILLS_ROOT),
@@ -107,7 +109,7 @@ def main() -> int:
     skill_files = find_skill_files(skills_root)
 
     if not skill_files:
-        print(f"No SKILL.md files found under {skills_root}")
+        print(tr('No SKILL.md files found under {p0}', p0=skills_root))
         return 1
 
     all_failures: list[str] = []
@@ -115,14 +117,14 @@ def main() -> int:
         all_failures.extend(validate_skill(skill_file, skills_root))
 
     if all_failures:
-        print(f"Skill frontmatter issues ({len(all_failures)}):")
+        print(tr('Skill frontmatter issues ({p0}):', p0=len(all_failures)))
         for failure in all_failures:
             print(f"  - {failure}")
         return 1
 
-    print(f"Skill frontmatter OK ({len(skill_files)} skills)")
+    print(tr('Skill frontmatter OK ({p0} skills)', p0=len(skill_files)))
     return 0
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    sys.exit(run_cli(main))

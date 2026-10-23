@@ -12,11 +12,13 @@ from sc2_official import identity, default_cache, probe, snapshot, publish_snaps
 from sc2_paths import load_project_config, resolve_configured_path, find_project_mods
 from sc2_dependencies import resolve_dependency_root
 
+from sc2_i18n import UIArgumentParser, run_cli
+
 ROOT = Path(__file__).resolve().parents[1]
 
 
 def main(argv=None):
-    p = argparse.ArgumentParser(description=__doc__)
+    p = UIArgumentParser(description=__doc__)
     p.add_argument('command', choices=('probe', 'sync'))
     p.add_argument('--sc2-install-dir', type=Path)
     p.add_argument('--casc-dll', type=Path, required=True)
@@ -68,4 +70,4 @@ def main(argv=None):
 
 
 if __name__ == '__main__':
-    sys.exit(main())
+    sys.exit(run_cli(main))

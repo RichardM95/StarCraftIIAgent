@@ -14,6 +14,8 @@ from sc2_paths import catalog_output_dir, find_project_mods, load_project_config
 from sc2_dependencies import RECURSION_DISABLED
 from sc2_triggers import Index, Target, build_index, check, describe, validate_templates, walk
 
+from sc2_i18n import UIArgumentParser, tr, run_cli
+
 ROOT = Path(__file__).resolve().parents[1]
 CASES = ROOT / "wiki/reference/trigger-cases.json"
 
@@ -23,7 +25,7 @@ def emit(value):
 
 
 def parser():
-    p = argparse.ArgumentParser(description=__doc__)
+    p = UIArgumentParser(description=__doc__)
     p.add_argument("--db", type=Path, help="SQLite index; default follows project/reference runtime paths")
     p.add_argument("--target", type=Path, help="Components directory or packed map/mod/campaign; defaults to configured source")
     p.add_argument("--official-cache", type=Path, help="Read-only build-bound official cache")
@@ -268,7 +270,7 @@ def main(argv=None):
               for d, k in available[:args.limit]])
         return 0
     except (ValueError, OSError, ET.ParseError, sqlite3.Error) as exc:
-        print(f"ERROR: {exc}", file=sys.stderr)
+        print(tr('ERROR: {p0}', p0=exc), file=sys.stderr)
         return 1
     finally:
         if index:
@@ -276,4 +278,4 @@ def main(argv=None):
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    raise SystemExit(run_cli(main))

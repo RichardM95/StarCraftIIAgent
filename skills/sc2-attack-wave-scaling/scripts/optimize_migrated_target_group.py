@@ -8,6 +8,10 @@ from pathlib import Path
 
 from convert_migrated_scripts_to_gui import Build, ELEMENT_RE, remove_unused_local_variables
 
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "tools"))
+from sc2_i18n import UIArgumentParser, tr, run_cli
+
 
 class NoOptimizationCandidate(RuntimeError):
     pass
@@ -282,7 +286,7 @@ def migrated_trigger_ids(text: str) -> set[str]:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser()
+    parser = UIArgumentParser()
     parser.add_argument("triggers", type=Path)
     parser.add_argument("--trigger-id")
     parser.add_argument("--player")
@@ -322,7 +326,7 @@ def main() -> int:
             f"{args.triggers}: trigger={name} id={trigger_id} redundant_pairs={pair_count} "
             f"replacement=PlayerGroupSingle({player}) unused_variables={unused_variables}"
         )
-    print(f"apply={'yes' if args.apply else 'no'} optimized_triggers={len(optimized)}")
+    print(tr('apply={p0} optimized_triggers={p1}', p0='yes' if args.apply else 'no', p1=len(optimized)))
     if not args.apply:
         return 0
     if args.backup is None:
@@ -335,4 +339,4 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    raise SystemExit(run_cli(main))

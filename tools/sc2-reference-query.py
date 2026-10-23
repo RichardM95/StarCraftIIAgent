@@ -9,6 +9,8 @@ from pathlib import Path
 import sys
 import xml.etree.ElementTree as ET
 
+from sc2_i18n import UIArgumentParser, tr, run_cli
+
 
 ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_REFERENCE_ROOT = ROOT / "DataEditorXML" / "SC2GameDataComponents"
@@ -61,7 +63,7 @@ def list_components(root: Path, source: str | None) -> int:
         entries[(relative.parts[0], package)].add(area)
     for (source_name, package), areas in sorted(entries.items(), key=lambda item: tuple(x.casefold() for x in item[0])):
         print(f"{source_name}/{package}\t{','.join(sorted(areas))}")
-    print(f"components: {len(entries)}")
+    print(tr('components: {p0}', p0=len(entries)))
     return 0
 
 
@@ -74,9 +76,9 @@ def show_stats(root: Path, source: str | None) -> int:
         size += path.stat().st_size
         components.add((relative.parts[0], package))
         areas[area] += 1
-    print(f"components: {len(components)}")
-    print(f"searchable_files: {files}")
-    print(f"searchable_bytes: {size}")
+    print(tr('components: {p0}', p0=len(components)))
+    print(tr('searchable_files: {p0}', p0=files))
+    print(tr('searchable_bytes: {p0}', p0=size))
     for area in sorted(areas):
         print(f"{area}: {areas[area]}")
     return 0
@@ -114,7 +116,7 @@ def find_matches(args: argparse.Namespace) -> int:
         try:
             lines = read_text_lines(path)
         except OSError as exc:
-            print(f"warning: cannot read {relative}: {exc}", file=sys.stderr)
+            print(tr('warning: cannot read {p0}: {p1}', p0=relative, p1=exc), file=sys.stderr)
             continue
         for line_number, line in enumerate(lines, start=1):
             haystack = line.casefold() if args.ignore_case else line
@@ -127,9 +129,9 @@ def find_matches(args: argparse.Namespace) -> int:
                 print(f"{marker} {relative}:{index + 1}:{compact_line(lines[index], needle, args.ignore_case)}")
             matches += 1
             if matches >= args.limit:
-                print(f"matches: {matches} (limit reached); files scanned: {scanned}")
+                print(tr('matches: {p0} (limit reached); files scanned: {p1}', p0=matches, p1=scanned))
                 return 0
-    print(f"matches: {matches}; files scanned: {scanned}")
+    print(tr('matches: {p0}; files scanned: {p1}', p0=matches, p1=scanned))
     return 0 if matches else 1
 
 
@@ -146,26 +148,26 @@ def show_objects(args: argparse.Namespace) -> int:
         try:
             root = ET.parse(path).getroot()
         except (ET.ParseError, OSError) as exc:
-            print(f"warning: cannot parse {relative}: {exc}", file=sys.stderr)
+            print(tr('warning: cannot parse {p0}: {p1}', p0=relative, p1=exc), file=sys.stderr)
             continue
         for element in root:
             if element.get("id") != object_id or not element.tag.startswith("C" + family):
                 continue
             xml = ET.tostring(element, encoding="unicode")
-            print(f"# {relative} [{element.tag} parent={element.get('parent', '')}]")
+            print(tr('# {p0} [{p1} parent={p2}]', p0=relative, p1=element.tag, p2=element.get('parent', '')))
             print(xml[: args.max_chars] if args.max_chars else xml)
             if args.max_chars and len(xml) > args.max_chars:
-                print(f"... truncated {len(xml) - args.max_chars} characters; use --max-chars 0 for full XML")
+                print(tr('... truncated {p0} characters; use --max-chars 0 for full XML', p0=len(xml) - args.max_chars))
             matches += 1
             if matches >= args.limit:
-                print(f"objects: {matches} (limit reached)")
+                print(tr('objects: {p0} (limit reached)', p0=matches))
                 return 0
-    print(f"objects: {matches}")
+    print(tr('objects: {p0}', p0=matches))
     return 0 if matches else 1
 
 
 def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(description=__doc__)
+    parser = UIArgumentParser(description=__doc__)
     parser.add_argument("--root", type=Path, default=DEFAULT_REFERENCE_ROOT, help="sample-data root")
     subparsers = parser.add_subparsers(dest="command", required=True)
     for name in ("components", "stats"):
@@ -209,4 +211,4 @@ def main(argv: list[str] | None = None) -> int:
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    raise SystemExit(run_cli(main))

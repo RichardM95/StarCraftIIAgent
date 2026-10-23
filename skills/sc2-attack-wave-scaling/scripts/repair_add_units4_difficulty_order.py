@@ -9,6 +9,10 @@ from pathlib import Path
 from convert_migrated_scripts_to_gui import ELEMENT_RE
 from optimize_migrated_target_group import action_references, function_id, reachable_action_containers
 
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "tools"))
+from sc2_i18n import UIArgumentParser, run_cli
+
 
 COUNT_DEFS = {"A166DBF3", "24D9A2D7", "B52CD455", "AD14DE85"}
 REMAPS = {
@@ -91,7 +95,7 @@ def repair(text: str, trigger_ids: list[str], profile: str) -> tuple[str, int]:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser()
+    parser = UIArgumentParser()
     parser.add_argument("triggers", type=Path)
     parser.add_argument("--trigger-id", action="append", required=True)
     parser.add_argument("--profile", choices=sorted(REMAPS), default="v1-to-native")
@@ -117,4 +121,4 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    raise SystemExit(run_cli(main))

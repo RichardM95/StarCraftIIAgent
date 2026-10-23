@@ -1,3 +1,6 @@
+
+import os
+os.environ["SC2AGENT_UI_LANGUAGE"] = "en"
 import argparse, importlib.util, io, json, sqlite3, sys, tempfile, unittest
 from pathlib import Path
 from unittest.mock import patch

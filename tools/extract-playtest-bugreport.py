@@ -9,6 +9,8 @@ import sys
 from dataclasses import dataclass
 from pathlib import Path
 
+from sc2_i18n import UIArgumentParser, tr, run_cli
+
 REPO_ROOT = Path(__file__).resolve().parent.parent
 from sc2_paths import project_data_dir, ensure_project_data
 
@@ -350,7 +352,7 @@ def format_report(
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(
+    parser = UIArgumentParser(
         description=(
             "Read the latest SC2 Alerts.txt and ScriptError.txt from a playtest "
             "session and write deduplicated bugreport.txt for coding agents."
@@ -412,14 +414,13 @@ def main() -> int:
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(report, encoding="utf-8", newline="\n")
 
-    print(f"Wrote {args.output}")
+    print(tr('Wrote {p0}', p0=args.output))
     if alerts_file:
         print(
-            f"  Alerts: {alerts_file.path.name} "
-            f"({len(actor_error_items)} actor errors, {len(warning_items)} warnings)"
+            tr('  Alerts: {p0} ({p1} actor errors, {p2} warnings)', p0=alerts_file.path.name, p1=len(actor_error_items), p2=len(warning_items))
         )
     else:
-        print("  Alerts: (none)")
+        print(tr('  Alerts: (none)'))
     if script_error_file:
         print(
             f"  ScriptError: {script_error_file.path.name} "
@@ -432,11 +433,11 @@ def main() -> int:
             + ")"
         )
     else:
-        print("  ScriptError: (none)")
+        print(tr('  ScriptError: (none)'))
 
     has_failures = bool(error_items or actor_error_items)
     return 1 if has_failures else 0
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    sys.exit(run_cli(main))

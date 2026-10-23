@@ -10,6 +10,9 @@ import sys
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "tools"))
+from sc2_i18n import UIArgumentParser, tr, run_cli
+
 
 def fresh(used: set[str]) -> str:
     while True:
@@ -381,7 +384,7 @@ def convert(
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(
+    parser = UIArgumentParser(
         description=(
             "INTERNAL compatibility stage. Use convert_custom_ai_to_gui.py for normal work; "
             "this tool writes temporary Custom Script actions."
@@ -409,7 +412,7 @@ def main() -> int:
 
 if __name__ == "__main__":
     try:
-        raise SystemExit(main())
+        raise SystemExit(run_cli(main))
     except Exception as error:
-        print(f"ERROR: {error}", file=sys.stderr)
+        print(tr('ERROR: {p0}', p0=error), file=sys.stderr)
         raise SystemExit(2)

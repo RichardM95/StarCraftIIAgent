@@ -1,5 +1,7 @@
 # Wiki 页面清单
 
+[English](catalog.en.md)
+
 - [design/README.md](design/README.md)
 - [guides/editor-handoff.md](guides/editor-handoff.md)
 - [guides/multi-pc-setup.md](guides/multi-pc-setup.md)

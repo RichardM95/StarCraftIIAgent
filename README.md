@@ -1,5 +1,7 @@
 # StarCraftIIAgent — 星际Ⅱ模组开发智能体
 
+[English](README.en.md)
+
 > 星际争霸2自定义战役开发智能体。统一知识库 + 29 个技能（10 根 + 13 galaxy + 6 sc2data），开发规则、工具与资料均在本目录维护。
 >
 > **作者：扯蛋虾米**。参见 [AUTHORS.md](AUTHORS.md)。
@@ -701,3 +703,7 @@ E:\Program Files (x86)\StarCraft II\Mods\MyCampaign.SC2Mod
 核对一个单位的基础值并直接回答；如果发现需要跨次追踪的问题，再写入项目账本。
 不要在开发套件里写项目工作记录。
 ```
+
+## 中英双语使用
+
+使用层提供独立中英文页面及对话示例；深层技术资料保持原文，智能体按所选语言解释。[语言选择规则](wiki/guides/agent-language.md)支持自动识别、临时 `--ui-language` 及个人固定偏好。`python tools/agent-language.py` 只读查看；`--set en`、`--set zh-CN` 或 `--set auto` 显式保存。界面语言不改变 SC2 `--locale`、项目配置或索引身份。

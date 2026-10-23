@@ -11,6 +11,9 @@ from collections import Counter
 from dataclasses import dataclass
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "tools"))
+from sc2_i18n import UIArgumentParser, tr, run_cli
+
 
 DEFAULT_ADD_COUNT_PARAMS = ["A166DBF3", "24D9A2D7", "B52CD455", "AD14DE85"]
 
@@ -151,7 +154,7 @@ def wrap_parameter(
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(
+    parser = UIArgumentParser(
         description="Wrap supported SC2 Triggers attack-wave quantity parameters with an integer modifier."
     )
     parser.add_argument("triggers", type=Path)
@@ -192,18 +195,18 @@ def main() -> int:
     pending = [parameter_id for parameter_id in targets if not is_wrapped(elements[parameter_id].group(0), elements, profile)]
     wrapped = len(targets) - len(pending)
 
-    print(f"AIAttackWaveAddUnits4 calls: {add_calls}")
-    print(f"Flexible attack-wave calls: {flexible_calls}")
-    print(f"Target quantity parameters: {len(targets)}")
-    print(f"Already wrapped: {wrapped}")
-    print(f"Pending: {len(pending)}")
+    print(tr('AIAttackWaveAddUnits4 calls: {p0}', p0=add_calls))
+    print(tr('Flexible attack-wave calls: {p0}', p0=flexible_calls))
+    print(tr('Target quantity parameters: {p0}', p0=len(targets)))
+    print(tr('Already wrapped: {p0}', p0=wrapped))
+    print(tr('Pending: {p0}', p0=len(pending)))
 
     if args.check:
         return 0 if not pending else 1
     if not args.apply:
         return 0
     if not pending:
-        print("No changes required.")
+        print(tr('No changes required.'))
         return 0
 
     used_ids = set(elements)
@@ -249,13 +252,13 @@ def main() -> int:
         if temporary.exists():
             temporary.unlink()
 
-    print(f"Applied wrappers: {len(replacements)}")
+    print(tr('Applied wrappers: {p0}', p0=len(replacements)))
     return 0
 
 
 if __name__ == "__main__":
     try:
-        raise SystemExit(main())
+        raise SystemExit(run_cli(main))
     except Exception as error:
-        print(f"ERROR: {error}", file=sys.stderr)
+        print(tr('ERROR: {p0}', p0=error), file=sys.stderr)
         raise SystemExit(2)

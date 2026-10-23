@@ -1,5 +1,7 @@
 # 项目初始化配置
 
+[English](project-initialization.en.md)
+
 本指南只处理两种情况：
 
 1. 首次安装智能体工作区。

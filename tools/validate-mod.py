@@ -13,6 +13,8 @@ from pathlib import Path
 from sc2_paths import find_project_mods
 from sc2_components import component_path, parse_xml, archive_of, verify_archives, component_session
 
+from sc2_i18n import UIArgumentParser, tr, run_cli
+
 REPO_ROOT = Path(__file__).resolve().parent.parent
 SCHEMAS_DIR = REPO_ROOT / "tools" / "schemas" / "sc2-xsd"
 CATALOG_XSD = SCHEMAS_DIR / "Catalog.xsd"
@@ -136,7 +138,7 @@ def validate_xml_schemas(gamedata_dir: Path) -> tuple[list[str], str]:
                     input=xml_file.read_bytes(), capture_output=True)
                 checked_count += 1
                 if result.returncode:
-                    issues.append(f'XSD Schema Error ({xml_file}): {result.stderr.decode(errors="replace")}')
+                    issues.append(f'XSD Schema Error ({xml_file}): {result.stderr.decode("utf-8", errors="replace")}')
             continue
         result = subprocess.run(
             [
@@ -147,7 +149,7 @@ def validate_xml_schemas(gamedata_dir: Path) -> tuple[list[str], str]:
                 *(str(xml_file) for xml_file in xml_files),
             ],
             capture_output=True,
-            text=True,
+            text=True, encoding="utf-8", errors="replace",
         )
         checked_count += len(xml_files)
         if result.returncode != 0:
@@ -383,7 +385,7 @@ def validate_galaxy_scripts(mod_dir: Path | None) -> list[str]:
 
 @component_session
 def main() -> int:
-    parser = argparse.ArgumentParser(
+    parser = UIArgumentParser(
         description="Run static validation checks on SC2 XML catalogs, UI layouts, and Galaxy scripts."
     )
     parser.add_argument("--mod-dir", help="Explicit path to .SC2Mod component directory")
@@ -391,12 +393,12 @@ def main() -> int:
 
     mods = find_local_mods(args.mod_dir)
     if not mods:
-        print("ERROR: No .SC2Mod directory found to validate.")
-        print("Pass --mod-dir or correct agent-config.json (SC2_MODS_PATH is a fallback).")
+        print(tr('ERROR: No .SC2Mod directory found to validate.'))
+        print(tr('Pass --mod-dir or correct agent-config.json (SC2_MODS_PATH is a fallback).'))
         return 2
     primary_mod = mods[0] if mods else None
 
-    print("Running static validation checks...")
+    print(tr('Running static validation checks...'))
     catalog_file_count = sum(
         len(list((mod / "Base.SC2Data" / "GameData").glob("*.xml")))
         for mod in mods
@@ -408,12 +410,9 @@ def main() -> int:
         if (mod / "Base.SC2Data" / "UI" / "Layout").is_dir()
     )
     galaxy_file_count = len(find_script_blocks([primary_mod])) if primary_mod else 0
-    print(f"Target: {primary_mod}")
+    print(tr('Target: {p0}', p0=primary_mod))
     print(
-        "Scanned inputs: "
-        f"{catalog_file_count} catalog XML, "
-        f"{layout_file_count} layout, "
-        f"{galaxy_file_count} hand-authored Galaxy file(s)"
+        tr('Scanned inputs: {p0} catalog XML, {p1} layout, {p2} hand-authored Galaxy file(s)', p0=catalog_file_count, p1=layout_file_count, p2=galaxy_file_count)
     )
     xml_issues: list[str] = []
     xsd_statuses: list[str] = []
@@ -430,30 +429,30 @@ def main() -> int:
     total_issues = len(xml_issues) + len(layout_issues) + len(galaxy_issues)
 
     print("\n" + "=" * 60)
-    print("STATIC VALIDATION RESULTS")
+    print(tr('STATIC VALIDATION RESULTS'))
     print("=" * 60)
-    print(f"XML Catalogs:   {len(xml_issues)} issue(s)")
+    print(tr('XML Catalogs:   {p0} issue(s)', p0=len(xml_issues)))
     for status in xsd_statuses:
-        print(f"  [XSD] {status}")
+        print(tr('  [XSD] {p0}', p0=status))
     for issue in xml_issues:
-        print(f"  [XML ERROR] {issue}")
+        print(tr('  [XML ERROR] {p0}', p0=issue))
 
-    print(f"UI Layouts:     {len(layout_issues)} issue(s)")
+    print(tr('UI Layouts:     {p0} issue(s)', p0=len(layout_issues)))
     for issue in layout_issues:
-        print(f"  [LAYOUT ERROR] {issue}")
+        print(tr('  [LAYOUT ERROR] {p0}', p0=issue))
 
-    print(f"Galaxy Script:  {len(galaxy_issues)} issue(s)")
+    print(tr('Galaxy Script:  {p0} issue(s)', p0=len(galaxy_issues)))
     for issue in galaxy_issues:
-        print(f"  [GALAXY ERROR] {issue}")
+        print(tr('  [GALAXY ERROR] {p0}', p0=issue))
 
     print("=" * 60)
     if total_issues == 0:
-        print("Pre-flight check PASSED cleanly.")
+        print(tr('Pre-flight check PASSED cleanly.'))
         return 0
     else:
-        print(f"Pre-flight check FAILED with {total_issues} issue(s).")
+        print(tr('Pre-flight check FAILED with {p0} issue(s).', p0=total_issues))
         return 1
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    sys.exit(run_cli(main))

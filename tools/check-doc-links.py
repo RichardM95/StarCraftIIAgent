@@ -11,6 +11,8 @@ import unicodedata
 from pathlib import Path
 from urllib.parse import unquote
 
+from sc2_i18n import UIArgumentParser, tr, run_cli
+
 LINK_START_RE = re.compile(r"!?\[[^\]\n]*\]\(")
 TOOL_REF_RE = re.compile(r"(?<![\w/])tools/[A-Za-z0-9_.-]+\.py")
 SKIP_PARTS = {".git", "publish", "sc2-catalog-graph-out", ".workspace-recovery",
@@ -140,20 +142,20 @@ def check(root: Path) -> list[str]:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description=__doc__)
+    parser = UIArgumentParser(description=__doc__)
     parser.add_argument('root', nargs='?', default='.', help='repository root')
     root = Path(parser.parse_args().root).resolve()
     if not root.is_dir():
-        print(f'Documentation root missing: {root}')
+        print(tr('Documentation root missing: {p0}', p0=root))
         return 1
     failures = check(root)
     if failures:
-        print('Broken local documentation references:')
+        print(tr('Broken local documentation references:'))
         print('\n'.join(f'- {failure}' for failure in failures))
         return 1
-    print('Markdown files, anchors and documented tool references OK')
+    print(tr('Markdown files, anchors and documented tool references OK'))
     return 0
 
 
 if __name__ == '__main__':
-    sys.exit(main())
+    sys.exit(run_cli(main))
