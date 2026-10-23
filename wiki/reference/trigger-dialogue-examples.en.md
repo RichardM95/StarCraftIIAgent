@@ -16,7 +16,7 @@ python tools/sc2-trigger-query.py --ui-language en --reference examples dialogs 
 python tools/sc2-trigger-query.py --ui-language en --reference examples cinematics --case cinematic-skip-key --summary
 ```
 
---case accepts case_id or exact element ID; no match fails. Display defaults to 200 nodes/resources/local-graph nodes; full validation is not truncated. --max-nodes 0 displays all. Start with summaries for complex stories. Add --target "<目标.SC2Map>" --mods-dir "<Mods>" --campaigns-dir "<Campaigns>" before the subcommand for compatibility. --reference preserves incompatibility reasons without granting libraries to a target.
+--case accepts case_id or exact element ID; no match fails. Display defaults to 200 nodes/resources/local-graph nodes; full validation is not truncated. --max-nodes 0 displays all. Start with summaries for complex stories. Add --target "`<target.SC2Map>`" --mods-dir "<Mods>" --campaigns-dir "<Campaigns>" before the subcommand for compatibility. --reference preserves incompatibility reasons without granting libraries to a target.
 
 Source abbreviations are relative to the external Campaigns root:
 

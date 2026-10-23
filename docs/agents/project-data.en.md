@@ -9,7 +9,7 @@ The suite owns reusable rules, tools, skills and references. Project facts follo
 
 `python tools/project-paths.py` returns documentation, ledger, index, report and temporary paths without creating them. Without a project, project paths are null and reference indexes use the sibling `<suite-name>-data/reference/`.
 
-`python tools/init-project.py "<主.SC2Mod>"` records a sibling `<mod-name>.agent` by default. Override with --project-data-dir. Relative project.data_dir resolves against the suite; prefer relative paths on the same drive. Initialization writes local configuration without creating empty project data directories.
+`python tools/init-project.py "<primary.SC2Mod>"` records a sibling `<mod-name>.agent` by default. Override with --project-data-dir. Relative project.data_dir resolves against the suite; prefer relative paths on the same drive. Initialization writes local configuration without creating empty project data directories.
 
 Reinitializing the same project preserves an explicit data directory; switching project derives a new one. Editing copies retain the selected project's ownership. Data must be outside the suite and SC2Mod/SC2Map Components. Invalid config/write errors stop; do not fall back to suite wiki/.
 

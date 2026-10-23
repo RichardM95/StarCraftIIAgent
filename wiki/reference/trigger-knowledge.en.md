@@ -20,14 +20,14 @@ When evidence is missing, explicit --reference permits read-only research while 
 Common options precede the subcommand; external paths below are placeholders, not selected projects.
 
 ```text
-python tools/sc2-trigger-query.py --ui-language en build --reference-root "<官方 Mods>" --reference-root "<官方 Campaigns>"
+python tools/sc2-trigger-query.py --ui-language en build --reference-root "<official-Mods-root>" --reference-root "<official-Campaigns-root>"
 python tools/sc2-trigger-query.py --ui-language en --reference find TriggerAddEvent
 python tools/sc2-trigger-query.py --ui-language en --reference show Ntve:FunctionDef:6D565EB4
 python tools/sc2-trigger-query.py --ui-language en --reference examples waves --summary
 python tools/sc2-trigger-query.py --ui-language en --reference examples dialogs --case dialog-add-button --summary
 python tools/sc2-trigger-query.py --ui-language en --reference check --templates
-python tools/sc2-trigger-query.py --ui-language en --target "<地图.SC2Map>" --mods-dir "<目标 Mods>" --campaigns-dir "<目标 Campaigns>" libraries
-python tools/sc2-trigger-query.py --ui-language en --target "<地图.SC2Map>" --mods-dir "<目标 Mods>" --campaigns-dir "<目标 Campaigns>" check
+python tools/sc2-trigger-query.py --ui-language en --target "<map.SC2Map>" --mods-dir "<target-Mods-root>" --campaigns-dir "<target-Campaigns-root>" libraries
+python tools/sc2-trigger-query.py --ui-language en --target "<map.SC2Map>" --mods-dir "<target-Mods-root>" --campaigns-dir "<target-Campaigns-root>" check
 ```
 
 Configured projects can omit target/Mods; Campaigns uses explicit input or the configured installation. Supply paths for nonstandard layouts. show accepts Library:Type:Id; use local for map-local definitions and --source to disambiguate reference providers. Param, ParamDef, PresetValue and SubFuncType are also queryable.

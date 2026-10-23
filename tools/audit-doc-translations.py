@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import ast
 import hashlib
+import html
 import json
 from pathlib import Path
 import re
@@ -13,6 +14,8 @@ import sys
 from sc2_i18n import UIArgumentParser, tr, run_cli
 
 ROOT = Path(__file__).resolve().parents[1]
+# Inspect placeholders even in command examples, without rejecting original XML attributes.
+ENGLISH_PLACEHOLDER_RE = re.compile(r'''<[^<>"'=\n]*[\u3400-\u9fff][^<>"'=\n]*>''')
 
 
 def source_digest(path):
@@ -31,6 +34,9 @@ def check(root):
                 continue
             original = source.read_text(encoding='utf-8-sig')
             translated = english.read_text(encoding='utf-8-sig')
+            for number, line in enumerate(translated.splitlines(), 1):
+                for match in ENGLISH_PLACEHOLDER_RE.finditer(html.unescape(line)):
+                    errors.append(f"Untranslated English example placeholder: {item['english']}:{number}: {match[0]}")
             stamp = f"<!-- translation-source: {item['source']}; sha256: {source_digest(source)} -->"
             if stamp not in translated:
                 errors.append('Outdated translation/source fingerprint: ' + item['english'])

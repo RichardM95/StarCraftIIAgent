@@ -12,9 +12,9 @@ The agent reads facts available in configuration and source, asks for missing in
 | Scenario | User request | Agent actions and response |
 |---|---|---|
 | 01 Research without selecting a project | “Find how the official maps sequence dialogue. Don't edit any map.” | Use explicit reference queries and inspect cases. Return provenance, calls and resource needs as reference_only; do not initialize a project. |
-| 02 Explicit map edit | “Add dialogue on entering the base in `<地图.SC2Map>`; here are the Mods/Campaigns directories.” | Resolve the explicit target; check region and dialogue assets, then edit its actual Triggers. Identify specific missing objects. |
+| 02 Explicit map edit | “Add dialogue on entering the base in `<map.SC2Map>`; here are the Mods/Campaigns directories.” | Resolve the explicit target; check region and dialogue assets, then edit its actual Triggers. Identify specific missing objects. |
 | 03 Configured project | “Add an exported GUI action to the current mod to display a mission hint.” | Resolve the editing source from source_mode; confirm library identity/loading, implement the action and show the map call. |
-| 04 Initialization requested | “Select this primary Components mod: `<主模组.SC2Mod>`.” | Run initialization directly, verify identity/source, and continue authorized work. Do not ask for manual JSON editing. |
+| 04 Initialization requested | “Select this primary Components mod: `<primary.SC2Mod>`.” | Run initialization directly, verify identity/source, and continue authorized work. Do not ask for manual JSON editing. |
 | 05 Liberty dependencies only | “This map only loads Wings of Liberty; use this LotV function.” | Query root definitions and indirect dependencies. If unavailable, find a target-supported alternative; report incompatibility without adding dependencies silently. |
 | 06 Dependency change authorized | “I've added the required component in the Editor. Check again.” | Read updated declarations, registrations and fingerprints; confirm the complete chain rather than reuse old availability. |
 | 07 Only a library file exists | “VoidLib is on disk. Why can't I use it?” | Distinguish component loading from library registration; identify missing declarations/references. Reference research can continue. |
@@ -92,11 +92,11 @@ The agent reads facts available in configuration and source, asks for missing in
 
 ### Complete authorized work before handoff
 
-**User:** “In `<目标.SC2Map>`, add a one-shot line when player 1 enters `<区域>`. Here are the sound, subtitle and portrait assets; use loaded libraries only.”
+**User:** “In `<target.SC2Map>`, add a one-shot line when player 1 enters `<region>`. Here are the sound, subtitle and portrait assets; use loaded libraries only.”
 
 **Agent actions:** Resolve target/dependencies, check region/resources, query full definitions, write GUI/string anchors and one-shot state, then run target checks. Complete these authorized actions when inputs are available.
 
-**Completion reply template:** “Added the one-shot region-entry line. Recipient, state variable and resource references were checked; target checks reached `<实际状态>`. Follow the attached steps to test sound/portrait/subtitles and repeated entry.”
+**Completion reply template:** “Added the one-shot region-entry line. Recipient, state variable and resource references were checked; target checks reached `<actual-status>`. Follow the attached steps to test sound/portrait/subtitles and repeated entry.”
 
 **User:** “The Editor saved correctly, but subtitles don't appear in the packaged game.”
 

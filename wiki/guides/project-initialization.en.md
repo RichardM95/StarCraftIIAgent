@@ -3,7 +3,7 @@
 [中文](project-initialization.md)
 <!-- translation-source: wiki/guides/project-initialization.md; sha256: ee77a753eecceb802d9e654c02de17e2d0a300b0f63e44e78cfa73d2f6cf8e22 -->
 
-Provide the primary Components .SC2Mod folder when requesting selection. The agent directly runs `python tools/init-project.py "<主Mod文件夹路径>"`; users need not edit JSON or list dependencies. The tool derives SC2/Mods/Maps from standard layout, recursively validates dependencies and atomically writes config only after checks pass. --dry-run is read-only. For nonstandard layouts supply --mods-dir, --sc2-install-dir and/or --campaign-maps-dir only as needed.
+Provide the primary Components .SC2Mod folder when requesting selection. The agent directly runs `python tools/init-project.py "<primary-mod-components-path>"`; users need not edit JSON or list dependencies. The tool derives SC2/Mods/Maps from standard layout, recursively validates dependencies and atomically writes config only after checks pass. --dry-run is read-only. For nonstandard layouts supply --mods-dir, --sc2-install-dir and/or --campaign-maps-dir only as needed.
 
 Bank, Library ID, hand-written script block and prefixes cannot be inferred from a folder name. Verify actual component/Triggers identity after selection; never carry an old project's assumptions forward. [Workspace rules](../../AGENTS.en.md) remain authoritative.
 
@@ -12,12 +12,12 @@ Bank, Library ID, hand-written script block and prefixes cannot be inferred from
 | Example | Request | Expected action |
 |---|---|---|
 | 1 Standard layout | “My primary Components mod is `D:\SC2\Mods\MyCampaign.SC2Mod`. Initialize it and check dependencies and identity.” | Run initialization and config validation, no manual JSON request. |
-| 2 Preview only | “Preview `<主Mod文件夹路径>` with --dry-run; wait for confirmation before writing config.” | Report inferred paths/dependency gaps, no config writes. |
+| 2 Preview only | “Preview `<primary-mod-components-path>` with --dry-run; wait for confirmation before writing config.” | Report inferred paths/dependency gaps, no config writes. |
 | 3 Switch project | “Select `D:\StarCraft II\Mods\AnotherCampaign.SC2Mod`; verify identity rather than reuse the old campaign.” | Reinitialize, check Library/Bank/source evidence. |
 | 4 Nonstandard layout | “Primary: `D:\Projects\MyCampaign.SC2Mod`; Mods: `D:\SC2Data\Mods`; install: `C:\Games\StarCraft II`; maps: `D:\SC2Data\Maps\Campaign`. Initialize only after validation.” | Use explicit directory flags. |
 | 5 Validate current config | “Check current paths, source_mode and dependencies read-only.” | Run tools/validate-agent-config.py, do not select another project. |
-| 6 Temporary other mod | “Inspect `<其他.SC2Mod>` with --mod-dir; do not change the default project.” | Pass actual target and dependency roots to relevant checks. |
-| 7 Missing dependency | “Initialization reports `<依赖引用>`; diagnose the declaration and missing metadata. Do not hide it with --allow-incomplete.” | Locate exact gap, preserve old config on failure. |
+| 6 Temporary other mod | “Inspect `<other.SC2Mod>` with --mod-dir; do not change the default project.” | Pass actual target and dependency roots to relevant checks. |
+| 7 Missing dependency | “Initialization reports `<dependency-reference>`; diagnose the declaration and missing metadata. Do not hide it with --allow-incomplete.” | Locate exact gap, preserve old config on failure. |
 | 8 No Components yet | “I only have a mod in the Editor; explain saving Components. Do not invent configuration.” | Give Editor steps, wait for the actual directory. |
 
 ## Installation and selection

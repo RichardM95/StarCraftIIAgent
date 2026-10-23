@@ -13,7 +13,7 @@ Follow [language selection](wiki/guides/agent-language.en.md): explicit instruct
 
 ## Project and editing rules
 
-When given a primary Components .SC2Mod directory and asked to initialize/select, run `python tools/init-project.py "<主Mod文件夹路径>"` directly. It infers SC2/Mods/Maps, resolves recursive dependencies and writes agent-config.json. Do not require manual JSON editing. Ask only for missing paths that cannot be derived from a nonstandard layout. Verify project identity from the chosen component; never guess Bank, Library ID or prefixes.
+When given a primary Components .SC2Mod directory and asked to initialize/select, run `python tools/init-project.py "<primary-mod-components-path>"` directly. It infers SC2/Mods/Maps, resolves recursive dependencies and writes agent-config.json. Do not require manual JSON editing. Ask only for missing paths that cannot be derived from a nonstandard layout. Verify project identity from the chosen component; never guess Bank, Library ID or prefixes.
 
 After initialization follow project.source_mode: in_place edits the configured primary source; workspace_copy edits project.source_mod, resolved relative to the workspace or absolute. Missing copy stops writes. Deploy using tools/deploy-mod.py in the verified direction. Never edit publish/.
 

@@ -1,7 +1,7 @@
 # Interface language and personal preferences
 
 [中文](agent-language.md)
-<!-- translation-source: wiki/guides/agent-language.md; sha256: 11c8e7e48a8aaa0a30592c726501b163b34671099ae01fcd405ae1cf45fc9242 -->
+<!-- translation-source: wiki/guides/agent-language.md; sha256: 5fc61cb5d06858b3e7fce4935452843cec8b5fec5b7d2f6ea9995391ab03ecdd -->
 
 The usage layer supports Simplified Chinese and English, with separate linked pages. Deep API references, raw game data and third-party files retain their original language; the agent explains them in the chosen language and identifies the source language. Skills retain one name and authoritative rule source.
 
@@ -27,6 +27,8 @@ python tools/sc2-catalog-query.py --ui-language zh-CN --locale enUS --no-auto-re
 No arguments or --json only display language, source, saved preference and preference path; they create nothing. Only --set saves. Default: `%LOCALAPPDATA%/StarCraftIIAgent/preferences.json`; without LOCALAPPDATA on other systems: `~/.config/StarCraftIIAgent/preferences.json`. Override with `SC2AGENT_PREFERENCES_FILE` for isolated tests or portable use. Preferences are personal, outside project config and version control. Saving preserves unrelated valid JSON fields; --set explicitly repairs corrupt files.
 
 ## Data compatibility
+
+Translate instructions and replaceable example placeholders into the page’s language, such as `Unit:<unit-id>` in English. Keep real object IDs, Library IDs, actual paths, command parameters and exact lifecycle labels unchanged.
 
 UI language changes owned human help, summaries and prompts. JSON/XML fields, canonical diagnostics, states, exit codes and raw data remain stable. Raw runtime/system errors retain their original text beside a localized human summary; machine output has no language banner. Native worker protocols are unchanged.
 

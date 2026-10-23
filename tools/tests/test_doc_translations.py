@@ -75,6 +75,22 @@ class TranslationTests(unittest.TestCase):
         (self.root/'tools/new.py').write_text('p = UIArgumentParser(description="New owned help")\n')
         self.assertTrue(any('Missing UI message' in x for x in audit.check(self.root)))
 
+    def test_rejects_chinese_example_placeholders_in_english_pages(self):
+        for body in ('Unit:<单位ID>', '`<目录>`',
+                     '```powershell\npython tools/init-project.py "<路径>"\n```',
+                     '&lt;单位ID&gt;'):
+            with self.subTest(body=body):
+                self.save_translation(body)
+                errors = audit.check(self.root)
+                self.assertTrue(any('Untranslated English example placeholder: guide.en.md:' in x for x in errors), errors)
+
+    def test_allows_translated_placeholders_and_original_source_data(self):
+        self.save_translation('Author: 扯蛋虾米. Original title: 伊罕利英雄设计与调整.\n'
+                              '`Unit:<unit-id>` in `<map.SC2Map>`.\n'
+                              '<details><summary>Examples</summary>\n'
+                              '```xml\n<CUnit id="原始对象ID" />\n```\n</details>')
+        self.assertEqual(audit.check(self.root), [])
+
 
 if __name__ == '__main__':
     unittest.main()

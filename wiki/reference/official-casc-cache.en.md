@@ -48,12 +48,12 @@ All cached files are hash-checked. Target official_problems includes only releva
 init-project, inspect-mod-dependencies, validate-agent-config, sc2-trigger-query, build-sc2-catalog-graph, sc2-catalog-query and test-suite support --official-cache. Without it, read-only discovery matches the target Mods installation/build; missing caches remain dependency gaps, invalid explicit caches fail.
 
 ```text
-python tools/inspect-mod-dependencies.py --ui-language en --official-cache "<缓存根>"
-python tools/sc2-trigger-query.py --ui-language en --official-cache "<缓存根>" libraries
-python tools/sc2-trigger-query.py --ui-language en --official-cache "<缓存根>" check
-python tools/build-sc2-catalog-graph.py --ui-language en --official-cache "<缓存根>" --locale zhCN --sqlite-only
-python tools/sc2-catalog-query.py --ui-language en --official-cache "<同一缓存根>" stats
-python tools/test-suite.py --ui-language en --scope mod --official-cache "<缓存根>"
+python tools/inspect-mod-dependencies.py --ui-language en --official-cache "<cache-root>"
+python tools/sc2-trigger-query.py --ui-language en --official-cache "<cache-root>" libraries
+python tools/sc2-trigger-query.py --ui-language en --official-cache "<cache-root>" check
+python tools/build-sc2-catalog-graph.py --ui-language en --official-cache "<cache-root>" --locale zhCN --sqlite-only
+python tools/sc2-catalog-query.py --ui-language en --official-cache "<same-cache-root>" stats
+python tools/test-suite.py --ui-language en --scope mod --official-cache "<cache-root>"
 ```
 
 ## Official research queries

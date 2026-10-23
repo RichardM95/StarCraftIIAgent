@@ -9,4 +9,4 @@ SC2_MODS_PATH optionally supplies a machine's Mods root only when no primary pro
 
 Follow .gitattributes line endings for XML/Galaxy/Layout/Bank. Do not commit publish/ or generated indexes. Run relevant checks before pushing.
 
-After synchronization, confirm the Editor can locate Components and run `python tools/init-project.py "<主模组.SC2Mod 路径>"` to resolve local paths/dependencies. For workspace_copy, preview `python tools/deploy-mod.py --dry-run`, then perform authorized deployment. Identical in-place source/target needs no copy.
+After synchronization, confirm the Editor can locate Components and run `python tools/init-project.py "<primary.SC2Mod>"` to resolve local paths/dependencies. For workspace_copy, preview `python tools/deploy-mod.py --dry-run`, then perform authorized deployment. Identical in-place source/target needs no copy.

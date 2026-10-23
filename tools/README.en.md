@@ -23,7 +23,7 @@ All public Python CLIs accept --ui-language auto|zh-CN|en. See [selection and pr
 | Catalog | `python tools/sc2-catalog-query.py <cmd>` | Bounded objects/references/chains |
 | Raw example | `python tools/sc2-reference-query.py object Unit:Marine --component liberty` | --max-chars bounds XML |
 | Sample search | `python tools/sc2-reference-query.py find <term> --family <Family> --component <name> --limit 20` | Reference only, not active loading |
-| Refresh samples | `python tools/refresh-sc2-reference.py --mods <目录> --campaigns <目录> --cm <目录>` | Verify only; --apply replaces verified snapshot with backup |
+| Refresh samples | `python tools/refresh-sc2-reference.py --mods <directory> --campaigns <directory> --cm <directory>` | Verify only; --apply replaces verified snapshot with backup |
 | SQLite refresh | `python tools/build-sc2-catalog-graph.py --sqlite-only` | Omit flag for JSON/GraphML/reports |
 | Deployment preview | `python tools/deploy-mod.py --dry-run` | Copy only after authorization/direction verification |
 | String anchors | `python tools/audit-gamestrings-anchors.py` | Read-only audit |
@@ -69,7 +69,7 @@ Identity conflict, malformed manifest, missing source or invalid config stops wi
 
 Builders retain local_mod, active_component_dependency and reference_export. TXT/non-active examples never prove loaded values. --official-research opens verified loading-uncertain official sources only; it does not waive corrupt XML, custom missing deps or disabled recursion. Other partial investigations require --allow-incomplete-dependencies on both build and query; --allow-partial-official-cache has independent requirements. Index inventory remains v8: info files, relationship/order/rule evidence, dependencies, roots, selected data locale and archive/member provenance. UI preferences are excluded. See [CASC](../wiki/reference/official-casc-cache.en.md).
 
-Declaration postorder is distinct from proven component loading order and unproven XML field merging. Local sources win; peer differences stay ambiguous. Localization nodes retain all text/providers/CASC/MPQ provenance. show loc:<键> and providers loc:<键> show candidates; reference_only cannot become a current value. Recursive false is explicitly partial investigation, not complete loading.
+Declaration postorder is distinct from proven component loading order and unproven XML field merging. Local sources win; peer differences stay ambiguous. Localization nodes retain all text/providers/CASC/MPQ provenance. show `loc:<string-key>` and providers `loc:<string-key>` show candidates; reference_only cannot become a current value. Recursive false is explicitly partial investigation, not complete loading.
 
 ## Packed components and conversion
 
