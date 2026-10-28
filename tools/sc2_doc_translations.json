@@ -3,6 +3,12 @@
   "fingerprint": "sha256 of UTF-8 source with LF line endings and no BOM",
   "pages": [
     {
+      "source": "wiki/guides/terrain-conversations.md",
+      "english": "wiki/guides/terrain-conversations.en.md",
+      "scenarios": 26,
+      "dialogues": 2
+    },
+    {
       "source": "wiki/guides/skill-conversations.md",
       "english": "wiki/guides/skill-conversations.en.md",
       "scenarios": 18,

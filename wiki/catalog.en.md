@@ -1,7 +1,7 @@
 # Wiki page inventory
 
 [中文](catalog.md)
-<!-- translation-source: wiki/catalog.md; sha256: 7853589e6d6d247f51d0b681b3d9c40029d7cb4db13de15c845e5ed3775884e7 -->
+<!-- translation-source: wiki/catalog.md; sha256: af3c1105508ff39f7709689e1f3668a31c172e774ab55b0db8bc35484d9b1646 -->
 
 Usage pages have separate Chinese/English versions. Deep API, raw data and third-party material keep their original language; the agent explains them in the chosen language.
 
@@ -10,6 +10,7 @@ Usage pages have separate Chinese/English versions. Deep API, raw data and third
 - [guides/multi-pc-setup.md](guides/multi-pc-setup.en.md) — English usage page
 - [guides/project-initialization.md](guides/project-initialization.en.md) — English usage page
 - [guides/skill-conversations.md](guides/skill-conversations.en.md) — English usage page
+- [guides/terrain-conversations.md](guides/terrain-conversations.en.md) — English usage page
 - [guides/README.md (English original)](guides/README.md) — English technical original
 - [guides/simulated-bank-playtests.md (Chinese original)](guides/simulated-bank-playtests.md) — Chinese original
 - [implementation/agent-context-efficiency.md (English original)](implementation/agent-context-efficiency.md) — English technical original

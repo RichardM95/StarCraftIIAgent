@@ -6,6 +6,7 @@
 
 - 技能：[统一入口](../skills/sc2-project-entry/SKILL.md)，按任务加载专用技能及 Galaxy、SC2 Data 子技能。
 - 技能调用与新能力：[18 个场景与两组多轮对话](guides/skill-conversations.md)，含地形、迁移、官方资源、MCP、模型分包与 Harness2。
+- 地形模块制图对话：[26 个图层操作场景与两组多轮对话](guides/terrain-conversations.md)，从选参考、画地形、摆物件到寻路和编辑器续作。
 - 工具：[工具指南](../tools/README.md)。未初始化时运行 `python tools/test-suite.py --scope tools` 和 `python tools/test-suite.py --scope docs`。
 - 官方依赖：[CASC 诊断、缓存与共用查询](reference/official-casc-cache.md)。
 - XML：[模式](implementation/xml-patterns.md)、[Catalog 规则](implementation/xml-patterns/catalog-rules.md)。

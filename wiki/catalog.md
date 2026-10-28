@@ -7,6 +7,7 @@
 - [guides/multi-pc-setup.md](guides/multi-pc-setup.md)
 - [guides/project-initialization.md](guides/project-initialization.md)
 - [guides/skill-conversations.md](guides/skill-conversations.md)
+- [guides/terrain-conversations.md](guides/terrain-conversations.md)
 - [guides/README.md](guides/README.md)
 - [guides/simulated-bank-playtests.md](guides/simulated-bank-playtests.md)
 - [implementation/agent-context-efficiency.md](implementation/agent-context-efficiency.md)

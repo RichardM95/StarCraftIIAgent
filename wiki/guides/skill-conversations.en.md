@@ -6,6 +6,8 @@ Start in the cloned workspace and have the agent read [AGENTS.md](../../AGENTS.e
 
 ## Invoking skills
 
+For layer-specific drawing, see [26 terrain scenarios and two multi-turn conversations](terrain-conversations.en.md), covering heights, textures, cliffs/ramps, water, objects, pathing and continuation after saves. This page retains cross-skill integration and collaboration examples.
+
 Describe the task normally, or explicitly request: “Read `skills/<skill-id>/SKILL.md` and follow its workflow.” Workspace skills may not appear in the host's global skill menu; explicit file loading works without that discovery. Use the host's selector if it already discovers the skill. Typing `$skill-name` alone does not install anything.
 
 Replace every `<...>` with actual input. An explicit map determines the terrain target. Mod initialization, temporary map investigation, model delegation and global registration are separate actions. Specify UI language independently of the SC2 data locale. Keep credentials out of chats, packets and Git.
@@ -81,4 +83,4 @@ python tools/harness2.py --ui-language en sc2-optimize --skill galaxy-language-f
 
 The first two checks need no active project. Shared CLI requires [local environments](shared-tools.en.md); delegation also needs the local Harness/provider. Harness2 optimization requires [Linux/WSL, Codex login and model connectivity](harness2.en.md) and consumes model quota. Examples do not grant unrelated deployment, registration or external writes; follow the user's actual authorized target/scope. Recovery uses the corresponding task/transaction/experiment state and fingerprints, preserving later user edits.
 
-<!-- translation-source: wiki/guides/skill-conversations.md; sha256: a6c48fd97afb1de201cb3e41fd607a30b36223350ea91f3057919283d3b499b9 -->
+<!-- translation-source: wiki/guides/skill-conversations.md; sha256: b0e0796f5f8c31409cac4e7f2e4cac619b8cd4d0adda59066acd74a72edae16d -->

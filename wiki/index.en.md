@@ -6,6 +6,7 @@ Read [workspace rules](../AGENTS.en.md). The local agent-config.json identifies 
 - [Language and personal preferences](guides/agent-language.en.md).
 - [Unified skill entry (English original)](../skills/sc2-project-entry/SKILL.md): one English technical skill tree, explained in the chosen language.
 - [18 skill scenarios and two multi-turn conversations](guides/skill-conversations.en.md): terrain, migration, official resources, MCP, model delegation and Harness2.
+- [26 Terrain Module drawing scenarios and two multi-turn conversations](guides/terrain-conversations.en.md): reference selection, terrain painting, placement, pathing and continuation after Editor saves.
 - [Tools](../tools/README.en.md); without a project run tools/test-suite.py --scope tools and --scope docs.
 - Basic terrain drawing: [terrain tools and experiments](guides/sc2-terrain-editing.en.md), [terrain skill](../skills/sc2-terrain-editing/SKILL.md), [map adaptation and composition](../skills/sc2-terrain-editing/references/map-adaptation.md). Route mission objects and organization to [GUI adaptation](../skills/sc2-map-triggers/references/map-adaptation.md). Query the coverage ledger; unfinished operations remain visible.
 - [Official CASC cache](reference/official-casc-cache.en.md).
@@ -25,4 +26,4 @@ Read [workspace rules](../AGENTS.en.md). The local agent-config.json identifies 
 - Shared tools and MCP: [setup, ownership and DeepSeek](guides/shared-tools.en.md), [routing skill](../skills/sc2-shared-tools/SKILL.md).
 - Harness2: [project-local installation and recursion demo](guides/harness2.en.md).
 
-<!-- translation-source: wiki/index.md; sha256: 9b39a6021ee343fb0c8fe242015c26f545a7a7cedd18123801be8b37c0aabf08 -->
+<!-- translation-source: wiki/index.md; sha256: c171a855f33970f8bc0ca6f17fa7158f017599ef1182341280159f863f7fae3f -->

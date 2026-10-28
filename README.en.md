@@ -1,7 +1,7 @@
 # StarCraftIIAgent — StarCraft II mod development agent
 
 [中文](README.md)
-<!-- translation-source: README.md; sha256: b3635fef1dcaa173e56a992459b75da972431c9c65a3bcdc3a60fcf038780b65 -->
+<!-- translation-source: README.md; sha256: 71e51af9f3a8ea9318c71da9956cefc010ddf4cd7fbdc624e2c69e6583314f2a -->
 
 SC2 custom campaign development with a shared knowledge base, 34 skills (15 root, 13 Galaxy, six SC2Data), local tools and references. **Author: 扯蛋虾米.** See [attribution](AUTHORS.en.md).
 
@@ -89,6 +89,8 @@ After an Editor save, restoring missing anchors is a separate **write**: tools/a
 ## Common request examples
 
 For terrain, migration, official resources, MCP transactions, model delegation and Harness2, see [18 new skill scenarios and two multi-turn conversations](wiki/guides/skill-conversations.en.md). The existing 36 development scenarios remain below.
+
+For Terrain Module work, see [26 drawing requests and two multi-turn conversations](wiki/guides/terrain-conversations.en.md): heights, textures, cliffs/ramps, water, roads, foliage, lighting, creep, vision, units/doodads/regions, pathing, bounds, resizing and continuation after Editor saves, with operation-specific capability and evidence limits.
 
 Supply target, desired behavior, known unit/ability/player/region/resources, and scope (read-only/design/edit+static checks). The agent retrieves facts already in config/source; ask only for material missing inputs. Deliver actual source/evidence/check scope plus Editor/game steps. The following are requests, not executed acceptance evidence.
 

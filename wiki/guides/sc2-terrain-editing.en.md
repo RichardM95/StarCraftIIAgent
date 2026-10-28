@@ -1,7 +1,9 @@
 # Terrain Module tools and controlled Editor experiments
 
 [中文](sc2-terrain-editing.md)
-<!-- translation-source: wiki/guides/sc2-terrain-editing.md; sha256: 43dde9b00fded449efa2eb3655674036857eb0b8e0bb0168cf132fb9798b7cbf -->
+
+For copyable drawing requests, use [26 Terrain Module scenarios and two multi-turn conversations](terrain-conversations.en.md). They distinguish layer-specific goals, current implementation gaps and evidence without requiring users to construct tool arguments themselves.
+<!-- translation-source: wiki/guides/sc2-terrain-editing.md; sha256: a68f798640ff4da61a0239f8006ee0628b9f48952824a6ac6d429f15b491269a -->
 
 Entry skill: [sc2-terrain-editing](../../skills/sc2-terrain-editing/SKILL.md). Attribution follows [AUTHORS](../../AUTHORS.en.md). The current target is basic drawing on reference-map copies: heights, textures, cliffs/ramps, water, unit/doodad/region placement, deletion and movement, plus creep, roads, foliage, lighting and visibility painting. Exhaustive advanced menus and property parity are optional extensions. `capabilities` is the single coverage ledger, separating implemented tools, diagnostic previews, Editor acceptance and runtime acceptance.
 
