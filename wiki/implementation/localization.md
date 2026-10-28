@@ -48,4 +48,6 @@ When the SC2 Editor saves, it may normalize entries and migrate editor-facing te
 python tools/audit-gamestrings-anchors.py --fill
 ```
 
-This scans all `GameData/*.xml` files, checks against `GameStrings.txt`, and automatically populates missing keys from `ObjectStrings.txt`.
+This audits explicit target `Name`/`Tooltip`/`Description` anchors, target class defaults and explicit parent inheritance against same-locale strings in confirmed active dependencies. `##id##` expands per concrete object; it is not a literal localization key. Scalar overrides replace earlier anchors. Implicit dependency class defaults are outside this audit's scope, since many generate optional editor names. Explicit nested references retain the existing scan scope; this is not a complete gameplay-data resolver.
+
+`--mods-dir`, `--campaigns-dir` and `--official-cache` select dependency evidence. Missing dependency or locale coverage fails as unconfirmed rather than asserting missing text or falling back to another language. `--fill` writes only the target, restoring truly missing keys from its `ObjectStrings.txt`; inherited strings do not need copying. `test-suite.py --locale zhCN` forwards the requested audit locale and dependency roots; its default remains `enUS`.

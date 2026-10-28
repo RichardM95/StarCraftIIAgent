@@ -428,3 +428,7 @@ Charge and cooldown actor events only fire if the corresponding flags are set on
 - Use `parent="ModelAnimationStyleOneShot"` for all one-time VFX (explosions, birth effects).
 - Always add `<On Terms="ActorOrphan" Send="Destroy"/>` to orphan non-unit actors that should clean up.
 - Test animations in the editor with the Actor Viewer (F7 in the editor).
+
+## Task routing refinement
+
+Trace the Unit/Model/Actor and relevant Weapon/Effect links before editing visuals. Preserve the target registered Catalog layout and explicit array style. Animation, attachments, portraits and Actor events need their own Editor/runtime evidence.

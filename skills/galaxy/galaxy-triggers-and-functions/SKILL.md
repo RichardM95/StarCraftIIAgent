@@ -477,3 +477,7 @@ void gf_MyActionDef(int lp_param) {
 - Multithreaded action definitions run noticeably slower than non-threaded equivalents.
 - Use threading only when you genuinely need concurrent `Wait()`-based timelines (e.g., five marines each on a 5-second lifecycle running in parallel).
 - For one-off delays, a `Timer`-based trigger is usually simpler and cheaper.
+
+## Task routing refinement
+
+Use this page for trigger/function mechanics and confirmed API references. New trigger authoring is routed through `sc2-map-triggers` for editable GUI events, conditions and actions; existing Galaxy diagnostics retain the actual initialization order.

@@ -1,7 +1,7 @@
 # Trigger queries, dependencies and examples
 
 [中文](trigger-knowledge.md)
-<!-- translation-source: wiki/reference/trigger-knowledge.md; sha256: 141ce8a005a73a3eac43cea3997f9f19f0c55b3249ab9cb882ba52e85589a247 -->
+<!-- translation-source: wiki/reference/trigger-knowledge.md; sha256: 8af8126130a9f98b3b1eb3ffa6894417fe0a9fb5f17a08f1e9066dbd857d9f0d -->
 
 This is the GUI-trigger query entry. Keep raw definitions, official cases and target availability separate: a reference hit does not prove loading. See [in-game dialogue cases](trigger-dialogue-examples.en.md) and [44 user scenarios](trigger-agent-dialogue-examples.en.md). There are 27 curated entries across 11 mechanisms; the seven original templates retain their own acceptance scope.
 
@@ -51,6 +51,12 @@ Use [CASC rules](official-casc-cache.en.md). Applicable builds with verified sou
 Definition parameter order describes the signature; call Params bind through ParameterDef, so sibling order may differ. The official sc2tutorial Terran MakeBarracks CreateObjective case confirms this. Check ownership, coverage and duplicates, not just ordering.
 
 Defaults are definition facts; calls still supply explicit required parameters. SubFunctionType belongs to the parent definition. Checks follow function bodies, variable initializers, parameter defaults and indirect GUI references. Default templates validate references without implying execution; Label grouping is not executable dependency. Variable arguments follow ParamFlagMultiple and difficulty literals use official ValueId.
+
+Presets normally require group membership. Cross-group aliases require two `PresetCustom` groups with equal `BaseType` and the same nonempty explicit `PresetValue/Value`; names and inferred `PresetInteger` positions are insufficient. The current official NativeLib uses identical Galaxy constants for Paused, Hidden and Invulnerable in two groups. A `gamelink` literal can lower to a Galaxy `string` parameter but still requires `ValueGameType`; the reverse conversion is not accepted. Official PortraitCamera calls using `Dflt` provide a local example. Editor and runtime acceptance still require actual evidence.
+
+`check` returns `inactive_diagnostics` for call-signature problems reached only through `<Disabled/>` paths. Disabled state propagates through parameters and nested expressions; an active path to the same call keeps its problems in `errors`. Definitions are entry points, followed by otherwise unreachable calls and orphan call cycles, so nested disabled expressions are not independently enabled. Reference resolution, dependency completeness and node structure remain strict for disabled drafts; default templates still validate references only. This classification does not establish Editor or runtime acceptance.
+
+A definition's `Parameter` list may contain a `Type="Comment"` annotation. It is not a formal argument, but its reference must still resolve. An existing saved patrol-AI definition with three `ParamDef` entries and one annotation has only three parameters in its preexisting Galaxy header. A `byte` literal may widen to `int`, without allowing the reverse conversion or widening to `bool`. This XML/generated-source comparison is not a new Editor acceptance result. Disabled empty calls without a `FunctionDef` remain structural errors.
 
 Remap local declaration/reference IDs before import, synchronizing TriggerStrings/GameStrings. tools/sc2_triggers.py remap_local_ids(raw, strings, occupied) returns XML/strings for map-local fragments; occupied includes all existing elements/anchor IDs. Mod Library import additionally requires explicit ownership.
 

@@ -1,0 +1,24 @@
+- id: credentials
+  config:
+    path: <DEEPSEEK_CREDENTIALS_FILE>
+    watch: false
+- id: approval
+  config:
+    policy: never
+- id: permission
+  config:
+    defaultPreset: workspace-write
+    presets:
+      workspace-write:
+        sandbox: workspace-write
+        approval: never
+- id: sdk-jsonrpc-server
+  config:
+    maxTokensAsSuccess: false
+- id: session-log-deepseek
+  config:
+    enabled: false
+- id: session-telemetry-otel
+  disabled: true
+- id: plugin-package-inventory-deepseek
+  disabled: true

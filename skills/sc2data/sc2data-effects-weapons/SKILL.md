@@ -379,3 +379,7 @@ Footprints define the terrain blocked by a structure:
 - Use `CEffectSearch` + `CEffectDamage` for splash/AoE rather than multiple separate weapons.
 - Effects are forward-declared: ability → effect → sub-effect(s). Do not circular-reference.
 - Keep each effect id uniquely named; Blizzard's data is dense and naming collisions cause silent overrides.
+
+## Task routing refinement
+
+Trace Weapon -> Effect -> Set/Search/Damage/Behavior/Validator, plus ActorAction/VFX when presentation is affected. Check inherited array indexes before editing. Damage multiplicity, targeting and range need scenario evidence.

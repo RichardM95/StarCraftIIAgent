@@ -1,11 +1,15 @@
 # Installation and setup — custom campaign agent starter
 
 [中文](setup.md)
-<!-- translation-source: setup.md; sha256: 69186efd73a6f7da37da3de5542626c8520f9cb131c848aca3b98c626788580a -->
+<!-- translation-source: setup.md; sha256: 925c4e595022b454d9c77af85ffe419c0b977ad79485995bb1bc79deebb7ac54 -->
 
 **Author: 扯蛋虾米.** See [AUTHORS](AUTHORS.en.md). Local agent-config.json determines whether a project is selected. Open this independent StarCraftIIAgent workspace; verify current configuration/source rather than assume a historical campaign.
 
 ## Quick-start checklist
+
+A fresh Git clone contains generic skills, source and references, without the maintainer's `projects/`, local `agent-config.json`, environments, credentials, indexes or model-task records. Run tools/docs checks first and initialize your own project. Do not copy another machine's selected-project configuration to compensate for these absent local files.
+
+See [skill conversations](wiki/guides/skill-conversations.en.md) for new capabilities and expected evidence. Rebuild shared CLI/MCP environments and register local entries using [shared-tool setup](wiki/guides/shared-tools.en.md); delegation additionally needs your local Harness/provider configuration. Optional [Harness2 setup](wiki/guides/harness2.en.md) rebuilds Linux/WSL dependencies. Registration, actual model connectivity, execution, static checks, Editor acceptance and runtime acceptance are separate results.
 
 1. Make Python and the installed SC2 Editor available for their respective operations; use a host with local workspace/tool access. Read AGENTS.md, wiki/index.md and skills/sc2-project-entry/SKILL.md.
 2. Choose [UI language](wiki/guides/agent-language.en.md). `python tools/agent-language.py --set en` saves English; --set zh-CN fixes Chinese; --set auto restores automatic selection. UI language never changes SC2 --locale.

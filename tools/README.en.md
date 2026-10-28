@@ -1,9 +1,9 @@
 # Custom campaign tools
 
 [中文](README.md)
-<!-- translation-source: tools/README.md; sha256: a9d605e47ba7857f7d72eed377116b8574710f51cc8c454387f89c235e0cbc14 -->
-
 Maintenance helpers, static checks, bounded Catalog/GUI queries and test entry points. Paths come from agent-config.json and resolve relative to the workspace. Explicit targets win; SC2_MODS_PATH is a fallback only without a configured primary. Missing configured sources never fall back to same-name copies. workspace_copy requires source_mod. Dependency source-lint scope follows validation.include_dependencies/exclude_mods or explicit overrides; loading resolution is separate.
+
+Terrain Module tools: `python tools/sc2-terrain.py --ui-language en capabilities` shows basic drawing requirements, optional extensions and current coverage. See the [terrain guide](../wiki/guides/sc2-terrain-editing.en.md) for scan, inspect, render, plan, apply, diff, undo, redo and controlled Editor experiments. Implemented operations edit isolated Components copies; Editor and game acceptance are reported separately.
 
 ## Interface language
 
@@ -20,6 +20,7 @@ All public Python CLIs accept --ui-language auto|zh-CN|en. See [selection and pr
 | Source validation | `python tools/validate-mod.py` | Formal Catalog XSD plus layout/Galaxy static patterns |
 | Dependencies | `python tools/inspect-mod-dependencies.py --json` | Actual component declarations/rules, recursive by default |
 | CASC | `python tools/sc2-official-cache.py probe --casc-dll "<DLL>"` | Explicit probe/sync only; sync preview unless --apply |
+| Unit data-chain migration | `python tools/sc2-migrate.py plan --source "<Source.SC2Mod>" --target "<Target.SC2Mod>"` | [Analysis, selection, packages and transactional import](../wiki/guides/unit-migration.en.md); explicit --apply writes |
 | Catalog | `python tools/sc2-catalog-query.py <cmd>` | Bounded objects/references/chains |
 | Raw example | `python tools/sc2-reference-query.py object Unit:Marine --component liberty` | --max-chars bounds XML |
 | Sample search | `python tools/sc2-reference-query.py find <term> --family <Family> --component <name> --limit 20` | Reference only, not active loading |
@@ -44,7 +45,7 @@ Unified tools scope runs unit tests; docs scope checks skill frontmatter, local 
 
 validate-mod uses lxml or xmllint for formal Catalog/GameData XSD; neither available means failure. SC2Layout.xsd remains an IDE/reference aid; runtime-compatible layout root/children/ASCII checks are separate. XML comments/attributes use ASCII and Catalog cannot be comment-only. Galaxy checks are static patterns (locals/include/operator/ASCII), not an AST compiler. Generated Galaxy remains read-only.
 
-The command-card auditor's historical filename does not imply complete Actor binding validation. Intentional shared slots may depend on Requirements, so candidates summarize unless --show-warnings/--strict is requested. String audits check Name/Tooltip/Description anchors; --fill uses ObjectStrings to restore missing GameStrings, never guessed prose.
+The command-card auditor's historical filename does not imply complete Actor binding validation. Intentional shared slots may depend on Requirements, so candidates summarize unless --show-warnings/--strict is requested. String audits check explicit target Name/Tooltip/Description anchors, target default templates and explicit parent inheritance against active same-locale GameStrings. They expand `##id##`, never create a literal placeholder key, and do not expand scope to all implicit dependency editor names. Missing dependency or locale evidence reports unconfirmed and fails. The auditor accepts --mods-dir/--campaigns-dir/--official-cache; preflight forwards these and --locale (still enUS by default). --fill restores truly missing keys from target ObjectStrings without copying strings already supplied by dependencies.
 
 Frontmatter checks one SKILL.md per skill: matching name, nonempty single-line description/body. Translation pages do not duplicate skills. Documentation checks skip generated/cache/backup/temp/publish directories, ignore fenced Markdown example links but still validate tool references, and support Chinese/duplicate headings, HTML anchors and complex local paths. Translation checks detect missing/stale pairs; they do not prove semantic equivalence.
 
@@ -104,3 +105,15 @@ Automatic refresh closes readers, locks the same target and rechecks after acqui
 Deployment verifies direction/containment even in dry-run. Equal in-place source/target is a safe no-op. Ordinary deployment copies current target then overlays source; --clean stages only source. Recheck unchanged source, verify copied files and switch. Retain one owned prior version; rotate only verified ownership, reject links/manual collisions. Roll back on switch failure; keep/report recovery paths if rollback fails. Lock cleanup cannot mask the primary error. Do not hand-edit copied generated libraries; compile/save in the Editor.
 
 Extract playtest logs only when authorized, using project reports or explicit --output without a project. Raw logs stay read-only. Static tools justify only static validation passed, never Editor accepted or packaged runtime passed without their respective evidence.
+
+## Shared local tools and MCP
+
+See [setup, calls, DeepSeek and recovery](../wiki/guides/shared-tools.en.md). `sc2-local.py` and `deepseek-task.py` use isolated environments; MCP and CLI share business code and project state. Use `sc2-integration.py` for installation, diagnosis and global registration.
+
+## Harness2
+
+`python tools/harness2.py --ui-language en demo --k 2` runs the official local demo through WSL. See the [Harness2 guide](../wiki/guides/harness2.en.md) for the environment, model configuration and scope.
+
+`sc2-optimize --skill <ID>` or `sc2-optimize --batch <JSON-manifest>` validates professional Skills through real Codex calls; no selection options retain the localization flow. The [24-Skill registry](harness2-skills.json) defines group order and acceptance profiles. Candidates use restricted on-demand reference reads, with all selection and solving input tokens included in the benefit measure. After independent cases and primary-agent diff review, use `sc2-apply` to merge a group and `sc2-restore` with its experiment directory for guarded recovery.
+
+<!-- translation-source: tools/README.md; sha256: db2eccea7723c06ab2d726a0235d4704f89c65c8f991ca42f69732415a6df9a5 -->

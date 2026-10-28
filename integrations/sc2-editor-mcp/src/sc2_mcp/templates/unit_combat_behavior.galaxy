@@ -1,0 +1,98 @@
+include "TriggerLibs/NativeLib"
+
+bank htProbeBank;
+trigger htProbeTrigger;
+
+void HTProbeSnapshot (unit templar, string section) {
+    int i;
+    int count;
+    string weapon;
+    BankValueSetFromFixed(htProbeBank, section, "StartedGameTime", GameGetMissionTime());
+    BankValueSetFromString(htProbeBank, section, "StageStatus", "STARTED");
+    BankSave(htProbeBank);
+    count = UnitWeaponCount(templar);
+    BankValueSetFromInt(htProbeBank, section, "UnitWeaponCount", count);
+    i = 1;
+    while (i <= count) {
+        weapon = UnitWeaponGet(templar, i);
+        BankValueSetFromString(htProbeBank, section, "Weapon" + IntToString(i), weapon);
+        BankValueSetFromInt(htProbeBank, section, "Enabled" + IntToString(i), BoolToInt(UnitWeaponIsEnabled(templar, i)));
+        BankValueSetFromFixed(htProbeBank, section, "Damage" + IntToString(i), UnitWeaponDamage(templar, i, c_unitAttributeNone, false));
+        i += 1;
+    }
+    BankValueSetFromInt(htProbeBank, section, "AttackOrderValid", BoolToInt(UnitOrderIsValid(templar, OrderTargetingPoint(AbilityCommand("attack", 0), Point(50.0, 40.0)))));
+    BankValueSetFromInt(htProbeBank, section, "ActorExists", BoolToInt(ActorScopeRefGet(ActorScopeFromUnit(templar), "::Main") != null));
+    BankValueSetFromFixed(htProbeBank, section, "FinishedGameTime", GameGetMissionTime());
+    BankValueSetFromString(htProbeBank, section, "StageStatus", "FINISHED");
+    BankSave(htProbeBank);
+}
+
+bool HTProbeRun (bool testConds, bool runActions) {
+    unit templar;
+    unit target;
+    int i;
+    int count;
+    string path;
+    if (!runActions) {
+        return true;
+    }
+    Wait(1.0, c_timeGame);
+    htProbeBank = BankLoad("__BANK__", 1);
+    BankValueSetFromString(htProbeBank, "Run", "Status", "STARTED");
+    BankValueSetFromString(htProbeBank, "Run", "RunId", "__RUN_ID__");
+    BankValueSetFromFixed(htProbeBank, "Run", "StartedGameTime", GameGetMissionTime());
+    BankSave(htProbeBank);
+    count = CatalogFieldValueCount(c_gameCatalogUnit, "HighTemplar", "AbilArray", 1);
+    BankValueSetFromInt(htProbeBank, "Catalog", "AbilityCount", count);
+    i = 0;
+    while (i < count) {
+        path = "AbilArray[" + IntToString(i) + "].Link";
+        BankValueSetFromString(htProbeBank, "Catalog", path, CatalogFieldValueGet(c_gameCatalogUnit, "HighTemplar", path, 1));
+        i += 1;
+    }
+    count = CatalogFieldValueCount(c_gameCatalogUnit, "HighTemplar", "WeaponArray", 1);
+    BankValueSetFromInt(htProbeBank, "Catalog", "WeaponCount", count);
+    i = 0;
+    while (i < count) {
+        path = "WeaponArray[" + IntToString(i) + "].Link";
+        BankValueSetFromString(htProbeBank, "Catalog", path, CatalogFieldValueGet(c_gameCatalogUnit, "HighTemplar", path, 1));
+        i += 1;
+    }
+    BankSave(htProbeBank);
+    libNtve_gf_SetAllianceBetweenTwoPlayerGroups(PlayerGroupSingle(1), PlayerGroupSingle(2), libNtve_ge_AllianceSetting_Enemy);
+    libNtve_gf_SetAllianceBetweenTwoPlayerGroups(PlayerGroupSingle(2), PlayerGroupSingle(1), libNtve_ge_AllianceSetting_Enemy);
+    UnitCreate(1, "HighTemplar", c_unitCreateIgnorePlacement, 1, Point(40.0, 40.0), 0.0);
+    templar = UnitLastCreated();
+    UnitSetPropertyFixed(templar, c_unitPropEnergy, 0.0);
+    UnitSetState(templar, c_unitStateInvulnerable, true);
+    UnitCreate(1, "Marine", c_unitCreateIgnorePlacement, 2, Point(43.0, 40.0), 180.0);
+    target = UnitLastCreated();
+    UnitSetPropertyFixed(target, c_unitPropLifeMax, 500.0);
+    UnitSetPropertyFixed(target, c_unitPropLife, 500.0);
+    HTProbeSnapshot(templar, "Born");
+    BankValueSetFromFixed(htProbeBank, "Attack", "StartedGameTime", GameGetMissionTime());
+    BankValueSetFromString(htProbeBank, "Attack", "StageStatus", "STARTED");
+    BankSave(htProbeBank);
+    UnitIssueOrder(templar, OrderTargetingUnit(AbilityCommand("attack", 0), target), c_orderQueueReplace);
+    Wait(5.0, c_timeGame);
+    BankValueSetFromFixed(htProbeBank, "Attack", "TargetLife", UnitGetPropertyFixed(target, c_unitPropLife, c_unitPropCurrent));
+    BankValueSetFromFixed(htProbeBank, "Attack", "FinishedGameTime", GameGetMissionTime());
+    BankValueSetFromString(htProbeBank, "Attack", "StageStatus", "FINISHED");
+    HTProbeSnapshot(templar, "AfterAttack");
+    UnitBehaviorAdd(templar, "CasterWaitingToMoveOut", templar, 1);
+    HTProbeSnapshot(templar, "Waiting");
+    UnitBehaviorRemove(templar, "CasterWaitingToMoveOut", c_unitBehaviorCountAll);
+    HTProbeSnapshot(templar, "Released");
+    UnitCreate(1, "KSCG2HighTemplarCardCaster", c_unitCreateIgnorePlacement, 1, Point(70.0, 40.0), 0.0);
+    HTProbeSnapshot(UnitLastCreated(), "CardCaster");
+    BankValueSetFromFixed(htProbeBank, "Run", "FinishedGameTime", GameGetMissionTime());
+    BankValueSetFromString(htProbeBank, "Run", "Status", "FINISHED");
+    BankSave(htProbeBank);
+    return true;
+}
+
+void InitMap () {
+    libNtve_InitLib();
+    htProbeTrigger = TriggerCreate("HTProbeRun");
+    TriggerAddEventMapInit(htProbeTrigger);
+}

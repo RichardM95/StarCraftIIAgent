@@ -57,6 +57,12 @@ python tools/sc2-trigger-query.py --target "<地图.SC2Map>" --mods-dir "<目标
 
 默认值是定义事实；构造调用仍显式提供每个参数。`SubFunctionType` 必须属于父调用的函数定义。检查会追踪函数体、变量初始值、参数默认值和间接 GUI 引用；默认值模板只检查引用，不把它当作调用者自动执行的代码。Label 分组信息不当作可执行依赖。可变参数以原始 `ParamFlagMultiple` 为准；难度字面值采用官方 `ValueId` 结构。
 
+预设通常按所属组检查。跨组仅在双方均为 `PresetCustom`、`BaseType` 相同且 `PresetValue/Value` 为相同非空显式值时接受；不按名称匹配，也不推断 `PresetInteger` 的位置序号。当前官方 NativeLib 的 Paused、Hidden、Invulnerable 在两组中使用同一 Galaxy 常量，是此兼容判断的本地证据。`gamelink` 字面量可传给 Galaxy `string` 参数，但仍须提供 `ValueGameType`；不允许反向放宽 `string` 到指定数据链接。官方 PortraitCamera 的 `Dflt` 调用是本地案例，GUI/运行验收仍需实际证据。
+
+`check` 的 `inactive_diagnostics` 保留仅由 `<Disabled/>` 路径触达的调用签名问题，不计入执行错误。禁用状态传播到参数和嵌套表达式；同一调用也被启用路径触达时，问题仍进入 `errors`。定义先作为检查入口，尚未触达的独立调用与孤立调用环另行检查，避免把禁用分支的子表达式当作启用入口。禁用草稿的引用解析、依赖完整性与节点结构检查仍然严格执行；默认值模板仍仅检查引用。此分类不证明编辑器接受或游戏通过。
+
+函数定义的 `Parameter` 列表可以包含 `Type="Comment"` 注释；它不是调用形参，仍须解析注释引用。已有保存组件中，带三个 `ParamDef` 和一个注释的巡逻 AI 定义，其预存 Galaxy 函数头仅有三个参数。`byte` 字面量可扩宽为 `int`，不反向放宽，也不扩宽到 `bool`。这些规则依据已有 XML 与生成代码对照，不代表本轮已获编辑器验收；禁用且没有 `FunctionDef` 的空调用仍按结构错误报告。
+
 移植本地片段前，为声明和引用重新分配 ID，并同步 TriggerStrings 与 GameStrings。`tools/sc2_triggers.py` 的纯函数 `remap_local_ids(raw, strings, occupied)` 返回新 XML 和新字符串映射，接受地图本地片段；`occupied` 应包含目标全部已有元素及字符串锚点 ID。导入模组 Library 时还需显式设置归属，不能直接使用地图本地引用。
 
 声明了 Variable 元素还不够：全局变量须通过 Root 或其可达 Category 的 Item 登记；局部变量和结构体字段由各自 FunctionDef、Trigger 或 Structure 的 Variable 引用声明。变量读取引用不能代替声明。多个变量的初始值 Param、多个动作的 FunctionCall/Param 实例分别分配 ID；FunctionDef、ParamDef、Preset 和 Variable 的读取可以复用。参见[归档证据 S1](../../docs/agents/retrospective.md)。

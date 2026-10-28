@@ -30,6 +30,7 @@ Load this skill when running any tool from the `tools/` directory: pre-flight te
 | **Preview/deploy mod to SC2 install** | `python tools/deploy-mod.py --dry-run` |
 | **Check GameStrings / localization anchors (read-only)** | `python tools/audit-gamestrings-anchors.py` |
 | **Restore anchors after Editor save (writes files)** | `python tools/audit-gamestrings-anchors.py --fill` |
+| **Check terrain operation coverage** | `python tools/sc2-terrain.py --ui-language <language> capabilities`; load [sc2-terrain-editing](../sc2-terrain-editing/SKILL.md) before map writes |
 | **Audit command cards** | `python tools/audit-actor-and-card-integrity.py` |
 | **Extract playtest errors & logs** | `python tools/extract-playtest-bugreport.py` |
 | **Check documentation links** | `python tools/check-doc-links.py` |

@@ -3,6 +3,12 @@
   "fingerprint": "sha256 of UTF-8 source with LF line endings and no BOM",
   "pages": [
     {
+      "source": "wiki/guides/skill-conversations.md",
+      "english": "wiki/guides/skill-conversations.en.md",
+      "scenarios": 18,
+      "dialogues": 2
+    },
+    {
       "source": "AGENT.md",
       "english": "AGENT.en.md"
     },
@@ -95,6 +101,22 @@
     {
       "source": "wiki/reference/trigger-knowledge.md",
       "english": "wiki/reference/trigger-knowledge.en.md"
+    },
+    {
+      "source": "wiki/guides/sc2-terrain-editing.md",
+      "english": "wiki/guides/sc2-terrain-editing.en.md"
+    },
+    {
+      "source": "wiki/guides/unit-migration.md",
+      "english": "wiki/guides/unit-migration.en.md"
+    },
+    {
+      "source": "wiki/guides/shared-tools.md",
+      "english": "wiki/guides/shared-tools.en.md"
+    },
+    {
+      "source": "wiki/guides/harness2.md",
+      "english": "wiki/guides/harness2.en.md"
     }
   ]
 }

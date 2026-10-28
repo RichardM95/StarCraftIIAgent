@@ -813,3 +813,7 @@ From the Data Editor **View** menu — settings that improve navigation and redu
 - Commented-out entries (`<!-- ... -->`) are safe to leave — they don't affect gameplay.
 - When disabling an array element from a parent, use `index` with an empty or zeroed-out value.
 - Test changes in the editor with **View Raw Data** enabled to see actual field IDs.
+
+## Task routing refinement
+
+For production changes, inspect the final AbilArray, command card, Train/Build InfoArray slot, cost, supply and Requirement chain together. Preserve existing registered file organization; layout changes are separate work. Static field presence is not proof of final merged or engine behavior.

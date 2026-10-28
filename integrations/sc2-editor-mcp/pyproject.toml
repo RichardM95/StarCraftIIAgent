@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools==80.9.0", "wheel==0.45.1"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sc2-editor-mcp"
+version = "0.5.1"
+description = "Transactional StarCraft II component-map tools over MCP"
+requires-python = ">=3.12"
+dependencies = ["pydantic>=2,<3", "numpy>=2,<3", "Pillow>=11,<13", "psutil>=7,<8", "tomlkit>=0.13,<1", "mpyq>=0.2.5", "pympq>=0.1"]
+
+[project.optional-dependencies]
+mcp = ["mcp>=1.20,<2"]
+test = ["pytest>=8,<10", "pytest-asyncio>=0.25,<2"]
+
+[project.scripts]
+sc2-editor = "sc2_mcp.cli:main"
+sc2-local = "sc2_mcp.local_cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+sc2_mcp = ["templates/*.galaxy", "profiles/*.json", "knowledge/*.json.gz"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"

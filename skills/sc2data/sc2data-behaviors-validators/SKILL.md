@@ -347,3 +347,7 @@ Ability is grayed out / uncastable when validator returns false:
 - Set `MaxCount value="1"` on most buffs to prevent unintended stacking.
 - For auras: put the `PeriodicEffectArray` on the source unit's behavior, and use a `CEffectSearch` to reach nearby targets — never apply directly to all units from the behavior.
 - Keep validators simple and composable — build complex logic from `CValidatorCombine` of simple validators.
+
+## Task routing refinement
+
+Trace the owning Unit/Ability/Effect through the complete inherited Behavior/Validator chain. Distinguish array replacement from dependency-appended entries; stack, duration and target filtering remain runtime questions after XML validation.

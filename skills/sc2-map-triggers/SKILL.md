@@ -11,6 +11,8 @@ Load this skill when editing map trigger XML (`.SC2Map/Triggers`), wiring campai
 
 For new triggers, prefer GUI-editable events, conditions, actions, and GUI custom definitions. If a small part cannot reasonably be expressed in GUI, embed only that part as Custom Script within the trigger and keep the surrounding flow in GUI. Do not move the whole feature to a standalone Galaxy script unless the user explicitly requests Galaxy; maintenance of existing Galaxy source is a separate case.
 
+For inherited campaign sidequests, physical rescue/equipment interactions, or a crowded GUI tree, read [map adaptation and GUI organization](references/map-adaptation.md). It covers preserving the story, successful-create/remove sequencing, aggregate objectives, queued voice, category-only invariants and saving a changed shared library before its map.
+
 ## Critical Rule: Map-to-Mod Calls Must Use GUI Actions
 
 First follow [dependency-aware trigger development](../../wiki/reference/trigger-knowledge.md): confirm the editing target, resolve dependencies, query available definitions, choose a compatible case, write GUI, then validate. `tools/sc2-trigger-query.py libraries` must confirm the library scope before development. Use `find`/`show` for exact parameter, preset and SubFunctionType IDs; `examples` for curated cases; `check` before Editor handoff. Missing dependency evidence allows only explicit reference research, not target acceptance.

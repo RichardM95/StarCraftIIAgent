@@ -1,6 +1,6 @@
 ---
 name: sc2-project-entry
-description: StarCraft II mod and campaign implementation entry point. Use for SC2Mod/SC2Map, catalog XML, Galaxy, triggers, actors, localization, or Editor handoff; route to the relevant specialist skill.
+description: StarCraft II mod and campaign implementation entry point. Use for SC2Mod/SC2Map, catalog XML, Galaxy, triggers, actors, localization, terrain, map expansion, scene composition, or Editor handoff; route to the relevant specialist skill.
 ---
 
 # SC2 Project Entry (Unified Router)
@@ -29,10 +29,13 @@ Library selection follows `tools/sc2-trigger-query.py libraries` for the actual 
 |---|---|---|
 | Writing/editing Galaxy script | `sc2-galaxy-scripting` | `wiki/implementation/galaxy-gotchas.md`, `wiki/reference/galaxy-language.md` |
 | Writing/editing mod XML (units, abilities, behaviors, effects, weapons, upgrades, validators, footprints) | `sc2-catalog-xml` | `wiki/implementation/xml-patterns.md`, `wiki/implementation/xml-patterns/catalog-rules.md` |
+| Migrating custom unit data chains between mods | `sc2-unit-migration` | `wiki/guides/unit-migration.en.md` |
 | Deep actor work (CActorUnit/Action/Model/Beam/Sound, VFX/audio, texture swaps, morph transitions, inactive-XML extraction) | `sc2-actor-system` | `wiki/reference/actors.md`, `wiki/implementation/xml-patterns/editor-roundtrip-and-actors.md` |
-| Editing map triggers, GUI action wiring, victory/defeat hooks | `sc2-map-triggers` | `wiki/reference/triggers-overview.md`, `wiki/implementation/per-map-setup.md` |
+| Editing map triggers, mission-object wiring, GUI organization, victory/defeat hooks | `sc2-map-triggers` | `wiki/reference/triggers-overview.md`, `wiki/implementation/per-map-setup.md` |
+| Terrain layers, map expansion, scene composition, placed objects, pathing, bridges/tunnels | `sc2-terrain-editing` | `wiki/guides/sc2-terrain-editing.md`; adaptation tasks load `skills/sc2-terrain-editing/references/map-adaptation.md` |
 | Bank system, campaign persistence, mission saves, unlocks | `sc2-bank-system` | `wiki/implementation/bank-system.md`, `wiki/reference/galaxy-bank.md` |
 | Localization (GameStrings/ObjectStrings/TriggerStrings), string anchors, blank editor names, GameHotkeys | `sc2-localization` | `wiki/implementation/localization.md` |
+| Supplementary local/MCP tools, official assets, editor warnings, bounded DeepSeek sub-tasks | `sc2-shared-tools` | `wiki/guides/shared-tools.md` |
 | Running tools, validation, deployment | `sc2-tools-validation` | `tools/README.md` |
 | Editor handoff, issue lifecycle, playtest | `sc2-editor-handoff` | `wiki/guides/editor-handoff.md`, `wiki/implementation/testing-feedback-workflow.md` |
 | Attack wave scaling, AI personality wave migration | `sc2-attack-wave-scaling` | `skills/sc2-attack-wave-scaling/references/ai-personality-to-gui-triggers.md` |
@@ -49,10 +52,10 @@ After loading `sc2-galaxy-scripting` or `sc2-catalog-xml`, use that skill's own 
 - `wiki/reference/triggers-native/` — native function signatures
 - Git history (`git log -n <N> -- <path>`) for historical provenance
 
-## What Requires SC2 Editor GUI (Agent cannot do these)
+## Editor-dependent operations and acceptance
 
 - Opening and saving Blizzard maps (requires SC2 account login)
-- Terrain, regions, doodads, pathing
+- Terrain and map adaptation: load `sc2-terrain-editing` and query current capabilities for the explicit map. It owns supported copy editing, controlled Editor experiments and operation-specific evidence. Authorized, verifiable GUI control may perform Editor steps; request user action only for unavailable steps.
 - Cutscenes and cinematics
 - Saving mod/map as Components (user action)
 

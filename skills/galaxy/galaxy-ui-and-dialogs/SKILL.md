@@ -541,3 +541,7 @@ int CreateDialogItemFromTemplate(int dialog, int type, string template) {
     return DialogControlCreateFromTemplate(dialog, type, template);
 }
 ```
+
+## Task routing refinement
+
+Dialog controls and screen-space interaction belong here; world-space Actor presentation belongs to `galaxy-actor-and-visuals`. Confirm callback IDs and initialization in the target instead of adopting a reference project bootstrap.

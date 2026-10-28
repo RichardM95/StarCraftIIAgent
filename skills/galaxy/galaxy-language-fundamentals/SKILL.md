@@ -541,3 +541,7 @@ void libXXXXXXXX_InitLib() {
     libXXXXXXXX_InitTriggers();
 }
 ```
+
+## Task routing refinement
+
+Keep syntax diagnosis separate from file reorganization: resolve declarations, types and the actual include/bootstrap order first. A syntax task does not authorize a new project layout; source ownership is defined by `sc2-galaxy-scripting`.

@@ -1,0 +1,137 @@
+include "TriggerLibs/NativeLib"
+
+bank warfieldProbeBank;
+trigger warfieldProbeTrigger;
+
+void WarfieldProbeSnapshot (unit source, string section) {
+    string unitType;
+    int i;
+    int count;
+    int catalogCount;
+    string field;
+    BankValueSetFromFixed(warfieldProbeBank, section, "StartedGameTime", GameGetMissionTime());
+    BankValueSetFromString(warfieldProbeBank, section, "StageStatus", "STARTED");
+    BankSave(warfieldProbeBank);
+    unitType = UnitGetType(source);
+    catalogCount = CatalogFieldValueCount(c_gameCatalogUnit, unitType, "WeaponArray", 1);
+    BankValueSetFromInt(warfieldProbeBank, section, "CatalogWeaponCount", catalogCount);
+    i = 0;
+    while (i < catalogCount) {
+        field = "WeaponArray[" + IntToString(i) + "].Link";
+        BankValueSetFromString(warfieldProbeBank, section, field, CatalogFieldValueGet(c_gameCatalogUnit, unitType, field, 1));
+        i += 1;
+    }
+    count = UnitWeaponCount(source);
+    BankValueSetFromInt(warfieldProbeBank, section, "Weapons", count);
+    i = 1;
+    while (i <= count) {
+        BankValueSetFromString(warfieldProbeBank, section, "Weapon" + IntToString(i), UnitWeaponGet(source, i));
+        BankValueSetFromInt(warfieldProbeBank, section, "Enabled" + IntToString(i), BoolToInt(UnitWeaponIsEnabled(source, i)));
+        BankValueSetFromFixed(warfieldProbeBank, section, "Damage" + IntToString(i), UnitWeaponDamage(source, i, c_unitAttributeNone, false));
+        BankValueSetFromFixed(warfieldProbeBank, section, "Range" + IntToString(i), UnitWeaponRange(source, i));
+        BankValueSetFromFixed(warfieldProbeBank, section, "Period" + IntToString(i), UnitWeaponPeriod(source, i));
+        BankValueSetFromFixed(warfieldProbeBank, section, "SpeedMultiplier" + IntToString(i), UnitWeaponSpeedMultiplier(source, i));
+        i += 1;
+    }
+    BankValueSetFromString(warfieldProbeBank, section, "Armor", CatalogFieldValueGet(c_gameCatalogUnit, unitType, "LifeArmor", 1));
+    BankValueSetFromString(warfieldProbeBank, section, "Model", CatalogFieldValueGet(c_gameCatalogActor, unitType, "Model", 1));
+    BankValueSetFromString(warfieldProbeBank, section, "LifeMax", CatalogFieldValueGet(c_gameCatalogUnit, unitType, "LifeMax", 1));
+    BankValueSetFromFixed(warfieldProbeBank, section, "Life", UnitGetPropertyFixed(source, c_unitPropLife, c_unitPropCurrent));
+    BankValueSetFromInt(warfieldProbeBank, section, "ActorExists", BoolToInt(ActorScopeRefGet(ActorScopeFromUnit(source), "::Main") != null));
+    BankValueSetFromFixed(warfieldProbeBank, section, "FinishedGameTime", GameGetMissionTime());
+    BankValueSetFromString(warfieldProbeBank, section, "StageStatus", "FINISHED");
+    BankSave(warfieldProbeBank);
+}
+
+bool WarfieldProbeRun (bool testConds, bool runActions) {
+    unit baseUnit;
+    unit variantUnit;
+    unit baseTarget;
+    unit variantTarget;
+    if (!runActions) {
+        return true;
+    }
+    Wait(1.0, c_timeGame);
+    warfieldProbeBank = BankLoad("__BANK__", 1);
+    BankValueSetFromString(warfieldProbeBank, "Run", "Status", "STARTED");
+    BankValueSetFromString(warfieldProbeBank, "Run", "RunId", "__RUN_ID__");
+    BankValueSetFromFixed(warfieldProbeBank, "Run", "StartedGameTime", GameGetMissionTime());
+    BankSave(warfieldProbeBank);
+    libNtve_gf_SetAllianceBetweenTwoPlayerGroups(PlayerGroupSingle(1), PlayerGroupSingle(2), libNtve_ge_AllianceSetting_Enemy);
+    libNtve_gf_SetAllianceBetweenTwoPlayerGroups(PlayerGroupSingle(2), PlayerGroupSingle(1), libNtve_ge_AllianceSetting_Enemy);
+    UnitCreate(1, "Marauder", c_unitCreateIgnorePlacement, 1, Point(40.0, 40.0), 0.0);
+    baseUnit = UnitLastCreated();
+    UnitSetState(baseUnit, c_unitStateInvulnerable, true);
+    UnitCreate(1, "MarauderWarfield", c_unitCreateIgnorePlacement, 1, Point(52.0, 40.0), 0.0);
+    variantUnit = UnitLastCreated();
+    UnitSelect(variantUnit, 1, true);
+    UnitSetState(variantUnit, c_unitStateInvulnerable, true);
+    UnitCreate(1, "Marine", c_unitCreateIgnorePlacement, 2, Point(43.0, 40.0), 180.0);
+    baseTarget = UnitLastCreated();
+    UnitSetPropertyFixed(baseTarget, c_unitPropLifeMax, 500.0);
+    UnitSetPropertyFixed(baseTarget, c_unitPropLife, 500.0);
+    UnitCreate(1, "Marine", c_unitCreateIgnorePlacement, 2, Point(55.0, 40.0), 180.0);
+    variantTarget = UnitLastCreated();
+    UnitSetPropertyFixed(variantTarget, c_unitPropLifeMax, 500.0);
+    UnitSetPropertyFixed(variantTarget, c_unitPropLife, 500.0);
+    Wait(0.25, c_timeGame);
+    WarfieldProbeSnapshot(baseUnit, "BaseBorn");
+    WarfieldProbeSnapshot(variantUnit, "VariantBorn");
+    BankValueSetFromString(warfieldProbeBank, "Launch", "AmmoUnit", CatalogFieldValueGet(c_gameCatalogEffect, "MarauderWarfieldLM", "AmmoUnit", 1));
+    BankValueSetFromString(warfieldProbeBank, "Launch", "Validator0", CatalogFieldValueGet(c_gameCatalogEffect, "MarauderWarfieldLM", "ValidatorArray[0]", 1));
+    UnitIssueOrder(baseUnit, OrderTargetingUnit(AbilityCommand("attack", 0), baseTarget), c_orderQueueReplace);
+    UnitIssueOrder(variantUnit, OrderTargetingUnit(AbilityCommand("attack", 0), variantTarget), c_orderQueueReplace);
+    Wait(5.0, c_timeGame);
+    BankValueSetFromFixed(warfieldProbeBank, "Attack", "BaseTargetLife", UnitGetPropertyFixed(baseTarget, c_unitPropLife, c_unitPropCurrent));
+    BankValueSetFromFixed(warfieldProbeBank, "Attack", "VariantTargetLife", UnitGetPropertyFixed(variantTarget, c_unitPropLife, c_unitPropCurrent));
+    TechTreeUpgradeAddLevel(1, "TerranInfantryWeaponsLevel1", 1);
+    TechTreeUpgradeAddLevel(1, "TerranInfantryArmorsLevel1", 1);
+    TechTreeUpgradeAddLevel(1, "PunisherGrenades", 1);
+    TechTreeUpgradeAddLevel(1, "Stimpack", 1);
+    Wait(0.25, c_timeGame);
+    WarfieldProbeSnapshot(baseUnit, "BaseUpgrade");
+    WarfieldProbeSnapshot(variantUnit, "VariantUpgrade");
+    UnitIssueOrder(baseUnit, Order(AbilityCommand("StimpackMarauder", 0)), c_orderQueueReplace);
+    UnitIssueOrder(variantUnit, Order(AbilityCommand("StimpackMarauder", 0)), c_orderQueueReplace);
+    Wait(0.5, c_timeGame);
+    WarfieldProbeSnapshot(baseUnit, "BaseStim");
+    WarfieldProbeSnapshot(variantUnit, "VariantStim");
+    BankValueSetFromFixed(warfieldProbeBank, "Move", "BeforeX", PointGetX(UnitGetPosition(variantUnit)));
+    UnitIssueOrder(variantUnit, OrderTargetingPoint(AbilityCommand("move", 0), Point(58.0, 40.0)), c_orderQueueReplace);
+    Wait(1.0, c_timeGame);
+    BankValueSetFromFixed(warfieldProbeBank, "Move", "AfterX", PointGetX(UnitGetPosition(variantUnit)));
+    UnitIssueOrder(variantUnit, OrderTargetingUnit(AbilityCommand("attack", 0), variantTarget), c_orderQueueReplace);
+    Wait(1.0, c_timeGame);
+    BankValueSetFromInt(warfieldProbeBank, "Slow", "VariantTarget", BoolToInt(UnitHasBehavior(variantTarget, "Slow")));
+    BankValueSetFromInt(warfieldProbeBank, "Slow", "BaseTarget", BoolToInt(UnitHasBehavior(baseTarget, "Slow")));
+    TechTreeUpgradeAddLevel(1, "LaserTargetingSystemMarauder", 1);
+    TechTreeUpgradeAddLevel(1, "RaynorCommanderTerranWeaponAttackSpeed", 1);
+    TechTreeUpgradeAddLevel(1, "MarauderLifeBoost", 1);
+    Wait(0.25, c_timeGame);
+    WarfieldProbeSnapshot(baseUnit, "BaseExtraUpgrade");
+    WarfieldProbeSnapshot(variantUnit, "VariantExtraUpgrade");
+    UnitCreate(1, "MarauderWarfield", c_unitCreateIgnorePlacement, 1, Point(60.0, 40.0), 0.0);
+    WarfieldProbeSnapshot(UnitLastCreated(), "VariantBornUpgraded");
+    UnitSetState(baseUnit, c_unitStateInvulnerable, false);
+    UnitSetState(variantUnit, c_unitStateInvulnerable, false);
+    UnitKill(baseUnit);
+    UnitKill(variantUnit);
+    BankValueSetFromFixed(warfieldProbeBank, "Death", "StartedGameTime", GameGetMissionTime());
+    BankValueSetFromString(warfieldProbeBank, "Death", "StageStatus", "STARTED");
+    BankSave(warfieldProbeBank);
+    Wait(2.0, c_timeGame);
+    BankValueSetFromInt(warfieldProbeBank, "Death", "BaseAlive", BoolToInt(UnitIsAlive(baseUnit)));
+    BankValueSetFromInt(warfieldProbeBank, "Death", "VariantAlive", BoolToInt(UnitIsAlive(variantUnit)));
+    BankValueSetFromFixed(warfieldProbeBank, "Death", "FinishedGameTime", GameGetMissionTime());
+    BankValueSetFromString(warfieldProbeBank, "Death", "StageStatus", "FINISHED");
+    BankValueSetFromFixed(warfieldProbeBank, "Run", "FinishedGameTime", GameGetMissionTime());
+    BankValueSetFromString(warfieldProbeBank, "Run", "Status", "FINISHED");
+    BankSave(warfieldProbeBank);
+    return true;
+}
+
+void InitMap () {
+    libNtve_InitLib();
+    warfieldProbeTrigger = TriggerCreate("WarfieldProbeRun");
+    TriggerAddEventMapInit(warfieldProbeTrigger);
+}

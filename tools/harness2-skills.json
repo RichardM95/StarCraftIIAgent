@@ -1,0 +1,190 @@
+{
+  "version": 1,
+  "groups": [
+    {
+      "id": "galaxy-foundation",
+      "skills": [
+        {
+          "id": "galaxy-language-fundamentals",
+          "path": "skills/galaxy/galaxy-language-fundamentals/SKILL.md",
+          "profile": "reference"
+        },
+        {
+          "id": "galaxy-code-organization",
+          "path": "skills/galaxy/galaxy-code-organization/SKILL.md",
+          "profile": "reference"
+        },
+        {
+          "id": "galaxy-math-strings-conversion",
+          "path": "skills/galaxy/galaxy-math-strings-conversion/SKILL.md",
+          "profile": "reference"
+        }
+      ]
+    },
+    {
+      "id": "galaxy-2",
+      "skills": [
+        {
+          "id": "galaxy-actor-and-visuals",
+          "path": "skills/galaxy/galaxy-actor-and-visuals/SKILL.md",
+          "profile": "reference"
+        },
+        {
+          "id": "galaxy-ai-and-techtree",
+          "path": "skills/galaxy/galaxy-ai-and-techtree/SKILL.md",
+          "profile": "reference"
+        }
+      ]
+    },
+    {
+      "id": "galaxy-3",
+      "skills": [
+        {
+          "id": "galaxy-debug-data-catalog",
+          "path": "skills/galaxy/galaxy-debug-data-catalog/SKILL.md",
+          "profile": "reference"
+        },
+        {
+          "id": "galaxy-game-systems",
+          "path": "skills/galaxy/galaxy-game-systems/SKILL.md",
+          "profile": "reference"
+        }
+      ]
+    },
+    {
+      "id": "galaxy-4",
+      "skills": [
+        {
+          "id": "galaxy-players-and-alliances",
+          "path": "skills/galaxy/galaxy-players-and-alliances/SKILL.md",
+          "profile": "reference"
+        },
+        {
+          "id": "galaxy-points-regions-geometry",
+          "path": "skills/galaxy/galaxy-points-regions-geometry/SKILL.md",
+          "profile": "reference"
+        }
+      ]
+    },
+    {
+      "id": "galaxy-5",
+      "skills": [
+        {
+          "id": "galaxy-sound-camera-environment",
+          "path": "skills/galaxy/galaxy-sound-camera-environment/SKILL.md",
+          "profile": "reference"
+        },
+        {
+          "id": "galaxy-triggers-and-functions",
+          "path": "skills/galaxy/galaxy-triggers-and-functions/SKILL.md",
+          "profile": "reference"
+        }
+      ]
+    },
+    {
+      "id": "galaxy-6",
+      "skills": [
+        {
+          "id": "galaxy-ui-and-dialogs",
+          "path": "skills/galaxy/galaxy-ui-and-dialogs/SKILL.md",
+          "profile": "reference"
+        },
+        {
+          "id": "galaxy-units-and-groups",
+          "path": "skills/galaxy/galaxy-units-and-groups/SKILL.md",
+          "profile": "reference"
+        }
+      ]
+    },
+    {
+      "id": "data-units",
+      "skills": [
+        {
+          "id": "sc2data-units-abilities",
+          "path": "skills/sc2data/sc2data-units-abilities/SKILL.md",
+          "profile": "reference"
+        },
+        {
+          "id": "sc2data-units-reference",
+          "path": "skills/sc2data/sc2data-units-reference/SKILL.md",
+          "profile": "reference"
+        }
+      ]
+    },
+    {
+      "id": "data-effects",
+      "skills": [
+        {
+          "id": "sc2data-behaviors-validators",
+          "path": "skills/sc2data/sc2data-behaviors-validators/SKILL.md",
+          "profile": "reference"
+        },
+        {
+          "id": "sc2data-effects-weapons",
+          "path": "skills/sc2data/sc2data-effects-weapons/SKILL.md",
+          "profile": "reference"
+        }
+      ]
+    },
+    {
+      "id": "data-visuals",
+      "skills": [
+        {
+          "id": "sc2data-actors-visuals",
+          "path": "skills/sc2data/sc2data-actors-visuals/SKILL.md",
+          "profile": "reference"
+        },
+        {
+          "id": "sc2data-wizards",
+          "path": "skills/sc2data/sc2data-wizards/SKILL.md",
+          "profile": "reference"
+        }
+      ]
+    },
+    {
+      "id": "actor-system",
+      "skills": [
+        {
+          "id": "sc2-actor-system",
+          "path": "skills/sc2-actor-system/SKILL.md",
+          "profile": "actor"
+        }
+      ]
+    },
+    {
+      "id": "catalog-xml",
+      "skills": [
+        {
+          "id": "sc2-catalog-xml",
+          "path": "skills/sc2-catalog-xml/SKILL.md",
+          "profile": "catalog"
+        }
+      ]
+    },
+    {
+      "id": "map-triggers",
+      "skills": [
+        {
+          "id": "sc2-map-triggers",
+          "path": "skills/sc2-map-triggers/SKILL.md",
+          "profile": "triggers"
+        }
+      ]
+    },
+    {
+      "id": "final-entry",
+      "skills": [
+        {
+          "id": "sc2-project-entry",
+          "path": "skills/sc2-project-entry/SKILL.md",
+          "profile": "entry"
+        },
+        {
+          "id": "sc2-tools-validation",
+          "path": "skills/sc2-tools-validation/SKILL.md",
+          "profile": "tools"
+        }
+      ]
+    }
+  ]
+}

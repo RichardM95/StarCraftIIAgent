@@ -1,19 +1,25 @@
 # StarCraftIIAgent — StarCraft II mod development agent
 
 [中文](README.md)
-<!-- translation-source: README.md; sha256: 4f044690da5fbd16577fc8b8f62e69edc6cd3f098c54d580b3acb89dba47b986 -->
+<!-- translation-source: README.md; sha256: b3635fef1dcaa173e56a992459b75da972431c9c65a3bcdc3a60fcf038780b65 -->
 
-SC2 custom campaign development with a shared knowledge base, 29 skills (10 root, 13 Galaxy, six sc2data), local tools and references. **Author: 扯蛋虾米.** See [attribution](AUTHORS.en.md).
+SC2 custom campaign development with a shared knowledge base, 34 skills (15 root, 13 Galaxy, six SC2Data), local tools and references. **Author: 扯蛋虾米.** See [attribution](AUTHORS.en.md).
 
-[Install](setup.en.md) · [Rules](AGENTS.en.md) · [Wiki](wiki/index.en.md) · [Tools](tools/README.en.md) · [Language](wiki/guides/agent-language.en.md)
+[Install](setup.en.md) · [Rules](AGENTS.en.md) · [Wiki](wiki/index.en.md) · [Tools](tools/README.en.md) · [Language](wiki/guides/agent-language.en.md) · [New skill conversations](wiki/guides/skill-conversations.en.md)
 
 ## Overview and requirements
 
 The suite supports Catalog/Actor investigation, editable GUI triggers, existing hand-written Galaxy, campaign Banks, developer string anchors and Editor handoff. It includes WoL/HotS/LotV exports and official XSD references. The local agent-config.json determines the active project; do not infer selection from this README or directory contents.
 
-Use Windows/Python and an installed SC2 Editor for corresponding game operations, with a host able to read local files/run tools. Trae metadata is included; rules and skills remain workspace-local. Deep API/game/third-party sources retain their original language. Skills are one shared English technical tree; the agent explains them in the chosen user language.
+Use Windows x64/Python 3.12 and an installed SC2 Editor for corresponding game operations, with a host able to read local files/run tools, such as Codex, Trae, Claude Code or Cursor. Shared tools require Python 3.12+; Harness2 requires Linux Python 3.12/3.13. Formal XML schema validation needs `lxml` (`python -m pip install lxml`) or executable `xmllint`; a missing backend is a failure. Trae metadata is included; rules and skills remain workspace-local. Deep API/game/third-party sources retain their original language. Skills are one shared English technical tree; the agent explains them in the chosen user language.
 
 ## Quick start
+
+For a fresh clone, run `python tools/test-suite.py --ui-language en --scope docs` and `python tools/test-suite.py --ui-language en --scope tools` from this directory. Neither needs a selected project. See [setup](setup.en.md) for prerequisites and initialize your own Components project rather than copying the maintainer's configuration.
+
+Git distributes generic rules, skills, code, tests and references. It excludes `projects/`, local `agent-config.json`, `.runtime/`, reports, virtual environments, credentials and personal model settings. Rebuild indexes and per-machine settings locally. [Shared CLI/MCP setup](wiki/guides/shared-tools.en.md) covers install/configure/diagnose/register; delegation also needs a local DeepSeek Harness with saved provider/model settings. Optional [Harness2](wiki/guides/harness2.en.md) needs a rebuilt Linux/WSL environment and your own Codex login. Workflows independent of those optional environments remain usable.
+
+Describe a task normally for automatic routing. If the host does not discover workspace skills, explicitly ask it to read AGENTS.md and `skills/sc2-project-entry/SKILL.md`, then load the specialist file. A duplicate global installation of every skill is unnecessary; register global MCP/thin entries separately when needed.
 
 “Load sc2-project-entry and help me [specific task].” The agent reads AGENTS.md, current config and wiki/index.md, then the entry skill and task-specific references. AGENT.md is an optional identity overview. Common requests:
 
@@ -48,6 +54,12 @@ AGENTS.md owns rules, AGENT.md identity, AUTHORS.md attribution and agent-config
 | Validation/deployment | sc2-tools-validation |
 | Editor/playtest | sc2-editor-handoff |
 | AI waves | sc2-attack-wave-scaling |
+| Project identity and task routing | [sc2-project-entry](skills/sc2-project-entry/SKILL.md) |
+| Terrain, map expansion, scenes, bridges/tunnels and scoped evidence | [sc2-terrain-editing](skills/sc2-terrain-editing/SKILL.md), [guide](wiki/guides/sc2-terrain-editing.en.md) |
+| Unit-chain migration, source choices and explicit local-layer merges | [sc2-unit-migration](skills/sc2-unit-migration/SKILL.md), [guide](wiki/guides/unit-migration.en.md) |
+| Official skins, models, portraits and Actor resource chains | [sc2-official-assets](skills/sc2-official-assets/SKILL.md); distinguish skin swaps from coexisting variants |
+| Shared CLI/MCP diagnostics, candidates, transactions and recovery | [sc2-shared-tools](skills/sc2-shared-tools/SKILL.md), [setup](wiki/guides/shared-tools.en.md) |
+| Bounded SC2 work using Harness-configured local/remote models | [sc2-deepseek-tasks](skills/sc2-deepseek-tasks/SKILL.md); review actual differences and validate independently |
 
 ## Tool quick reference
 
@@ -65,11 +77,18 @@ python tools/test-suite.py --ui-language en --scope tools
 python tools/test-suite.py --ui-language en --scope docs
 python tools/test-suite.py --ui-language en --scope mod --primary-only
 python tools/audit-gamestrings-anchors.py --ui-language en
+python tools/sc2-terrain.py --ui-language en capabilities
+python tools/sc2-migrate.py --ui-language en --help
+python tools/sc2-merge-mod-layers.py --ui-language en --help
+python tools/sc2-local.py --ui-language en tools
+python tools/deepseek-task.py --ui-language en models
 ```
 
 After an Editor save, restoring missing anchors is a separate **write**: tools/audit-gamestrings-anchors.py --locale <actual locale> --fill. Deployment begins with tools/deploy-mod.py --dry-run; copying requires authorization. See [full tools guide](tools/README.en.md), [CASC](wiki/reference/official-casc-cache.en.md) and archive conversion there. Attack-wave tools inspect actual GUI definitions, preserve scheduling and generated scripts; consult the dedicated skill rather than copy historical IDs.
 
 ## Common request examples
+
+For terrain, migration, official resources, MCP transactions, model delegation and Harness2, see [18 new skill scenarios and two multi-turn conversations](wiki/guides/skill-conversations.en.md). The existing 36 development scenarios remain below.
 
 Supply target, desired behavior, known unit/ability/player/region/resources, and scope (read-only/design/edit+static checks). The agent retrieves facts already in config/source; ask only for material missing inputs. Deliver actual source/evidence/check scope plus Editor/game steps. The following are requests, not executed acceptance evidence.
 
@@ -118,7 +137,7 @@ More setup conversations: [installation](setup.en.md). Trigger-specific conversa
 
 [AGENTS](AGENTS.en.md) is authoritative: prefer GUI, never hand-edit generated scripts/publish/, confirm identity and effective values, use formal schema/static checks, and advance exact lifecycle stages only with evidence. XML comments/attributes use ASCII; no AbilAutoCmd button type or CBehaviorBuff InitEffect; locals at function top, conservative while/explicit assignments and extensionless includes.
 
-Editor opening/saving, terrain/regions/doodads/pathing and cinematics require the operator. Never open Blizzard maps with a project mod external override. Add dependencies through Map → Modules → Dependencies. For os error 206/replacement errors see wiki/implementation/agent-context-efficiency.md (English technical reference). If local rules cannot be read, verify host file access and workspace location rather than assume another installation.
+For terrain editing, map expansion and scene composition, load the [terrain skill](skills/sc2-terrain-editing/SKILL.md) and query current capabilities. Supported operations may write isolated Components copies; acceptance remains scoped to observed operations. Editor save/reopen, visual checks, unsupported-operation experiments and cinematics require the actual Editor. The agent may perform authorized steps when GUI control is verifiably available; hand off necessary unavailable steps to the user. Follow the [handoff skill](skills/sc2-editor-handoff/SKILL.md) for save and anchor checks; capture raw terrain experiment differences first. Never open Blizzard maps with a project mod external override. Add dependencies through Map → Modules → Dependencies. For os error 206/replacement errors see wiki/implementation/agent-context-efficiency.md (English technical reference). If local rules cannot be read, verify host file access and workspace location rather than assume another installation.
 
 ## Independent use and project files
 

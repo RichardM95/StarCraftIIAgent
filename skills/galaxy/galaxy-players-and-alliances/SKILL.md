@@ -410,3 +410,7 @@ void MapInit_ActivePlayers() {
     PlayerSetColorIndex(gv_EnemyPlayer, 13, true);
 }
 ```
+
+## Task routing refinement
+
+Read the actual lobby attributes and player-slot setup before interpreting a mode. Pass the selected mode to game systems rather than duplicating attribute interpretation in each subsystem. AI research policy belongs to `galaxy-ai-and-techtree`.

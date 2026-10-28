@@ -2,7 +2,7 @@
 
 [English](README.en.md)
 
-> 星际争霸2自定义战役开发智能体。统一知识库 + 29 个技能（10 根 + 13 galaxy + 6 sc2data），开发规则、工具与资料均在本目录维护。
+> 星际争霸2自定义战役开发智能体。统一知识库 + 34 个技能（15 根 + 13 Galaxy + 6 SC2Data），开发规则、工具与资料均在本目录维护。
 >
 > **作者：扯蛋虾米**。参见 [AUTHORS.md](AUTHORS.md)。
 
@@ -16,6 +16,7 @@
 - [环境要求](#环境要求)
 - [快速开始](#快速开始)
 - [任务路由](#任务路由)
+- [新增技能与对话示例](wiki/guides/skill-conversations.md)
 - [工具速查](#工具速查)
 - [常见场景示例](#常见场景示例)
 - [硬性规则](#硬性规则)
@@ -35,9 +36,9 @@
 本智能体专为星际争霸2自定义战役开发而设计，整合两大模块（全部位于本目录下）：
 
 1. **统一知识库** — wiki 设计/实现/参考文档、DataEditorXML 导出、W3C XSD schema、Python 工具链、catalog 图查询
-2. **统一技能库**（`skills/`） — 29 个技能按需加载（10 根技能 + 13 个 Galaxy 子技能 + 6 个 SC2 Data 子技能）
+2. **统一技能库**（`skills/`） — 34 个技能按需加载（15 根技能 + 13 个 Galaxy 子技能 + 6 个 SC2 Data 子技能）
 
-当前尚未选择项目。提供主 Components `.SC2Mod` 路径后运行 `python tools/init-project.py "<路径>"`。
+活动项目以本机 `agent-config.json` 为准；新克隆默认没有项目配置。提供主 Components `.SC2Mod` 路径后运行 `python tools/init-project.py "<路径>"`。地形、单位迁移、官方资源、共享 MCP 与模型分包的调用方式见[新增技能与 18 个对话场景](wiki/guides/skill-conversations.md)。
 
 ---
 
@@ -54,7 +55,7 @@
 ├── setup.md                            ← 安装指南
 ├── agents\
 │   └── trae.yaml                      ← Trae 智能体配置
-├── skills\                            ← 统一技能库（29 个技能）
+├── skills\                            ← 统一技能库（34 个技能）
 │   ├── sc2-project-entry\             ← 统一入口（路由+工具+流程）
 │   ├── sc2-catalog-xml\               ← Catalog XML 路由器
 │   ├── sc2-galaxy-scripting\          ← Galaxy 脚本路由器
@@ -65,6 +66,11 @@
 │   ├── sc2-tools-validation\          ← 工具校验
 │   ├── sc2-editor-handoff\            ← 编辑器交接
 │   ├── sc2-attack-wave-scaling\       ← 攻击波缩放（含 scripts/）
+│   ├── sc2-terrain-editing\           ← 地形、地图扩建与场景布置
+│   ├── sc2-unit-migration\            ← 单位数据链迁移与显式本地层合并
+│   ├── sc2-official-assets\           ← 官方资源索引与 Actor 素材链
+│   ├── sc2-shared-tools\              ← 本地 CLI/MCP 能力与事务路由
+│   ├── sc2-deepseek-tasks\            ← Harness 配置模型的受限 SC2 分包
 │   ├── galaxy\                         ← Galaxy 子技能（13 个）
 │   │   ├── galaxy-language-fundamentals\
 │   │   ├── galaxy-code-organization\
@@ -124,15 +130,26 @@
 ## 环境要求
 
 - **操作系统：** Windows
-- **Python：** 3.x（用于工具链）
+- **Python：** 建议 Windows x64 Python 3.12；共享工具要求 3.12+，Harness2 要求 Linux Python 3.12/3.13
 - **StarCraft II：** 已安装，编辑器可用
-- **TraeCode：** 已安装
+- **智能体宿主：** 能读取本地工作区并执行工具的 Codex、Trae、Claude Code、Cursor 等；不要求同时安装
+- **XML schema 校验：** 需要 `lxml`（`python -m pip install lxml`）或可执行的 `xmllint`；缺少后端时不能声称通过正式校验
 
 ---
 
 ## 快速开始
 
+### 新克隆与可选能力
+
+在本目录打开智能体，先运行 `python tools/test-suite.py --ui-language zh-CN --scope docs` 和 `python tools/test-suite.py --ui-language zh-CN --scope tools`。两者不要求选择项目。普通工具的环境要求见下方及 [setup.md](setup.md)；共享工具需要 Python 3.12+ 和单独安装环境。
+
+Git 分发包含通用规则、技能、源码、测试和参考资料；`projects/`、`agent-config.json`、`.runtime/`、报告、虚拟环境、凭据和个人模型配置不分发。其他用户需要初始化自己的 Components 项目并重建索引。不要复制维护者的项目选择或用户级配置。
+
+共享工具与 MCP 按[接入指南](wiki/guides/shared-tools.md)完成本机 install/configure/diagnose/register；模型分包还需要本机 DeepSeek Harness 及已保存的 provider/model。Harness2 是独立的可选研究框架，按[安装与优化指南](wiki/guides/harness2.md)重建 Linux/WSL 环境并连接自己的 Codex 登录。缺少这些可选环境时，仍可使用不依赖它们的本地工作流。
+
 ### 1. 让 AI 助手加载智能体
+
+自然语言请求会由统一入口路由。若宿主没有自动发现本地技能，明确要求“先读取 AGENTS.md 和 `skills/sc2-project-entry/SKILL.md`，再按任务加载专用技能”；无需将整套技能重复安装到全局目录。需要全局 MCP/薄入口时单独执行接入指南中的注册步骤。
 
 在 TraeCode 中对话时，告诉 AI：
 
@@ -194,6 +211,11 @@ E:\Program Files (x86)\StarCraft II\Mods\MyCampaign.SC2Mod
 | 运行工具、校验、部署 | `sc2-tools-validation` | — |
 | 编辑器交接、问题生命周期、游戏测试 | `sc2-editor-handoff` | — |
 | 攻击波缩放、AI 性格波迁移 | `sc2-attack-wave-scaling` | — |
+| 地形、地图扩建、场景布置、桥梁/隧道与逐项编辑器证据 | [sc2-terrain-editing](skills/sc2-terrain-editing/SKILL.md) | [地形指南](wiki/guides/sc2-terrain-editing.md) |
+| 单位数据链迁移、多来源选择、显式本地层合并 | [sc2-unit-migration](skills/sc2-unit-migration/SKILL.md) | [迁移指南](wiki/guides/unit-migration.md) |
+| 官方皮肤、模型、肖像与 Actor 素材引用链 | [sc2-official-assets](skills/sc2-official-assets/SKILL.md) | 先区分外观替换和新增并存单位 |
+| 补充诊断、共享 CLI/MCP、候选事务与恢复 | [sc2-shared-tools](skills/sc2-shared-tools/SKILL.md) | [接入指南](wiki/guides/shared-tools.md) |
+| Harness 已配置的本地/远程模型执行明确 SC2 子任务 | [sc2-deepseek-tasks](skills/sc2-deepseek-tasks/SKILL.md) | 主智能体复核真实差异和独立验收 |
 
 完整路由表（含 13 个 galaxy-* 与 6 个 sc2data-* 子技能的逐项映射）见 [skills/sc2-project-entry/SKILL.md](skills/sc2-project-entry/SKILL.md)。
 
@@ -217,6 +239,12 @@ E:\Program Files (x86)\StarCraft II\Mods\MyCampaign.SC2Mod
 | 校验技能 SKILL.md frontmatter | `python tools/audit-skill-frontmatter.py` |
 | 提取游戏测试错误与日志 | `python tools/extract-playtest-bugreport.py` |
 | 检查文档链接 | `python tools/check-doc-links.py` |
+| 地形当前能力与证据范围 | `python tools/sc2-terrain.py --ui-language zh-CN capabilities` |
+| 单位迁移命令与目标参数 | `python tools/sc2-migrate.py --ui-language zh-CN --help` |
+| 本地层合并命令与预览 | `python tools/sc2-merge-mod-layers.py --ui-language zh-CN --help` |
+| 共享实现的当前工具 schema | `python tools/sc2-local.py --ui-language zh-CN tools` |
+| 本机模型路由目录 | `python tools/deepseek-task.py --ui-language zh-CN models` |
+| 可选 Harness2 运行与技能优化 | [安装、demo、基线、复核、合并与恢复](wiki/guides/harness2.md) |
 
 ### 攻击波工具
 
@@ -229,6 +257,8 @@ E:\Program Files (x86)\StarCraft II\Mods\MyCampaign.SC2Mod
 ---
 
 ## 常见场景示例
+
+新增的地形、迁移、官方资源、MCP 事务、模型分包和 Harness2 调用，以及两组多轮协作示例，见[技能调用与 18 个新场景](wiki/guides/skill-conversations.md)。本节保留已有 36 个开发场景。
 
 这些文字可以直接复制到与智能体的对话中。先按 [setup.md 的对话示例](setup.md#-与智能体对话示例) 选择项目；只读研究不要求选择项目。把 `<…>` 替换为实际输入，下面的名称、数值和路径只是需求示例，不代表当前项目。智能体应先读取工作区规则并按任务加载技能，无需每次重复指定技能名称。
 
@@ -637,18 +667,18 @@ E:\Program Files (x86)\StarCraft II\Mods\MyCampaign.SC2Mod
 5. **XML 仅 ASCII：** XML 注释和属性值只用 ASCII 字符。
 6. **禁用 XML 模式：** `AbilAutoCmd` 按钮类型无效；`CBehaviorBuff` 不支持 `InitEffect`；纯注释 catalog 会被解析器拒绝。
 7. **Galaxy 语法：** 局部变量必须提升到函数体最顶部。不支持 `++`/`--` 和 `for(...)` 循环——用 `i += 1;` 和 `while(...)`。include 指令用无扩展名的相对路径。
-8. **编辑器交接：** 地图必须由用户保存为 Components。编辑器保存后运行 `python tools/audit-gamestrings-anchors.py --fill`。
+8. **编辑器交接：** 按[交接技能](skills/sc2-editor-handoff/SKILL.md)执行实际目标的保存、生成结果核对与字符串锚点检查；地形实验先保留原始保存差异。
 
 ---
 
 ## 智能体限制
 
-智能体无法完成以下操作，必须由用户在 SC2 编辑器中手动完成：
+地形编辑、地图扩建及场景布置按[地形技能](skills/sc2-terrain-editing/SKILL.md)查询当前能力；支持的操作可写入独立 Components 副本，验收以各操作的实际证据为准。以下步骤依赖 SC2 编辑器；已授权且 GUI 控制经验证可用时可由智能体执行，仅将无法执行的必要步骤交给用户：
 
 - 打开和保存 Blizzard 地图（需要 SC2 账号登录）
-- 地形、区域、装饰物、寻路
+- 地形等操作的保存、重开及视觉核对，未支持操作的受控实验
 - 过场动画和电影
-- 将模组/地图保存为 Components（用户操作）
+- 通过编辑器将模组/地图保存为 Components
 
 ---
 

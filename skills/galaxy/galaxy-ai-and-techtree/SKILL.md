@@ -301,3 +301,7 @@ int   lv_hp   = libNtve_gf_DifficultyValueInt  (100, 150, 200, 250);  // easy/no
 fixed lv_spd  = libNtve_gf_DifficultyValueFixed(1.0, 1.25, 1.5, 2.0);
 string lv_type = libNtve_gf_DifficultyValueUnitType("Zergling", "Hydralisk", "Ultralisk", "Ultralisk");
 ```
+
+## Task routing refinement
+
+Separate AI policy from deterministic spawning: target choice, retreat, counters, production and research decisions belong here; fixed timer spawns belong to `galaxy-game-systems`. Bound sensing by region/range and separate scoring from orders. Avoid reissuing an unchanged order each tick. Confirm native AI signatures and initialization from the target libraries before using them.

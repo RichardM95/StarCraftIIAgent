@@ -352,3 +352,7 @@ actor lv_named = ActorFromScope(lv_scope, "SomeActorInScope");
 // Get actor from parent actor by name
 actor lv_sub = ActorFromActor(lv_a, "SubActorName");
 ```
+
+## Task routing refinement
+
+Actor animation and messages during a cinematic stay here; load `galaxy-sound-camera-environment` for camera moves, fades, cinematic mode and audio. One cinematic may use both skills.

@@ -14,7 +14,7 @@
 | **库包装器** | `Lib[HASH].galaxy` | 编辑器生成的模块实现包装器 | **只读** | **高**：在 GUI 中修改库触发器时会被覆盖 |
 | **库头文件** | `Lib[HASH]_h.galaxy` | 编辑器生成的头声明 | **只读** | **高**：库编译时会被覆盖 |
 | **组件清单** | `ComponentList.SC2Components` 或编辑器管理的组件清单 | 地图/模组包含的组件列表 | **只读** | **高**：由 SC2 编辑器在保存时管理和更新 |
-| **地图放置对象** | `Objects` | 包含编辑器放置对象的 `PlacedObjects` XML | **只读（可检查）** | **高**：用于区分预放置内容和触发器创建内容；应在 SC2 编辑器中修改 |
+| **地图放置对象** | `Objects` | 包含编辑器放置对象的 `PlacedObjects` XML | **按已实现能力编辑独立副本** | 经 [地形技能](../../skills/sc2-terrain-editing/SKILL.md) 核对模板、引用和工具覆盖；编辑器保存、重开及运行结果单独验收 |
 | **自定义脚本块** | 主模组 `Base.SC2Data/Epi_Main.galaxy` 或项目规定的 `*_ScriptBlock.galaxy` | 模组触发器脚本块的手写源码 | **读写** | **低**：以项目 `AGENTS.md` 规定的源真值为准；编辑器交接时核对同步结果 |
 | **自定义脚本目录** | `Base.SC2Data/Scripts/*.galaxy` | 用户编写的辅助 Galaxy 逻辑 | **读写** | **低**：通过自定义 include 引用时可跨保存保留 |
 | **GameData Catalog** | `Base.SC2Data/GameData/*.xml` | Unit、Ability、Actor、Behavior 等 XML catalog | **读写** | **低**：允许修改，但必须保持合法 XML 节点层级 |

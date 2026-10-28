@@ -1,7 +1,7 @@
 # AGENTS.md — workspace entry
 
 [中文](AGENTS.md)
-<!-- translation-source: AGENTS.md; sha256: 60f73afebd266fdda40ab93980f0f9833953c0032c0db7d9cf5da2e088831f7a -->
+<!-- translation-source: AGENTS.md; sha256: 1bf53da95cd42787fb34fa6ab85c732215e79396cca7bfa5c8d639ccf911b690 -->
 
 **Author: 扯蛋虾米.** Unified attribution: [AUTHORS](AUTHORS.en.md).
 
@@ -71,7 +71,7 @@ Galaxy locals belong at the start of the function, before executable statements.
 
 ## Editor operations and precautions
 
-Opening/saving Blizzard maps requires the user's Editor/account. Terrain, regions, doodads, pathing and cinematics need Editor work. For initialization obtain a real Components source (setup guidance); explicit archive conversion is available separately. Never open a map while the project mod is active as an external override. Add dependencies via Map → Modules → Dependencies → `<ModName>.SC2Mod`.
+Opening/saving Blizzard maps requires the user's Editor/account. For terrain editing, map expansion, scene composition and bridge/tunnel connections, load `skills/sc2-terrain-editing/SKILL.md` and query capabilities and scoped evidence for the explicitly supplied map. Mission objects and GUI organization also load `skills/sc2-map-triggers/SKILL.md`. Implemented operations may write isolated Components copies; gaps follow that skill's controlled Editor experiments; exhaustive Editor parity remains optional. The agent may perform authorized Editor steps when GUI control is verifiably available; request user action only for necessary unavailable steps. Record acceptance separately for the observed operation, artifact and result. Cinematics still need Editor work. For initialization obtain a real Components source (setup guidance); explicit archive conversion is available separately. Never open a map while the project mod is active as an external override. Add dependencies via Map → Modules → Dependencies → `<ModName>.SC2Mod`.
 
 ## Independent workspace and execution scope
 

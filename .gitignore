@@ -35,6 +35,9 @@ tmp*/
 # 本机路径配置（不同机器路径不同，不进版本库）
 agent-config.json
 
+# 本地项目资料、地图工作副本、项目专用工具与历史快照
+/projects/
+
 # Workspace reset recovery archive
 .workspace-recovery/
 
@@ -47,3 +50,25 @@ reports/
 **/.*.sc2-publish.lock/
 **/.*.sc2-convert.lock/
 **/.*.sc2-backup-*
+
+# Shared integration environments, local settings and build metadata
+.runtime/
+.venv/
+*.egg-info/
+integrations/**/config.json
+integrations/**/profiles/base.patch.yml
+integrations/**/state/
+integrations/**/.state/
+pip-build-env-*/
+pip-build-tracker-*/
+pip-metadata-*/
+pip-ephem-wheel-cache-*/
+pip-install-*/
+pip-modern-metadata-*/
+pip-unpack-*/
+
+# Harness2 local Linux environment, credentials and experiment output
+integrations/harness2/.venv-linux/
+integrations/harness2/.env
+integrations/harness2/runs/
+integrations/harness2/dependencies/*/

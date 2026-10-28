@@ -46,7 +46,7 @@ class DocLinkTests(unittest.TestCase):
         self.assertTrue(any('missing tool' in e for e in errors))
 
     def test_ignored_directories_and_external_schemes(self):
-        for name in ('backup', '_backups', 'tmp-123', 'reports', '.git', '.workspace-recovery', 'publish', '__pycache__', 'node_modules'):
+        for name in ('backup', '_backups', 'tmp-123', 'reports', '.git', '.workspace-recovery', 'publish', '__pycache__', 'node_modules', '.venv', '.runtime'):
             self.write(f'{name}/bad.md', '[bad](missing.md)\npython tools/missing.py')
         self.write('README.md', '[web](https://example.invalid/a#b)\n[app](codex://review)\n[mail](mailto:a@b)\n[cdn](//example.invalid/a)')
         self.assertEqual(DOCS.check(self.root), [])

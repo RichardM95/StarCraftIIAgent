@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "deepseek-supervisor"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = ["mcp>=1.20,<2", "PyYAML>=6,<7", "pywin32>=308; sys_platform == 'win32'"]
+
+[project.scripts]
+deepseek-supervisor = "supervisor.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["supervisor*"]

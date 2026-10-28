@@ -17,7 +17,7 @@ LINK_START_RE = re.compile(r"!?\[[^\]\n]*\]\(")
 TOOL_REF_RE = re.compile(r"(?<![\w/])tools/[A-Za-z0-9_.-]+\.py")
 SKIP_PARTS = {".git", "publish", "sc2-catalog-graph-out", ".workspace-recovery",
               "backup", "backups", "_backup", "_backups", "tmp", "temp", "_tmp", "_temp",
-              "reports", "__pycache__", ".pytest_cache", "node_modules"}
+              "reports", "__pycache__", ".pytest_cache", "node_modules", ".venv", ".runtime"}
 
 
 def documentation_files(root: Path):

@@ -53,6 +53,96 @@ class TriggerTests(unittest.TestCase):
     def tearDown(self):
         self.tmp.cleanup()
 
+    def test_ability_command_literal_type_preserves_editor_default_command_zero(self):
+        for name, literal, value_id, expected in [
+            ('AbilityLink', 'gamelink', '', 'type: expected abilcmd, got gamelink'),
+            ('String', 'string', '', 'type: expected abilcmd, got string'),
+            ('ImplicitZero', 'abilcmd', '', None),
+            ('TechLab', 'abilcmd', '<ValueId Id="0"/>', None),
+            ('Reactor', 'abilcmd', '<ValueId Id="1"/>', None),
+        ]:
+            with self.subTest(name=name):
+                body = definition(extra='<Parameter Type="ParamDef" Id="00000002"/>')
+                body += '<Element Type="ParamDef" Id="00000002"><ParameterType><Type Value="abilcmd"/></ParameterType></Element>'
+                body += call('', extra='<Parameter Type="Param" Id="A0000002"/>')
+                body += ('<Element Type="Param" Id="A0000002"><ParameterDef Type="ParamDef" Id="00000002"/>'
+                         '<Value>BarracksAddOns</Value><ValueType Type="' + literal + '"/>' + value_id)
+                body += ('<ValueGameType Type="Abil"/>' if literal == 'gamelink' else '') + '</Element>'
+                path = component(self.root / (name + '.SC2Map'), body=body)
+                result = check(Target(path, self.mods, self.campaigns))
+                if expected:
+                    self.assertIn(expected, str(result['errors']))
+                else:
+                    self.assertEqual(result['errors'], [])
+
+    def test_disabled_calls_and_nested_parameters_remain_diagnostic(self):
+        definitions = definition(extra='<Parameter Type="ParamDef" Id="00000002"/>')
+        definitions += '<Element Type="ParamDef" Id="00000002"><ParameterType><Type Value="int"/></ParameterType></Element>'
+        definitions += '<Element Type="FunctionDef" Id="00000010"><Parameter Type="ParamDef" Id="00000011"/></Element>'
+        definitions += '<Element Type="ParamDef" Id="00000011"><ParameterType><Type Value="int"/></ParameterType></Element>'
+        for name, direct, disabled in [('Direct', True, True), ('Nested', False, True), ('Enabled', False, False)]:
+            with self.subTest(name=name):
+                body = definitions + '<Element Type="FunctionDef" Id="00000020"><FunctionCall Type="FunctionCall" Id="A0000001"/></Element>'
+                body += '<Element Type="FunctionCall" Id="A0000001">' + ('<Disabled/>' if disabled else '')
+                if direct:
+                    body += '<FunctionDef Type="FunctionDef" Id="00000001"/></Element>'
+                else:
+                    body += '<FunctionDef Type="FunctionDef" Id="00000010"/><Parameter Type="Param" Id="A0000003"/></Element>'
+                    body += '<Element Type="Param" Id="A0000003"><ParameterDef Type="ParamDef" Id="00000011"/><FunctionCall Type="FunctionCall" Id="A0000002"/></Element>'
+                    body += '<Element Type="FunctionCall" Id="A0000002"><FunctionDef Type="FunctionDef" Id="00000001"/></Element>'
+                p = component(self.root / (name + '.SC2Map'), body=body)
+                result = check(Target(p, self.mods, self.campaigns))
+                self.assertEqual(result['status'], 'static validation passed' if disabled else 'failed')
+                self.assertEqual(len(result['inactive_diagnostics']), 1 if disabled else 0)
+                self.assertIn('parameter ownership/coverage', str(result['inactive_diagnostics'] if disabled else result['errors']))
+                if disabled:
+                    (p / 'Triggers').write_text((p / 'Triggers').read_text().replace('<Disabled/>', ''))
+                    enabled = check(Target(p, self.mods, self.campaigns))
+                    self.assertIn('parameter ownership/coverage', str(enabled['errors']))
+                    self.assertEqual(enabled['inactive_diagnostics'], [])
+
+    def test_active_path_wins_over_disabled_path_in_either_order(self):
+        body = definition(extra='<Parameter Type="ParamDef" Id="00000002"/>')
+        body += '<Element Type="ParamDef" Id="00000002"><ParameterType><Type Value="int"/></ParameterType></Element>'
+        body += '<Element Type="FunctionDef" Id="00000010"/>'
+        body += '<Element Type="FunctionCall" Id="A0000001"><Disabled/><FunctionDef Type="FunctionDef" Id="00000010"/><Parameter Type="Param" Id="A0000003"/></Element>'
+        body += '<Element Type="Param" Id="A0000003"><ParameterDef Type="ParamDef" Id="00000002"/><FunctionCall Type="FunctionCall" Id="A0000002"/></Element>'
+        body += '<Element Type="FunctionCall" Id="A0000002"><FunctionDef Type="FunctionDef" Id="00000001"/></Element>'
+        p = component(self.root / 'Shared.SC2Map', body=body)
+        d = Document(p / 'Triggers')
+        def resolve(key, owner):
+            return d, d.elements[key]
+        for ids in [('A0000001', 'A0000002'), ('A0000002', 'A0000001')]:
+            result = walk([(d, ('', 'FunctionCall', ident)) for ident in ids], resolve)
+            self.assertIn('parameter ownership/coverage', str(result['errors']))
+            self.assertFalse(any('A0000002: parameter ownership' in x for x in result['inactive_diagnostics']))
+
+    def test_disabled_call_still_requires_resolvable_references(self):
+        p = component(self.root / 'Missing.SC2Map', body=call('Missing', extra='<Disabled/>'))
+        result = check(Target(p, self.mods, self.campaigns))
+        self.assertIn('missing/unloaded Missing:FunctionDef', str(result['errors']))
+        self.assertEqual(result['inactive_diagnostics'], [])
+
+    def test_orphan_call_cycle_is_still_checked(self):
+        body = definition(extra='<Parameter Type="ParamDef" Id="00000002"/>')
+        body += '<Element Type="ParamDef" Id="00000002"><ParameterType><Type Value="int"/></ParameterType></Element>'
+        body += '<Element Type="FunctionCall" Id="A0000001"><FunctionDef Type="FunctionDef" Id="00000001"/><FunctionCall Type="FunctionCall" Id="A0000002"/></Element>'
+        body += '<Element Type="FunctionCall" Id="A0000002"><FunctionDef Type="FunctionDef" Id="00000001"/><FunctionCall Type="FunctionCall" Id="A0000001"/></Element>'
+        p = component(self.root / 'Cycle.SC2Map', body=body)
+        result = check(Target(p, self.mods, self.campaigns))
+        self.assertIn('parameter ownership/coverage', str(result['errors']))
+        self.assertEqual(result['inactive_diagnostics'], [])
+
+    def test_disabled_call_does_not_exempt_malformed_gui_structure(self):
+        p = component(self.root / 'Malformed.SC2Map', body='<Element Type="FunctionCall" Id="A0000001"><Disabled/></Element>')
+        result = check(Target(p, self.mods, self.campaigns))
+        self.assertIn('FunctionCall has no FunctionDef', str(result['errors']))
+        self.assertEqual(result['inactive_diagnostics'], [])
+        body = definition() + call('', extra='<Disabled/><FunctionCall Type="FunctionCall" Id="A0000002"/>')
+        body += '<Element Type="FunctionCall" Id="A0000002"><FunctionDef Type="FunctionDef" Id="00000001"/></Element>'
+        (p / 'Triggers').write_text('<TriggerData>' + body + '</TriggerData>')
+        self.assertIn('invalid SubFunctionType', str(check(Target(p, self.mods, self.campaigns))['errors']))
+
     def test_shared_variable_initializers_fail_target_check(self):
         body = '<Element Type="Variable" Id="00000001"><Value Type="Param" Id="00000003"/></Element>'
         body += '<Element Type="Variable" Id="00000002"><Value Type="Param" Id="00000003"/></Element>'
@@ -184,6 +274,66 @@ class TriggerTests(unittest.TestCase):
         errors=str(check(Target(target,self.mods,self.campaigns))['errors'])
         self.assertIn('expected int, got text',errors)
         self.assertIn('invalid SubFunctionType',errors)
+
+    def test_parameter_annotation_is_not_a_formal_argument(self):
+        body = definition(extra='<Parameter Type="ParamDef" Id="00000002"/><Parameter Type="Comment" Id="00000003"/>')
+        body += '<Element Type="ParamDef" Id="00000002"><ParameterType><Type Value="int"/></ParameterType></Element>'
+        body += '<Element Type="Comment" Id="00000003"><Comment>1 = fast, 5 = default</Comment></Element>'
+        body += call('', extra='<Parameter Type="Param" Id="A0000002"/>')
+        body += '<Element Type="Param" Id="A0000002"><ParameterDef Type="ParamDef" Id="00000002"/><Value>5</Value><ValueType Type="int"/></Element>'
+        p = component(self.root / 'Annotated.SC2Map', body=body)
+        self.assertEqual(check(Target(p, self.mods, self.campaigns))['errors'], [])
+        (p / 'Triggers').write_text('<TriggerData>' + body.replace('Type="Comment" Id="00000003"/>', 'Type="Comment" Id="00000004"/>') + '</TriggerData>')
+        self.assertIn('missing/unloaded', str(check(Target(p, self.mods, self.campaigns))['errors']))
+
+    def test_byte_literal_widens_to_int_without_loosening_other_types(self):
+        body = definition(extra='<Parameter Type="ParamDef" Id="00000002"/>')
+        body += '<Element Type="ParamDef" Id="00000002"><ParameterType><Type Value="int"/></ParameterType></Element>'
+        body += call('', extra='<Parameter Type="Param" Id="A0000002"/>')
+        body += '<Element Type="Param" Id="A0000002"><ParameterDef Type="ParamDef" Id="00000002"/><Value>0</Value><ValueType Type="byte"/></Element>'
+        p = component(self.root / 'Widen.SC2Map', body=body)
+        self.assertEqual(check(Target(p, self.mods, self.campaigns))['errors'], [])
+        for changed in [body.replace('<Type Value="int"/>', '<Type Value="bool"/>'),
+                        body.replace('<Type Value="int"/>', '<Type Value="byte"/>').replace('<ValueType Type="byte"/>', '<ValueType Type="int"/>')]:
+            (p / 'Triggers').write_text('<TriggerData>' + changed + '</TriggerData>')
+            self.assertIn('type: expected', str(check(Target(p, self.mods, self.campaigns))['errors']))
+
+    def test_explicit_preset_alias_requires_same_value_and_base_type(self):
+        body = definition(extra='<Parameter Type="ParamDef" Id="00000002"/>')
+        body += '<Element Type="ParamDef" Id="00000002"><ParameterType><Type Value="preset"/><TypeElement Type="Preset" Id="00000003"/></ParameterType></Element>'
+        body += '<Element Type="Preset" Id="00000003"><PresetCustom/><BaseType Value="int"/><Item Type="PresetValue" Id="00000004"/></Element>'
+        body += '<Element Type="PresetValue" Id="00000004"><Value>c_unitStatePaused</Value></Element>'
+        body += '<Element Type="Preset" Id="00000005"><PresetCustom/><BaseType Value="int"/><Item Type="PresetValue" Id="00000006"/></Element>'
+        body += '<Element Type="PresetValue" Id="00000006"><Value>c_unitStatePaused</Value></Element>'
+        body += call('', extra='<Parameter Type="Param" Id="A0000002"/>')
+        body += '<Element Type="Param" Id="A0000002"><ParameterDef Type="ParamDef" Id="00000002"/><Preset Type="PresetValue" Id="00000006"/></Element>'
+        p = component(self.root / 'Aliases.SC2Map', body=body)
+        self.assertEqual(check(Target(p, self.mods, self.campaigns))['errors'], [])
+        for name, changed in [
+            ('different_value', body.replace('Id="00000006"><Value>c_unitStatePaused', 'Id="00000006"><Value>c_unitStateHidden')),
+            ('different_base', body.replace('Id="00000005"><PresetCustom/><BaseType Value="int"', 'Id="00000005"><PresetCustom/><BaseType Value="string"')),
+            ('implicit_ordinals', body.replace('<Value>c_unitStatePaused</Value>', '')),
+            ('integer_ordinals', body.replace('<PresetCustom/>', '<PresetInteger/>')),
+        ]:
+            with self.subTest(name=name):
+                (p / 'Triggers').write_text('<TriggerData>' + changed + '</TriggerData>')
+                self.assertIn('preset is not in its declared preset type', str(check(Target(p, self.mods, self.campaigns))['errors']))
+
+    def test_gamelink_string_lowering_keeps_link_validation(self):
+        body = definition(extra='<Parameter Type="ParamDef" Id="00000002"/>')
+        body += '<Element Type="ParamDef" Id="00000002"><ParameterType><Type Value="string"/></ParameterType></Element>'
+        body += call('', extra='<Parameter Type="Param" Id="A0000002"/>')
+        body += '<Element Type="Param" Id="A0000002"><ParameterDef Type="ParamDef" Id="00000002"/><Value>Dflt</Value><ValueType Type="gamelink"/><ValueGameType Type="Camera"/></Element>'
+        p = component(self.root / 'Links.SC2Map', body=body)
+        self.assertEqual(check(Target(p, self.mods, self.campaigns))['errors'], [])
+        for changed, expected in [
+            (body.replace('<ValueGameType Type="Camera"/>', ''), 'missing/mismatched ValueGameType'),
+            (body.replace('<Type Value="string"/>', '<Type Value="int"/>'), 'expected int, got gamelink'),
+            (body.replace('<Type Value="string"/>', '<Type Value="gamelink"/><GameType Value="Unit"/>'), 'missing/mismatched ValueGameType'),
+            (body.replace('<Type Value="string"/>', '<Type Value="gamelink"/>').replace('<ValueType Type="gamelink"/>', '<ValueType Type="string"/>'), 'expected gamelink, got string'),
+        ]:
+            (p / 'Triggers').write_text('<TriggerData>' + changed + '</TriggerData>')
+            self.assertIn(expected, str(check(Target(p, self.mods, self.campaigns))['errors']))
 
     def test_template_local_closure_and_migration_names(self):
         directory=TOOLS.parent/'wiki/reference/trigger-templates'

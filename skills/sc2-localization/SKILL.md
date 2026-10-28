@@ -5,159 +5,70 @@ description: StarCraft II localization files (GameStrings.txt, ObjectStrings.txt
 
 # SC2 Localization & String Anchors
 
-## When to Use
+Load for localization-file changes, reported UI text issues, or blank names, wrong prefixes and missing descriptions in the Data Editor. This skill covers development-time keys, anchors and file-format diagnostics; whole-project translation is outside this workspace.
 
-Load this skill when the task touches any of the three localization files inside `<ModName>.SC2Mod/enUS.SC2Data/LocalizedData/`:
+## Files and Reference
 
-- `GameStrings.txt` — in-game visible text
-- `ObjectStrings.txt` — Data Editor display text
-- `TriggerStrings.txt` — Trigger Editor display names
+Localization files live in `<ModName>.SC2Mod/<locale>.SC2Data/LocalizedData/`.
 
-Also load when the Data Editor shows blank names, wrong prefixes, or missing descriptions, or when fixing a reported UI text issue.
+| File | Purpose and key examples |
+|---|---|
+| `GameStrings.txt` | Player-visible text: `Button/Name/ID`, `Button/Tooltip/ID`, `Unit/Tooltip/ID`, `Upgrade/Name/ID` |
+| `ObjectStrings.txt` | Data Editor text: `Type/Name/ID`, `Type/EditorPrefix/ID`, `Type/EditorDescription/ID` |
+| `TriggerStrings.txt` | Trigger Editor names: `FunctionDef/Name/ID`, `Trigger/Name/ID` |
+| `GameHotkeys.txt` | Localized hotkey bindings and labels; UTF-8 `Key=Value` lines. Preserve intended shortcuts across locales. |
 
-## Localization Files Overview
+Use [localization.md](../../wiki/implementation/localization.md) for the authoritative file reference and surface-to-anchor mapping. XML authoring belongs to [xml-patterns.md](../../wiki/implementation/xml-patterns.md) and the `sc2-catalog-xml` skill.
 
-| File | Purpose | Key Format |
-|---|---|---|
-| `GameStrings.txt` | In-game visible text: button names, tooltips, upgrade names shown to the player | `Button/Name/ID=Text`<br>`Button/Tooltip/ID=Text`<br>`Unit/Tooltip/ID=Text`<br>`Upgrade/Name/ID=Text` |
-| `ObjectStrings.txt` | Data Editor display text: editor names, prefixes, descriptions for all data objects | `Type/Name/ID=Name`<br>`Type/EditorPrefix/ID=Prefix`<br>`Type/EditorDescription/ID=Desc` |
-| `TriggerStrings.txt` | Trigger Editor display names for Galaxy functions and triggers | `FunctionDef/Name/ID=Name`<br>`Trigger/Name/ID=Name` |
+## Intake and Restoration Workflow
 
-## ObjectStrings.txt Types Covered
+1. Identify the exact surface before editing: world hover, selection panel, command-card button, tooltip or editor display. Record its effective localization anchor. Confirm field consumption against the object and current dependency: `Name`, `Tooltip` and `Description` do not consume keys uniformly. An imported diagnostic does not replace this investigation.
+2. Inspect the target mod's existing locale folders and project convention. Use the requested runtime locale; if it is unresolved, confirm it with the user before writing. Neither an `enUS` example nor the user's language selects the locale or authorizes migration.
+3. Fix localized values in the appropriate text file when Data Editor text is blank or wrong: player-facing values belong in `GameStrings.txt`, editor display values in `ObjectStrings.txt`. Do not substitute a raw XML text edit for a localization fix.
+4. After every Editor save touching catalog XML, inspect the audit tool's current `--help`, then run restoration against the actual target and locale:
 
-`Abil`, `Actor`, `Behavior`, `Button`, `Effect`, `Model`, `Mover`, `Requirement`, `RequirementNode`, `Sound`, `Turret`, `Unit`, `Upgrade`, `Validator`, `Weapon`.
+   ```powershell
+   python tools/audit-gamestrings-anchors.py --mod-dir "<target>" --locale <actual-locale> --fill
+   ```
 
-## Rule for New XML Entries
+   The tool scans `GameData/*.xml`, checks referenced keys in `GameStrings.txt`, and fills missing values from `ObjectStrings.txt`. Editor migration into `ObjectStrings.txt` does not satisfy runtime references still reading `GameStrings.txt`.
+5. Reopen and review the actual target copy after restoration; a successful write alone does not verify its contents. Review indirect runtime references separately. A zero-error static report does not prove packaged runtime coverage; retain the evidence-stage distinctions required by `AGENTS.md`.
 
-Whenever you create or override an XML catalog object that should be readable in the SC2 Data Editor, update `ObjectStrings.txt` in the same change. Add both `Type/EditorPrefix/ID=...` and `Type/Name/ID=...` for every new `id` in catalogs such as `AbilData.xml`, `UnitData.xml`, `ButtonData.xml`, `UpgradeData.xml`, `RequirementData.xml`, and `RequirementNodeData.xml`.
+## Catalog Changes and Anchors
 
-For player-visible text in `GameData.xml`, always add an explicit XML anchor:
+For each new or overridden catalog object intended to be readable in the Data Editor, keep `Type/Name/ID` and the project's `Type/EditorPrefix/ID` synchronized in `ObjectStrings.txt` in the same change. Coverage includes `Abil`, `Actor`, `Behavior`, `Button`, `Effect`, `Model`, `Mover`, `Requirement`, `RequirementNode`, `Sound`, `Turret`, `Unit`, `Upgrade`, `Validator` and `Weapon`, including supporting objects.
+
+Player-visible text requires an explicit XML anchor, for example:
 
 ```xml
-<!-- UnitData.xml -->
 <CUnit id="MyUnit">
     <Description value="Unit/Tooltip/MyUnit"/>
 </CUnit>
 ```
 
 ```text
-# GameStrings.txt
 Unit/Tooltip/MyUnit=Player-facing unit description here.
 ```
 
-Without an explicit XML anchor, the SC2 Editor may prune or fail to preserve player-facing localized text during save passes.
+Without an explicit anchor, Editor save passes may prune or fail to preserve localized player text. Follow the XML references above when authoring anchors; run restoration after the save as described in the workflow.
 
-## Issue Intake Rule
+## Optional KSP Diagnostics
 
-Before changing UI text, identify the exact UI surface and its effective localization anchor:
+[Localization Editor SC2 KSP](https://github.com/VoVanRusLvSC2/Localization-Editor-SC2-KSP) is an optional existing desktop diagnostic, not a replacement for anchor restoration. CLI installation is documented in [PR #1](https://github.com/VoVanRusLvSC2/Localization-Editor-SC2-KSP/pull/1/files).
 
-- **World hover** — text shown when hovering an object in the game world
-- **Selection panel** — text in the unit/structure selection panel
-- **Command-card button** — `Button/Name/ID` and `Button/Tooltip/ID`
-- **Tooltip** — `Unit/Tooltip/ID`, `Upgrade/Name/ID`, etc.
-- **Editor text** — `Type/Name/ID` and `Type/EditorDescription/ID` in `ObjectStrings.txt`
-
-Record the effective anchor before editing `GameStrings.txt` or `ObjectStrings.txt`.
-
-## Automated String Restoration
-
-When the SC2 Editor saves, it may normalize entries and migrate editor-facing text into `ObjectStrings.txt`. To ensure all referenced player-facing strings remain anchored in `GameStrings.txt`, run:
+When the CLI is available:
 
 ```powershell
-python tools/audit-gamestrings-anchors.py --fill
+sc2loc check-missing "<target>/<locale>.SC2Data/LocalizedData/GameStrings.txt" --json
 ```
 
-This scans all `GameData/*.xml` files, checks against `GameStrings.txt`, and automatically populates missing keys from `ObjectStrings.txt`. Run it after every Editor save that touches catalog XML.
+`--json` is optional. Diagnostics cover missing sibling locale files, cross-language missing keys, blank or `null`-like values, malformed lines without `=`, duplicate keys and read errors. Exit codes: `0` clean; `1` warnings/errors; `2` usage/input error; `3` unexpected runtime failure.
 
-## Hard Rules
+For localization-error fixes, perform the workflow end-to-end: inspect categories, correct their causes in the text files, and rerun after corrections until resolved. If the CLI is unavailable, manually inspect sibling locale files and preserve key parity across languages.
 
-- **Edit localization files, not raw data XML, when the Data Editor shows blank/wrong text.** Player-facing text belongs in `GameStrings.txt`; editor display text belongs in `ObjectStrings.txt`.
-- **Every new catalog `id` must get `ObjectStrings.txt` entries** in the same change — both `Type/Name/ID` and `Type/EditorPrefix/ID`. Otherwise the object shows blank in the Data Editor.
-- **Player-facing text requires an explicit XML anchor** (`<Description value="Unit/Tooltip/..."/>`, `<Name value="Button/Name/..."/>`, etc.). Missing anchors cause the Editor to prune localized text on save.
-- **Run `audit-gamestrings-anchors.py --fill` after every Editor save** that touches catalog XML, to restore pruned anchors.
+When fixing lines, split at the first `=` and preserve subsequent `=` characters in the value. Keep one canonical entry per key when removing duplicates.
 
-## Reference
+## Text Preservation and Writing
 
-- `wiki/implementation/localization.md` — full localization file reference
-- `tools/audit-gamestrings-anchors.py` — automated anchor restoration tool
-- `wiki/implementation/xml-patterns.md` — XML authoring patterns that produce the anchor references
-- `sc2-catalog-xml` skill — XML authoring rules that emit the anchors consumed here
-
-## Chinese Task Knowledge (Merged)
-
-Distilled from `references/localization.md`. Duplicates with sections above omitted.
-
-### Locale Discipline
-- Before writing text, inspect the target mod's existing locales (`enUS`, `zhCN`, etc.) and follow the project's convention. Do not assume `enUS` only, and do not migrate language based on the user speaking Chinese — confirm the runtime locale with the user first.
-
-### Anchor Coverage Caveats
-- The source example uses `enUS.SC2Data/LocalizedData/`; the actual task may target `zhCN` or another locale. Mirror the project's locale folders.
-- Use `audit-gamestrings-anchors.py --locale <actual-locale>` and its current `--help`. Review indirect runtime references separately; a zero-error static report does not prove packaged runtime coverage.
-- Editor may move editor-facing text into `ObjectStrings.txt`; that migration does NOT satisfy runtime references still pointing at `GameStrings.txt`. After save, run the anchor audit with explicit `--mod-dir`, restore with `--fill`, and manually review the actual copy.
-
-### ObjectStrings Coverage Scope
-- When adding a readable catalog object, sync `ObjectStrings.txt` name and project prefix for every relevant type — Actor, Model, Sound, Turret, Validator, and supporting Weapon, in addition to the obvious Unit/Ability/Button/Effect.
-
-### Anchor Consumption Caveat
-- `Name`, `Tooltip`, and `Description` field consumption varies by object — confirm against the field and current dependency before assuming which `GameStrings` key a catalog field reads.
-
-## GameHotkeys and KSP CLI
-
-These cover localization concerns not handled by `audit-gamestrings-anchors.py`.
-
-### GameHotkeys.txt
-
-Fourth localization file, alongside `GameStrings.txt` / `ObjectStrings.txt` / `TriggerStrings.txt`. Stores localized hotkey bindings and labels. Same `Key=Value` line format, UTF-8. Preserve hotkey intent and avoid locale changes that break expected shortcuts.
-
-### Localization Editor SC2 KSP CLI
-
-External tool for manual localization work and diagnostics. GitHub: <https://github.com/VoVanRusLvSC2/Localization-Editor-SC2-KSP>. CLI install path documented in [PR #1](https://github.com/VoVanRusLvSC2/Localization-Editor-SC2-KSP/pull/1/files).
-
-This skill covers localization keys, anchors and file-format diagnostics for development. Whole-project translation is outside this workspace. KSP is an optional existing desktop diagnostic.
-
-#### CLI Diagnostics
-
-```powershell
-sc2loc check-missing "C:\Maps\MyMap\enUS.SC2Data\LocalizedData\GameStrings.txt"
-sc2loc check-missing "C:\Maps\MyMap\enUS.SC2Data\LocalizedData\GameStrings.txt" --json
-```
-
-Reports the following issue categories:
-- missing locale files (sibling `xxXX.SC2Data` folders)
-- missing keys compared across languages
-- blank or `null`-like values
-- malformed lines without `=`
-- duplicate keys in one file
-- read errors
-
-Exit codes: `0` clean, `1` warnings/errors, `2` usage/input error, `3` unexpected runtime failure.
-
-#### Localization Error Check/Fix Loop
-
-When editing localization files, run this loop until clean:
-
-1. Run `sc2loc check-missing <file>` (when CLI available).
-2. Review by category — missing file, missing key, blank value, malformed line, duplicate key.
-3. Fix the root cause in the text file, not the symptom.
-4. Re-run the CLI and repeat until resolved.
-5. If the CLI is unavailable, inspect sibling locale files manually and preserve key parity across languages.
-
-If the user asks to fix localization errors, perform this workflow end-to-end rather than only describing it.
-
-#### Common Text Fixes
-
-- **Add a missing key:** `Unit/Name/MyUnit=My Unit`
-- **Fix a blank value:** `DocInfo/PatchNote003=Fixed an issue where the unit icon was missing.`
-- **Fix a malformed line:** split at the first `=`; preserve any `=` characters in the value — `Unit/Name/MyUnit My Unit` → `Unit/Name/MyUnit=My Unit`
-- **Remove duplicate keys:** keep one canonical entry per key, delete duplicates.
-
-### Writing Guidance
-
-- If the task is a translation of existing text, preserve source meaning, placeholders, markup, and tone.
-- If the task requires brand-new localization text (not translating an existing string), ask the user for templates or reference examples first — tone and phrasing are project-specific.
-- Good templates: existing keys from the same map/mod, a preferred faction voice, UI wording examples, tooltip patterns, or a comparable `GameStrings.txt` sample.
-- If no template is available, state the text is a best-effort draft and keep wording neutral, concise, and SC2-style.
-
-### Terminology Consistency
-
-Prefer terminology consistency across `GameStrings.txt`, `ObjectStrings.txt`, and UI-facing strings. Use the sibling localization workflow for bulk translation, with its project context and review requirements.
+- Preserve source meaning, placeholders, markup and tone when translating existing text. Keep terminology consistent across localization files and UI-facing strings.
+- Before creating new text, ask for project templates or reference examples: nearby keys, faction voice, UI wording, tooltip patterns or comparable strings. If none are available, identify the text as a best-effort draft and use neutral, concise SC2-style wording.

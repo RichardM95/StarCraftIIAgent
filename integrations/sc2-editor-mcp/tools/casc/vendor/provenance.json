@@ -1,0 +1,20 @@
+{
+  "copied_date": "2026-10-10",
+  "origin": "existing local compiled helper dependencies; no runtime linkage to original project",
+  "files": [
+    {
+      "name": "CascLib.dll",
+      "version": "1.0.23.0",
+      "sha256": "1db8437f1a9d4e36ce50b783beb2c8613a6544a2b193e078d876f23a6c7e86a0",
+      "source": "E:\\AI\\星际争霸钥石卡牌逆向\\work\\casc_asset_extract\\bin\\Debug\\net6.0\\CascLib.dll",
+      "upstream": "https://github.com/WoW-Tools/CascLib"
+    },
+    {
+      "name": "MimeKitLite.dll",
+      "version": "3.4.3.0",
+      "sha256": "e14a271fcb3b1fb5c0dd26448b76b3a524deb3bebe01a032295aac70bb6371a1",
+      "source": "E:\\AI\\星际争霸钥石卡牌逆向\\work\\casc_asset_extract\\bin\\Debug\\net6.0\\MimeKitLite.dll",
+      "upstream": "https://github.com/jstedfast/MimeKit"
+    }
+  ]
+}

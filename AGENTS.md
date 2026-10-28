@@ -111,10 +111,10 @@
 - Include 指令必须使用无扩展名的相对路径（如 `include "Scripts/MyScript"`）
 - 地图内的 `MapScript.galaxy` 编辑是自动生成且保存时会被覆盖 — 在模组脚本块或 `Base.SC2Data/Scripts/` 中编写逻辑
 
-## 需要 SC2 Editor GUI 的操作（智能体无法完成）
+## 需要 SC2 Editor GUI 的验收与操作
 
 - 打开和保存 Blizzard 地图（需要 SC2 账号登录）
-- 地形、区域、doodads、寻路
+- 地形编辑、地图扩建、场景布置、桥梁/隧道连接先加载 `skills/sc2-terrain-editing/SKILL.md`，按明确指定的地图查询能力与证据范围；任务物件和 GUI 组织同时加载 `skills/sc2-map-triggers/SKILL.md`。已实现操作可写入独立 Components 副本，缺口按该技能做单项编辑器实验；完整编辑器对齐为可选扩展。已获授权且 GUI 控制经验证可用时，智能体可执行编辑器操作；仅将无法执行的必要步骤交给用户。验收按实际操作、产物和观察结果分别记录。
 - 过场动画和 cinematics
 - 将模组/地图保存为 Components（用户操作 — 见 `setup.md`）
 

@@ -49,11 +49,13 @@ class DependencyValidationTests(unittest.TestCase):
             config = {'paths': {'mods_dir': str(old.parent)}, 'project': {'primary_mod': old.name, 'resolve_dependencies_recursive': False},
                       'validation': {'include_dependencies': True, 'exclude_mods': ['Shared.SC2Mod']}}
             campaigns, cache = root / 'archive', root / 'cache'
-            commands = self.commands(root, target, config, '--mods-dir', str(target.parent), '--campaigns-dir', str(campaigns), '--official-cache', str(cache))
+            commands = self.commands(root, target, config, '--mods-dir', str(target.parent), '--campaigns-dir', str(campaigns), '--official-cache', str(cache), '--locale', 'zhCN')
             self.assertFalse(any('tools/validate-agent-config.py' in c for c in commands))
             inspector = next(c for c in commands if 'tools/inspect-mod-dependencies.py' in c)
             gui = next(c for c in commands if 'tools/sc2-trigger-query.py' in c)
-            for cmd in (inspector, gui):
+            anchors = next(c for c in commands if 'tools/audit-gamestrings-anchors.py' in c)
+            self.assertEqual(anchors[anchors.index('--locale') + 1], 'zhCN')
+            for cmd in (inspector, gui, anchors):
                 for option, value in (('--mods-dir', target.parent), ('--campaigns-dir', campaigns), ('--official-cache', cache)):
                     self.assertEqual(cmd[cmd.index(option) + 1], str(value))
             self.assertFalse(any(str(shared) in c for c in commands))

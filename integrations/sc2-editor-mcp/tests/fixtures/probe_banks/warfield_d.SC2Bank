@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Bank version="1">
+    <Section name="Launch">
+        <Key name="Validator0">
+            <Value string="PunisherGrenadesLMTargetFilters"/>
+        </Key>
+        <Key name="AmmoUnit">
+            <Value string="PunisherGrenadesLMWeapon"/>
+        </Key>
+    </Section>
+    <Section name="BaseUpgrade">
+        <Key name="Period1">
+            <Value fixed="24"/>
+        </Key>
+        <Key name="Range1">
+            <Value fixed="6"/>
+        </Key>
+        <Key name="Enabled1">
+            <Value int="1"/>
+        </Key>
+        <Key name="Weapon1">
+            <Value string="PunisherGrenades"/>
+        </Key>
+        <Key name="Life">
+            <Value fixed="125"/>
+        </Key>
+        <Key name="ActorExists">
+            <Value int="1"/>
+        </Key>
+        <Key name="Weapons">
+            <Value int="1"/>
+        </Key>
+        <Key name="Damage1">
+            <Value fixed="11"/>
+        </Key>
+        <Key name="WeaponArray[0].Link">
+            <Value string="PunisherGrenades"/>
+        </Key>
+        <Key name="Armor">
+            <Value string="2"/>
+        </Key>
+        <Key name="SpeedMultiplier1">
+            <Value fixed="1"/>
+        </Key>
+        <Key name="CatalogWeaponCount">
+            <Value int="1"/>
+        </Key>
+        <Key name="Model">
+            <Value string="Marauder"/>
+        </Key>
+        <Key name="LifeMax">
+            <Value string="125"/>
+        </Key>
+    </Section>
+    <Section name="BaseBorn">
+        <Key name="Period1">
+            <Value fixed="24"/>
+        </Key>
+        <Key name="Range1">
+            <Value fixed="6"/>
+        </Key>
+        <Key name="Enabled1">
+            <Value int="1"/>
+        </Key>
+        <Key name="Weapon1">
+            <Value string="PunisherGrenades"/>
+        </Key>
+        <Key name="Life">
+            <Value fixed="125"/>
+        </Key>
+        <Key name="ActorExists">
+            <Value int="1"/>
+        </Key>
+        <Key name="Weapons">
+            <Value int="1"/>
+        </Key>
+        <Key name="Damage1">
+            <Value fixed="10"/>
+        </Key>
+        <Key name="WeaponArray[0].Link">
+            <Value string="PunisherGrenades"/>
+        </Key>
+        <Key name="Armor">
+            <Value string="1"/>
+        </Key>
+        <Key name="SpeedMultiplier1">
+            <Value fixed="1"/>
+        </Key>
+        <Key name="CatalogWeaponCount">
+            <Value int="1"/>
+        </Key>
+        <Key name="Model">
+            <Value string="Marauder"/>
+        </Key>
+        <Key name="LifeMax">
+            <Value string="125"/>
+        </Key>
+    </Section>
+    <Section name="VariantBorn">
+        <Key name="Period1">
+            <Value fixed="24"/>
+        </Key>
+        <Key name="Range1">
+            <Value fixed="6"/>
+        </Key>
+        <Key name="Enabled1">
+            <Value int="1"/>
+        </Key>
+        <Key name="SpeedMultiplier2">
+            <Value fixed="1"/>
+        </Key>
+        <Key name="Weapon1">
+            <Value string="MarauderWarfieldWeapon"/>
+        </Key>
+        <Key name="Period2">
+            <Value fixed="24"/>
+        </Key>
+        <Key name="Enabled2">
+            <Value int="0"/>
+        </Key>
+        <Key name="Life">
+            <Value fixed="125"/>
+        </Key>
+        <Key name="ActorExists">
+            <Value int="1"/>
+        </Key>
+        <Key name="Weapon2">
+            <Value string="PunisherGrenades"/>
+        </Key>
+        <Key name="Weapons">
+            <Value int="2"/>
+        </Key>
+        <Key name="Damage1">
+            <Value fixed="10"/>
+        </Key>
+        <Key name="WeaponArray[0].Link">
+            <Value string="MarauderWarfieldWeapon"/>
+        </Key>
+        <Key name="Armor">
+            <Value string="1"/>
+        </Key>
+        <Key name="SpeedMultiplier1">
+            <Value fixed="1"/>
+        </Key>
+        <Key name="CatalogWeaponCount">
+            <Value int="1"/>
+        </Key>
+        <Key name="Damage2">
+            <Value fixed="10"/>
+        </Key>
+        <Key name="Range2">
+            <Value fixed="6"/>
+        </Key>
+        <Key name="Model">
+            <Value string="MarauderWarfield"/>
+        </Key>
+        <Key name="LifeMax">
+            <Value string="125"/>
+        </Key>
+    </Section>
+    <Section name="Run">
+        <Key name="Status">
+            <Value string="STARTED"/>
+        </Key>
+    </Section>
+    <Section name="VariantStim">
+        <Key name="Period1">
+            <Value fixed="24"/>
+        </Key>
+        <Key name="Range1">
+            <Value fixed="6"/>
+        </Key>
+        <Key name="Enabled1">
+            <Value int="1"/>
+        </Key>
+        <Key name="SpeedMultiplier2">
+            <Value fixed="0.6665"/>
+        </Key>
+        <Key name="Weapon1">
+            <Value string="MarauderWarfieldWeapon"/>
+        </Key>
+        <Key name="Period2">
+            <Value fixed="24"/>
+        </Key>
+        <Key name="Enabled2">
+            <Value int="0"/>
+        </Key>
+        <Key name="Life">
+            <Value fixed="105"/>
+        </Key>
+        <Key name="ActorExists">
+            <Value int="1"/>
+        </Key>
+        <Key name="Weapon2">
+            <Value string="PunisherGrenades"/>
+        </Key>
+        <Key name="Weapons">
+            <Value int="2"/>
+        </Key>
+        <Key name="Damage1">
+            <Value fixed="11"/>
+        </Key>
+        <Key name="WeaponArray[0].Link">
+            <Value string="MarauderWarfieldWeapon"/>
+        </Key>
+        <Key name="Armor">
+            <Value string="2"/>
+        </Key>
+        <Key name="SpeedMultiplier1">
+            <Value fixed="0.6665"/>
+        </Key>
+        <Key name="CatalogWeaponCount">
+            <Value int="1"/>
+        </Key>
+        <Key name="Damage2">
+            <Value fixed="11"/>
+        </Key>
+        <Key name="Range2">
+            <Value fixed="6"/>
+        </Key>
+        <Key name="Model">
+            <Value string="MarauderWarfield"/>
+        </Key>
+        <Key name="LifeMax">
+            <Value string="125"/>
+        </Key>
+    </Section>
+    <Section name="VariantUpgrade">
+        <Key name="Period1">
+            <Value fixed="24"/>
+        </Key>
+        <Key name="Range1">
+            <Value fixed="6"/>
+        </Key>
+        <Key name="Enabled1">
+            <Value int="1"/>
+        </Key>
+        <Key name="SpeedMultiplier2">
+            <Value fixed="1"/>
+        </Key>
+        <Key name="Weapon1">
+            <Value string="MarauderWarfieldWeapon"/>
+        </Key>
+        <Key name="Period2">
+            <Value fixed="24"/>
+        </Key>
+        <Key name="Enabled2">
+            <Value int="0"/>
+        </Key>
+        <Key name="Life">
+            <Value fixed="125"/>
+        </Key>
+        <Key name="ActorExists">
+            <Value int="1"/>
+        </Key>
+        <Key name="Weapon2">
+            <Value string="PunisherGrenades"/>
+        </Key>
+        <Key name="Weapons">
+            <Value int="2"/>
+        </Key>
+        <Key name="Damage1">
+            <Value fixed="11"/>
+        </Key>
+        <Key name="WeaponArray[0].Link">
+            <Value string="MarauderWarfieldWeapon"/>
+        </Key>
+        <Key name="Armor">
+            <Value string="2"/>
+        </Key>
+        <Key name="SpeedMultiplier1">
+            <Value fixed="1"/>
+        </Key>
+        <Key name="CatalogWeaponCount">
+            <Value int="1"/>
+        </Key>
+        <Key name="Damage2">
+            <Value fixed="11"/>
+        </Key>
+        <Key name="Range2">
+            <Value fixed="6"/>
+        </Key>
+        <Key name="Model">
+            <Value string="MarauderWarfield"/>
+        </Key>
+        <Key name="LifeMax">
+            <Value string="125"/>
+        </Key>
+    </Section>
+    <Section name="BaseStim">
+        <Key name="Period1">
+            <Value fixed="24"/>
+        </Key>
+        <Key name="Range1">
+            <Value fixed="6"/>
+        </Key>
+        <Key name="Enabled1">
+            <Value int="1"/>
+        </Key>
+        <Key name="Weapon1">
+            <Value string="PunisherGrenades"/>
+        </Key>
+        <Key name="Life">
+            <Value fixed="105"/>
+        </Key>
+        <Key name="ActorExists">
+            <Value int="1"/>
+        </Key>
+        <Key name="Weapons">
+            <Value int="1"/>
+        </Key>
+        <Key name="Damage1">
+            <Value fixed="11"/>
+        </Key>
+        <Key name="WeaponArray[0].Link">
+            <Value string="PunisherGrenades"/>
+        </Key>
+        <Key name="Armor">
+            <Value string="2"/>
+        </Key>
+        <Key name="SpeedMultiplier1">
+            <Value fixed="0.6665"/>
+        </Key>
+        <Key name="CatalogWeaponCount">
+            <Value int="1"/>
+        </Key>
+        <Key name="Model">
+            <Value string="Marauder"/>
+        </Key>
+        <Key name="LifeMax">
+            <Value string="125"/>
+        </Key>
+    </Section>
+    <Section name="Attack">
+        <Key name="BaseTargetLife">
+            <Value fixed="470"/>
+        </Key>
+        <Key name="VariantTargetLife">
+            <Value fixed="470"/>
+        </Key>
+    </Section>
+</Bank>

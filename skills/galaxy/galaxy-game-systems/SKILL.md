@@ -407,3 +407,7 @@ fixed lv_timeGame = TimerGetElapsed(lv_timer);
 Wait(5.0, c_timeGame);     // 5 game seconds
 Wait(1.0, c_timeReal);     // 1 real second
 ```
+
+## Task routing refinement
+
+This skill consumes already selected lobby modes and UserData configuration. Read lobby attributes through `galaxy-players-and-alliances` and generic UserData through `galaxy-debug-data-catalog`. AI decisions about targets or production belong to `galaxy-ai-and-techtree`.

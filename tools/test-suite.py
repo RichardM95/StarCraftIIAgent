@@ -121,6 +121,9 @@ def main() -> int:
         help="Run the full suite or only tool, documentation, or mod checks.",
     )
     parser.add_argument("--official-cache", type=Path, help="Read-only official cache; verifies hashes/XML without authoring lint")
+    parser.add_argument('--locale', default='enUS',
+                        choices=('enUS', 'zhCN', 'zhTW', 'koKR', 'deDE', 'esES', 'esMX', 'frFR', 'itIT', 'plPL', 'ptBR', 'ruRU'),
+                        help='Localization directory to audit (default: enUS)')
     parser.add_argument("--mods-dir", help="Explicit dependency Mods root for a one-off component")
     parser.add_argument("--campaigns-dir", type=Path, help="Explicit dependency Campaigns root for all dependency checks")
     dependency_group = parser.add_mutually_exclusive_group()
@@ -241,7 +244,8 @@ def main() -> int:
         ),
         (
             "GameStrings Anchor & Localization Audit",
-            [sys.executable, "tools/audit-gamestrings-anchors.py", "--mod-dir", mod_dir],
+            [sys.executable, "tools/audit-gamestrings-anchors.py", "--mod-dir", mod_dir,
+             '--locale', args.locale, *dependency_options],
         ),
         ("Issue Lifecycle Ledger Audit", [sys.executable, "tools/audit-issue-lifecycle.py", "--target", mod_dir]),
         ("Skill Frontmatter Validator", [sys.executable, "tools/audit-skill-frontmatter.py"]),

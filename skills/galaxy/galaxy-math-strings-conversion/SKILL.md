@@ -265,3 +265,7 @@ lv_padded = StringSub(lv_padded, StringLength(lv_padded) - 1, StringLength(lv_pa
 // Combine for display (e.g. kill counter)
 text lv_display = IntToText(lv_kills) + StringToText(" kills");
 ```
+
+## Task routing refinement
+
+Use this skill for calculations and string conversion. Player-visible localized text is maintained by `sc2-localization`; session state and runtime Catalog lookups belong to `galaxy-debug-data-catalog`.

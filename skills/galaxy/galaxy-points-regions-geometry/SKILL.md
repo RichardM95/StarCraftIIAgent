@@ -254,3 +254,7 @@ TextTagShow(lv_tag, true, PlayerGroupAll());
 // Attach to a unit (floats with the unit)
 TextTagAttachToUnit(lv_tag, lv_unit, 1.0, false);
 ```
+
+## Task routing refinement
+
+Geometry helpers calculate positions, distances and retreat vectors. AI policy chooses the destination; placed-object and region edits use `sc2-terrain-editing`. A geometric or painted-grid path check does not prove engine pathfinding.

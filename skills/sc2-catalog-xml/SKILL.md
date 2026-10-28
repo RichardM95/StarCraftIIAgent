@@ -11,6 +11,8 @@ Load this skill when writing or editing GameData XML in `*.SC2Mod/Base.SC2Data/G
 
 This skill is the **Catalog XML router**. It owns project-wide schema rules, parent inheritance, effective-value evidence, localization anchors, and editor round-trip safety. For deep XML work on a specific catalog family, route to the matching `sc2data-*` sub-skill under `skills/sc2data/`.
 
+For cross-mod unit migration, official-ID filtering, chain extraction or migration package work, load `skills/sc2-unit-migration/SKILL.md` before editing.
+
 ## Catalog Sub-Skill Router
 
 For deep XML authoring on a specific catalog family, load the matching `sc2data-*` sub-skill under `skills/sc2data/`. This skill retains the project-wide **schema rules** and **effective-value workflow** that all sub-skills obey.

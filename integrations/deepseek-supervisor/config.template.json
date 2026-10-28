@@ -1,0 +1,11 @@
+{
+  "harness_exe": "<DEEPSEEK_HARNESS_EXE>",
+  "harness_cli": "<DEEPSEEK_HARNESS_CLI>",
+  "provider": "deepseek-official",
+  "model": "deepseek-flash",
+  "reasoning_effort": "high",
+  "concurrency": 4,
+  "timeout_seconds": 1200,
+  "max_tool_calls": 200,
+  "max_tokens": 16384
+}

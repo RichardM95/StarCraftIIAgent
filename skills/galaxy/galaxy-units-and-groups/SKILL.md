@@ -366,3 +366,7 @@ UnitClearSelection(lv_player);         // deselect all units for player
 libNtve_gf_StoreUnitSelection(lv_player, libNtve_ge_UnitSelectionStoreOption_ClearUnitSelection);
 libNtve_gf_RestoreUnitSelection(lv_player);  // restore previously stored selection
 ```
+
+## Task routing refinement
+
+Use this page for unit/group queries and a known order. Target scoring, retreat policy, counters and production choices belong to `galaxy-ai-and-techtree`; fixed spawn schedules and rewards belong to `galaxy-game-systems`.

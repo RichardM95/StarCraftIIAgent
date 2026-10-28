@@ -1,0 +1,119 @@
+{
+  "source_bundle": "SC2-MCP-DeepSeek-便携无隐私版-20261027",
+  "merged": [
+    {
+      "source_skill": "galaxy-actor-and-visuals",
+      "source_sha256": "4ba6af0b59a185bb6446f2971e219804ae518297ee2874e2ac9a6e6a6e1da987",
+      "canonical_skill": "skills/galaxy/galaxy-actor-and-visuals/SKILL.md",
+      "disposition": "retain canonical technical reference; merge task routing and bounded evidence guidance; reject Keystone overrides"
+    },
+    {
+      "source_skill": "galaxy-ai-and-techtree",
+      "source_sha256": "48245f5304ab49b0bfc00a4978c39bd9476ec9cbb79bfeff67b1f6610df76fa6",
+      "canonical_skill": "skills/galaxy/galaxy-ai-and-techtree/SKILL.md",
+      "disposition": "retain canonical technical reference; merge task routing and bounded evidence guidance; reject Keystone overrides"
+    },
+    {
+      "source_skill": "galaxy-debug-data-catalog",
+      "source_sha256": "3efe8694e8d30dad5390e2a945a8e31e5e083d2165fe149ed10dc78a34b8c294",
+      "canonical_skill": "skills/galaxy/galaxy-debug-data-catalog/SKILL.md",
+      "disposition": "retain canonical technical reference; merge task routing and bounded evidence guidance; reject Keystone overrides"
+    },
+    {
+      "source_skill": "galaxy-game-systems",
+      "source_sha256": "328d347cd93ab3457d55263ad1dcebde44c3f14c25713ac2fc74af528dbb6e4e",
+      "canonical_skill": "skills/galaxy/galaxy-game-systems/SKILL.md",
+      "disposition": "retain canonical technical reference; merge task routing and bounded evidence guidance; reject Keystone overrides"
+    },
+    {
+      "source_skill": "galaxy-language-fundamentals",
+      "source_sha256": "1fb1d4fadfaa0501cf689c529f43030c25ea825d645433b7b5cced4f52911edd",
+      "canonical_skill": "skills/galaxy/galaxy-language-fundamentals/SKILL.md",
+      "disposition": "retain canonical technical reference; merge task routing and bounded evidence guidance; reject Keystone overrides"
+    },
+    {
+      "source_skill": "galaxy-math-strings-conversion",
+      "source_sha256": "abd0592487aee1b39e5a58ad85d2284192f724f6aae505634ac0547e8cb8994e",
+      "canonical_skill": "skills/galaxy/galaxy-math-strings-conversion/SKILL.md",
+      "disposition": "retain canonical technical reference; merge task routing and bounded evidence guidance; reject Keystone overrides"
+    },
+    {
+      "source_skill": "galaxy-players-and-alliances",
+      "source_sha256": "f0ea110eea7f386478fed7b1a27531c14bdacd1c9e32e546bde8d009551311fd",
+      "canonical_skill": "skills/galaxy/galaxy-players-and-alliances/SKILL.md",
+      "disposition": "retain canonical technical reference; merge task routing and bounded evidence guidance; reject Keystone overrides"
+    },
+    {
+      "source_skill": "galaxy-points-regions-geometry",
+      "source_sha256": "a58212a76e0d808c14a38e21bc14dec3de1ff1258eb7ff7079fd6bacfcfdee25",
+      "canonical_skill": "skills/galaxy/galaxy-points-regions-geometry/SKILL.md",
+      "disposition": "retain canonical technical reference; merge task routing and bounded evidence guidance; reject Keystone overrides"
+    },
+    {
+      "source_skill": "galaxy-sound-camera-environment",
+      "source_sha256": "981c7cc4682d77ca1173ab92d5414a5a59a6ebc0642045123673a97009ef41bb",
+      "canonical_skill": "skills/galaxy/galaxy-sound-camera-environment/SKILL.md",
+      "disposition": "retain canonical technical reference; merge task routing and bounded evidence guidance; reject Keystone overrides"
+    },
+    {
+      "source_skill": "galaxy-triggers-and-functions",
+      "source_sha256": "10a9692c1a8b92198581700363a753bfd806032df3caa7e1290e3fe31ebcea57",
+      "canonical_skill": "skills/galaxy/galaxy-triggers-and-functions/SKILL.md",
+      "disposition": "retain canonical technical reference; merge task routing and bounded evidence guidance; reject Keystone overrides"
+    },
+    {
+      "source_skill": "galaxy-ui-and-dialogs",
+      "source_sha256": "5cbc9b924c0b35c3ed875ef5a73a7fe3a79b547f78f4e9093ba6095884be2d55",
+      "canonical_skill": "skills/galaxy/galaxy-ui-and-dialogs/SKILL.md",
+      "disposition": "retain canonical technical reference; merge task routing and bounded evidence guidance; reject Keystone overrides"
+    },
+    {
+      "source_skill": "galaxy-units-and-groups",
+      "source_sha256": "0a1f749c285c5948e4c6ba4534eca78739ccfdc2caffc828f37f8872c4bf4d21",
+      "canonical_skill": "skills/galaxy/galaxy-units-and-groups/SKILL.md",
+      "disposition": "retain canonical technical reference; merge task routing and bounded evidence guidance; reject Keystone overrides"
+    },
+    {
+      "source_skill": "sc2data-actors-visuals",
+      "source_sha256": "26af4e5949dd46bb9a21b7b05bffd2c24583b7b613172be68fdfbefe57f8e2d7",
+      "canonical_skill": "skills/sc2data/sc2data-actors-visuals/SKILL.md",
+      "disposition": "retain canonical technical reference; merge task routing and bounded evidence guidance; reject Keystone overrides"
+    },
+    {
+      "source_skill": "sc2data-behaviors-validators",
+      "source_sha256": "2c2be74f711bd59056f340676f684919ceb1e1301b0f619d1f805d9c51b6e850",
+      "canonical_skill": "skills/sc2data/sc2data-behaviors-validators/SKILL.md",
+      "disposition": "retain canonical technical reference; merge task routing and bounded evidence guidance; reject Keystone overrides"
+    },
+    {
+      "source_skill": "sc2data-effects-weapons",
+      "source_sha256": "b7bc0fd1568dcf913e215872cb5d67429b42ece5165aca6a0ef28ae71bb84ecd",
+      "canonical_skill": "skills/sc2data/sc2data-effects-weapons/SKILL.md",
+      "disposition": "retain canonical technical reference; merge task routing and bounded evidence guidance; reject Keystone overrides"
+    },
+    {
+      "source_skill": "sc2data-units-abilities",
+      "source_sha256": "cd8a67c5c2e758b405d6cfeae2c325857f5a47ff8c713de0dc39982b3929c313",
+      "canonical_skill": "skills/sc2data/sc2data-units-abilities/SKILL.md",
+      "disposition": "retain canonical technical reference; merge task routing and bounded evidence guidance; reject Keystone overrides"
+    },
+    {
+      "source_skill": "sc2-units-reference",
+      "source_sha256": "3b8fc4c946b4e57d1c66ae560fd805856401fddb4d89850963146b96370e4fec",
+      "canonical_skill": "skills/sc2data/sc2data-units-reference/SKILL.md",
+      "disposition": "retain canonical technical reference; merge task routing and bounded evidence guidance; reject Keystone overrides"
+    },
+    {
+      "source_skill": "sc2-localization-and-text",
+      "source_sha256": "b9eb6784fcfd04a11bd8325739c293dced8ff3bd7c7b1c1cd924ed4ddc7cde08",
+      "canonical_skill": "skills/sc2-localization/SKILL.md",
+      "disposition": "retain canonical technical reference; merge task routing and bounded evidence guidance; reject Keystone overrides"
+    }
+  ],
+  "new": [
+    "sc2-shared-tools",
+    "sc2-official-assets",
+    "sc2-deepseek-tasks"
+  ],
+  "excluded": "Keystone project skills; generated-MapScript editing permissions; unverified copied API examples; duplicate reference bodies"
+}

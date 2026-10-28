@@ -389,3 +389,7 @@ These are the `Attributes` values used in XML and the `c_unitAttribute*` constan
 | Psionic | Ghosts, High/Dark Templar, Overseers, Infestors, many Protoss | `c_unitAttributePsionic` |
 | Structure | All buildings | `c_unitAttributeStructure` |
 | Hover | Hellion (moves over some terrain) | `c_unitAttributeHover` |
+
+## Task routing refinement
+
+Unit IDs in this reference are lookup leads. Verify each ID and morph variant against the actual active dependencies and local overrides; a reference library does not establish target availability.

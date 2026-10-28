@@ -17,6 +17,10 @@
 
 ## ⚡ 快速开始清单
 
+新机器从 Git 获得通用技能、工具源码和参考资料，不会获得维护者的 `projects/`、本机 `agent-config.json`、虚拟环境、凭据、索引或模型任务记录。先在本目录运行 tools/docs 范围检查，再初始化自己的项目；不要因缺少这些本地文件而复制其他机器的活动项目配置。
+
+新增能力的调用和预期结果见[技能对话示例](wiki/guides/skill-conversations.md)。共享 CLI/MCP 按[接入指南](wiki/guides/shared-tools.md)重建独立 Python 环境并注册本机入口；模型分包需要本机 Harness/provider 配置。可选 Harness2 按[安装指南](wiki/guides/harness2.md)重建 Linux/WSL 环境。全局注册、模型实际连接、执行完成、静态检查、编辑器验收和游戏验收分别报告。
+
 1. 将本模板文件夹**复制或克隆**到项目位置。
 2. 如果已有 Components 格式的主模组，运行：
    ```powershell

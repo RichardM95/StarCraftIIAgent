@@ -326,3 +326,7 @@ Use arrays for small, typed, well-defined collections. Use Data Tables when the 
 | Local (`c_dataTableScopeLocal`) | First `DataTableSet*` call inside a trigger | Cleared when the trigger exits | Only the current trigger |
 
 **Memory leak risk:** The Global data table is permanent. Entries added but never removed will accumulate. Always call `DataTableValueRemove(c_dataTableScopeGlobal, "key")` or `DataTableClear(c_dataTableScopeGlobal)` when data is no longer needed. Local tables are cleaned up automatically when their trigger finishes.
+
+## Task routing refinement
+
+Data Table state is session-only. Use the Bank workflow for cross-session persistence. Generic UserData field access belongs here; gameplay reward logic consumes those values in `galaxy-game-systems`.

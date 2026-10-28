@@ -284,13 +284,37 @@ class Target:
                               for d in self.documents for lib in sorted(d.libraries)]}
 
 
+def preset_alias(value_key: tuple, group_key: tuple, d: Document, resolve) -> bool:
+    """Explicit custom presets can share a Galaxy value across GUI groups.
+
+    Never infer integer-preset ordinals from their item position: a matching
+    display name or absent Value is not evidence of runtime compatibility.
+    """
+    sd, group = resolve(group_key, d)
+    vd, value = resolve(value_key, d)
+    literal = value.findtext('Value')
+    base = group.find('BaseType')
+    if group.find('PresetCustom') is None or base is None or not base.get('Value') or not literal:
+        return False
+    parents = [e for k, e in vd.elements.items() if k[1] == 'Preset'
+               and any(ref_key(r, k) == value_key for r in e.findall('Item'))]
+    if not any(e.find('PresetCustom') is not None and e.find('BaseType') is not None
+               and e.find('BaseType').get('Value') == base.get('Value') for e in parents):
+        return False
+    return any(resolve(ref_key(r, group_key), sd)[1].findtext('Value') == literal
+               for r in group.findall('Item'))
+
+
 def validate_call(element: ET.Element, key: tuple, d: Document, resolve) -> list[str]:
     problems = []
     definition_ref = element.find("FunctionDef")
     if definition_ref is None:
         return ["FunctionCall has no FunctionDef"]
     fd, definition = resolve(ref_key(definition_ref, key), d)
-    expected = [ref_key(e, ref_key(definition_ref, key)) for e in definition.findall("Parameter")]
+    # Editor definitions may place annotations beside their formal parameters.
+    # They remain references to validate, but are not callable argument slots.
+    expected = [ref_key(e, ref_key(definition_ref, key)) for e in definition.findall("Parameter")
+                if e.get("Type") != "Comment"]
     actual = []
     for p in element.findall("Parameter"):
         pd, param = resolve(ref_key(p, key), d)
@@ -306,21 +330,24 @@ def validate_call(element: ET.Element, key: tuple, d: Document, resolve) -> list
             expected_type = declared.get("Value") if declared is not None else None
             if literal is not None and literal.get("Type") == "difficulty" and param.find("ValueId") is None:
                 problems.append(f"Param {p.get('Id')} difficulty literal requires ValueId")
-            if (literal is not None and expected_type in {"int", "fixed", "bool", "string", "text", "gamelink", "difficulty", "filepath"}
+            if (literal is not None and expected_type in {"byte", "int", "fixed", "bool", "string", "text", "gamelink", "difficulty", "filepath", "abilcmd"}
                     and literal.get("Type") != expected_type
-                    and not (expected_type == "fixed" and literal.get("Type") == "int")):
+                    and not (expected_type == "int" and literal.get("Type") == "byte")
+                    and not (expected_type == "fixed" and literal.get("Type") == "int")
+                    and not (expected_type == "string" and literal.get("Type") == "gamelink")):
                 problems.append(f"Param {p.get('Id')} type: expected {expected_type}, got {literal.get('Type')}")
             if literal is not None and literal.get("Type") == "gamelink":
                 game_type = param.find("ValueGameType")
                 expected_game = bound.find("ParameterType/GameType")
-                if game_type is None or (expected_game is not None and game_type.get("Type") != expected_game.get("Value")):
+                if game_type is None or not game_type.get('Type') or (expected_game is not None and game_type.get("Type") != expected_game.get("Value")):
                     problems.append(f"Param {p.get('Id')} missing/mismatched ValueGameType")
             preset_type = bound.find("ParameterType/TypeElement")
             preset_value = param.find("Preset")
             if preset_type is not None and preset_value is not None and preset_type.get("Type") == "Preset":
                 sd, group = resolve(ref_key(preset_type, bound_key), bd)
                 allowed_values = [ref_key(r, ref_key(preset_type, bound_key)) for r in group.findall("Item")]
-                if ref_key(preset_value, ref_key(p, key)) not in allowed_values:
+                value_key = ref_key(preset_value, ref_key(p, key))
+                if value_key not in allowed_values and not preset_alias(value_key, ref_key(preset_type, bound_key), pd, resolve):
                     problems.append(f"Param {p.get('Id')} preset is not in its declared preset type")
             # Explicit values still required even when ParamDef has a Default.
             if not any(c.tag not in {"ParameterDef", "Comment"} for c in param):
@@ -350,23 +377,39 @@ def validate_call(element: ET.Element, key: tuple, d: Document, resolve) -> list
 def walk(start: list[tuple[Document, tuple]], resolve, *, validate: bool = True,
          node_limit: int | None = None) -> dict:
     """Follow referenced GUI bodies, parameter defaults and variables with cycle protection."""
-    pending = deque((d, k, [f"{d.path.name}:{':'.join(k)}"], True) for d, k in start)
+    pending = deque((d, k, [f"{d.path.name}:{':'.join(k)}"], "active") for d, k in start)
     seen, recorded, errors, nodes, resources = set(), set(), [], [], []
+    active_calls, inactive_calls = set(), {}
     resource_count, libraries, external_libraries = 0, set(), set()
     start_paths = {d.path for d, _ in start}
     resolve = lru_cache(maxsize=4096)(resolve)
     while pending:
-        d, key, chain, executable = pending.popleft()
-        marker = (str(d.path), key, executable)
+        d, key, chain, mode = pending.popleft()
+        marker = (str(d.path), key, mode)
         if marker in seen:
             continue
         seen.add(marker)
         try:
             owner, element = resolve(key, d)
+            if mode == "active" and element.find("Disabled") is not None:
+                mode = "inactive"
             if validate and key[1] == "Trigger" and element.find("Event") is not None and element.find("Action") is None:
                 errors.append(" -> ".join(chain) + ": event trigger has no action")
-            if validate and executable and key[1] == "FunctionCall":
-                errors.extend(" -> ".join(chain) + ": " + p for p in validate_call(element, key, owner, resolve))
+            if validate and mode != "default" and key[1] == "FunctionCall":
+                call_key = (str(owner.path), key)
+                problems = []
+                for problem in validate_call(element, key, owner, resolve):
+                    message = " -> ".join(chain) + ": " + problem
+                    if (problem == "FunctionCall has no FunctionDef" or problem.startswith("child ")
+                            or problem.endswith("has no ParameterDef")):
+                        errors.append(message)  # Malformed GUI structure stays fatal, even in drafts.
+                    else:
+                        problems.append(message)
+                if mode == "active":
+                    active_calls.add(call_key)
+                    errors.extend(problems)
+                else:
+                    inactive_calls.setdefault(call_key, problems)
         except ValueError as exc:
             errors.append(" -> ".join(chain) + ": " + str(exc))
             continue
@@ -395,8 +438,10 @@ def walk(start: list[tuple[Document, tuple]], resolve, *, validate: bool = True,
                 continue
             # Defaults are definition metadata, not implicitly executed GUI calls.
             # Resolve their references, but lint the caller's explicit argument tree.
-            pending.append((owner, r, chain + [": ".join(r)], executable and ref.tag != "Default"))
-    return {"errors": list(dict.fromkeys(errors)), "nodes": nodes, "resources": resources,
+            pending.append((owner, r, chain + [": ".join(r)], "default" if ref.tag == "Default" else mode))
+    inactive = [p for key, problems in inactive_calls.items() if key not in active_calls for p in problems]
+    return {"errors": list(dict.fromkeys(errors)), "inactive_diagnostics": list(dict.fromkeys(inactive)),
+            "nodes": nodes, "resources": resources,
             "total_nodes": len(recorded), "total_resources": resource_count,
             "required_libraries": sorted(libraries), "external_libraries": sorted(external_libraries),
             "truncated": len(nodes) < len(recorded) or len(resources) < resource_count}
@@ -443,8 +488,25 @@ def editable_structure_errors(d: Document) -> list[str]:
 
 def check(target: Target) -> dict:
     target.refresh()
-    starts = [(d, k) for d in target.documents if d.component == target.path
-              for k in d.elements if k[1] in {"Trigger", "FunctionDef", "Variable", "Preset", "FunctionCall"}]
+    starts = []
+    for d in target.documents:
+        if d.component != target.path:
+            continue
+        # Owned calls inherit disabled/default state. Scan definitions first,
+        # then any unreachable call components (including orphan cycles).
+        roots = [k for k in d.elements if k[1] in {"Trigger", "FunctionDef", "Variable", "Preset"}]
+        reached = set()
+        for key in roots + [k for k in d.elements if k[1] == "FunctionCall"]:
+            if key[1] == "FunctionCall" and key in reached:
+                continue
+            starts.append((d, key))
+            pending = [key]
+            while pending:
+                k = pending.pop()
+                if k in reached or k not in d.elements:
+                    continue
+                reached.add(k)
+                pending.extend(references(d.elements[k], k))
     result = walk(starts, target.resolve)
     target.refresh()
     structure_errors = [error for d in target.documents if d.component == target.path

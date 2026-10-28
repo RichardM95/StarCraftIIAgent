@@ -1,0 +1,13 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+*.egg-info/
+workspace/
+dist/
+build/
+.state/
+tools/casc/bin/
+tools/casc/obj/
+tools/casc/.sc2-casc-*/
+tools/casc/smoke-*/

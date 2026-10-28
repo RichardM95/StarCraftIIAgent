@@ -1,0 +1,3 @@
+Catalog merge, effective-value, typed-link and M3 algorithms adapted from SC2EditorTool.
+Upstream copyright: 2026 RichardM, MIT.
+Adaptations: workspace component IO, strict diagnostics, ID remapping and transaction orchestration.

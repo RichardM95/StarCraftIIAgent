@@ -1,0 +1,482 @@
+{
+  "format": "sc2-capability-routing/1",
+  "shared_entry": "connected MCP, otherwise the same operation via sc2-local call",
+  "operations": [
+    {
+      "operation": "sc2_capabilities",
+      "ownership": "shared",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_project_open",
+      "ownership": "shared",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_project_list",
+      "ownership": "shared",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_project_inspect",
+      "ownership": "shared",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_validate_map_shell",
+      "ownership": "shared",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_cliff_capability_status",
+      "ownership": "shared",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_validate_data_warnings",
+      "ownership": "shared",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_plan_data_warning_repairs",
+      "ownership": "shared",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_project_read_text",
+      "ownership": "shared",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_project_clone",
+      "ownership": "shared",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_project_register_template",
+      "ownership": "shared",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_project_create",
+      "ownership": "shared",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_project_export",
+      "ownership": "shared",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_terrain_inspect",
+      "ownership": "existing_default",
+      "default_local_tool": "sc2-terrain.py"
+    },
+    {
+      "operation": "sc2_terrain_preview",
+      "ownership": "existing_default",
+      "default_local_tool": "sc2-terrain.py"
+    },
+    {
+      "operation": "sc2_terrain_edit",
+      "ownership": "existing_default",
+      "default_local_tool": "sc2-terrain.py"
+    },
+    {
+      "operation": "sc2_terrain_flatten_protected",
+      "ownership": "existing_default",
+      "default_local_tool": "sc2-terrain.py"
+    },
+    {
+      "operation": "sc2_spatial_ground_offsets",
+      "ownership": "existing_default",
+      "default_local_tool": "sc2-terrain.py"
+    },
+    {
+      "operation": "sc2_terrain_native_sync",
+      "ownership": "existing_default",
+      "default_local_tool": "sc2-terrain.py"
+    },
+    {
+      "operation": "sc2_terrain_native_candidate",
+      "ownership": "existing_default",
+      "default_local_tool": "sc2-terrain.py"
+    },
+    {
+      "operation": "sc2_dependencies_inspect",
+      "ownership": "shared",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_terrain_fields",
+      "ownership": "existing_default",
+      "default_local_tool": "sc2-terrain.py"
+    },
+    {
+      "operation": "sc2_terrain_environment",
+      "ownership": "existing_default",
+      "default_local_tool": "sc2-terrain.py"
+    },
+    {
+      "operation": "sc2_spatial_place_batch",
+      "ownership": "existing_default",
+      "default_local_tool": "sc2-terrain.py"
+    },
+    {
+      "operation": "sc2_validate_pathing_grid",
+      "ownership": "shared",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_dependencies_impact",
+      "ownership": "shared",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_dependencies_set",
+      "ownership": "shared",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_catalog_search",
+      "ownership": "existing_default",
+      "default_local_tool": "sc2-catalog-query.py"
+    },
+    {
+      "operation": "sc2_catalog_inspect",
+      "ownership": "existing_default",
+      "default_local_tool": "sc2-catalog-query.py"
+    },
+    {
+      "operation": "sc2_catalog_references",
+      "ownership": "existing_default",
+      "default_local_tool": "sc2-catalog-query.py"
+    },
+    {
+      "operation": "sc2_catalog_set",
+      "ownership": "shared",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_spatial_inspect",
+      "ownership": "existing_default",
+      "default_local_tool": "sc2-terrain.py"
+    },
+    {
+      "operation": "sc2_spatial_edit",
+      "ownership": "existing_default",
+      "default_local_tool": "sc2-terrain.py"
+    },
+    {
+      "operation": "sc2_spatial_add",
+      "ownership": "existing_default",
+      "default_local_tool": "sc2-terrain.py"
+    },
+    {
+      "operation": "sc2_spatial_remove",
+      "ownership": "existing_default",
+      "default_local_tool": "sc2-terrain.py"
+    },
+    {
+      "operation": "sc2_spatial_region",
+      "ownership": "existing_default",
+      "default_local_tool": "sc2-terrain.py"
+    },
+    {
+      "operation": "sc2_war3_inspect",
+      "ownership": "shared",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_war3_plan",
+      "ownership": "shared",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_war3_coverage",
+      "ownership": "shared",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_script_guard",
+      "ownership": "shared",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_script_guarded_replace",
+      "ownership": "excluded_project_or_generated_source",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_script_build_inspect",
+      "ownership": "shared",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_script_build",
+      "ownership": "excluded_project_or_generated_source",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_script_inspect",
+      "ownership": "shared",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_script_replace",
+      "ownership": "excluded_project_or_generated_source",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_script_triggers",
+      "ownership": "existing_default",
+      "default_local_tool": "sc2-trigger-query.py"
+    },
+    {
+      "operation": "sc2_text_inspect",
+      "ownership": "existing_default",
+      "default_local_tool": "sc2-localization skill; audit-gamestrings-anchors.py for anchors"
+    },
+    {
+      "operation": "sc2_text_set",
+      "ownership": "existing_default",
+      "default_local_tool": "sc2-localization skill; audit-gamestrings-anchors.py for anchors"
+    },
+    {
+      "operation": "sc2_layout_replace",
+      "ownership": "shared",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_assets_search",
+      "ownership": "shared",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_assets_audit",
+      "ownership": "shared",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_assets_import",
+      "ownership": "shared",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_assets_casc_extract",
+      "ownership": "shared",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_assets_migrate_mod",
+      "ownership": "existing_default",
+      "default_local_tool": "sc2-migrate.py"
+    },
+    {
+      "operation": "sc2_validate_static",
+      "ownership": "shared",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_validate_native_script_gate",
+      "ownership": "shared",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_validate_environment",
+      "ownership": "shared",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_validate_region_diagnose",
+      "ownership": "shared",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_validate_open_editor",
+      "ownership": "shared",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_validate_launch_test",
+      "ownership": "shared",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_validate_logs",
+      "ownership": "shared",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_validate_capture",
+      "ownership": "shared",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_validate_windows",
+      "ownership": "shared",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_validate_record",
+      "ownership": "shared",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_changes_batch",
+      "ownership": "shared",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_dependencies_prepare",
+      "ownership": "shared",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_catalog_explain",
+      "ownership": "shared",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_catalog_schema",
+      "ownership": "shared",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_catalog_patch",
+      "ownership": "shared",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_official_assets_search",
+      "ownership": "shared",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_official_assets_explain",
+      "ownership": "shared",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_official_assets_audit",
+      "ownership": "shared",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_assets_model_inspect",
+      "ownership": "shared",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_assets_resolve",
+      "ownership": "shared",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_unit_variant_audit",
+      "ownership": "shared",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_unit_variant_plan",
+      "ownership": "shared",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_keystone_card_inspect",
+      "ownership": "excluded_project_or_generated_source",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_keystone_card_cost",
+      "ownership": "excluded_project_or_generated_source",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_keystone_descriptions",
+      "ownership": "excluded_project_or_generated_source",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_keystone_news_inspect",
+      "ownership": "excluded_project_or_generated_source",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_keystone_news_update",
+      "ownership": "excluded_project_or_generated_source",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_keystone_portraits_inspect",
+      "ownership": "excluded_project_or_generated_source",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_keystone_portrait_import",
+      "ownership": "excluded_project_or_generated_source",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_changes_prepare",
+      "ownership": "shared",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_probe_prepare",
+      "ownership": "shared",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_probe_run",
+      "ownership": "shared",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_probe_result",
+      "ownership": "shared",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_changes_inspect",
+      "ownership": "shared",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_changes_apply",
+      "ownership": "shared",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_changes_rollback",
+      "ownership": "shared",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_changes_recover",
+      "ownership": "shared",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_job_status",
+      "ownership": "shared",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_job_cancel",
+      "ownership": "shared",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_report_read",
+      "ownership": "shared",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_artifact_image",
+      "ownership": "shared",
+      "default_local_tool": null
+    }
+  ],
+  "deepseek_entry": "connected MCP, otherwise deepseek-task run in an owned exec session"
+}

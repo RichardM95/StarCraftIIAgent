@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AssemblyName>Sc2Casc</AssemblyName>
+    <RestoreIgnoreFailedSources>true</RestoreIgnoreFailedSources>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CascLib"><HintPath>vendor/CascLib.dll</HintPath><Private>true</Private></Reference>
+    <Reference Include="MimeKitLite"><HintPath>vendor/MimeKitLite.dll</HintPath><Private>true</Private></Reference>
+  </ItemGroup>
+</Project>

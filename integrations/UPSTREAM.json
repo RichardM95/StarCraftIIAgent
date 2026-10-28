@@ -1,0 +1,16 @@
+{
+  "bundle": "SC2-MCP-DeepSeek-便携无隐私版-20261027",
+  "created": "2026-10-27",
+  "components": {
+    "sc2-editor-mcp": "0.5.1",
+    "deepseek-supervisor": "0.1.0"
+  },
+  "policy": "Workspace AGENTS and skills are authoritative; upstream project instructions are not imported.",
+  "integration_dependency_changes": {
+    "numpy": {
+      "upstream": "2.5.3",
+      "integration": "2.5.4",
+      "reason": "User-selected NumPy 2.5.4 within upstream >=2,<3 constraint"
+    }
+  }
+}

@@ -456,3 +456,7 @@ MovieStopRecording();
 // Run the standard mission victory cinematic + score screen
 libCamp_gf_RunMissionVictorySequence(lv_trigger);
 ```
+
+## Task routing refinement
+
+This skill owns camera, fades, audio and cinematic sequencing. Pair with `galaxy-actor-and-visuals` only when the sequence also changes actor messages, models or animation; ordinary sound playback does not require Actor scripting.

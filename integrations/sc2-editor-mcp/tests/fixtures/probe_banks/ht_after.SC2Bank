@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Bank version="1">
+    <Section name="AfterAttack">
+        <Key name="Enabled1">
+            <Value int="1"/>
+        </Key>
+        <Key name="UnitWeaponCount">
+            <Value int="1"/>
+        </Key>
+        <Key name="Weapon1">
+            <Value string="HighTemplarWeapon"/>
+        </Key>
+        <Key name="Damage1">
+            <Value fixed="4"/>
+        </Key>
+        <Key name="AttackOrderValid">
+            <Value int="1"/>
+        </Key>
+    </Section>
+    <Section name="Catalog">
+        <Key name="AbilArray[9].Link">
+            <Value string=""/>
+        </Key>
+        <Key name="AbilArray[2].Link">
+            <Value string="PsiStorm"/>
+        </Key>
+        <Key name="AbilityCount">
+            <Value int="11"/>
+        </Key>
+        <Key name="AbilArray[10].Link">
+            <Value string="FeedbackFromCard"/>
+        </Key>
+        <Key name="AbilArray[6].Link">
+            <Value string="Feedback"/>
+        </Key>
+        <Key name="AbilArray[8].Link">
+            <Value string="attack"/>
+        </Key>
+        <Key name="AbilArray[5].Link">
+            <Value string="ProgressRally"/>
+        </Key>
+        <Key name="AbilArray[4].Link">
+            <Value string="Warpable"/>
+        </Key>
+        <Key name="AbilArray[3].Link">
+            <Value string="ArchonWarp"/>
+        </Key>
+        <Key name="AbilArray[1].Link">
+            <Value string="move"/>
+        </Key>
+        <Key name="WeaponArray[0].Link">
+            <Value string="HighTemplarWeapon"/>
+        </Key>
+        <Key name="AbilArray[7].Link">
+            <Value string="BuildInProgress"/>
+        </Key>
+        <Key name="AbilArray[0].Link">
+            <Value string="stop"/>
+        </Key>
+        <Key name="WeaponCount">
+            <Value int="1"/>
+        </Key>
+    </Section>
+    <Section name="CardCaster">
+        <Key name="UnitWeaponCount">
+            <Value int="0"/>
+        </Key>
+        <Key name="AttackOrderValid">
+            <Value int="0"/>
+        </Key>
+    </Section>
+    <Section name="Released">
+        <Key name="Enabled1">
+            <Value int="1"/>
+        </Key>
+        <Key name="UnitWeaponCount">
+            <Value int="1"/>
+        </Key>
+        <Key name="Weapon1">
+            <Value string="HighTemplarWeapon"/>
+        </Key>
+        <Key name="Damage1">
+            <Value fixed="4"/>
+        </Key>
+        <Key name="AttackOrderValid">
+            <Value int="1"/>
+        </Key>
+    </Section>
+    <Section name="Born">
+        <Key name="Enabled1">
+            <Value int="1"/>
+        </Key>
+        <Key name="UnitWeaponCount">
+            <Value int="1"/>
+        </Key>
+        <Key name="Weapon1">
+            <Value string="HighTemplarWeapon"/>
+        </Key>
+        <Key name="Damage1">
+            <Value fixed="4"/>
+        </Key>
+        <Key name="AttackOrderValid">
+            <Value int="1"/>
+        </Key>
+    </Section>
+    <Section name="Run">
+        <Key name="Status">
+            <Value string="FINISHED"/>
+        </Key>
+    </Section>
+    <Section name="Waiting">
+        <Key name="Enabled1">
+            <Value int="0"/>
+        </Key>
+        <Key name="UnitWeaponCount">
+            <Value int="1"/>
+        </Key>
+        <Key name="Weapon1">
+            <Value string="HighTemplarWeapon"/>
+        </Key>
+        <Key name="Damage1">
+            <Value fixed="4"/>
+        </Key>
+        <Key name="AttackOrderValid">
+            <Value int="0"/>
+        </Key>
+    </Section>
+    <Section name="Attack">
+        <Key name="TargetLife">
+            <Value fixed="488"/>
+        </Key>
+    </Section>
+</Bank>

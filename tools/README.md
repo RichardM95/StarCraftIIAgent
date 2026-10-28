@@ -4,6 +4,8 @@
 
 本目录包含《星际争霸 II》自定义战役开发所需的维护助手、静态检查器、catalog 查询工具和自动化测试入口。
 
+地形模块工具：`python tools/sc2-terrain.py --ui-language zh-CN capabilities` 查看基础制图需求、可选扩展及当前覆盖；`scan`、`inspect`、`render`、`plan`、`apply`、`diff`、`undo`、`redo` 和单项编辑器实验见 [制图指南](../wiki/guides/sc2-terrain-editing.md)。已实现操作在独立 Components 副本上执行，编辑器与游戏验证状态单独报告。
+
 项目路径从 `agent-config.json` 读取。相对路径以工作区根目录为基准解析，便于跨电脑使用；跨盘符初始化会退回到机器专属的绝对路径，并在校验时给出警告。单次命令显式传入的 `--mod-dir` 优先级最高；对于不采用配置布局的电脑，`SC2_MODS_PATH` 仅在未配置主项目时作为后备；存在明确配置时，目标缺失不会寻找同名旧副本；`workspace_copy` 必须设置 `project.source_mod`，不会回退安装目录。`validation.include_dependencies` 控制是否递归校验组件依赖内容，`validation.exclude_mods` 用于记录有意排除的依赖模组。
 
 ---
@@ -18,6 +20,7 @@
 | **校验 GameData XML 与 Galaxy** | `python tools/validate-mod.py` | 使用正式 XSD 校验 GameData XML，并检查 Galaxy 变量提升、非法语法和 include 路径 |
 | **检查递归模组依赖** | `python tools/inspect-mod-dependencies.py` | 从 ComponentList 的 info 组件出发，递归解析本地 `.SC2Mod` 依赖 |
 | **诊断或同步官方 CASC 来源** | `python tools/sc2-official-cache.py probe --casc-dll "<DLL>"` | [只读探测与显式同步](../wiki/reference/official-casc-cache.md)；sync 默认预览，通过校验并加 --apply 才发布共用缓存 |
+| **迁移自定义单位数据链** | `python tools/sc2-migrate.py plan --source "<来源.SC2Mod>" --target "<目标.SC2Mod>"` | [分析、选择、包导出与事务导入](../wiki/guides/unit-migration.md)；真实写入需显式 --apply |
 | **查询单位、技能或数据链** | `python tools/sc2-catalog-query.py <cmd>` | 节省上下文的 catalog 查询：查找对象、解析引用并输出依赖链，无需载入大型 XML |
 | **查询精确样例对象** | `python tools/sc2-reference-query.py object Unit:Marine --component liberty` | 返回组件中的完整 XML 对象；可用 `--max-chars` 限制输出 |
 | **核对或更新组件快照** | `python tools/refresh-sc2-reference.py --mods <目录> --campaigns <目录> --cm <目录>` | 默认只核对；确认差异后加 `--apply`，保留旧版备份 |
@@ -49,7 +52,7 @@
   - 执行项目 XML 规则，包括注释/属性仅 ASCII，以及拒绝只有注释的 catalog。
   - 执行 Galaxy 静态模式检查，包括函数内变量提升、include 路径、禁用运算符和非 ASCII 字符。
 - **`audit-actor-and-card-integrity.py`**——命令卡静态检查器。文件名为兼容旧工作流而保留，但不代表覆盖 Actor 绑定。高置信度错误会正常失败；由于活动依赖中的 Requirement 可能使共享槽位成为有意设计，歧义候选只做汇总。使用 `--show-warnings` 查看候选，或使用 `--strict` 让所有未解决候选导致失败。
-- **`audit-gamestrings-anchors.py`**——检查活动 catalog 的 `Name`、`Tooltip`、`Description` 引用是否存在于 `GameStrings.txt`。编辑器保存后可用 `--fill` 从 `ObjectStrings.txt` 恢复缺失键。
+- **`audit-gamestrings-anchors.py`**——检查目标显式 `Name`、`Tooltip`、`Description` 锚点、目标默认模板和显式父对象继承，按活动依赖查询同一语言的 `GameStrings.txt`。`##id##` 按实际对象展开，不建立字面占位键；不扩大到依赖中的所有隐式编辑器名称。依赖或语言资源证据不足时报告未确认并失败。可传 `--mods-dir`、`--campaigns-dir`、`--official-cache`；统一预检新增 `--locale`（默认仍为 `enUS`）并透传依赖选项。编辑器保存后可用 `--fill` 从目标 `ObjectStrings.txt` 恢复真正缺失的键，已由依赖提供的字符串无需复制。
 - **`schemas/sc2-xsd/`**——随附的 SC2 GameData 与组件/IDE 参考 XSD。CLI 会强制校验 Catalog/GameData schema；出于上述兼容原因，`SC2Layout.xsd` 仅作参考。
 
 ---
@@ -133,3 +136,13 @@ Catalog 构建遇到 XML 解析失败会中止发布并保留旧索引；`--allo
 ## 界面语言
 
 所有公开 Python CLI 支持 `--ui-language auto|zh-CN|en`，选择规则见[使用语言](../wiki/guides/agent-language.md)。`python tools/agent-language.py` 只读显示偏好；只有 `--set` 保存。JSON/XML、规范诊断、状态与退出码不翻译；SC2 `--locale` 独立控制数据语言，界面偏好不进入索引清单。`python tools/audit-doc-translations.py` 检查配对、来源指纹、示例编号与消息占位符，已接入 docs scope；静态检查不证明译文语义完全等价。
+
+## 共享本地工具与 MCP
+
+[安装、调用、DeepSeek 与恢复](../wiki/guides/shared-tools.md)。`sc2-local.py` 与 `deepseek-task.py` 使用独立环境；MCP 与本地命令共享业务实现和项目状态。安装、诊断及全局注册使用 `sc2-integration.py`。
+
+## Harness2
+
+`python tools/harness2.py --ui-language zh-CN demo --k 2` 通过 WSL 运行官方本地 demo。环境、模型配置与适用范围见 [Harness2 指南](../wiki/guides/harness2.md)。
+
+`sc2-optimize --skill <ID>` 或 `sc2-optimize --batch <JSON清单>` 使用真实 Codex 验证专业技能；不传选择参数保留本地化流程。[24 项分组清单](harness2-skills.json)定义固定顺序与验收类型。候选采用受限的按需资料读取，收益计入资料选择与求解的全部输入 token；每组经过独立案例和主智能体差异审查后，用 `sc2-apply` 合并，按实验目录用 `sc2-restore` 受保护恢复。
