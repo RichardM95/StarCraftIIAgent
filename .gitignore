@@ -45,6 +45,9 @@ agent-config.json
 
 # 本地项目资料、地图工作副本、项目专用工具与历史快照
 /projects/
+/design-reviews/
+/build_mission_design.py
+/runtime_mission_survey.py
 
 # Workspace reset recovery archive
 .workspace-recovery/
