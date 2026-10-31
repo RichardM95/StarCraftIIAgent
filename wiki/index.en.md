@@ -5,6 +5,7 @@ Read [workspace rules](../AGENTS.en.md). The local agent-config.json identifies 
 
 - [Language and personal preferences](guides/agent-language.en.md).
 - [Unified skill entry (English original)](../skills/sc2-project-entry/SKILL.md): one English technical skill tree, explained in the chosen language.
+- Everyday development: [36 scenarios](guides/development-conversations.en.md), grouped by units, presentation, triggers, dialogue, persistence and validation.
 - [18 skill scenarios and two multi-turn conversations](guides/skill-conversations.en.md): terrain, migration, official resources, MCP, model delegation and Harness2.
 - [26 Terrain Module drawing scenarios and two multi-turn conversations](guides/terrain-conversations.en.md): reference selection, terrain painting, placement, pathing and continuation after Editor saves.
 - [Tools](../tools/README.en.md); without a project run tools/test-suite.py --scope tools and --scope docs.
@@ -26,4 +27,4 @@ Read [workspace rules](../AGENTS.en.md). The local agent-config.json identifies 
 - Shared tools and MCP: [setup, ownership and DeepSeek](guides/shared-tools.en.md), [routing skill](../skills/sc2-shared-tools/SKILL.md).
 - Harness2: [project-local installation and recursion demo](guides/harness2.en.md).
 
-<!-- translation-source: wiki/index.md; sha256: c171a855f33970f8bc0ca6f17fa7158f017599ef1182341280159f863f7fae3f -->
+<!-- translation-source: wiki/index.md; sha256: c75039108e71c432210397d1fe7b10b8159e21dc944953e044f1e61d4714b4a1 -->

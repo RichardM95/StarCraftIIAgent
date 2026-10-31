@@ -22,7 +22,7 @@ Bank, Library ID, hand-written script block and prefixes cannot be inferred from
 
 ## Installation and selection
 
-Keep suite separate from game/mod/project data. Open this workspace in a compatible assistant with local file/Python access; Windows, Python and an installed SC2 Editor are needed for the corresponding operations. Host metadata is in agents/trae.yaml; rules/tools remain local regardless of host.
+Keep suite separate from game/mod/project data. Open this workspace in a compatible assistant with local file/Python access; Windows, Python and an installed SC2 Editor are needed for the corresponding operations. Rules, skills and tools remain workspace-local regardless of host.
 
 In the Editor create/open the mod, select intended dependencies, and File → Save As → Components. Provide the directory containing ComponentList.SC2Components and its declared info file. Packaged MPQ sources are readable for queries; initialization/editing still require Components. Explicit tools/sc2-archive.py conversion is a separate operation.
 

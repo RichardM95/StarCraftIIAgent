@@ -6,6 +6,7 @@
 - [guides/editor-handoff.md](guides/editor-handoff.md)
 - [guides/multi-pc-setup.md](guides/multi-pc-setup.md)
 - [guides/project-initialization.md](guides/project-initialization.md)
+- [guides/development-conversations.md](guides/development-conversations.md)
 - [guides/skill-conversations.md](guides/skill-conversations.md)
 - [guides/terrain-conversations.md](guides/terrain-conversations.md)
 - [guides/README.md](guides/README.md)

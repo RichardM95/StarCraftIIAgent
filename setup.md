@@ -322,7 +322,7 @@ D:\StarCraft II\Mods\Experimental.SC2Mod
 >
 > **智能体：**按实际覆盖结果更新状态，未测的超时或多人场景仍单独列出。
 
-更多配置、验证与纠错示例见[项目初始化配置](wiki/guides/project-initialization.md)。 日常数据、技能、触发器、Bank、排错和部署的可复制需求见 [README常见场景](README.md#常见场景示例)。
+更多配置、验证与纠错示例见[项目初始化配置](wiki/guides/project-initialization.md)。 日常数据、技能、触发器、Bank、排错和部署的可复制需求见 [36个开发场景](wiki/guides/development-conversations.md)。
 
 ---
 

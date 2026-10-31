@@ -35,13 +35,21 @@ tmp*/
 # 本机路径配置（不同机器路径不同，不进版本库）
 agent-config.json
 
+# 本机环境变量（任意层级）；可分发的示例与模板保留跟踪
+.env
+.env.*
+!.env.example
+!.env.template
+!.env.*.example
+!.env.*.template
+
 # 本地项目资料、地图工作副本、项目专用工具与历史快照
 /projects/
 
 # Workspace reset recovery archive
 .workspace-recovery/
 
-# Generated validation reports and staged publication/previous versions
+# Generated validation reports (any depth) and staged publication/previous versions
 reports/
 **/.*.stage-*/
 **/.*.sc2-previous/
@@ -69,6 +77,5 @@ pip-unpack-*/
 
 # Harness2 local Linux environment, credentials and experiment output
 integrations/harness2/.venv-linux/
-integrations/harness2/.env
 integrations/harness2/runs/
 integrations/harness2/dependencies/*/

@@ -35,7 +35,7 @@ Replace every `<...>` with actual input. An explicit map determines the terrain 
 | 17 | Shared-tool setup: `sc2-shared-tools` | “Follow shared-tools to check Python 3.12 and my local Harness, install isolated environments, use my saved provider configuration, diagnose and register global entries. Preserve other MCP services and Hub ownership.” | Local setup, backups and diagnosis; report MCP available only after an actual client connection. |
 | 18 | Git distribution: `sc2-tools-validation` | “Check whether generic tools, skills and instructions distribute independently. Exclude projects, local configuration, environments, credentials, reports and runtime state, then run tools/docs checks.” | Distribution evidence; project maps and historical outputs stay outside suite Git. |
 
-Existing Catalog, Actor, Bank, Galaxy, localization, attack-wave and trigger tasks retain the [README's 36 scenarios](../../README.en.md#common-request-examples) and [trigger conversations](../reference/trigger-agent-dialogue-examples.en.md). New capabilities preserve GUI-first, effective-value and generated-source boundaries.
+Existing Catalog, Actor, Bank, Galaxy, localization, attack-wave and trigger tasks retain the [36 development scenarios](development-conversations.en.md) and [trigger conversations](../reference/trigger-agent-dialogue-examples.en.md). New capabilities preserve GUI-first, effective-value and generated-source boundaries.
 
 ## Multi-turn collaboration
 
@@ -83,4 +83,4 @@ python tools/harness2.py --ui-language en sc2-optimize --skill galaxy-language-f
 
 The first two checks need no active project. Shared CLI requires [local environments](shared-tools.en.md); delegation also needs the local Harness/provider. Harness2 optimization requires [Linux/WSL, Codex login and model connectivity](harness2.en.md) and consumes model quota. Examples do not grant unrelated deployment, registration or external writes; follow the user's actual authorized target/scope. Recovery uses the corresponding task/transaction/experiment state and fingerprints, preserving later user edits.
 
-<!-- translation-source: wiki/guides/skill-conversations.md; sha256: b0e0796f5f8c31409cac4e7f2e4cac619b8cd4d0adda59066acd74a72edae16d -->
+<!-- translation-source: wiki/guides/skill-conversations.md; sha256: ac3e2ee54b9e6e9d48acdd1ee49e72f87ce8e58ad37a4a361bbc2dd907439ecf -->

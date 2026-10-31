@@ -35,7 +35,7 @@
 | 17 | 新机器启用共享工具：`sc2-shared-tools` | “按 shared-tools 指南检查 Python 3.12 与本机 Harness，安装独立环境，使用我本机保存的 provider 配置，诊断后注册全局入口。保留其他 MCP 服务和 Hub 归属。” | 本机安装与配置、备份及诊断；客户端实际连接后才报告 MCP 可用。 |
 | 18 | Git 分发：`sc2-tools-validation` | “检查通用工具、技能和使用说明能否独立分发。排除 projects、本机配置、环境、凭据、报告和运行状态，再执行 tools/docs 检查。” | 分发检查结果；项目地图和历史产物不进入套件 Git。 |
 
-已有 Catalog、Actor、Bank、Galaxy、本地化、攻击波与触发器需求继续使用 [README 的 36 个场景](../../README.md#常见场景示例)和[触发器专用对话](../reference/trigger-agent-dialogue-examples.md)。新增能力不改变 GUI 优先、有效值调查或生成源码保护。
+已有 Catalog、Actor、Bank、Galaxy、本地化、攻击波与触发器需求继续使用 [36个开发场景](development-conversations.md)和[触发器专用对话](../reference/trigger-agent-dialogue-examples.md)。新增能力不改变 GUI 优先、有效值调查或生成源码保护。
 
 ## 多轮协作
 

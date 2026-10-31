@@ -2,6 +2,7 @@
 
 Step-by-step guides for workspace setup, Editor handoff, testing, and complex features.
 
+- [开发对话示例](development-conversations.md) / [English](development-conversations.en.md) — 36个日常开发场景。
 - [项目初始化配置](project-initialization.md) — 首次安装，或选择已有 `.SC2Mod` 项目。
 - [Editor handoff](editor-handoff.md) — 静态修改与 SC2 Editor 之间的交接。
 - [Multi-PC setup](multi-pc-setup.md) — 多台电脑之间的路径与同步约定。

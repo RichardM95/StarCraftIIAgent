@@ -3,6 +3,10 @@
   "fingerprint": "sha256 of UTF-8 source with LF line endings and no BOM",
   "pages": [
     {
+      "source": "wiki/guides/development-conversations.md",
+      "english": "wiki/guides/development-conversations.en.md"
+    },
+    {
       "source": "wiki/guides/terrain-conversations.md",
       "english": "wiki/guides/terrain-conversations.en.md",
       "scenarios": 26,

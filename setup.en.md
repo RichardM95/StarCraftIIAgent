@@ -1,7 +1,7 @@
 # Installation and setup — custom campaign agent starter
 
 [中文](setup.md)
-<!-- translation-source: setup.md; sha256: 925c4e595022b454d9c77af85ffe419c0b977ad79485995bb1bc79deebb7ac54 -->
+<!-- translation-source: setup.md; sha256: 5434091efb7e13d0bdf0849eadab482480a0b31433b0c9625b5a7c558c4cda45 -->
 
 **Author: 扯蛋虾米.** See [AUTHORS](AUTHORS.en.md). Local agent-config.json determines whether a project is selected. Open this independent StarCraftIIAgent workspace; verify current configuration/source rather than assume a historical campaign.
 
@@ -80,7 +80,7 @@ Replace placeholders with actual paths/inputs. Expected behavior is guidance, no
 
 ## Workspace and Editor steps
 
-See [README structure](README.en.md#repository-and-routing) and [initialization](wiki/guides/project-initialization.en.md). The suite contains local rules/skills/tools/wiki/exports; project source lives under configured Mods or explicit editing copy, project docs/runtime beside the project, publish/ only for packaging.
+For everyday requests, see [36 development scenarios](wiki/guides/development-conversations.en.md). See [README structure](README.en.md#repository-and-routing) and [initialization](wiki/guides/project-initialization.en.md). The suite contains local rules/skills/tools/wiki/exports; project source lives under configured Mods or explicit editing copy, project docs/runtime beside the project, publish/ only for packaging.
 
 1. Existing Components: run `python tools/init-project.py "<primary.SC2Mod>"`; verify identity from Triggers/config. New mods: create in the Editor, select correct dependencies, save Components and provide path. Do not invent IDs/Bank names.
 2. Save mods as Components, preserving hand-written versus generated source. Map → Modules → Dependencies adds the intended mod. Never open Blizzard maps with project mod external override active.
