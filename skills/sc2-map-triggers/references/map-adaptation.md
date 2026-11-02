@@ -43,7 +43,7 @@ For a directory-only operation:
 5. Verify exactly one category membership for each organized item and an idempotent second pass. Unknown new features should be classified deliberately rather than automatically dumped into compatibility.
 6. Use the same classifier in the build path, then verify the actual output and save/reopen in the Editor.
 
-This reorganizes the GUI; it does not require rewriting generated Galaxy or mission behavior. The local organizer lives at `projects/liberation-day-expanded/tools/organize_uprising_gui.py`. It is a project-specific example with fixed targets and classification names, not a generic command for an arbitrary map.
+This reorganizes the GUI; it does not require rewriting generated Galaxy or mission behavior. Keep any organizer in the owning project's tools and verify its targets and classification names before reuse on another map.
 
 ## Save the shared library before the map
 
@@ -55,4 +55,4 @@ Read generated scripts to confirm the function definition, map call and event re
 
 On 2026-10-27 the user confirmed that the Uprising map and LoyalWOL mod retained their organized folders after saving, closing and reopening and compiled normally. The organizer preserved all 20,725 map and 7,521 mod non-category elements while grouping 224 map and 15 mod named declarations. The result is `Editor accepted` for GUI organization and compilation, not for the map's gameplay.
 
-The movement/replacement and reward examples have GUI state-test evidence, not `packaged runtime passed`. Their use in another mission requires that mission's own branches, resources, persistence contract and playtest. Local provenance is retained in `projects/liberation-day-expanded/reports/uprising-gui-organization.json` and `uprising-current-handoff.md`; missing generated records are not replaced with assumed acceptance.
+The movement/replacement and reward examples have GUI state-test evidence, not `packaged runtime passed`. Their use in another mission requires that mission's own branches, resources, persistence contract and playtest. Keep new provenance in the selected project's data directory, located through `tools/project-paths.py`; historical project records are not installation dependencies or acceptance evidence for a new project.
