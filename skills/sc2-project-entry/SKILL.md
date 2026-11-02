@@ -15,6 +15,8 @@ Load this skill for SC2 mod or campaign implementation. Read `agent-config.json`
 
 When the user supplies a primary Components `.SC2Mod` folder path and asks to initialize or select a project, run `python tools/init-project.py "<path>"` directly. Do not ask the user to edit `agent-config.json` or list dependencies. Ask for extra paths only if the tool cannot infer a nonstandard layout. After initialization, verify the project-specific identity from evidence; never guess a Bank name, Library ID, script block, or code prefix.
 
+If initialization reports an unresolved official dependency, route to [official CASC dependency diagnosis](../../wiki/reference/official-casc-cache.en.md#unresolved-official-dependencies-during-initialization) before asking the user to supply components or accept incomplete initialization.
+
 ## Project Rules
 
 `AGENTS.md` owns editing scope and Galaxy/XML constraints. Read `agent-config.json` for the selected project and paths, then verify its identity from the actual source. Use the relevant specialist skill for detailed implementation rules; do not maintain a second copy here.

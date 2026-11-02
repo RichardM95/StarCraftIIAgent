@@ -12,6 +12,8 @@
 
 > **项目初始化规则：** 当用户给出主 `.SC2Mod` Components 文件夹路径并要求初始化或选择项目时，直接运行 `python tools/init-project.py "<主Mod文件夹路径>"`。该工具负责推导 SC2/Mods/Maps 路径、递归解析依赖并写入 `agent-config.json`；不要要求用户手工编辑 JSON。仅当目录不是标准 `<StarCraft II>/Mods/<Name>.SC2Mod` 布局且无法推导时，才询问缺失路径。初始化后检查“模组身份”是否与所选项目相符，不要猜测 Bank、Library ID 或代码前缀。
 
+> **官方依赖诊断：** 初始化报告官方组件未解析时，先按 [CASC 官方依赖缓存](wiki/reference/official-casc-cache.md#初始化中的官方依赖未解析) 核查游戏内置来源与缓存覆盖。缓存未收录不等于游戏缺少依赖；先恢复工具读取证据，再重试严格初始化。
+
 > **编辑规则：** 初始化后遵循 `agent-config.json` 的 `project.source_mode`。`in_place` 直接编辑配置的主模组；`workspace_copy` 编辑 `project.source_mod` 指定的副本（相对工作区或绝对路径，缺失时停止写入）并通过 `tools/deploy-mod.py` 部署。绝不编辑 `publish/`。
 >
 > **Galaxy 编辑规则：** 从当前项目的 Triggers 核对手写源码入口和 include 顺序，仅修改手写源码；绝不直接编辑 `Lib*.galaxy`、`MapScript.galaxy` 或其他编译输出。

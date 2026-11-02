@@ -1,7 +1,7 @@
 # Official CASC dependency cache
 
 [中文](official-casc-cache.md)
-<!-- translation-source: wiki/reference/official-casc-cache.md; sha256: 862e9645d415d54b0f728c9398586464c5cb39c3770968be1a0d89277e281c6b -->
+<!-- translation-source: wiki/reference/official-casc-cache.md; sha256: ba98f94aa0ee29829fff18141283d67707a0985af4d36c5239536fa049ab7185 -->
 
 [sc2-official-cache.py](../../tools/sc2-official-cache.py) opens CASC only for explicit probe/sync. Dependencies, GUI, Catalog and preflight consume published caches without loading CascLib, extracting or networking. Local MPQ components use StormLib; see [archives](../../tools/README.en.md#packed-components-and-conversion). No command implicitly rewrites project configuration, game or mod.
 
@@ -24,6 +24,16 @@ sync previews in memory without creating caches. It resolves metadata/publicatio
 Default cache: sibling StarCraftIIAgent-data/reference/casc/<installation-id>/<build-key>/. --official-cache overrides. Preserve lower-case Mods/Campaigns logical paths and original bytes. Manifests record actual CASC paths, installation/build, DLL fingerprints, hashes, language availability and registration evidence. Extract only component/dependency metadata, GUI registration/libraries, Galaxy definitions, GameData XML and available zhCN/enUS text. Exclude whole maps, models, textures, audio and cinematics.
 
 Verify paths/build/hashes/XML/registration/GameData closure before staged publication. Failure preserves the previous cache. Existing destinations must match installation/build and completeness class; never place caches inside suite/game or their ancestors, or mix builds/installations.
+
+## Unresolved official dependencies during initialization
+
+`unresolved dependency` or `[engine/network]` means the tool has not resolved a declaration; it does not establish that the game installation lacks the component. Built-in campaign components may reside in CASC without unpacked directories. For example, the locally verified SC2 `5.0.17.98370` engine registers `campaigns/swarmstory.sc2campaign` → `campaigns/swarm.sc2campaign`; a cache that omits the former also blocks strict initialization.
+
+1. Preserve the raw declaration and inspect the target installation/build, engine registration and matching cache inventory. A `bnet:` prefix alone does not establish a custom network dependency, and a `Campaigns/` path alone does not establish an official component. Distinguish cache coverage, read failures and genuinely missing custom dependencies.
+2. For confirmed official sources, explicitly run the probe and sync preview above with the user's current `--target`, `--sc2-install-dir` and a compatible `--casc-dll`. A failed initialization may leave the previous project selected; default config must not substitute for this target. DLL bitness must match the Python running the tool.
+3. For native read failures, check bitness, interfaces and access permissions first. Sandboxed `CascOpenStorage ... failed: 2` does not prove missing game files. With evidence of restricted access, use the permission workflow to retry the same read-only probe and explain the actual restriction. Use an available compatible local DLL rather than another machine's absolute path as a default.
+4. Once the preview confirms sources, paths and completeness, publish with `sync --apply`, then rerun the original strict initialization and `validate-agent-config.py`. This restores tool cache coverage without asking the user to unpack, copy or reinstall official components.
+5. If gaps remain, report the evidence still unconfirmed and whether configuration was written. Use `--allow-incomplete` only after the user explicitly accepts that state. Cache coverage gaps alone do not justify recommending a validation bypass or declaring game dependencies missing.
 
 ## Loading evidence and limits
 

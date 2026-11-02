@@ -1,7 +1,7 @@
 # AGENTS.md — workspace entry
 
 [中文](AGENTS.md)
-<!-- translation-source: AGENTS.md; sha256: 1bf53da95cd42787fb34fa6ab85c732215e79396cca7bfa5c8d639ccf911b690 -->
+<!-- translation-source: AGENTS.md; sha256: 6b576287da445bea11b8c5d659967cef2e0833f03fb05a44ae5e8c48cd7727dc -->
 
 **Author: 扯蛋虾米.** Unified attribution: [AUTHORS](AUTHORS.en.md).
 
@@ -14,6 +14,8 @@ Follow [language selection](wiki/guides/agent-language.en.md): explicit instruct
 ## Project and editing rules
 
 When given a primary Components .SC2Mod directory and asked to initialize/select, run `python tools/init-project.py "<primary-mod-components-path>"` directly. It infers SC2/Mods/Maps, resolves recursive dependencies and writes agent-config.json. Do not require manual JSON editing. Ask only for missing paths that cannot be derived from a nonstandard layout. Verify project identity from the chosen component; never guess Bank, Library ID or prefixes.
+
+For unresolved official components during initialization, follow [official CASC dependency diagnosis](wiki/reference/official-casc-cache.en.md#unresolved-official-dependencies-during-initialization) to check built-in sources and cache coverage. A component absent from the cache is not evidence that the game lacks the dependency. Restore tool-readable evidence, then retry strict initialization.
 
 After initialization follow project.source_mode: in_place edits the configured primary source; workspace_copy edits project.source_mod, resolved relative to the workspace or absolute. Missing copy stops writes. Deploy using tools/deploy-mod.py in the verified direction. Never edit publish/.
 
