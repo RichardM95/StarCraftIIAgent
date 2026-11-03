@@ -13,7 +13,8 @@ from pathlib import Path
 from . import __version__, archives, assets, catalog, data_warnings, dependencies, editor, localization, map_shell, script, spatial, terrain_capability
 from .errors import SC2Error
 from .jobs import Jobs
-from .projects import Projects, KEYSTONE
+from .reports import write_report
+from .projects import Projects
 from .storage import atomic_write, digest, file_lock, map_files, safe_path, snapshot, write_json
 from .terrain import Terrain, plan_terrain, render_terrain
 from .transactions import Transactions
@@ -21,6 +22,10 @@ from .validation import inspect_project, validate_changes
 
 
 class Service:
+    # One parsed snapshot across all project stores in this process.
+    _query_lock = threading.Lock()
+    _query_index = None
+
     def __init__(self, state: Path):
         self.state=Path(state).resolve()
         self.state.mkdir(parents=True,exist_ok=True)
@@ -53,7 +58,10 @@ class Service:
                 'spatial':{'status':'implemented_static','features':['unit/doodad/point/group edits','region rectangles','literal reference guards','batch placement','bilinear terrain grounding','native Objects version sidecar'],
                     'limitations':['camera creation requires observed simple schema','grounded doodads use bilinear terrain sampling; engine appearance unverified']},
                 'script_text':{'status':'implemented_static','features':['Galaxy inspection/exact patches','Triggers read','locale edits','layout exact patches','fixed-build native evidence gate'],
-                    'limitations':['no Galaxy compiler','no graphical Trigger writer']},
+                    'limitations':['editor/runtime acceptance is separate from static checks']},
+                'trigger_pipeline':{'status':'experimental_static','features':['bounded GUI context with input fingerprints','version-1 behavior authoring and bounded edits','exact candidate bytes validated in isolation','structured GUI upsert candidates','offline subset Galaxy generation','pinned Galaxy parser/binder/type checker','isolated MPQ runtime proof packages'],
+                    'tools':['sc2_trigger_context','sc2_trigger_author','sc2_trigger_write','sc2_trigger_generate','sc2_galaxy_check','sc2_trigger_package'],
+                    'limitations':['unsupported executable nodes fail','Node 22+ and built frontend required','no bytecode backend','native ABI is not verified by the static frontend','Editor and offline runtime evidence are limited to documented B98370 scalar-action scenarios']},
                 'assets':{'status':'implemented_static','features':['local/dependency lookup','missing literal refs','import','local CASC extraction','module migration planning'],
                     'limitations':['unknown M3 structures and missing official parent metadata remain explicit unknown']},
                 'validation':{'status':'implemented','features':['file structure','profile guards','transaction recovery','conflict-aware rollback','editor/test launch','evidence records'],
@@ -80,11 +88,8 @@ class Service:
                     'evidence':['HT before failed/after passed','Warfield level1 and custom level12 complete','actual timeout partial']},
                 'models':{'status':'implemented_readonly','features':['MD34 model metadata','animations/attachments/textures','sparse verified CASC asset cache','explicit extra source order'],
                     'limitations':['unsupported structures rejected or unknown','portrait external animation closure may be partial']},
-                'unit_variant':{'status':'restricted_candidate_generator','template':'Marauder/Warfield','features':['unit actor model entry audit','exact upgrade references','shared damage protection','named secret_hangar production/addon/discard impact audit'],
-                    'named_workflows':['secret_hangar'],
+                'unit_variant':{'status':'restricted_candidate_generator','template':'Marauder/Warfield','features':['unit actor model entry audit','exact upgrade references','shared damage protection'],
                     'limitations':['real new-ID generation blocked when parent weapon source incomplete','complex Skin/Actor macros unknown']},
-                'keystone':{'status':'implemented_static_candidate_workflows','features':['card ID/cost/effect query','cost and hover preview synchronization','description composition audit','category/date news','152px DXT5 portrait append'],
-                    'limitations':['recognized Galaxy fingerprints only','UI/player unlock behavior and visual acceptance not automated']},
                 'terrain_control':{'status':'experimental','features':['protected HMAP brush candidate','explicit model origin offset grounding','paired native resave and final-target semantic gate'],
                     'support':'cn98370 exact editor SHA256, XML115/HMAP101/SMAP102 only',
                     'limitations':['original stale sync input rejected for shared native drift','normalized-baseline acceptance recorded separately','runtime and visual evidence require their own results']},
@@ -140,25 +145,29 @@ class Service:
         report['source_context_id']=context['source_context_id']
         return [Path(p) for p in context['roots']],report
 
-    def _prepare_context(self,record,dependency_values=None,options=None):
+    def _prepare_context(self,record,dependency_values=None,options=None,*,defer_final_check=False):
         from .source_context import prepare_source_context
         path=self.state/'source-selections'/(record['project_id']+'.json')
         selected=json.loads(path.read_text('utf-8')) if path.is_file() else {}
         if options is not None:selected=options
         return prepare_source_context(Path(record['root']),[Path(p) for p in record['search_roots']],
             self.state/'source-cache',Path(selected['installation']) if selected.get('installation') else None,
-            selected.get('locale','zhCN'),selected.get('product'),selected.get('branch'),dependency_values=dependency_values)
+            selected.get('locale','zhCN'),selected.get('product'),selected.get('branch'),dependency_values=dependency_values,
+            official_cache=selected.get('official_cache'),_defer_final_check=defer_final_check)
 
-    def prepare_dependencies(self,project_id,installation=None,locale=None,product=None,branch=None):
+    def save_source_context(self,project_id,context):
+        write_json(self.state/'source-contexts'/(context['source_context_id']+'.json'),{'project_id':project_id,'context':context})
+
+    def prepare_dependencies(self,project_id,installation=None,locale=None,product=None,branch=None,official_cache=None):
         record,root=self.record(project_id)
         options=None
-        overrides={key:value for key,value in {'installation':installation,'locale':locale,'product':product,'branch':branch}.items() if value is not None}
+        overrides={key:value for key,value in {'installation':installation,'locale':locale,'product':product,'branch':branch,'official_cache':official_cache}.items() if value is not None}
         if overrides:
             selected=self.state/'source-selections'/(project_id+'.json')
             options=json.loads(selected.read_text('utf-8')) if selected.is_file() else {}
             options.update(overrides)
         context=self._prepare_context(record,options=options)
-        write_json(self.state/'source-contexts'/(context['source_context_id']+'.json'),{'project_id':project_id,'context':context})
+        self.save_source_context(project_id,context)
         if options is not None:write_json(self.state/'source-selections'/(project_id+'.json'),options)
         return context
 
@@ -205,7 +214,11 @@ class Service:
             data=path.read_bytes()
             return {**parse_probe_bank(data,assertions=assertions),'evidence_sha256':digest(data),
                 'evidence':str(path),'runtime_binding':'historical_unbound','visual':'not_reviewed'}
-        return self.probes.collect(probe_id)
+        result=self.probes.collect(probe_id)
+        result['monitor_status']=result.get('run_state')
+        result['observation_status']=result.get('bank_verdict','not_observed')
+        if not result.get('bank'):result['missing_evidence']=['run_bound_bank']
+        return result
 
     def prepare_changes(self,project_id,patches,source_context_id=None):
         from .change_import import plan_import
@@ -226,7 +239,7 @@ class Service:
             self.source_context(project_id,context['source_context_id'])
             return result
         result=self.transactions.run(root,plan,label='candidate_import',validator=validate,preview_only=True,
-            backup_root=root.parent/'_codex_backups' if record['profile']=='keystone' else None)
+            backup_root=None)
         if result.get('change_id'):
             manifest=self.transactions.read(result['change_id'])
             manifest['source_context_id']=context['source_context_id']
@@ -251,7 +264,7 @@ class Service:
             self.source_context(project_id,context['source_context_id'])
             return result
         result=self.transactions.run(root,plan,label=label,validator=validate,preview_only=True,
-            backup_root=root.parent/'_codex_backups' if record['profile']=='keystone' else None)
+            backup_root=None)
         if result.get('change_id'):
             manifest=self.transactions.read(result['change_id'])
             manifest['source_context_id']=context['source_context_id'];self.transactions._save(manifest)
@@ -260,15 +273,6 @@ class Service:
         if conflict:result['write_deferred']=conflict
         return result
 
-    def audit_named_unit_workflow(self,project_id,workflow,source_context_id=None):
-        if workflow!='secret_hangar':
-            raise SC2Error('unsupported_named_workflow','仅支持已固化的秘密机库命名审计',workflow=workflow)
-        from .secret_hangar_audit import audit_secret_hangar
-        _,root=self.record(project_id)
-        context=self.source_context(project_id,source_context_id) if source_context_id else self.prepare_dependencies(project_id)
-        result=audit_secret_hangar(root,source_context=context)
-        result.update(project_id=project_id,source_context_id=context['source_context_id'])
-        return result
 
     def prepare_catalog_patch(self,project_id,operations,source_context_id=None):
         from .catalog_patch import plan_catalog_patch_report
@@ -285,23 +289,7 @@ class Service:
             self.transactions._save(manifest)
         return result
 
-    def keystone_inspect(self,project_id,workflow,parameters=None,source_context_id=None):
-        from . import keystone
-        _,root=self.record(project_id)
-        parameters=parameters or {}
-        if workflow=='card':return keystone.inspect_keystone_card(root,**parameters)
-        if workflow=='news':return keystone.inspect_keystone_news(root,**parameters)
-        if workflow=='portraits':return keystone.inspect_keystone_portraits(root)
-        if workflow=='descriptions':
-            context=self.source_context(project_id,source_context_id) if source_context_id else self.prepare_dependencies(project_id)
-            return keystone.audit_keystone_descriptions(root,source_context=context,**parameters)
-        raise SC2Error('invalid_keystone_workflow','未知钥石查询流程',workflow=workflow)
 
-    def prepare_keystone(self,project_id,workflow,parameters,source_context_id=None):
-        from . import keystone
-        planners={'card_cost':keystone.plan_keystone_card_cost,'news':keystone.plan_keystone_news,'portrait':keystone.plan_keystone_portrait}
-        if workflow not in planners:raise SC2Error('invalid_keystone_workflow','未知钥石候选流程',workflow=workflow)
-        return self.prepare_domain(project_id,'keystone_'+workflow,lambda root,roots,context:planners[workflow](root,**parameters),source_context_id)
 
     def resolve_model_assets(self,project_id,reference=None,model_id=None,source_context_id=None,sources=None,cancel=None,references=None):
         from .asset_cache import materialize_assets
@@ -320,7 +308,25 @@ class Service:
             result['complete']=result['complete'] and not result['catalog_unknown']
         return result
 
-    def explain_catalog(self,project_id,kind,object_id,fields=None,source_context_id=None,observations=None):
+    def _query_library(self,context,include_references):
+        roots = [Path(p) for p in context['roots']]
+        key = context['source_context_id']
+        with self._query_lock:
+            if self._query_index and self._query_index[0] == key:
+                index = self._query_index[1]
+                if include_references:
+                    Service._query_index = None  # Keep the graph request-local.
+                return index
+            previous = Service._query_index[1] if Service._query_index else None
+            Service._query_index = None
+            library = catalog._Library(roots,previous=previous,fingerprints=context["fingerprints"])
+            if any(context['fingerprints'].get(str(path)) != sha for path,sha in library.file_sha256.items()):
+                raise SC2Error('source_context_stale','解析期间 Catalog 内容变化')
+            if not include_references and sum(p.stat().st_size for p in library.files) <= 64 * 1024 * 1024:
+                Service._query_index = (key,library)
+            return library
+
+    def explain_catalog(self,project_id,kind,object_id,fields=None,source_context_id=None,observations=None,include_references=False):
         from .catalog_explain import catalog_explain
         context=self.source_context(project_id,source_context_id) if source_context_id else self.prepare_dependencies(project_id)
         bound=None
@@ -333,7 +339,7 @@ class Service:
             if (manifest.get('project_id')!=project_id or manifest['template']!='catalog_snapshot' or manifest.get('change_id') or
                 manifest.get('source_context',{}).get('source_context_id')!=context['source_context_id'] or
                 result.get('source_stale') or result.get('binding')!='run_bound' or
-                result.get('execution',{}).get('state')!='complete' or result.get('run_state') not in {'finished','recovered_finished'} or
+                result.get('execution',{}).get('state')!='complete' or result.get('run_state') not in {'finished','recovered_finished','interrupted','timed_out'} or
                 result.get('evidence_status')!='bound_runtime' or
                 parameters.get('catalog','Unit')!=kind or parameters.get('object_id')!=object_id):
                 raise SC2Error('runtime_evidence_mismatch','探针不是当前对象、来源或未修改基准的观测')
@@ -342,7 +348,12 @@ class Service:
             bound={'source_context_id':context['source_context_id'],'build':manifest['launch']['build'],
                 'observations':[{'catalog':kind,'object_id':object_id,'field':field,'value':value,'status':'observed','evidence':evidence}
                     for field,value in result['sections'].get('Catalog',{}).items() if field not in {'StageStatus','StartedGameTime','FinishedGameTime'}]}
-        return catalog_explain([Path(p) for p in context['roots']],kind,object_id,fields,context,bound)
+        from .reference_index import _query_current
+        def references(library):
+            return _query_current(self,project_id,(catalog._catalog_name(kind),object_id),
+                                  context["source_context_id"],"full",ctx=context,lib=library)
+        return catalog_explain([Path(p) for p in context['roots']],kind,object_id,fields,context,bound,include_references=include_references,
+                               _verified_library=lambda:self._query_library(context,False),_references=references)
 
     def _materialize_roots(self,report,root):
         roots=[]
@@ -372,7 +383,12 @@ class Service:
             after_context=self._prepare_context(record,values)
             after=after_context['dependency_report']
         context={'before':[Path(p) for p in before_context['roots']],'after':[Path(p) for p in after_context['roots']]}
-        report=validate_references(root,changes,context,self.state/'reference-checks')
+        coverage = {side: {'complete': ctx['complete'], 'source_context_id': ctx['source_context_id'],
+                           'missing': ctx['dependency_report']['missing']}
+                    for side,ctx in [('before',before_context),('after',after_context)]}
+        report=validate_references(root,changes,context,self.state/'reference-checks',coverage=coverage)
+        if report['static'] == 'partial':
+            raise SC2Error('reference_dependencies_incomplete','引用待核实，请先补齐活动依赖',report=report)
         report['dependencies_complete']={'before':before_context['complete'],'after':after_context['complete']}
         report['source_context_id']={'before':before_context['source_context_id'],'after':after_context['source_context_id']}
         report['missing_dependencies']={'before':before['missing'],'after':after['missing']}
@@ -496,8 +512,8 @@ class Service:
         if terrain and not experimental_write:
             preview_only=True
             conflict=conflict or {'code':'terrain_not_accepted','message':'地形写回尚未完成引擎验收，默认仅生成候选；独立测试图可显式 experimental_write=true。'}
-        if terrain and experimental_write and root.resolve()==KEYSTONE.resolve():
-            raise SC2Error('experimental_formal_map','未验收地形不能写正式钥石地图，请先克隆独立测试图')
+        if terrain and experimental_write and not preview_only:
+            self.projects.require_work_copy(project_id)
         domain='dependencies' if operation=='dependencies_set' or (operation=='batch' and any(x.get('operation')=='dependencies_set' for x in parameters.get('edits',[]))) else operation
         impact={}
         def plan():
@@ -531,12 +547,11 @@ class Service:
             if not preview_only and self.editor_conflict():
                 raise SC2Error('editor_started_during_plan','验证时启动了编辑器，未提交')
             return result
-        backup=root.parent/'_codex_backups' if record['profile']=='keystone' else None
         before_preview=None
         if terrain and (root/'t3Terrain.xml').is_file():
             before_preview=render_terrain(root,self.state/'previews'/uuid.uuid4().hex/'before')
         result=self.transactions.run(root,plan,label=operation,validator=validate,cancel=cancel,
-                                     preview_only=preview_only,backup_root=backup)
+                                     preview_only=preview_only)
         result['project_id']=project_id
         result['operation']=operation
         if impact: result['impact']=impact
@@ -549,16 +564,21 @@ class Service:
 
     def apply_candidate(self,project_id,change_id,experimental_write=False):
         record,root=self.record(project_id,True)
-        if self.editor_conflict(): raise SC2Error('editor_unsaved_state_unknown','编辑器仍运行，候选保持未提交')
         manifest=self.transactions.read(change_id)
+        if Path(manifest['root']).resolve()!=root.resolve():raise SC2Error('project_mismatch','候选不属于此项目')
+        previous=self.transactions.completed_application(manifest)
+        if previous:return previous
+        if self.editor_conflict(): raise SC2Error('editor_unsaved_state_unknown','编辑器仍运行，候选保持未提交')
         if manifest['state']!='prepared' or Path(manifest['root']).resolve()!=root.resolve():
             raise SC2Error('invalid_candidate','候选状态或项目不匹配')
         terrain_candidate=manifest['label'] in {'terrain','terrain_fields','terrain_environment','terrain_flatten_protected','terrain_native_sync','ground_offsets'}
-        if terrain_candidate and (not experimental_write or root.resolve()==KEYSTONE.resolve()):
+        if terrain_candidate and experimental_write:
+            self.projects.require_work_copy(project_id)
+        if terrain_candidate and not experimental_write:
             raise SC2Error('terrain_not_accepted','地形候选需通过独立图实验流程，不能直接向正式图提升')
-        if manifest.get('source_context_id'):
-            self.source_context(project_id,manifest['source_context_id'])
         def plan():
+            if manifest.get('source_context_id'):
+                self.source_context(project_id,manifest['source_context_id'])
             baseline=manifest.get('baseline')
             if baseline is None or snapshot(root)!=baseline:
                 raise SC2Error('baseline_conflict','候选生成后地图发生变化')
@@ -571,18 +591,26 @@ class Service:
                 if (digest(data) if data is not None else None)!=entry['after']:
                     raise SC2Error('candidate_corrupt','候选内容指纹不符')
                 result[entry['path']]=data
-            if self._terrain_changes(root,result) and (not experimental_write or root.resolve()==KEYSTONE.resolve()):
+            if manifest.get('trigger_author'):
+                from .trigger_author import guard_candidate
+                guard_candidate(root,manifest,result)
+            if self._terrain_changes(root,result) and experimental_write:
+                self.projects.require_work_copy(project_id)
+            if self._terrain_changes(root,result) and not experimental_write:
                 raise SC2Error('terrain_not_accepted','地形候选尚不能向正式图提升')
             return result
         def validate(changes):
             if self.editor_conflict():raise SC2Error('editor_started_during_plan','检查期间启动了编辑器，候选保持未提交')
             if manifest.get('source_context_id'):self.source_context(project_id,manifest['source_context_id'])
             result=self._validate_candidate(record,root,changes,'dependencies' if 'DocumentInfo' in changes else 'general')
+            if manifest.get('trigger_author'):
+                from .trigger_author import guard_candidate
+                guard_candidate(root,manifest,changes)
             if manifest.get('source_context_id'):self.source_context(project_id,manifest['source_context_id'])
             if self.editor_conflict():raise SC2Error('editor_started_during_plan','检查期间启动了编辑器，候选保持未提交')
             return result
         return self.transactions.run(root,plan,label='apply_'+manifest['label'],validator=validate,
-            backup_root=root.parent/'_codex_backups' if record['profile']=='keystone' else None)
+            candidate_id=change_id)
 
     def validate(self,project_id,cancel=None):
         record,root=self.record(project_id)
@@ -601,7 +629,7 @@ class Service:
         result['static_scope']='syntax/component structure; dependency completeness reported separately'
         result['sha256_snapshot']=snapshot(root)
         output=self.state/'reports'/(uuid.uuid4().hex+'.json')
-        write_json(output,result)
+        write_report(output,result)
         return {**{k:v for k,v in result.items() if k!='sha256_snapshot'},'report':str(output)}
 
     def map_shell_audit(self,project_id,installation=None,product=None,branch=None,locale='zhCN'):
@@ -696,7 +724,7 @@ class Service:
             label='data_warning_repairs',
             validator=validate,
             preview_only=True,
-            backup_root=root.parent/'_codex_backups' if record['profile']=='keystone' else None,
+            backup_root=None,
         )
         result['warning_repair_report']=planned.get('report',{})
         result['blocked']=planned.get('blocked',[])
@@ -738,14 +766,37 @@ class Service:
         checks=inspect_project(root,record['profile'])
         if checks['static']!='passed': raise SC2Error('template_invalid','模板静态检查未通过',report=checks)
         result={'name':name,'project_id':project_id,'snapshot':data['snapshot'],'evidence_id':evidence_id,'evidence_source':data['source']}
-        write_json(self.state/'templates'/(name+'.json'),result)
+        write_json(self.state/'templates'/project_id/(name+'.json'),result)
         return {'name':name,'registered':True,'evidence_source':data['source']}
 
-    def create_from_template(self,name,destination):
-        data=json.loads(safe_path(self.state/'templates',name+'.json').read_text('utf-8'))
-        _,root=self.record(data['project_id'])
+    def find_templates(self,name,project_id=None):
+        if not name or len(name)>80 or any(c not in 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-' for c in name):
+            raise SC2Error('invalid_template_name','模板名称无效')
+        matches=[]
+        for rec in self.projects.list():
+            key=rec['project_id']
+            if project_id and key!=project_id:continue
+            for path in (self.state/'templates'/key/(name+'.json'), self.state/'templates'/(name+'.json')):
+                if path.is_file():
+                    data=json.loads(path.read_text('utf-8'))
+                    if data['project_id']==key:
+                        matches.append((rec,data))
+                        break
+        return matches
+
+    def create_from_template(self,name,destination,project_id=None,registry=None):
+        matches=self.find_templates(name,project_id)
+        if len(matches)!=1:
+            raise SC2Error('template_ambiguous' if matches else 'template_not_found','请选择已注册模板的来源项目',
+                           candidates=[{'project_id':r['project_id'],'path':r['root']} for r,_ in matches])
+        record,data=matches[0]
+        _,root=self.record(record['project_id'])
         if snapshot(root)!=data['snapshot']: raise SC2Error('template_changed','模板自验收后已改变，需重新验证')
-        return self.projects.clone(data['project_id'],destination)
+        proof=json.loads(safe_path(self.state/'evidence',data['evidence_id']+'.json').read_text('utf-8'))
+        path=Path(proof['evidence'])
+        if not path.is_file() or digest(path.read_bytes())!=proof['evidence_sha256']:
+            raise SC2Error('evidence_changed','模板验收证据文件已变化')
+        return self.projects.clone(record['project_id'],destination,registry,data['snapshot'])
 
     def export(self,project_id,destination,cancel=None):
         _,root=self.record(project_id)
@@ -770,7 +821,7 @@ class Service:
             raise SC2Error('invalid_destination','目标需为独立全新 .SC2Mod 目录')
         changes=plan_migration(root,selections,template,search,source_context=context)
         verified=False
-        for path in (self.state/'templates').glob('*.json'):
+        for path in (self.state/'templates').rglob('*.json'):
             item=json.loads(path.read_text('utf-8'))
             if item.get('project_id')==template_project_id and item.get('snapshot')==snapshot(template):
                 verified=True;break
@@ -783,14 +834,13 @@ class Service:
 
     def native_sync(self,project_id,control_archive,candidate_archive,destination,installation,expected_editor_sha256,timeout=120,cancel=None):
         from .terrain_control import run_native_sync
-        self.record(project_id)
+        proof=self.projects.require_work_copy(project_id)
         return run_native_sync(Path(control_archive),Path(candidate_archive),Path(destination),Path(installation),
-            state_root=self.state,expected_editor_sha256=expected_editor_sha256,protected_roots=[KEYSTONE.parent],timeout=timeout,cancel=cancel)
+            state_root=self.state,expected_editor_sha256=expected_editor_sha256,protected_roots=[Path(proof["source"]),Path(proof["target"])],timeout=timeout,cancel=cancel)
 
     def prepare_native_result(self,project_id,control_before,control_after,candidate_before,candidate_after,protected_mask=None,support_radius=3):
         from .terrain_control import plan_native_sync_result_report
         record,root=self.record(project_id,True)
-        if root.resolve()==KEYSTONE.resolve():raise SC2Error('experimental_formal_map','原生地形只允许独立测试地图')
         report={}
         def plan():
             value=plan_native_sync_result_report(root,Path(control_before),Path(control_after),Path(candidate_before),Path(candidate_after),

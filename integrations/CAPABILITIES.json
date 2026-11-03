@@ -3,6 +3,36 @@
   "shared_entry": "connected MCP, otherwise the same operation via sc2-local call",
   "operations": [
     {
+      "operation": "sc2_trigger_context",
+      "ownership": "shared",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_trigger_author",
+      "ownership": "shared",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_trigger_write",
+      "ownership": "shared",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_trigger_generate",
+      "ownership": "shared",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_trigger_package",
+      "ownership": "shared",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_galaxy_check",
+      "ownership": "shared",
+      "default_local_tool": null
+    },
+    {
       "operation": "sc2_capabilities",
       "ownership": "shared",
       "default_local_tool": null
@@ -380,41 +410,6 @@
     {
       "operation": "sc2_unit_variant_plan",
       "ownership": "shared",
-      "default_local_tool": null
-    },
-    {
-      "operation": "sc2_keystone_card_inspect",
-      "ownership": "excluded_project_or_generated_source",
-      "default_local_tool": null
-    },
-    {
-      "operation": "sc2_keystone_card_cost",
-      "ownership": "excluded_project_or_generated_source",
-      "default_local_tool": null
-    },
-    {
-      "operation": "sc2_keystone_descriptions",
-      "ownership": "excluded_project_or_generated_source",
-      "default_local_tool": null
-    },
-    {
-      "operation": "sc2_keystone_news_inspect",
-      "ownership": "excluded_project_or_generated_source",
-      "default_local_tool": null
-    },
-    {
-      "operation": "sc2_keystone_news_update",
-      "ownership": "excluded_project_or_generated_source",
-      "default_local_tool": null
-    },
-    {
-      "operation": "sc2_keystone_portraits_inspect",
-      "ownership": "excluded_project_or_generated_source",
-      "default_local_tool": null
-    },
-    {
-      "operation": "sc2_keystone_portrait_import",
-      "ownership": "excluded_project_or_generated_source",
       "default_local_tool": null
     },
     {

@@ -1,0 +1,19 @@
+{
+  "date": "2026-11-02",
+  "evidence": "user-created and saved Components Mod shell; XML and metadata read back",
+  "source_name": "CodexGuiLinkShell.SC2Mod",
+  "source_components": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<Components>\n    <DataComponent Type=\"gada\">GameData</DataComponent>\n    <DataComponent Type=\"text\" Locale=\"zhCN\">GameText</DataComponent>\n    <DataComponent Type=\"info\">DocumentInfo</DataComponent>\n    <DataComponent Type=\"trig\">Triggers</DataComponent>\n</Components>",
+  "sidecar_hashes": {
+    "DocumentInfo.version": "e6aa3f141c64c82b048526546e6a6d45ebd3e999229162cf4ab8fa5334646d8b",
+    "GameData.version": "70f085987d410b604139f66f55b2fe9e93461432d676b01f5a72a6d3dee61ee0",
+    "GameText.version": "c01653bac1e1a48e9b3f3b730ca95b35f41f79a98700fdbdf3acb8a330e3c82b",
+    "Triggers.version": "c69c97b1271862e3ca4e76a4b6f19f47ba15eaedb1d00bc73cebf2c2a1d0eb5f"
+  },
+  "header_sha256": "5892c38b3fab42498a97dbbbea4ba4cc288956b8afe5831914cf2be92a98e995",
+  "native_registered_locales": [
+    "zhCN"
+  ],
+  "mod_has_mapinfo": false,
+  "base_gamedata_directory_present": false,
+  "scope": "Mod shell provenance only; modified independent Mod Editor acceptance and runtime still pending"
+}

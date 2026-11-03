@@ -9,6 +9,7 @@ from __future__ import annotations
 import argparse
 import subprocess
 import sys
+import tempfile
 import time
 from collections.abc import Mapping
 from pathlib import Path
@@ -98,6 +99,35 @@ def run_step(name: str, cmd: list[str], verbose: bool) -> bool:
         return False
 
 
+def run_integrations(args):
+    suite = REPO_ROOT / "integrations/sc2-editor-mcp"
+    python = suite / ".venv" / ("Scripts/python.exe" if sys.platform == "win32" else "bin/python")
+    if not python.is_file():
+        print("Install the sc2-editor-mcp isolated environment first", file=sys.stderr)
+        return 2
+    command = [str(python), "-m", "pytest", "-q"]
+    tests = suite / "tests"
+    if not run_step("Integration collection", [*command, "--collect-only", str(tests)], args.verbose):
+        return 1
+    core = sorted(tests.glob("test_catalog*.py")) + [tests / "test_agent_integration.py"]
+    remaining = [str(tests), *("--ignore=" + str(path) for path in core)]
+    groups = [("Catalog and routing", core), ("Other integrations", remaining)]
+    if not args.retry_symlink_elevated:
+        return 0 if all([run_step(label, [*command, *map(str, group)], args.verbose)
+                         for label, group in groups]) else 1
+    from sc2_symlink_retry import finish_retry
+    with tempfile.TemporaryDirectory(prefix="sc2-integration-") as directory:
+        reports, results = [], []
+        for index, (label, group) in enumerate(groups):
+            report = Path(directory) / f"group-{index}.xml"
+            reports.append(report)
+            results.append(run_step(label, [*command, "--junitxml", str(report), *map(str, group)], args.verbose))
+        if not all(results):
+            print(tr("Ordinary regression failed; elevation was not requested."))
+            return 1
+        return finish_retry(reports)
+
+
 def main() -> int:
     parser = UIArgumentParser(
         description="Run fast static pre-flight checks and linters."
@@ -116,9 +146,9 @@ def main() -> int:
     )
     parser.add_argument(
         "--scope",
-        choices=("all", "tools", "docs", "mod"),
+        choices=("all", "tools", "docs", "mod", "integration"),
         default="all",
-        help="Run the full suite or only tool, documentation, or mod checks.",
+        help="Select integration for shared CLI/MCP collection and grouped tests, or all/tools/docs/mod for workspace checks.",
     )
     parser.add_argument("--official-cache", type=Path, help="Read-only official cache; verifies hashes/XML without authoring lint")
     parser.add_argument('--locale', default='enUS',
@@ -146,8 +176,25 @@ def main() -> int:
         default=[],
         help="Component mod folder name to exclude from dependency validation (repeatable).",
     )
+    parser.add_argument("--retry-symlink-elevated", action="store_true",
+                        help="Retry only the WinError 1314 directory symlink skip with Windows UAC.")
     args = parser.parse_args()
+    if args.retry_symlink_elevated and args.scope != "integration":
+        parser.error(tr("--retry-symlink-elevated requires --scope integration"))
 
+    if args.scope in {"integration","all"}:
+        from sc2_activity import ActivityBusy, heavy_activity
+        try:
+            with heavy_activity("全量集成回归" if args.scope=="integration" else "完整工作区预检"):
+                return run_integrations(args) if args.scope=="integration" else run_scoped(args)
+        except ActivityBusy as exc:
+            print(exc)
+            return 2
+
+    return run_scoped(args)
+
+
+def run_scoped(args):
     if args.scope in {"tools", "docs"}:
         scoped_steps = (
             [("Tool Unit Tests", [sys.executable, "-m", "unittest", "discover", "-s", "tools/tests", "-p", "test_*.py"])]

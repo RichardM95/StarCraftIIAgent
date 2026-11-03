@@ -17,6 +17,14 @@ spec.loader.exec_module(audit)
 
 
 class TranslationTests(unittest.TestCase):
+    def test_example_diagnostics_identify_case_and_spelling(self):
+        for call, message in [('sc2_old(id)', 'unknown operation'), ('sc2_read(old)', 'unknown parameter')]:
+            text = '\n'.join(f'`{call if i == 2 else "sc2_read(id)"}` <!-- example: saved-map-{i} -->'
+                             for i in range(1, 5))
+            issues = audit.example_errors(text, {'sc2_read': {'id'}}, 'guide')
+            self.assertEqual(len(issues), 1)
+            self.assertIn('guide:2 saved-map-2: ' + message, issues[0])
+
     def setUp(self):
         temp = tempfile.TemporaryDirectory()
         self.addCleanup(temp.cleanup)

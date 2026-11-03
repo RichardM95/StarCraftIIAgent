@@ -61,24 +61,6 @@ def test_plan_synchronizes_both_metadata_files_without_writing(tmp_path):
     assert (tmp_path / 'DocumentHeader').read_bytes() == original_header
 
 
-def test_optional_real_keystone_header_readonly():
-    root = Path(r'<KEYSTONE_MAP_ROOT>\build\kscg2.SC2Map')
-    if not (root / 'DocumentHeader').is_file():
-        pytest.skip('real readonly SC2 fixture unavailable on this host')
-    before = {name: (root / name).read_bytes() for name in ('DocumentInfo', 'DocumentHeader')}
-    parsed = header_dependencies(before['DocumentHeader'])
-    if len(parsed['values']) < 2:
-        pytest.skip('readonly fixture no longer has two dependencies')
-    requested = list(reversed(parsed['values']))
-    candidate = plan_dependencies(root, requested)
-    after = header_dependencies(candidate['DocumentHeader'])
-    assert after['values'] == requested
-    assert candidate['DocumentHeader'][:44] == before['DocumentHeader'][:44]
-    assert candidate['DocumentHeader'][after['end']:] == before['DocumentHeader'][parsed['end']:]
-    for name, data in before.items():
-        assert hashlib.sha256((root / name).read_bytes()).digest() == hashlib.sha256(data).digest()
-
-
 @pytest.mark.parametrize('replacement', ['翠影遗庭：林间遗迹战场', '庭', ''])
 def test_localization_variable_utf8_length_preserves_identity_dependencies_and_other_entries(replacement):
     dependencies = ['file:Mods/Liberty.SC2Mod', 'bnet:合作数据/0.0/999,file:Mods/Coop.SC2Mod']

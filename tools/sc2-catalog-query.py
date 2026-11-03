@@ -1197,6 +1197,8 @@ def main() -> int:
         "actor-chain": command_actor_chain,
         "production-chain": command_production_chain,
     }
+    if args.command in {"show", "path", "unresolved", "actor-chain", "ability-chain", "unit-chain", "production-chain"}:
+        print(tr("Explicit XML reference index only. Check inherited and ID-based links with sc2_catalog_explain and sc2_catalog_references."), file=sys.stderr)
     commands[args.command](args)
     return 0
 

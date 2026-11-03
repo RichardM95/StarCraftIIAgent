@@ -46,6 +46,15 @@ class _FakeReader:
         return self._data
 
 
+def test_export_regenerates_root_mpq_metadata_without_excluding_nested_assets(tmp_path):
+    for name in ['(attributes)','(listfile)','(signature)','Assets/(attributes)','Triggers']:
+        _write(tmp_path/name,b'test')
+    included,excluded=archives._collect_export_members(tmp_path)
+    assert [name for name,_ in included]==['Assets/(attributes)','Triggers']
+    assert {x['path'] for x in excluded}=={'(attributes)','(listfile)','(signature)'}
+    assert all(x['reason']=='archive_metadata' for x in excluded)
+
+
 # ---------------------------------------------------------------------------
 # inspect / 格式守卫
 # ---------------------------------------------------------------------------

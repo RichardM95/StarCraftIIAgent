@@ -21,7 +21,7 @@ sc2-local = "sc2_mcp.local_cli:main"
 where = ["src"]
 
 [tool.setuptools.package-data]
-sc2_mcp = ["templates/*.galaxy", "profiles/*.json", "knowledge/*.json.gz"]
+sc2_mcp = ["templates/*.galaxy", "knowledge/*.json.gz"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

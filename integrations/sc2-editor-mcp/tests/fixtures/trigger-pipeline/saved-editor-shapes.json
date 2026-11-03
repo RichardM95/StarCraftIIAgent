@@ -1,0 +1,8 @@
+{
+  "evidence": "upstream saved map fixture; no current Editor acceptance",
+  "commit": "95d1ff82b8e89fb0078c4b8e5e6622271b927b94",
+  "path": "packages/sc2-lsp/tests/fixtures/sc2-map.SC2Map/MapScript.galaxy",
+  "sha256": "a693cb72ac838e477d7c4d8c349cfe8e644ee440f27bfd1da84cb7680a17339a",
+  "trigger_init": "void gt_init_Init () {\n    gt_init = TriggerCreate(\"gt_init_Func\");\n    TriggerAddEventMapInit(gt_init);\n}",
+  "map_init": "void InitMap () {\n    InitLibs();\n    InitGlobals();\n    InitTriggers();\n}"
+}

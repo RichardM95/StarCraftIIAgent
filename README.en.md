@@ -8,11 +8,19 @@ Author: **扯蛋虾米**. See [AUTHORS](AUTHORS.en.md).
 
 [Installation](setup.en.md) · [Workspace rules](AGENTS.en.md) · [Wiki](wiki/index.en.md) · [Tools](tools/README.en.md) · [Full development examples](wiki/guides/development-conversations.en.md)
 
-## Overview
+## Start with your task
 
-Open this directory in an AI assistant able to read local workspace files and run tools. Describe what you want to investigate, change or create. The agent reads the relevant rules and skills, verifies the project and dependencies, then works on the actual development source.
+| Send this request | What to expect first |
+|---|---|
+| “Find an official example of a one-time mission objective.” | Component and trigger names, plus the conditions the example uses. No project setup required. |
+| “Check the evacuation trigger in `<map.SC2Map>` and preview a change so only player 1 can complete it once.” | The actual Components path, region and current conditions, followed by the proposed change. |
+| “Initialize my main mod at `<mod.SC2Mod>`.” | The resolved project, editing source and active dependencies. |
 
-The knowledge base includes WoL/HotS/LotV DataEditorXML exports, W3C XSD schemas, and Catalog, Actor, GUI trigger, Galaxy and Bank references. References support investigation; configuration and component evidence determine what the project actually loads.
+Open this workspace in your assistant and replace paths with real Components directories. See [user–agent conversations](wiki/guides/development-conversations.en.md#saved-map-examples) or [in-game dialogue examples](wiki/reference/trigger-dialogue-examples.en.md).
+
+## Requirements by task
+
+Use Windows and Python 3.12 for the basic tools. For shared CLI/MCP operations install the isolated Python 3.12+ environment. Offline Galaxy compilation also requires Node 22+ and the installed frontend. Install SC2 for Editor and game checks. Formal XML schema validation requires lxml or xmllint. See [installation](setup.en.md) and [integration regression and Windows UAC](wiki/guides/shared-tools.en.md).
 
 ## Capabilities
 
@@ -28,68 +36,6 @@ The knowledge base includes WoL/HotS/LotV DataEditorXML exports, W3C XSD schemas
 | Checks, deployment and project records | Static checks, log diagnosis, deployment previews and authorized deployment, design and issue records | Explicit target, scope or reproduction evidence | Static checks cannot replace Editor and packaged runtime acceptance |
 
 The basic workflow uses local rules, skills and Python tools. Shared CLI/MCP, model delegation and Harness2 are optional extensions with separate local environments and connections. Workflows independent of them remain available without installation.
-
-## Requirements
-
-- Windows; Windows x64 Python 3.12 is recommended. Shared tools require Python 3.12+.
-- An AI assistant able to read local workspace files and run tools.
-- An installed StarCraft II; Editor saves, visual checks and game tests require the corresponding environment.
-- Formal XML schema validation needs `lxml` (`python -m pip install lxml`) or executable `xmllint`. Without a backend, formal validation cannot be reported as passed.
-- Optional Harness2 needs Linux/WSL, Python 3.12/3.13 and your own Codex login. Model delegation additionally needs a local Harness and saved provider/model settings.
-
-## Quick start
-
-### 1. Open the workspace
-
-Open this directory in your assistant and send:
-
-```text
-Read AGENTS.md and skills/sc2-project-entry/SKILL.md first, then load the specialist skills needed for my task.
-```
-
-You do not need to install every skill globally. If automatic skill discovery is unavailable, ask the assistant to read those files explicitly.
-
-### 2. Check the environment
-
-From the workspace root, run these commands or ask the agent to run them:
-
-```powershell
-python tools/test-suite.py --ui-language en --scope docs
-python tools/test-suite.py --ui-language en --scope tools
-```
-
-Neither requires a selected project. See [setup](setup.en.md) for missing prerequisites.
-
-### 3. Initialize a project
-
-Provide the primary Mod Components folder, for example:
-
-```text
-My primary Mod folder is E:\Program Files (x86)\StarCraft II\Mods\MyCampaign.SC2Mod. Please initialize the project.
-```
-
-The agent runs `python tools/init-project.py "<primary-mod-path>"`, derives paths, checks recursive local dependencies and verifies project identity. If you only have an archive or have not saved Components yet, prepare valid input using the [initialization guide](wiki/guides/project-initialization.en.md).
-
-Initialization generates `agent-config.json` for local project paths. It is not distributed through Git and needs no manual editing. Its absence in a fresh clone is normal; do not copy another machine's selected-project settings.
-
-### 4. Describe a task
-
-State the target and desired outcome. The agent should query and clarify ambiguous names or targets first. You do not need to repeat facts already in configuration or source.
-
-## Common request examples
-
-These six requests are ready to adapt. Replace paths and object names with your own project inputs.
-
-| Need | Short request | Expected delivery |
-|---|---|---|
-| Project initialization | My primary Mod folder is `<Components-path>`. Please initialize it. | Paths, recursive dependencies, actual editing source and identity verification |
-| Unit query | Show the current project's Marine health, weapons and production requirements. Read-only this time. | Resolved object, effective values, local overrides and dependency providers |
-| Attribute change | Set the current project's Marine base health to 120, keeping other attributes unchanged. Do not deploy yet. | Before/after base values, actual source changes and relevant static checks |
-| New ability | Add a separate “Shadow Blink” to Stalker with a ten-second cooldown. Keep the original ability. | Independent ability, button/card wiring, strings and relevant checks |
-| GUI objective | In `<map-path>`, add “Destroy three enemy bases” targeting `<three-objects>`. | Editable GUI objective/counting logic, reference checks and game-test steps |
-| Read-only checks | Check the current project for problems without changing files. | Actual target, check scope, passing/failing checks and unverified items |
-
-See [36 development scenarios](wiki/guides/development-conversations.en.md), [18 skill scenarios and two multi-turn conversations](wiki/guides/skill-conversations.en.md), and [26 terrain scenarios and two multi-turn conversations](wiki/guides/terrain-conversations.en.md).
 
 ## Advanced guides
 
@@ -178,4 +124,4 @@ Never open Blizzard maps with a project mod active as an external override. Add 
 - `os error 206` or replacement failures: narrow operations using the [recovery guide](wiki/implementation/agent-context-efficiency.md), preserve encoding/line endings and run relevant checks.
 - Runtime problems: provide the actual map/mod, reproduction steps, Editor version, logs and screenshots; follow the [runtime diagnosis guide](wiki/implementation/runtime-diagnostics.en.md).
 
-<!-- translation-source: README.md; sha256: 21650939d37489301559e3c7c1f653a11b15dfe333ff4dafc06194991437ed11 -->
+<!-- translation-source: README.md; sha256: ae6b3ec48b33b653f26f182ad11af73fc0a78329603f017c880ad7a7eea08e5e -->

@@ -80,10 +80,12 @@ def _owned_process(pid: int) -> bool:
 def processes(installation: Path | None = None) -> list[dict[str, Any]]:
     root = Path(installation).resolve() if installation else None
     result = []
-    for proc in psutil.process_iter(["pid", "name", "exe", "cmdline", "create_time", "status"]):
+    for proc in psutil.process_iter(["pid", "name", "exe", "cmdline", "create_time", "status", "num_threads"]):
         try:
             info = proc.info
             if (info["name"] or "").lower() not in _NAMES:
+                continue
+            if info.get("num_threads") == 0 and info.get("create_time") and time.time()-info["create_time"] > 90:
                 continue
             exe = Path(info["exe"]).resolve() if info["exe"] else None
             if root and (not exe or not exe.is_relative_to(root)):
@@ -417,7 +419,7 @@ def build_launch_command(map_path: Path, installation: Path, mode: str = "editor
         args = [str(exe), "-loadfile", str(path), "-product", "SC2", "-uid", product]
     else:
         # Actual 98370 editor-launched game logs show -run <map>, display/preload/reloadcheck.
-        args = [str(exe), "-run", str(path), "-displaymode", "1", "-preload", "1", "-NoUserCheats", "-reloadcheck", "-uid", product]
+        args = [str(exe), "-run", str(path), "-displaymode", "0", "-preload", "1", "-NoUserCheats", "-reloadcheck", "-uid", product]
     version = selected.get("version", "").split(".")[-1]
     client = root / "Versions" / f"Base{version}" / "SC2_x64.exe"
     if mode == "test" and (not version.isdigit() or not client.is_file()):
@@ -452,7 +454,27 @@ def open_editor(map_path: Path, installation: Path, product: str = "s2_cn") -> d
 
 
 def launch_test(map_path: Path, installation: Path, product: str = "s2_cn") -> dict:
-    return _launch(build_launch_command(map_path, installation, "test", product))
+    from .agent_bridge import sc2_activity
+    plan = build_launch_command(map_path, installation, "test", product)
+    try:
+        with sc2_activity.heavy_activity("SC2 游戏启动"):
+            pending = sc2_activity.reserve_start()
+            try:
+                return _launch(plan)
+            except BaseException:
+                pending.unlink(missing_ok=True)
+                raise
+    except sc2_activity.ActivityBusy as exc:
+        raise SC2Error("heavy_activity_busy", str(exc)) from exc
+
+
+def write_test_launcher(path, artifact, installation, product="s2_cn"):
+    from .agent_bridge import runtime_command
+    args = runtime_command("sc2-editor-mcp","sc2_mcp.test_launcher",[str(artifact),str(installation),product])
+    if any(any(c in arg for c in '%!\r\n&|<>^"') for arg in args):
+        raise SC2Error("unsafe_launcher_path","启动器路径含 cmd 展开字符")
+    path.write_bytes(('@echo off\r\nchcp 65001 >nul\r\n'+subprocess.list2cmdline(args)+'\r\nif errorlevel 1 (pause & exit /b 1)\r\n').encode("utf-8"))
+
 
 
 def capture_window(pid: int, destination: Path, window_handle: int | None = None) -> dict:

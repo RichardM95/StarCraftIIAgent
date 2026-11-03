@@ -49,6 +49,50 @@ def test_preview_is_reviewable_and_does_not_commit(setup):
     assert error.value.code == "invalid_change_state"
 
 
+def test_shared_state_corrupt_foreign_manifest(setup, tmp_path):
+    a, first = setup
+    baseline = snapshot(a)
+    b = tmp_path / 'second.SC2Map'
+    b.mkdir()
+    change = first.run(a, lambda: {'A': b'candidate'}, preview_only=True)
+    folder = Path(change['candidate']).parent
+    path = folder / 'manifest.json'
+    path.write_bytes(b'{')
+    second = Transactions(first.state)
+    for operation in [lambda: second.run(a, lambda: {}), lambda: second.recover(a)]:
+        with pytest.raises(SC2Error) as blocked:
+            operation()
+        assert blocked.value.details['path'] == str(path)
+    assert second.recover(b) == []
+    plan = lambda: {'A': b'second'}
+    candidate = second.run(b, plan, preview_only=True)
+    applied = second.run(b, plan, label='apply_edit', candidate_id=candidate['change_id'])
+    assert second.rollback(applied['change_id'], b)['state'] == 'rolled_back'
+    assert not (b / 'A').exists()
+    assert snapshot(a) == baseline and path.read_bytes() == b'{'
+    (folder / 'owner.json').unlink()  # A damaged legacy record has no trusted owner.
+    with pytest.raises(SC2Error, match='事务记录损坏'):
+        second.recover(b)
+
+
+def test_owner_conflict_and_current_marker_take_priority(setup, tmp_path):
+    a, tx = setup
+    b = tmp_path / 'second.SC2Map'
+    b.mkdir()
+    change = tx.run(a, lambda: {'A': b'candidate'}, preview_only=True)
+    path = Path(change['candidate']).parent / 'manifest.json'
+    manifest = json.loads(path.read_text('utf-8'))
+    manifest['root'] = str(b)
+    write_json(path, manifest)
+    for root in [a, b]:
+        with pytest.raises(SC2Error, match='归属记录矛盾'):
+            Transactions(tx.state).recover(root)
+    write_json(b / '.sc2-mcp/active-change.json', {'id': 'absent', 'state_directory': str(tx.state)})
+    with pytest.raises(SC2Error) as active:
+        tx.run(b, lambda: {})
+    assert active.value.code == 'recovery_required'
+
+
 @pytest.mark.parametrize("plan", [{"A": "not bytes"}, {"../outside": b"x"}, {"a": b"x"},
                                   {"Assets/x": b"a", "Assets\\x": b"b"},
                                   {"Assets": b"file", "Assets/x": b"child"}, None])

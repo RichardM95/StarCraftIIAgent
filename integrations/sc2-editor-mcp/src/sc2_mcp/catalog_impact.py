@@ -6,7 +6,7 @@ from decimal import Decimal, InvalidOperation
 import hashlib
 import json
 
-from .catalog import _catalog_name, _trace
+from .catalog import _catalog_name, reference_graph
 from .errors import SC2Error
 
 
@@ -61,22 +61,15 @@ def _inherited_targets(libraries, targets):
     return found
 
 
-def _graph(library):
+def _graph(library, complete):
     if not library.objects:
         return [], [], []
-    # Reuse the existing typed-field/exact-ID graph and its explicit limits.
-    issues = []
-    for first in library.objects:
-        try:
-            trace = _trace(library, *first)
-            break
-        except SC2Error as exc:
-            issues.append(exc.as_dict())
-    else:
-        return [], ['引用图未完整解析；不能据空边集合推定没有影响'], issues
-    edges, missing, warnings = library._reference_cache
+    try:
+        edges,missing,warnings = reference_graph(library, complete)
+    except SC2Error as exc:
+        return [], ["引用图未完整解析；不能据空边集合推定没有影响"], [exc.as_dict()]
     return ([{**edge, 'resolved': True} for edge in edges] +
-            [{**edge, 'resolved': False} for edge in missing]), trace['limitations'], issues + warnings
+            [{**edge, 'resolved': False} for edge in missing]), ['静态引用范围仅覆盖已加载目录与支持的字段'], warnings
 
 
 def _edge_key(edge):
@@ -128,8 +121,9 @@ def inspect_patch_impact(before, after, operations, changes, context=None):
             changed.add(key)
         objects.append({**owner, 'status': 'changed_static' if any(counts.values()) else 'unchanged_static',
                         'counts': counts, 'requested': key in targets})
-    old_edges, limits, old_issues = _graph(before)
-    new_edges, new_limits, new_issues = _graph(after)
+    complete = context is None or context.get("complete", False)
+    old_edges, limits, old_issues = _graph(before, complete)
+    new_edges, new_limits, new_issues = _graph(after, complete)
     unknown.extend({'scope': 'reference_graph', 'side': side, 'detail': issue}
                    for side, issues in [('before', old_issues), ('after', new_issues)] for issue in issues)
     old_index, new_index = {_edge_key(row): row for row in old_edges}, {_edge_key(row): row for row in new_edges}

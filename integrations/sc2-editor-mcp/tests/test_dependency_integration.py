@@ -16,7 +16,7 @@ def component(root: Path, name: str, xml: str = '<DocInfo/>') -> Path:
     return path
 
 
-def test_actual_keystone_combined_dependency_syntax(tmp_path):
+def test_combined_dependency_syntax(tmp_path):
     first = 'bnet:Co-op Mission/0.0/999,file:Mods/StarCoop/StarCoop.SC2Mod'
     second = 'bnet:Void Multi (Mod)/0.0/999,file:Mods/VoidMulti.SC2Mod'
     root = component(tmp_path, 'test.SC2Map', f'<DocInfo><Dependencies><Value>{first}</Value><Value>{second}</Value></Dependencies></DocInfo>')

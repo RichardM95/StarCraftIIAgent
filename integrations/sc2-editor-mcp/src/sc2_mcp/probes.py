@@ -1,6 +1,7 @@
 """Controlled, restart-recoverable diagnostics on independent map copies.
 
-The existing Jobs executes runs and Transactions applies the diagnostic setup.
+Jobs executes runs. Transactions applies user candidates to a private copy;
+the fixed diagnostic script and Bank declaration are archive build outputs.
 There is no user-script injection or second background-task implementation.
 """
 from __future__ import annotations
@@ -64,7 +65,7 @@ def render_template(template: str, parameters: dict, run_id: str) -> tuple[bytes
             raise SC2Error('invalid_probe_parameter', '字段路径包含不支持的语法')
         lines = ['include "TriggerLibs/NativeLib"', '', 'bank probeBank;', 'trigger probeTrigger;', '',
             'bool ProbeRun (bool testConds, bool runActions) {', '    int i;', '    int count;', '    string field;',
-            '    if (!runActions) {', '        return true;', '    }', '    Wait(1.0, c_timeGame);',
+            '    if (!runActions) {', '        return true;', '    }', '    UIDisplayMessage(PlayerGroupAll(), c_messageAreaChat, StringToText("Catalog probe started"));', '    Wait(1.0, c_timeGame);' ,
             f'    probeBank = BankLoad("{bank}", 1);', f'    BankValueSetFromString(probeBank, "Run", "RunId", "{run_id}");',
             '    BankValueSetFromString(probeBank, "Run", "Status", "STARTED");',
             '    BankValueSetFromFixed(probeBank, "Run", "StartedGameTime", GameGetMissionTime());',
@@ -73,6 +74,7 @@ def render_template(template: str, parameters: dict, run_id: str) -> tuple[bytes
         constant = 'c_gameCatalog' + kind
         for field in fields:
             lines.append(f'    BankValueSetFromString(probeBank, "Catalog", "{field}", CatalogFieldValueGet({constant}, "{identifier}", "{field}", 1));')
+            lines.append(f'    UIDisplayMessage(PlayerGroupAll(), c_messageAreaChat, StringToText("{identifier}.{field} = " + BankValueGetAsString(probeBank, "Catalog", "{field}")));')
         for field in arrays:
             lines.extend([f'    count = CatalogFieldValueCount({constant}, "{identifier}", "{field}", 1);',
                 f'    BankValueSetFromInt(probeBank, "Catalog", "{field}.Count", count);', '    i = 0;',
@@ -84,7 +86,7 @@ def render_template(template: str, parameters: dict, run_id: str) -> tuple[bytes
             '    BankValueSetFromString(probeBank, "Catalog", "StageStatus", "FINISHED");',
             '    BankValueSetFromFixed(probeBank, "Run", "FinishedGameTime", GameGetMissionTime());',
             '    BankValueSetFromString(probeBank, "Run", "Status", "FINISHED");', '    BankSave(probeBank);',
-            '    return true;', '}', '', 'void InitMap () {', '    libNtve_InitLib();',
+            '    UIDisplayMessage(PlayerGroupAll(), c_messageAreaChat, StringToText("Catalog sampling complete"));', '    return true;', '}', '', 'void InitMap () {', '    libNtve_InitLib();',
             '    probeTrigger = TriggerCreate("ProbeRun");', '    TriggerAddEventMapInit(probeTrigger);', '}', ''])
         raw = '\n'.join(lines).encode('utf-8')
         phases = ['Catalog']
@@ -96,7 +98,7 @@ def render_template(template: str, parameters: dict, run_id: str) -> tuple[bytes
         text = text.replace('__BANK__', bank).replace('__RUN_ID__', run_id)
         replacements = ({'HighTemplar': parameters.get('unit_id', 'HighTemplar'),
             'CasterWaitingToMoveOut':parameters.get('waiting_behavior', 'CasterWaitingToMoveOut'),
-            'KSCG2HighTemplarCardCaster':parameters.get('caster_id', 'KSCG2HighTemplarCardCaster')}
+            'ProbeCasterUnit':parameters.get('caster_id', 'HighTemplar')}
             if template == 'unit_combat_behavior' else {'Marauder':parameters.get('base_unit','Marauder'),
             'MarauderWarfield':parameters.get('variant_unit','MarauderWarfield'),
             'TerranInfantryWeaponsLevel1':parameters.get('weapon_upgrade','TerranInfantryWeaponsLevel1'),
@@ -188,7 +190,10 @@ class Probes:
         raw,phases=render_template(template,parameters,probe_id)
         root=guard_absolute_path(Path(root)).resolve()
         before=snapshot(root)
-        area=self.folder(probe_id); area.mkdir(parents=True,exist_ok=False)
+        area=self.folder(probe_id)
+        if area.resolve().is_relative_to(root):
+            raise SC2Error('unsafe_build_root','探针运行目录必须位于源地图之外')
+        area.mkdir(parents=True,exist_ok=False)
         target=area/'diagnostic.SC2Map'; target.mkdir()
         for rel,path in map_files(root):
             dest=safe_path(target,rel); dest.parent.mkdir(parents=True,exist_ok=True); shutil.copyfile(path,dest)
@@ -203,13 +208,29 @@ class Probes:
                 data=safe_path(self.state/'changes'/candidate['id']/'candidate',entry['path']).read_bytes() if entry['after'] is not None else None
                 if (digest(data) if data is not None else None)!=entry['after']:raise SC2Error('candidate_corrupt','探针候选被修改')
                 changes[entry['path']]=data
-        changes['MapScript.galaxy']=raw
-        changes['BankList.xml']=(f'<?xml version="1.0" encoding="utf-8"?>\n<BankList>\n    <Bank Name="SC2MCPProbe_{probe_id}" Player="1"/>\n</BankList>\n').encode()
-        tx=Transactions(self.state).run(target,lambda:changes,label='probe_setup',validator=lambda c:validate_changes(target,c))
-        archive=area/'diagnostic.SC2Map.mpq'
-        # The launch filename must remain an actual .SC2Map archive.
+        tx = None
+        if changes:
+            tx = Transactions(self.state).run(target, lambda: changes, label='probe_candidate',
+                                               validator=lambda c: validate_changes(target,c))
+        generated = {'MapScript.galaxy':raw}
+        generated['BankList.xml']=(f'<?xml version="1.0" encoding="utf-8"?>\n<BankList>\n    <Bank Name="SC2MCPProbe_{probe_id}" Player="1"/>\n</BankList>\n').encode()
+        validate_changes(target, generated)
+        for name, data in generated.items():
+            atomic_write(safe_path(target,name), data)
         archive=area/'run.SC2Map'
         export=archives.export_archive(target,archive)
+        verified = {row['path']:row['sha256'] for row in export['files']}
+        for name,data in generated.items():
+            if verified.get(name) != digest(data):
+                raise SC2Error('probe_archive_mismatch','探针归档成员指纹不符',path=name)
+        if snapshot(root) != before:
+            raise SC2Error('baseline_conflict','探针打包期间源地图发生变化')
+        if candidate:
+            for entry in candidate['entries']:
+                if entry['after'] is not None:
+                    file = safe_path(self.state/'changes'/candidate['id']/'candidate',entry['path'])
+                    if digest(file.read_bytes()) != entry['after']:
+                        raise SC2Error('candidate_corrupt','探针打包期间候选被修改')
         manifest={'probe_id':probe_id,'run_id':probe_id,'state':'prepared','template':template,'template_version':TEMPLATE_VERSION,
             'parameters':parameters,'expected_phases':phases,'assertions':assertions or [],'source':str(root),'source_snapshot':before,
             'source_context':source_context,'change_id':candidate['id'] if candidate else None,'component_copy':str(target),
@@ -318,6 +339,14 @@ class Probes:
         return result
 
     def run(self, probe_id, installation, product='s2_cn', startup_timeout=120, probe_timeout=120, cancel=None):
+        from .agent_bridge import sc2_activity
+        try:
+            with sc2_activity.heavy_activity("SC2 运行探针"):
+                return self._run(probe_id,installation,product,startup_timeout,probe_timeout,cancel)
+        except sc2_activity.ActivityBusy as exc:
+            raise SC2Error("heavy_activity_busy",str(exc)) from exc
+
+    def _run(self,probe_id,installation,product,startup_timeout,probe_timeout,cancel):
         startup_timeout=_number(startup_timeout,'startup_timeout',1,600)
         probe_timeout=_number(probe_timeout,'probe_timeout',1,600)
         manifest=self.read(probe_id)
@@ -345,6 +374,7 @@ class Probes:
             manifest.update(installation=str(installation),state='launching',launched_at=time.time(),log_baselines=logs,
                 worker={'pid':os.getpid(),'created':psutil.Process().create_time()})
             self.save(manifest)
+            missing_since=None
             started=None
             try:
                 if cancel and cancel.is_set():
@@ -368,7 +398,10 @@ class Probes:
                     if (started is None and elapsed>=startup_timeout) or (started is not None and time.monotonic()-started>=probe_timeout):
                         manifest.update(state='timed_out',execution='partial' if started is not None else 'not_started',verdict='partial',timeout_phase='probe' if started is not None else 'startup');break
                     if manifest['owned_processes'] and not any(self.verified_process(p,manifest) for p in manifest['owned_processes']):
-                        manifest.update(state='interrupted',execution='partial',verdict='partial');break
+                        if missing_since is None:missing_since=time.monotonic()
+                        elif time.monotonic()-missing_since>=10:
+                            manifest.update(state='interrupted',execution='partial',verdict='partial');break
+                    else:missing_since=None
                     if cancel and hasattr(cancel,'report_progress'):cancel.report_progress(20 if started is None else 60,'等待探针启动' if started is None else '收集阶段观测')
                     time.sleep(.25)
             except BaseException as exc:

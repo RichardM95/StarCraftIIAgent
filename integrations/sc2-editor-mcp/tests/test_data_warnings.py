@@ -22,7 +22,7 @@ def test_parse_local_dependency_and_user_warnings(tmp_path):
         <BuildModel value="Viper"/>
         <PlacementModel value="Viper"/>
     </CActorModel>
-    <CActorUnit id="KSCG2Mothership">
+    <CActorUnit id="FixtureMothership">
         <On Terms="" Send=""/>
     </CActorUnit>
     </Catalog>"""
@@ -30,7 +30,7 @@ def test_parse_local_dependency_and_user_warnings(tmp_path):
     put(tmp_path, "Objects", "<PlacedObjects><Object id=\"1a8\" name=\"Aiur_Fireflies\"/></PlacedObjects>")
     log = f"""[10/27/2026 4:25:14 上午] 警告: XML: {tmp_path.as_posix()}/Base.SC2Data/GameData/ActorData.xml(4,9) : Unable to find field ModelBuild  Source: E:/{tmp_path.name}/  Entry: ScientistNarud  Scope: CActorUnit
 [10/27/2026 4:25:14 上午] 警告: XML: GameData\\EffectData.xml(3238,9) : Unable to use index: 8  Source: Mods/VoidMulti.SC2Mod/  Entry: VolatileBurst  Scope: CEffectSet  Field: EffectArray[0]
-[10/27/2026 4:25:14 上午] 警告: USER: CActorUnit[KSCG2Mothership] Has event without a triggering message. Event[Terms "" Send ""]
+[10/27/2026 4:25:14 上午] 警告: USER: CActorUnit[FixtureMothership] Has event without a triggering message. Event[Terms "" Send ""]
 [10/27/2026 4:25:14 上午] 警告: USER: [ 1a8    1] CActorDoodad[Aiur_Fireflies] 
 """
     result = inspect_data_warnings(tmp_path, log_text=log)

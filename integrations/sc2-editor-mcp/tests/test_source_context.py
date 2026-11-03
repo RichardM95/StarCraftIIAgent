@@ -9,6 +9,49 @@ from sc2_mcp.catalog import inspect_catalog
 from sc2_mcp.errors import SC2Error
 
 
+@pytest.mark.parametrize("failure", ["once", "persistent", "conflict", "tampered", "other"])
+def test_atomic_cache_publish_handles_rename_failure(tmp_path, monkeypatch, failure):
+    target = tmp_path / "published"
+    rename = Path.rename
+    attempts = []
+
+    def blocked(stage, destination):
+        attempts.append(stage)
+        if failure == "once" and len(attempts) == 2:
+            return rename(stage, destination)
+        if failure == "conflict":
+            target.mkdir()
+            (target / "original").write_bytes(b"keep")
+        if failure == "tampered":
+            (stage / "files" / "extra").write_bytes(b"changed")
+        exc = PermissionError("publish test")
+        exc.winerror = 5 if failure != "other" else 123
+        raise exc
+
+    monkeypatch.setattr(Path, "rename", blocked)
+    monkeypatch.setattr(sources.time, "sleep", lambda _: None)
+    def publish():
+        return sources._cache_publish(target, {"test": True}, {"DocumentInfo": b"<DocInfo/>"}, [])
+
+    if failure == "once":
+        assert (publish() / "DocumentInfo").read_bytes() == b"<DocInfo/>"
+        assert len(attempts) == 2
+        return
+    with pytest.raises(SC2Error) as caught:
+        publish()
+    assert attempts[0].is_dir()
+    if failure == "conflict":
+        assert caught.value.code == "source_cache_conflict"
+        assert (target / "original").read_bytes() == b"keep"
+    elif failure == "tampered":
+        assert caught.value.code == "source_cache_verification"
+        assert not target.exists()
+    else:
+        assert caught.value.code == "source_cache_publish_failed"
+        assert not target.exists()
+        assert caught.value.details["attempts"] == len(attempts) == (4 if failure == "persistent" else 1)
+
+
 def put(root, relative, raw):
     path = root / relative
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -213,3 +256,33 @@ def test_casc_optional_missing_still_requires_exact_hash_and_membership(tmp_path
     with pytest.raises(SC2Error) as error:
         sources._read_casc_batch(tmp_path / "install", "Mods/A.SC2Mod", ["DocumentInfo"], tmp_path / "cache", build)
     assert error.value.code == "CASC_OUTPUT_INVALID"
+
+def test_same_size_restored_timestamp_is_stale(tmp_path):
+    import os
+    root=component(tmp_path/"map.SC2Map")
+    context=prepare(root,tmp_path)
+    field=root/"Base.SC2Data/GameData/UnitData.xml"
+    old=field.stat()
+    field.write_bytes(field.read_bytes().replace(b'45',b'54'))
+    os.utime(field,ns=(old.st_atime_ns,old.st_mtime_ns))
+    with pytest.raises(SC2Error) as changed:
+        sources.assert_source_context_current(context)
+    assert changed.value.code=="source_context_stale"
+
+
+@pytest.mark.parametrize("status", ["partial","complete"])
+def test_explicit_untrusted_official_cache_rejected(tmp_path,monkeypatch,status):
+    import sc2_official
+    root=component(tmp_path/"map.SC2Map")
+    install=tmp_path/"install"
+    info=put(install,".build.info","active")
+    cfg=put(install,"config","fixture")
+    mock_id={"build_key":"a","install":str(install)}
+    monkeypatch.setattr(sc2_official,"identity",lambda _:mock_id)
+    bad=tmp_path/"published"
+    put(bad,"official-cache.json",json.dumps({"version":3,"status":status,"identity":mock_id if status=="partial" else {"build_key":"wrong"}}))
+    monkeypatch.setattr(sources.casc,"inspect_installation",lambda _:{"build_info_sha256":sources._hash_file(info)})
+    monkeypatch.setattr(sources.casc,"select_build",lambda *a,**kw:{"build_key":"a","build_config":str(cfg),"product":"s2_cn"})
+    with pytest.raises(SC2Error) as error:
+        prepare(root,tmp_path,installation=install,official_cache=str(bad))
+    assert error.value.code=="official_cache_invalid"

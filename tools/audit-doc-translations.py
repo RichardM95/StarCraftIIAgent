@@ -23,6 +23,29 @@ def source_digest(path):
     return hashlib.sha256(path.read_text(encoding='utf-8-sig').encode('utf-8')).hexdigest()
 
 
+def example_errors(text, operations, page):
+    found, errors = [], []
+    for number, line in enumerate(text.splitlines(), 1):
+        marker = re.search(r'<!-- example: (saved-map-\d+) -->', line)
+        if not marker:
+            continue
+        name = marker[1]
+        found.append(name)
+        for call in line[:marker.start()].split():
+            match = re.fullmatch(r'`(\w+)\(([\w,]*)\)`', call)
+            if not match or match[1] not in operations:
+                errors.append(f'{page}:{number} {name}: unknown operation {call}')
+            else:
+                for arg in filter(None, match[2].split(',')):
+                    if arg not in operations[match[1]]:
+                        errors.append(f'{page}:{number} {name}: unknown parameter {arg} in {match[1]}')
+        if not line[:marker.start()].strip():
+            errors.append(f'{page}:{number} {name}: missing example call')
+    if found != [f'saved-map-{i}' for i in range(1,5)]:
+        errors.append(f'{page}: missing or duplicated saved-map examples')
+    return errors
+
+
 def check(root):
     errors = []
     try:
@@ -34,6 +57,16 @@ def check(root):
                 continue
             original = source.read_text(encoding='utf-8-sig')
             translated = english.read_text(encoding='utf-8-sig')
+            if item['source'] == 'wiki/guides/development-conversations.md':
+                # Read CLI registration decorators without requiring the optional MCP environment.
+                registry = root/'integrations/sc2-editor-mcp/src/sc2_mcp/operations.py'
+                tree = ast.parse(registry.read_text(encoding='utf-8'))
+                operations = {fn.name: {arg.arg for arg in fn.args.args + fn.args.kwonlyargs}
+                              for fn in ast.walk(tree) if isinstance(fn, ast.FunctionDef)
+                              and any(isinstance(d, ast.Call) and isinstance(d.func, ast.Name)
+                                      and d.func.id == 'register' for d in fn.decorator_list)}
+                for page, body in [(source, original), (english, translated)]:
+                    errors.extend(example_errors(body, operations, page))
             for number, line in enumerate(translated.splitlines(), 1):
                 for match in ENGLISH_PLACEHOLDER_RE.finditer(html.unescape(line)):
                     errors.append(f"Untranslated English example placeholder: {item['english']}:{number}: {match[0]}")

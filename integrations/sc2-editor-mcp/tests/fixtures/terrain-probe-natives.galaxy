@@ -1,0 +1,34 @@
+// B98370 Core TriggerLibs/natives.galaxy SHA256 4309b3852a4dccab5c1bae9418089753564daaff59e7ef275204590482eac9d6
+native fixed    WorldHeight (int inType, point inPos);
+native point UnitTypePlacementFromPoint (string inType, int inPlayer, point inSource, fixed inRange);
+native unitgroup UnitCreate (
+    int inCount,
+    string inUnitType,
+    int inCreateStyle,
+    int inPlayer,
+    point inPos,
+    fixed inFacing
+);
+native int  UnitGroupCount (unitgroup inGroup, int inType);
+native unit UnitGroupUnit (unitgroup inGroup, int inIndex);
+native unit UnitLastCreated ();
+native bool UnitIsValid (unit inUnit);
+native void UnitRemove (unit inUnit);
+native string UnitGetType (unit inUnit);
+native point UnitGetPosition (unit inUnit);
+native bool     UnitIssueOrder (unit inUnit, order inOrder, int inQueueType);
+native fixed DistanceBetweenPoints (point p1, point p2);
+native region RegionEntireMap ();
+native region RegionPlayableMap ();
+native bool RegionContainsPoint (region r, point p);
+native point RegionGetBoundsMin (region r);
+native point RegionGetBoundsMax (region r);
+native fixed PointGetX (point p);
+native fixed PointGetY (point p);
+native void TriggerAddEventTimeElapsed (trigger inTrigger, fixed inTime, int inTimeType);
+native void TriggerAddEventTimePeriodic (trigger inTrigger, fixed inTime, int inTimeType);
+native void     BankValueSetFromFixed (bank b, string section, string key, fixed value);
+native void     BankValueSetFromFlag (bank b, string section, string key, bool value);
+native void     BankValueSetFromInt (bank b, string section, string key, int value);
+native void     BankValueSetFromString (bank b, string section, string key, string value);
+native void     BankSave (bank b);

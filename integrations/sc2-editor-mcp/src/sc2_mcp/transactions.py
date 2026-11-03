@@ -48,6 +48,33 @@ class Transactions:
     def _save(self, manifest):
         write_json(self._folder(manifest['id']) / 'manifest.json', manifest)
 
+    def _owner(self, folder):
+        path = guard_absolute_path(folder / 'owner.json')
+        try:
+            record = json.loads(path.read_text('utf-8'))
+            root = record['root']
+            if (record['id'] != folder.name or record['state_directory'] != str(self.state)
+                    or not isinstance(root, str) or not Path(root).is_absolute()
+                    or str(Path(root).resolve()) != root):
+                raise ValueError('invalid transaction owner')
+            return root
+        except FileNotFoundError:
+            return None  # Legacy manifest.
+        except (OSError, ValueError, TypeError, KeyError) as exc:
+            raise SC2Error('invalid_manifest', '归属记录损坏，请核查并从可信备份恢复', path=str(path)) from exc
+
+    def _project_manifests(self, root):
+        for path in sorted((self.state / 'changes').glob('*/manifest.json')):
+            try:
+                manifest = self.read(path.parent.name)
+            except SC2Error as exc:
+                owner = exc.details.get('verified_owner')
+                if exc.code == 'invalid_manifest' and owner and Path(owner) != root:
+                    continue
+                raise
+            if Path(manifest['root']).resolve() == root:
+                yield manifest
+
     @staticmethod
     def _hash(root, relative):
         target = safe_path(root, relative)
@@ -67,9 +94,8 @@ class Transactions:
                 raise SC2Error('recovery_required', '活动事务标记无法读取，先检查恢复记录', path=str(marker)) from exc
             if not isinstance(pending, dict) or (pending.get('id'), pending.get('state_directory')) != (allowed_id, str(self.state)):
                 raise SC2Error('recovery_required', '项目有未完成事务，需要先恢复', pending=pending)
-        for path in (self.state / 'changes').glob('*/manifest.json'):
-            manifest = self.read(path.parent.name)
-            if Path(manifest['root']).resolve() == root and manifest['state'] in _RECOVERABLE and manifest['id'] != allowed_id:
+        for manifest in self._project_manifests(root):
+            if manifest['state'] in _RECOVERABLE and manifest['id'] != allowed_id:
                 raise SC2Error('recovery_required', '项目有未完成事务，需要先恢复', change_id=manifest['id'])
 
     def _activate(self, manifest):
@@ -83,8 +109,26 @@ class Transactions:
                 raise SC2Error('recovery_required', '活动事务标记属于另一项操作')
             path.unlink()
 
+    def application(self, candidate):
+        """Resolve an apply receipt without modifying the candidate or its map."""
+        key = candidate.get('applied_change_id') or candidate.get('author_applied_change_id')
+        if not key:
+            return None
+        applied = self.read(key)
+        if (applied['root'] != candidate['root'] or applied['label'] != 'apply_' + candidate['label']
+                or (candidate.get('applied_change_id') and applied.get('candidate_id') != candidate['id'])):
+            raise SC2Error('invalid_manifest', '提交记录与候选不匹配', change_id=key)
+        return applied
+
+    def completed_application(self, candidate):
+        applied = self.application(candidate)
+        if applied and applied['state'] in {'committed', 'rolled_back'}:
+            return self.describe(applied)
+        return None
+
     def run(self, root: Path, planner: Callable, *, label='edit', validator=None,
-            cancel: threading.Event | None = None, preview_only=False, backup_root: Path | None = None):
+            cancel: threading.Event | None = None, preview_only=False, backup_root: Path | None = None,
+            candidate_id=None):
         root = guard_absolute_path(Path(root)).resolve()
         if not callable(planner) or (validator is not None and not callable(validator)):
             raise SC2Error('invalid_plan', '修改器和验证器必须可调用')
@@ -97,6 +141,13 @@ class Transactions:
                     raise SC2Error('invalid_state_location', '事务状态与备份不能写入地图数据目录', path=str(location))
         with self.lock(root):
             self._check_pending(root)
+            if candidate_id:
+                candidate = self.read(candidate_id)
+                if candidate['root'] != str(root) or candidate['state'] != 'prepared':
+                    raise SC2Error('invalid_candidate', '候选不属于此项目或状态不正确')
+                previous = self.completed_application(candidate)
+                if previous:
+                    return previous
             self.check_cancel(cancel)
             baseline = snapshot(root)
             raw = planner()
@@ -169,12 +220,20 @@ class Transactions:
                         'baseline': baseline,
                         'created_at': datetime.now(timezone.utc).isoformat()}
             atomic_write(folder / 'changes.diff', ''.join(diff).encode('utf-8'))
+            if candidate_id:
+                manifest['candidate_id'] = candidate_id
+            write_json(folder / 'owner.json', {'id': change_id, 'root': str(root), 'state_directory': str(self.state)})
             self._save(manifest)
             self.check_cancel(cancel)
             if snapshot(root) != baseline:
                 raise SC2Error('baseline_conflict', '备份期间地图发生变化', change_id=change_id)
             if preview_only:
                 return self.describe(manifest)
+            if candidate_id:
+                # Both records must exist before the first source write. A crash
+                # before activation leaves only a prepared, unapplied attempt.
+                candidate['applied_change_id'] = change_id
+                self._save(candidate)
             try:
                 self._activate(manifest)
                 manifest['state'] = 'committing'
@@ -246,8 +305,13 @@ class Transactions:
         path = guard_absolute_path(self._folder(change_id) / 'manifest.json')
         if not path.is_file():
             raise SC2Error('change_not_found', '修改记录不存在', change_id=change_id)
+        owner = self._owner(path.parent)
         try:
             manifest = json.loads(path.read_text('utf-8'))
+            if owner and isinstance(manifest, dict) and (
+                    ('root' in manifest and manifest['root'] != owner)
+                    or ('id' in manifest and manifest['id'] != change_id)):
+                raise SC2Error('invalid_manifest', '清单与归属记录矛盾，请从可信备份核对两份记录', path=str(path))
             if (not isinstance(manifest, dict) or manifest.get('id') != change_id or manifest.get('state') not in _STATES
                     or not isinstance(manifest.get('root'), str) or not Path(manifest['root']).is_absolute()
                     or not isinstance(manifest.get('backup'), str) or not Path(manifest['backup']).is_absolute()
@@ -274,7 +338,8 @@ class Transactions:
                         raise ValueError('invalid fingerprint')
             return manifest
         except (OSError, ValueError, KeyError, TypeError) as exc:
-            raise SC2Error('invalid_manifest', '事务记录损坏，停止自动恢复', change_id=change_id, error=str(exc)) from exc
+            raise SC2Error('invalid_manifest', '事务记录损坏，请保留现场并从可信备份恢复清单',
+                           path=str(path), change_id=change_id, verified_owner=owner, error=str(exc)) from exc
 
     def _rollback_locked(self, manifest):
         root = Path(manifest['root'])
@@ -326,11 +391,9 @@ class Transactions:
                 if not isinstance(value, dict) or value.get('state_directory') != str(self.state):
                     raise SC2Error('recovery_required', '请使用记录所属状态目录恢复事务', pending=value)
                 active_id = value.get('id')
-                self.read(active_id)
-            for path in sorted((self.state / 'changes').glob('*/manifest.json')):
-                manifest = self.read(path.parent.name)
-                if Path(manifest['root']).resolve() != root:
-                    continue
+                if Path(self.read(active_id)['root']).resolve() != root:
+                    raise SC2Error('recovery_required', '活动事务标记与地图不匹配', path=str(marker))
+            for manifest in list(self._project_manifests(root)):
                 if manifest['id'] == active_id and manifest['state'] in {'committed', 'reverted', 'rolled_back'}:
                     self._clear(manifest)
                     results.append(self.describe(manifest))
@@ -340,7 +403,10 @@ class Transactions:
 
     def describe(self, manifest):
         folder = self._folder(manifest['id'])
-        return {'change_id': manifest['id'], 'state': manifest['state'], 'files': manifest['entries'],
+        result = {'change_id': manifest['id'], 'state': manifest['state'], 'files': manifest['entries'],
                 'backup': manifest['backup'], 'diff': str(folder / 'changes.diff'),
                 'candidate': str(folder / 'candidate'), 'validation': manifest['validation'],
                 'conflicts': manifest.get('conflicts', [])}
+        if manifest.get('candidate_id'):
+            result['candidate_id'] = manifest['candidate_id']
+        return result

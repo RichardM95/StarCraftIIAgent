@@ -8,6 +8,43 @@
 
 地形、迁移、MCP 和模型协作另见[技能对话](skill-conversations.md)及[地形制图对话](terrain-conversations.md)。
 
+<a id="saved-map-examples"></a>
+
+## 从已保存的地图继续工作
+
+**我刚保存，把行为从 Bar 改成了 Baz。谁还在用它们？**
+
+我会分别列出两个行为的直接使用者和来源字段。依赖缺失时会标明具体缺口。
+
+核验依据 · 对两个 Behavior ID 分别用 direct，调查连锁影响才用 full。
+
+`sc2_catalog_references(project_id,catalog_type,object_id,mode)` <!-- example: saved-map-1 -->
+
+**玩家 1 首次进入已有的 EvacZone 才完成撤离目标，先给我看改动。**
+
+其他玩家进入时目标保持激活。玩家 1 首次进入时先设置完成标志，再完成初始化保存的目标。
+
+核验依据 · 绑定唯一区域和目标句柄，mode 取 preview。依次测试玩家 2、玩家 1、离开后重入，预期计数为 0、1、1。
+
+`sc2_trigger_context(project_id)` `sc2_trigger_author(project_id,spec,mode)` <!-- example: saved-map-2 -->
+
+**还没有撤离区。在指定矩形建一个，再接上刚才的逻辑。**
+
+先把区域放在工作副本上，再让进入该区域的事件引用它。交付时列出副本路径、区域 ID 和候选 ID。
+
+核验依据 · 用地形计划的 regions 操作、add 模式和 rect 形状创建区域，核对副本登记、坐标和分配的 ID。写入后重读同一副本，用新指纹生成 candidate。
+
+`sc2_trigger_context(project_id)` `sc2_trigger_author(project_id,spec,mode)` <!-- example: saved-map-3 -->
+
+**提交时断线了。我又在编辑器里保存了一次，现在怎么办？**
+
+先查上次改动是否已落盘。已提交就给你原提交状态和回滚用的提交 ID。尚未提交且源已变化，就重读并展示新差异。
+
+核验依据 · 用原候选 ID 读 application.change_id 和 application.state。若已回滚，报告该状态。
+
+`sc2_changes_inspect(project_id,change_id)` <!-- example: saved-map-4 -->
+
+
 ## A. 单位、有效值与技能
 
 ### 1. 只读查询单位完整数据链

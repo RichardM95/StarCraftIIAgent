@@ -42,12 +42,10 @@ def test_guarded_edit_uses_normal_transaction_backup_and_rollback(tmp_path,monke
         with pytest.raises(SC2Error):
             service.edit(key,'script_guarded_replace',{'old':'Counter(counter);','new':'','expected_sha256':hashlib.sha256(source).hexdigest()})
         assert snapshot(root)==before
-        changed=service.edit(key,'script_guarded_replace',{'old':'counter < 4','new':'counter < 5','expected_sha256':hashlib.sha256(source).hexdigest(),
+        with pytest.raises(SC2Error) as protected:
+            service.edit(key,'script_guarded_replace',{'old':'counter < 4','new':'counter < 5','expected_sha256':hashlib.sha256(source).hexdigest(),
                               'review':{'author':'a','reviewer':'b','evidence':'independent-leaf-review'}})
-        assert changed['state']=='committed'
-        assert (root/'MapScript.galaxy').read_bytes()==source.replace(b'< 4',b'< 5')
-        assert (tmp_path/'state').is_dir()
-        service.transactions.rollback(changed['change_id'],root)
+        assert protected.value.code=='source_boundary'
         assert snapshot(root)==before
     finally:service.jobs.shutdown()
 
@@ -57,9 +55,9 @@ def test_new_tools_are_discoverable_with_explicit_limits(tmp_path):
     try:
         tools=asyncio.run(server.list_tools())
         by_name={tool.name:tool for tool in tools}
-        assert {'sc2_war3_inspect','sc2_war3_plan','sc2_war3_coverage','sc2_script_guard','sc2_script_guarded_replace','sc2_script_build','sc2_script_build_inspect'}<=by_name.keys()
+        assert {'sc2_war3_inspect','sc2_war3_plan','sc2_war3_coverage','sc2_script_guard','sc2_script_build_inspect'}<=by_name.keys()
         assert by_name['sc2_war3_inspect'].annotations.readOnlyHint
-        assert not by_name['sc2_script_guarded_replace'].annotations.readOnlyHint
+        assert {'sc2_script_guarded_replace','sc2_script_build'}.isdisjoint(by_name)
     finally:server.sc2_service.jobs.shutdown()
 
 
@@ -79,15 +77,10 @@ def test_script_build_commits_both_components_and_rolls_back(tmp_path,monkeypatc
         key=service.projects.open(str(root),True)['project_id']
         before=snapshot(root)
         parameters={'manifest_path':'source/manifest.json','expected_manifest_sha256':hashlib.sha256(raw).hexdigest()}
-        preview=service.edit(key,'script_build',parameters,True)
-        assert preview['state']=='prepared'
-        assert snapshot(root)==before
-        result=service.edit(key,'script_build',parameters)
-        assert result['state']=='committed'
-        assert {item['path'] for item in result['files']}=={'MapScript.galaxy','Triggers'}
-        assert data in (root/'MapScript.galaxy').read_bytes()
-        service.transactions.rollback(result['change_id'],root)
-        assert snapshot(root)==before
+        for preview in (True,False):
+            with pytest.raises(SC2Error) as protected:
+                service.edit(key,'script_build',parameters,preview)
+            assert protected.value.code=='source_boundary' and snapshot(root)==before
         (folder/'all.galaxy').write_bytes(data+b'// later change\n')
         with pytest.raises(SC2Error) as error:
             service.edit(key,'script_build',parameters)

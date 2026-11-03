@@ -246,9 +246,9 @@ def test_dependency_changes_during_validation_are_rejected(project, tmp_path, mo
     original = cross_validation._catalog_graph
     calls = 0
 
-    def changing_graph(session):
+    def changing_graph(session, complete):
         nonlocal calls
-        result = original(session)
+        result = original(session, complete)
         calls += 1
         if calls == 2:
             if change == "content":

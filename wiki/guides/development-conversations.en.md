@@ -8,6 +8,43 @@ Usually, send only the request in the code block. The agent should read the [wor
 
 For terrain, migration, MCP and model collaboration, see [skill conversations](skill-conversations.en.md) and [terrain conversations](terrain-conversations.en.md).
 
+<a id="saved-map-examples"></a>
+
+## Working with a saved map
+
+**I saved a change from Bar to Baz. Who uses each behavior now?**
+
+I’ll list direct users and their source fields for both IDs and identify missing dependencies.
+
+Verify · Query both Behavior IDs with direct. Use full for downstream impact.
+
+`sc2_catalog_references(project_id,catalog_type,object_id,mode)` <!-- example: saved-map-1 -->
+
+**Preview completion when player 1 first enters the existing EvacZone.**
+
+Other players leave the objective active. On the first qualifying entry, set the flag before completing the saved objective.
+
+Verify · Bind the unique region and saved handle. Use preview. Test player 2, player 1, then re-entry for counts of 0, 1, 1.
+
+`sc2_trigger_context(project_id)` `sc2_trigger_author(project_id,spec,mode)` <!-- example: saved-map-2 -->
+
+**Create the missing evacuation zone in this rectangle and wire the same logic.**
+
+I’ll add the region on the working copy, bind its entry event and return the copy path, region ID and candidate ID.
+
+Verify · Create the rectangle with the terrain plan’s regions operation in add mode. Verify copy registration, coordinates and the assigned ID. Reread the same copy after the edit and use its fresh fingerprint in candidate mode.
+
+`sc2_trigger_context(project_id)` `sc2_trigger_author(project_id,spec,mode)` <!-- example: saved-map-3 -->
+
+**The connection dropped during apply and I saved again in the editor. What now?**
+
+I’ll check whether the change landed. A completed apply has a commit ID for rollback. A pending candidate against changed input needs a fresh preview.
+
+Verify · Inspect application.change_id and application.state using the original candidate ID. Report an existing rollback as such.
+
+`sc2_changes_inspect(project_id,change_id)` <!-- example: saved-map-4 -->
+
+
 ## A. Units, effective values and abilities
 
 ### 1. Read a unit chain
@@ -316,4 +353,4 @@ Agent checks and delivery: Reuse current paths/implementation and run tools/docs
 
 More setup requests: [installation](../../setup.en.md). Trigger-specific conversations: [44 scenarios and two dialogues](../reference/trigger-agent-dialogue-examples.en.md); underlying mechanisms: [in-game cases](../reference/trigger-dialogue-examples.en.md).
 
-<!-- translation-source: wiki/guides/development-conversations.md; sha256: ed26101667290556e279b60f0b267a798c75afe171834cee874603004671ec69 -->
+<!-- translation-source: wiki/guides/development-conversations.md; sha256: 4d226ca90b3f405fabaa49aa75eaba40d929f2f415bf061635553fbb008cb54c -->

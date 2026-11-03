@@ -1,0 +1,7 @@
+{
+  "kind": "Reference excerpts, not a playable map or engine acceptance",
+  "upstream_commit": "95d1ff82b8e89fb0078c4b8e5e6622271b927b94",
+  "path": "packages\\sc2-lsp\\tests\\fixtures\\sc2-data-trigger\\mods\\core.sc2mod\\base.sc2data\\TriggerLibs\\NativeLib.TriggerLib",
+  "sha256": "08e0cf4c704883df209c130f83132360fd38fc10b1daf42567a5b089dfd9ecb3",
+  "elements": 24
+}

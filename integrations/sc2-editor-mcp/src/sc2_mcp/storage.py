@@ -106,6 +106,12 @@ def snapshot(root: Path) -> dict[str, str]:
 def atomic_write(path: Path, data: bytes):
     if not isinstance(data, bytes):
         raise SC2Error("invalid_content", "原子写入内容必须为 bytes")
+    with atomic_writer(path) as stream:
+        stream.write(data)
+
+
+@contextlib.contextmanager
+def atomic_writer(path: Path):
     path = guard_absolute_path(path)
     if path.exists() and not path.is_file():
         raise SC2Error("path_collision", "文件目标被目录占用", path=str(path))
@@ -113,7 +119,7 @@ def atomic_write(path: Path, data: bytes):
     fd, tmp = tempfile.mkstemp(prefix=".sc2-write-", dir=path.parent)
     try:
         with os.fdopen(fd, "wb") as f:
-            f.write(data)
+            yield f
             f.flush()
             os.fsync(f.fileno())
         guard_absolute_path(path)

@@ -1,0 +1,148 @@
+{
+  "date": "2026-11-02",
+  "status": "packaged runtime passed",
+  "operator": "user",
+  "scope": "Directly launched offline-generated MPQ; loop, disabled action, branch, function/local/return, Mod GUI action regenerated inline, shared variable result 29",
+  "procedure": "Close previous test game; run RunOfflineTest-v2.cmd through Win+R, without Editor save or Ctrl+F9; observe both total PASS and unique offline marker",
+  "observed_messages": [
+    "GUI_MATRIX_LOOP_PASS",
+    "GUI_MATRIX_DISABLED_PASS",
+    "GUI_MATRIX_BRANCH_PASS",
+    "GUI_MATRIX_FUNCTION_PASS",
+    "GUI_MODLINK_CALL_PASS",
+    "GUI_MODLINK_ALL_PASS",
+    "GUI_OFFLINE_EXEC_69d74dc20471"
+  ],
+  "runtime_evidence": {
+    "kind": "user screenshot and explicit test reply",
+    "screenshot_sha256": "94e4888d0acab942b40ed7c90c8a283352740b36cf95c5c54ae1d401d696d231",
+    "local_copy": "E:\\Program Files (x86)\\StarCraftIIAgent\\.runtime\\trigger-editor-acceptance\\modlink-v2\\evidence\\offline-v2-runtime-pass.png"
+  },
+  "build_id": "bcd15e2a84bd45658cee4ae2961b6b95",
+  "archive_sha256": "a0501d272e1e59856b30ee41f5e3515168fc538341196060eae4830a385caea4",
+  "entry_sha256": "5866e4f9904e495987f369527f77c221831c1ea802f10ba57d2eb1708588e7a2",
+  "archive_member_count": 19,
+  "archive_roundtrip_verified": true,
+  "gui_inputs": {
+    "E:/Program Files (x86)/StarCraft II/.build.info": {
+      "size": 612,
+      "mtime_ns": 1792987860088033300,
+      "sha256": "5566a9aaee29472ea52760d3c86a8c50815247e275a04a1487256a366b42b1e7"
+    },
+    "E:/Program Files (x86)/StarCraft II/Mods/CodexGuiLinkAcceptanceV2.SC2Mod/ComponentList.SC2Components": {
+      "size": 313,
+      "mtime_ns": 1793596767505007500,
+      "sha256": "bbc1912295fc283ef3d2f76ec533a602b4f06f872dfec5cbd117701a6df0b663"
+    },
+    "E:/Program Files (x86)/StarCraft II/Mods/CodexGuiLinkAcceptanceV2.SC2Mod/DocumentInfo": {
+      "size": 185,
+      "mtime_ns": 1793596767504007700,
+      "sha256": "0cfd274984d12b504497577ecb3b45cacb0494c0e5d3b88f66a708f322fc0a79"
+    },
+    "E:/Program Files (x86)/StarCraft II/Mods/CodexGuiLinkAcceptanceV2.SC2Mod/Triggers": {
+      "size": 2756,
+      "mtime_ns": 1793597213371040100,
+      "sha256": "79178d41212df838a150b8a3b16fc91c1880d7093bf0979721ee97a41343bb4f"
+    },
+    "E:/Program Files (x86)/StarCraft II/Mods/CodexGuiLinkAcceptanceV2.SC2Mod/zhCN.SC2Data/LocalizedData/TriggerStrings.txt": {
+      "size": 155,
+      "mtime_ns": 1793596936924154400,
+      "sha256": "74ed3ebe48dfdb0b56b717e0dc983afab221bd65323f2cc098bb11d087f11592"
+    },
+    "E:/Program Files (x86)/StarCraft II/Versions/Base98370/SC2_x64.exe": {
+      "size": 69011664,
+      "mtime_ns": 1791602464946242100,
+      "sha256": "c68202849f8e64ed20d15bea0fb89f2c5b94028d075d9848e124a8264d130222"
+    },
+    "E:/Program Files (x86)/StarCraftIIAgent/.runtime/trigger-editor-acceptance/modlink-v2/GuiModLink.SC2Map/ComponentList.SC2Components": {
+      "size": 440,
+      "mtime_ns": 1793592986700220100,
+      "sha256": "93d97a1f5e2556f37e9e7e04778f19ac9cedc5787cf34761a25b5c2c20fbcaae"
+    },
+    "E:/Program Files (x86)/StarCraftIIAgent/.runtime/trigger-editor-acceptance/modlink-v2/GuiModLink.SC2Map/DocumentInfo": {
+      "size": 155,
+      "mtime_ns": 1793596936923152000,
+      "sha256": "214b35f24cf028d5501a65d124b919dd684f118a5e5c66183aa43ed59f5c57ca"
+    },
+    "E:/Program Files (x86)/StarCraftIIAgent/.runtime/trigger-editor-acceptance/modlink-v2/GuiModLink.SC2Map/enUS.SC2Data/LocalizedData/TriggerStrings.txt": {
+      "size": 2498,
+      "mtime_ns": 1793595056883224200,
+      "sha256": "fd43b4dac0600570c4d4c7189124cddaf2b9a17e1f4e878a04b2cd8618259b85"
+    },
+    "E:/Program Files (x86)/StarCraftIIAgent/.runtime/trigger-editor-acceptance/modlink-v2/GuiModLink.SC2Map/Triggers": {
+      "size": 40949,
+      "mtime_ns": 1793597789254156600,
+      "sha256": "bed046c7b781f834c3966243cc8bae1d18f1927f08c9e57f0174f216d60c9368"
+    },
+    "E:/Program Files (x86)/StarCraftIIAgent/.runtime/trigger-editor-acceptance/modlink-v2/GuiModLink.SC2Map/zhCN.SC2Data/LocalizedData/TriggerStrings.txt": {
+      "size": 964703,
+      "mtime_ns": 1793597789359599700,
+      "sha256": "65f13028d8887d0f48299be59f0cfd98746a7fda131eedfb1b5c9c1785139924"
+    },
+    "E:/Program Files (x86)/StarCraftIIAgent-data/reference/casc/416332de96c043fd/bb10ee62e9cf3678dfa74233d5657757/mods/core.sc2mod/base.sc2data/triggerlibs/librarylist.xml": {
+      "size": 142,
+      "mtime_ns": 1793584882097787400,
+      "sha256": "dc1aefce544b306aaa93c9292eefcb183b5fa5c392ff14f69d2fb66358b7ae2d"
+    },
+    "E:/Program Files (x86)/StarCraftIIAgent-data/reference/casc/416332de96c043fd/bb10ee62e9cf3678dfa74233d5657757/mods/core.sc2mod/base.sc2data/triggerlibs/nativelib.triggerlib": {
+      "size": 7743650,
+      "mtime_ns": 1793584882107320800,
+      "sha256": "cbb2302825dce57ff9bb8efd44f9b0ed5cb056eee00265e5b711b0824d872396"
+    },
+    "E:/Program Files (x86)/StarCraftIIAgent-data/reference/casc/416332de96c043fd/bb10ee62e9cf3678dfa74233d5657757/mods/core.sc2mod/zhcn.sc2data/localizeddata/triggerstrings.txt": {
+      "size": 1390663,
+      "mtime_ns": 1793584882129073300,
+      "sha256": "281e453b7a371f174c5d8011519e3d12ee1968ef20f53026224c67fd3f6b5d85"
+    },
+    "E:/Program Files (x86)/StarCraftIIAgent-data/reference/casc/416332de96c043fd/bb10ee62e9cf3678dfa74233d5657757/mods/liberty.sc2mod/base.sc2data/triggerlibs/libertylib.sc2lib": {
+      "size": 621813,
+      "mtime_ns": 1793584882254009200,
+      "sha256": "7164d3c4f2a549431c4c41a87113baa9698c5d4ab3c3e8f0882d18b85b5899e8"
+    },
+    "E:/Program Files (x86)/StarCraftIIAgent-data/reference/casc/416332de96c043fd/bb10ee62e9cf3678dfa74233d5657757/mods/liberty.sc2mod/base.sc2data/triggerlibs/librarylist.xml": {
+      "size": 129,
+      "mtime_ns": 1793584882257028200,
+      "sha256": "d6b985fb50564d6cade1db9db53ae95bcfa1dc0d9c663d815f3e0037f3be42af"
+    },
+    "E:/Program Files (x86)/StarCraftIIAgent-data/reference/casc/416332de96c043fd/bb10ee62e9cf3678dfa74233d5657757/mods/liberty.sc2mod/zhcn.sc2data/localizeddata/triggerstrings.txt": {
+      "size": 8891,
+      "mtime_ns": 1793584882303546300,
+      "sha256": "d7cd9d4da0a7513dfad316a8bea64c7de4e6d9f942cc7e1d9fe72e5685aa5eea"
+    },
+    "E:/Program Files (x86)/StarCraftIIAgent-data/reference/casc/416332de96c043fd/bb10ee62e9cf3678dfa74233d5657757/official-cache.json": {
+      "size": 853535,
+      "mtime_ns": 1793584882637609500,
+      "sha256": "366fc2fd443119fcbaa55d3102bba6feb101e23772af67d13bbd91234b61e17b"
+    }
+  },
+  "frontend": {
+    "name": "sc2-galaxy-lang",
+    "revision": "95d1ff82b8e89fb0078c4b8e5e6622271b927b94",
+    "node": "v24.22.1"
+  },
+  "static_context": {
+    "entry": "agentgenerated.galaxy",
+    "declarations": [
+      "agent_native_supplement.galaxy"
+    ],
+    "engine_abi_verified": false
+  },
+  "source_generated_files_modified": false,
+  "source_files_rechecked": true,
+  "previous_failure": {
+    "build_id": "9f7c8c678a6b48acaefe1284bdfb8583",
+    "archive_sha256": "8ee6cc764928941bcc15591484a06f476820043192563e7f3023b524cb36e582",
+    "error": "agent_native_supplement.galaxy (5): native function prototype does not match internal function",
+    "declaration": "native void UnitSetInfoButtonTooltip(unit p0, string p1, text p2);",
+    "error_screenshot_sha256": "c1e2d5a4f14a19d0c6db706931b82dcd41104268ea476e4a8c68b287df29e286",
+    "game_log_sha256": "d0d534564e89bb9adc3ca9cdd99035676aadb8661765fa359b3817f430d4689f",
+    "root_cause": "GUI-derived static typing declarations were emitted into runtime code; engine rejected this declaration despite matching GUI metadata",
+    "fix": "Only the real static frontend includes the declaration context; runtime entry and archive exclude it; packaging legacy builds is rejected"
+  },
+  "limits": [
+    "B98370 installation and this scalar-action test only",
+    "No general native ABI verification, library pruning equivalence or full Galaxy frontend/engine equivalence claimed",
+    "Custom Mod GUI function is regenerated into map entry; runtime does not import its original generated Galaxy",
+    "No Editor accepted claim for the offline runtime archive"
+  ]
+}

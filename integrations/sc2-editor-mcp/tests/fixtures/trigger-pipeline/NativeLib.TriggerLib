@@ -1,0 +1,174 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TriggerData>
+  <Standard Id="Ntve" />
+  <Element Type="FunctionDef" Id="00000097">
+    <Identifier>Return</Identifier>
+    <Label Type="Label" Library="Ntve" Id="00000002" />
+    <FlagAction />
+    <FlagOperator />
+    <Parameter Type="ParamDef" Library="Ntve" Id="00000488" />
+    <ScriptCode>
+            return #PARAM(val);
+        </ScriptCode>
+  </Element>
+  <Element Type="FunctionDef" Id="00000120">
+    <Identifier>TriggerAddEventMapInit</Identifier>
+    <Label Type="Label" Library="Ntve" Id="00000009" />
+    <FlagEvent />
+    <FlagNative />
+  </Element>
+  <Element Type="FunctionDef" Id="00000123">
+    <Identifier>customscriptaction</Identifier>
+    <Label Type="Label" Library="Ntve" Id="00000002" />
+    <FlagAction />
+    <FlagCustomScript />
+  </Element>
+  <Element Type="FunctionDef" Id="00000132">
+    <Identifier>And</Identifier>
+    <Label Type="Label" Library="Ntve" Id="00000016" />
+    <FlagCondition />
+    <FlagSubFunctions />
+    <ReturnType>
+      <Type Value="bool" />
+    </ReturnType>
+    <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000002" />
+    <ScriptCode>
+            (#SUBFUNCS(cond," &amp;&amp; "))
+        </ScriptCode>
+  </Element>
+  <Element Type="FunctionDef" Id="00000133">
+    <Identifier>Or</Identifier>
+    <Label Type="Label" Library="Ntve" Id="00000016" />
+    <FlagCondition />
+    <FlagSubFunctions />
+    <ReturnType>
+      <Type Value="bool" />
+    </ReturnType>
+    <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000001" />
+    <ScriptCode>
+            (#SUBFUNCS(cond," || "))
+        </ScriptCode>
+  </Element>
+  <Element Type="FunctionDef" Id="00000136">
+    <Identifier>SetVariable</Identifier>
+    <Label Type="Label" Library="Ntve" Id="CE915C5A" />
+    <FlagAction />
+    <FlagOperator />
+    <Parameter Type="ParamDef" Library="Ntve" Id="00000219" />
+    <Parameter Type="ParamDef" Library="Ntve" Id="00000220" />
+    <ScriptCode>
+            #PARAM(var) = #PARAM(val);
+        </ScriptCode>
+  </Element>
+  <Element Type="FunctionDef" Id="00000137">
+    <Identifier>IfThenElse</Identifier>
+    <Label Type="Label" Library="Ntve" Id="00000002" />
+    <FlagAction />
+    <FlagSubFunctions />
+    <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000003" />
+    <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004" />
+    <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000005" />
+    <ScriptCode>
+            if (#SUBFUNCS(if," &amp;&amp; ")) {
+                #SUBFUNCS(then)
+            }
+            #IFHAVESUBFUNCS(else,else {
+            )
+                #SUBFUNCS(else)
+            #IFHAVESUBFUNCS(else,})
+        </ScriptCode>
+  </Element>
+  <Element Type="FunctionDef" Id="71596144">
+    <Identifier>While</Identifier>
+    <Label Type="Label" Library="Ntve" Id="00000002" />
+    <FlagAction />
+    <FlagSubFunctions />
+    <FlagAllowBreak />
+    <SubFunctionType Type="SubFuncType" Library="Ntve" Id="20298AEC" />
+    <SubFunctionType Type="SubFuncType" Library="Ntve" Id="A1B37466" />
+    <ScriptCode>
+            while (#SUBFUNCS(Conditions," &amp;&amp; ")) {
+                #SUBFUNCS(Actions)
+            }
+        </ScriptCode>
+  </Element>
+  <Element Type="FunctionDef" Id="CEDAB9C3">
+    <Identifier>RepeatForever</Identifier>
+    <Label Type="Label" Library="Ntve" Id="00000002" />
+    <FlagAction />
+    <FlagSubFunctions />
+    <FlagAllowBreak />
+    <SubFunctionType Type="SubFuncType" Library="Ntve" Id="4945FAA8" />
+    <ScriptCode>
+            while (true) {
+                #SUBFUNCS(actions)
+            }
+        </ScriptCode>
+  </Element>
+  <Element Type="Label" Id="00000002">
+    <Color>255,0,128,255</Color>
+    <Icon>Assets\Textures\ui-editoricon-triggercategories_general.dds</Icon>
+  </Element>
+  <Element Type="Label" Id="00000009">
+    <Icon>Assets\Textures\ui-editoricon-triggercategories_game.dds</Icon>
+  </Element>
+  <Element Type="Label" Id="00000016">
+    <Icon>Assets\Textures\ui-editoricon-triggercategories_logic.dds</Icon>
+  </Element>
+  <Element Type="Label" Id="CE915C5A">
+    <Color>255,0,0,255</Color>
+    <Icon>Assets\Textures\ui-editoricon-triggercategories_variable.dds</Icon>
+  </Element>
+  <Element Type="ParamDef" Id="00000219">
+    <Identifier>var</Identifier>
+    <ParameterType>
+      <Type Value="anyvariable" />
+    </ParameterType>
+    <ParamFlagMatchConst />
+  </Element>
+  <Element Type="ParamDef" Id="00000220">
+    <Identifier>val</Identifier>
+    <ParameterType>
+      <Type Value="sameas" />
+      <TypeElement Type="ParamDef" Library="Ntve" Id="00000219" />
+    </ParameterType>
+  </Element>
+  <Element Type="ParamDef" Id="00000488">
+    <Identifier>val</Identifier>
+    <ParameterType>
+      <Type Value="return" />
+    </ParameterType>
+  </Element>
+  <Element Type="SubFuncType" Id="00000001">
+    <Identifier>cond</Identifier>
+    <Condition />
+  </Element>
+  <Element Type="SubFuncType" Id="00000002">
+    <Identifier>cond</Identifier>
+    <Condition />
+  </Element>
+  <Element Type="SubFuncType" Id="00000003">
+    <Identifier>if</Identifier>
+    <Condition />
+  </Element>
+  <Element Type="SubFuncType" Id="00000004">
+    <Identifier>then</Identifier>
+    <Action />
+  </Element>
+  <Element Type="SubFuncType" Id="00000005">
+    <Identifier>else</Identifier>
+    <Action />
+  </Element>
+  <Element Type="SubFuncType" Id="20298AEC">
+    <Identifier>Conditions</Identifier>
+    <Condition />
+  </Element>
+  <Element Type="SubFuncType" Id="4945FAA8">
+    <Identifier>actions</Identifier>
+    <Action />
+  </Element>
+  <Element Type="SubFuncType" Id="A1B37466">
+    <Identifier>Actions</Identifier>
+    <Action />
+  </Element>
+</TriggerData>

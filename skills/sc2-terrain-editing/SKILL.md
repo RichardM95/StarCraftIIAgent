@@ -5,11 +5,24 @@ description: Create and adapt StarCraft II Components maps with sc2-terrain tool
 
 # SC2 Terrain Editing
 
-Use the workspace's [SC2 entry](../sc2-project-entry/SKILL.md), then the [usage guide](../../wiki/guides/sc2-terrain-editing.md) or its English link. Explain technical material in the user's language. The map argument, not the currently selected mod, identifies the actual editing target.
+Follow the workspace's [SC2 entry](../sc2-project-entry/SKILL.md). Read the [usage guide](../../wiki/guides/sc2-terrain-editing.md) when command details are needed. Explain technical material in the user's language. The map argument, not the currently selected mod, identifies the actual editing target.
 
 Use this skill for practical basic map drawing from a reference copy. It includes placing/removing/moving units, doodads and regions, plus creep, roads, foliage, lighting and visibility painting. Full Editor parity and exhaustive menu/property reproduction are optional extensions. Preserve existing ramps/pathing when a requested new operation lacks a writer; disclose that limitation instead of substituting preview output for an edit.
 
 For campaign expansion, scene polishing, bridges or tunnel connections, read [map adaptation and composition](references/map-adaptation.md) before changing the layout. It covers choosing the latest saved baseline, reserving circulation, arranging substantial scenery and separating visual from traversal evidence. For mission objects or GUI organization, continue with [sc2-map-triggers](../sc2-map-triggers/SKILL.md); terrain placement alone does not implement the mission behavior.
+
+## Choose the deliverable
+
+| Request | Action |
+|---|---|
+| Read-only investigation | Query capabilities and inspect/select or scan the supplied map/reference root; report findings |
+| Continue a working copy | Inspect its ownership/history and latest saved state, then plan against that exact copy |
+| Create a new working copy | Inspect reusable maps and their real terrain components/dependencies, then plan/apply to a new workspace output |
+| Learn an unsupported operation | Use a single named Editor experiment with baseline normalization and scoped evidence |
+
+First inspect available reference maps and terrain components. Ask for a map only when the required input cannot be recovered from the supplied target or existing usable references. An Editor save invalidates terrain history; start a new output from the saved map as specified by the operation contract.
+
+The project entry owns mixed-task routing. Terrain hands off the working copy path, changed components and verified object/region IDs. Mission logic then reads fresh context on that copy. Distinguish a bridge's appearance, terrain/elevation data and actual runtime traversability in the completion evidence.
 
 ## Choose the next action
 
@@ -22,9 +35,7 @@ For campaign expansion, scene polishing, bridges or tunnel connections, read [ma
 
 Before extending an accepted operation or diagnosing an Editor difference, read the [scoped Editor evidence](references/editor-evidence.md). It distinguishes tool-generated acceptance from manual experiments and records migration confounders.
 
-When placing or moving units/doodads, choose facing from the layout: guards face approaches, formations share a direction, and walls/pipes follow their intended axis. Use absolute `Rotation` or `face_towards` for rotation in place; `angle` rotates positions around a pivot too. Verify model-specific forward direction and symmetric assets in the Editor. For static blocking scenery, use `doodad-blockers` with actual occupancy evidence and reserved routes; its owned contributions automatically follow subsequent object edits. Native movable/destructible blockers keep their native behavior. Read the [placement and pathing rules](references/operations.md#placement-and-pathing) before adding paint; arbitrary model footprint inference is unsupported.
-
-Check doodad height mode as well as XY. Absolute-height doodads preserve their terrain-relative offset on offset moves/copies and XY alignment. Use `grounding:"snap"` for terrain contact or correcting burial; explicit XYZ placements retain their supplied Z by default. Keep authored bridge/elevated placements with `grounding:"keep-z"`; terrain sampling does not decode platform surfaces or mixed cliff geometry.
+For placement, consult [placement and pathing rules](references/operations.md#placement-and-pathing) for model facing, rotation units, grounding, occupancy profiles and reserved routes. Use actual footprint evidence when adding blockers.
 
 ## Source and completion boundaries
 

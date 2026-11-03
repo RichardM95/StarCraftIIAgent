@@ -83,7 +83,7 @@ bool HTProbeRun (bool testConds, bool runActions) {
     HTProbeSnapshot(templar, "Waiting");
     UnitBehaviorRemove(templar, "CasterWaitingToMoveOut", c_unitBehaviorCountAll);
     HTProbeSnapshot(templar, "Released");
-    UnitCreate(1, "KSCG2HighTemplarCardCaster", c_unitCreateIgnorePlacement, 1, Point(70.0, 40.0), 0.0);
+    UnitCreate(1, "ProbeCasterUnit", c_unitCreateIgnorePlacement, 1, Point(70.0, 40.0), 0.0);
     HTProbeSnapshot(UnitLastCreated(), "CardCaster");
     BankValueSetFromFixed(htProbeBank, "Run", "FinishedGameTime", GameGetMissionTime());
     BankValueSetFromString(htProbeBank, "Run", "Status", "FINISHED");

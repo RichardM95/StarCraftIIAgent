@@ -1,0 +1,25 @@
+{
+  "source": "sc2-galaxy-toolkit/packages/sc2-lsp/tests/fixtures/sc2-map.SC2Map/Triggers",
+  "commit": "95d1ff82b8e89fb0078c4b8e5e6622271b927b94",
+  "sha256": "aada89928caa9ce323d128bbb96db89b1087cbacb64a347b28afc8c48ff85526",
+  "library_precedes_map_root": true,
+  "library_id": "loop",
+  "root_items": [
+    {
+      "Type": "Category",
+      "Library": "loop",
+      "Id": "C7DA882A"
+    },
+    {
+      "Type": "Category",
+      "Library": "loop",
+      "Id": "1A13E77C"
+    },
+    {
+      "Type": "Category",
+      "Library": "loop",
+      "Id": "C99865E1"
+    }
+  ],
+  "evidence_scope": "saved source layout; does not prove the isolated cause of the matrix-v1 Editor failure"
+}

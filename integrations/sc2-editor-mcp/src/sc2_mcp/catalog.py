@@ -19,6 +19,7 @@ from __future__ import annotations
 
 from collections import Counter, defaultdict
 from copy import deepcopy
+from functools import lru_cache
 from dataclasses import dataclass, field
 from pathlib import Path, PurePosixPath
 import hashlib
@@ -69,6 +70,7 @@ def _catalog_name(name: str) -> str:
     raise SC2Error("unsupported_catalog", "未知 Catalog 类型", catalog=name)
 
 
+@lru_cache(maxsize=512)
 def _type_catalog(tag: str) -> str | None:
     if not tag.startswith("C"):
         return None
@@ -120,7 +122,10 @@ class _Patch:
 
 
 class _Library:
-    def __init__(self, roots: list[Path]):
+    def __init__(self, roots: list[Path], *, previous=None, fingerprints=None, document_loader=None):
+        self._previous_documents = previous.documents if previous else {}
+        self._expected_hashes = fingerprints or {}
+        self._document_loader = document_loader
         if not roots:
             raise SC2Error("catalog_roots_required", "必须提供按加载顺序排列的组件路径")
         self.objects: dict[tuple[str, str], list[_Patch]] = defaultdict(list)
@@ -130,6 +135,7 @@ class _Library:
         self.warnings: list[dict] = []
         self.arrays: set[tuple[str, tuple[str, ...]]] = set()
         self._seen: set[Path] = set()
+        self.documents = {}
         self._roots = [Path(root).resolve() for root in roots]
         for layer, root in enumerate(self._roots):
             if not root.is_dir():
@@ -154,6 +160,9 @@ class _Library:
             if manifest:
                 self._load(manifest, data, root, layer, [])
 
+        self._previous_documents = {}
+        self._document_loader = None
+
     def _load(self, path: Path, data: Path, root: Path, layer: int, active: list[Path]) -> None:
         path = path.resolve()
         if path in active:
@@ -162,8 +171,15 @@ class _Library:
             self.warnings.append({"code": "repeated_catalog_include", "file": str(path)})
             return
         self._seen.add(path)
-        raw, document = _xml(path)
-        document_digest = hashlib.sha256(raw).hexdigest()
+        previous = self._previous_documents.get(path)
+        if not previous and self._document_loader:
+            previous = self._document_loader(path,self._expected_hashes.get(str(path)))
+        if previous and previous[0] == self._expected_hashes.get(str(path)):
+            document_digest, document = previous
+        else:
+            raw, document = _xml(path)
+            document_digest = hashlib.sha256(raw).hexdigest()
+        self.documents[path] = (document_digest,document)
         self.files.append(path)
         self.file_sha256[path] = document_digest
         if document.tag not in {"Includes", "Catalog"}:
@@ -198,24 +214,32 @@ class _Library:
                 self.warnings.append({"code": "entry_without_id", "file": str(path), "class": element.tag})
             self._array_hints(element, element.tag, ())
 
-    def _array_hints(self, element: ET.Element, class_name: str, prefix: tuple[str, ...]) -> None:
+    def _array_hints(self, element: ET.Element, class_name: str, prefix: tuple[str, ...], hints=None) -> None:
+        if hints is None:
+            hints = self.arrays
         counts = Counter(child.tag for child in element)
         for child in element:
             path = (*prefix, child.tag)
             if (child.get("index") is not None or child.tag.endswith("Array")
                     or child.tag in _ARRAY_NAMES or counts[child.tag] > 1):
-                self.arrays.add((class_name, path))
-            self._array_hints(child, class_name, path)
+                hints.add((class_name, path))
+            self._array_hints(child, class_name, path, hints)
 
-    def inspect(self, catalog: str, object_id: str) -> dict:
+    def patch_contents(self, patch):
+        return patch.node
+
+    def inspect(self, catalog: str, object_id: str, *, reference_only=False) -> dict:
         key = (catalog, object_id)
         if key not in self.objects:
             raise SC2Error("catalog_object_not_found", "已加载的数据中没有该对象", catalog=catalog, object_id=object_id)
         warnings = deepcopy(self.warnings)
-        tree, inheritance, sources = self._effective(key, [], warnings)
+        tree, inheritance, sources = self._effective(key, [], warnings, history=not reference_only)
         fields: dict[str, dict] = {}
         removed: list[dict] = []
         _flatten(tree, "", fields, removed)
+        if reference_only:
+            return {"catalog":catalog,"object_id":object_id,"class":self.objects[key][-1].node.tag,
+                    "fields":fields,"warnings":warnings}
         return {"catalog": catalog, "object_id": object_id, "class": self.objects[key][-1].node.tag,
                 "fields": fields, "removed": removed, "inheritance": inheritance,
                 "sources": sources, "files": [str(p) for p in self.files],
@@ -224,7 +248,7 @@ class _Library:
                 "limitations": ["仅处理所给 roots；不自动推断缺失依赖", "匿名默认仅按精确类名应用；原生类层次和内建默认未知",
                                 "数组类型由索引、已知数组名和同级重复推断；非完整引擎 schema", "tokens、宏、表达式不求值"]}
 
-    def _effective(self, key: tuple[str, str], active: list[tuple[str, str]], warnings: list[dict]) -> tuple[_Node, list[str], list[dict]]:
+    def _effective(self, key: tuple[str, str], active: list[tuple[str, str]], warnings: list[dict], *, history=True) -> tuple[_Node, list[str], list[dict]]:
         if key in active:
             raise SC2Error("catalog_parent_cycle", "Catalog parent 出现循环", chain=[list(k) for k in [*active, key]])
         patches = self.objects[key]
@@ -237,13 +261,16 @@ class _Library:
         sources: list[dict] = []
         inheritance: list[str] = []
         for patch in self.defaults.get(class_name, []):
-            _merge(result, patch.node, patch.source("class_default"), self.arrays, class_name, (), warnings)
+            _merge(result, self.patch_contents(patch), patch.source("class_default"), self.arrays, class_name, (), warnings,keep_history=history)
             sources.append(patch.source("class_default"))
         if parent:
             parent_key = (key[0], parent)
             if parent_key in self.objects:
-                inherited, ancestors, parent_sources = self._effective(parent_key, [*active, key], warnings)
-                _overlay(result, inherited)
+                inherited, ancestors, parent_sources = self._effective(parent_key, [*active, key], warnings, history=history)
+                if result.children or result.attributes:
+                    _overlay(result, inherited)
+                else:
+                    result = inherited
                 inheritance = [parent, *ancestors]
                 sources.extend(parent_sources)
             else:
@@ -254,7 +281,7 @@ class _Library:
                 raise SC2Error("unsupported_catalog_object_removal", "对象级删除语义尚未验证", object_id=key[1], source=patch.source())
             if patch.node.tag != class_name:
                 warnings.append({"code": "catalog_class_changed", "object_id": key[1], "before": patch.node.tag, "after": class_name})
-            _merge(result, patch.node, patch.source(), self.arrays, class_name, (), warnings)
+            _merge(result, self.patch_contents(patch), patch.source(), self.arrays, class_name, (), warnings,keep_history=history)
             sources.append(patch.source())
         return result, inheritance, sources
 
@@ -295,16 +322,16 @@ def _overlay(target: _Node, source: _Node) -> None:
 
 
 def _merge(target: _Node, patch: ET.Element, source: dict, arrays: set, class_name: str,
-           prefix: tuple[str, ...], warnings: list[dict]) -> None:
+           prefix: tuple[str, ...], warnings: list[dict], *, keep_history=True) -> None:
     if prefix:
         for attr, value in patch.attrib.items():
             if attr in _CONTROL_ATTRIBUTES:
                 continue
             previous = target.attributes.get(attr)
-            history = deepcopy(previous.history) if previous else []
-            if previous:
+            history = deepcopy(previous.history) if previous and keep_history else []
+            if previous and keep_history:
                 history.append({"value": previous.value, "source": deepcopy(previous.source)})
-            target.attributes[attr] = _Value(value, deepcopy(source), history)
+            target.attributes[attr] = _Value(value, deepcopy(source) if keep_history else source, history)
             if "##" in value or "$" in value:
                 warnings.append({"code": "unevaluated_catalog_expression", "path": ".".join(prefix), "value": value, "source": source})
     if patch.text and patch.text.strip():
@@ -337,7 +364,7 @@ def _merge(target: _Node, patch: ET.Element, source: dict, arrays: set, class_na
             warnings.append({"code": "unknown_removed_value", "path": ".".join(path), "source": source})
         existing.removed = False
         existing.removal_source = None
-        _merge(existing, child, child_source, arrays, class_name, path, warnings)
+        _merge(existing, child, child_source, arrays, class_name, path, warnings,keep_history=keep_history)
 
 
 def _flatten(node: _Node, prefix: str, fields: dict, removed: list) -> None:
@@ -374,8 +401,8 @@ class CatalogSession:
     def search(self, catalog: str, query: str = "", limit: int = 100) -> list[dict]:
         return _search(self._library, catalog, query, limit)
 
-    def trace(self, catalog: str, object_id: str) -> dict:
-        return _trace(self._library, catalog, object_id)
+    def trace(self, catalog: str, object_id: str, dependencies_complete=True) -> dict:
+        return _trace(self._library, catalog, object_id, dependencies_complete)
 
     def catalog_names(self) -> list[str]:
         return sorted({kind for kind, _identifier in self._library.objects})
@@ -442,6 +469,7 @@ def _search(library: _Library, catalog: str, query: str, limit: int) -> list[dic
     return sorted(result, key=lambda item: item["object_id"].casefold())[:limit]
 
 
+@lru_cache(maxsize=8192)
 def _reference_kind(path: str, owner_class: str) -> str | None:
     tags = [re.sub(r"\[[^\]]*\]", "", part) for part in path.split(".")]
     leaf = tags[-1]
@@ -467,57 +495,134 @@ def _reference_kind(path: str, owner_class: str) -> str | None:
     return None
 
 
-def trace_references(roots: list[Path], catalog: str, object_id: str) -> dict:
-    return _trace(_Library(roots), catalog, object_id)
+def _effective_link(library, owner, path, record, complete=True, tombstone=None):
+    """Resolve only the verified link slots, after merging their XML layers."""
+    cls = owner["class"]
+    if cls == "CEffectApplyBehavior" and path == "Behavior":
+        kind = "Behavior"
+    elif cls == "CActorAction" and (path in {"LaunchAssets.Model", "ContainerAssets.Model"}
+                                     or re.fullmatch(r"(ImpactMap|DamageMap)\[[^\]]+\]\.Model", path)):
+        kind = "Model"
+    elif cls == "CActorAction" and path in {"LaunchModel", "ImpactModel", "DamageModel", "Missile"}:
+        kind = "Actor"
+    else:
+        return None
+    raw = record["value"] if record else None
+    source = (tombstone or record or {}).get("source")
+    link = {"catalog": kind, "object_id": None, "raw_value": raw, "source": source, "status": "unknown"}
+    if not complete:
+        return {**link, "reason": "source_context_incomplete"}
+    if any(w["code"] in {"missing_catalog_parent", "catalog_class_changed"} for w in owner["warnings"]):
+        return {**link, "reason": "inheritance_incomplete"}
+    if tombstone:
+        return {**link, "status": "removed"}
+    if raw is None:
+        return {**link, "reason": "no_effective_field"}
+    if raw == "":
+        return {**link, "status": "cleared"}
+    identifier = owner["object_id"]
+    value = raw.replace("##id##", identifier)
+    if "#" in value or "$" in value or (value != raw and not re.fullmatch(r"[A-Za-z0-9_]*##id##[A-Za-z0-9_]*", raw)):
+        return {**link, "reason": "unsupported_token"}
+    if raw != value and any(p.node.get("default") == "1" for p in library.objects[(owner["catalog"], identifier)]):
+        return {**link, "reason": "template_requires_concrete_object"}
+    if (kind, value) in library.objects:
+        status = "resolved"
+    elif (source["object_id"] == "GenericAttackBase" and
+          (path, raw) in {("LaunchAssets.Model", "##id##Launch"), ("ImpactMap[None].Model", "##id##Impact"),
+                          ("DamageMap[None].Model", "##id##Damage"), ("Missile", "##id##Missile")}):
+        status = "optional_default_absent"
+    else:
+        status = "missing_in_roots"
+    return {**link, "object_id": value, "status": status}
 
 
-def _trace(library: _Library, catalog: str, object_id: str) -> dict:
-    catalog = _catalog_name(catalog)
-    target = library.inspect(catalog, object_id)
-    index: dict[str, list[str]] = defaultdict(list)
+def trace_references(roots: list[Path], catalog: str, object_id: str, dependencies_complete=True) -> dict:
+    return _trace(_Library(roots), catalog, object_id, dependencies_complete)
+
+
+def _id_index(library):
+    index = defaultdict(list)
     for kind, identifier in library.objects:
         index[identifier].append(kind)
-    edges: list[dict] = []
-    missing: list[dict] = []
-    trace_warnings = []
-    cached = getattr(library, "_reference_cache", None)
-    for (kind, identifier), patches in ([] if cached is not None else library.objects.items()):
-        try:
-            effective = library.inspect(kind, identifier)
-        except SC2Error as exc:
-            if exc.code != "catalog_parent_cycle":
-                raise
-            trace_warnings.append({"code": exc.code, **exc.details})
-            continue
-        values = list(effective["fields"].items())
-        parent_patch = next((patch for patch in reversed(patches) if "parent" in patch.node.attrib), None)
-        if parent_patch and parent_patch.node.get("parent"):
-            values.append(("parent", {"value": parent_patch.node.get("parent"), "source": parent_patch.source()}))
-        for path, info in values:
-            value = info["value"]
-            if not value:
-                continue
-            expected_kind = _reference_kind(path, effective["class"])
-            if path.endswith("AbilCmd"):
-                value = value.split(",", 1)[0]
-            if expected_kind:
-                candidates = [expected_kind]
-                confidence = "typed_field"
-            else:
-                candidates = index.get(value, [])
-                confidence = "exact_id_candidate"
-            for referenced_kind in candidates:
+    return index
+
+
+def _owner_edges(library, key, index, dependencies_complete, *, include_warnings=False):
+    kind, identifier = key
+    patches = library.objects[key]
+    edges, missing, trace_warnings = [], [], []
+    try:
+        effective = library.inspect(kind, identifier,reference_only=True)
+    except SC2Error as exc:
+        if exc.code != "catalog_parent_cycle":
+            raise
+        result = (edges, missing, [{"code":exc.code, **exc.details}])
+        return (*result,None) if include_warnings else result
+    values = list(effective["fields"].items())
+    parent_patch = next((patch for patch in reversed(patches) if "parent" in patch.node.attrib), None)
+    if parent_patch and parent_patch.node.get("parent"):
+        values.append(("parent", {"value": parent_patch.node.get("parent"), "source": parent_patch.source()}))
+    for path, info in values:
+        value = info["value"]
+        link = _effective_link(library, effective, path, info, dependencies_complete)
+        if link:
+            status = link["status"]
+            if status in {"resolved", "missing_in_roots"}:
                 edge = {"from": {"catalog": kind, "object_id": identifier}, "field": path,
-                        "to": {"catalog": referenced_kind, "object_id": value},
-                        "source": info["source"], "confidence": confidence}
-                if (referenced_kind, value) in library.objects:
-                    edges.append(edge)
-                else:
-                    missing.append(edge)
-    if cached is None:
-        library._reference_cache = (edges, missing, trace_warnings)
-    else:
-        edges, missing, trace_warnings = cached
+                        "to": {"catalog": link["catalog"], "object_id": link["object_id"]},
+                        "source": info["source"], "confidence": "typed_field", "reference": link}
+                (edges if status == "resolved" else missing).append(edge)
+            elif status in {"unknown", "optional_default_absent"}:
+                trace_warnings.append({"code": "catalog_link_" + status, "catalog": kind,
+                                       "object_id": identifier, "field": path, "reference": link})
+            continue
+        if not value:
+            continue
+        expected_kind = _reference_kind(path, effective["class"])
+        if path.endswith("AbilCmd"):
+            value = value.split(",", 1)[0]
+        if expected_kind:
+            candidates = [expected_kind]
+            confidence = "typed_field"
+        else:
+            candidates = index.get(value, [])
+            confidence = "exact_id_candidate"
+        for referenced_kind in candidates:
+            edge = {"from": {"catalog": kind, "object_id": identifier}, "field": path,
+                    "to": {"catalog": referenced_kind, "object_id": value},
+                    "source": info["source"], "confidence": confidence}
+            if (referenced_kind, value) in library.objects:
+                edges.append(edge)
+            else:
+                missing.append(edge)
+    result = (edges, missing, trace_warnings)
+    if include_warnings:
+        return (*result,effective["warnings"][len(library.warnings):])
+    return result
+
+
+def reference_graph(library, complete=True):
+    if getattr(library,"_reference_complete",None) == complete:
+        return library._reference_cache
+    result = ([], [], [])
+    index = _id_index(library)
+    for key in library.objects:
+        for rows, additions in zip(result, _owner_edges(library,key,index,complete)):
+            rows.extend(additions)
+    library._reference_cache = result
+    library._reference_complete = complete
+    return result
+
+
+def _trace(library: _Library, catalog: str, object_id: str, dependencies_complete=True) -> dict:
+    catalog = _catalog_name(catalog)
+    target = library.inspect(catalog,object_id)
+    graph = reference_graph(library,dependencies_complete)
+    return _trace_rows(catalog,object_id,target,*graph)
+
+
+def _trace_rows(catalog,object_id,target,edges,missing,trace_warnings,direct=False):
     origin = {"catalog": catalog, "object_id": object_id}
     outgoing = [edge for edge in edges if edge["from"] == origin]
     incoming = [edge for edge in edges if edge["to"] == origin]
@@ -527,7 +632,7 @@ def _trace(library: _Library, catalog: str, object_id: str) -> dict:
     adjacency: dict[tuple[str, str], list[dict]] = defaultdict(list)
     for edge in edges:
         adjacency[(edge["from"]["catalog"], edge["from"]["object_id"])].append(edge)
-    while pending:
+    while pending and not direct:
         item = pending.pop()
         for edge in adjacency[item]:
             ref = (edge["to"]["catalog"], edge["to"]["object_id"])
@@ -539,8 +644,10 @@ def _trace(library: _Library, catalog: str, object_id: str) -> dict:
     return {"catalog": catalog, "object_id": object_id, "outgoing": outgoing,
             "incoming": incoming, "reachable": reachable, "missing": missing,
             "edges": [edge for edge in edges if (edge["from"]["catalog"], edge["from"]["object_id"]) in visited],
-            "warnings": target["warnings"] + trace_warnings, "engine_parity": False,
-            "limitations": ["类型映射覆盖常见字段；其余同 ID 匹配仅为候选引用", "不解释 Actor 事件语法、宏、脚本动态引用"]}
+            "warnings": target["warnings"] + [w for w in trace_warnings if "reference" not in w
+                                              or (w["catalog"], w["object_id"]) in visited], "engine_parity": False,
+            "limitations": ["类型映射覆盖常见字段；其余同 ID 匹配仅为候选引用",
+                            "仅在支持的动作演算体和应用行为字段展开 ##id##；不解释 Actor 事件或动态脚本"]}
 
 
 @dataclass

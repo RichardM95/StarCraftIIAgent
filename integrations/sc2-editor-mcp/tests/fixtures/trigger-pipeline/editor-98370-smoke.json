@@ -1,0 +1,35 @@
+{
+  "date": "2026-11-02",
+  "scope": "GUI map-init event, scalar assignment, playergroup/preset/text parameters, UI message",
+  "operator": "user",
+  "user_report": "一切正常",
+  "status": "packaged runtime passed",
+  "editor_validation": "User confirmed open, GUI inspection, Components save and Ctrl+F9 test; saved XML and generated script independently read back",
+  "runtime_validation": {
+    "steps": [
+      "Open independent GuiPipeline.SC2Map",
+      "Save Components",
+      "Ctrl+F9",
+      "Observe GUI_PIPELINE_PASS_20261102"
+    ],
+    "observed": "User confirmed all requested checks normal",
+    "client_build": "Base98370",
+    "evidence_source": "user report; local client session log corroborates process launch, not UI content"
+  },
+  "hashes": {
+    "saved_triggers": "fe8724746ad4b3326ba00d4f58338bb0966c8476cc18abf1c2ad0fd3488e275a",
+    "saved_galaxy": "8e647340c054fb910ec65f422d7f1607e5d17b49f2081b86b85e27237e4e4118",
+    "offline_galaxy": "b04f160ff112d5171d3e774b462af68cbf6fb665efca39f0065c9daa488d0bc7",
+    "editor_launcher": "ed6e2636af6dc4cd2dd67c1ed6f6f3d14188628749e1498693cb9f09098eee17"
+  },
+  "triggers_xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<TriggerData>\n    <Root>\n        <Item Type=\"Variable\" Id=\"AC010001\"/>\n        <Item Type=\"Trigger\" Id=\"AC01000B\"/>\n    </Root>\n    <Element Type=\"Variable\" Id=\"AC010001\">\n        <Identifier>PipelineResult</Identifier>\n        <VariableType>\n            <Type Value=\"int\"/>\n        </VariableType>\n    </Element>\n    <Element Type=\"Trigger\" Id=\"AC01000B\">\n        <Identifier>PipelineInit</Identifier>\n        <Event Type=\"FunctionCall\" Id=\"AC01000A\"/>\n        <Action Type=\"FunctionCall\" Id=\"AC010004\"/>\n        <Action Type=\"FunctionCall\" Id=\"AC010009\"/>\n    </Element>\n    <Element Type=\"FunctionCall\" Id=\"AC01000A\">\n        <FunctionDef Type=\"FunctionDef\" Library=\"Ntve\" Id=\"00000120\"/>\n    </Element>\n    <Element Type=\"FunctionCall\" Id=\"AC010004\">\n        <FunctionDef Type=\"FunctionDef\" Library=\"Ntve\" Id=\"00000136\"/>\n        <Parameter Type=\"Param\" Id=\"AC010002\"/>\n        <Parameter Type=\"Param\" Id=\"AC010003\"/>\n    </Element>\n    <Element Type=\"Param\" Id=\"AC010002\">\n        <ParameterDef Type=\"ParamDef\" Library=\"Ntve\" Id=\"00000219\"/>\n        <Variable Type=\"Variable\" Id=\"AC010001\"/>\n    </Element>\n    <Element Type=\"Param\" Id=\"AC010003\">\n        <ParameterDef Type=\"ParamDef\" Library=\"Ntve\" Id=\"00000220\"/>\n        <Value>7</Value>\n        <ValueType Type=\"int\"/>\n    </Element>\n    <Element Type=\"FunctionCall\" Id=\"AC010009\">\n        <FunctionDef Type=\"FunctionDef\" Library=\"Ntve\" Id=\"0366EE04\"/>\n        <Parameter Type=\"Param\" Id=\"AC010006\"/>\n        <Parameter Type=\"Param\" Id=\"AC010007\"/>\n        <Parameter Type=\"Param\" Id=\"AC010008\"/>\n    </Element>\n    <Element Type=\"Param\" Id=\"AC010006\">\n        <ParameterDef Type=\"ParamDef\" Library=\"Ntve\" Id=\"0D120C33\"/>\n        <FunctionCall Type=\"FunctionCall\" Id=\"AC010005\"/>\n    </Element>\n    <Element Type=\"FunctionCall\" Id=\"AC010005\">\n        <FunctionDef Type=\"FunctionDef\" Library=\"Ntve\" Id=\"00000192\"/>\n    </Element>\n    <Element Type=\"Param\" Id=\"AC010007\">\n        <ParameterDef Type=\"ParamDef\" Library=\"Ntve\" Id=\"A4C19F41\"/>\n        <Preset Type=\"PresetValue\" Library=\"Ntve\" Id=\"89CC0A21\"/>\n    </Element>\n    <Element Type=\"Param\" Id=\"AC010008\">\n        <ParameterDef Type=\"ParamDef\" Library=\"Ntve\" Id=\"78A54B52\"/>\n        <ValueType Type=\"text\"/>\n    </Element>\n</TriggerData>",
+  "editor_galaxy": "//==================================================================================================\n// \n// Generated Map Script\n// \n// Name:   \n// \n//==================================================================================================\ninclude \"TriggerLibs/NativeLib\"\n\n//--------------------------------------------------------------------------------------------------\n// Library Initialization\n//--------------------------------------------------------------------------------------------------\nvoid InitLibs () {\n    libNtve_InitLib();\n}\n\n//--------------------------------------------------------------------------------------------------\n// Global Variables\n//--------------------------------------------------------------------------------------------------\nint gv_PipelineResult;\n\nvoid InitGlobals () {\n}\n\n//--------------------------------------------------------------------------------------------------\n// Trigger Variables\n//--------------------------------------------------------------------------------------------------\ntrigger gt_PipelineInit;\n\n//--------------------------------------------------------------------------------------------------\n// Trigger: Pipeline Initialization\n//--------------------------------------------------------------------------------------------------\nbool gt_PipelineInit_Func (bool testConds, bool runActions) {\n    // Automatic Variable Declarations\n    // Actions\n    if (!runActions) {\n        return true;\n    }\n\n    gv_PipelineResult = 7;\n    UIDisplayMessage(PlayerGroupAll(), c_messageAreaChat, StringExternal(\"Param/Value/AC010008\"));\n    return true;\n}\n\n//--------------------------------------------------------------------------------------------------\nvoid gt_PipelineInit_Init () {\n    gt_PipelineInit = TriggerCreate(\"gt_PipelineInit_Func\");\n    TriggerAddEventMapInit(gt_PipelineInit);\n}\n\n//--------------------------------------------------------------------------------------------------\n// Trigger Initialization\n//--------------------------------------------------------------------------------------------------\nvoid InitTriggers () {\n    gt_PipelineInit_Init();\n}\n\n//--------------------------------------------------------------------------------------------------\n// Map Initialization\n//--------------------------------------------------------------------------------------------------\nvoid InitMap () {\n    InitLibs();\n    InitGlobals();\n    InitTriggers();\n}\n",
+  "matching_statements": [
+    "gv_PipelineResult = 7;",
+    "UIDisplayMessage(PlayerGroupAll(), c_messageAreaChat, StringExternal(\"Param/Value/AC010008\"));",
+    "gt_PipelineInit = TriggerCreate(\"gt_PipelineInit_Func\");",
+    "TriggerAddEventMapInit(gt_PipelineInit);"
+  ],
+  "known_difference": "Offline build conservatively retains loaded Liberty library initialization; Editor saved output includes NativeLib only. Library pruning parity is not established.",
+  "offline_runtime_tested": false
+}

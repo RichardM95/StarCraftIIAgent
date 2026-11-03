@@ -117,6 +117,7 @@ def test_project_runtime_routes_across_clients_and_refuses_stale_candidate(tmp_p
         result = first.call('sc2_catalog_set', {'project_id': key, 'catalog_type': 'Unit',
             'object_id': 'TestUnit', 'field_path': 'LifeMax', 'value': '120', 'expected': '100', 'preview_only': True})
         change_id = result['result']['change_id']
+        assert second.call('sc2_project_list')['result']['projects'][0]['project_id'] == key
         inspected = second.call('sc2_changes_inspect', {'project_id': key, 'change_id': change_id})
         assert inspected['result']['state'] == 'prepared'
         assert Path(inspected['result']['candidate']).is_relative_to(tmp_path / 'runtime/projects')
@@ -132,9 +133,128 @@ def test_project_runtime_routes_across_clients_and_refuses_stale_candidate(tmp_p
 def test_project_specific_and_generated_edit_operations_not_exposed(tmp_path):
     dispatcher = Dispatcher(tmp_path / 'state')
     try:
-        assert not any(name.startswith('sc2_keystone_') for name in dispatcher.operations)
         assert 'sc2_script_replace' not in dispatcher.operations
         with pytest.raises(SC2Error, match='not exposed'):
             dispatcher.call('sc2_script_replace', {})
     finally:
         dispatcher.close()
+
+def test_routing_inventory_and_restart(tmp_path, monkeypatch):
+    monkeypatch.setenv("SC2_AGENT_RUNTIME_ROOT", str(tmp_path / "runtime"))
+    client = Dispatcher(tmp_path / "index", project_states=True)
+    try:
+        manifest = Path(__file__).resolve().parents[2] / "CAPABILITIES.json"
+        rows = json.loads(manifest.read_text("utf-8"))["operations"]
+        assert set(client.operations) == {r["operation"] for r in rows if r["ownership"] != "excluded_project_or_generated_source"}
+        ids = []
+        for name in ("A", "B"):
+            parent = tmp_path / name
+            parent.mkdir()
+            ids.append(client.call("sc2_project_open", {"path": str(component(parent))})["result"]["project_id"])
+        for _ in range(2):
+            assert {p["project_id"] for p in client.call("sc2_project_list")["result"]["projects"]} == set(ids)
+        client.close()
+        client = Dispatcher(tmp_path / "index", project_states=True)
+        for key in ids:
+            assert client.call("sc2_project_read_text", {"project_id":key, "path":"DocumentInfo"})["ok"]
+    finally:
+        client.close()
+
+
+def test_report_pages_reconstruct_original(tmp_path):
+    client = Dispatcher(tmp_path / "state")
+    try:
+        root = component(tmp_path)
+        (root / "large.txt").write_text(('abcd中文"\\' * 15000), encoding="utf-8")
+        key = client.call("sc2_project_open", {"path":str(root)})["result"]["project_id"]
+        report = client.call("sc2_project_read_text", {"project_id":key,"path":"large.txt","limit":100000})["result"]
+        offset, parts = 0, []
+        while offset is not None:
+            page = client.call("sc2_report_read", {"name":report["report_name"], "offset":offset,"limit":100000})["result"]
+            assert len(json.dumps(page, ensure_ascii=False)) <= 48000
+            parts.append(page["text"])
+            offset = page["next_offset"]
+        assert "".join(parts) == Path(report["report_file"]).read_text("utf-8")
+    finally:
+        client.close()
+
+
+def test_effect_candidate_with_missing_then_restored_dependency(tmp_path, monkeypatch):
+    root = component(tmp_path)
+    (root / "DocumentInfo").write_text("<DocInfo><Dependencies><Value>file:Mods/External.SC2Mod</Value></Dependencies></DocInfo>")
+    mods = tmp_path / "Mods"
+    mods.mkdir()
+    data = root / "Base.SC2Data/GameData"
+    (data / "EffectData.xml").write_text('<Catalog><CEffectApplyBehavior id="Buff"><Behavior value="Old"/></CEffectApplyBehavior></Catalog>')
+    (data / "BehaviorData.xml").write_text('<Catalog><CBehaviorBuff id="Old"/></Catalog>')
+    service = Service(tmp_path / "state")
+    monkeypatch.setattr(service, "editor_conflict", lambda: None)
+    try:
+        key = service.projects.open(str(root), True, search_roots=[mods])["project_id"]
+        def preview():
+            return service.edit(key, "catalog_set", {"catalog":"Effect","object_id":"Buff","field_path":"Behavior","expected":"Old","value":"ExternalBuff"}, preview_only=True)
+        with pytest.raises(SC2Error) as partial:
+            preview()
+        assert partial.value.code == "reference_dependencies_incomplete"
+        report = partial.value.details["report"]
+        assert report["source_coverage"]["after"]["missing"] and report["static"] == "partial"
+        assert any(row.get("field") == "Behavior" and row["reference"]["raw_value"] == "ExternalBuff" for row in report["unresolved"])
+        dep = mods / "External.SC2Mod"
+        folder = dep / "Base.SC2Data/GameData"
+        folder.mkdir(parents=True)
+        (dep / "DocumentInfo").write_text("<DocInfo/>")
+        target = folder / "BehaviorData.xml"
+        target.write_text('<Catalog><CBehaviorBuff id="ExternalBuff"/></Catalog>')
+        assert preview()["state"] == "prepared"
+        target.write_text('<Catalog/>')
+        with pytest.raises(SC2Error) as broken:
+            preview()
+        assert broken.value.code == "new_missing_references"
+    finally:
+        service.jobs.shutdown()
+
+def test_template_routes_and_evidence_across_restarts(tmp_path, monkeypatch):
+    monkeypatch.setenv("SC2_AGENT_RUNTIME_ROOT", str(tmp_path / "runtime"))
+    client = Dispatcher(tmp_path / "index", project_states=True)
+    try:
+        def call(op, **args):
+            return client.call(op, args)["result"]
+        def register(name):
+            root = tmp_path / (name + ".SC2Mod")
+            root.mkdir()
+            for path, raw in [("DocumentInfo","<DocInfo/>"),("ComponentList.SC2Components","<Components/>"),("DocumentHeader",name)]:
+                (root / path).write_text(raw)
+            key = call("sc2_project_open", path=str(root))["project_id"]
+            proof = tmp_path / (name + ".txt")
+            proof.write_text("Synthetic routing fixture")
+            eid = call("sc2_validate_record",project_id=key,level="editor",status="passed",evidence_path=str(proof),notes="fixture")["id"]
+            call("sc2_project_register_template",project_id=key,name="Sample",evidence_id=eid)
+            return key, root, proof
+        key, root, proof = register("First")
+        client.close()
+        client = Dispatcher(tmp_path / "index", project_states=True)
+        target = tmp_path / "Copy.SC2Mod"
+        created = call("sc2_project_create",template="Sample",destination=str(target))
+        assert call("sc2_project_open",path=str(target))["project_id"] == created["project_id"]
+        with pytest.raises(SC2Error,match="副本"):
+            call("sc2_project_create",template="Sample",destination=str(target))
+        register("Second")
+        fresh = tmp_path / "Another.SC2Mod"
+        args = dict(template="Sample",destination=str(fresh))
+        with pytest.raises(SC2Error) as ambiguous:
+            call("sc2_project_create",**args)
+        assert len(ambiguous.value.details["candidates"]) == 2 and not fresh.exists()
+        args["template_project_id"] = key
+        call("sc2_project_create",**args)
+        args["destination"] = str(tmp_path / "Unused.SC2Mod")
+        proof.write_text("changed")
+        with pytest.raises(SC2Error) as stale:
+            call("sc2_project_create",**args)
+        assert stale.value.code == "evidence_changed"
+        (root / "DocumentHeader").write_text("updated")
+        with pytest.raises(SC2Error) as stale:
+            call("sc2_project_create",**args)
+        assert stale.value.code == "template_changed"
+        assert not Path(args["destination"]).exists()
+    finally:
+        client.close()

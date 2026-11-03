@@ -66,6 +66,15 @@ def test_clone_independent_hash_parity_without_service_metadata(setup, tmp_path)
     assert result["writable"] is True
     (target / "MapScript.galaxy").write_bytes(b"changed")
     assert (root / "MapScript.galaxy").read_bytes() == b"void f(){}"
+    # SkyShield's generic copy boundary: unexpected additions and deletions
+    # must remain visible in a candidate snapshot, with the source untouched.
+    baseline = snapshot(root)
+    (target / "DocumentInfo").unlink()
+    (target / "unexpected.txt").write_text("extra")
+    copied = snapshot(target)
+    assert baseline.keys() - copied.keys() == {"DocumentInfo"}
+    assert copied.keys() - baseline.keys() == {"unexpected.txt"}
+    assert snapshot(root) == baseline
 
 
 def test_clone_rejects_nested_or_existing_destination(setup, tmp_path):
@@ -75,12 +84,6 @@ def test_clone_rejects_nested_or_existing_destination(setup, tmp_path):
         with pytest.raises(SC2Error) as error:
             registry.clone(record["project_id"], str(destination))
         assert error.value.code == "invalid_destination"
-
-
-def test_keystone_detection_cannot_be_disabled_by_generic_profile(setup):
-    root, registry = setup
-    (root / "MapScript.galaxy").write_bytes(b"int lib1_gv_mAX_CARD_ID = 123;")
-    assert registry.open(str(root), profile="generic")["profile"] == "keystone"
 
 
 def test_invalid_xml_and_wrong_root_are_not_component_maps(setup):

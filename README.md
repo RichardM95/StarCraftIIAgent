@@ -8,11 +8,19 @@
 
 [安装指南](setup.md) · [工作区规则](AGENTS.md) · [Wiki](wiki/index.md) · [工具指南](tools/README.md) · [完整开发示例](wiki/guides/development-conversations.md)
 
-## 简介
+## 从你的第一项任务开始
 
-在能够读取本地工作区并执行工具的 AI 助手中打开本目录，用自然语言描述要调查、修改或制作的内容。智能体会按任务读取规则与技能，核对当前项目及依赖，再操作实际开发源。
+| 可以直接发送的请求 | 第一次回复应给你什么 |
+|---|---|
+| “查一个官方战役里只完成一次任务目标的例子。” | 来源组件、触发器和生效条件。只读研究无需初始化项目。 |
+| “检查 `<地图.SC2Map>` 里的撤离区触发器，先预览怎样改成只有玩家 1 能完成一次。” | 实际检查的 Components 地图路径、区域和现有条件，再展示拟修改的行为。 |
+| “我的主 Mod 在 `<主模组.SC2Mod>`，请初始化项目。” | 解析出的主项目、实际编辑源和活动依赖。 |
 
-知识库包含 WoL/HotS/LotV 的 DataEditorXML 导出、W3C XSD schema，以及 Catalog、Actor、GUI 触发器、Galaxy 和 Bank 参考。参考资料用于查询；当前项目实际加载的数据以配置和组件证据为准。
+在助手中打开本工作区，将路径替换成实际 Components 目录。[用户与智能体的对话示例](wiki/guides/development-conversations.md#saved-map-examples) · [游戏内对白制作案例](wiki/reference/trigger-dialogue-examples.md)
+
+## 按任务准备环境
+
+基础工具推荐 Windows 和 Python 3.12。使用共享 CLI/MCP 时安装独立的 Python 3.12+ 环境。离线 Galaxy 编译还需要 Node 22+ 和已安装的前端。编辑器与游戏验收需要本机 SC2，正式 XML schema 校验需要 lxml 或 xmllint。[安装指南](setup.md) · [完整集成回归与 Windows UAC 补验](wiki/guides/shared-tools.md)
 
 ## 功能概览
 
@@ -28,68 +36,6 @@
 | 检查、部署与项目资料 | 静态校验、日志排错、部署预览及授权部署，维护设计与问题账本 | 明确目标、检查范围或复现材料 | 静态检查不能替代编辑器和打包运行验收 |
 
 基础工作流使用本地规则、技能和 Python 工具。共享 CLI/MCP、模型分包及 Harness2 是可选扩展，分别需要本机环境和连接配置；未安装时仍可使用不依赖它们的功能。
-
-## 环境要求
-
-- Windows，建议 Windows x64 Python 3.12；共享工具要求 Python 3.12+。
-- 能够读取本地工作区并执行工具的 AI 助手。
-- 已安装 StarCraft II；编辑器保存、视觉检查和游戏验证需要对应环境可用。
-- 正式 XML schema 校验需要 `lxml`（`python -m pip install lxml`）或可执行的 `xmllint`；缺少后端时不能报告正式校验通过。
-- 可选 Harness2 需要 Linux/WSL、Python 3.12/3.13 和自己的 Codex 登录；模型分包另需本机 Harness 与已保存的 provider/model 配置。
-
-## 快速开始
-
-### 1. 打开工作区
-
-在 AI 助手中打开本目录，发送：
-
-```text
-先读取 AGENTS.md 和 skills/sc2-project-entry/SKILL.md，再按我的任务加载对应技能。
-```
-
-无需将整套技能重复安装到全局目录。若宿主不能自动发现技能，明确要求读取上述文件即可。
-
-### 2. 检查环境
-
-在工作区根目录运行，或让智能体执行：
-
-```powershell
-python tools/test-suite.py --ui-language zh-CN --scope docs
-python tools/test-suite.py --ui-language zh-CN --scope tools
-```
-
-这两项不要求选择项目。缺失环境的安装方法见 [setup.md](setup.md)。
-
-### 3. 初始化项目
-
-提供主 Mod 的 Components 文件夹路径，例如：
-
-```text
-我的主 Mod 文件夹是 E:\Program Files (x86)\StarCraft II\Mods\MyCampaign.SC2Mod，请完成项目初始化。
-```
-
-智能体会运行 `python tools/init-project.py "<主Mod路径>"`，推导路径、递归检查本地依赖并验证项目身份。只有归档或尚未保存组件时，先按[初始化指南](wiki/guides/project-initialization.md)准备有效输入。
-
-`agent-config.json` 由初始化工具生成，保存本机项目路径，不随 Git 分发，无需手工编辑。新克隆没有此文件是正常情况；不要复制其他机器的活动项目配置。
-
-### 4. 提出任务
-
-说明目标和期望结果即可。单位名称有歧义或目标不明确时，智能体应先查询并澄清；配置与源码中已有的信息无需重复提供。
-
-## 常见场景示例
-
-以下六类请求可直接发送；路径和对象名称替换为自己的项目内容。
-
-| 需求 | 简短请求 | 预期交付 |
-|---|---|---|
-| 初始化项目 | 我的主 Mod 文件夹是 `<Components路径>`，请完成初始化。 | 路径、递归依赖、实际编辑源与项目身份核对结果 |
-| 查询单位 | 帮我看看当前项目中陆战队员的生命、武器和生产条件，这次只查询。 | 对应对象、有效值、本地覆盖和依赖来源 |
-| 修改属性 | 把当前项目中陆战队员的基础生命改成120，其他属性保持原样，先不用部署。 | 修改前后基础值、实际源修改和相关静态检查 |
-| 添加技能 | 给追猎者添加一个冷却10秒的“暗影闪现”，保留原技能。 | 独立能力、按钮和命令卡接线、文字及相关检查 |
-| GUI 任务目标 | 在 `<地图路径>` 中增加目标“摧毁三座敌方基地”，目标是 `<三个对象>`。 | 可编辑 GUI 目标与计数逻辑、引用检查和游戏验证步骤 |
-| 只读检查 | 检查当前项目有什么问题，这次不修改文件。 | 实际目标、检查范围、通过项、失败项与待验项 |
-
-完整需求见[36个开发场景](wiki/guides/development-conversations.md)，跨技能接入见[18个技能场景与两组多轮对话](wiki/guides/skill-conversations.md)，地形专项见[26个制图场景与两组多轮对话](wiki/guides/terrain-conversations.md)。
 
 ## 进阶指南
 

@@ -55,4 +55,5 @@ def rule_profile() -> dict:
             "scalars": {kind: sorted(paths) for kind, paths in SCALARS.items()},
             "indexed_arrays": [{"catalog": kind, "field": path} for kind, path in sorted(INDEXED_ARRAYS)],
             "engine_parity": False, "evidence": "repository_static_fixtures",
-            "limitations": ["不展开原生默认、类层次、token 或 Actor 宏", "无索引追加与移除/恢复的引擎效果仍需绑定实机观测"]}
+            "limitations": ["按已加载 XML 合并字段；仅在支持的动作演算体和应用行为字段展开 ##id##，原生默认和其他宏未知",
+                            "无索引追加与移除/恢复的引擎效果仍需绑定实机观测"]}

@@ -5,6 +5,7 @@
 先阅读 [工作区规则](../AGENTS.md)，当前选择以本机 `agent-config.json` 为准。用户提供主 Components 模组路径后运行 `python tools/init-project.py "<路径>"`。
 
 - 技能：[统一入口](../skills/sc2-project-entry/SKILL.md)，按任务加载专用技能及 Galaxy、SC2 Data 子技能。
+- 触发器与地形入口：[按任务分流与混合交接](../skills/sc2-project-entry/SKILL.md#task-routing)，任务行为进入 sc2-map-triggers，物理放置与区域创建进入 sc2-terrain-editing。
 - 日常开发请求：[36个开发场景](guides/development-conversations.md)，按单位、表现、触发器、对白、存档和验证分组。
 - 技能调用与新能力：[18 个场景与两组多轮对话](guides/skill-conversations.md)，含地形、迁移、官方资源、MCP、模型分包与 Harness2。
 - 地形模块制图对话：[26 个图层操作场景与两组多轮对话](guides/terrain-conversations.md)，从选参考、画地形、摆物件到寻路和编辑器续作。
@@ -14,6 +15,7 @@
 - Galaxy：[语法陷阱](implementation/galaxy-gotchas.md)、[语言参考](reference/galaxy-language.md)。
 - 本地化：[规则](implementation/localization.md)。
 - 触发器：[依赖查询与案例](reference/trigger-knowledge.md)、[游戏对白与对话框](reference/trigger-dialogue-examples.md)、[用户对话示例](reference/trigger-agent-dialogue-examples.md)、[GUI 模板](reference/trigger-templates/README.md)、[XML 概述](reference/triggers-overview.md)、[地图接线](implementation/per-map-setup.md)。
+- 离线触发器工具：[GUI 写入、Galaxy 生成与静态编译](guides/trigger-pipeline.md)、[按行为编写与改造 GUI](guides/trigger-author.md)。
 - Bank：[约定](implementation/bank-system.md)、[接口](reference/galaxy-bank.md)。
 - 项目初始化：[指南](guides/project-initialization.md)。
 - 验收：[反馈流程](implementation/testing-feedback-workflow.md)、[编辑器交接](guides/editor-handoff.md)。

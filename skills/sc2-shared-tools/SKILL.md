@@ -7,7 +7,7 @@ description: Route SC2 tasks between existing workspace tools and the shared CLI
 
 Load [project entry](../sc2-project-entry/SKILL.md). Read the [integration guide](../../wiki/guides/shared-tools.md) or its English link for setup, exact commands, JSON arguments and state ownership.
 
-Existing Catalog effective-value queries, GUI triggers, localization anchors, terrain and migration tools remain the default. Use the imported shared implementation for supplementary resources, source-context/asset audits, shell/region diagnostics, warnings and transactional candidates. Query its current `tools` schema instead of inventing parameters.
+Follow the project entry task table for GUI behavior, physical terrain edits and mixed-task handoff. GUI work starts with sc2_trigger_context and sc2_trigger_author; terrain work starts with its capabilities and actual-map inspection. Existing Catalog effective-value queries, localization anchors and migration tools remain the default. Use the imported shared implementation for supplementary resources, source-context/asset audits, shell/region diagnostics, warnings and transactional candidates. Query its current `tools` schema instead of inventing parameters.
 
 For supplementary operations, use connected `sc2-editor` MCP tools; if unavailable, run `python tools/sc2-local.py --ui-language <language> call <operation> --arguments-file <file>`. Both use the same dispatcher, validation and project state. Keep one transaction entry for the task. Business errors need diagnosis; do not change transport to bypass a guard. On an uncertain submission, inspect existing task/change IDs before repeating it.
 

@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TriggerLib Id="Ntve">
+  <Element Type="FunctionDef" Id="71596144">
+    <Identifier>While</Identifier>
+    <Label Type="Label" Library="Ntve" Id="00000002" />
+    <FlagAction />
+    <FlagSubFunctions />
+    <FlagAllowBreak />
+    <SubFunctionType Type="SubFuncType" Library="Ntve" Id="20298AEC" />
+    <SubFunctionType Type="SubFuncType" Library="Ntve" Id="A1B37466" />
+    <ScriptCode>
+            while (#SUBFUNCS(Conditions," &amp;&amp; ")) {
+                #SUBFUNCS(Actions)
+            }
+        </ScriptCode>
+  </Element>
+  <Element Type="SubFuncType" Id="A1B37466">
+    <Identifier>Actions</Identifier>
+    <Action />
+  </Element>
+  <Element Type="SubFuncType" Id="20298AEC">
+    <Identifier>Conditions</Identifier>
+    <Condition />
+  </Element>
+  <Element Type="Label" Id="00000002">
+    <Color>255,0,128,255</Color>
+    <Icon>Assets\Textures\ui-editoricon-triggercategories_general.dds</Icon>
+  </Element>
+</TriggerLib>

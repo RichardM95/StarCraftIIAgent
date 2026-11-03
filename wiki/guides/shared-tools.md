@@ -21,6 +21,8 @@ python tools/sc2-integration.py --ui-language zh-CN register
 
 `register` 增量添加全局 `sc2-editor`、`deepseek-supervisor` 和薄技能入口，保留其他配置并保存备份。相同配置可重复注册；不同内容的同名服务/技能会报冲突。`unregister` 只移除仍与注册记录相符的条目，保留代码、环境与运行证据。注册成功后需由客户端重新连接，不能据此声称当前聊天已加载。
 
+如需在普通用户下运行完整集成回归并补验 Windows 的真实目录符号链接，运行 `python tools/test-suite.py --scope integration --retry-symlink-elevated --ui-language zh-CN`。仅在该用例因 1314 跳过且其余用例全部通过时请求 UAC。管理员进程只运行这一项并核对本次测试报告；取消或未取得通过证据时返回非零。
+
 ## 能力归属
 
 | 任务 | 默认入口 |
@@ -31,11 +33,18 @@ python tools/sc2-integration.py --ui-language zh-CN register
 | 地图外壳、地区环境、编辑器警告 | 共享诊断与候选工具 |
 | 候选差异、提交、恢复 | 同一共享事务入口完成整个修改 |
 | DeepSeek SC2 子任务 | 已连接 MCP；否则受管理的 CLI 进程 |
-| 钥石专用机制 | 不作为当前工作区通用接口开放 |
 
 新增能力优先调用已连接 MCP；连接不可用时使用同一实现的 CLI。业务拒绝不能通过切换入口绕过。提交状态不确定时先查询已有任务或事务，禁止盲目重复提交。
 
 ## 本地调用
+
+CLI 等待本次提交的任务完成。执行成功返回退出码 `0`，任务失败、取消或中断返回 `1`，非法请求返回 `2`。`sc2_job_status` 和 `sc2_job_cancel` 只返回本次查询或取消请求的结果。即使查询成功，也要检查任务的 `state`。
+
+提交响应丢失时，用原候选 ID 调用 `sc2_changes_inspect`，查看 `application.change_id` 和 `application.state`。已提交或已回滚的候选再次调用 `sc2_changes_apply` 会返回原提交记录。回滚使用提交 ID。旧普通候选可能没有关联记录。
+
+项目共用状态目录时，新事务的 `owner.json` 记录地图归属。若清单损坏，保留现场并按诊断路径核对备份。能确认属于另一张地图的坏清单不阻断当前地图；旧记录归属不明或两份记录矛盾时仍会阻断。
+
+大结果返回 `report_name` 和正文字符数 `characters`。调用 `sc2_report_read` 时从 `offset=0` 开始，将每页的 `next_offset` 用作下一次偏移，直到它为 `null`。
 
 ```powershell
 python tools/sc2-local.py --ui-language zh-CN capabilities

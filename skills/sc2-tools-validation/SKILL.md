@@ -79,6 +79,8 @@ Checks active catalog `Name`/`Tooltip`/`Description` string references against `
 
 ## Catalog Navigation & Querying
 
+Use the explicit XML index for discovery. For orphan or missing-link diagnoses use `sc2_catalog_explain` and `sc2_catalog_references` with `mode="direct"` for immediate users of an object; use `full` for transitive impact on the selected project. Incomplete active dependencies leave the target unverified.
+
 ### `sc2-catalog-query.py` (primary lookup tool)
 Token-efficient catalog lookup over `<project-data>/runtime/catalog/catalog.sqlite` (or `graph.json`). Use this INSTEAD of reading raw `DataEditorXML/` dumps.
 

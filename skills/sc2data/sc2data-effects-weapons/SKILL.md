@@ -127,6 +127,8 @@ File: `Base.SC2Data/GameData/EffectData.xml`
 
 ### CEffectApplyBehavior — apply a buff/debuff
 
+Core EffectData sets `<Behavior value="##id##"/>` on the anonymous class default. For effect `Foo` with the field omitted, use `sc2_catalog_explain` on Effect/Foo, field `Behavior`, and check the expanded ID in the active Behavior Catalog. If no layer overrides the default, Behavior/Foo is the target. If a named parent sets `Behavior` to `Bar`, the effect applies Behavior/Bar even when Behavior/Foo exists. An explicit empty value clears the link. Use `sc2_catalog_references` for the reverse check. Report the winning source and target, and flag incomplete dependency or parent evidence before suggesting edits.
+
 ```xml
 <CEffectApplyBehavior id="MyStunApply">
     <Behavior value="MyStunBehavior"/>

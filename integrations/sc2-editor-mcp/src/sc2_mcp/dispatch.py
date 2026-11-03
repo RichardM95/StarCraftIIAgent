@@ -12,6 +12,7 @@ from pydantic import ConfigDict, ValidationError, create_model
 from .agent_bridge import project_runtime, process_lock
 from .errors import SC2Error
 from .operations import create_operations
+from . import reports
 from .service import Service
 from .storage import write_json
 
@@ -70,7 +71,11 @@ class Dispatcher:
         def walk(value):
             if isinstance(value, dict):
                 for key, item in value.items():
-                    if key.endswith('_id') and isinstance(item, str):
+                    if key == 'project_id':
+                        # Only a registered project in this store owns its route.
+                        if isinstance(item, str) and item in owned_projects:
+                            additions[key + ':' + item] = str(service.state)
+                    elif key in {'job_id', 'probe_id', 'source_context_id', 'change_id'} and isinstance(item, str):
                         additions[key + ':' + item] = str(service.state)
                     elif key == 'report_name':
                         additions['report:' + item] = str(service.state)
@@ -79,6 +84,7 @@ class Dispatcher:
             elif isinstance(value, list):
                 for item in value:
                     walk(item)
+        owned_projects = {record['project_id'] for record in service.projects.list()}
         walk(result)
         if additions:
             with process_lock(self.state / 'routing.lock', timeout=2):
@@ -91,25 +97,40 @@ class Dispatcher:
             raise SC2Error('unsupported_operation', 'Operation is not exposed by this workspace', operation=name)
         try:
             arguments = self.schemas[name].model_validate(arguments or {}).model_dump()
-            if name == 'sc2_project_open' and arguments.get('profile') == 'keystone':
-                raise SC2Error('project_profile_disabled', 'Keystone project adapters are not enabled')
             service = self._select(name, arguments)
-            if name == 'sc2_project_list' and self.project_states:
+            if name == 'sc2_project_clone' and self.project_states:
+                owner = service
+                service = self._service(project_runtime(arguments['destination']) / 'sc2')
+                result = owner.projects.clone(arguments['project_id'],arguments['destination'],service.projects)
+            elif name == 'sc2_project_create' and self.project_states:
+                with process_lock(self.state / 'routing.lock', timeout=2):
+                    states = set(self._index().values())
+                matches = [(self._service(state),rec) for state in sorted(states) for rec,_ in
+                           self._service(state).find_templates(arguments['template'],arguments['template_project_id'])]
+                if len(matches)!=1:
+                    raise SC2Error('template_ambiguous' if matches else 'template_not_found','请选择已注册模板的来源项目',
+                                   candidates=[{'project_id':r['project_id'],'path':r['root']} for _,r in matches])
+                owner,record = matches[0]
+                service = self._service(project_runtime(arguments['destination']) / 'sc2')
+                result = owner.create_from_template(arguments['template'],arguments['destination'],record['project_id'],service.projects)
+            elif name == 'sc2_project_list' and self.project_states:
                 with process_lock(self.state / 'routing.lock', timeout=2):
                     states = set(self._index().values())
                 result = {'projects': [p for state in sorted(states) for p in self._service(state).projects.list()]}
             else:
                 result = create_operations(service)[name][0](**arguments)
-            encoded = json.dumps(result, ensure_ascii=False)
-            if len(encoded) > 48000:
+            if name == 'sc2_report_read':
+                return {'ok': True, 'result': result}
+            if reports.size({'ok': True, 'result': result}) > reports.LIMIT:
                 report = uuid.uuid4().hex + '.json'
                 path = service.state / 'reports' / report
-                write_json(path, result)
+                characters = reports.write_report(path, result)
+                if name != 'sc2_project_list':
+                    self._remember(result, service)
+                result = {'summary': reports.summary(result), 'report_file': str(path),
+                          'report_name': report, 'characters': characters}
+            if name != 'sc2_project_list' or 'report_name' in result:
                 self._remember(result, service)
-                result = {'summary': {k: v for k, v in result.items() if k in
-                    ('project_id', 'change_id', 'job_id', 'state', 'count', 'warnings', 'limitations')} if isinstance(result, dict) else {},
-                    'report_file': str(path), 'report_name': report, 'characters': len(encoded)}
-            self._remember(result, service)
             return {'ok': True, 'result': result}
         except SC2Error:
             raise
@@ -119,3 +140,11 @@ class Dispatcher:
     def close(self):
         for service in self.services.values():
             service.jobs.shutdown(cancel_pending=True)
+
+    def error_payload(self, error):
+        if reports.size({'ok': False, 'error': error}) <= reports.LIMIT:
+            return error
+        name = uuid.uuid4().hex + '.json'
+        path = self.service.state / 'reports' / name
+        characters = reports.write_report(path, error)
+        return {**reports.short_error(error), 'report_name': name, 'characters': characters}

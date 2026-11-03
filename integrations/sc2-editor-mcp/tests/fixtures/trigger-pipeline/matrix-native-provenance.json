@@ -1,0 +1,8 @@
+{
+  "scope": "reference excerpt; does not prove Editor acceptance",
+  "build": "5.0.17.98370",
+  "source": "mods/core.sc2mod/base.sc2data/triggerlibs/nativelib.triggerlib",
+  "source_sha256": "cbb2302825dce57ff9bb8efd44f9b0ed5cb056eee00265e5b711b0824d872396",
+  "excerpt_sha256": "fd89054bd292a36b25476d32faba20a927fa04ad627dee20b7a0216718bee22b",
+  "elements": 386
+}

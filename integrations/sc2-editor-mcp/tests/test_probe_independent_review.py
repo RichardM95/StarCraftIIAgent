@@ -15,6 +15,9 @@ from sc2_mcp.errors import SC2Error
 
 @pytest.fixture
 def prepared(tmp_path, monkeypatch):
+    import sc2_activity
+    monkeypatch.setattr(sc2_activity,"activity_dir",lambda:tmp_path/"activity")
+    monkeypatch.setattr(sc2_activity,"running_games",lambda:[])
     root = tmp_path / 'source.SC2Map'
     root.mkdir()
     (root / 'DocumentInfo').write_bytes(b'<DocInfo><Dependencies/></DocInfo>')
@@ -22,7 +25,8 @@ def prepared(tmp_path, monkeypatch):
     (root / 'BankList.xml').write_bytes(b'<BankList/>')
     def export(source, destination):
         destination.write_bytes(b'MPQ-fixture')
-        return {'test_backend': True}
+        return {'files':[{'path':name,'sha256':probes.digest((source/name).read_bytes())}
+                         for name in ('MapScript.galaxy','BankList.xml')]}
     monkeypatch.setattr(probes.archives, 'export_archive', export)
     docs = tmp_path / 'Documents'
     (docs / 'Banks').mkdir(parents=True)

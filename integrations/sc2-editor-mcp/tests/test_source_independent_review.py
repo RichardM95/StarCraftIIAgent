@@ -306,7 +306,10 @@ def test_apply_rechecks_dependency_after_reference_validator_before_transaction_
         reached_commit.append(True)
         pytest.fail('stale dependency escaped to transaction commit')
     service._validate_candidate = validate
-    service.transactions = SimpleNamespace(read=lambda _: manifest, run=transaction_run)
+    from sc2_mcp.transactions import Transactions
+    service.transactions = Transactions(service.state)
+    service.transactions.read = lambda _: manifest
+    service.transactions.run = transaction_run
     before = snapshot(root)
     with pytest.raises(SC2Error) as error:
         service.apply_candidate('mine', 'change')
@@ -324,44 +327,6 @@ def test_persisted_context_cannot_be_loaded_by_other_project(tmp_path):
     with pytest.raises(SC2Error) as error:
         service.source_context('different', saved['source_context_id'])
     assert error.value.code == 'source_context_mismatch'
-
-
-def test_bom_dependency_name_read_is_bound_readonly_and_local_override_wins(tmp_path):
-    from sc2_mcp import keystone
-    dependency = component(tmp_path / 'Names.SC2Mod', objects='<CUnit id="A"><Name value="Unit/Name/A"/></CUnit>')
-    root = component(tmp_path / 'map', ['file:Names.SC2Mod'], objects='')
-    raw = b'\xef\xbb\xbf' + 'Unit/Name/A=官方依赖名字\r\n'.encode('utf-8')
-    put(dependency, keystone.TEXT, raw)
-    put(root, keystone.TEXT, 'Unused=无关\r\n')
-    saved = context(root, tmp_path)
-    before = snapshot(root), snapshot(dependency)
-    strings = keystone._Strings(root)
-    result, identifier = keystone._unit_name_sources(root, strings, {'A'}, saved)
-    assert result['A']['value'] == '官方依赖名字'
-    assert Path(result['A']['source']) == dependency / keystone.TEXT
-    assert identifier == saved['source_context_id']
-    with pytest.raises(SC2Error) as error:
-        keystone._Strings(dependency, dependency=True).set('Unit/Name/A', '不能改')
-    assert error.value.code == 'keystone_dependency_readonly'
-    assert before == (snapshot(root), snapshot(dependency))
-    put(root, keystone.TEXT, 'Unit/Name/A=本图覆盖\r\n')
-    fresh = context(root, tmp_path)
-    result, _ = keystone._unit_name_sources(root, keystone._Strings(root), {'A'}, fresh)
-    assert result['A']['value'] == '本图覆盖'
-    assert Path(result['A']['source']) == root / keystone.TEXT
-    assert (dependency / keystone.TEXT).read_bytes() == raw
-
-
-@pytest.mark.parametrize('dependency,raw', [(False, b'\xef\xbb\xbfKey=Value'), (True, b'\xef\xbb\xbf\xef\xbb\xbfKey=Value'), (True, b'\xff\xfeK\0'), (True, b'Key=Value\0')])
-def test_bom_patch_does_not_relax_other_encoding_rejections(tmp_path, dependency, raw):
-    from sc2_mcp import keystone
-    root = tmp_path / 'map'
-    put(root, keystone.TEXT, raw)
-    before = snapshot(root)
-    with pytest.raises(SC2Error) as error:
-        keystone._Strings(root, dependency=dependency)
-    assert error.value.code == 'keystone_encoding'
-    assert snapshot(root) == before
 
 
 def test_value_attribute_array_append_remove_restore_remains_supported(tmp_path):

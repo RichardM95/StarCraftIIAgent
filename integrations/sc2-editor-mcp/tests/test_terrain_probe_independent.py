@@ -21,7 +21,7 @@ RUN = "0123456789abcdef0123456789abcdef"
 
 @pytest.fixture
 def parameters():
-    return json.loads((DELIVERY / "docs/skyshield-example.json").read_text("utf-8"))
+    return json.loads((DELIVERY / "tests/fixtures/terrain-probe.json").read_text("utf-8"))
 
 
 @pytest.mark.parametrize("direction", ["up", "down"])

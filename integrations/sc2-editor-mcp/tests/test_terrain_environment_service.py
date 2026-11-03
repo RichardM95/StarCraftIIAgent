@@ -29,7 +29,8 @@ def environment_project(tmp_path, monkeypatch):
     service = Service(tmp_path / "state")
     monkeypatch.setattr(service, "editor_conflict", lambda: None)
     key = service.projects.open(str(root), writable=True)["project_id"]
-    yield service, key, root
+    copy = service.projects.clone(key, str(tmp_path / "copy.SC2Map"))
+    yield service, copy["project_id"], Path(copy["root"])
     service.jobs.shutdown()
 
 
@@ -83,9 +84,8 @@ def test_independent_experimental_commit_is_backed_up_and_rollback_restores(envi
 @pytest.mark.parametrize("batch", [False, True])
 def test_formal_path_is_rejected_before_planning_or_preview(environment_project, monkeypatch, batch):
     service, key, root = environment_project
-    # Redirect the formal-path sentinel to this synthetic temp fixture. The
-    # real formal Keystone directory is never read, registered or touched.
-    monkeypatch.setattr(service_module, "KEYSTONE", root)
+    root = Path(service.projects.require_work_copy(key)["source"])
+    key = service.projects.open(str(root), writable=True)["project_id"]
     before = snapshot(root)
     def forbidden(*args, **kwargs):
         pytest.fail("Formal-map gate must reject before any planning or rendering")
@@ -93,7 +93,7 @@ def test_formal_path_is_rejected_before_planning_or_preview(environment_project,
     monkeypatch.setattr(service_module, "render_terrain", forbidden)
     with pytest.raises(SC2Error) as error:
         service.edit(key, *operation(batch), experimental_write=True)
-    assert error.value.code == "experimental_formal_map"
+    assert error.value.code == "terrain_not_accepted"
     assert snapshot(root) == before
     assert not (service.state / "changes").exists()
 
@@ -186,11 +186,12 @@ def test_catalog_terrain_routes_require_experimental_opt_in(environment_project,
 @pytest.mark.parametrize("batch", [False, True])
 def test_formal_catalog_terrain_routes_cannot_commit(environment_project, monkeypatch, catalog, batch):
     service, key, root = environment_project
-    monkeypatch.setattr(service_module, "KEYSTONE", root)
+    root = Path(service.projects.require_work_copy(key)["source"])
+    key = service.projects.open(str(root), writable=True)["project_id"]
     before = snapshot(root)
     with pytest.raises(SC2Error) as error:
         service.edit(key, *catalog_operation(catalog, batch), experimental_write=True)
-    assert error.value.code == "experimental_formal_map"
+    assert error.value.code == "terrain_not_accepted"
     assert snapshot(root) == before
 
 
@@ -258,3 +259,40 @@ def test_catalog_terrain_mod_without_map_components_needs_no_preview_renderer(en
     result = service.edit(key, *catalog_operation("Terrain"), experimental_write=True)
     assert result["state"] == "committed"
     assert "previews" not in result
+
+def test_unowned_original_and_replaced_copy_cannot_commit(environment_project):
+    import shutil
+    service, key, root = environment_project
+    proof = service.projects.require_work_copy(key)
+    original = Path(proof["source"])
+    original_key = service.projects.open(str(original), writable=True)["project_id"]
+    before = snapshot(original)
+    with pytest.raises(SC2Error, match="工作副本"):
+        service.edit(original_key, *operation(False), experimental_write=True)
+    assert snapshot(original) == before
+    preview = service.edit(key, *operation(False), preview_only=True)
+    with pytest.raises(SC2Error) as mismatch:
+        service.apply_candidate(original_key,preview["change_id"],True)
+    assert mismatch.value.code == "project_mismatch"
+    assert service.projects.open(str(root), writable=True)["project_id"] == key
+    root.rename(root.with_suffix(".saved"))
+    shutil.copytree(original, root)
+    with pytest.raises(SC2Error, match="工作副本"):
+        service.apply_candidate(key,preview["change_id"],True)
+    assert snapshot(root) == before
+
+def test_work_copy_junction_to_source_is_rejected(environment_project):
+    import os
+    import subprocess
+    service,key,root = environment_project
+    original = Path(service.projects.require_work_copy(key)["source"])
+    root.rename(root.with_suffix(".saved"))
+    if os.name == "nt":
+        subprocess.run(["powershell","-NoProfile","-Command","New-Item -ErrorAction Stop -ItemType Junction -Path $env:SC2_LINK -Target $env:SC2_SOURCE"],
+                       env={**os.environ,"SC2_LINK":str(root),"SC2_SOURCE":str(original)},check=True,capture_output=True)
+    else:
+        root.symlink_to(original,target_is_directory=True)
+    before=snapshot(original)
+    with pytest.raises(SC2Error):
+        service.edit(key,*operation(False),experimental_write=True)
+    assert snapshot(original)==before

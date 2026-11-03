@@ -41,6 +41,7 @@ class Registration(unittest.TestCase):
         registered = self.config.read_bytes()
         self.assertFalse(setup.register()['changed'])
         self.assertEqual(self.config.read_bytes(), registered)
+        self.assertEqual((self.home / 'skills/sc2-agent-tools/SKILL.md').read_bytes(), setup.global_skill().encode('utf-8'))
         current = tomlkit.parse(registered.decode()).unwrap()
         self.assertEqual(current['model'], 'user-model')
         self.assertEqual(current['mcp_servers']['other'], {'command': 'user-tool'})
@@ -78,6 +79,18 @@ class Registration(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'changed'):
             setup.register(True)
         self.assertEqual(self.config.read_bytes(), before)
+
+    def test_user_skill_conflict_reports_diff_without_mutation(self):
+        setup.register()
+        skill = self.home / 'skills/sc2-agent-tools/SKILL.md'
+        skill.write_text(skill.read_text() + '\nUser authored note\n', encoding='utf-8')
+        before = skill.read_bytes()
+        config_before = self.config.read_bytes()
+        with self.assertRaisesRegex(ValueError, 'generated/sc2-agent-tools/SKILL.md') as error:
+            setup.register()
+        self.assertIn('-User authored note', str(error.exception))
+        self.assertEqual(skill.read_bytes(), before)
+        self.assertEqual(self.config.read_bytes(), config_before)
 
 
 if __name__ == '__main__':

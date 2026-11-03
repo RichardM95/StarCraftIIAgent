@@ -72,27 +72,18 @@ def _edge_key(edge):
             edge["to"]["catalog"], edge["to"]["object_id"])
 
 
-def _catalog_graph(session):
+def _catalog_graph(session, complete=True):
     identifiers = [(kind, identifier) for kind in session.catalog_names() for identifier in session.object_ids(kind)]
     cycles = {}
-    for kind, identifier in identifiers:
-        try:
-            session.trace(kind, identifier)
-            break
-        except SC2Error as exc:
-            if exc.code != "catalog_parent_cycle":
-                raise
-            chain = tuple(sorted({tuple(item) for item in exc.details.get("chain", [])}))
-            cycles[chain] = {"kind": "catalog_parent_cycle", **exc.details}
-    # CatalogSession.trace constructs a graph for the whole session once. Reading
-    # that internal cache avoids rebuilding reachability for every single object.
-    cache = getattr(session._library, "_reference_cache", ([], [], []))
-    _edges, missing, warnings = cache
+    from .catalog import reference_graph
+    _edges, missing, warnings = reference_graph(session._library,complete)
     for warning in warnings:
         if warning.get("code") == "catalog_parent_cycle":
             chain = tuple(sorted({tuple(item) for item in warning.get("chain", [])}))
             cycles[chain] = {"kind": "catalog_parent_cycle", **warning}
-    proven, unknown = {}, []
+    proven = {}
+    unknown = [w for w in warnings if w.get("code") == "catalog_link_unknown"
+               and w["reference"].get("reason") != "template_requires_concrete_object"]
     for edge in missing:
         if edge.get("confidence") != "typed_field":
             continue
@@ -239,7 +230,7 @@ def _script_refs(files, objects, known):
     return missing, unit_calls, unknown
 
 
-def validate_references(root: Path, changes: dict[str, bytes | None], dependency_roots, workspace: Path) -> dict:
+def validate_references(root: Path, changes: dict[str, bytes | None], dependency_roots, workspace: Path, *, coverage=None) -> dict:
     """Reject newly missing typed links while preserving pre-existing diagnostics.
 
     dependency_roots is an ordered list of materialized component roots for
@@ -309,8 +300,8 @@ def validate_references(root: Path, changes: dict[str, bytes | None], dependency
         return redirected_roots
     before_session = CatalogSession(redirected(before_roots, before_stage))
     after_session = CatalogSession(redirected(after_roots, after_stage))
-    before_missing, before_cycles, before_unknown, before_ids = _catalog_graph(before_session)
-    after_missing, after_cycles, after_unknown, after_ids = _catalog_graph(after_session)
+    before_missing, before_cycles, before_unknown, before_ids = _catalog_graph(before_session, coverage["before"]["complete"] if coverage else True)
+    after_missing, after_cycles, after_unknown, after_ids = _catalog_graph(after_session, coverage["after"]["complete"] if coverage else True)
     new_missing = [edge for key, edge in after_missing.items() if key not in before_missing]
     new_missing += [value for key, value in after_cycles.items() if key not in before_cycles]
     before_objects, after_objects = _spatial(originals), _spatial(candidates)
@@ -340,6 +331,14 @@ def validate_references(root: Path, changes: dict[str, bytes | None], dependency
               "dependency_context": "caller_supplied_before_after" if mapping else "caller_supplied_same_load_order",
               "dependency_files_checked": checked_dependency_files,
               "engine_parity": False, "workspace": str(area), "limitations": limitations}
+    if coverage:
+        report["source_coverage"] = coverage
+        if not all(side["complete"] for side in coverage.values()):
+            report["static"] = "partial"
+            uncertain = [item for item in new_missing if item["kind"] in {"catalog_reference", "placed_object_catalog_reference"}]
+            report["unresolved"].extend({**item, "reason": "source_context_incomplete"} for item in uncertain)
+            new_missing[:] = [item for item in new_missing if item not in uncertain]
     if new_missing:
+        report["static"] = "failed"
         raise SC2Error("new_missing_references", "候选引入新的可证明引用断链", report=report)
     return report

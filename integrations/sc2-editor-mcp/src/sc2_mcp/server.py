@@ -32,7 +32,7 @@ def create_server(state: Path, *, project_states=False):
                         return Image(path=result['result']['path'], format='png')
                     return result
                 except SC2Error as exc:
-                    raise ToolError(json.dumps(exc.as_dict(), ensure_ascii=False)) from exc
+                    raise ToolError(json.dumps(dispatcher.error_payload(exc.as_dict()), ensure_ascii=False)) from exc
             return invoke
         mcp.tool(name=name, annotations=ToolAnnotations(
             readOnlyHint=readonly, destructiveHint=not readonly,

@@ -190,8 +190,8 @@ def execute_request(root: str | Path, request: dict[str, Any]) -> dict[str, Any]
         }
     if operation == "workspace_inspect":
         profile = arguments.get("profile", "generic")
-        if profile not in {"generic", "keystone"}:
-            raise SC2Error("bridge_invalid_profile", "profile 必须是 generic 或 keystone")
+        if profile != "generic":
+            raise SC2Error("bridge_invalid_profile", "profile 必须是 generic")
         return inspect_project(root, profile=profile)
     if operation == "map_shell_audit":
         return map_shell.inspect_map_shell(root)
@@ -245,8 +245,8 @@ def execute_request(root: str | Path, request: dict[str, Any]) -> dict[str, Any]
             raise SC2Error("bridge_invalid_paths", "paths 必须是 1 到 64 个工作区相对路径")
         changes = {_relative_file(root, item): safe_path(root, _relative_file(root, item)).read_bytes() for item in values}
         profile = arguments.get("profile", "generic")
-        if profile not in {"generic", "keystone"}:
-            raise SC2Error("bridge_invalid_profile", "profile 必须是 generic 或 keystone")
+        if profile != "generic":
+            raise SC2Error("bridge_invalid_profile", "profile 必须是 generic")
         return validate_changes(root, changes, profile=profile, domain="worker_bridge")
     raise SC2Error("bridge_operation_unreachable", "未处理的桥接操作", operation=operation)
 

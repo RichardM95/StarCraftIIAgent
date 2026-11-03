@@ -1,7 +1,6 @@
 """Independent Service/Server glue review; all map writes target tmp_path fixtures.
 
-Keystone domain functions are stubbed only at their boundary. This exercises
-transaction routing and guards, without reviewing the author's own domain code.
+The fixture exercises transaction routing and guards with generic source edits.
 """
 import asyncio
 import json
@@ -10,7 +9,6 @@ from pathlib import Path
 
 import pytest
 
-from sc2_mcp import keystone
 from sc2_mcp.errors import SC2Error
 from sc2_mcp.server import create_server
 from sc2_mcp.service import Service
@@ -31,7 +29,7 @@ def environment(tmp_path, monkeypatch):
     (root / "DocumentInfo").write_bytes(b'<DocInfo><Dependencies><Value>file:Mods/A.SC2Mod</Value></Dependencies></DocInfo>')
     (dependency / "DocumentInfo").write_bytes(b"<DocInfo/>")
     (dependency / "Base.SC2Data/GameData/UnitData.xml").write_bytes(b'<Catalog><CUnit id="A"><LifeMax value="45"/></CUnit></Catalog>')
-    (root / "MapScript.galaxy").write_bytes(b"void InitMap () {}\n")
+    (root / "GlueFixture.galaxy").write_bytes(b"void InitMap () {}\n")
     (root / "zhCN.SC2Data/LocalizedData").mkdir(parents=True)
     (root / "zhCN.SC2Data/LocalizedData/GameStrings.txt").write_bytes(b"review=before\n")
     service = Service(tmp_path / "state")
@@ -42,17 +40,80 @@ def environment(tmp_path, monkeypatch):
 
 
 def prepare_three_files(service, key, monkeypatch):
-    changes = {"MapScript.galaxy": SCRIPT,
+    changes = {"GlueFixture.galaxy": SCRIPT,
                "zhCN.SC2Data/LocalizedData/GameStrings.txt": STRINGS,
                "Assets/Textures/review.dds": b"synthetic transaction payload"}
-    monkeypatch.setattr(keystone, "plan_keystone_card_cost", lambda root, **kwargs: changes)
-    prepared = service.prepare_keystone(key, "card_cost", {"card_id": 213, "mineral": 5, "gas": 2})
+    prepared = service.prepare_domain(key, "fixture_source_edit", lambda root, roots, context: changes)
     return prepared, changes
 
 
 def change_dependency(dependency):
     path = dependency / "Base.SC2Data/GameData/UnitData.xml"
     path.write_bytes(path.read_bytes().replace(b'"45"', b'"46"'))
+
+
+def test_apply_receipt_survives_restart_manual_edits_and_rollback(environment, monkeypatch):
+    from sc2_mcp.operations import create_operations
+    service, key, root, _ = environment
+    candidate, changes = prepare_three_files(service, key, monkeypatch)
+    cid = candidate["change_id"]
+    applied = service.apply_candidate(key, cid)
+    assert applied["candidate_id"] == cid
+    reopened = Service(service.state)
+    try:
+        inspect = create_operations(reopened)["sc2_changes_inspect"][0]
+        assert inspect(key, cid)["application"] == {"change_id":applied["change_id"], "state":"committed"}
+        target = root / "GlueFixture.galaxy"
+        target.write_bytes(b"subsequent manual edit")
+        monkeypatch.setattr(reopened, "editor_conflict", lambda: True)
+        count = len(list((service.state / "changes").iterdir()))
+        assert reopened.apply_candidate(key, cid) == applied
+        assert target.read_bytes() == b"subsequent manual edit"
+        target.write_bytes(changes["GlueFixture.galaxy"])
+        reopened.transactions.rollback(applied["change_id"], root)
+        assert inspect(key, cid)["application"]["state"] == "rolled_back"
+        assert reopened.apply_candidate(key, cid)["state"] == "rolled_back"
+        assert len(list((service.state / "changes").iterdir())) == count
+    finally:
+        reopened.jobs.shutdown()
+
+
+def test_dependency_change_during_candidate_planning_is_rejected(environment):
+    service, key, root, dependency = environment
+    before = snapshot(root)
+
+    def planner(root, roots, context):
+        change_dependency(dependency)
+        return {"GlueFixture.galaxy": SCRIPT}
+
+    with pytest.raises(SC2Error) as error:
+        service.prepare_domain(key, "fixture_source_edit", planner)
+    assert error.value.code == "source_context_stale"
+    assert snapshot(root) == before
+
+
+def test_apply_receipt_after_process_exit_before_reply(environment, monkeypatch):
+    import subprocess
+    import sys
+
+    service, key, root, _ = environment
+    candidate, changes = prepare_three_files(service, key, monkeypatch)
+    cid = candidate["change_id"]
+    child = """
+import os, sys
+from pathlib import Path
+from sc2_mcp.service import Service
+s = Service(Path(sys.argv[1]))
+s.editor_conflict = lambda: None
+s.transactions._clear = lambda manifest: os._exit(17)
+s.apply_candidate(sys.argv[2], sys.argv[3])
+"""
+    proc = subprocess.run([sys.executable, "-c", child, str(service.state), key, cid], timeout=30)
+    assert proc.returncode == 17
+    recovered, = service.transactions.recover(root)
+    assert recovered["state"] == "committed"
+    assert service.apply_candidate(key, cid) == recovered
+    assert (root / "GlueFixture.galaxy").read_bytes() == changes["GlueFixture.galaxy"]
 
 
 def test_dependency_change_during_apply_validation_must_not_commit(environment, monkeypatch):
@@ -74,19 +135,6 @@ def test_dependency_change_during_apply_validation_must_not_commit(environment, 
     evidence = {"commit": committed, "error": error.as_dict() if error else None,
                 "map_changed": snapshot(root) != before}
     assert error is not None and error.code == "source_context_stale", json.dumps(evidence, ensure_ascii=False)
-    assert snapshot(root) == before
-
-
-def test_dependency_change_during_candidate_planning_is_rejected(environment, monkeypatch):
-    service, key, root, dependency = environment
-    before = snapshot(root)
-    def planner(path, **kwargs):
-        change_dependency(dependency)
-        return {"MapScript.galaxy": SCRIPT}
-    monkeypatch.setattr(keystone, "plan_keystone_card_cost", planner)
-    with pytest.raises(SC2Error) as caught:
-        service.prepare_keystone(key, "card_cost", {"card_id": 213, "mineral": 5, "gas": 2})
-    assert caught.value.code == "source_context_stale"
     assert snapshot(root) == before
 
 
@@ -127,20 +175,20 @@ def test_glue_commit_failure_restores_every_earlier_file(environment, monkeypatc
     assert not (root / ".sc2-mcp/active-change.json").exists()
 
 
-@pytest.mark.parametrize("mode,expected", [("wrong_project", "invalid_candidate"),
+@pytest.mark.parametrize("mode,expected", [("wrong_project", "project_mismatch"),
                                           ("tamper", "candidate_corrupt"),
                                           ("baseline", "baseline_conflict"),
                                           ("pending", "recovery_required")])
 def test_existing_transaction_guards_cannot_be_bypassed(environment, tmp_path, mode, expected):
     service, key, root, _ = environment
-    prepared = service.transactions.run(root, lambda: {"MapScript.galaxy": SCRIPT}, label="legacy_candidate", preview_only=True)
+    prepared = service.transactions.run(root, lambda: {"GlueFixture.galaxy": SCRIPT}, label="legacy_candidate", preview_only=True)
     if mode == "wrong_project":
         other = tmp_path / "other.SC2Map"
         other.mkdir()
         (other / "DocumentInfo").write_bytes(b"<DocInfo/>")
         key = service.projects.open(str(other), True)["project_id"]
     elif mode == "tamper":
-        (Path(prepared["candidate"]) / "MapScript.galaxy").write_bytes(b"void Changed () {}\n")
+        (Path(prepared["candidate"]) / "GlueFixture.galaxy").write_bytes(b"void Changed () {}\n")
     elif mode == "baseline":
         (root / "unrelated.txt").write_bytes(b"external newly added component")
     else:
@@ -152,13 +200,13 @@ def test_existing_transaction_guards_cannot_be_bypassed(environment, tmp_path, m
     assert snapshot(root) == before
 
 
-@pytest.mark.parametrize("experimental,formal", [(False, False), (True, True)])
+@pytest.mark.parametrize("experimental", [False, True])
 @pytest.mark.parametrize("mode", ["terrain_label", "content_label_bypass", "old_terrain_deletion"])
-def test_experimental_guard_checks_legacy_labels_and_actual_content(environment, monkeypatch, experimental, formal, mode):
+def test_experimental_guard_checks_legacy_labels_and_actual_content(environment, monkeypatch, experimental, mode):
     import sc2_mcp.service as service_module
     service, key, root, _ = environment
     if mode == "terrain_label":
-        changes, label = {"MapScript.galaxy": SCRIPT}, "terrain_native_sync"
+        changes, label = {"GlueFixture.galaxy": SCRIPT}, "terrain_native_sync"
     else:
         relative = "Base.SC2Data/GameData/Unexpected.xml"
         terrain = b'<Catalog><CTerrain id="ReviewTerrain"/></Catalog>'
@@ -169,34 +217,12 @@ def test_experimental_guard_checks_legacy_labels_and_actual_content(environment,
         else:
             changes = {relative: terrain}
         label = "legacy_candidate"
-    if formal:
-        monkeypatch.setattr(service_module, "KEYSTONE", root)
     prepared = service.transactions.run(root, lambda: changes, label=label, preview_only=True)
     before = snapshot(root)
     with pytest.raises(SC2Error) as caught:
         service.apply_candidate(key, prepared["change_id"], experimental_write=experimental)
     assert caught.value.code == "terrain_not_accepted"
     assert snapshot(root) == before
-
-
-def test_readonly_and_foreign_source_context_stop_before_keystone_planner(environment, tmp_path, monkeypatch):
-    service, key, root, _ = environment
-    context = service.prepare_dependencies(key)
-    invoked = []
-    monkeypatch.setattr(keystone, "plan_keystone_card_cost", lambda *args, **kwargs: invoked.append(True))
-    other = tmp_path / "other.SC2Map"
-    other.mkdir()
-    (other / "DocumentInfo").write_bytes(b"<DocInfo/>")
-    other_key = service.projects.open(str(other), True)["project_id"]
-    with pytest.raises(SC2Error) as caught:
-        service.prepare_keystone(other_key, "card_cost", {}, context["source_context_id"])
-    assert caught.value.code == "source_context_mismatch"
-    service.projects.open(str(root), False)
-    before = snapshot(root)
-    with pytest.raises(SC2Error) as caught:
-        service.prepare_keystone(key, "card_cost", {})
-    assert caught.value.code == "readonly_project"
-    assert not invoked and snapshot(root) == before
 
 
 def test_editor_started_during_apply_validation_keeps_candidate(environment, monkeypatch):
@@ -246,101 +272,10 @@ def test_source_selection_survives_restart_and_failed_override(environment, monk
         restarted.jobs.shutdown()
 
 
-def test_server_exposes_and_dispatches_all_seven_keystone_entries(tmp_path, monkeypatch):
-    server = create_server(tmp_path / "server-state")
-    service = server.sc2_service
-    observed = []
-    monkeypatch.setattr(service, "keystone_inspect", lambda *args, **kwargs: observed.append(("inspect", args, kwargs)) or {"marker": "inspected"})
-    monkeypatch.setattr(service, "prepare_keystone", lambda *args, **kwargs: observed.append(("prepare", args, kwargs)) or {"marker": "prepared"})
-    image = tmp_path / "source-image.bin"
-    image.write_bytes(b"image file bytes for glue-only fixture")
-    cases = [
-        ("sc2_keystone_card_inspect", {"project_id": "key", "card_id": 213}, "inspect", ("key", "card", {"card_id": 213, "name": None})),
-        ("sc2_keystone_card_cost", {"project_id": "key", "card_id": 213, "mineral": 4, "gas": 2, "source_context_id": "ctx"}, "prepare", ("key", "card_cost", {"card_id": 213, "mineral": 4, "gas": 2}, "ctx")),
-        ("sc2_keystone_descriptions", {"project_id": "key", "card_ids": [213], "source_context_id": "ctx"}, "inspect", ("key", "descriptions", {"card_ids": [213]}, "ctx")),
-        ("sc2_keystone_news_inspect", {"project_id": "key", "category": "protoss"}, "inspect", ("key", "news", {"category": "protoss"})),
-        ("sc2_keystone_news_update", {"project_id": "key", "category": "global", "date": "20261016", "body": "正文", "source_context_id": "ctx"}, "prepare", ("key", "news", {"category": "global", "date": "20261016", "body": "正文"}, "ctx")),
-        ("sc2_keystone_portraits_inspect", {"project_id": "key"}, "inspect", ("key", "portraits")),
-        ("sc2_keystone_portrait_import", {"project_id": "key", "image_path": str(image), "save_id": 140, "nemesis_unlock_id": 2, "backer_exclusive": True, "support_months_required": 3, "standard_wins_required": 4, "source_context_id": "ctx"}, "prepare", ("key", "portrait", {"image": image.read_bytes(), "save_id": 140, "nemesis_unlock_id": 2, "backer_exclusive": True, "support_months_required": 3, "standard_wins_required": 4}, "ctx")),
-    ]
-    async def check():
-        registered = {tool.name: tool for tool in await server.list_tools()}
-        assert {name for name in registered if name.startswith("sc2_keystone_")} == {case[0] for case in cases}
-        for name, parameters, method, expected in cases:
-            assert registered[name].annotations.readOnlyHint == (method == "inspect")
-            await server.call_tool(name, parameters)
-            assert observed[-1] == (method, expected, {})
-    try:
-        asyncio.run(check())
-    finally:
-        service.jobs.shutdown()
-
-
-@pytest.mark.parametrize("kind,expected", [("missing", "keystone_image_invalid"),
-                                         ("directory", "keystone_image_invalid"),
-                                         ("oversized", "keystone_image_invalid"),
-                                         ("hardlink", "hardlinked_file")])
-def test_server_image_file_guard_rejects_before_planning(tmp_path, monkeypatch, kind, expected):
-    from mcp.server.fastmcp.exceptions import ToolError
-    server = create_server(tmp_path / "server-state")
-    image = tmp_path / "image.bin"
-    called = []
-    monkeypatch.setattr(server.sc2_service, "prepare_keystone", lambda *args, **kwargs: called.append(True))
-    if kind == "directory":
-        image.mkdir()
-    elif kind == "oversized":
-        with image.open("wb") as handle:
-            handle.truncate(64 * 1024 * 1024 + 1)
-        original = Path.read_bytes
-        def reject_oversized_read(path):
-            assert path != image, "oversized file must not be loaded before the size guard"
-            return original(path)
-        monkeypatch.setattr(Path, "read_bytes", reject_oversized_read)
-    elif kind == "hardlink":
-        original = tmp_path / "original.bin"
-        original.write_bytes(b"small source")
-        os.link(original, image)
-    async def check():
-        with pytest.raises(ToolError, match=expected):
-            await server.call_tool("sc2_keystone_portrait_import", {"project_id": "key", "image_path": str(image)})
-        assert not called
-    try:
-        asyncio.run(check())
-    finally:
-        server.sc2_service.jobs.shutdown()
-
-
-def test_inspection_glue_uses_requested_project_and_bound_description_context(environment, monkeypatch):
-    service, key, root, dependency = environment
-    context = service.prepare_dependencies(key)
-    observed = []
-    def capture(path, **kwargs):
-        observed.append((path, kwargs))
-        return {"captured": True}
-    for function in ("inspect_keystone_card", "inspect_keystone_news", "inspect_keystone_portraits", "audit_keystone_descriptions"):
-        monkeypatch.setattr(keystone, function, capture)
-    service.projects.open(str(root), False)
-    before = snapshot(root)
-    service.keystone_inspect(key, "card", {"card_id": 213})
-    assert observed[-1] == (root, {"card_id": 213})
-    service.keystone_inspect(key, "news", {"category": "terran"})
-    assert observed[-1] == (root, {"category": "terran"})
-    service.keystone_inspect(key, "portraits")
-    assert observed[-1] == (root, {})
-    service.keystone_inspect(key, "descriptions", {"card_ids": [213]}, context["source_context_id"])
-    assert observed[-1][0] == root
-    assert observed[-1][1]["source_context"]["source_context_id"] == context["source_context_id"]
-    assert observed[-1][1]["card_ids"] == [213]
-    count = len(observed)
-    change_dependency(dependency)
-    with pytest.raises(SC2Error) as caught:
-        service.keystone_inspect(key, "descriptions", {"card_ids": [213]}, context["source_context_id"])
-    assert caught.value.code == "source_context_stale" and len(observed) == count
-    assert snapshot(root) == before
-
-
 def test_legacy_terrain_candidate_allows_explicit_independent_experiment(environment):
     service, key, root, _ = environment
+    copy = service.projects.clone(key,str(root.parent / "trial.SC2Map"))
+    root, key = Path(copy["root"]), copy["project_id"]
     before = snapshot(root)
     relative = "Base.SC2Data/GameData/Unexpected.xml"
     content = b'<Catalog><CTerrain id="ReviewTerrain"/></Catalog>'
@@ -358,7 +293,7 @@ def test_server_preserves_omitted_source_options_and_experimental_default(tmp_pa
     monkeypatch.setattr(server.sc2_service, "apply_candidate", lambda *args: observed.append(("apply", args)) or {"captured": True})
     async def check():
         await server.call_tool("sc2_dependencies_prepare", {"project_id": "key", "locale": "enUS", "background": False})
-        assert observed[-1] == ("sources", ("key", None, "enUS", None, None))
+        assert observed[-1] == ("sources", ("key", None, "enUS", None, None, None))
         await server.call_tool("sc2_changes_apply", {"project_id": "key", "change_id": "candidate"})
         assert observed[-1] == ("apply", ("key", "candidate", False))
         await server.call_tool("sc2_changes_apply", {"project_id": "key", "change_id": "candidate", "experimental_write": True})

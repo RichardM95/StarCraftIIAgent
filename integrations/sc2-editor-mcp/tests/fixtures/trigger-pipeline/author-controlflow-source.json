@@ -1,0 +1,28 @@
+{
+  "build": "B98370",
+  "source": "E:\\Program Files (x86)\\StarCraftIIAgent-data\\reference\\casc\\416332de96c043fd\\bb10ee62e9cf3678dfa74233d5657757\\mods\\core.sc2mod\\base.sc2data\\triggerlibs\\nativelib.triggerlib",
+  "source_sha256": "cbb2302825dce57ff9bb8efd44f9b0ed5cb056eee00265e5b711b0824d872396",
+  "evidence": "official definition and its reference closure; no new Editor or runtime acceptance claimed",
+  "references": [
+    [
+      "Ntve",
+      "FunctionDef",
+      "71596144"
+    ],
+    [
+      "Ntve",
+      "SubFuncType",
+      "A1B37466"
+    ],
+    [
+      "Ntve",
+      "SubFuncType",
+      "20298AEC"
+    ],
+    [
+      "Ntve",
+      "Label",
+      "00000002"
+    ]
+  ]
+}

@@ -14,6 +14,7 @@ from pathlib import Path, PurePosixPath
 import re
 import stat
 import tempfile
+import time
 from xml.etree import ElementTree as ET
 
 from . import archives, casc, dependencies
@@ -21,7 +22,7 @@ from .catalog import _CATALOGS
 from .errors import SC2Error
 from .storage import file_lock, guard_absolute_path, map_files
 
-PARSER_VERSION = "source-context-2"
+PARSER_VERSION = "source-context-3"
 RULES_VERSION = "catalog-rules-1"
 
 
@@ -196,7 +197,35 @@ def _cache_publish(cache: Path, identity: dict, files: dict[str, bytes], issues:
         raise SC2Error("source_cache_conflict", "缓存目标已存在，保留两份来源", path=str(cache), stage=str(stage))
     for path in [*(materialized / name for name in records), stage / "manifest.json"]:
         path.chmod(stat.S_IREAD | stat.S_IRGRP | stat.S_IROTH)
-    stage.rename(cache)
+    # Windows scanners and other file handles can briefly block a directory
+    # rename. Retry only the final atomic rename, never replace a destination.
+    delays = (0.05, 0.15, 0.30)
+    for attempt in range(len(delays) + 1):
+        if attempt:
+            if cache.exists() or cache.is_symlink():
+                raise SC2Error("source_cache_conflict", "缓存目标已出现，保留两份来源",
+                               path=str(cache), stage=str(stage))
+            try:
+                intact = (_inventory(materialized) == records and
+                          guard_absolute_path(stage / "manifest.json").read_bytes() == _canonical(manifest))
+            except OSError as exc:
+                raise SC2Error("source_cache_verification", "无法复查等待发布的临时缓存", path=str(stage),
+                               reason=str(exc)) from exc
+            if not intact:
+                raise SC2Error("source_cache_verification", "等待发布期间临时缓存内容变化", path=str(stage))
+        try:
+            stage.rename(cache)
+            break
+        except OSError as exc:
+            if cache.exists() or isinstance(exc, FileExistsError):
+                raise SC2Error("source_cache_conflict", "缓存目标已出现，保留两份来源",
+                               path=str(cache), stage=str(stage)) from exc
+            winerror = getattr(exc, "winerror", None)
+            if winerror not in (5, 32, 33) or attempt == len(delays):
+                raise SC2Error("source_cache_publish_failed", "来源缓存目录发布失败，已保留验证过的临时目录",
+                               path=str(cache), stage=str(stage), attempts=attempt + 1,
+                               winerror=winerror, errno=exc.errno, reason=str(exc)) from exc
+            time.sleep(delays[attempt])
     return cache / "files"
 
 
@@ -270,7 +299,8 @@ def _read_casc_batch(installation: Path, prefix: str, names: list[str], cache_ro
 def prepare_source_context(root: Path, search_roots: list[Path], cache_root: Path,
                            installation: Path | None = None, locale: str = "zhCN",
                            product: str | None = None, branch: str | None = None, *,
-                           dependency_values: list[str] | None = None) -> dict:
+                           dependency_values: list[str] | None = None, official_cache: str | None = None,
+                           _defer_final_check: bool = False) -> dict:
     """Resolve actual declarations recursively; return a JSON-safe snapshot.
 
     Missing dependencies, cycles, unreadable metadata/includes and unverified
@@ -347,6 +377,30 @@ def prepare_source_context(root: Path, search_roots: list[Path], cache_root: Pat
         unknown.append({"code": "client_build_not_selected"})
     nodes, edges, order, missing, cycles, incomplete = [], [], [], [], [], []
     components, inventories, fingerprints = {}, {}, {}
+    published = None
+    if official_cache and not install:
+        raise SC2Error("official_cache_invalid","显式官方缓存需要选择安装目录")
+    if install:
+        from sc2_official import OfficialCache, default_cache
+        try:
+            directory = Path(official_cache) if official_cache else default_cache(install)
+        except (ValueError,OSError):
+            directory = None
+        if official_cache or directory and (directory/"official-cache.json").is_file():
+            try:
+                directory = guard_absolute_path(directory.resolve())
+                if cache.is_relative_to(directory):
+                    raise SC2Error("source_cache_in_source","运行缓存不能写入官方缓存目录")
+                manifest_hash = _hash_file(directory/"official-cache.json")
+                published = OfficialCache(directory,install)
+                if published.identity['build_key'] != build['build_key']:
+                    raise ValueError("selected build differs from official cache")
+            except (OSError,ValueError,KeyError) as exc:
+                raise SC2Error("official_cache_invalid",str(exc),path=str(directory)) from exc
+            fingerprints[str(published.manifest_path)] = manifest_hash
+            engine = published.data.get("engine")
+            if engine:
+                fingerprints[engine["path"]] = engine["sha256"]
     resolution_checks = []
     visiting, visited = [], set()
     parser = {"parser_version": PARSER_VERSION, "rules_version": RULES_VERSION}
@@ -367,6 +421,23 @@ def prepare_source_context(root: Path, search_roots: list[Path], cache_root: Pat
                 return found
             _selected, issues = _catalog_closure(read_many, locale)
             return actual, "component", issues
+        if published and virtual:
+            component = published.component(virtual)
+            if component is None:
+                raise SC2Error("official_component_unavailable","声明的组件未收录",component=virtual)
+            meta = published.metadata(component)
+            if meta["scope"] == "research_only" or meta["assessment"]["closure"] != "complete":
+                raise SC2Error("official_component_unconfirmed","官方组件缺少活动加载依据",component=virtual)
+            prefix = component.relative_to(published.root).as_posix() + "/"
+            expected = {p[len(prefix):]: row["sha256"] for p,row in published.data["files"].items() if p.startswith(prefix)}
+            # OfficialCache has just hashed these payloads. Enumerate to detect
+            # extra files; the final freshness check independently rehashes them.
+            if {name for name, _ in map_files(component)} != expected.keys():
+                raise SC2Error("source_cache_tampered","缓存组件文件与已验证清单不一致",component=virtual)
+            inventory = expected
+            inventories[str(component)] = inventory
+            fingerprints.update({str(component/name):sha for name,sha in inventory.items()})
+            return component, "official_cache", []
         archive_hash = _hash_file(actual) if actual else None
         if actual:
             fingerprints[str(actual)] = archive_hash
@@ -430,7 +501,10 @@ def prepare_source_context(root: Path, search_roots: list[Path], cache_root: Pat
         try:
             component, source_kind, issues = materialize(key, actual, virtual)
         except SC2Error as exc:
-            if exc.code in {"source_cache_in_source", "source_cache_tampered", "source_changed", "source_case_collision", "unsafe_path", "unsafe_dependency_path", "unsafe_catalog_path", "linked_path", "hardlinked_file"}:
+            if exc.code in {"source_cache_in_source", "source_cache_tampered", "source_cache_conflict",
+                            "source_cache_publish_failed", "source_cache_verification", "source_changed",
+                            "source_case_collision", "unsafe_path", "unsafe_dependency_path", "unsafe_catalog_path",
+                            "linked_path", "hardlinked_file"}:
                 raise
             incomplete.append({"path": key, "reason": exc.code, "detail": exc.as_dict()})
             visiting.pop()
@@ -441,7 +515,13 @@ def prepare_source_context(root: Path, search_roots: list[Path], cache_root: Pat
         metadata = dependencies._resolve_ci(component, "DocumentInfo")
         values, declarations = [], []
         metadata_complete = False
-        if metadata and metadata.is_file():
+        if source_kind == "official_cache":
+            meta = published.metadata(component)
+            values = list(meta["dependencies"]) + list(meta.get("locale_dependencies", []))
+            metadata = published.manifest_path
+            metadata_complete = True
+            declarations = [{"source":str(metadata),"ordinal":i,"line":None} for i in range(len(values))]
+        elif metadata and metadata.is_file():
             try:
                 raw = metadata.read_bytes()
                 text, _ = dependencies._decode_xml(raw, metadata)
@@ -456,6 +536,10 @@ def prepare_source_context(root: Path, search_roots: list[Path], cache_root: Pat
             values = list(dependency_values)
             declarations = [{"source": str(metadata) if metadata else key + "!DocumentInfo", "line": None,
                              "ordinal": ordinal} for ordinal, _ in enumerate(values)]
+        if kind == "root" and published and published.bootstrap:
+            implicit = ["file:"+name for name in published.bootstrap["roots"]]
+            values = implicit + values
+            declarations = [{"source":str(published.manifest_path),"ordinal":i,"line":None} for i in range(len(implicit))] + declarations
         node = {"path": key, "name": actual.name if actual else virtual, "kind": kind,
                 "container": source_kind == "component", "source_kind": source_kind, "materialized_root": str(component),
                 "dependencies": values, "resolved_dependencies": [], "metadata_source": str(metadata) if metadata else key + "!DocumentInfo",
@@ -464,14 +548,17 @@ def prepare_source_context(root: Path, search_roots: list[Path], cache_root: Pat
         if actual and install and actual.is_relative_to(install):
             node["build_identity"] = "unknown_install_component"
             unknown.append({"code": "installation_component_build_unverified", "path": str(actual)})
+        if source_kind == "official_cache":
+            node["dependency_evidence"] = meta["dependency_evidence"]
+            node["build_identity"] = "verified_official_cache"
         nodes.append(node)
         for reference, declaration in zip(values, declarations, strict=True):
             parts = dependencies._reference_parts(reference)
             edge = {"from": key, "to": None, "reference": reference, "resolved": False, "declared_sources": parts,
                     "source": {"file": declaration["source"], "line": declaration["line"], "ordinal": declaration["ordinal"]},
                     "bnet_identity_verified": False if "bnet" in parts else None}
-            if "bnet" in parts:
-                unknown.append({"code": "battle_net_identity_not_verified", "reference": reference, "requested_by": key})
+            if "bnet" in parts and "file" not in parts:
+                unknown.append({"code":"battle_net_identity_not_verified","reference":reference,"requested_by":key})
             if "file" not in parts:
                 missing.append({"reference": reference, "requested_by": key, "kind": "bnet", "reason": "battle_net_reference_not_resolved"})
                 edges.append(edge)
@@ -482,7 +569,9 @@ def prepare_source_context(root: Path, search_roots: list[Path], cache_root: Pat
                 missing.append({"reference": reference, "requested_by": key, "kind": "file", "relative": parts["file"], "reason": "file_not_found"})
             else:
                 target_key = visit(target, casc_name, "dependency")
-                edge.update({"to": target_key, "resolved": target_key in components, "resolved_via": "file" if target else "casc"})
+                edge.update({"to": target_key, "resolved": target_key in components, "resolved_via": "file" if target else "official_cache" if published else "casc"})
+                if "bnet" in parts and not (published and casc_name and edge["resolved"]):
+                    unknown.append({"code":"battle_net_identity_not_verified","reference":reference,"requested_by":key})
                 if edge["resolved"]:
                     node["resolved_dependencies"].append(target_key)
                 else:
@@ -514,8 +603,11 @@ def prepare_source_context(root: Path, search_roots: list[Path], cache_root: Pat
                "resolution_checks": resolution_checks, "proposed_dependencies": dependency_values,
                "complete": graph["complete"] and not any(item["code"] in {"battle_net_identity_not_verified", "installation_component_build_unverified"} for item in unknown),
                "unknown": unknown, "engine_parity": False}
+    if published:
+        context["official_cache"] = {"manifest":str(published.manifest_path),"identity":published.identity}
     context["source_context_id"] = _context_id(context)
-    assert_source_context_current(context)
+    if not _defer_final_check:
+        assert_source_context_current(context)
     return context
 
 
@@ -545,11 +637,16 @@ def assert_source_context_current(context: dict) -> dict:
     if context.get("parser_version") != PARSER_VERSION or context.get("rules_version") != RULES_VERSION:
         raise SC2Error("source_context_stale", "解析器或规则版本已变化")
     changed = []
+    checked_files = {}
     for root, inventory in context.get("inventories", {}).items():
         path = guard_absolute_path(Path(root))
-        if not path.is_dir() or _inventory(path) != inventory:
+        current = _inventory(path) if path.is_dir() else None
+        checked_files.update({str(path/name):value for name,value in (current or {}).items()})
+        if current != inventory:
             changed.append(root)
     for raw_path, expected in context.get("fingerprints", {}).items():
+        if raw_path in checked_files and checked_files[raw_path] == expected:
+            continue
         path = guard_absolute_path(Path(raw_path))
         if not path.is_file() or _hash_file(path) != expected:
             changed.append(raw_path)

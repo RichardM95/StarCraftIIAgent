@@ -8,7 +8,6 @@ from pathlib import Path
 from .errors import SC2Error
 from .storage import digest, file_lock, guard_absolute_path, map_files, safe_path, snapshot, write_json
 
-KEYSTONE = Path(r"<KEYSTONE_MAP_ROOT>\build\kscg2.SC2Map")
 
 
 class Projects:
@@ -28,7 +27,7 @@ class Projects:
                 if (not isinstance(record, dict) or record.get("project_id") != key
                         or not isinstance(record.get("root"), str) or not Path(record["root"]).is_absolute()
                         or not isinstance(record.get("writable"), bool)
-                        or record.get("profile") not in {"generic", "keystone"}
+                        or not isinstance(record.get("profile"), str)
                         or not isinstance(record.get("search_roots"), list)):
                     raise ValueError("invalid project record")
             return records
@@ -46,7 +45,7 @@ class Projects:
         source = guard_absolute_path(Path(path)).resolve()
         if not source.exists():
             raise SC2Error("project_missing", "地图或模组不存在", path=str(source))
-        if profile not in ("auto", "generic", "keystone"):
+        if profile not in ("auto", "generic"):
             raise SC2Error("invalid_profile", "项目适配类型无效")
         with file_lock(self.state / "registry.lock"):
             records = self._load()
@@ -81,11 +80,8 @@ class Projects:
                         raise SC2Error("not_component_project", "地图组件根元素不正确", component=filename)
             except ET.ParseError as exc:
                 raise SC2Error("invalid_xml", str(exc)) from exc
-            script = safe_path(root, "MapScript.galaxy")
-            is_keystone = root == KEYSTONE.resolve() or (script.exists() and b"lib1_gv_mAX_CARD_ID" in script.read_bytes())
-            effective_profile = "keystone" if is_keystone else ("generic" if profile == "auto" else profile)
             record = {"project_id": key, "source": str(source), "root": str(root),
-                      "writable": writable, "profile": effective_profile,
+                      "writable": writable, "profile": "generic",
                       "kind": "mod" if source.suffix.casefold() == ".sc2mod" else "map",
                       "archive_source": source.is_file(),
                       "search_roots": [str(guard_absolute_path(Path(p)).resolve()) for p in (search_roots or [])]}
@@ -106,7 +102,7 @@ class Projects:
         if not isinstance(project_id, str) or not project_id or not isinstance(write, bool):
             raise SC2Error("invalid_project_id", "项目 ID 或访问参数无效")
         record = self._load().get(project_id)
-        if record is None:
+        if record is None or record["profile"] != "generic":
             raise SC2Error("project_not_open", "先调用 sc2_project_open 打开项目")
         if not guard_absolute_path(Path(record["root"])).is_dir():
             raise SC2Error("project_missing", "工作目录已移动或不存在")
@@ -115,9 +111,9 @@ class Projects:
         return record
 
     def list(self):
-        return list(self._load().values())
+        return [r for r in self._load().values() if r["profile"] == "generic"]
 
-    def clone(self, project_id, destination: str):
+    def clone(self, project_id, destination: str, registry=None, expected_snapshot=None):
         record = self.get(project_id)
         if not isinstance(destination, (str, Path)) or not str(destination).strip():
             raise SC2Error("invalid_destination", "副本目标必须为非空路径")
@@ -125,6 +121,8 @@ class Projects:
         if target.exists() or target.is_relative_to(source) or source.is_relative_to(target):
             raise SC2Error("invalid_destination", "副本需使用不存在且不嵌套于源图的目录")
         baseline = snapshot(source)
+        if expected_snapshot is not None and baseline != expected_snapshot:
+            raise SC2Error('template_changed','复制前模板指纹已变化')
         target.mkdir(parents=True, exist_ok=False)
         try:
             for rel, path in map_files(source):
@@ -136,4 +134,21 @@ class Projects:
         except BaseException:
             # Keep partial output as evidence; never delete user data on failure.
             raise
-        return self.open(str(target), writable=True, profile=record["profile"], search_roots=record["search_roots"])
+        store = registry or self
+        result = store.open(str(target), writable=True, profile=record["profile"], search_roots=record["search_roots"])
+        identity = target.stat()
+        write_json(store.state / "work-copies" / (result["project_id"]+".json"),
+                   {"project_id":result["project_id"],"source":str(source),"target":str(target),"initial_snapshot":baseline,
+                    "identity":[identity.st_dev,identity.st_ino,getattr(identity,"st_birthtime_ns",None)]})
+        return result
+
+    def require_work_copy(self, project_id):
+        record = self.get(project_id)
+        path = self.state / "work-copies" / (project_id+".json")
+        root = guard_absolute_path(Path(record["root"]))
+        identity = root.stat()
+        proof = json.loads(path.read_text("utf-8")) if path.is_file() else {}
+        if (proof.get("project_id") != project_id or proof.get("target") != str(root) or
+                proof.get("identity") != [identity.st_dev,identity.st_ino,getattr(identity,"st_birthtime_ns",None)]):
+            raise SC2Error("terrain_not_accepted","请从当前版本克隆已登记工作副本，再重新预览地形改动")
+        return proof

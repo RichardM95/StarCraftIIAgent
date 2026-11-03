@@ -24,8 +24,18 @@ If initialization reports an unresolved official dependency, route to [official 
 ## Task Routing
 
 After reading this skill, route to the appropriate deep skill based on the task. Sub-skills under `skills/galaxy/` and `skills/sc2data/` are loaded after the corresponding top-level router skill.
-For a new trigger request, route to `sc2-map-triggers` and prefer editable GUI events, conditions, and actions. Use embedded Custom Script only for a small part that GUI cannot reasonably express; choose standalone Galaxy only when the user explicitly requests it or the task maintains existing Galaxy source.
-Library selection follows `tools/sc2-trigger-query.py libraries` for the actual target; use the [dependency query workflow](../../wiki/reference/trigger-knowledge.md) before choosing function, parameter, preset or sub-action IDs. Official reference membership does not establish target availability.
+The supplied map identifies the map task target even when agent-config.json selects a different mod. Resolve paths and preserve Hub task ownership before opening the project.
+
+| Requested outcome | Primary skill | First effective action |
+|---|---|---|
+| Query/create/modify GUI events, conditions, actions, variables or objectives | sc2-map-triggers | sc2_trigger_context on the explicit project |
+| Terrain, expansion, placed units/doodads, create/move regions or pathing | sc2-terrain-editing | capabilities, then inspect/select the actual map |
+| Complete an objective on entry into an existing region | sc2-map-triggers | Query and uniquely bind the existing region |
+| Create/move a region or place a unit, then implement its mission behavior | sc2-terrain-editing then sc2-map-triggers | Edit the working copy, hand off its path/components/object IDs, then refresh trigger context on that same copy |
+| Diagnose behavior of an already placed mission object | sc2-map-triggers | Read logic first; load terrain skill if placement is implicated |
+| Existing handwritten Galaxy / wave conversion / unit data | sc2-galaxy-scripting / sc2-attack-wave-scaling / sc2-catalog-xml | Verify handwritten entry / wave source / active effective definitions |
+
+The handoff includes the working copy path, changed components, object or region names and IDs, and evidence scope. Terrain writes change resource fingerprints. Re-read context before generating GUI candidates. A missing/ambiguous resource needs the actual target's candidates. For existing-resource requests, inspect it read-only before authoring behavior.
 
 | Task type | Load next skill | Wiki page |
 |---|---|---|
@@ -33,8 +43,6 @@ Library selection follows `tools/sc2-trigger-query.py libraries` for the actual 
 | Writing/editing mod XML (units, abilities, behaviors, effects, weapons, upgrades, validators, footprints) | `sc2-catalog-xml` | `wiki/implementation/xml-patterns.md`, `wiki/implementation/xml-patterns/catalog-rules.md` |
 | Migrating custom unit data chains between mods | `sc2-unit-migration` | `wiki/guides/unit-migration.en.md` |
 | Deep actor work (CActorUnit/Action/Model/Beam/Sound, VFX/audio, texture swaps, morph transitions, inactive-XML extraction) | `sc2-actor-system` | `wiki/reference/actors.md`, `wiki/implementation/xml-patterns/editor-roundtrip-and-actors.md` |
-| Editing map triggers, mission-object wiring, GUI organization, victory/defeat hooks | `sc2-map-triggers` | `wiki/reference/triggers-overview.md`, `wiki/implementation/per-map-setup.md` |
-| Terrain layers, map expansion, scene composition, placed objects, pathing, bridges/tunnels | `sc2-terrain-editing` | `wiki/guides/sc2-terrain-editing.md`; adaptation tasks load `skills/sc2-terrain-editing/references/map-adaptation.md` |
 | Bank system, campaign persistence, mission saves, unlocks | `sc2-bank-system` | `wiki/implementation/bank-system.md`, `wiki/reference/galaxy-bank.md` |
 | Localization (GameStrings/ObjectStrings/TriggerStrings), string anchors, blank editor names, GameHotkeys | `sc2-localization` | `wiki/implementation/localization.md` |
 | Supplementary local/MCP tools, official assets, editor warnings, bounded DeepSeek sub-tasks | `sc2-shared-tools` | `wiki/guides/shared-tools.md` |

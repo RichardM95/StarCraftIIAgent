@@ -6,6 +6,7 @@ from . import assets, casc, catalog, dependencies, editor, localization, script,
 from .errors import SC2Error
 from .storage import safe_path
 from .terrain import Terrain, render_terrain
+from .reports import read_page
 
 DISABLED = {'sc2_script_replace', 'sc2_script_guarded_replace', 'sc2_script_build'}
 
@@ -14,7 +15,7 @@ def create_operations(service):
     operations = {}
     def register(readonly=False):
         def decorate(fn):
-            if not fn.__name__.startswith('sc2_keystone_') and fn.__name__ not in DISABLED:
+            if fn.__name__ not in DISABLED:
                 operations[fn.__name__] = (fn, readonly)
             return fn
         return decorate
@@ -24,7 +25,7 @@ def create_operations(service):
         """返回真实支持范围、实验功能、未完成项、版本与验证层级。"""
         result = service.capabilities()
         result['integration'] = {'implementation': 'shared-cli-mcp',
-            'exposed_operations': list(operations), 'excluded_profiles': ['keystone'],
+            'exposed_operations': list(operations), 'excluded_profiles': [],
             'generated_galaxy': 'read_only', 'existing_workspace_tools_remain_default': True}
         return result
 
@@ -95,9 +96,9 @@ def create_operations(service):
 
 
     @register(False)
-    def sc2_project_create(template: str, destination: str) -> dict:
+    def sc2_project_create(template: str, destination: str, template_project_id: str|None=None) -> dict:
         """从已注册且指纹未变的模板创建新组件项目；不猜测地图外壳。"""
-        return service.create_from_template(template,destination)
+        return service.create_from_template(template,destination,template_project_id)
 
 
     @register(False)
@@ -211,10 +212,10 @@ def create_operations(service):
 
 
     @register(True)
-    def sc2_catalog_references(project_id: str, catalog_type: str, object_id: str) -> dict:
-        """查询入向/出向引用及可达链；动态 Actor 事件和脚本引用不伪装已解析。"""
-        roots,dep=service.roots(project_id)
-        return {**catalog.trace_references(roots,catalog_type,object_id),'dependencies_complete':dep['complete']}
+    def sc2_catalog_references(project_id: str, catalog_type: str, object_id: str, source_context_id: str|None=None, mode: str="full") -> dict:
+        """direct 查询直接入边和出边；full 同时返回传递闭包。"""
+        from .reference_index import query
+        return query(service,project_id,catalog_type,object_id,source_context_id,mode)
 
 
     @register(False)
@@ -308,7 +309,7 @@ def create_operations(service):
 
     @register(False)
     def sc2_script_replace(project_id: str, old: str, new: str, expected_sha256: str, preview_only: bool=False) -> dict:
-        """唯一精确上下文替换，要求 SHA-256；保持结构、编码、换行和钥石保护。"""
+        """唯一精确上下文替换，要求 SHA-256；保持结构、编码、换行。"""
         return service.edit(project_id,'script_replace',{'old':old,'new':new,'expected_sha256':expected_sha256},preview_only)
 
 
@@ -316,6 +317,48 @@ def create_operations(service):
     def sc2_script_triggers(project_id: str) -> dict:
         """只读检查图形 Triggers XML 的元素与引用结构。"""
         return script.inspect_triggers(service.record(project_id)[1])
+
+    @register(False)
+    def sc2_trigger_write(project_id: str, operations: list[dict], expected_sha256: str|None=None,
+                          locale: str='zhCN', mods_dir: str|None=None) -> dict:
+        """结构化 GUI upsert，返回统一事务候选；不直接改源。"""
+        from .trigger_pipeline import write
+        return write(service,project_id,operations,expected_sha256,locale,mods_dir)
+
+    @register(True)
+    def sc2_trigger_context(project_id: str, selection: list[str]|None=None, query: str|None=None,
+                            topic: str|None=None, depth: int=1, limit: int=40, mods_dir: str|None=None,
+                            library: str|None=None) -> dict:
+        """读取局部 GUI 顺序、作用域、引用者、定义、资源和输入指纹；展示截断不限制完整验证。"""
+        from .trigger_context import context
+        return context(service,project_id,selection,query,topic,depth,limit,mods_dir,library)
+
+    @register(False)
+    def sc2_trigger_author(project_id: str, spec: dict, mode: str='preview', mods_dir: str|None=None,
+                           include_diff: bool=False) -> dict:
+        """版本化行为树与精确局部改造；验证隔离副本实际字节，preview 或统一事务 candidate。"""
+        from .trigger_author import author
+        return author(service,project_id,spec,mode,mods_dir,include_diff)
+
+    @register(False)
+    def sc2_trigger_generate(project_id: str, mods_dir: str|None=None, runtime_probe: bool=False) -> dict:
+        """离线生成受支持 GUI 闭包，产物仅写项目运行目录。"""
+        from .trigger_pipeline import generate
+        return generate(service,project_id,mods_dir,runtime_probe)
+
+    @register(False)
+    def sc2_galaxy_check(project_id: str, build_id: str|None=None, entry: str|None=None,
+                          mods_dir: str|None=None) -> dict:
+        """检查指纹绑定的离线构建，运行真实 Galaxy 静态前端。"""
+        from .trigger_pipeline import check_build, check_source
+        if (build_id is None)==(entry is None):raise SC2Error('galaxy_check_request','provide exactly one of build_id or entry')
+        return check_build(service,project_id,build_id) if build_id is not None else check_source(service,project_id,entry,mods_dir)
+
+    @register(False)
+    def sc2_trigger_package(project_id: str, build_id: str, installation: str|None=None) -> dict:
+        """将带运行证明的离线构建装入新 MPQ，回读校验，不改源码或启动游戏。"""
+        from .trigger_package import package_build
+        return package_build(service,project_id,build_id,installation)
 
 
     @register(True)
@@ -414,10 +457,16 @@ def create_operations(service):
     @register(False)
     def sc2_validate_launch_test(project_id: str, installation: str, product: str='s2_cn') -> dict:
         """先生成独立已回读归档，再程序化启动游戏测试；不控制输入。"""
-        destination=service.state/'test-runs'/uuid.uuid4().hex/'test.SC2Map'
-        destination.parent.mkdir(parents=True)
-        exported=service.export(project_id,str(destination))
-        return {'export':exported,'launch':editor.launch_test(destination,Path(installation),product),'runtime':'not_verified'}
+        from .agent_bridge import sc2_activity
+        try:
+            with sc2_activity.heavy_activity("归档并启动测试地图"):
+                destination=service.state/'test-runs'/uuid.uuid4().hex/'test.SC2Map'
+                destination.parent.mkdir(parents=True)
+                exported=service.export(project_id,str(destination))
+                return {'export':exported,'launch':editor.launch_test(destination,Path(installation),product),'runtime':'not_verified'}
+        except sc2_activity.ActivityBusy as exc:
+            raise SC2Error("heavy_activity_busy",str(exc)) from exc
+
 
 
     @register(True)
@@ -454,16 +503,16 @@ def create_operations(service):
 
 
     @register(False)
-    def sc2_dependencies_prepare(project_id: str, installation: str|None=None, locale: str|None=None, product: str|None=None, branch: str|None=None, background: bool=True) -> dict:
+    def sc2_dependencies_prepare(project_id: str, installation: str|None=None, locale: str|None=None, product: str|None=None, branch: str|None=None, background: bool=True, official_cache: str|None=None) -> dict:
         """固定递归依赖、物化来源与构建指纹；缺失来源保持不完整，不改依赖声明。"""
-        fn=lambda cancel:service.prepare_dependencies(project_id,installation,locale,product,branch)
+        fn=lambda cancel:service.prepare_dependencies(project_id,installation,locale,product,branch,official_cache)
         return service.jobs.submit('dependencies_prepare',fn) if background else fn(None)
 
 
     @register(True)
-    def sc2_catalog_explain(project_id: str, catalog: str, object_id: str, fields: list[str]|None=None, source_context_id: str|None=None, observations: dict|None=None) -> dict:
+    def sc2_catalog_explain(project_id: str, catalog: str, object_id: str, fields: list[str]|None=None, source_context_id: str|None=None, observations: dict|None=None, include_references: bool=False) -> dict:
         """分别解释静态值、逐层来源、未知规则和有证据绑定的实测对照。"""
-        return service.explain_catalog(project_id,catalog,object_id,fields,source_context_id,observations)
+        return service.explain_catalog(project_id,catalog,object_id,fields,source_context_id,observations,include_references)
 
 
     @register(True)
@@ -527,10 +576,8 @@ def create_operations(service):
 
 
     @register(True)
-    def sc2_unit_variant_audit(project_id: str, base_unit: str|None=None, new_id: str|None=None, visual_source: str='MarineWarfield', allowed_gameplay_differences: list[str]|None=None, source_context_id: str|None=None, named_workflow: str|None=None) -> dict:
-        """审计单位变体；named_workflow=secret_hangar可单独审计秘密机库生产/挂件/弃牌链，无需base/new ID。"""
-        if named_workflow is not None:
-            return service.audit_named_unit_workflow(project_id,named_workflow,source_context_id)
+    def sc2_unit_variant_audit(project_id: str, base_unit: str, new_id: str, visual_source: str='MarineWarfield', allowed_gameplay_differences: list[str]|None=None, source_context_id: str|None=None) -> dict:
+        """审计单位变体。"""
         from .unit_variant import audit_unit_variant
         context=service.source_context(project_id,source_context_id) if source_context_id else service.prepare_dependencies(project_id)
         result=audit_unit_variant([Path(p) for p in context['roots']],base_unit,new_id,visual_source,allowed_gameplay_differences=allowed_gameplay_differences)
@@ -543,53 +590,6 @@ def create_operations(service):
         """受限Marauder/Warfield模板生成完整事务候选，公共伤害链不重复升级。"""
         from .unit_variant import plan_unit_variant
         return service.prepare_domain(project_id,'unit_variant',lambda root,roots,context:plan_unit_variant(root,roots,base_unit,new_id,visual_source,allowed_gameplay_differences),source_context_id)
-
-
-    @register(True)
-    def sc2_keystone_card_inspect(project_id: str, card_id: int|None=None, name: str|None=None) -> dict:
-        """读取真实卡牌ID、费用、注册单位和静态效果调用链。"""
-        return service.keystone_inspect(project_id,'card',{'card_id':card_id,'name':name})
-
-
-    @register(False)
-    def sc2_keystone_card_cost(project_id: str, card_id: int, mineral: int, gas: int, source_context_id: str|None=None) -> dict:
-        """精确修改矿气与已识别的双悬停预览，生成事务候选。"""
-        return service.prepare_keystone(project_id,'card_cost',{'card_id':card_id,'mineral':mineral,'gas':gas},source_context_id)
-
-
-    @register(True)
-    def sc2_keystone_descriptions(project_id: str, card_ids: list[int]|None=None, source_context_id: str|None=None) -> dict:
-        """组合自动介绍与手写描述并提示重复；不自动改写语义不明卡效。"""
-        return service.keystone_inspect(project_id,'descriptions',{'card_ids':card_ids},source_context_id)
-
-
-    @register(True)
-    def sc2_keystone_news_inspect(project_id: str, category: str='global') -> dict:
-        """读取指定分类的真实页序、日期键和历史正文。"""
-        return service.keystone_inspect(project_id,'news',{'category':category})
-
-
-    @register(False)
-    def sc2_keystone_news_update(project_id: str, category: str, date: str, body: str, source_context_id: str|None=None) -> dict:
-        """按分类新增日期首页或补充同日正文，保留历史和其他分类，生成候选。"""
-        return service.prepare_keystone(project_id,'news',{'category':category,'date':date,'body':body},source_context_id)
-
-
-    @register(True)
-    def sc2_keystone_portraits_inspect(project_id: str) -> dict:
-        """读取稳定saveID、头像容量和分页；玩家可见页数保持未知。"""
-        return service.keystone_inspect(project_id,'portraits')
-
-
-    @register(False)
-    def sc2_keystone_portrait_import(project_id: str, image_path: str, save_id: int|None=None, nemesis_unlock_id: int=-1, backer_exclusive: bool=False, support_months_required: int=0, standard_wins_required: int=0, source_context_id: str|None=None) -> dict:
-        """解码源图片并裁切为152px DXT5头像；仅追加新稳定ID的事务候选。"""
-        from .storage import guard_absolute_path
-        path=guard_absolute_path(Path(image_path))
-        if not path.is_file() or path.stat().st_size>64*1024*1024:raise SC2Error('keystone_image_invalid','源图片不存在或超过64MiB')
-        raw=path.read_bytes()
-        if len(raw)>64*1024*1024:raise SC2Error('keystone_image_invalid','源图片超过64MiB')
-        return service.prepare_keystone(project_id,'portrait',{'image':raw,'save_id':save_id,'nemesis_unlock_id':nemesis_unlock_id,'backer_exclusive':backer_exclusive,'support_months_required':support_months_required,'standard_wins_required':standard_wins_required},source_context_id)
 
 
     @register(False)
@@ -607,6 +607,12 @@ def create_operations(service):
     @register(False)
     def sc2_probe_run(probe_id: str, installation: str, product: str='s2_cn', startup_timeout: int=120, probe_timeout: int=120) -> dict:
         """后台串行运行诊断；已有客户端阻塞，超时/中断保留partial，仅终止核实归属的测试进程。"""
+        from .agent_bridge import sc2_activity
+        try:
+            with sc2_activity.heavy_activity("探针启动预检"):
+                pass  # The worker acquires the gate again and holds it through collection.
+        except sc2_activity.ActivityBusy as exc:
+            raise SC2Error("heavy_activity_busy",str(exc)) from exc
         return service.jobs.submit('probe_run',lambda cancel:service.probes.run(probe_id,installation,product,startup_timeout,probe_timeout,cancel))
 
 
@@ -622,7 +628,11 @@ def create_operations(service):
         _,root=service.record(project_id)
         item=service.transactions.read(change_id)
         if Path(item['root']).resolve()!=root.resolve(): raise SC2Error('project_mismatch','记录不属于此项目')
-        return service.transactions.describe(item)
+        result = service.transactions.describe(item)
+        applied = service.transactions.application(item)
+        if applied:
+            result['application'] = {'change_id': applied['id'], 'state': applied['state']}
+        return result
 
 
     @register(False)
@@ -662,9 +672,7 @@ def create_operations(service):
     @register(True)
     def sc2_report_read(name: str, offset: int=0, limit: int=24000) -> dict:
         """分段读取此服务生成的大型 JSON 报告。name 使用工具返回的 report_name。"""
-        if not 0<=offset or not 1<=limit<=100000: raise SC2Error('invalid_range','报告范围无效')
-        value=safe_path(service.state/'reports',name).read_text('utf-8')
-        return {'text':value[offset:offset+limit],'next_offset':offset+limit if offset+limit<len(value) else None}
+        return read_page(service.state/'reports',name,offset,limit)
 
 
     @register(True)

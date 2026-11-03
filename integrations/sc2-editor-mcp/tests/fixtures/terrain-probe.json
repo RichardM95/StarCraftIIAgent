@@ -1,0 +1,78 @@
+{
+  "rect": [
+    0,
+    0,
+    144,
+    120
+  ],
+  "thor": {
+    "up_start": [
+      71,
+      61
+    ],
+    "up_end": [
+      71,
+      76
+    ],
+    "down_start": [
+      73,
+      76
+    ],
+    "down_end": [
+      73,
+      61
+    ]
+  },
+  "building_points": [
+    {
+      "id": "legal_ground",
+      "point": [
+        60,
+        58
+      ],
+      "expected_exact_placeable": true
+    },
+    {
+      "id": "illegal_edge",
+      "point": [
+        0,
+        0
+      ],
+      "expected_exact_placeable": false
+    }
+  ],
+  "boundary_points": [
+    {
+      "id": "west",
+      "point": [
+        0,
+        60
+      ],
+      "expected_exact_placeable": false
+    },
+    {
+      "id": "east",
+      "point": [
+        144,
+        60
+      ],
+      "expected_exact_placeable": false
+    },
+    {
+      "id": "south",
+      "point": [
+        72,
+        0
+      ],
+      "expected_exact_placeable": false
+    },
+    {
+      "id": "north",
+      "point": [
+        72,
+        120
+      ],
+      "expected_exact_placeable": false
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "name": "sc2-agent-galaxy-frontend",
+  "private": true,
+  "type": "module",
+  "engines": {"node": ">=22"},
+  "scripts": {"build": "esbuild bridge.ts --bundle --platform=node --format=esm --packages=external --outfile=dist/bridge.mjs"},
+  "dependencies": {"vscode-languageserver": "10.0.1", "vscode-uri": "3.1.0"},
+  "devDependencies": {"esbuild": "0.25.12"}
+}

@@ -5,6 +5,7 @@ Read [workspace rules](../AGENTS.en.md). The local agent-config.json identifies 
 
 - [Language and personal preferences](guides/agent-language.en.md).
 - [Unified skill entry (English original)](../skills/sc2-project-entry/SKILL.md): one English technical skill tree, explained in the chosen language.
+- Trigger/terrain entry: [task routing and mixed handoff](../skills/sc2-project-entry/SKILL.md#task-routing), GUI behavior through sc2-map-triggers and physical placement through sc2-terrain-editing.
 - Everyday development: [36 scenarios](guides/development-conversations.en.md), grouped by units, presentation, triggers, dialogue, persistence and validation.
 - [18 skill scenarios and two multi-turn conversations](guides/skill-conversations.en.md): terrain, migration, official resources, MCP, model delegation and Harness2.
 - [26 Terrain Module drawing scenarios and two multi-turn conversations](guides/terrain-conversations.en.md): reference selection, terrain painting, placement, pathing and continuation after Editor saves.
@@ -27,4 +28,6 @@ Read [workspace rules](../AGENTS.en.md). The local agent-config.json identifies 
 - Shared tools and MCP: [setup, ownership and DeepSeek](guides/shared-tools.en.md), [routing skill](../skills/sc2-shared-tools/SKILL.md).
 - Harness2: [project-local installation and recursion demo](guides/harness2.en.md).
 
-<!-- translation-source: wiki/index.md; sha256: c75039108e71c432210397d1fe7b10b8159e21dc944953e044f1e61d4714b4a1 -->
+- Offline triggers: [GUI writing, Galaxy generation and static compilation](guides/trigger-pipeline.md), [behavior authoring and bounded GUI modifications (Chinese)](guides/trigger-author.md).
+
+<!-- translation-source: wiki/index.md; sha256: bc04488d7baa240ef1de1e9fd5650c69f068dc9279ad2941f3878e09131e3a0f -->

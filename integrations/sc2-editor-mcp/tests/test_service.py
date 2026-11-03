@@ -89,20 +89,6 @@ def test_localization_never_edits_other_locale(opened):
     assert inspect_localization(root)['card_pairs']=={'paired':[],'missing':[]}
 
 
-def test_keystone_stable_identity_and_new_card_limit(tmp_path):
-    script=(
-        'const int lib1_gv_mAX_CARD_ID = 1;\n'
-        'void lib1_Cards () {\n int lv_id;\n lv_id = 1;\n'
-        ' lib1_gf_DefineCard(lv_id, SET, RACE, "Marine Squad", Name);\n}\n')
-    (tmp_path/'MapScript.galaxy').write_bytes(script.encode('utf-8'))
-    with pytest.raises(SC2Error) as error:
-        validate_changes(tmp_path,{'MapScript.galaxy':script.replace('Marine Squad','Renamed').encode()},'keystone')
-    assert error.value.code=='keystone_card_identity'
-    with pytest.raises(SC2Error) as error:
-        validate_changes(tmp_path,{'MapScript.galaxy':script.replace('= 1;','= 0;',1).encode()},'keystone')
-    assert error.value.code=='keystone_card_limit'
-
-
 def test_mcp_schemas_and_structured_results(tmp_path):
     from sc2_mcp.server import create_server
     server=create_server(tmp_path/'server-state')

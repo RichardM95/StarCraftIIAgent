@@ -27,7 +27,6 @@ from .terrain import Terrain
 SUPPORT_VERSION = "skyshield-98370-xml115-experimental-1"
 SUPPORTED_EDITOR_SHA256 = "ed6e2636af6dc4cd2dd67c1ed6f6f3d14188628749e1498693cb9f09098eee17"
 NATIVE_COMPONENTS = frozenset({"t3Terrain.xml", "t3HeightMap", "t3SyncHeightMap", "t3VertCol", "Minimap.tga"})
-_FORMAL = Path("<KEYSTONE_MAP_ROOT>/build")
 
 
 def _finite(value, name):
@@ -275,7 +274,7 @@ def plan_native_sync_result(root: Path, control_before: Path, control_after: Pat
 
 def _protected(path, roots):
     actual = guard_absolute_path(path).resolve()
-    if any(actual.is_relative_to(guard_absolute_path(r).resolve()) for r in [_FORMAL, *(roots or [])]):
+    if any(actual.is_relative_to(guard_absolute_path(r).resolve()) for r in (roots or [])):
         raise SC2Error("native_sync_protected_path", "原生同步不接受正式或受保护路径", path=str(actual))
     return actual
 

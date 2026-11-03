@@ -26,6 +26,23 @@ from sc2_catalog_inputs import index_inputs, inventory, save_manifest, changed_i
 from sc2_triggers import Target, check
 
 
+class VerifiedTreeTests(unittest.TestCase):
+    def test_summary_reuse_depends_on_bytes_and_document_kind(self):
+        xml = b"<Fixture><One/></Fixture>"
+        digest = hashlib.sha256(xml).hexdigest()
+        trigger = official._verified_tree(xml, "test/fixture.triggerlib", digest)
+        trigger.set("_entry_count", "99")
+        with patch.object(official, "validation_tree", wraps=official.validation_tree) as parse:
+            second = official._verified_tree(xml, "test/fixture.triggerlib", digest)
+            self.assertEqual(second.get("_entry_count"), "1")
+            parse.assert_not_called()
+            full = official._verified_tree(xml, "test/fixture.xml", digest)
+            self.assertEqual(full[0].tag, "One")
+            changed = b"<Fixture><One/><Two/></Fixture>"
+            result = official._verified_tree(changed, "test/fixture.triggerlib", hashlib.sha256(changed).hexdigest())
+            self.assertEqual(result.get("_entry_count"), "2")
+
+
 def tool(name, filename):
     spec = importlib.util.spec_from_file_location(name, TOOLS / filename)
     module = importlib.util.module_from_spec(spec)
@@ -269,12 +286,20 @@ class CacheTests(unittest.TestCase):
         def parse(raw, *args, **kwargs):
             parses.append(raw)
             return fromstring(raw, *args, **kwargs)
-        with patch.object(Path, 'read_bytes', read), patch.object(official.ET, 'fromstring', parse):
+        with patch.dict(official._xml_summaries, clear=True), patch.object(Path, 'read_bytes', read), patch.object(official.ET, 'fromstring', parse):
             official.OfficialCache(self.cache, self.install)
-        self.assertEqual(len(reads), len(set(reads)))
-        for key, raw in self.files.items():
-            if key.endswith(('librarylist.xml', '/a.xml', '/b.xml', '.triggerlib')):
-                self.assertEqual(parses.count(raw), 1)
+            self.assertEqual(len(reads), len(set(reads)))
+            for key, raw in self.files.items():
+                if key.endswith(('librarylist.xml', '/a.xml', '/b.xml', '.triggerlib')):
+                    self.assertEqual(parses.count(raw), 1)
+            cold_reads = list(reads)
+            reads.clear()
+            parses.clear()
+            official.OfficialCache(self.cache, self.install)
+            self.assertEqual(reads, cold_reads)
+            for key, raw in self.files.items():
+                if key.endswith('.triggerlib'):
+                    self.assertNotIn(raw, parses)
 
     def test_bootstrap_blocker_stops_before_payload_reads(self):
         self.files.pop('campaigns/void.sc2campaign/documentinfo')

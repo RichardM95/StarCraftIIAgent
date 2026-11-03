@@ -1,0 +1,343 @@
+{
+  "method": "Fixed manual rule walkthrough, including global entry, project router and specialist. Not model hit-rate measurement.",
+  "cases": [
+    {
+      "id": 1,
+      "group": "触发器",
+      "prompt": "查询这张地图撤离触发器的成功分支",
+      "target": "explicit map; hand-authored file for case 15",
+      "primary_skill": "sc2-map-triggers",
+      "first_action": "sc2_trigger_context",
+      "secondary_skill": null,
+      "evidence": "static validation passed; Editor accepted and packaged runtime passed only with scoped observations",
+      "before": {
+        "route_available": true,
+        "entry_to_specialist_documents": 3,
+        "issue": "high-level GUI workflow below XML details"
+      },
+      "after": {
+        "route_available": true,
+        "entry_to_specialist_documents": 3,
+        "review": "verified against project task table and specialist first workflow"
+      },
+      "critical_errors": []
+    },
+    {
+      "id": 2,
+      "group": "触发器",
+      "prompt": "只有玩家1首次进入已有EvacZone才完成目标",
+      "target": "explicit map; hand-authored file for case 15",
+      "primary_skill": "sc2-map-triggers",
+      "first_action": "sc2_trigger_context",
+      "secondary_skill": null,
+      "evidence": "static validation passed; Editor accepted and packaged runtime passed only with scoped observations",
+      "before": {
+        "route_available": true,
+        "entry_to_specialist_documents": 3,
+        "issue": "high-level GUI workflow below XML details"
+      },
+      "after": {
+        "route_available": true,
+        "entry_to_specialist_documents": 3,
+        "review": "verified against project task table and specialist first workflow"
+      },
+      "critical_errors": []
+    },
+    {
+      "id": 3,
+      "group": "触发器",
+      "prompt": "替换成功分支并调整动作顺序",
+      "target": "explicit map; hand-authored file for case 15",
+      "primary_skill": "sc2-map-triggers",
+      "first_action": "sc2_trigger_context",
+      "secondary_skill": null,
+      "evidence": "static validation passed; Editor accepted and packaged runtime passed only with scoped observations",
+      "before": {
+        "route_available": true,
+        "entry_to_specialist_documents": 3,
+        "issue": "high-level GUI workflow below XML details"
+      },
+      "after": {
+        "route_available": true,
+        "entry_to_specialist_documents": 3,
+        "review": "verified against project task table and specialist first workflow"
+      },
+      "critical_errors": []
+    },
+    {
+      "id": 4,
+      "group": "触发器",
+      "prompt": "地图初始化时调用活动模组导出的GUI动作",
+      "target": "explicit map; hand-authored file for case 15",
+      "primary_skill": "sc2-map-triggers",
+      "first_action": "sc2_trigger_context",
+      "secondary_skill": null,
+      "evidence": "static validation passed; Editor accepted and packaged runtime passed only with scoped observations",
+      "before": {
+        "route_available": true,
+        "entry_to_specialist_documents": 3,
+        "issue": "high-level GUI workflow below XML details"
+      },
+      "after": {
+        "route_available": true,
+        "entry_to_specialist_documents": 3,
+        "review": "verified against project task table and specialist first workflow"
+      },
+      "critical_errors": []
+    },
+    {
+      "id": 5,
+      "group": "触发器",
+      "prompt": "将触发器移动分类并保留ID",
+      "target": "explicit map; hand-authored file for case 15",
+      "primary_skill": "sc2-map-triggers",
+      "first_action": "sc2_trigger_context",
+      "secondary_skill": null,
+      "evidence": "static validation passed; Editor accepted and packaged runtime passed only with scoped observations",
+      "before": {
+        "route_available": true,
+        "entry_to_specialist_documents": 3,
+        "issue": "high-level GUI workflow below XML details"
+      },
+      "after": {
+        "route_available": true,
+        "entry_to_specialist_documents": 3,
+        "review": "verified against project task table and specialist first workflow"
+      },
+      "critical_errors": []
+    },
+    {
+      "id": 6,
+      "group": "地形",
+      "prompt": "把已有救援单位向东移动两格",
+      "target": "explicit map; hand-authored file for case 15",
+      "primary_skill": "sc2-terrain-editing",
+      "first_action": "capabilities + inspect/select",
+      "secondary_skill": null,
+      "evidence": "static validation passed; Editor accepted and packaged runtime passed only with scoped observations",
+      "before": {
+        "route_available": true,
+        "entry_to_specialist_documents": 3,
+        "issue": "workflow requires reading mode distinctions"
+      },
+      "after": {
+        "route_available": true,
+        "entry_to_specialist_documents": 3,
+        "review": "verified against project task table and specialist first workflow"
+      },
+      "critical_errors": []
+    },
+    {
+      "id": 7,
+      "group": "地形",
+      "prompt": "创建名为EvacZone的矩形区域",
+      "target": "explicit map; hand-authored file for case 15",
+      "primary_skill": "sc2-terrain-editing",
+      "first_action": "capabilities + inspect/select",
+      "secondary_skill": null,
+      "evidence": "static validation passed; Editor accepted and packaged runtime passed only with scoped observations",
+      "before": {
+        "route_available": true,
+        "entry_to_specialist_documents": 3,
+        "issue": "workflow requires reading mode distinctions"
+      },
+      "after": {
+        "route_available": true,
+        "entry_to_specialist_documents": 3,
+        "review": "verified against project task table and specialist first workflow"
+      },
+      "critical_errors": []
+    },
+    {
+      "id": 8,
+      "group": "地形",
+      "prompt": "在已有工作副本续画道路",
+      "target": "explicit map; hand-authored file for case 15",
+      "primary_skill": "sc2-terrain-editing",
+      "first_action": "capabilities + inspect/select",
+      "secondary_skill": null,
+      "evidence": "static validation passed; Editor accepted and packaged runtime passed only with scoped observations",
+      "before": {
+        "route_available": true,
+        "entry_to_specialist_documents": 3,
+        "issue": "workflow requires reading mode distinctions"
+      },
+      "after": {
+        "route_available": true,
+        "entry_to_specialist_documents": 3,
+        "review": "verified against project task table and specialist first workflow"
+      },
+      "critical_errors": []
+    },
+    {
+      "id": 9,
+      "group": "地形",
+      "prompt": "检查桥梁是否实际可通行",
+      "target": "explicit map; hand-authored file for case 15",
+      "primary_skill": "sc2-terrain-editing",
+      "first_action": "capabilities + inspect/select",
+      "secondary_skill": null,
+      "evidence": "static validation passed; Editor accepted and packaged runtime passed only with scoped observations",
+      "before": {
+        "route_available": true,
+        "entry_to_specialist_documents": 3,
+        "issue": "workflow requires reading mode distinctions"
+      },
+      "after": {
+        "route_available": true,
+        "entry_to_specialist_documents": 3,
+        "review": "verified against project task table and specialist first workflow"
+      },
+      "critical_errors": []
+    },
+    {
+      "id": 10,
+      "group": "地形",
+      "prompt": "调查可复用的真实地形组件再制作副本",
+      "target": "explicit map; hand-authored file for case 15",
+      "primary_skill": "sc2-terrain-editing",
+      "first_action": "capabilities + scan/inspect",
+      "secondary_skill": null,
+      "evidence": "static validation passed; Editor accepted and packaged runtime passed only with scoped observations",
+      "before": {
+        "route_available": true,
+        "entry_to_specialist_documents": 3,
+        "issue": "workflow requires reading mode distinctions"
+      },
+      "after": {
+        "route_available": true,
+        "entry_to_specialist_documents": 3,
+        "review": "verified against project task table and specialist first workflow"
+      },
+      "critical_errors": []
+    },
+    {
+      "id": 11,
+      "group": "混合",
+      "prompt": "新建撤离区并实现首次进入逻辑",
+      "target": "explicit map; hand-authored file for case 15",
+      "primary_skill": "sc2-terrain-editing",
+      "first_action": "capabilities + inspect/select",
+      "secondary_skill": "sc2-map-triggers",
+      "evidence": "static validation passed; Editor accepted and packaged runtime passed only with scoped observations",
+      "before": {
+        "route_available": true,
+        "entry_to_specialist_documents": 3,
+        "issue": "mixed handoff not explicit"
+      },
+      "after": {
+        "route_available": true,
+        "entry_to_specialist_documents": 3,
+        "review": "verified against project task table and specialist first workflow"
+      },
+      "critical_errors": []
+    },
+    {
+      "id": 12,
+      "group": "混合",
+      "prompt": "摆放救援单位并实现靠近后的营救目标",
+      "target": "explicit map; hand-authored file for case 15",
+      "primary_skill": "sc2-terrain-editing",
+      "first_action": "capabilities + inspect/select",
+      "secondary_skill": "sc2-map-triggers",
+      "evidence": "static validation passed; Editor accepted and packaged runtime passed only with scoped observations",
+      "before": {
+        "route_available": true,
+        "entry_to_specialist_documents": 3,
+        "issue": "mixed handoff not explicit"
+      },
+      "after": {
+        "route_available": true,
+        "entry_to_specialist_documents": 3,
+        "review": "verified against project task table and specialist first workflow"
+      },
+      "critical_errors": []
+    },
+    {
+      "id": 13,
+      "group": "混合",
+      "prompt": "修复救援单位已经摆好但任务无法完成",
+      "target": "explicit map; hand-authored file for case 15",
+      "primary_skill": "sc2-map-triggers",
+      "first_action": "sc2_trigger_context",
+      "secondary_skill": "sc2-terrain-editing if placement is implicated",
+      "evidence": "static validation passed; Editor accepted and packaged runtime passed only with scoped observations",
+      "before": {
+        "route_available": true,
+        "entry_to_specialist_documents": 3,
+        "issue": "mixed handoff not explicit"
+      },
+      "after": {
+        "route_available": true,
+        "entry_to_specialist_documents": 3,
+        "review": "verified against project task table and specialist first workflow"
+      },
+      "critical_errors": []
+    },
+    {
+      "id": 14,
+      "group": "混合",
+      "prompt": "先移动撤离区再重新绑定进入事件",
+      "target": "explicit map; hand-authored file for case 15",
+      "primary_skill": "sc2-terrain-editing",
+      "first_action": "capabilities + inspect/select",
+      "secondary_skill": "sc2-map-triggers",
+      "evidence": "static validation passed; Editor accepted and packaged runtime passed only with scoped observations",
+      "before": {
+        "route_available": true,
+        "entry_to_specialist_documents": 3,
+        "issue": "mixed handoff not explicit"
+      },
+      "after": {
+        "route_available": true,
+        "entry_to_specialist_documents": 3,
+        "review": "verified against project task table and specialist first workflow"
+      },
+      "critical_errors": []
+    },
+    {
+      "id": 15,
+      "group": "相邻",
+      "prompt": "修复既有手写Galaxy函数",
+      "target": "explicit map; hand-authored file for case 15",
+      "primary_skill": "sc2-galaxy-scripting",
+      "first_action": "verify hand-authored entry/includes",
+      "secondary_skill": null,
+      "evidence": "static validation passed; Editor accepted and packaged runtime passed only with scoped observations",
+      "before": {
+        "route_available": true,
+        "entry_to_specialist_documents": 3,
+        "issue": "workflow requires reading mode distinctions"
+      },
+      "after": {
+        "route_available": true,
+        "entry_to_specialist_documents": 3,
+        "review": "verified against project task table and specialist first workflow"
+      },
+      "critical_errors": []
+    },
+    {
+      "id": 16,
+      "group": "相邻",
+      "prompt": "将Custom AI进攻波迁移成普通GUI触发器",
+      "target": "explicit map; hand-authored file for case 15",
+      "primary_skill": "sc2-attack-wave-scaling",
+      "first_action": "inspect wave source and active definitions",
+      "secondary_skill": null,
+      "evidence": "static validation passed; Editor accepted and packaged runtime passed only with scoped observations",
+      "before": {
+        "route_available": true,
+        "entry_to_specialist_documents": 3,
+        "issue": "workflow requires reading mode distinctions"
+      },
+      "after": {
+        "route_available": true,
+        "entry_to_specialist_documents": 3,
+        "review": "verified against project task table and specialist first workflow"
+      },
+      "critical_errors": []
+    }
+  ],
+  "accuracy_statement": "16/16 fixed rule cases have explicit routes. Human walkthrough only; no model hit-rate claim.",
+  "comparison": "Entry-to-specialist route takes three documents both before and after. High-level GUI workflow and mixed-task handoff are now front-loaded."
+}

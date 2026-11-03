@@ -150,8 +150,10 @@ def test_symlink_cannot_redirect_import(tmp_path):
     source = put(tmp_path, "source.dds")
     try:
         (project / "Assets").symlink_to(outside, target_is_directory=True)
-    except OSError:
-        pytest.skip("This Windows account cannot create symbolic links")
+    except OSError as exc:
+        if getattr(exc, "winerror", None) != 1314:
+            raise
+        pytest.skip(f"Cannot create the test directory symlink: {exc}")
     with pytest.raises(SC2Error) as error:
         plan_asset_import(project, source, "Assets/a.dds")
     assert error.value.code == "linked_asset_path"

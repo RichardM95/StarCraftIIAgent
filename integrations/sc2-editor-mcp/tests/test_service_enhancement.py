@@ -14,7 +14,7 @@ def environment(tmp_path,monkeypatch):
     (dep/'DocumentInfo').write_bytes(b'<DocInfo/>')
     folder=dep/'Base.SC2Data/GameData';folder.mkdir(parents=True)
     (folder/'UnitData.xml').write_bytes(b'<Catalog><CUnit id="A"><LifeMax value="45"/></CUnit></Catalog>')
-    (root/'MapScript.galaxy').write_bytes(b'void InitMap () {}\n')
+    (root/'Fixture.galaxy').write_bytes(b'void InitMap () {}\n')
     service=Service(tmp_path/'state');monkeypatch.setattr(service,'editor_conflict',lambda:None)
     project=service.projects.open(str(root),True,search_roots=[str(source)])
     yield service,project['project_id'],root,dep
@@ -38,14 +38,14 @@ def test_domain_candidate_revalidates_dependency_before_commit(environment):
 def test_import_candidate_commits_and_uses_original_transaction(environment,tmp_path):
     service,key,root,_=environment
     candidate=tmp_path/'candidate.galaxy';candidate.write_bytes(b'void InitMap () { int value = 1; }\n')
-    before=(root/'MapScript.galaxy').read_bytes()
-    result=service.prepare_changes(key,[{'path':'MapScript.galaxy','baseline_sha256':digest(before),
+    before=(root/'Fixture.galaxy').read_bytes()
+    result=service.prepare_changes(key,[{'path':'Fixture.galaxy','baseline_sha256':digest(before),
         'candidate_file':str(candidate),'candidate_sha256':digest(candidate.read_bytes())}])
-    assert result['state']=='prepared' and (root/'MapScript.galaxy').read_bytes()==before
+    assert result['state']=='prepared' and (root/'Fixture.galaxy').read_bytes()==before
     commit=service.apply_candidate(key,result['change_id'])
     assert commit['state']=='committed'
     service.transactions.rollback(commit['change_id'],root)
-    assert (root/'MapScript.galaxy').read_bytes()==before
+    assert (root/'Fixture.galaxy').read_bytes()==before
 
 
 @pytest.mark.parametrize('relative',['DocumentInfo','BankList.xml','t3HeightMap'])
@@ -85,32 +85,10 @@ def test_source_selection_updates_locale_without_forgetting_installation(environ
 def test_experimental_terrain_commit_requires_flag_and_independent_target(environment,monkeypatch):
     import sc2_mcp.service as module
     service,key,root,_=environment
-    prepared=service.transactions.run(root,lambda:{'MapScript.galaxy':b'void InitMap () { int x = 1; }\n'},label='terrain_flatten_protected',preview_only=True)
+    prepared=service.transactions.run(root,lambda:{'Fixture.galaxy':b'void InitMap () { int x = 1; }\n'},label='terrain_flatten_protected',preview_only=True)
     before=snapshot(root)
     with pytest.raises(SC2Error) as error:service.apply_candidate(key,prepared['change_id'])
     assert error.value.code=='terrain_not_accepted'
-    monkeypatch.setattr(module,'KEYSTONE',root)
     with pytest.raises(SC2Error) as error:service.apply_candidate(key,prepared['change_id'],True)
     assert error.value.code=='terrain_not_accepted'
     assert snapshot(root)==before
-
-
-def test_keystone_planner_routes_through_bound_candidate_and_rollback(tmp_path,monkeypatch):
-    import importlib.util
-    spec=importlib.util.spec_from_file_location('keystone_service_fixture',Path(__file__).with_name('test_keystone.py'))
-    fixture=importlib.util.module_from_spec(spec);spec.loader.exec_module(fixture)
-    root=fixture.fixture(tmp_path/'map.SC2Map')
-    (root/'DocumentInfo').write_bytes(b'<DocInfo/>')
-    service=Service(tmp_path/'state');monkeypatch.setattr(service,'editor_conflict',lambda:None)
-    try:
-        project=service.projects.open(str(root),True)
-        before=snapshot(root)
-        card=service.keystone_inspect(project['project_id'],'card',{'card_id':1})
-        prepared=service.prepare_keystone(project['project_id'],'card_cost',{'card_id':1,'mineral':6,'gas':3})
-        assert prepared['state']=='prepared' and snapshot(root)==before
-        assert service.transactions.read(prepared['change_id'])['source_context_id']==prepared['source_context_id']
-        applied=service.apply_candidate(project['project_id'],prepared['change_id'])
-        assert service.keystone_inspect(project['project_id'],'card',{'card_id':1})['mineral']==6
-        service.transactions.rollback(applied['change_id'],root)
-        assert snapshot(root)==before
-    finally:service.jobs.shutdown()

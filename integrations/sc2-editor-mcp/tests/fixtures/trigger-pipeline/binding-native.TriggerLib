@@ -1,0 +1,145 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TriggerData>
+  <Standard Id="Ntve" />
+  <Element Type="FunctionDef" Id="00000022">
+    <Identifier>Point</Identifier>
+    <Label Type="Label" Library="Ntve" Id="00000019" />
+    <FlagCall />
+    <FlagNative />
+    <ReturnType>
+      <Type Value="point" />
+    </ReturnType>
+    <Parameter Type="ParamDef" Library="Ntve" Id="00000034" />
+    <Parameter Type="ParamDef" Library="Ntve" Id="00000035" />
+  </Element>
+  <Element Type="ParamDef" Id="00000035">
+    <Identifier>y</Identifier>
+    <ParameterType>
+      <Type Value="fixed" />
+    </ParameterType>
+    <Default Type="Param" Library="Ntve" Id="00000013" />
+  </Element>
+  <Element Type="Param" Id="00000013">
+    <Value>0</Value>
+    <ValueType Type="fixed" />
+  </Element>
+  <Element Type="ParamDef" Id="00000034">
+    <Identifier>x</Identifier>
+    <ParameterType>
+      <Type Value="fixed" />
+    </ParameterType>
+    <Default Type="Param" Library="Ntve" Id="00000012" />
+  </Element>
+  <Element Type="Param" Id="00000012">
+    <Value>0</Value>
+    <ValueType Type="fixed" />
+  </Element>
+  <Element Type="Label" Id="00000019">
+    <Icon>Assets\Textures\ui-editoricon-triggercategories_point.dds</Icon>
+  </Element>
+  <Element Type="Preset" Id="1CAA7463">
+    <Identifier>CurrentTotalOptions</Identifier>
+    <Label Type="Label" Library="Ntve" Id="E499631E" />
+    <PresetCustom />
+    <BaseType Value="bool" />
+    <PresetGenConstVar />
+    <Item Type="PresetValue" Library="Ntve" Id="0507CEFD" />
+    <Item Type="PresetValue" Library="Ntve" Id="0C9F0213" />
+  </Element>
+  <Element Type="PresetValue" Id="0C9F0213">
+    <Identifier>Total</Identifier>
+    <Value>true</Value>
+  </Element>
+  <Element Type="PresetValue" Id="0507CEFD">
+    <Identifier>Current</Identifier>
+    <Value>false</Value>
+  </Element>
+  <Element Type="Label" Id="E499631E">
+    <Color>255,0,0,160</Color>
+    <Icon>Assets\Textures\ui-editoricon-triggercategories_unit.dds</Icon>
+  </Element>
+  <Element Type="FunctionDef" Id="2E7FB833">
+    <Identifier>PowerLevel</Identifier>
+    <Label Type="Label" Library="Ntve" Id="1C34099B" />
+    <FlagCall />
+    <FlagNative />
+    <ReturnType>
+      <Type Value="int" />
+    </ReturnType>
+    <Parameter Type="ParamDef" Library="Ntve" Id="1BABB68E" />
+    <Parameter Type="ParamDef" Library="Ntve" Id="6AA17D3E" />
+    <Parameter Type="ParamDef" Library="Ntve" Id="AB6FE2EA" />
+  </Element>
+  <Element Type="ParamDef" Id="AB6FE2EA">
+    <Identifier>inType</Identifier>
+    <ParameterType>
+      <Type Value="string" />
+    </ParameterType>
+    <Default Type="Param" Library="Ntve" Id="B4F81E41" />
+  </Element>
+  <Element Type="Param" Id="B4F81E41">
+    <Value>PowerSource</Value>
+    <ValueType Type="string" />
+  </Element>
+  <Element Type="ParamDef" Id="6AA17D3E">
+    <Identifier>inPosition</Identifier>
+    <ParameterType>
+      <Type Value="point" />
+    </ParameterType>
+  </Element>
+  <Element Type="ParamDef" Id="1BABB68E">
+    <Identifier>inPlayer</Identifier>
+    <ParameterType>
+      <Type Value="int" />
+    </ParameterType>
+    <Limits Value="0,15" />
+  </Element>
+  <Element Type="Label" Id="1C34099B">
+    <Icon>Assets\Textures\ui-editoricon-triggercategories_environment.dds</Icon>
+  </Element>
+  <Element Type="FunctionDef" Id="00000250">
+    <Identifier>PowerLevel</Identifier>
+    <Label Type="Label" Library="Ntve" Id="1C34099B" />
+    <Deprecated />
+    <FlagCall />
+    <FlagNative />
+    <ReturnType>
+      <Type Value="int" />
+    </ReturnType>
+    <Parameter Type="ParamDef" Library="Ntve" Id="00000427" />
+    <Parameter Type="ParamDef" Library="Ntve" Id="00000425" />
+    <FunctionCall Type="FunctionCall" Library="Ntve" Id="976BBA25" />
+  </Element>
+  <Element Type="FunctionCall" Id="976BBA25">
+    <FunctionDef Type="FunctionDef" Library="Ntve" Id="2E7FB833" />
+    <Parameter Type="Param" Library="Ntve" Id="FB07AF67" />
+    <Parameter Type="Param" Library="Ntve" Id="C5253559" />
+    <Parameter Type="Param" Library="Ntve" Id="82B9BD9F" />
+  </Element>
+  <Element Type="Param" Id="82B9BD9F">
+    <ParameterDef Type="ParamDef" Library="Ntve" Id="6AA17D3E" />
+    <Parameter Type="ParamDef" Library="Ntve" Id="00000425" />
+  </Element>
+  <Element Type="ParamDef" Id="00000425">
+    <Identifier>inPosition</Identifier>
+    <ParameterType>
+      <Type Value="point" />
+    </ParameterType>
+  </Element>
+  <Element Type="Param" Id="C5253559">
+    <ParameterDef Type="ParamDef" Library="Ntve" Id="1BABB68E" />
+    <Parameter Type="ParamDef" Library="Ntve" Id="00000427" />
+  </Element>
+  <Element Type="ParamDef" Id="00000427">
+    <Identifier>inPlayer</Identifier>
+    <ParameterType>
+      <Type Value="int" />
+    </ParameterType>
+    <Limits Value="0,15" />
+  </Element>
+  <Element Type="Param" Id="FB07AF67">
+    <ParameterDef Type="ParamDef" Library="Ntve" Id="AB6FE2EA" />
+    <Value>PowerSource</Value>
+    <ValueType Type="string" />
+  </Element>
+</TriggerData>

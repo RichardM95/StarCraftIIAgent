@@ -74,6 +74,12 @@ Actor events can also be triggered from the Trigger Editor using the `Send Actor
 
 **Known editor bug with Range/Splat parents:** After setting the token in the Data Module, the generated `<On>` events may be malformed. Fix by right-clicking the Events field → `Reset To Parent Value` → select the parent name. Alternatively open XML view and delete the generated `<On>` lines for the new actor.
 
+## Checking apparently empty action actor links
+
+Use `sc2_catalog_explain` on the **concrete action actor**. Read the effective field, its source layer or named parent, and the target Catalog/ID in `reference`. In Core ActorData, `GenericAttackBase` supplies `LaunchAssets.Model="##id##Launch"` and `ImpactMap[None].Model="##id##Impact"`. A child named `Foo` that only changes the impact sound can therefore use Model/FooImpact. If its nearer parent instead sets the model to `Fixed`, look for Model/Fixed. The separate `LaunchModel` field links to an **Actor**.
+
+Use `sc2_catalog_references` with `mode="direct"` on the Model ID to find its immediate users in the active dependencies. Request `full` when you need the transitive chain. The legacy Catalog index only collects explicit XML references. Empty incoming results there cannot establish that a model is orphaned. Distinguish a cleared or removed slot, an absent optional default asset, an unresolved parent and an explicit broken link before proposing a data edit.
+
 ## Action Actor Missile Defaults
 
 For a `CActorAction` based on `GenericAttack`, a missile actor named exactly `<ActionActorId>Missile` is the default missile binding. In XML this may appear as an explicit `<Missile value="..."/>`, but the SC2 Editor can remove that field on save because the resolved preload token is already `##id##Missile`.

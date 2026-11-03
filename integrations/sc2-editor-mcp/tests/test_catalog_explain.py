@@ -89,3 +89,28 @@ def test_duplicate_stage_observations_rejected(tmp_path):
     with pytest.raises(SC2Error) as error:
         catalog_explain([root], "Unit", "A", ["LifeMax"], observations={"observations": [{"field": "LifeMax", "value": "45"}, {"field": "LifeMax", "value": "55"}]})
     assert error.value.code == "ambiguous_catalog_observation"
+
+def test_verified_service_queries_reuse_index_but_reject_stale_content(tmp_path):
+    import os
+    from sc2_mcp.service import Service
+    root = cat(tmp_path / "map.SC2Map", '<CUnit id="Marine"><LifeMax value="45"/></CUnit>')
+    service = Service(tmp_path / "state")
+    try:
+        key = service.projects.open(str(root))["project_id"]
+        ctx = service.prepare_dependencies(key)["source_context_id"]
+        def explain():
+            return service.explain_catalog(key,"Unit","Marine",["LifeMax"],ctx)
+        original = explain()
+        index = service._query_index[1]
+        assert explain() == original and service._query_index[1] is index
+        xml = root / "Base.SC2Data/GameData/UnitData.xml"
+        stat = xml.stat()
+        xml.write_bytes(xml.read_bytes().replace(b"45",b"46"))
+        os.utime(xml,ns=(stat.st_atime_ns,stat.st_mtime_ns))
+        with pytest.raises(SC2Error) as stale:
+            explain()
+        assert stale.value.code == "source_context_stale"
+        ctx = service.prepare_dependencies(key)["source_context_id"]
+        assert explain()["fields"]["LifeMax"]["static"]["value"] == "46"
+    finally:
+        service.jobs.shutdown()

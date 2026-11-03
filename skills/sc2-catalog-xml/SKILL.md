@@ -30,6 +30,8 @@ For deep XML authoring on a specific catalog family, load the matching `sc2data-
 
 ## Pre-Edit Workflow (mandatory)
 
+Use the explicit XML index for discovery. For orphan or missing-link diagnoses use `sc2_catalog_explain` and `sc2_catalog_references` with `mode="direct"` for immediate users of an object; use `full` for transitive impact on the selected project. After an Editor save, query the current project to refresh the derived reference index. An edit bound to a stale `source_context_id` requires a fresh preview. Incomplete active dependencies leave the target unverified.
+
 1. **Query first:** Run `python tools/sc2-catalog-query.py` for the target ID, unit, or family. Identify the current project and active-dependency providers. Do NOT guess field names or IDs — they are case-sensitive.
 2. **Inspect one source:** Open the relevant current XML fragment. If field shape or a proven pattern is still needed, search one identified `DataEditorXML/*.txt` dump. For a component-level official/partner precedent, run `python tools/sc2-reference-query.py find <term> --area gamedata --family <Family> --component <name> --limit 20`. Reuse findings instead of repeating broad searches. Snapshot presence does not prove an active dependency.
 3. **Read patterns:** Consult the relevant section of `wiki/implementation/xml-patterns.md` and `wiki/implementation/xml-patterns/catalog-rules.md`.

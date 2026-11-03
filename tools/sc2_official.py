@@ -2,11 +2,13 @@
 from __future__ import annotations
 
 import csv
+from collections import OrderedDict
 import hashlib
 import io
 import json
 import posixpath
 import re
+from threading import Lock
 import xml.etree.ElementTree as ET
 from pathlib import Path, PurePosixPath
 
@@ -142,6 +144,30 @@ def validation_tree(raw: bytes, name: str) -> ET.Element:
     if root.tag == 'Catalog' or name.endswith(('/triggers', '.triggerlib', '.sc2lib')):
         return ET.Element(root.tag, {'_entry_count': str(len(root))})
     return root
+
+
+# Repeated MCP requests still read and hash every declared file. For large
+# Catalog/trigger XML the parser returns just a tag and child count; those
+# two immutable values can be reused for the exact same verified bytes.
+_xml_summaries = OrderedDict()
+_summary_lock = Lock()
+
+
+def _verified_tree(raw: bytes, name: str, digest: str) -> ET.Element:
+    trigger = name.endswith(('/triggers', '.triggerlib', '.sc2lib'))
+    key = (digest, trigger)
+    with _summary_lock:
+        summary = _xml_summaries.get(key)
+        if summary is not None:
+            _xml_summaries.move_to_end(key)
+            return ET.Element(summary[0], {'_entry_count': summary[1]})
+    tree = validation_tree(raw, name)
+    if trigger or tree.tag == 'Catalog':
+        with _summary_lock:
+            _xml_summaries[key] = (tree.tag, tree.attrib['_entry_count'])
+            if len(_xml_summaries) > 2048:
+                _xml_summaries.popitem(last=False)
+    return tree
 
 
 def catalog_paths(component: Path, *, research=False, manifest_data=None, registration=None) -> list[Path]:
@@ -299,7 +325,8 @@ class OfficialCache:
         if not isinstance(states, dict):
             raise ValueError('Invalid official cache file states')
         for name, state in states.items():
-            safe_path(self.root, name)
+            if name not in files:  # Every inventoried path is checked at read time below.
+                safe_path(self.root, name)
             if not isinstance(state, str) or state not in {'readable', 'unavailable', 'not_attempted'}:
                 raise ValueError('Invalid official cache file state: ' + name)
             if state == 'readable' and name not in files:
@@ -336,7 +363,7 @@ class OfficialCache:
                     or entry.get('casc_path', '').replace('\\', '/').lower() != relative):
                 raise ValueError('Missing, damaged or disallowed official cache input: ' + relative)
             if path.suffix in {'.xml', '.triggerlib', '.sc2lib', '.sc2components'} or path.name == 'triggers':
-                parsed[relative] = validation_tree(raw, relative)
+                parsed[relative] = _verified_tree(raw, relative, entry['sha256'])
         self.assessments = {}
         self.dependency_ordinals = {}
         self.bootstrap = bootstrap

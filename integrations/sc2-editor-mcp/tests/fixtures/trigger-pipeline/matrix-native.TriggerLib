@@ -1,0 +1,2249 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TriggerData>
+  <Standard Id="Ntve" />
+  <Element Type="Comment" Id="020ED8CF">
+    <Comment>
+            Effect
+        </Comment>
+  </Element>
+  <Element Type="Comment" Id="1D2D3527">
+    <Comment>
+            Harvest
+        </Comment>
+  </Element>
+  <Element Type="Comment" Id="2ED0ACB4">
+    <Comment>
+            Rally
+        </Comment>
+  </Element>
+  <Element Type="Comment" Id="395B510E">
+    <Comment>
+            Attack
+        </Comment>
+  </Element>
+  <Element Type="Comment" Id="5D7027ED">
+    <Comment>
+            Build
+        </Comment>
+  </Element>
+  <Element Type="Comment" Id="B71F5C0A">
+    <Comment>
+            Behavior
+        </Comment>
+  </Element>
+  <Element Type="Comment" Id="EB8ADF72">
+    <Comment>
+            Generic
+        </Comment>
+  </Element>
+  <Element Type="Comment" Id="FC93AECD">
+    <Comment>
+            Morph
+        </Comment>
+  </Element>
+  <Element Type="FunctionCall" Id="00000055">
+    <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000092" />
+  </Element>
+  <Element Type="FunctionCall" Id="00000067">
+    <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000356" />
+  </Element>
+  <Element Type="FunctionCall" Id="06029750">
+    <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000092" />
+  </Element>
+  <Element Type="FunctionCall" Id="5175B442">
+    <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000081" />
+    <Parameter Type="Param" Library="Ntve" Id="EB0275C1" />
+  </Element>
+  <Element Type="FunctionCall" Id="5D460481">
+    <FunctionDef Type="FunctionDef" Library="Ntve" Id="00000192" />
+  </Element>
+  <Element Type="FunctionDef" Id="00000041">
+    <Identifier>TriggerAddEventUnitRegion</Identifier>
+    <Label Type="Label" Library="Ntve" Id="00000007" />
+    <FlagEvent />
+    <FlagNative />
+    <Parameter Type="ParamDef" Library="Ntve" Id="00000325" />
+    <Parameter Type="ParamDef" Library="Ntve" Id="00000326" />
+    <Parameter Type="ParamDef" Library="Ntve" Id="00000327" />
+  </Element>
+  <Element Type="FunctionDef" Id="00000081">
+    <Identifier>UnitGetOwner</Identifier>
+    <Label Type="Label" Library="Ntve" Id="00000007" />
+    <FlagCall />
+    <FlagNative />
+    <ReturnType>
+      <Type Value="int" />
+    </ReturnType>
+    <Parameter Type="ParamDef" Library="Ntve" Id="00000140" />
+  </Element>
+  <Element Type="FunctionDef" Id="00000090">
+    <Identifier>TriggerAddEventUnitDied</Identifier>
+    <Label Type="Label" Library="Ntve" Id="00000007" />
+    <FlagEvent />
+    <FlagNative />
+    <Parameter Type="ParamDef" Library="Ntve" Id="00000159" />
+  </Element>
+  <Element Type="FunctionDef" Id="00000092">
+    <Identifier>EventUnit</Identifier>
+    <Label Type="Label" Library="Ntve" Id="00000007" />
+    <FlagCall />
+    <FlagNative />
+    <ReturnType>
+      <Type Value="unit" />
+    </ReturnType>
+    <EventResponse Type="FunctionDef" Library="Ntve" Id="E54B2D20" />
+    <EventResponse Type="FunctionDef" Library="Ntve" Id="00000041" />
+    <EventResponse Type="FunctionDef" Library="Ntve" Id="00000090" />
+    <EventResponse Type="FunctionDef" Library="Ntve" Id="6D29DCBA" />
+    <EventResponse Type="FunctionDef" Library="Ntve" Id="00000208" />
+    <EventResponse Type="FunctionDef" Library="Ntve" Id="1DE1CB2A" />
+    <EventResponse Type="FunctionDef" Library="Ntve" Id="00000272" />
+    <EventResponse Type="FunctionDef" Library="Ntve" Id="00000222" />
+    <EventResponse Type="FunctionDef" Library="Ntve" Id="00000275" />
+    <EventResponse Type="FunctionDef" Library="Ntve" Id="20830338" />
+    <EventResponse Type="FunctionDef" Library="Ntve" Id="721F018F" />
+    <EventResponse Type="FunctionDef" Library="Ntve" Id="B81FF416" />
+    <EventResponse Type="FunctionDef" Library="Ntve" Id="82E80323" />
+    <EventResponse Type="FunctionDef" Library="Ntve" Id="8ACFE903" />
+    <EventResponse Type="FunctionDef" Library="Ntve" Id="B0FA20B6" />
+    <EventResponse Type="FunctionDef" Library="Ntve" Id="69D0B7FE" />
+    <EventResponse Type="FunctionDef" Library="Ntve" Id="58A61D51" />
+    <EventResponse Type="FunctionDef" Library="Ntve" Id="3DC1F123" />
+    <EventResponse Type="FunctionDef" Library="Ntve" Id="E267A52A" />
+    <EventResponse Type="FunctionDef" Library="Ntve" Id="D00F9D6F" />
+    <EventResponse Type="FunctionDef" Library="Ntve" Id="5C010D48" />
+    <EventResponse Type="FunctionDef" Library="Ntve" Id="565520E9" />
+    <EventResponse Type="FunctionDef" Library="Ntve" Id="3C0566C4" />
+    <EventResponse Type="FunctionDef" Library="Ntve" Id="791E7DE3" />
+    <EventResponse Type="FunctionDef" Library="Ntve" Id="6D5C96AC" />
+    <EventResponse Type="FunctionDef" Library="Ntve" Id="18377668" />
+  </Element>
+  <Element Type="FunctionDef" Id="00000097">
+    <Identifier>Return</Identifier>
+    <Label Type="Label" Library="Ntve" Id="00000002" />
+    <FlagAction />
+    <FlagOperator />
+    <Parameter Type="ParamDef" Library="Ntve" Id="00000488" />
+    <ScriptCode>
+            return #PARAM(val);
+        </ScriptCode>
+  </Element>
+  <Element Type="FunctionDef" Id="00000120">
+    <Identifier>TriggerAddEventMapInit</Identifier>
+    <Label Type="Label" Library="Ntve" Id="00000009" />
+    <FlagEvent />
+    <FlagNative />
+  </Element>
+  <Element Type="FunctionDef" Id="00000128">
+    <Identifier>ArithmeticInt</Identifier>
+    <Label Type="Label" Library="Ntve" Id="00000015" />
+    <FlagCall />
+    <FlagOperator />
+    <ReturnType>
+      <Type Value="int" />
+    </ReturnType>
+    <Parameter Type="ParamDef" Library="Ntve" Id="00000205" />
+    <Parameter Type="ParamDef" Library="Ntve" Id="00000206" />
+    <Parameter Type="ParamDef" Library="Ntve" Id="00000207" />
+  </Element>
+  <Element Type="FunctionDef" Id="00000136">
+    <Identifier>SetVariable</Identifier>
+    <Label Type="Label" Library="Ntve" Id="CE915C5A" />
+    <FlagAction />
+    <FlagOperator />
+    <Parameter Type="ParamDef" Library="Ntve" Id="00000219" />
+    <Parameter Type="ParamDef" Library="Ntve" Id="00000220" />
+    <ScriptCode>
+            #PARAM(var) = #PARAM(val);
+        </ScriptCode>
+  </Element>
+  <Element Type="FunctionDef" Id="00000137">
+    <Identifier>IfThenElse</Identifier>
+    <Label Type="Label" Library="Ntve" Id="00000002" />
+    <FlagAction />
+    <FlagSubFunctions />
+    <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000003" />
+    <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000004" />
+    <SubFunctionType Type="SubFuncType" Library="Ntve" Id="00000005" />
+    <ScriptCode>
+            if (#SUBFUNCS(if," &amp;&amp; ")) {
+                #SUBFUNCS(then)
+            }
+            #IFHAVESUBFUNCS(else,else {
+            )
+                #SUBFUNCS(else)
+            #IFHAVESUBFUNCS(else,})
+        </ScriptCode>
+  </Element>
+  <Element Type="FunctionDef" Id="00000192">
+    <Identifier>PlayerGroupAll</Identifier>
+    <Label Type="Label" Library="Ntve" Id="00000011" />
+    <FlagCall />
+    <FlagNative />
+    <ReturnType>
+      <Type Value="playergroup" />
+    </ReturnType>
+  </Element>
+  <Element Type="FunctionDef" Id="00000208">
+    <Identifier>TriggerAddEventUnitCargo</Identifier>
+    <Label Type="Label" Library="Ntve" Id="00000007" />
+    <FlagEvent />
+    <FlagNative />
+    <Parameter Type="ParamDef" Library="Ntve" Id="00000362" />
+    <Parameter Type="ParamDef" Library="Ntve" Id="00000363" />
+  </Element>
+  <Element Type="FunctionDef" Id="00000222">
+    <Identifier>TriggerAddEventUnitSelected</Identifier>
+    <Label Type="Label" Library="Ntve" Id="5B96F31A" />
+    <FlagEvent />
+    <FlagNative />
+    <Parameter Type="ParamDef" Library="Ntve" Id="00000383" />
+    <Parameter Type="ParamDef" Library="Ntve" Id="00000385" />
+    <Parameter Type="ParamDef" Library="Ntve" Id="00000384" />
+  </Element>
+  <Element Type="FunctionDef" Id="00000272">
+    <Identifier>TriggerAddEventUnitHighlight</Identifier>
+    <Label Type="Label" Library="Ntve" Id="5B96F31A" />
+    <FlagEvent />
+    <FlagNative />
+    <Parameter Type="ParamDef" Library="Ntve" Id="00000489" />
+    <Parameter Type="ParamDef" Library="Ntve" Id="00000491" />
+    <Parameter Type="ParamDef" Library="Ntve" Id="00000490" />
+  </Element>
+  <Element Type="FunctionDef" Id="00000275">
+    <Identifier>TriggerAddEventUnitClick</Identifier>
+    <Label Type="Label" Library="Ntve" Id="5B96F31A" />
+    <FlagEvent />
+    <FlagNative />
+    <Parameter Type="ParamDef" Library="Ntve" Id="00000492" />
+    <Parameter Type="ParamDef" Library="Ntve" Id="00000493" />
+  </Element>
+  <Element Type="FunctionDef" Id="00000356">
+    <Identifier>RegionEntireMap</Identifier>
+    <Label Type="Label" Library="Ntve" Id="00000003" />
+    <FlagCall />
+    <FlagNative />
+    <ReturnType>
+      <Type Value="region" />
+    </ReturnType>
+  </Element>
+  <Element Type="FunctionDef" Id="0366EE04">
+    <Identifier>UIDisplayMessage</Identifier>
+    <Label Type="Label" Library="Ntve" Id="00000026" />
+    <FlagAction />
+    <FlagNative />
+    <Parameter Type="ParamDef" Library="Ntve" Id="0D120C33" />
+    <Parameter Type="ParamDef" Library="Ntve" Id="A4C19F41" />
+    <Parameter Type="ParamDef" Library="Ntve" Id="78A54B52" />
+  </Element>
+  <Element Type="FunctionDef" Id="18377668">
+    <Identifier>TriggerAddEventUnitCreated</Identifier>
+    <Label Type="Label" Library="Ntve" Id="196A8DD2" />
+    <FlagEvent />
+    <FlagNative />
+    <Parameter Type="ParamDef" Library="Ntve" Id="B38CA56F" />
+    <Parameter Type="ParamDef" Library="Ntve" Id="B6D9C7C9" />
+    <Parameter Type="ParamDef" Library="Ntve" Id="4E42D7EB" />
+  </Element>
+  <Element Type="FunctionDef" Id="1DE1CB2A">
+    <Identifier>TriggerAddEventUnitProperty</Identifier>
+    <Label Type="Label" Library="Ntve" Id="00000007" />
+    <FlagEvent />
+    <FlagNative />
+    <Parameter Type="ParamDef" Library="Ntve" Id="CF01C5C3" />
+    <Parameter Type="ParamDef" Library="Ntve" Id="DBE4165B" />
+  </Element>
+  <Element Type="FunctionDef" Id="20830338">
+    <Identifier>TriggerAddEventUnitAcquiredTarget</Identifier>
+    <Label Type="Label" Library="Ntve" Id="00000007" />
+    <FlagEvent />
+    <FlagNative />
+    <Parameter Type="ParamDef" Library="Ntve" Id="D6EC806A" />
+  </Element>
+  <Element Type="FunctionDef" Id="3C0566C4">
+    <Identifier>TriggerAddEventUnitBehaviorChange</Identifier>
+    <Label Type="Label" Library="Ntve" Id="E499631E" />
+    <FlagEvent />
+    <FlagNative />
+    <Parameter Type="ParamDef" Library="Ntve" Id="F3A8B0DC" />
+    <Parameter Type="ParamDef" Library="Ntve" Id="1CDCC284" />
+    <Parameter Type="ParamDef" Library="Ntve" Id="3029CA3C" />
+  </Element>
+  <Element Type="FunctionDef" Id="3DC1F123">
+    <Identifier>TriggerAddEventUnitRemoved</Identifier>
+    <Label Type="Label" Library="Ntve" Id="00000007" />
+    <FlagEvent />
+    <FlagNative />
+    <Parameter Type="ParamDef" Library="Ntve" Id="50C67B31" />
+  </Element>
+  <Element Type="FunctionDef" Id="565520E9">
+    <Identifier>TriggerAddEventUnitRevive</Identifier>
+    <Label Type="Label" Library="Ntve" Id="00000007" />
+    <FlagEvent />
+    <FlagNative />
+    <Parameter Type="ParamDef" Library="Ntve" Id="030338E9" />
+  </Element>
+  <Element Type="FunctionDef" Id="58A61D51">
+    <Identifier>TriggerAddEventUnitGainLevel</Identifier>
+    <Label Type="Label" Library="Ntve" Id="00000007" />
+    <FlagEvent />
+    <FlagNative />
+    <Parameter Type="ParamDef" Library="Ntve" Id="8399AFF5" />
+  </Element>
+  <Element Type="FunctionDef" Id="5C010D48">
+    <Identifier>TriggerAddEventUnitDamaged</Identifier>
+    <Label Type="Label" Library="Ntve" Id="00000007" />
+    <FlagEvent />
+    <FlagNative />
+    <Parameter Type="ParamDef" Library="Ntve" Id="4421C93A" />
+    <Parameter Type="ParamDef" Library="Ntve" Id="1B5BFFA8" />
+    <Parameter Type="ParamDef" Library="Ntve" Id="68EEADB6" />
+    <Parameter Type="ParamDef" Library="Ntve" Id="3F9C41F8" />
+  </Element>
+  <Element Type="FunctionDef" Id="69D0B7FE">
+    <Identifier>TriggerAddEventUnitGainExperience</Identifier>
+    <Label Type="Label" Library="Ntve" Id="00000007" />
+    <FlagEvent />
+    <FlagNative />
+    <Parameter Type="ParamDef" Library="Ntve" Id="240B6DE7" />
+  </Element>
+  <Element Type="FunctionDef" Id="6D29DCBA">
+    <Identifier>TriggerAddEventUnitOrder</Identifier>
+    <Label Type="Label" Library="Ntve" Id="00000007" />
+    <FlagEvent />
+    <FlagNative />
+    <Parameter Type="ParamDef" Library="Ntve" Id="E8C1A535" />
+    <Parameter Type="ParamDef" Library="Ntve" Id="427B2830" />
+  </Element>
+  <Element Type="FunctionDef" Id="6D5C96AC">
+    <Identifier>TriggerAddEventUnitDamageAbsorbed</Identifier>
+    <Label Type="Label" Library="Ntve" Id="00000007" />
+    <FlagEvent />
+    <FlagNative />
+    <Parameter Type="ParamDef" Library="Ntve" Id="0FE3DCAD" />
+    <Parameter Type="ParamDef" Library="Ntve" Id="9E064507" />
+  </Element>
+  <Element Type="FunctionDef" Id="71596144">
+    <Identifier>While</Identifier>
+    <Label Type="Label" Library="Ntve" Id="00000002" />
+    <FlagAction />
+    <FlagSubFunctions />
+    <FlagAllowBreak />
+    <SubFunctionType Type="SubFuncType" Library="Ntve" Id="20298AEC" />
+    <SubFunctionType Type="SubFuncType" Library="Ntve" Id="A1B37466" />
+    <ScriptCode>
+            while (#SUBFUNCS(Conditions," &amp;&amp; ")) {
+                #SUBFUNCS(Actions)
+            }
+        </ScriptCode>
+  </Element>
+  <Element Type="FunctionDef" Id="721F018F">
+    <Identifier>TriggerAddEventUnitAttacked</Identifier>
+    <Label Type="Label" Library="Ntve" Id="00000007" />
+    <FlagEvent />
+    <FlagNative />
+    <FlagHidden />
+    <Parameter Type="ParamDef" Library="Ntve" Id="BB25ABCF" />
+  </Element>
+  <Element Type="FunctionDef" Id="791E7DE3">
+    <Identifier>TriggerAddEventUnitAbilityAutoCastChange</Identifier>
+    <Label Type="Label" Library="Ntve" Id="196A8DD2" />
+    <FlagEvent />
+    <FlagNative />
+    <Parameter Type="ParamDef" Library="Ntve" Id="486B4E85" />
+    <Parameter Type="ParamDef" Library="Ntve" Id="1F7CADD4" />
+    <Parameter Type="ParamDef" Library="Ntve" Id="6F1D5C0F" />
+    <Parameter Type="ParamDef" Library="Ntve" Id="E05F3449" />
+  </Element>
+  <Element Type="FunctionDef" Id="82E80323">
+    <Identifier>TriggerAddEventUnitTrainProgress</Identifier>
+    <Label Type="Label" Library="Ntve" Id="00000007" />
+    <FlagEvent />
+    <FlagNative />
+    <Parameter Type="ParamDef" Library="Ntve" Id="EE161BEC" />
+    <Parameter Type="ParamDef" Library="Ntve" Id="DD4FFE3C" />
+  </Element>
+  <Element Type="FunctionDef" Id="8ACFE903">
+    <Identifier>TriggerAddEventUnitArmMagazineProgress</Identifier>
+    <Label Type="Label" Library="Ntve" Id="00000007" />
+    <FlagEvent />
+    <FlagNative />
+    <Parameter Type="ParamDef" Library="Ntve" Id="DAC1A8F7" />
+    <Parameter Type="ParamDef" Library="Ntve" Id="BA972DF2" />
+  </Element>
+  <Element Type="FunctionDef" Id="B0FA20B6">
+    <Identifier>TriggerAddEventUnitConstructProgress</Identifier>
+    <Label Type="Label" Library="Ntve" Id="00000007" />
+    <FlagEvent />
+    <FlagNative />
+    <Parameter Type="ParamDef" Library="Ntve" Id="9B14445A" />
+    <Parameter Type="ParamDef" Library="Ntve" Id="5E741589" />
+  </Element>
+  <Element Type="FunctionDef" Id="B81FF416">
+    <Identifier>TriggerAddEventUnitStartedAttack</Identifier>
+    <Label Type="Label" Library="Ntve" Id="00000007" />
+    <FlagEvent />
+    <FlagNative />
+    <FlagHidden />
+    <Parameter Type="ParamDef" Library="Ntve" Id="1771F2F3" />
+  </Element>
+  <Element Type="FunctionDef" Id="C439C375">
+    <Identifier>Comparison</Identifier>
+    <Label Type="Label" Library="Ntve" Id="00000016" />
+    <FlagCondition />
+    <FlagOperator />
+    <ReturnType>
+      <Type Value="bool" />
+    </ReturnType>
+    <Parameter Type="ParamDef" Library="Ntve" Id="ABB380C4" />
+    <Parameter Type="ParamDef" Library="Ntve" Id="51567265" />
+    <Parameter Type="ParamDef" Library="Ntve" Id="4A15EC5F" />
+  </Element>
+  <Element Type="FunctionDef" Id="D00F9D6F">
+    <Identifier>TriggerAddEventUnitAbility</Identifier>
+    <Label Type="Label" Library="Ntve" Id="196A8DD2" />
+    <FlagEvent />
+    <FlagNative />
+    <Parameter Type="ParamDef" Library="Ntve" Id="EE631277" />
+    <Parameter Type="ParamDef" Library="Ntve" Id="3F2584C8" />
+    <Parameter Type="ParamDef" Library="Ntve" Id="BB4C37B6" />
+    <Parameter Type="ParamDef" Library="Ntve" Id="ACC52290" />
+  </Element>
+  <Element Type="FunctionDef" Id="E267A52A">
+    <Identifier>TriggerAddEventUnitRangePoint</Identifier>
+    <Label Type="Label" Library="Ntve" Id="00000007" />
+    <FlagEvent />
+    <FlagNative />
+    <Parameter Type="ParamDef" Library="Ntve" Id="C4A782E5" />
+    <Parameter Type="ParamDef" Library="Ntve" Id="540DD7E3" />
+    <Parameter Type="ParamDef" Library="Ntve" Id="A468FD92" />
+    <Parameter Type="ParamDef" Library="Ntve" Id="A4C004B2" />
+  </Element>
+  <Element Type="FunctionDef" Id="E54B2D20">
+    <Identifier>TriggerAddEventUnitRange</Identifier>
+    <Label Type="Label" Library="Ntve" Id="00000007" />
+    <FlagEvent />
+    <FlagNative />
+    <Parameter Type="ParamDef" Library="Ntve" Id="9B87B175" />
+    <Parameter Type="ParamDef" Library="Ntve" Id="A30297E7" />
+    <Parameter Type="ParamDef" Library="Ntve" Id="574074BD" />
+    <Parameter Type="ParamDef" Library="Ntve" Id="46641A49" />
+  </Element>
+  <Element Type="Label" Id="00000001">
+    <Icon>Assets\Textures\ui-editoricon-triggercategories_operator.dds</Icon>
+  </Element>
+  <Element Type="Label" Id="00000002">
+    <Color>255,0,128,255</Color>
+    <Icon>Assets\Textures\ui-editoricon-triggercategories_general.dds</Icon>
+  </Element>
+  <Element Type="Label" Id="00000003">
+    <Icon>Assets\Textures\ui-editoricon-triggercategories_region.dds</Icon>
+  </Element>
+  <Element Type="Label" Id="00000006">
+    <Icon>Assets\Textures\ui-editoricon-triggercategories_player.dds</Icon>
+  </Element>
+  <Element Type="Label" Id="00000007">
+    <Color>255,128,0,128</Color>
+    <Icon>Assets\Textures\ui-editoricon-triggercategories_unit.dds</Icon>
+  </Element>
+  <Element Type="Label" Id="00000009">
+    <Icon>Assets\Textures\ui-editoricon-triggercategories_game.dds</Icon>
+  </Element>
+  <Element Type="Label" Id="00000011">
+    <Icon>Assets\Textures\ui-editoricon-triggercategories_playergroup.dds</Icon>
+  </Element>
+  <Element Type="Label" Id="00000012">
+    <Icon>Assets\Textures\ui-editoricon-triggercategories_orders.dds</Icon>
+  </Element>
+  <Element Type="Label" Id="00000015">
+    <Icon>Assets\Textures\ui-editoricon-triggercategories_math.dds</Icon>
+  </Element>
+  <Element Type="Label" Id="00000016">
+    <Icon>Assets\Textures\ui-editoricon-triggercategories_logic.dds</Icon>
+  </Element>
+  <Element Type="Label" Id="00000019">
+    <Icon>Assets\Textures\ui-editoricon-triggercategories_point.dds</Icon>
+  </Element>
+  <Element Type="Label" Id="00000026">
+    <Icon>Assets\Textures\ui-editoricon-triggercategories_ui.dds</Icon>
+  </Element>
+  <Element Type="Label" Id="00000032">
+    <Icon>Assets\Textures\ui-editoricon-triggercategories_catalog.dds</Icon>
+  </Element>
+  <Element Type="Label" Id="196A8DD2">
+    <Color>255,0,0,160</Color>
+    <Icon>Assets\Textures\ui-editoricon-triggercategories_orders.dds</Icon>
+  </Element>
+  <Element Type="Label" Id="5B96F31A">
+    <Color>255,128,0,128</Color>
+    <Icon>Assets\Textures\ui-editoricon-triggercategories_selection.dds</Icon>
+  </Element>
+  <Element Type="Label" Id="CE915C5A">
+    <Color>255,0,0,255</Color>
+    <Icon>Assets\Textures\ui-editoricon-triggercategories_variable.dds</Icon>
+  </Element>
+  <Element Type="Label" Id="E499631E">
+    <Color>255,0,0,160</Color>
+    <Icon>Assets\Textures\ui-editoricon-triggercategories_unit.dds</Icon>
+  </Element>
+  <Element Type="Param" Id="00000006">
+    <Preset Type="PresetValue" Library="Ntve" Id="C84C7A78" />
+  </Element>
+  <Element Type="Param" Id="00000043">
+    <Preset Type="PresetValue" Library="Ntve" Id="C84C7A78" />
+  </Element>
+  <Element Type="Param" Id="00000053">
+    <Preset Type="PresetValue" Library="Ntve" Id="C84C7A78" />
+  </Element>
+  <Element Type="Param" Id="00000060">
+    <Preset Type="PresetValue" Library="Ntve" Id="00000214" />
+  </Element>
+  <Element Type="Param" Id="00000068">
+    <Preset Type="PresetValue" Library="Ntve" Id="2999701E" />
+  </Element>
+  <Element Type="Param" Id="00000123">
+    <Preset Type="PresetValue" Library="Ntve" Id="00000085" />
+  </Element>
+  <Element Type="Param" Id="00000124">
+    <Value>1</Value>
+    <ValueType Type="int" />
+  </Element>
+  <Element Type="Param" Id="00000192">
+    <FunctionCall Type="FunctionCall" Library="Ntve" Id="00000055" />
+  </Element>
+  <Element Type="Param" Id="00000197">
+    <Preset Type="PresetValue" Library="Ntve" Id="C84C7A78" />
+  </Element>
+  <Element Type="Param" Id="00000215">
+    <Preset Type="PresetValue" Library="Ntve" Id="2999701E" />
+  </Element>
+  <Element Type="Param" Id="00000267">
+    <FunctionCall Type="FunctionCall" Library="Ntve" Id="00000067" />
+  </Element>
+  <Element Type="Param" Id="00000272">
+    <Preset Type="PresetValue" Library="Ntve" Id="00000145" />
+  </Element>
+  <Element Type="Param" Id="00000373">
+    <Preset Type="PresetValue" Library="Ntve" Id="C84C7A78" />
+  </Element>
+  <Element Type="Param" Id="00000374">
+    <Preset Type="PresetValue" Library="Ntve" Id="00000131" />
+  </Element>
+  <Element Type="Param" Id="00000391">
+    <Preset Type="PresetValue" Library="Ntve" Id="C84C7A78" />
+  </Element>
+  <Element Type="Param" Id="00000392">
+    <Preset Type="PresetValue" Library="Ntve" Id="00000136" />
+  </Element>
+  <Element Type="Param" Id="00000393">
+    <Preset Type="PresetValue" Library="Ntve" Id="2999701E" />
+  </Element>
+  <Element Type="Param" Id="08F49B0D">
+    <Preset Type="PresetValue" Library="Ntve" Id="C84C7A78" />
+  </Element>
+  <Element Type="Param" Id="09AD4F23">
+    <Preset Type="PresetValue" Library="Ntve" Id="00000060" />
+  </Element>
+  <Element Type="Param" Id="12222CAC">
+    <Preset Type="PresetValue" Library="Ntve" Id="9F9C00A9" />
+  </Element>
+  <Element Type="Param" Id="1BCDE273">
+    <Preset Type="PresetValue" Library="Ntve" Id="C84C7A78" />
+  </Element>
+  <Element Type="Param" Id="1EACEA55">
+    <Preset Type="PresetValue" Library="Ntve" Id="D280C23A" />
+  </Element>
+  <Element Type="Param" Id="2C05A1D5">
+    <Preset Type="PresetValue" Library="Ntve" Id="C84C7A78" />
+  </Element>
+  <Element Type="Param" Id="35C6A72B">
+    <Preset Type="PresetValue" Library="Ntve" Id="C84C7A78" />
+  </Element>
+  <Element Type="Param" Id="371A5736">
+    <Preset Type="PresetValue" Library="Ntve" Id="00000145" />
+  </Element>
+  <Element Type="Param" Id="37A61591">
+    <Preset Type="PresetValue" Library="Ntve" Id="C84C7A78" />
+  </Element>
+  <Element Type="Param" Id="3E00653E">
+    <Preset Type="PresetValue" Library="Ntve" Id="875889C8" />
+  </Element>
+  <Element Type="Param" Id="467C4B09">
+    <Preset Type="PresetValue" Library="Ntve" Id="03977D39" />
+  </Element>
+  <Element Type="Param" Id="5A7E74B2">
+    <Preset Type="PresetValue" Library="Ntve" Id="C2CE1E18" />
+  </Element>
+  <Element Type="Param" Id="5E64076D">
+    <Preset Type="PresetValue" Library="Ntve" Id="C84C7A78" />
+  </Element>
+  <Element Type="Param" Id="66CD291A">
+    <Preset Type="PresetValue" Library="Ntve" Id="C84C7A78" />
+  </Element>
+  <Element Type="Param" Id="6DD1B147">
+    <Preset Type="PresetValue" Library="Ntve" Id="C84C7A78" />
+  </Element>
+  <Element Type="Param" Id="79E71C24">
+    <Value>1.0</Value>
+    <ValueType Type="fixed" />
+  </Element>
+  <Element Type="Param" Id="7B5D20F3">
+    <Preset Type="PresetValue" Library="Ntve" Id="C84C7A78" />
+  </Element>
+  <Element Type="Param" Id="7ECF1964">
+    <Value>1</Value>
+    <ValueType Type="fixed" />
+  </Element>
+  <Element Type="Param" Id="83DDD0D0">
+    <Preset Type="PresetValue" Library="Ntve" Id="03977D39" />
+  </Element>
+  <Element Type="Param" Id="85111156">
+    <FunctionCall Type="FunctionCall" Library="Ntve" Id="5175B442" />
+  </Element>
+  <Element Type="Param" Id="86FFF2A2">
+    <Preset Type="PresetValue" Library="Ntve" Id="C84C7A78" />
+  </Element>
+  <Element Type="Param" Id="8FED0560">
+    <Preset Type="PresetValue" Library="Ntve" Id="00000231" />
+  </Element>
+  <Element Type="Param" Id="90DA7C36">
+    <Preset Type="PresetValue" Library="Ntve" Id="1E7A4625" />
+  </Element>
+  <Element Type="Param" Id="96028754">
+    <Preset Type="PresetValue" Library="Ntve" Id="C84C7A78" />
+  </Element>
+  <Element Type="Param" Id="9F3A18C8">
+    <Preset Type="PresetValue" Library="Ntve" Id="00000231" />
+  </Element>
+  <Element Type="Param" Id="A1307876">
+    <Preset Type="PresetValue" Library="Ntve" Id="00000060" />
+  </Element>
+  <Element Type="Param" Id="A95F87FC">
+    <Preset Type="PresetValue" Library="Ntve" Id="00000231" />
+  </Element>
+  <Element Type="Param" Id="AEC7352B">
+    <Preset Type="PresetValue" Library="Ntve" Id="C84C7A78" />
+  </Element>
+  <Element Type="Param" Id="B20EC38C">
+    <Preset Type="PresetValue" Library="Ntve" Id="00000145" />
+  </Element>
+  <Element Type="Param" Id="B4AA7B81">
+    <Value>1</Value>
+    <ValueType Type="int" />
+  </Element>
+  <Element Type="Param" Id="B822DA5B">
+    <Preset Type="PresetValue" Library="Ntve" Id="D33DD35C" />
+  </Element>
+  <Element Type="Param" Id="BD8EBDB9">
+    <Preset Type="PresetValue" Library="Ntve" Id="C84C7A78" />
+  </Element>
+  <Element Type="Param" Id="C636C713">
+    <Preset Type="PresetValue" Library="Ntve" Id="C84C7A78" />
+  </Element>
+  <Element Type="Param" Id="CB0E6D64">
+    <Preset Type="PresetValue" Library="Ntve" Id="C84C7A78" />
+  </Element>
+  <Element Type="Param" Id="CC03741D">
+    <Preset Type="PresetValue" Library="Ntve" Id="C84C7A78" />
+  </Element>
+  <Element Type="Param" Id="D31E2346">
+    <Preset Type="PresetValue" Library="Ntve" Id="C84C7A78" />
+  </Element>
+  <Element Type="Param" Id="D77C05A3">
+    <Preset Type="PresetValue" Library="Ntve" Id="00000060" />
+  </Element>
+  <Element Type="Param" Id="E48DA215">
+    <Preset Type="PresetValue" Library="Ntve" Id="00000231" />
+  </Element>
+  <Element Type="Param" Id="E4A0A722">
+    <Preset Type="PresetValue" Library="Ntve" Id="C84C7A78" />
+  </Element>
+  <Element Type="Param" Id="E53B0F80">
+    <Preset Type="PresetValue" Library="Ntve" Id="C84C7A78" />
+  </Element>
+  <Element Type="Param" Id="E57C6E3B">
+    <Preset Type="PresetValue" Library="Ntve" Id="00000257" />
+  </Element>
+  <Element Type="Param" Id="EB0275C1">
+    <ParameterDef Type="ParamDef" Library="Ntve" Id="00000140" />
+    <FunctionCall Type="FunctionCall" Library="Ntve" Id="06029750" />
+  </Element>
+  <Element Type="Param" Id="F5985665">
+    <Preset Type="PresetValue" Library="Ntve" Id="C84C7A78" />
+  </Element>
+  <Element Type="Param" Id="F9EF6BE7">
+    <Preset Type="PresetValue" Library="Ntve" Id="C9DCA6C0" />
+  </Element>
+  <Element Type="Param" Id="FC13D79F">
+    <FunctionCall Type="FunctionCall" Library="Ntve" Id="5D460481" />
+  </Element>
+  <Element Type="Param" Id="FEF31B95">
+    <Preset Type="PresetValue" Library="Ntve" Id="00000029" />
+  </Element>
+  <Element Type="ParamDef" Id="00000140">
+    <Identifier>u</Identifier>
+    <ParameterType>
+      <Type Value="unit" />
+    </ParameterType>
+    <Default Type="Param" Library="Ntve" Id="00000192" />
+  </Element>
+  <Element Type="ParamDef" Id="00000159">
+    <Identifier>u</Identifier>
+    <ParameterType>
+      <Type Value="unit" />
+    </ParameterType>
+    <ParamFlagReference />
+    <Default Type="Param" Library="Ntve" Id="00000006" />
+    <Preset Type="Preset" Library="Ntve" Id="B87E2354" />
+  </Element>
+  <Element Type="ParamDef" Id="00000205">
+    <Identifier>val1</Identifier>
+    <ParameterType>
+      <Type Value="int" />
+    </ParameterType>
+  </Element>
+  <Element Type="ParamDef" Id="00000206">
+    <Identifier>op</Identifier>
+    <ParameterType>
+      <Type Value="preset" />
+      <TypeElement Type="Preset" Library="Ntve" Id="00000027" />
+    </ParameterType>
+    <Default Type="Param" Library="Ntve" Id="00000123" />
+  </Element>
+  <Element Type="ParamDef" Id="00000207">
+    <Identifier>val2</Identifier>
+    <ParameterType>
+      <Type Value="int" />
+    </ParameterType>
+    <Default Type="Param" Library="Ntve" Id="00000124" />
+  </Element>
+  <Element Type="ParamDef" Id="00000219">
+    <Identifier>var</Identifier>
+    <ParameterType>
+      <Type Value="anyvariable" />
+    </ParameterType>
+    <ParamFlagMatchConst />
+  </Element>
+  <Element Type="ParamDef" Id="00000220">
+    <Identifier>val</Identifier>
+    <ParameterType>
+      <Type Value="sameas" />
+      <TypeElement Type="ParamDef" Library="Ntve" Id="00000219" />
+    </ParameterType>
+  </Element>
+  <Element Type="ParamDef" Id="00000325">
+    <Identifier>u</Identifier>
+    <ParameterType>
+      <Type Value="unit" />
+    </ParameterType>
+    <ParamFlagReference />
+    <Default Type="Param" Library="Ntve" Id="00000043" />
+    <Preset Type="Preset" Library="Ntve" Id="B87E2354" />
+  </Element>
+  <Element Type="ParamDef" Id="00000326">
+    <Identifier>r</Identifier>
+    <ParameterType>
+      <Type Value="region" />
+    </ParameterType>
+    <Default Type="Param" Library="Ntve" Id="00000267" />
+  </Element>
+  <Element Type="ParamDef" Id="00000327">
+    <Identifier>state</Identifier>
+    <ParameterType>
+      <Type Value="preset" />
+      <TypeElement Type="Preset" Library="Ntve" Id="00000050" />
+    </ParameterType>
+    <Default Type="Param" Library="Ntve" Id="00000272" />
+  </Element>
+  <Element Type="ParamDef" Id="00000362">
+    <Identifier>unit</Identifier>
+    <ParameterType>
+      <Type Value="unit" />
+    </ParameterType>
+    <ParamFlagReference />
+    <Default Type="Param" Library="Ntve" Id="00000373" />
+    <Preset Type="Preset" Library="Ntve" Id="B87E2354" />
+  </Element>
+  <Element Type="ParamDef" Id="00000363">
+    <Identifier>state</Identifier>
+    <ParameterType>
+      <Type Value="preset" />
+      <TypeElement Type="Preset" Library="Ntve" Id="00000046" />
+    </ParameterType>
+    <Default Type="Param" Library="Ntve" Id="00000374" />
+  </Element>
+  <Element Type="ParamDef" Id="00000383">
+    <Identifier>unit</Identifier>
+    <ParameterType>
+      <Type Value="unit" />
+    </ParameterType>
+    <ParamFlagReference />
+    <Default Type="Param" Library="Ntve" Id="00000391" />
+    <Preset Type="Preset" Library="Ntve" Id="B87E2354" />
+  </Element>
+  <Element Type="ParamDef" Id="00000384">
+    <Identifier>state</Identifier>
+    <ParameterType>
+      <Type Value="preset" />
+      <TypeElement Type="Preset" Library="Ntve" Id="00000047" />
+    </ParameterType>
+    <Default Type="Param" Library="Ntve" Id="00000392" />
+  </Element>
+  <Element Type="ParamDef" Id="00000385">
+    <Identifier>player</Identifier>
+    <ParameterType>
+      <Type Value="int" />
+    </ParameterType>
+    <Default Type="Param" Library="Ntve" Id="00000393" />
+    <Limits Value="0,15" />
+    <Preset Type="Preset" Library="Ntve" Id="11A95F45" />
+  </Element>
+  <Element Type="ParamDef" Id="00000488">
+    <Identifier>val</Identifier>
+    <ParameterType>
+      <Type Value="return" />
+    </ParameterType>
+  </Element>
+  <Element Type="ParamDef" Id="00000489">
+    <Identifier>unit</Identifier>
+    <ParameterType>
+      <Type Value="unit" />
+    </ParameterType>
+    <ParamFlagReference />
+    <Default Type="Param" Library="Ntve" Id="00000053" />
+    <Preset Type="Preset" Library="Ntve" Id="B87E2354" />
+  </Element>
+  <Element Type="ParamDef" Id="00000490">
+    <Identifier>state</Identifier>
+    <ParameterType>
+      <Type Value="preset" />
+      <TypeElement Type="Preset" Library="Ntve" Id="00000055" />
+    </ParameterType>
+    <Default Type="Param" Library="Ntve" Id="00000060" />
+  </Element>
+  <Element Type="ParamDef" Id="00000491">
+    <Identifier>player</Identifier>
+    <ParameterType>
+      <Type Value="int" />
+    </ParameterType>
+    <Default Type="Param" Library="Ntve" Id="00000068" />
+    <Limits Value="0,15" />
+    <Preset Type="Preset" Library="Ntve" Id="11A95F45" />
+  </Element>
+  <Element Type="ParamDef" Id="00000492">
+    <Identifier>unit</Identifier>
+    <ParameterType>
+      <Type Value="unit" />
+    </ParameterType>
+    <ParamFlagReference />
+    <Default Type="Param" Library="Ntve" Id="00000197" />
+    <Preset Type="Preset" Library="Ntve" Id="B87E2354" />
+  </Element>
+  <Element Type="ParamDef" Id="00000493">
+    <Identifier>player</Identifier>
+    <ParameterType>
+      <Type Value="int" />
+    </ParameterType>
+    <Default Type="Param" Library="Ntve" Id="00000215" />
+    <Limits Value="0,15" />
+    <Preset Type="Preset" Library="Ntve" Id="11A95F45" />
+  </Element>
+  <Element Type="ParamDef" Id="030338E9">
+    <Identifier>u</Identifier>
+    <ParameterType>
+      <Type Value="unit" />
+    </ParameterType>
+    <ParamFlagReference />
+    <Default Type="Param" Library="Ntve" Id="37A61591" />
+    <Preset Type="Preset" Library="Ntve" Id="B87E2354" />
+  </Element>
+  <Element Type="ParamDef" Id="0D120C33">
+    <Identifier>players</Identifier>
+    <ParameterType>
+      <Type Value="playergroup" />
+    </ParameterType>
+    <Default Type="Param" Library="Ntve" Id="FC13D79F" />
+  </Element>
+  <Element Type="ParamDef" Id="0FE3DCAD">
+    <Identifier>u</Identifier>
+    <ParameterType>
+      <Type Value="unit" />
+    </ParameterType>
+    <ParamFlagReference />
+    <Default Type="Param" Library="Ntve" Id="6DD1B147" />
+    <Preset Type="Preset" Library="Ntve" Id="B87E2354" />
+  </Element>
+  <Element Type="ParamDef" Id="1771F2F3">
+    <Identifier>u</Identifier>
+    <ParameterType>
+      <Type Value="unit" />
+    </ParameterType>
+    <ParamFlagReference />
+    <Default Type="Param" Library="Ntve" Id="AEC7352B" />
+    <Preset Type="Preset" Library="Ntve" Id="B87E2354" />
+  </Element>
+  <Element Type="ParamDef" Id="1B5BFFA8">
+    <Identifier>damageType</Identifier>
+    <ParameterType>
+      <Type Value="preset" />
+      <TypeElement Type="Preset" Library="Ntve" Id="00000053" />
+    </ParameterType>
+    <Default Type="Param" Library="Ntve" Id="12222CAC" />
+  </Element>
+  <Element Type="ParamDef" Id="1CDCC284">
+    <Identifier>behavior</Identifier>
+    <ParameterType>
+      <Type Value="gamelink" />
+      <GameType Value="Behavior" />
+    </ParameterType>
+    <Default Type="Param" Library="Ntve" Id="8FED0560" />
+    <Preset Type="Preset" Library="Ntve" Id="00000058" />
+  </Element>
+  <Element Type="ParamDef" Id="1F7CADD4">
+    <Identifier>ability</Identifier>
+    <ParameterType>
+      <Type Value="abilcmd" />
+    </ParameterType>
+    <Preset Type="Preset" Library="Ntve" Id="98A6601F" />
+  </Element>
+  <Element Type="ParamDef" Id="240B6DE7">
+    <Identifier>u</Identifier>
+    <ParameterType>
+      <Type Value="unit" />
+    </ParameterType>
+    <ParamFlagReference />
+    <Default Type="Param" Library="Ntve" Id="D31E2346" />
+    <Preset Type="Preset" Library="Ntve" Id="B87E2354" />
+  </Element>
+  <Element Type="ParamDef" Id="3029CA3C">
+    <Identifier>type</Identifier>
+    <ParameterType>
+      <Type Value="preset" />
+      <TypeElement Type="Preset" Library="Ntve" Id="A8EC0C71" />
+    </ParameterType>
+    <Default Type="Param" Library="Ntve" Id="5A7E74B2" />
+  </Element>
+  <Element Type="ParamDef" Id="3F2584C8">
+    <Identifier>ability</Identifier>
+    <ParameterType>
+      <Type Value="abilcmd" />
+    </ParameterType>
+    <Preset Type="Preset" Library="Ntve" Id="98A6601F" />
+  </Element>
+  <Element Type="ParamDef" Id="3F9C41F8">
+    <Identifier>damageEffect</Identifier>
+    <ParameterType>
+      <Type Value="gamelink" />
+      <GameType Value="Effect" />
+    </ParameterType>
+    <Default Type="Param" Library="Ntve" Id="A95F87FC" />
+    <Preset Type="Preset" Library="Ntve" Id="00000058" />
+  </Element>
+  <Element Type="ParamDef" Id="427B2830">
+    <Identifier>command</Identifier>
+    <ParameterType>
+      <Type Value="abilcmd" />
+    </ParameterType>
+    <Preset Type="Preset" Library="Ntve" Id="98A6601F" />
+    <Preset Type="Preset" Library="Ntve" Id="EC258F63" />
+  </Element>
+  <Element Type="ParamDef" Id="4421C93A">
+    <Identifier>u</Identifier>
+    <ParameterType>
+      <Type Value="unit" />
+    </ParameterType>
+    <ParamFlagReference />
+    <Default Type="Param" Library="Ntve" Id="1BCDE273" />
+    <Preset Type="Preset" Library="Ntve" Id="B87E2354" />
+  </Element>
+  <Element Type="ParamDef" Id="46641A49">
+    <Identifier>state</Identifier>
+    <ParameterType>
+      <Type Value="preset" />
+      <TypeElement Type="Preset" Library="Ntve" Id="00000050" />
+    </ParameterType>
+    <Default Type="Param" Library="Ntve" Id="371A5736" />
+  </Element>
+  <Element Type="ParamDef" Id="486B4E85">
+    <Identifier>unit</Identifier>
+    <ParameterType>
+      <Type Value="unit" />
+    </ParameterType>
+    <ParamFlagReference />
+    <Default Type="Param" Library="Ntve" Id="E4A0A722" />
+    <Preset Type="Preset" Library="Ntve" Id="B87E2354" />
+  </Element>
+  <Element Type="ParamDef" Id="4A15EC5F">
+    <Identifier>val2</Identifier>
+    <ParameterType>
+      <Type Value="sameas" />
+      <TypeElement Type="ParamDef" Library="Ntve" Id="ABB380C4" />
+    </ParameterType>
+    <Default Type="Param" Library="Ntve" Id="B4AA7B81" />
+  </Element>
+  <Element Type="ParamDef" Id="4E42D7EB">
+    <Identifier>behavior</Identifier>
+    <ParameterType>
+      <Type Value="gamelink" />
+      <GameType Value="Behavior" />
+    </ParameterType>
+    <Default Type="Param" Library="Ntve" Id="F9EF6BE7" />
+    <Preset Type="Preset" Library="Ntve" Id="00000058" />
+  </Element>
+  <Element Type="ParamDef" Id="50C67B31">
+    <Identifier>u</Identifier>
+    <ParameterType>
+      <Type Value="unit" />
+    </ParameterType>
+    <ParamFlagReference />
+    <Default Type="Param" Library="Ntve" Id="08F49B0D" />
+    <Preset Type="Preset" Library="Ntve" Id="B87E2354" />
+  </Element>
+  <Element Type="ParamDef" Id="51567265">
+    <Identifier>op</Identifier>
+    <ParameterType>
+      <Type Value="preset" />
+      <TypeElement Type="Preset" Library="Ntve" Id="4FAE2F8A" />
+    </ParameterType>
+    <Default Type="Param" Library="Ntve" Id="90DA7C36" />
+  </Element>
+  <Element Type="ParamDef" Id="540DD7E3">
+    <Identifier>p</Identifier>
+    <ParameterType>
+      <Type Value="point" />
+    </ParameterType>
+    <Preset Type="Preset" Library="Ntve" Id="BC55C170" />
+  </Element>
+  <Element Type="ParamDef" Id="574074BD">
+    <Identifier>range</Identifier>
+    <ParameterType>
+      <Type Value="fixed" />
+    </ParameterType>
+    <Default Type="Param" Library="Ntve" Id="7ECF1964" />
+  </Element>
+  <Element Type="ParamDef" Id="5E741589">
+    <Identifier>stage</Identifier>
+    <ParameterType>
+      <Type Value="preset" />
+      <TypeElement Type="Preset" Library="Ntve" Id="00000017" />
+    </ParameterType>
+    <Default Type="Param" Library="Ntve" Id="D77C05A3" />
+  </Element>
+  <Element Type="ParamDef" Id="68EEADB6">
+    <Identifier>damageFatalOption</Identifier>
+    <ParameterType>
+      <Type Value="preset" />
+      <TypeElement Type="Preset" Library="Ntve" Id="A3CF97C2" />
+    </ParameterType>
+    <Default Type="Param" Library="Ntve" Id="B822DA5B" />
+  </Element>
+  <Element Type="ParamDef" Id="6F1D5C0F">
+    <Identifier>change</Identifier>
+    <ParameterType>
+      <Type Value="preset" />
+      <TypeElement Type="Preset" Library="Ntve" Id="2EAD04C1" />
+    </ParameterType>
+    <Default Type="Param" Library="Ntve" Id="1EACEA55" />
+  </Element>
+  <Element Type="ParamDef" Id="78A54B52">
+    <Identifier>message</Identifier>
+    <ParameterType>
+      <Type Value="text" />
+    </ParameterType>
+  </Element>
+  <Element Type="ParamDef" Id="8399AFF5">
+    <Identifier>u</Identifier>
+    <ParameterType>
+      <Type Value="unit" />
+    </ParameterType>
+    <ParamFlagReference />
+    <Default Type="Param" Library="Ntve" Id="E53B0F80" />
+    <Preset Type="Preset" Library="Ntve" Id="B87E2354" />
+  </Element>
+  <Element Type="ParamDef" Id="9B14445A">
+    <Identifier>u</Identifier>
+    <ParameterType>
+      <Type Value="unit" />
+    </ParameterType>
+    <ParamFlagReference />
+    <Default Type="Param" Library="Ntve" Id="35C6A72B" />
+    <Preset Type="Preset" Library="Ntve" Id="B87E2354" />
+  </Element>
+  <Element Type="ParamDef" Id="9B87B175">
+    <Identifier>u</Identifier>
+    <ParameterType>
+      <Type Value="unit" />
+    </ParameterType>
+    <ParamFlagReference />
+    <Default Type="Param" Library="Ntve" Id="7B5D20F3" />
+    <Preset Type="Preset" Library="Ntve" Id="B87E2354" />
+  </Element>
+  <Element Type="ParamDef" Id="9E064507">
+    <Identifier>behavior</Identifier>
+    <ParameterType>
+      <Type Value="gamelink" />
+      <GameType Value="Behavior" />
+      <EntryType Value="CBehaviorBuff" />
+    </ParameterType>
+    <ParamFlagPreload />
+    <Default Type="Param" Library="Ntve" Id="9F3A18C8" />
+    <Preset Type="Preset" Library="Ntve" Id="00000058" />
+  </Element>
+  <Element Type="ParamDef" Id="A30297E7">
+    <Identifier>fromUnit</Identifier>
+    <ParameterType>
+      <Type Value="unit" />
+    </ParameterType>
+  </Element>
+  <Element Type="ParamDef" Id="A468FD92">
+    <Identifier>distance</Identifier>
+    <ParameterType>
+      <Type Value="fixed" />
+    </ParameterType>
+    <Default Type="Param" Library="Ntve" Id="79E71C24" />
+    <Limits Value="0,N" />
+  </Element>
+  <Element Type="ParamDef" Id="A4C004B2">
+    <Identifier>state</Identifier>
+    <ParameterType>
+      <Type Value="preset" />
+      <TypeElement Type="Preset" Library="Ntve" Id="00000050" />
+    </ParameterType>
+    <Default Type="Param" Library="Ntve" Id="B20EC38C" />
+  </Element>
+  <Element Type="ParamDef" Id="A4C19F41">
+    <Identifier>messageArea</Identifier>
+    <ParameterType>
+      <Type Value="preset" />
+      <TypeElement Type="Preset" Library="Ntve" Id="08050A84" />
+    </ParameterType>
+    <Default Type="Param" Library="Ntve" Id="3E00653E" />
+  </Element>
+  <Element Type="ParamDef" Id="ABB380C4">
+    <Identifier>val1</Identifier>
+    <ParameterType>
+      <Type Value="anycompare" />
+    </ParameterType>
+    <Default Type="Param" Library="Ntve" Id="85111156" />
+  </Element>
+  <Element Type="ParamDef" Id="ACC52290">
+    <Identifier>includeSharedAbilities</Identifier>
+    <ParameterType>
+      <Type Value="preset" />
+      <TypeElement Type="Preset" Library="Ntve" Id="A7775FEF" />
+    </ParameterType>
+    <Default Type="Param" Library="Ntve" Id="467C4B09" />
+  </Element>
+  <Element Type="ParamDef" Id="B38CA56F">
+    <Identifier>creator</Identifier>
+    <ParameterType>
+      <Type Value="unit" />
+    </ParameterType>
+    <ParamFlagReference />
+    <Default Type="Param" Library="Ntve" Id="86FFF2A2" />
+    <Preset Type="Preset" Library="Ntve" Id="B87E2354" />
+  </Element>
+  <Element Type="ParamDef" Id="B6D9C7C9">
+    <Identifier>ability</Identifier>
+    <ParameterType>
+      <Type Value="gamelink" />
+      <GameType Value="Abil" />
+    </ParameterType>
+    <Default Type="Param" Library="Ntve" Id="E48DA215" />
+    <Preset Type="Preset" Library="Ntve" Id="00000058" />
+  </Element>
+  <Element Type="ParamDef" Id="BA972DF2">
+    <Identifier>stage</Identifier>
+    <ParameterType>
+      <Type Value="preset" />
+      <TypeElement Type="Preset" Library="Ntve" Id="00000017" />
+    </ParameterType>
+    <Default Type="Param" Library="Ntve" Id="A1307876" />
+  </Element>
+  <Element Type="ParamDef" Id="BB25ABCF">
+    <Identifier>u</Identifier>
+    <ParameterType>
+      <Type Value="unit" />
+    </ParameterType>
+    <ParamFlagReference />
+    <Default Type="Param" Library="Ntve" Id="C636C713" />
+    <Preset Type="Preset" Library="Ntve" Id="B87E2354" />
+  </Element>
+  <Element Type="ParamDef" Id="BB4C37B6">
+    <Identifier>stage</Identifier>
+    <ParameterType>
+      <Type Value="preset" />
+      <TypeElement Type="Preset" Library="Ntve" Id="00000064" />
+    </ParameterType>
+    <Default Type="Param" Library="Ntve" Id="E57C6E3B" />
+  </Element>
+  <Element Type="ParamDef" Id="C4A782E5">
+    <Identifier>u</Identifier>
+    <ParameterType>
+      <Type Value="unit" />
+    </ParameterType>
+    <ParamFlagReference />
+    <Default Type="Param" Library="Ntve" Id="2C05A1D5" />
+    <Preset Type="Preset" Library="Ntve" Id="B87E2354" />
+  </Element>
+  <Element Type="ParamDef" Id="CF01C5C3">
+    <Identifier>u</Identifier>
+    <ParameterType>
+      <Type Value="unit" />
+    </ParameterType>
+    <ParamFlagReference />
+    <Default Type="Param" Library="Ntve" Id="F5985665" />
+    <Preset Type="Preset" Library="Ntve" Id="B87E2354" />
+  </Element>
+  <Element Type="ParamDef" Id="D6EC806A">
+    <Identifier>u</Identifier>
+    <ParameterType>
+      <Type Value="unit" />
+    </ParameterType>
+    <ParamFlagReference />
+    <Default Type="Param" Library="Ntve" Id="BD8EBDB9" />
+    <Preset Type="Preset" Library="Ntve" Id="B87E2354" />
+  </Element>
+  <Element Type="ParamDef" Id="DAC1A8F7">
+    <Identifier>u</Identifier>
+    <ParameterType>
+      <Type Value="unit" />
+    </ParameterType>
+    <ParamFlagReference />
+    <Default Type="Param" Library="Ntve" Id="CB0E6D64" />
+    <Preset Type="Preset" Library="Ntve" Id="B87E2354" />
+  </Element>
+  <Element Type="ParamDef" Id="DBE4165B">
+    <Identifier>property</Identifier>
+    <ParameterType>
+      <Type Value="preset" />
+      <TypeElement Type="Preset" Library="Ntve" Id="00000013" />
+    </ParameterType>
+    <Default Type="Param" Library="Ntve" Id="FEF31B95" />
+  </Element>
+  <Element Type="ParamDef" Id="DD4FFE3C">
+    <Identifier>stage</Identifier>
+    <ParameterType>
+      <Type Value="preset" />
+      <TypeElement Type="Preset" Library="Ntve" Id="00000017" />
+    </ParameterType>
+    <Default Type="Param" Library="Ntve" Id="09AD4F23" />
+  </Element>
+  <Element Type="ParamDef" Id="E05F3449">
+    <Identifier>includeSharedAbilities</Identifier>
+    <ParameterType>
+      <Type Value="preset" />
+      <TypeElement Type="Preset" Library="Ntve" Id="A7775FEF" />
+    </ParameterType>
+    <Default Type="Param" Library="Ntve" Id="83DDD0D0" />
+  </Element>
+  <Element Type="ParamDef" Id="E8C1A535">
+    <Identifier>u</Identifier>
+    <ParameterType>
+      <Type Value="unit" />
+    </ParameterType>
+    <ParamFlagReference />
+    <Default Type="Param" Library="Ntve" Id="CC03741D" />
+    <Preset Type="Preset" Library="Ntve" Id="B87E2354" />
+  </Element>
+  <Element Type="ParamDef" Id="EE161BEC">
+    <Identifier>u</Identifier>
+    <ParameterType>
+      <Type Value="unit" />
+    </ParameterType>
+    <ParamFlagReference />
+    <Default Type="Param" Library="Ntve" Id="5E64076D" />
+    <Preset Type="Preset" Library="Ntve" Id="B87E2354" />
+  </Element>
+  <Element Type="ParamDef" Id="EE631277">
+    <Identifier>unit</Identifier>
+    <ParameterType>
+      <Type Value="unit" />
+    </ParameterType>
+    <ParamFlagReference />
+    <Default Type="Param" Library="Ntve" Id="96028754" />
+    <Preset Type="Preset" Library="Ntve" Id="B87E2354" />
+  </Element>
+  <Element Type="ParamDef" Id="F3A8B0DC">
+    <Identifier>unit</Identifier>
+    <ParameterType>
+      <Type Value="unit" />
+    </ParameterType>
+    <ParamFlagReference />
+    <Default Type="Param" Library="Ntve" Id="66CD291A" />
+    <Preset Type="Preset" Library="Ntve" Id="B87E2354" />
+  </Element>
+  <Element Type="Preset" Id="00000013">
+    <Identifier>Unit_Property</Identifier>
+    <Label Type="Label" Library="Ntve" Id="00000007" />
+    <PresetCustom />
+    <BaseType Value="int" />
+    <PresetGenConstVar />
+    <Item Type="PresetValue" Library="Ntve" Id="00000029" />
+    <Item Type="PresetValue" Library="Ntve" Id="C9B8C640" />
+    <Item Type="PresetValue" Library="Ntve" Id="00000416" />
+    <Item Type="PresetValue" Library="Ntve" Id="2094B0D7" />
+    <Item Type="PresetValue" Library="Ntve" Id="00000030" />
+    <Item Type="PresetValue" Library="Ntve" Id="00000031" />
+    <Item Type="PresetValue" Library="Ntve" Id="E93DFC69" />
+    <Item Type="PresetValue" Library="Ntve" Id="00000415" />
+    <Item Type="PresetValue" Library="Ntve" Id="06D62A6F" />
+    <Item Type="PresetValue" Library="Ntve" Id="00000032" />
+    <Item Type="PresetValue" Library="Ntve" Id="00000033" />
+    <Item Type="PresetValue" Library="Ntve" Id="773A2331" />
+    <Item Type="PresetValue" Library="Ntve" Id="00000417" />
+    <Item Type="PresetValue" Library="Ntve" Id="86456ABA" />
+    <Item Type="PresetValue" Library="Ntve" Id="00000034" />
+    <Item Type="PresetValue" Library="Ntve" Id="BE1385DA" />
+    <Item Type="PresetValue" Library="Ntve" Id="F3F83E28" />
+    <Item Type="PresetValue" Library="Ntve" Id="399B3B49" />
+    <Item Type="PresetValue" Library="Ntve" Id="169EC109" />
+    <Item Type="PresetValue" Library="Ntve" Id="00000037" />
+    <Item Type="PresetValue" Library="Ntve" Id="00000038" />
+    <Item Type="PresetValue" Library="Ntve" Id="00000035" />
+    <Item Type="PresetValue" Library="Ntve" Id="137A2BFD" />
+    <Item Type="PresetValue" Library="Ntve" Id="3F9EAECF" />
+    <Item Type="PresetValue" Library="Ntve" Id="792442FD" />
+    <Item Type="PresetValue" Library="Ntve" Id="C33B2168" />
+    <Item Type="PresetValue" Library="Ntve" Id="35EA11B2" />
+    <Item Type="PresetValue" Library="Ntve" Id="52BA3DB5" />
+    <Item Type="PresetValue" Library="Ntve" Id="FCDD771A" />
+    <Item Type="PresetValue" Library="Ntve" Id="8A6207F5" />
+    <Item Type="PresetValue" Library="Ntve" Id="97A0ABF0" />
+    <Item Type="PresetValue" Library="Ntve" Id="E3B88AAA" />
+    <Item Type="PresetValue" Library="Ntve" Id="77FB28D6" />
+    <Item Type="PresetValue" Library="Ntve" Id="DDC14531" />
+    <Item Type="PresetValue" Library="Ntve" Id="F9CAAA89" />
+    <Item Type="PresetValue" Library="Ntve" Id="ABB92787" />
+    <Item Type="PresetValue" Library="Ntve" Id="F1809B89" />
+    <Item Type="PresetValue" Library="Ntve" Id="FC2D9EEB" />
+    <Item Type="PresetValue" Library="Ntve" Id="D398E1F0" />
+    <Item Type="PresetValue" Library="Ntve" Id="7F40A566" />
+    <Item Type="PresetValue" Library="Ntve" Id="DE81D44C" />
+    <Item Type="PresetValue" Library="Ntve" Id="095B7356" />
+    <Item Type="PresetValue" Library="Ntve" Id="F73C9778" />
+    <Item Type="PresetValue" Library="Ntve" Id="28C3B434" />
+    <Item Type="PresetValue" Library="Ntve" Id="9FF22628" />
+    <Item Type="PresetValue" Library="Ntve" Id="5ECEC5F6" />
+    <Item Type="PresetValue" Library="Ntve" Id="E0646DA8" />
+  </Element>
+  <Element Type="Preset" Id="00000017">
+    <Identifier>Unit_Progress</Identifier>
+    <Label Type="Label" Library="Ntve" Id="00000007" />
+    <PresetCustom />
+    <BaseType Value="int" />
+    <PresetGenConstVar />
+    <Item Type="PresetValue" Library="Ntve" Id="00000058" />
+    <Item Type="PresetValue" Library="Ntve" Id="00000059" />
+    <Item Type="PresetValue" Library="Ntve" Id="00000060" />
+    <Item Type="PresetValue" Library="Ntve" Id="00000061" />
+    <Item Type="PresetValue" Library="Ntve" Id="00000062" />
+  </Element>
+  <Element Type="Preset" Id="00000027">
+    <Identifier>ArithmeticOp</Identifier>
+    <Label Type="Label" Library="Ntve" Id="00000001" />
+    <PresetCustom />
+    <BaseType Value="int" />
+    <Item Type="PresetValue" Library="Ntve" Id="00000085" />
+    <Item Type="PresetValue" Library="Ntve" Id="00000086" />
+    <Item Type="PresetValue" Library="Ntve" Id="00000087" />
+    <Item Type="PresetValue" Library="Ntve" Id="00000088" />
+  </Element>
+  <Element Type="Preset" Id="00000046">
+    <Identifier>CargoLoadUnloadState</Identifier>
+    <Label Type="Label" Library="Ntve" Id="00000007" />
+    <PresetCustom />
+    <BaseType Value="bool" />
+    <PresetGenConstVar />
+    <Item Type="PresetValue" Library="Ntve" Id="00000131" />
+    <Item Type="PresetValue" Library="Ntve" Id="00000132" />
+  </Element>
+  <Element Type="Preset" Id="00000047">
+    <Identifier>SelectDeselectState</Identifier>
+    <Label Type="Label" Library="Ntve" Id="5B96F31A" />
+    <PresetCustom />
+    <BaseType Value="bool" />
+    <PresetGenConstVar />
+    <Item Type="PresetValue" Library="Ntve" Id="00000136" />
+    <Item Type="PresetValue" Library="Ntve" Id="00000137" />
+  </Element>
+  <Element Type="Preset" Id="00000050">
+    <Identifier>RegionEnterLeaveState</Identifier>
+    <Label Type="Label" Library="Ntve" Id="00000007" />
+    <PresetCustom />
+    <BaseType Value="bool" />
+    <PresetGenConstVar />
+    <Item Type="PresetValue" Library="Ntve" Id="00000145" />
+    <Item Type="PresetValue" Library="Ntve" Id="00000146" />
+  </Element>
+  <Element Type="Preset" Id="00000053">
+    <Identifier>DamageType</Identifier>
+    <Label Type="Label" Library="Ntve" Id="00000007" />
+    <PresetCustom />
+    <BaseType Value="int" />
+    <PresetGenConstVar />
+    <Item Type="PresetValue" Library="Ntve" Id="9F9C00A9" />
+    <Item Type="PresetValue" Library="Ntve" Id="00000196" />
+    <Item Type="PresetValue" Library="Ntve" Id="00000197" />
+    <Item Type="PresetValue" Library="Ntve" Id="00000198" />
+    <Item Type="PresetValue" Library="Ntve" Id="00000199" />
+  </Element>
+  <Element Type="Preset" Id="00000055">
+    <Identifier>HighlightState</Identifier>
+    <Label Type="Label" Library="Ntve" Id="5B96F31A" />
+    <PresetCustom />
+    <BaseType Value="bool" />
+    <PresetGenConstVar />
+    <Item Type="PresetValue" Library="Ntve" Id="00000214" />
+    <Item Type="PresetValue" Library="Ntve" Id="00000215" />
+  </Element>
+  <Element Type="Preset" Id="00000058">
+    <Identifier>AnyGameLink</Identifier>
+    <Label Type="Label" Library="Ntve" Id="00000032" />
+    <PresetCustom />
+    <BaseType Value="gamelink" />
+    <PresetGenConstVar />
+    <Item Type="PresetValue" Library="Ntve" Id="00000231" />
+  </Element>
+  <Element Type="Preset" Id="00000064">
+    <Identifier>AbilityStage</Identifier>
+    <Label Type="Label" Library="Ntve" Id="00000007" />
+    <PresetCustom />
+    <BaseType Value="int" />
+    <PresetGenConstVar />
+    <Item Type="Comment" Library="Ntve" Id="EB8ADF72" />
+    <Item Type="PresetValue" Library="Ntve" Id="00000257" />
+    <Item Type="PresetValue" Library="Ntve" Id="00000258" />
+    <Item Type="PresetValue" Library="Ntve" Id="00000259" />
+    <Item Type="PresetValue" Library="Ntve" Id="00000260" />
+    <Item Type="PresetValue" Library="Ntve" Id="00000261" />
+    <Item Type="PresetValue" Library="Ntve" Id="00000262" />
+    <Item Type="PresetValue" Library="Ntve" Id="BA8F2873" />
+    <Item Type="PresetValue" Library="Ntve" Id="A85F2292" />
+    <Item Type="Comment" Library="Ntve" Id="395B510E" />
+    <Item Type="PresetValue" Library="Ntve" Id="531B8EF2" />
+    <Item Type="PresetValue" Library="Ntve" Id="FF133B48" />
+    <Item Type="PresetValue" Library="Ntve" Id="091CDBA8" />
+    <Item Type="Comment" Library="Ntve" Id="B71F5C0A" />
+    <Item Type="PresetValue" Library="Ntve" Id="A08ED446" />
+    <Item Type="PresetValue" Library="Ntve" Id="A347261C" />
+    <Item Type="Comment" Library="Ntve" Id="5D7027ED" />
+    <Item Type="PresetValue" Library="Ntve" Id="601BFE05" />
+    <Item Type="PresetValue" Library="Ntve" Id="C40A10E3" />
+    <Item Type="PresetValue" Library="Ntve" Id="25145EBA" />
+    <Item Type="PresetValue" Library="Ntve" Id="E1644D62" />
+    <Item Type="PresetValue" Library="Ntve" Id="18E7DAB2" />
+    <Item Type="PresetValue" Library="Ntve" Id="8DB1A372" />
+    <Item Type="PresetValue" Library="Ntve" Id="53AED373" />
+    <Item Type="Comment" Library="Ntve" Id="020ED8CF" />
+    <Item Type="PresetValue" Library="Ntve" Id="7194D750" />
+    <Item Type="PresetValue" Library="Ntve" Id="B3616A1A" />
+    <Item Type="PresetValue" Library="Ntve" Id="7610734A" />
+    <Item Type="PresetValue" Library="Ntve" Id="9BC61B25" />
+    <Item Type="PresetValue" Library="Ntve" Id="A518F664" />
+    <Item Type="PresetValue" Library="Ntve" Id="1F4882E2" />
+    <Item Type="Comment" Library="Ntve" Id="1D2D3527" />
+    <Item Type="PresetValue" Library="Ntve" Id="E15D20E5" />
+    <Item Type="PresetValue" Library="Ntve" Id="1B75F2AD" />
+    <Item Type="PresetValue" Library="Ntve" Id="B2E978AC" />
+    <Item Type="PresetValue" Library="Ntve" Id="8E2071FF" />
+    <Item Type="PresetValue" Library="Ntve" Id="56F01425" />
+    <Item Type="PresetValue" Library="Ntve" Id="704DD5CC" />
+    <Item Type="PresetValue" Library="Ntve" Id="93BDE23B" />
+    <Item Type="Comment" Library="Ntve" Id="FC93AECD" />
+    <Item Type="PresetValue" Library="Ntve" Id="C86BE21F" />
+    <Item Type="PresetValue" Library="Ntve" Id="8E9ED38F" />
+    <Item Type="PresetValue" Library="Ntve" Id="2172553A" />
+    <Item Type="PresetValue" Library="Ntve" Id="BEFD8E2B" />
+    <Item Type="PresetValue" Library="Ntve" Id="1930E289" />
+    <Item Type="PresetValue" Library="Ntve" Id="A7A8E3B2" />
+    <Item Type="PresetValue" Library="Ntve" Id="FF26B8DB" />
+    <Item Type="PresetValue" Library="Ntve" Id="B9E3904D" />
+    <Item Type="PresetValue" Library="Ntve" Id="47D83FAA" />
+    <Item Type="PresetValue" Library="Ntve" Id="8232D45E" />
+    <Item Type="PresetValue" Library="Ntve" Id="DE452683" />
+    <Item Type="PresetValue" Library="Ntve" Id="1B529798" />
+    <Item Type="PresetValue" Library="Ntve" Id="59550AA2" />
+    <Item Type="PresetValue" Library="Ntve" Id="00DED951" />
+    <Item Type="PresetValue" Library="Ntve" Id="9CDE2FB8" />
+    <Item Type="PresetValue" Library="Ntve" Id="BDB1F2D2" />
+    <Item Type="Comment" Library="Ntve" Id="2ED0ACB4" />
+    <Item Type="PresetValue" Library="Ntve" Id="96A90673" />
+  </Element>
+  <Element Type="Preset" Id="08050A84">
+    <Identifier>MessageArea</Identifier>
+    <Label Type="Label" Library="Ntve" Id="00000026" />
+    <PresetCustom />
+    <BaseType Value="int" />
+    <PresetGenConstVar />
+    <Item Type="PresetValue" Library="Ntve" Id="89CC0A21" />
+    <Item Type="PresetValue" Library="Ntve" Id="818777CD" />
+    <Item Type="PresetValue" Library="Ntve" Id="A1F3F135" />
+    <Item Type="PresetValue" Library="Ntve" Id="DDCB86EF" />
+    <Item Type="PresetValue" Library="Ntve" Id="875889C8" />
+    <Item Type="PresetValue" Library="Ntve" Id="F282A60A" />
+    <Item Type="PresetValue" Library="Ntve" Id="18995805" />
+    <Item Type="PresetValue" Library="Ntve" Id="04916632" />
+    <Item Type="PresetValue" Library="Ntve" Id="CE3345A2" />
+  </Element>
+  <Element Type="Preset" Id="11A95F45">
+    <Identifier>AnyPlayer</Identifier>
+    <Label Type="Label" Library="Ntve" Id="00000006" />
+    <PresetCustom />
+    <BaseType Value="int" />
+    <PresetGenConstVar />
+    <Item Type="PresetValue" Library="Ntve" Id="2999701E" />
+  </Element>
+  <Element Type="Preset" Id="2EAD04C1">
+    <Identifier>AbilityAutoCastChange</Identifier>
+    <PresetCustom />
+    <BaseType Value="int" />
+    <PresetGenConstVar />
+    <Item Type="PresetValue" Library="Ntve" Id="D280C23A" />
+    <Item Type="PresetValue" Library="Ntve" Id="3ECA4D03" />
+    <Item Type="PresetValue" Library="Ntve" Id="A02B2671" />
+  </Element>
+  <Element Type="Preset" Id="4FAE2F8A">
+    <Identifier>NumberCompareOp2</Identifier>
+    <Label Type="Label" Library="Ntve" Id="00000001" />
+    <PresetCustom />
+    <BaseType Value="int" />
+    <Item Type="PresetValue" Library="Ntve" Id="1E7A4625" />
+    <Item Type="PresetValue" Library="Ntve" Id="500677B2" />
+    <Item Type="PresetValue" Library="Ntve" Id="684CA9CE" />
+    <Item Type="PresetValue" Library="Ntve" Id="E123C832" />
+    <Item Type="PresetValue" Library="Ntve" Id="40567BEE" />
+    <Item Type="PresetValue" Library="Ntve" Id="B128CB9A" />
+  </Element>
+  <Element Type="Preset" Id="98A6601F">
+    <Identifier>AnyAbilityCommand</Identifier>
+    <Label Type="Label" Library="Ntve" Id="00000007" />
+    <PresetCustom />
+    <BaseType Value="abilcmd" />
+    <Item Type="PresetValue" Library="Ntve" Id="70496E3A" />
+  </Element>
+  <Element Type="Preset" Id="A3CF97C2">
+    <Identifier>DamageFatalOption</Identifier>
+    <Label Type="Label" Library="Ntve" Id="00000007" />
+    <PresetCustom />
+    <BaseType Value="int" />
+    <PresetGenConstVar />
+    <Item Type="PresetValue" Library="Ntve" Id="D33DD35C" />
+    <Item Type="PresetValue" Library="Ntve" Id="7A5F9BC4" />
+    <Item Type="PresetValue" Library="Ntve" Id="9384CB66" />
+  </Element>
+  <Element Type="Preset" Id="A7775FEF">
+    <Identifier>IncludeIgnoreOption</Identifier>
+    <Label Type="Label" Library="Ntve" Id="00000002" />
+    <PresetCustom />
+    <BaseType Value="bool" />
+    <PresetGenConstVar />
+    <Item Type="PresetValue" Library="Ntve" Id="8DA1FC37" />
+    <Item Type="PresetValue" Library="Ntve" Id="03977D39" />
+  </Element>
+  <Element Type="Preset" Id="A8EC0C71">
+    <Identifier>BehaviorChange</Identifier>
+    <Label Type="Label" Library="Ntve" Id="00000007" />
+    <PresetCustom />
+    <BaseType Value="int" />
+    <PresetGenConstVar />
+    <Item Type="PresetValue" Library="Ntve" Id="C2CE1E18" />
+    <Item Type="PresetValue" Library="Ntve" Id="0059E8B3" />
+    <Item Type="PresetValue" Library="Ntve" Id="D7C48C02" />
+    <Item Type="PresetValue" Library="Ntve" Id="E3C66153" />
+    <Item Type="PresetValue" Library="Ntve" Id="00F337BD" />
+    <Item Type="PresetValue" Library="Ntve" Id="6F226C5C" />
+    <Item Type="PresetValue" Library="Ntve" Id="079527A6" />
+    <Item Type="PresetValue" Library="Ntve" Id="77C172A5" />
+  </Element>
+  <Element Type="Preset" Id="B87E2354">
+    <Identifier>AnyUnit</Identifier>
+    <Label Type="Label" Library="Ntve" Id="00000007" />
+    <PresetCustom />
+    <BaseType Value="unit" />
+    <Item Type="PresetValue" Library="Ntve" Id="C84C7A78" />
+  </Element>
+  <Element Type="Preset" Id="BC55C170">
+    <Identifier>NoPoint</Identifier>
+    <Label Type="Label" Library="Ntve" Id="00000019" />
+    <PresetCustom />
+    <BaseType Value="point" />
+    <PresetGenConstVar />
+    <Item Type="PresetValue" Library="Ntve" Id="568CBBF1" />
+  </Element>
+  <Element Type="Preset" Id="EC258F63">
+    <Identifier>SmartCommandEvent</Identifier>
+    <Label Type="Label" Library="Ntve" Id="00000012" />
+    <PresetCustom />
+    <BaseType Value="abilcmd" />
+    <Item Type="PresetValue" Library="Ntve" Id="A6E3DE81" />
+  </Element>
+  <Element Type="PresetValue" Id="00000029">
+    <Identifier>Life</Identifier>
+    <DefinesDefault />
+    <Value>c_unitPropLife</Value>
+  </Element>
+  <Element Type="PresetValue" Id="00000030">
+    <Identifier>Life_Max</Identifier>
+    <Value>c_unitPropLifeMax</Value>
+  </Element>
+  <Element Type="PresetValue" Id="00000031">
+    <Identifier>Energy</Identifier>
+    <Value>c_unitPropEnergy</Value>
+  </Element>
+  <Element Type="PresetValue" Id="00000032">
+    <Identifier>Energy_Max</Identifier>
+    <Value>c_unitPropEnergyMax</Value>
+  </Element>
+  <Element Type="PresetValue" Id="00000033">
+    <Identifier>Shields</Identifier>
+    <Value>c_unitPropShields</Value>
+  </Element>
+  <Element Type="PresetValue" Id="00000034">
+    <Identifier>Shields_Max</Identifier>
+    <Value>c_unitPropShieldsMax</Value>
+  </Element>
+  <Element Type="PresetValue" Id="00000035">
+    <Identifier>Kills</Identifier>
+    <Value>c_unitPropKills</Value>
+  </Element>
+  <Element Type="PresetValue" Id="00000037">
+    <Identifier>Supplies_Used</Identifier>
+    <Value>c_unitPropSuppliesUsed</Value>
+  </Element>
+  <Element Type="PresetValue" Id="00000038">
+    <Identifier>Supplies_Made</Identifier>
+    <Value>c_unitPropSuppliesMade</Value>
+  </Element>
+  <Element Type="PresetValue" Id="00000058">
+    <Identifier>Started</Identifier>
+    <Value>c_unitProgressStageStart</Value>
+  </Element>
+  <Element Type="PresetValue" Id="00000059">
+    <Identifier>Cancelled</Identifier>
+    <Value>c_unitProgressStageCancel</Value>
+  </Element>
+  <Element Type="PresetValue" Id="00000060">
+    <Identifier>Completed</Identifier>
+    <DefinesDefault />
+    <Value>c_unitProgressStageComplete</Value>
+  </Element>
+  <Element Type="PresetValue" Id="00000061">
+    <Identifier>Paused</Identifier>
+    <Value>c_unitProgressStagePause</Value>
+  </Element>
+  <Element Type="PresetValue" Id="00000062">
+    <Identifier>Resumed</Identifier>
+    <Value>c_unitProgressStageResume</Value>
+  </Element>
+  <Element Type="PresetValue" Id="00000085">
+    <Identifier>plus</Identifier>
+    <Value>+</Value>
+  </Element>
+  <Element Type="PresetValue" Id="00000086">
+    <Identifier>minus</Identifier>
+    <Value>-</Value>
+  </Element>
+  <Element Type="PresetValue" Id="00000087">
+    <Identifier>mult</Identifier>
+    <Value>*</Value>
+  </Element>
+  <Element Type="PresetValue" Id="00000088">
+    <Identifier>div</Identifier>
+    <Value>/</Value>
+  </Element>
+  <Element Type="PresetValue" Id="00000131">
+    <Identifier>Loads</Identifier>
+    <DefinesDefault />
+    <Value>true</Value>
+  </Element>
+  <Element Type="PresetValue" Id="00000132">
+    <Identifier>Unloads</Identifier>
+    <Value>false</Value>
+  </Element>
+  <Element Type="PresetValue" Id="00000136">
+    <Identifier>select</Identifier>
+    <DefinesDefault />
+    <Value>true</Value>
+  </Element>
+  <Element Type="PresetValue" Id="00000137">
+    <Identifier>deselect</Identifier>
+    <Value>false</Value>
+  </Element>
+  <Element Type="PresetValue" Id="00000145">
+    <Identifier>enter</Identifier>
+    <DefinesDefault />
+    <Value>true</Value>
+  </Element>
+  <Element Type="PresetValue" Id="00000146">
+    <Identifier>exit</Identifier>
+    <Value>false</Value>
+  </Element>
+  <Element Type="PresetValue" Id="00000196">
+    <Identifier>spell</Identifier>
+    <Value>c_unitDamageTypeSpell</Value>
+  </Element>
+  <Element Type="PresetValue" Id="00000197">
+    <Identifier>melee</Identifier>
+    <DefinesDefault />
+    <Value>c_unitDamageTypeMelee</Value>
+  </Element>
+  <Element Type="PresetValue" Id="00000198">
+    <Identifier>ranged</Identifier>
+    <Value>c_unitDamageTypeRanged</Value>
+  </Element>
+  <Element Type="PresetValue" Id="00000199">
+    <Identifier>splash</Identifier>
+    <Value>c_unitDamageTypeSplash</Value>
+  </Element>
+  <Element Type="PresetValue" Id="00000214">
+    <Identifier>Highlighted</Identifier>
+    <DefinesDefault />
+    <Value>true</Value>
+  </Element>
+  <Element Type="PresetValue" Id="00000215">
+    <Identifier>Unhighlighted</Identifier>
+    <Value>false</Value>
+  </Element>
+  <Element Type="PresetValue" Id="00000231">
+    <Identifier>any</Identifier>
+    <DefinesDefault />
+    <Value>null</Value>
+  </Element>
+  <Element Type="PresetValue" Id="00000257">
+    <Identifier>any</Identifier>
+    <DefinesDefault />
+    <Value>c_unitAbilStageAll</Value>
+  </Element>
+  <Element Type="PresetValue" Id="00000258">
+    <Identifier>queue</Identifier>
+    <Value>c_unitAbilStageQueue</Value>
+  </Element>
+  <Element Type="PresetValue" Id="00000259">
+    <Identifier>execute</Identifier>
+    <Value>c_unitAbilStageExecute</Value>
+  </Element>
+  <Element Type="PresetValue" Id="00000260">
+    <Identifier>cancel</Identifier>
+    <Value>c_unitAbilStageCancel</Value>
+  </Element>
+  <Element Type="PresetValue" Id="00000261">
+    <Identifier>preempt</Identifier>
+    <Value>c_unitAbilStagePreempt</Value>
+  </Element>
+  <Element Type="PresetValue" Id="00000262">
+    <Identifier>complete</Identifier>
+    <Value>c_unitAbilStageComplete</Value>
+  </Element>
+  <Element Type="PresetValue" Id="00000415">
+    <Identifier>EnergyRegenerationRate</Identifier>
+    <Value>c_unitPropEnergyRegen</Value>
+  </Element>
+  <Element Type="PresetValue" Id="00000416">
+    <Identifier>LifeRegenerationRate</Identifier>
+    <Value>c_unitPropLifeRegen</Value>
+  </Element>
+  <Element Type="PresetValue" Id="00000417">
+    <Identifier>ShieldsRegenerationRate</Identifier>
+    <Value>c_unitPropShieldsRegen</Value>
+  </Element>
+  <Element Type="PresetValue" Id="0059E8B3">
+    <Identifier>Create</Identifier>
+    <Value>c_unitBehaviorChangeCreate</Value>
+  </Element>
+  <Element Type="PresetValue" Id="00DED951">
+    <Identifier>AbilsEndMorph</Identifier>
+    <Value>c_abilMorphStageAbilsEnd</Value>
+  </Element>
+  <Element Type="PresetValue" Id="00F337BD">
+    <Identifier>Increase</Identifier>
+    <Value>c_unitBehaviorChangeIncrease</Value>
+  </Element>
+  <Element Type="PresetValue" Id="03977D39">
+    <Identifier>Ignore</Identifier>
+    <Value>false</Value>
+  </Element>
+  <Element Type="PresetValue" Id="04916632">
+    <Identifier>Warning</Identifier>
+    <Value>c_messageAreaWarning</Value>
+  </Element>
+  <Element Type="PresetValue" Id="06D62A6F">
+    <Identifier>ExpectedEnergy</Identifier>
+    <Value>c_unitPropEnergyExpected</Value>
+  </Element>
+  <Element Type="PresetValue" Id="079527A6">
+    <Identifier>Activate</Identifier>
+    <Value>c_unitBehaviorChangeActivate</Value>
+  </Element>
+  <Element Type="PresetValue" Id="091CDBA8">
+    <Identifier>loiter</Identifier>
+    <Value>c_abilAttackStageLoiter</Value>
+  </Element>
+  <Element Type="PresetValue" Id="095B7356">
+    <Identifier>BaseMovementSpeed</Identifier>
+    <Value>c_unitPropBaseMovementSpeed</Value>
+  </Element>
+  <Element Type="PresetValue" Id="137A2BFD">
+    <Identifier>Acceleration</Identifier>
+    <Value>c_unitPropAcceleration</Value>
+  </Element>
+  <Element Type="PresetValue" Id="169EC109">
+    <Identifier>Radius</Identifier>
+    <Value>c_unitPropRadius</Value>
+  </Element>
+  <Element Type="PresetValue" Id="18995805">
+    <Identifier>Debug</Identifier>
+    <Value>c_messageAreaDebug</Value>
+  </Element>
+  <Element Type="PresetValue" Id="18E7DAB2">
+    <Identifier>ResumeBuild</Identifier>
+    <Value>c_abilBuildStageResume</Value>
+  </Element>
+  <Element Type="PresetValue" Id="1930E289">
+    <Identifier>StatsStartMorph</Identifier>
+    <Value>c_abilMorphStageStatsStart</Value>
+  </Element>
+  <Element Type="PresetValue" Id="1B529798">
+    <Identifier>UnitEndMorph</Identifier>
+    <Value>c_abilMorphStageUnitEnd</Value>
+  </Element>
+  <Element Type="PresetValue" Id="1B75F2AD">
+    <Identifier>WaitatResourceHarvest</Identifier>
+    <Value>c_abilHarvestStageWaitAtResource</Value>
+  </Element>
+  <Element Type="PresetValue" Id="1E7A4625">
+    <Identifier>eq</Identifier>
+    <Value>==</Value>
+  </Element>
+  <Element Type="PresetValue" Id="1F4882E2">
+    <Identifier>BailEffect</Identifier>
+    <Value>c_abilEffectStageBail</Value>
+  </Element>
+  <Element Type="PresetValue" Id="2094B0D7">
+    <Identifier>ExpectedLife</Identifier>
+    <Value>c_unitPropLifeExpected</Value>
+  </Element>
+  <Element Type="PresetValue" Id="2172553A">
+    <Identifier>ActorStartMorph</Identifier>
+    <Value>c_abilMorphStageActorStart</Value>
+  </Element>
+  <Element Type="PresetValue" Id="25145EBA">
+    <Identifier>ConstructBuild</Identifier>
+    <Value>c_abilBuildStageConstruct</Value>
+  </Element>
+  <Element Type="PresetValue" Id="28C3B434">
+    <Identifier>ExpectedLifePercent</Identifier>
+    <Value>c_unitPropLifeExpectedPercent</Value>
+  </Element>
+  <Element Type="PresetValue" Id="2999701E">
+    <Identifier>anyplayer</Identifier>
+    <DefinesDefault />
+    <Value>c_playerAny</Value>
+  </Element>
+  <Element Type="PresetValue" Id="35EA11B2">
+    <Identifier>Resources</Identifier>
+    <Value>c_unitPropResources</Value>
+  </Element>
+  <Element Type="PresetValue" Id="399B3B49">
+    <Identifier>MaximumVitality</Identifier>
+    <Value>c_unitPropVitalityMax</Value>
+  </Element>
+  <Element Type="PresetValue" Id="3ECA4D03">
+    <Identifier>Off</Identifier>
+    <Value>c_unitAbilAutoCastChangeOff</Value>
+  </Element>
+  <Element Type="PresetValue" Id="3F9EAECF">
+    <Identifier>Height</Identifier>
+    <Value>c_unitPropHeight</Value>
+  </Element>
+  <Element Type="PresetValue" Id="40567BEE">
+    <Identifier>gt</Identifier>
+    <Value>&gt;</Value>
+    <PreviousParamType Value="anynumber" />
+  </Element>
+  <Element Type="PresetValue" Id="47D83FAA">
+    <Identifier>FacingStartMorph</Identifier>
+    <Value>c_abilMorphStageFacingStart</Value>
+  </Element>
+  <Element Type="PresetValue" Id="500677B2">
+    <Identifier>ne</Identifier>
+    <Value>!=</Value>
+  </Element>
+  <Element Type="PresetValue" Id="52BA3DB5">
+    <Identifier>Experience</Identifier>
+    <Value>c_unitPropXP</Value>
+  </Element>
+  <Element Type="PresetValue" Id="531B8EF2">
+    <Identifier>approach</Identifier>
+    <Value>c_abilAttackStageApproach</Value>
+  </Element>
+  <Element Type="PresetValue" Id="53AED373">
+    <Identifier>Build7Collide</Identifier>
+    <Value>c_abilBuildStageCollide</Value>
+  </Element>
+  <Element Type="PresetValue" Id="568CBBF1">
+    <Identifier>NoPoint</Identifier>
+    <DefinesDefault />
+    <Value>null</Value>
+  </Element>
+  <Element Type="PresetValue" Id="56F01425">
+    <Identifier>WaitforDropOffHarvest</Identifier>
+    <Value>c_abilHarvestStageWaitForDropOff</Value>
+  </Element>
+  <Element Type="PresetValue" Id="59550AA2">
+    <Identifier>AbilsStartMorph</Identifier>
+    <Value>c_abilMorphStageAbilsStart</Value>
+  </Element>
+  <Element Type="PresetValue" Id="5ECEC5F6">
+    <Identifier>ExpectedShieldsPercent</Identifier>
+    <Value>c_unitPropShieldsExpectedPercent</Value>
+  </Element>
+  <Element Type="PresetValue" Id="601BFE05">
+    <Identifier>ApproachBuild</Identifier>
+    <Value>c_abilBuildStageApproach</Value>
+  </Element>
+  <Element Type="PresetValue" Id="684CA9CE">
+    <Identifier>lt</Identifier>
+    <Value>&lt;</Value>
+    <PreviousParamType Value="anynumber" />
+  </Element>
+  <Element Type="PresetValue" Id="6F226C5C">
+    <Identifier>Decrease</Identifier>
+    <Value>c_unitBehaviorChangeDecrease</Value>
+  </Element>
+  <Element Type="PresetValue" Id="70496E3A">
+    <Identifier>AnyAbilityCommand</Identifier>
+    <Value>null</Value>
+  </Element>
+  <Element Type="PresetValue" Id="704DD5CC">
+    <Identifier>ApproachDropOffHarvest</Identifier>
+    <Value>c_abilHarvestStageApproachDropOff</Value>
+  </Element>
+  <Element Type="PresetValue" Id="7194D750">
+    <Identifier>ApproachEffect</Identifier>
+    <Value>c_abilEffectStageApproach</Value>
+  </Element>
+  <Element Type="PresetValue" Id="7610734A">
+    <Identifier>CastEffect</Identifier>
+    <Value>c_abilEffectStageCast</Value>
+  </Element>
+  <Element Type="PresetValue" Id="773A2331">
+    <Identifier>ShieldsPercent</Identifier>
+    <Value>c_unitPropShieldsPercent</Value>
+  </Element>
+  <Element Type="PresetValue" Id="77C172A5">
+    <Identifier>Deactivate</Identifier>
+    <Value>c_unitBehaviorChangeDeactivate</Value>
+  </Element>
+  <Element Type="PresetValue" Id="77FB28D6">
+    <Identifier>BountyCustom</Identifier>
+    <Value>c_unitPropBountyCustom</Value>
+  </Element>
+  <Element Type="PresetValue" Id="792442FD">
+    <Identifier>MovementSpeedMax</Identifier>
+    <Value>c_unitPropMovementSpeed</Value>
+  </Element>
+  <Element Type="PresetValue" Id="7A5F9BC4">
+    <Identifier>Fatal</Identifier>
+    <Value>c_unitDamageFatal</Value>
+  </Element>
+  <Element Type="PresetValue" Id="7F40A566">
+    <Identifier>ShieldArmor</Identifier>
+    <Value>c_unitPropShieldArmor</Value>
+  </Element>
+  <Element Type="PresetValue" Id="818777CD">
+    <Identifier>Objective</Identifier>
+    <Value>c_messageAreaObjective</Value>
+  </Element>
+  <Element Type="PresetValue" Id="8232D45E">
+    <Identifier>FacingEndMorph</Identifier>
+    <Value>c_abilMorphStageFacingEnd</Value>
+  </Element>
+  <Element Type="PresetValue" Id="86456ABA">
+    <Identifier>ExpectedShields</Identifier>
+    <Value>c_unitPropShieldsExpected</Value>
+  </Element>
+  <Element Type="PresetValue" Id="875889C8">
+    <Identifier>Subtitle</Identifier>
+    <Value>c_messageAreaSubtitle</Value>
+  </Element>
+  <Element Type="PresetValue" Id="89CC0A21">
+    <Identifier>Chat</Identifier>
+    <Value>c_messageAreaChat</Value>
+  </Element>
+  <Element Type="PresetValue" Id="8A6207F5">
+    <Identifier>BountyMinerals</Identifier>
+    <Value>c_unitPropBountyMinerals</Value>
+  </Element>
+  <Element Type="PresetValue" Id="8DA1FC37">
+    <Identifier>Include</Identifier>
+    <DefinesDefault />
+    <Value>true</Value>
+  </Element>
+  <Element Type="PresetValue" Id="8DB1A372">
+    <Identifier>Build6Finish</Identifier>
+    <Value>c_abilBuildStageFinish</Value>
+  </Element>
+  <Element Type="PresetValue" Id="8E2071FF">
+    <Identifier>WaittoReturnHarvest</Identifier>
+    <Value>c_abilHarvestStageWaitToReturn</Value>
+  </Element>
+  <Element Type="PresetValue" Id="8E9ED38F">
+    <Identifier>WaitMorph</Identifier>
+    <Value>c_abilMorphStageWait</Value>
+  </Element>
+  <Element Type="PresetValue" Id="9384CB66">
+    <Identifier>NonFatal</Identifier>
+    <Value>c_unitDamageNonFatal</Value>
+  </Element>
+  <Element Type="PresetValue" Id="93BDE23B">
+    <Identifier>DropOffHarvest</Identifier>
+    <Value>c_abilHarvestStageDropOff</Value>
+  </Element>
+  <Element Type="PresetValue" Id="96A90673">
+    <Identifier>PlaceRally</Identifier>
+    <Value>c_abilRallyStagePlace</Value>
+  </Element>
+  <Element Type="PresetValue" Id="97A0ABF0">
+    <Identifier>BountyVespene</Identifier>
+    <Value>c_unitPropBountyVespene</Value>
+  </Element>
+  <Element Type="PresetValue" Id="9BC61B25">
+    <Identifier>ChannelEffect</Identifier>
+    <Value>c_abilEffectStageChannel</Value>
+  </Element>
+  <Element Type="PresetValue" Id="9CDE2FB8">
+    <Identifier>MoverStartMorph</Identifier>
+    <Value>c_abilMorphStageMoverStart</Value>
+  </Element>
+  <Element Type="PresetValue" Id="9F9C00A9">
+    <Identifier>Any</Identifier>
+    <DefinesDefault />
+    <Value>c_unitDamageTypeAny</Value>
+  </Element>
+  <Element Type="PresetValue" Id="9FF22628">
+    <Identifier>ExpectedEnergyPercent</Identifier>
+    <Value>c_unitPropEnergyExpectedPercent</Value>
+  </Element>
+  <Element Type="PresetValue" Id="A02B2671">
+    <Identifier>On</Identifier>
+    <Value>c_unitAbilAutoCastChangeOn</Value>
+  </Element>
+  <Element Type="PresetValue" Id="A08ED446">
+    <Identifier>untoggled</Identifier>
+    <Value>c_abilBehaviorStageUntoggled</Value>
+  </Element>
+  <Element Type="PresetValue" Id="A1F3F135">
+    <Identifier>Directive</Identifier>
+    <Value>c_messageAreaDirective</Value>
+  </Element>
+  <Element Type="PresetValue" Id="A347261C">
+    <Identifier>toggled</Identifier>
+    <Value>c_abilBehaviorStageToggled</Value>
+  </Element>
+  <Element Type="PresetValue" Id="A518F664">
+    <Identifier>FinishEffect</Identifier>
+    <Value>c_abilEffectStageFinish</Value>
+  </Element>
+  <Element Type="PresetValue" Id="A6E3DE81">
+    <Identifier>SmartCommand</Identifier>
+    <Value>AbilityCommand("", 0)</Value>
+  </Element>
+  <Element Type="PresetValue" Id="A7A8E3B2">
+    <Identifier>StatsEndMorph</Identifier>
+    <Value>c_abilMorphStageStatsEnd</Value>
+  </Element>
+  <Element Type="PresetValue" Id="A85F2292">
+    <Identifier>unpause</Identifier>
+    <Value>c_unitAbilStageUnpause</Value>
+  </Element>
+  <Element Type="PresetValue" Id="ABB92787">
+    <Identifier>CarriedVespene</Identifier>
+    <Value>c_unitPropCarriedVespene</Value>
+  </Element>
+  <Element Type="PresetValue" Id="B128CB9A">
+    <Identifier>gte</Identifier>
+    <Value>&gt;=</Value>
+    <PreviousParamType Value="anynumber" />
+  </Element>
+  <Element Type="PresetValue" Id="B2E978AC">
+    <Identifier>HarvestHarvest</Identifier>
+    <Value>c_abilHarvestStageHarvest</Value>
+  </Element>
+  <Element Type="PresetValue" Id="B3616A1A">
+    <Identifier>PrepEffect</Identifier>
+    <Value>c_abilEffectStagePrep</Value>
+  </Element>
+  <Element Type="PresetValue" Id="B9E3904D">
+    <Identifier>CollisionEndMorph</Identifier>
+    <Value>c_abilMorphStageCollideEnd</Value>
+  </Element>
+  <Element Type="PresetValue" Id="BA8F2873">
+    <Identifier>pause</Identifier>
+    <Value>c_unitAbilStagePause</Value>
+  </Element>
+  <Element Type="PresetValue" Id="BDB1F2D2">
+    <Identifier>MoverEndMorph</Identifier>
+    <Value>c_abilMorphStageMoverEnd</Value>
+  </Element>
+  <Element Type="PresetValue" Id="BE1385DA">
+    <Identifier>Vitality</Identifier>
+    <Value>c_unitPropVitality</Value>
+  </Element>
+  <Element Type="PresetValue" Id="BEFD8E2B">
+    <Identifier>ActorEndMorph</Identifier>
+    <Value>c_abilMorphStageActorEnd</Value>
+  </Element>
+  <Element Type="PresetValue" Id="C2CE1E18">
+    <Identifier>Any</Identifier>
+    <Value>c_unitBehaviorChangeAny</Value>
+  </Element>
+  <Element Type="PresetValue" Id="C33B2168">
+    <Identifier>TurnRate</Identifier>
+    <Value>c_unitPropTurnRate</Value>
+  </Element>
+  <Element Type="PresetValue" Id="C40A10E3">
+    <Identifier>WaitBuild</Identifier>
+    <Value>c_abilBuildStageWait</Value>
+  </Element>
+  <Element Type="PresetValue" Id="C84C7A78">
+    <Identifier>any</Identifier>
+    <DefinesDefault />
+    <Value>null</Value>
+  </Element>
+  <Element Type="PresetValue" Id="C86BE21F">
+    <Identifier>ApproachMorph</Identifier>
+    <Value>c_abilMorphStageApproach</Value>
+  </Element>
+  <Element Type="PresetValue" Id="C9B8C640">
+    <Identifier>LifePercent</Identifier>
+    <DefinesDefault />
+    <Value>c_unitPropLifePercent</Value>
+  </Element>
+  <Element Type="PresetValue" Id="C9DCA6C0">
+    <Identifier>None</Identifier>
+    <Value>null</Value>
+  </Element>
+  <Element Type="PresetValue" Id="CE3345A2">
+    <Identifier>Cheat</Identifier>
+    <Value>c_messageAreaCheat</Value>
+  </Element>
+  <Element Type="PresetValue" Id="D280C23A">
+    <Identifier>Any</Identifier>
+    <Value>c_unitAbilAutoCastChangeAll</Value>
+  </Element>
+  <Element Type="PresetValue" Id="D33DD35C">
+    <Identifier>FatalorNonFatal</Identifier>
+    <DefinesDefault />
+    <Value>c_unitDamageEither</Value>
+  </Element>
+  <Element Type="PresetValue" Id="D398E1F0">
+    <Identifier>LifeArmor</Identifier>
+    <Value>c_unitPropLifeArmor</Value>
+  </Element>
+  <Element Type="PresetValue" Id="D7C48C02">
+    <Identifier>Destroy</Identifier>
+    <Value>c_unitBehaviorChangeDestroy</Value>
+  </Element>
+  <Element Type="PresetValue" Id="DDC14531">
+    <Identifier>BountyXP</Identifier>
+    <Value>c_unitPropKillXP</Value>
+  </Element>
+  <Element Type="PresetValue" Id="DDCB86EF">
+    <Identifier>Error</Identifier>
+    <Value>c_messageAreaError</Value>
+  </Element>
+  <Element Type="PresetValue" Id="DE452683">
+    <Identifier>UnitStartMorph</Identifier>
+    <Value>c_abilMorphStageUnitStart</Value>
+  </Element>
+  <Element Type="PresetValue" Id="DE81D44C">
+    <Identifier>EnergyArmor</Identifier>
+    <Value>c_unitPropEnergyArmor</Value>
+  </Element>
+  <Element Type="PresetValue" Id="E0646DA8">
+    <Identifier>AIEvaluationFactor</Identifier>
+    <Value>c_unitPropAIEvaluationFactor</Value>
+  </Element>
+  <Element Type="PresetValue" Id="E123C832">
+    <Identifier>lte</Identifier>
+    <Value>&lt;=</Value>
+    <PreviousParamType Value="anynumber" />
+  </Element>
+  <Element Type="PresetValue" Id="E15D20E5">
+    <Identifier>ApproachResourceHarvest</Identifier>
+    <Value>c_abilHarvestStageApproachResource</Value>
+  </Element>
+  <Element Type="PresetValue" Id="E1644D62">
+    <Identifier>PauseBuild</Identifier>
+    <Value>c_abilBuildStageHalt</Value>
+  </Element>
+  <Element Type="PresetValue" Id="E3B88AAA">
+    <Identifier>BountyTerrazine</Identifier>
+    <Value>c_unitPropBountyTerrazine</Value>
+  </Element>
+  <Element Type="PresetValue" Id="E3C66153">
+    <Identifier>Refresh</Identifier>
+    <Value>c_unitBehaviorChangeRefresh</Value>
+  </Element>
+  <Element Type="PresetValue" Id="E93DFC69">
+    <Identifier>EnergyPercent</Identifier>
+    <Value>c_unitPropEnergyPercent</Value>
+  </Element>
+  <Element Type="PresetValue" Id="F1809B89">
+    <Identifier>CarriedTerrazine</Identifier>
+    <Value>c_unitPropCarriedTerrazine</Value>
+  </Element>
+  <Element Type="PresetValue" Id="F282A60A">
+    <Identifier>Cinematic</Identifier>
+    <Value>c_messageAreaCinematic</Value>
+  </Element>
+  <Element Type="PresetValue" Id="F3F83E28">
+    <Identifier>VitalityPercent</Identifier>
+    <Value>c_unitPropVitalityPercent</Value>
+  </Element>
+  <Element Type="PresetValue" Id="F73C9778">
+    <Identifier>MovementSpeedCurrent</Identifier>
+    <Value>c_unitPropMovementSpeedCurrent</Value>
+  </Element>
+  <Element Type="PresetValue" Id="F9CAAA89">
+    <Identifier>CarriedMinerals</Identifier>
+    <Value>c_unitPropCarriedMinerals</Value>
+  </Element>
+  <Element Type="PresetValue" Id="FC2D9EEB">
+    <Identifier>CarriedCustomResource</Identifier>
+    <Value>c_unitPropCarriedCustom</Value>
+  </Element>
+  <Element Type="PresetValue" Id="FCDD771A">
+    <Identifier>Level</Identifier>
+    <Value>c_unitPropLevel</Value>
+  </Element>
+  <Element Type="PresetValue" Id="FF133B48">
+    <Identifier>attack</Identifier>
+    <Value>c_abilAttackStageAttack</Value>
+  </Element>
+  <Element Type="PresetValue" Id="FF26B8DB">
+    <Identifier>CollisionStartMorph</Identifier>
+    <Value>c_abilMorphStageCollideStart</Value>
+  </Element>
+  <Element Type="SubFuncType" Id="00000003">
+    <Identifier>if</Identifier>
+    <Condition />
+  </Element>
+  <Element Type="SubFuncType" Id="00000004">
+    <Identifier>then</Identifier>
+    <Action />
+  </Element>
+  <Element Type="SubFuncType" Id="00000005">
+    <Identifier>else</Identifier>
+    <Action />
+  </Element>
+  <Element Type="SubFuncType" Id="20298AEC">
+    <Identifier>Conditions</Identifier>
+    <Condition />
+  </Element>
+  <Element Type="SubFuncType" Id="A1B37466">
+    <Identifier>Actions</Identifier>
+    <Action />
+  </Element>
+</TriggerData>

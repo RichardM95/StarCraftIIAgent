@@ -82,3 +82,14 @@ pip-unpack-*/
 integrations/harness2/.venv-linux/
 integrations/harness2/runs/
 integrations/harness2/dependencies/*/
+integrations/galaxy-frontend/node_modules/
+integrations/galaxy-frontend/dist/
+
+# Root-local CodeGraph and pytest workspaces
+/.codegraph/
+/pytest-of-*/
+
+# Project-specific worker receipt and historical tests
+/worker-final.md
+/integrations/sc2-editor-mcp/project-tests/skyshield/test_historical_terrain.py
+/integrations/sc2-editor-mcp/project-tests/skyshield/test_skyshield_copy.py

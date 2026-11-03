@@ -33,12 +33,17 @@ def test_missing_enabled_and_native_flag_remain_distinct():
 
 @pytest.fixture
 def prepared(tmp_path,monkeypatch):
+    import sc2_activity
+    monkeypatch.setattr(sc2_activity,"activity_dir",lambda:tmp_path/"activity")
+    monkeypatch.setattr(sc2_activity,"running_games",lambda:[])
     root=tmp_path/'source.SC2Map';root.mkdir()
     (root/'DocumentInfo').write_bytes(b'<DocInfo><Dependencies/></DocInfo>')
     (root/'MapScript.galaxy').write_bytes(b'void InitMap () { ProductionBankLoad(); }\n')
     (root/'BankList.xml').write_bytes(b'<BankList><Bank Name="Production" Player="1"/></BankList>')
     def export(source,destination):
-        destination.write_bytes(b'MPQ-fixture');return {'test_backend':True}
+        destination.write_bytes(b'MPQ-fixture')
+        return {'files':[{'path':name,'sha256':probes.digest((source/name).read_bytes())}
+                         for name in ('MapScript.galaxy','BankList.xml')]}
     monkeypatch.setattr(probes.archives,'export_archive',export)
     docs=tmp_path/'Documents';(docs/'Banks').mkdir(parents=True)
     monkeypatch.setattr(editor,'documents_root',lambda:docs)
@@ -56,7 +61,7 @@ def test_prepare_changes_only_independent_copy_and_bank(prepared):
     assert b'ProductionBankLoad' not in script
     bank=(target/'BankList.xml').read_bytes()
     assert b'Production' not in bank and manifest['bank_name'].encode() in bank
-    assert manifest['transaction']['state']=='committed'
+    assert manifest['transaction'] is None  # No user candidate was requested.
 
 
 def write_bank(manifest,docs,run_id=None,status='FINISHED',phase='FINISHED',value='150'):

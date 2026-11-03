@@ -19,6 +19,8 @@ python tools/sc2-integration.py --ui-language en register
 
 `register` adds the global `sc2-editor`, `deepseek-supervisor` and thin skill entry, preserving other settings and backing up the configuration. Identical registration is repeatable; different content under an existing name is a conflict. `unregister` removes only entries still matching the registration record and retains code, environments and runtime evidence. A client reconnect is required; registration alone does not prove the current chat loaded the tools.
 
+To run the integration suite as a regular Windows user, with an elevated retry for the real directory symlink test, use `python tools/test-suite.py --scope integration --retry-symlink-elevated --ui-language en`. UAC is requested only if that test skips with error 1314 and all others pass. The elevated process checks its own report for that single test. Cancellation or missing pass evidence yields a nonzero exit.
+
 ## Capability ownership
 
 | Task | Default entry |
@@ -29,11 +31,18 @@ python tools/sc2-integration.py --ui-language en register
 | Map shell, regional environment, editor warnings | Shared diagnostics and candidate tools |
 | Candidate review, commit and recovery | One shared transaction entry throughout the change |
 | DeepSeek SC2 sub-tasks | Connected MCP, otherwise a managed CLI process |
-| Keystone-specific mechanics | Not exposed as generic workspace operations |
 
 Prefer connected MCP for supplementary capabilities; when unavailable use the same implementation through CLI. A business rejection requires diagnosis rather than a transport change. Query uncertain task/transaction submissions before retrying.
 
 ## Local calls
+
+The CLI waits for jobs it submits. Successful execution exits with `0`, failed, cancelled or interrupted jobs with `1`, and invalid requests with `2`. Explicit `sc2_job_status` and `sc2_job_cancel` calls return one observation or cancellation response. Check the job’s `state` even when the status query succeeds.
+
+If an apply response is lost, inspect the original candidate ID with `sc2_changes_inspect`. Its `application.change_id` and `application.state` identify the commit and its current state. Reapplying a committed or rolled-back candidate returns the original commit record. Use the commit ID for rollback. Older candidates may have no receipt.
+
+When projects share a state directory, new transactions record the owning map in `owner.json`. Preserve corrupt manifests and check backups using the reported path. A corrupt manifest known to belong to another map does not block the current one. Ambiguous legacy records or conflicting ownership still block changes.
+
+Large results return a `report_name` and a body length in characters (`characters`). Start `sc2_report_read` at `offset=0` and pass each `next_offset` to the next call until it is `null`.
 
 ```powershell
 python tools/sc2-local.py --ui-language en capabilities
@@ -93,4 +102,4 @@ The integration lock pins NumPy 2.5.4 and retains the original upstream lock as 
 
 The launcher uses the normal interpreter with `-E -S` and the selected environment's site-packages, preserving dependency isolation while avoiding Windows venv-redirector directory restrictions. CLI, MCP and the file bridge share this launcher.
 
-<!-- translation-source: wiki/guides/shared-tools.md; sha256: f2056af5001a8ea409066c30272a38555bcb76fc3a3d354adde8814b49460c1f -->
+<!-- translation-source: wiki/guides/shared-tools.md; sha256: 8c593a379a879ec0dbb554402460fd5b2eac9d1b2fda3150eafc7ec29af112b9 -->

@@ -1,6 +1,7 @@
 """Install, configure, diagnose and register the shared local/MCP integration."""
 from __future__ import annotations
 import argparse
+import difflib
 from datetime import datetime, timezone
 import hashlib
 import importlib.util
@@ -133,11 +134,11 @@ def expected_servers():
 def global_skill():
     return '''---
 name: sc2-agent-tools
-description: Use StarCraftIIAgent local tools and MCP for SC2 map terrain and scene editing, assets, diagnostics, transactional candidates, or bounded SC2 tasks through Harness-configured local and remote models.
+description: Discover StarCraftIIAgent for editable GUI trigger logic, terrain and scene edits, mixed map tasks, assets and transactional CLI/MCP tools.
 ---
 
 Read `%LOCALAPPDATA%/StarCraftIIAgent/integrations.json` (or `SC2_AGENT_INTEGRATION_CONFIG`) to locate `workspace`.
-Load that workspace's AGENTS.md and skills/sc2-project-entry/SKILL.md. For map terrain, expansion or scene composition, load skills/sc2-terrain-editing/SKILL.md; route mission objects and GUI organization through skills/sc2-map-triggers/SKILL.md. Other shared-tool tasks route through skills/sc2-shared-tools/SKILL.md.
+Load that workspace's AGENTS.md and skills/sc2-project-entry/SKILL.md. Its task table owns routing between GUI behavior, terrain placement and mixed tasks. GUI work starts with sc2_trigger_context; terrain work starts with capabilities and actual-map inspection. New terrain resources are handed to GUI authoring on the same working copy with fresh context. Other shared-tool tasks route through skills/sc2-shared-tools/SKILL.md.
 An explicitly supplied map is the terrain target; do not substitute the selected mod. Use only the explicitly selected project; this entry does not change any existing Hub's project ownership.
 The workspace maintains the tools and detailed skills. MCP and CLI share their implementation and state.
 Automatic model delegation is limited to bounded sub-tasks in authorized SC2 work. Select provider/model through the workspace model registry; other domains need an explicit request.
@@ -163,7 +164,11 @@ def register(remove=False):
     # A changed user skill is never silently overwritten or removed.
     if (skill.exists() and skill.read_bytes() != text and (not remove or skill_owned)
             and not (skill_owned and actual_skill_hash == registration.get('skill_sha256'))):
-        raise ValueError('Global skill name is already used by different content: ' + str(skill))
+        difference = ''.join(difflib.unified_diff(
+            skill.read_text(encoding='utf-8-sig').splitlines(keepends=True),
+            text.decode('utf-8').splitlines(keepends=True),
+            fromfile=str(skill), tofile='generated/sc2-agent-tools/SKILL.md'))
+        raise ValueError('Global skill name is already used by different content: ' + str(skill) + '\n' + difference)
     with process_lock(home / 'sc2-agent-registration.lock', timeout=2):
         before = config.read_bytes() if config.exists() else b''
         parsed = tomlkit.parse(before.decode('utf-8-sig'))

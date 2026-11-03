@@ -35,6 +35,7 @@ def test_test_launch_matches_product_build(tmp_path):
     root, map_path = fixture(tmp_path)
     plan = editor.build_launch_command(map_path, root, "test")
     assert plan["argv"][1:3] == ["-run", str(map_path)]
+    assert plan["argv"][plan["argv"].index("-displaymode")+1] == "0"
     assert plan["selected_client"].endswith("Base98370\\SC2_x64.exe") or plan["selected_client"].endswith("Base98370/SC2_x64.exe")
     (root / "Versions/Base98370/SC2_x64.exe").unlink()
     with pytest.raises(SC2Error) as err:
