@@ -82,7 +82,8 @@ pip-unpack-*/
 integrations/harness2/.venv-linux/
 integrations/harness2/runs/
 integrations/harness2/dependencies/*/
-integrations/galaxy-frontend/node_modules/
+# Node dependencies at any depth; keep manifests and lockfiles tracked
+node_modules/
 integrations/galaxy-frontend/dist/
 
 # Root-local CodeGraph and pytest workspaces

@@ -8,6 +8,8 @@
 
 [安装指南](setup.md) · [工作区规则](AGENTS.md) · [Wiki](wiki/index.md) · [工具指南](tools/README.md) · [完整开发示例](wiki/guides/development-conversations.md)
 
+<a id="常见场景示例"></a>
+
 ## 从你的第一项任务开始
 
 | 可以直接发送的请求 | 第一次回复应给你什么 |
@@ -15,12 +17,29 @@
 | “查一个官方战役里只完成一次任务目标的例子。” | 来源组件、触发器和生效条件。只读研究无需初始化项目。 |
 | “检查 `<地图.SC2Map>` 里的撤离区触发器，先预览怎样改成只有玩家 1 能完成一次。” | 实际检查的 Components 地图路径、区域和现有条件，再展示拟修改的行为。 |
 | “我的主 Mod 在 `<主模组.SC2Mod>`，请初始化项目。” | 解析出的主项目、实际编辑源和活动依赖。 |
+| “查询当前项目中陆战队员的生命、武器和生产条件，这次不修改。” | 对应单位 ID、当前有效值及来源；重名时先确认对象。 |
+| “把当前项目中陆战队员的基础生命改成120，保留已有升级效果，先不部署。” | 修改前后基础值、实际源位置和相关静态检查结果。 |
+| “给追猎者新增一个冷却10秒的暗影闪现，保留原技能。” | 能力、按钮、命令卡和文字的接线结果，以及编辑器与游戏验证步骤。 |
 
-在助手中打开本工作区，将路径替换成实际 Components 目录。[用户与智能体的对话示例](wiki/guides/development-conversations.md#saved-map-examples) · [游戏内对白制作案例](wiki/reference/trigger-dialogue-examples.md)
+在能够读取本地工作区并执行工具的 AI 助手中打开本目录，将路径替换成实际 Components 目录。通常直接描述目标即可，已知信息由智能体查询；不需要记住技能名称或工具参数。[完整36个开发场景](wiki/guides/development-conversations.md) · [已保存地图的多轮协作](wiki/guides/development-conversations.md#saved-map-examples) · [游戏内对白制作案例](wiki/reference/trigger-dialogue-examples.md)
 
 ## 按任务准备环境
 
 基础工具推荐 Windows 和 Python 3.12。使用共享 CLI/MCP 时安装独立的 Python 3.12+ 环境。离线 Galaxy 编译还需要 Node 22+ 和已安装的前端。编辑器与游戏验收需要本机 SC2，正式 XML schema 校验需要 lxml 或 xmllint。[安装指南](setup.md) · [完整集成回归与 Windows UAC 补验](wiki/guides/shared-tools.md)
+
+## 快速开始
+
+1. **加载规则。** 在助手中打开本工作区，发送“先读取 AGENTS.md 和 skills/sc2-project-entry/SKILL.md，再处理我的任务”。宿主未自动发现技能时，也可直接读取这些文件。
+2. **检查安装。** 在工作区根目录运行下列检查，或让助手执行；两项都不需要选择项目。
+
+   ```powershell
+   python tools/test-suite.py --ui-language zh-CN --scope docs
+   python tools/test-suite.py --ui-language zh-CN --scope tools
+   ```
+
+3. **提供目标。** 修改模组前，发送“我的主 Mod Components 文件夹是 `<实际路径>`，请完成项目初始化”，再提出具体任务。只研究官方案例或检查一张地图时，可以直接给出目标，无需切换主项目。
+
+初始化会运行 `tools/init-project.py`，递归检查依赖并生成本机 `agent-config.json`，无需手工编辑 JSON。新克隆没有此文件是正常情况。Components 是编辑器保存出的组件文件夹；只有 `.SC2Mod` / `.SC2Map` 归档文件时，先按[初始化指南](wiki/guides/project-initialization.md)和[归档指南](tools/README.md#打包组件与格式转换)确认读取或转换方式。
 
 ## 功能概览
 
@@ -29,7 +48,9 @@
 | 单位、技能与科技 | 查询有效值和数据链，修改属性，制作技能、升级与单位变体 | 项目路径、对象 ID、期望行为；已有信息由智能体查询 | 修改后检查编辑器加载及游戏行为 |
 | Actor、模型与音效 | 排查表现链，查询官方素材，替换外观或接入特效 | 对象、目标外观或异常现象 | 需要观察动画、附着点、声音和实际画面 |
 | GUI 触发器与攻击波 | 制作目标、计时器、胜败和对白，缩放或迁移攻击波 | 明确地图、玩家、条件及目标对象 | 需要编辑器保存与游戏事件验证 |
-| Bank 与现有 Galaxy | 设计战役存档、兼容旧档，维护已确认的手写脚本 | 存档需求或实际脚本入口 | 需要加载、保存及相关运行场景验证 |
+| Bank 与战役存档 | 设计战役存档、兼容旧档，接入任务结算与解锁 | 存档需求、已有 Bank 与结算入口；已有信息由智能体查询 | 需要新旧档加载、保存及进度验证 |
+| 手写 Galaxy 与离线检查 | 维护已确认的手写源码，使用已安装前端进行离线编译诊断 | 源码入口、目标组件与实际依赖；离线编译另需 Node 22+ 和前端 | 离线编译结果不能替代编辑器接受和游戏运行 |
+| 官方案例与数据研究 | 查询官方数据、触发器案例及资源引用链 | 对象 ID、机制描述或组件范围 | 参考命中后仍需核对目标项目实际加载的依赖 |
 | 开发文字 | 维护玩家文字键、语言文件与缺失字符串锚点 | 对象、文字显示位置、目标数据语言 | 需要核对游戏显示；不提供整项目汉化服务 |
 | 地形与场景 | 调查地图，按当前支持范围制作独立副本、摆放物件和调整地形 | 有效地图基底、输出路径、布局与保留约束 | 按具体操作查询能力；视觉、通行与保存重开分别验证 |
 | 单位迁移与层合并 | 分析来源、数据链、冲突和资源，按明确方案导入 | 来源、目标、单位列表或层优先级 | 导入后验证生产、技能与表现；层合并不等于完整迁移 |
@@ -90,7 +111,16 @@ Git 分发通用规则、技能、源码、测试和参考资料；`projects/`�
 | 共享 CLI/MCP 与模型分包 | [本机安装、配置、诊断和注册](wiki/guides/shared-tools.md) |
 | Harness2 实验与技能优化 | [Linux/WSL 安装、基线、复核及恢复](wiki/guides/harness2.md)；实际运行消耗模型额度 |
 
-按修改范围运行检查：`--scope tools` 检查工具，`--scope docs` 检查文档，`--scope mod` 检查目标组件；地图和临时外部目标应显式指定。命令参数以工具 `--help` 为准。
+按修改范围选择检查，命令均从工作区根目录运行：
+
+| 检查范围 | 命令 | 前提 |
+|---|---|---|
+| 使用说明与技能文档 | `python tools/test-suite.py --ui-language zh-CN --scope docs` | 不要求活动项目 |
+| 通用工具回归 | `python tools/test-suite.py --ui-language zh-CN --scope tools` | 不要求活动项目 |
+| 模组或地图组件 | `python tools/test-suite.py --ui-language zh-CN --scope mod --mod-dir "<Components路径>"` | 有效目标及所需依赖；不传目标时使用当前项目 |
+| 共享 SC2 工具集成回归 | `python tools/test-suite.py --ui-language zh-CN --scope integration` | 已安装共享工具独立环境；先退出 SC2 游戏 |
+
+地图和临时外部目标应显式指定，参数以工具 `--help` 为准。Windows 目录符号链接权限不足时，按[集成回归指南](wiki/guides/shared-tools.md)使用可选 UAC 补验，并分别报告普通回归与补验结果。
 
 攻击波工具可用 `python skills/sc2-attack-wave-scaling/scripts/wrap_attack_wave_counts.py "<地图路径>/Triggers"` 只读检查，`--apply` 写入，`--check` 检查数量包装；使用前加载对应技能并核对实际 GUI 定义。
 
@@ -120,6 +150,7 @@ Git 分发通用规则、技能、源码、测试和参考资料；`projects/`�
 
 - 无法读取规则或技能：确认打开的是本工作区，宿主具备本地文件访问能力，`AGENTS.md`、项目入口技能和 `wiki/index.md` 存在，Python 可执行。
 - 未选择项目：提供主 Components 模组路径完成初始化；tools/docs 范围检查和显式目标研究仍可独立进行。
+- 初始化提示官方依赖未解析：先检查[CASC 缓存覆盖](wiki/reference/official-casc-cache.md#初始化中的官方依赖未解析)，恢复工具读取证据后再重试；缓存缺项不代表游戏缺少依赖。
 - 缺少可选工具：按接入指南重建本机环境；注册成功与客户端实际连接成功分别确认。
 - `os error 206` 或字符串替换失败：按[恢复指南](wiki/implementation/agent-context-efficiency.md)缩小操作，保留编码和换行，并运行相关范围检查。
 - 运行问题：提供实际地图或模组、复现步骤、编辑器版本、日志及截图；按[运行时排错指南](wiki/implementation/runtime-diagnostics.md)调查。

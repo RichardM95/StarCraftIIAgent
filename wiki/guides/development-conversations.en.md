@@ -12,38 +12,59 @@ For terrain, migration, MCP and model collaboration, see [skill conversations](s
 
 ## Working with a saved map
 
-**I saved a change from Bar to Baz. Who uses each behavior now?**
+These four turns can be used together. First provide the latest saved Components map path; replace example behavior IDs, region names and coordinates with actual inputs. Copy only the request. The agent performs the checks below it.
 
-I’ll list direct users and their source fields for both IDs and identify missing dependencies.
+### Query behavior references after saving
 
-Verify · Query both Behavior IDs with direct. Use full for downstream impact.
+```text
+I saved <map-path>, changing <old-behavior-id> to <new-behavior-id>.
+Show who still uses each behavior. Read-only this time.
+```
+
+Expected reply: List direct users, source fields and missing dependencies for each behavior. Expand the query only when downstream impact is needed.
+
+Verification: Query both Behavior IDs with `direct`; use `full` for downstream impact.
 
 `sc2_catalog_references(project_id,catalog_type,object_id,mode)` <!-- example: saved-map-1 -->
 
-**Preview completion when player 1 first enters the existing EvacZone.**
+### Preview a one-time evacuation objective
 
-Other players leave the objective active. On the first qualifying entry, set the flag before completing the saved objective.
+```text
+In this map, complete the evacuation objective only when player 1 first enters the existing EvacZone.
+Show the proposed changes without writing them.
+```
 
-Verify · Bind the unique region and saved handle. Use preview. Test player 2, player 1, then re-entry for counts of 0, 1, 1.
+Expected reply: Confirm the unique region and saved objective handle, then show the conditions and completion logic. Other players leave the objective active. On player 1's first qualifying entry, set the completion flag before completing the objective.
+
+Verification: Use `preview`. Test player 2, player 1, then re-entry for completion counts of 0, 1, 1.
 
 `sc2_trigger_context(project_id)` `sc2_trigger_author(project_id,spec,mode)` <!-- example: saved-map-2 -->
 
-**Create the missing evacuation zone in this rectangle and wire the same logic.**
+### Add a missing region
 
-I’ll add the region on the working copy, bind its entry event and return the copy path, region ID and candidate ID.
+```text
+If EvacZone does not exist, create it at <rectangle-coordinates> and wire the same logic.
+Use <working-copy-path>. Show the region placement and plan first.
+```
 
-Verify · Create the rectangle with the terrain plan’s regions operation in add mode. Verify copy registration, coordinates and the assigned ID. Reread the same copy after the edit and use its fresh fingerprint in candidate mode.
+Expected reply: Verify the working copy and coordinates, then show the plan. After an authorized write, bind the entry event to the assigned region ID and return the copy path, region ID and candidate ID.
+
+Verification: Create the rectangle with the terrain plan's `regions` operation, `add` mode and `rect` shape. Check copy registration, coordinates and the assigned ID. Reread the same copy after the edit and use its fresh fingerprint in `candidate` mode.
 
 `sc2_trigger_context(project_id)` `sc2_trigger_author(project_id,spec,mode)` <!-- example: saved-map-3 -->
 
-**The connection dropped during apply and I saved again in the editor. What now?**
+### Continue after a disconnected apply
 
-I’ll check whether the change landed. A completed apply has a commit ID for rollback. A pending candidate against changed input needs a fresh preview.
+```text
+The connection dropped while applying candidate <candidate-id>, and I saved the map again in the Editor.
+Check whether the previous operation completed before telling me how to continue.
+```
 
-Verify · Inspect application.change_id and application.state using the original candidate ID. Report an existing rollback as such.
+Expected reply: Check whether the change landed. If applied, return its original transaction state and commit ID for rollback. If still pending against changed input, reread and show a fresh preview. This commit ID identifies a tool transaction, not a Git commit.
+
+Verification: Find `application.change_id` and `application.state` using the original candidate ID, then inspect that change. Report an existing rollback as such.
 
 `sc2_changes_inspect(project_id,change_id)` <!-- example: saved-map-4 -->
-
 
 ## A. Units, effective values and abilities
 
@@ -353,4 +374,4 @@ Agent checks and delivery: Reuse current paths/implementation and run tools/docs
 
 More setup requests: [installation](../../setup.en.md). Trigger-specific conversations: [44 scenarios and two dialogues](../reference/trigger-agent-dialogue-examples.en.md); underlying mechanisms: [in-game cases](../reference/trigger-dialogue-examples.en.md).
 
-<!-- translation-source: wiki/guides/development-conversations.md; sha256: 4d226ca90b3f405fabaa49aa75eaba40d929f2f415bf061635553fbb008cb54c -->
+<!-- translation-source: wiki/guides/development-conversations.md; sha256: f3c5fa01531ddca2c9e334d6923404ad1f191ac1898e682db5a8572928992e97 -->
