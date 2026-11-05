@@ -32,8 +32,8 @@ tmp*/
 .sc2-reference-stage-*/
 .sc2-reference-backup-*/
 
-# 本机路径配置（不同机器路径不同，不进版本库）
-agent-config.json
+# 根目录本机路径配置；子目录中的测试配置可正常跟踪
+/agent-config.json
 
 # 本机环境变量（任意层级）；可分发的示例与模板保留跟踪
 .env

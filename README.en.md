@@ -2,7 +2,7 @@
 
 [中文](README.md)
 
-A local workspace for StarCraft II custom campaign development, with development rules, a knowledge base, query and validation tools, and 34 skills loaded on demand: 15 root skills, 13 Galaxy sub-skills and six SC2Data sub-skills.
+A local workspace for StarCraft II custom campaign development, with development rules, a knowledge base, query and validation tools, and root, Galaxy and SC2Data skills loaded by task. See [task routing](#repository-and-routing) for the skill entries.
 
 Author: **扯蛋虾米**. See [AUTHORS](AUTHORS.en.md).
 
@@ -22,6 +22,20 @@ Author: **扯蛋虾米**. See [AUTHORS](AUTHORS.en.md).
 | “Add a separate Shadow Blink to Stalker with a ten-second cooldown. Keep the original ability.” | Ability, button, command-card and string wiring, with Editor and game-test steps. |
 
 Open this directory in an AI assistant able to read local workspace files and run tools. Replace paths with real Components directories. Describe your goal normally; the agent retrieves existing facts, so you do not need to memorize skill names or tool arguments. See [all 36 development scenarios](wiki/guides/development-conversations.en.md), [saved-map collaboration](wiki/guides/development-conversations.en.md#saved-map-examples) and [in-game dialogue examples](wiki/reference/trigger-dialogue-examples.en.md).
+
+For a first request, state the target, desired outcome and scope, for example:
+
+```text
+The target is <map-or-mod-Components-path>.
+Complete the mission when player 1 first enters the evacuation zone, without triggering again on re-entry.
+Inspect the current logic read-only, then show a preview without applying it to the target source.
+```
+
+| What you can say | Expected behavior |
+|---|---|
+| “Read-only investigation this time.” | Query existing content and sources without changing target map or mod source. |
+| “Show a preview without applying it.” | Show proposed behavior, differences and impact; tools may create isolated copies, candidates or reports. |
+| “Apply this plan without deploying yet.” | Edit the identified development source, run relevant checks and report actual results; changes and deployment can be specified separately. |
 
 ## Requirements by task
 
@@ -58,6 +72,8 @@ Initialization runs `tools/init-project.py`, checks recursive dependencies and g
 
 The basic workflow uses local rules, skills and Python tools. Shared CLI/MCP, model delegation and Harness2 are optional extensions with separate local environments and connections. Workflows independent of them remain available without installation.
 
+Data queries explain local overrides, inheritance and dependency providers, identifying uncertain merge rules or missing dependencies. Upgrades, behaviors and triggers may also change values at runtime, so final in-game behavior needs actual testing. Previews help inspect layout and data; verify actual visuals and pathing in the Editor and game.
+
 ## Advanced guides
 
 ### Repository and routing
@@ -84,7 +100,7 @@ StarCraftIIAgent/
 ├── AUTHORS.md                 Attribution
 ├── setup.md / setup.en.md      Installation and configuration
 ├── agent-config.json          Generated locally at initialization; not distributed
-├── skills/                    34 skills loaded on demand
+├── skills/                    Root and sub-skills loaded by task
 ├── tools/                     Queries, validation, deployment and XSD schemas
 ├── integrations/              Optional shared-tool and model integration source
 ├── wiki/                      General development rules, references and guides
@@ -155,4 +171,4 @@ Never open Blizzard maps with a project mod active as an external override. Add 
 - `os error 206` or replacement failures: narrow operations using the [recovery guide](wiki/implementation/agent-context-efficiency.md), preserve encoding/line endings and run relevant checks.
 - Runtime problems: provide the actual map/mod, reproduction steps, Editor version, logs and screenshots; follow the [runtime diagnosis guide](wiki/implementation/runtime-diagnostics.en.md).
 
-<!-- translation-source: README.md; sha256: af6801ba2b237fece424ccbcf08d45a10bfa686653e80622ffa49ba3d32df169 -->
+<!-- translation-source: README.md; sha256: e94db60db87eac74ec1a9c1d3cbb7ed77ee7ce2461368866502549f04c76d594 -->

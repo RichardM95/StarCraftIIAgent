@@ -6,6 +6,8 @@ These 36 scenarios cover units, presentation, triggers, dialogue, persistence an
 
 Usually, send only the request in the code block. The agent should read the [workspace rules](../../AGENTS.en.md) and [entry skill](../../skills/sc2-project-entry/SKILL.md), retrieve facts already in configuration/source, then perform the listed checks and delivery. State when you want design only or read-only investigation. These are request templates, not completed acceptance evidence.
 
+If you do not know an object ID, provide its in-game name and target path so the agent can find candidates for confirmation. Replace example names, IDs, values and rectangle coordinates with actual inputs. Once initialization is complete and the target is unambiguous, “the current project” is enough. The [README request template](../../README.en.md#common-request-examples) explains read-only investigation, previews and actual changes.
+
 For terrain, migration, MCP and model collaboration, see [skill conversations](skill-conversations.en.md) and [terrain conversations](terrain-conversations.en.md).
 
 <a id="saved-map-examples"></a>
@@ -374,4 +376,4 @@ Agent checks and delivery: Reuse current paths/implementation and run tools/docs
 
 More setup requests: [installation](../../setup.en.md). Trigger-specific conversations: [44 scenarios and two dialogues](../reference/trigger-agent-dialogue-examples.en.md); underlying mechanisms: [in-game cases](../reference/trigger-dialogue-examples.en.md).
 
-<!-- translation-source: wiki/guides/development-conversations.md; sha256: f3c5fa01531ddca2c9e334d6923404ad1f191ac1898e682db5a8572928992e97 -->
+<!-- translation-source: wiki/guides/development-conversations.md; sha256: 6a23843b35ac4855f54a6a9fcf6ccb0ad27248c80d5eeb7f16e45ef8d5cc9265 -->

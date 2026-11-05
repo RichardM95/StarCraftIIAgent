@@ -2,7 +2,7 @@
 
 [中文](skill-conversations.md)
 
-Start in the cloned workspace and have the agent read [AGENTS.md](../../AGENTS.en.md) and the [project entry skill](../../skills/sc2-project-entry/SKILL.md). The workspace contains **34 skills: 15 root skills, 13 Galaxy sub-skills and six SC2Data sub-skills**. See the [README routes](../../README.en.md#repository-and-routing); the Galaxy and SC2Data roots own their detailed sub-routing.
+Start in the cloned workspace and have the agent read [AGENTS.md](../../AGENTS.en.md) and the [project entry skill](../../skills/sc2-project-entry/SKILL.md). Skills load by task. See the [README routes](../../README.en.md#repository-and-routing); the Galaxy and SC2Data roots own their detailed sub-routing. Use the skill files actually included in your version.
 
 ## Invoking skills
 
@@ -83,4 +83,4 @@ python tools/harness2.py --ui-language en sc2-optimize --skill galaxy-language-f
 
 The first two checks need no active project. Shared CLI requires [local environments](shared-tools.en.md); delegation also needs the local Harness/provider. Harness2 optimization requires [Linux/WSL, Codex login and model connectivity](harness2.en.md) and consumes model quota. Examples do not grant unrelated deployment, registration or external writes; follow the user's actual authorized target/scope. Recovery uses the corresponding task/transaction/experiment state and fingerprints, preserving later user edits.
 
-<!-- translation-source: wiki/guides/skill-conversations.md; sha256: ac3e2ee54b9e6e9d48acdd1ee49e72f87ce8e58ad37a4a361bbc2dd907439ecf -->
+<!-- translation-source: wiki/guides/skill-conversations.md; sha256: ba8fdfd638fe787fc81bee2797aca2f3c9f418c921c787e3b9ec4a425563168c -->

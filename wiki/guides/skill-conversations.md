@@ -2,7 +2,7 @@
 
 [English](skill-conversations.en.md)
 
-在克隆的工作区中开始对话，让智能体先读取 [AGENTS.md](../../AGENTS.md) 和[项目入口技能](../../skills/sc2-project-entry/SKILL.md)。工作区包含 **34 个技能：15 个根技能、13 个 Galaxy 子技能、6 个 SC2Data 子技能**。完整根路由见 [README](../../README.md#任务路由)，Galaxy 与 SC2Data 由各自根技能继续路由。
+在克隆的工作区中开始对话，让智能体先读取 [AGENTS.md](../../AGENTS.md) 和[项目入口技能](../../skills/sc2-project-entry/SKILL.md)。工作区技能按任务加载；根技能路由见 [README](../../README.md#任务路由)，Galaxy 与 SC2Data 由各自根技能继续路由。以当前版本实际提供的技能文件为准。
 
 ## 如何调用
 
