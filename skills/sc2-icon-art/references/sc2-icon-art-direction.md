@@ -4,7 +4,31 @@
 
 ## 选择参考
 
-从当前任务提供或已授权使用的素材中选择同用途构图、同材质和同派系参考。记录每张参考决定的是身份、构图还是表面处理。具体素材库、图板、文件清单和源文件哈希留在项目本地资料目录。
+从当前任务提供或随技能分发的 SCORE 资料中选择同用途构图、同材质和同派系参考。记录每张参考决定的是身份、构图还是表面处理。当前项目的角色身份与玩法含义以任务输入为准，项目原稿与审查记录留在项目本地资料目录。
+
+## SCORE 参考库
+
+这组参考来自用户提供的 SCORE 自定义模组集合，用于构图、材质、光照和派系风格研究。来源按模组记录，单图作者尚未逐一核实；文件名和分类不作为技能规则或活动项目依赖的证据。
+
+先看[跨包对照](score/cross-package.png)选择风格，再按下表打开对应图板；需要给绘图工具提供单张参考时，从 [238 枚细读样本索引](score/sample-index.md)打开对应 PNG，记录样本 ID 及借用的具体结构。只加载当前任务需要的图像。
+
+| 来源包 | 全量图标数 | 细读样本数 | 图板 |
+|---|---:|---:|---|
+| CovertOps | 76 | 30 | [总览](score/CovertOps-overview.png) · [细读](score/CovertOps-detail.png) |
+| Golden | 62 | 30 | [总览](score/Golden-overview.png) · [细读](score/Golden-detail.png) |
+| Ihanrii | 142 | 30 | [总览](score/Ihanrii-overview.png) · [细读](score/Ihanrii-detail.png) |
+| Moebius | 96 | 30 | [总览](score/Moebius-overview.png) · [细读](score/Moebius-detail.png) |
+| Other | 10 | 10 | [总览](score/Other-overview.png) · [细读](score/Other-detail.png) |
+| Purifier | 60 | 30 | [总览](score/Purifier-overview.png) · [细读](score/Purifier-detail.png) |
+| Taldarim | 97 | 30 | [总览](score/Taldarim-overview.png) · [细读](score/Taldarim-detail.png) |
+| Umojan | 18 | 18 | [总览](score/Umojan-overview.png) · [细读](score/Umojan-detail.png) |
+| Webby | 100 | 30 | [总览](score/Webby-overview.png) · [细读](score/Webby-detail.png) |
+
+例如护盾图可参考 Golden-017 的连续壳面和 Ihanrii-001 的受光弧；能量束可参考 Golden-013 的主轴与 Ihanrii-056 的亮芯。样本只提供视觉结构，具体主体、作用和配色由当前任务决定。
+
+[来源清单](score/inventory.json)保留 661 个源文件的相对路径与 SHA-256，其中 659 份内容不同；仓库包含总览、细读图板及 238 枚独立 PNG 样本，原始 DDS 不随库分发。`source_root` 为占位符，`relative_path` 相对于原始 SCORE 集合；细读图的 `detail_cell` 为从 1 起算的行列。[整理时的核对摘要](score/verification.json)记录数量和源文件校验范围。
+
+源图主要为 76×76，另有 90×90 和 84×84。图板用于观察结构，制作时仍按目标项目要求确认尺寸、透明与 mip，并在实际界面尺寸下比较。
 
 ## 轮廓与构图
 

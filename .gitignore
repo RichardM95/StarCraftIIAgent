@@ -49,8 +49,7 @@ tmp*/
 /build_mission_design.py
 /runtime_mission_survey.py
 
-# Private project references and local acceptance records
-/skills/sc2-icon-art/references/score/
+# Local project acceptance records
 /integrations/RELIABILITY.md
 
 # Workspace reset recovery archive
