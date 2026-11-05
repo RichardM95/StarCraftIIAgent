@@ -17,3 +17,5 @@ Open an explicit target with `writable=false` for investigation; the returned pr
 - Official resources: load [sc2-official-assets](../sc2-official-assets/SKILL.md).
 - DeepSeek sub-tasks: load [sc2-deepseek-tasks](../sc2-deepseek-tasks/SKILL.md).
 - Review candidates and source hashes before applying; use the existing domain validators on the actual output. Report the exact applicable lifecycle status; a connected tool, completed worker, static pass, Editor acceptance and packaged runtime result are separate evidence.
+
+For MPQ capability discrepancies, long candidate jobs, source identity diagnostics or interrupted submissions, follow [long-operation recovery](../../wiki/guides/shared-tools.md#长任务与来源诊断). Check the actual backend before reporting a missing capability.

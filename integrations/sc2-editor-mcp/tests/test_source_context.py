@@ -286,3 +286,78 @@ def test_explicit_untrusted_official_cache_rejected(tmp_path,monkeypatch,status)
     with pytest.raises(SC2Error) as error:
         prepare(root,tmp_path,installation=install,official_cache=str(bad))
     assert error.value.code=="official_cache_invalid"
+
+
+def install_fixture(tmp_path, monkeypatch):
+    """Mock installation/build selection; no official cache is present."""
+    install = tmp_path / "install"
+    info = put(install, ".build.info", "active")
+    config = put(install, "config", "fixture")
+    monkeypatch.setattr(sources.casc, "inspect_installation", lambda _: {"build_info_sha256": sources._hash_file(info)})
+    monkeypatch.setattr(sources.casc, "select_build", lambda *a, **kw: {"product": "s2_cn", "branch": "cn", "build_key": "a", "build_config": str(config)})
+    return install
+
+
+def test_custom_components_under_install_keep_source_closure_complete(tmp_path, monkeypatch):
+    install = install_fixture(tmp_path, monkeypatch)
+    root = component(install / "Maps/Custom/Map.SC2Map", ["file:Mods/Custom.SC2Mod"])
+    component(install / "Mods/Custom.SC2Mod")
+    result = prepare(root, tmp_path, installation=install)
+    assert result["complete"] and result["dependency_report"]["complete"]
+    nodes = {Path(node["path"]).name: node for node in result["dependency_report"]["nodes"]}
+    assert nodes["Custom.SC2Mod"]["build_identity"] == "component_fingerprint_only"
+    assert nodes["Map.SC2Map"]["build_identity"] == "component_fingerprint_only"
+    assert not [item for item in result["unknown"] if item["code"].startswith("installation_component")]
+
+
+def test_local_bnet_file_component_completes_but_remote_identity_unverified(tmp_path, monkeypatch):
+    install = install_fixture(tmp_path, monkeypatch)
+    root = component(tmp_path / "map.SC2Map", ["bnet:id,file:Mods/Custom.SC2Mod"])
+    dependency = component(install / "Mods/Custom.SC2Mod")
+    result = prepare(root, tmp_path, installation=install)
+    assert result["complete"]
+    edge = next(edge for edge in result["dependency_report"]["edges"] if edge["reference"] == "bnet:id,file:Mods/Custom.SC2Mod")
+    assert edge["resolved"] and edge["bnet_identity_verified"] is False
+    assert edge["local_source_resolution"] is True and edge["remote_identity_verified"] is False
+    warning = next(item for item in result["unknown"] if item["code"] == "local_source_bnet_identity_unverified")
+    assert warning["remote_identity_verified"] is False and warning["local_source"] == str(dependency)
+    node = next(node for node in result["dependency_report"]["nodes"] if node["kind"] == "root")
+    assert node["local_source_warnings"][0]["code"] == "local_source_bnet_identity_unverified"
+    assert "battle_net_identity_not_verified" not in result["dependency_report"]["warnings"]
+
+
+def test_bnet_only_and_missing_bnet_file_stay_incomplete(tmp_path, monkeypatch):
+    install = install_fixture(tmp_path, monkeypatch)
+    def unavailable(*args, **kwargs):
+        raise SC2Error("official_component_unavailable", "fixture missing")
+    monkeypatch.setattr(sources, "_read_casc_batch", unavailable)
+    root = component(tmp_path / "map.SC2Map", ["bnet:one", "bnet:two,file:Mods/Absent.SC2Mod"])
+    result = prepare(root, tmp_path, installation=install)
+    assert not result["complete"]
+    assert {item["kind"] for item in result["dependency_report"]["missing"]} == {"bnet", "file"}
+    assert "battle_net_identity_not_verified" in result["dependency_report"]["warnings"]
+    assert "local_source_bnet_identity_unverified" not in result["dependency_report"]["warnings"]
+
+
+def test_official_named_local_component_under_install_stays_unverified(tmp_path, monkeypatch):
+    install = install_fixture(tmp_path, monkeypatch)
+    root = component(tmp_path / "map.SC2Map", ["file:Mods/Core.SC2Mod"])
+    component(install / "Mods/Core.SC2Mod")
+    result = prepare(root, tmp_path, installation=install)
+    assert result["dependency_report"]["complete"] and not result["complete"]
+    node = next(node for node in result["dependency_report"]["nodes"] if node["name"] == "Core.SC2Mod")
+    assert node["build_identity"] == "official_install_component"
+    assert "installation_component_build_unverified" in {item["code"] for item in result["unknown"]}
+    assert "local_source_bnet_identity_unverified" not in result["dependency_report"]["warnings"]
+
+
+def test_archive_under_install_remains_unknown_install_component(tmp_path, monkeypatch):
+    install = install_fixture(tmp_path, monkeypatch)
+    root = component(tmp_path / "map.SC2Map", ["file:Mods/Custom.SC2Mod"])
+    dep_source = component(tmp_path / "dep_source")
+    archive = make_archive(tmp_path, dep_source, install / "Mods/Custom.SC2Mod")
+    context = prepare(root, tmp_path, installation=install)
+    node = next(node for node in context["dependency_report"]["nodes"] if node["source_kind"] == "mpq")
+    assert node["build_identity"] == "unknown_install_component"
+    assert {"code": "installation_component_build_unverified", "path": str(archive)} in context["unknown"]
+    assert not context["complete"]

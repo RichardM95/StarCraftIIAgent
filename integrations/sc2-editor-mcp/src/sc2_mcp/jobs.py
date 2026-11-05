@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import copy
+import hashlib
+import time
 import json
 import os
 import re
@@ -13,7 +15,7 @@ from pathlib import Path
 import psutil
 
 from .errors import SC2Error
-from .storage import guard_absolute_path, write_json
+from .storage import guard_absolute_path, write_json, file_lock
 
 _ACTIVE = {"queued", "running", "cancelling"}
 
@@ -82,7 +84,13 @@ class Jobs:
                         raise SC2Error("cancelled", "操作已取消")
                     item.update(state="running", progress=1)
                     self._save(item)
-                result = fn(token)
+                from .progress import current
+                context = current.set(token)
+                token.report_details = lambda **details: self.update_details(key, **details)
+                try:
+                    result = fn(token)
+                finally:
+                    current.reset(context)
                 # A completed operation may have committed before cancellation
                 # arrived. Record the late request without claiming a rollback.
                 json.dumps(result, allow_nan=False)
@@ -111,6 +119,28 @@ class Jobs:
                 self._save(item)
                 raise SC2Error("jobs_closed", "任务执行器已关闭") from exc
             return copy.deepcopy(item)
+
+    def submit_once(self, operation, request_id, binding, fn):
+        identity = hashlib.sha256((operation + ':' + request_id).encode()).hexdigest()
+        path = self.state / 'requests' / (identity + '.json')
+        with file_lock(path.with_suffix('.lock')):
+            if path.is_file():
+                previous = json.loads(path.read_text('utf-8'))
+                if previous['binding'] != binding:
+                    raise SC2Error('request_conflict', '同一 request_id 的输入不能改变')
+                job = self.status(previous['job_id'])
+                if job['state'] not in {'interrupted', 'cancelled', 'failed'}:
+                    return job
+            job = self.submit(operation, fn)
+            write_json(path, {'binding': binding, 'job_id': job['job_id']})
+            return job
+
+    def update_details(self, key, **details):
+        with self.lock:
+            item, _ = self.items[key]
+            item.update(details, last_progress_at=datetime.now(timezone.utc).isoformat())
+            item['elapsed_seconds'] = (datetime.now(timezone.utc)-datetime.fromisoformat(item['created_at'])).total_seconds()
+            self._save(item)
 
     def update_progress(self, key, progress: int, message: str | None = None):
         self._key(key)

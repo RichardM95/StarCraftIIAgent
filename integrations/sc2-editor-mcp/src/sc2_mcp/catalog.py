@@ -16,6 +16,7 @@ templates, not global defaults; anonymous defaults apply to their exact class.
 """
 
 from __future__ import annotations
+from .measurement import timed, profiled
 
 from collections import Counter, defaultdict
 from copy import deepcopy
@@ -122,6 +123,7 @@ class _Patch:
 
 
 class _Library:
+    @timed('xml_load')
     def __init__(self, roots: list[Path], *, previous=None, fingerprints=None, document_loader=None):
         self._previous_documents = previous.documents if previous else {}
         self._expected_hashes = fingerprints or {}
@@ -228,11 +230,13 @@ class _Library:
     def patch_contents(self, patch):
         return patch.node
 
-    def inspect(self, catalog: str, object_id: str, *, reference_only=False) -> dict:
+    def inspect(self, catalog: str, object_id: str, *, reference_only=False, _graph=False) -> dict:
         key = (catalog, object_id)
         if key not in self.objects:
             raise SC2Error("catalog_object_not_found", "已加载的数据中没有该对象", catalog=catalog, object_id=object_id)
-        warnings = deepcopy(self.warnings)
+        # Reference-only consumers never mutate warning dicts: merge and link
+        # resolution only append new dicts, so a shallow copy isolates the list.
+        warnings = list(self.warnings) if _graph else deepcopy(self.warnings)
         tree, inheritance, sources = self._effective(key, [], warnings, history=not reference_only)
         fields: dict[str, dict] = {}
         removed: list[dict] = []
@@ -248,6 +252,7 @@ class _Library:
                 "limitations": ["仅处理所给 roots；不自动推断缺失依赖", "匿名默认仅按精确类名应用；原生类层次和内建默认未知",
                                 "数组类型由索引、已知数组名和同级重复推断；非完整引擎 schema", "tokens、宏、表达式不求值"]}
 
+    @timed('effective_merge')
     def _effective(self, key: tuple[str, str], active: list[tuple[str, str]], warnings: list[dict], *, history=True) -> tuple[_Node, list[str], list[dict]]:
         if key in active:
             raise SC2Error("catalog_parent_cycle", "Catalog parent 出现循环", chain=[list(k) for k in [*active, key]])
@@ -391,8 +396,9 @@ class CatalogSession:
     must be recreated after filesystem changes; no global stale cache exists.
     """
 
-    def __init__(self, roots: list[Path]):
-        self._library = _Library(roots)
+    def __init__(self, roots: list[Path], *, previous=None):
+        self._library = _Library(roots, previous=previous._library if previous else None,
+                                 fingerprints=previous.file_fingerprints() if previous else None)
         self._source_documents: dict[Path, tuple[bytes, _Span]] = {}
 
     def inspect(self, catalog: str, object_id: str) -> dict:
@@ -495,7 +501,7 @@ def _reference_kind(path: str, owner_class: str) -> str | None:
     return None
 
 
-def _effective_link(library, owner, path, record, complete=True, tombstone=None):
+def _effective_link(library, owner, path, record, complete=True, tombstone=None, inheritance_incomplete=None):
     """Resolve only the verified link slots, after merging their XML layers."""
     cls = owner["class"]
     if cls == "CEffectApplyBehavior" and path == "Behavior":
@@ -512,7 +518,9 @@ def _effective_link(library, owner, path, record, complete=True, tombstone=None)
     link = {"catalog": kind, "object_id": None, "raw_value": raw, "source": source, "status": "unknown"}
     if not complete:
         return {**link, "reason": "source_context_incomplete"}
-    if any(w["code"] in {"missing_catalog_parent", "catalog_class_changed"} for w in owner["warnings"]):
+    if inheritance_incomplete is None:
+        inheritance_incomplete = any(w["code"] in {"missing_catalog_parent", "catalog_class_changed"} for w in owner["warnings"])
+    if inheritance_incomplete:
         return {**link, "reason": "inheritance_incomplete"}
     if tombstone:
         return {**link, "status": "removed"}
@@ -553,19 +561,21 @@ def _owner_edges(library, key, index, dependencies_complete, *, include_warnings
     patches = library.objects[key]
     edges, missing, trace_warnings = [], [], []
     try:
-        effective = library.inspect(kind, identifier,reference_only=True)
+        effective = library.inspect(kind, identifier,reference_only=True,_graph=True)
     except SC2Error as exc:
         if exc.code != "catalog_parent_cycle":
             raise
         result = (edges, missing, [{"code":exc.code, **exc.details}])
         return (*result,None) if include_warnings else result
+    inheritance_incomplete = any(w["code"] in {"missing_catalog_parent", "catalog_class_changed"}
+                                 for w in effective["warnings"])
     values = list(effective["fields"].items())
     parent_patch = next((patch for patch in reversed(patches) if "parent" in patch.node.attrib), None)
     if parent_patch and parent_patch.node.get("parent"):
         values.append(("parent", {"value": parent_patch.node.get("parent"), "source": parent_patch.source()}))
     for path, info in values:
         value = info["value"]
-        link = _effective_link(library, effective, path, info, dependencies_complete)
+        link = _effective_link(library, effective, path, info, dependencies_complete, inheritance_incomplete=inheritance_incomplete)
         if link:
             status = link["status"]
             if status in {"resolved", "missing_in_roots"}:
@@ -607,9 +617,13 @@ def reference_graph(library, complete=True):
         return library._reference_cache
     result = ([], [], [])
     index = _id_index(library)
-    for key in library.objects:
+    from .progress import report
+    total = len(library.objects)
+    for count, key in enumerate(library.objects):
+        if count % 128 == 0: report('reference_graph', count, total)
         for rows, additions in zip(result, _owner_edges(library,key,index,complete)):
             rows.extend(additions)
+    report("reference_graph", total, total)
     library._reference_cache = result
     library._reference_complete = complete
     return result

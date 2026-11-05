@@ -111,7 +111,9 @@ async def test_real_stdio_handshake(tmp_path):
     import sys
     from mcp import ClientSession, StdioServerParameters
     from mcp.client.stdio import stdio_client
-    params=StdioServerParameters(command=sys.executable,args=['-m','sc2_mcp','--state',str(tmp_path/'stdio')])
+    from sc2_mcp.agent_bridge import runtime_command
+    command=runtime_command('sc2-editor-mcp','sc2_mcp',['--state',str(tmp_path/'stdio')])
+    params=StdioServerParameters(command=command[0],args=command[1:])
     async with stdio_client(params) as (read,write):
         async with ClientSession(read,write) as session:
             initialized=await session.initialize()

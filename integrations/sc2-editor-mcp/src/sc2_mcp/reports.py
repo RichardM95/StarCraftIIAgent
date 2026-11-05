@@ -6,6 +6,7 @@ import os
 from io import TextIOWrapper
 
 from .errors import SC2Error
+from .measurement import timed
 from .storage import atomic_writer, guard_absolute_path, safe_path, write_json
 
 LIMIT = 48000  # serialized JSON characters, shared with the dispatcher
@@ -35,6 +36,7 @@ def _save_index(path, identity, characters, offsets):
         pass  # The report remains usable in read-only stores.
 
 
+@timed('report_write')
 def write_report(path, value):
     text = json.dumps(value, ensure_ascii=False, indent=2, allow_nan=False)
     offsets = [0]

@@ -39,6 +39,9 @@ The handoff includes the working copy path, changed components, object or region
 
 | Task type | Load next skill | Wiki page |
 |---|---|---|
+| Export/adapt bilingual roguelike talent lists as Excel, inspect UserData or static GUI registrations | [肉鸽天赋清单导出](../sc2-roguelike-talent-export/SKILL.md) | Project-local export mapping and diagnostics |
+| Design or implement roguelike mechanics, diagnose draw/shop/reward/restore paths, compare balance | [SC2肉鸽机制专用技能](../sc2-roguelike-mechanics/SKILL.md) | `wiki/implementation/bank-system.md` for restoration |
+| Draw new icons, redraw existing assets, or review small DDS icons | [SC2图标绘制技能](../sc2-icon-art/SKILL.md) | `wiki/guides/shared-tools.md` for asset operations |
 | Writing/editing Galaxy script | `sc2-galaxy-scripting` | `wiki/implementation/galaxy-gotchas.md`, `wiki/reference/galaxy-language.md` |
 | Writing/editing mod XML (units, abilities, behaviors, effects, weapons, upgrades, validators, footprints) | `sc2-catalog-xml` | `wiki/implementation/xml-patterns.md`, `wiki/implementation/xml-patterns/catalog-rules.md` |
 | Migrating custom unit data chains between mods | `sc2-unit-migration` | `wiki/guides/unit-migration.en.md` |

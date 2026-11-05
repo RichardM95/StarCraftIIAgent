@@ -1,6 +1,7 @@
 """Durable task records, isolated input copies, cancellation, and conflict-aware integration."""
 from __future__ import annotations
 import asyncio
+import ast
 import difflib
 import hashlib
 import json
@@ -17,7 +18,7 @@ from .policy import make_policy
 from .windows import process_identity
 from .agent_bridge import guard_source_changes, runtime_base
 from .concurrency import limited_worker, submission_lock, integration_lock, task_claim
-from .configuration import load_config
+from .configuration import load_config, provider_definition
 
 
 def digest(path: Path):
@@ -28,6 +29,20 @@ def atomic_json(path: Path, value):
     temporary = path.with_name(path.name + ".tmp-" + uuid.uuid4().hex)
     temporary.write_text(json.dumps(value, ensure_ascii=False, indent=2), encoding="utf-8")
     os.replace(temporary, path)
+
+
+def publish_initialization(stage, directory):
+    """Retry transient Windows scanner locks; never replace an existing task."""
+    for attempt in range(4):
+        if directory.exists():
+            raise ValueError('Task destination appeared during initialization: '+str(directory))
+        try:
+            stage.rename(directory)
+            return
+        except OSError as exc:
+            if getattr(exc,'winerror',None) not in {5,32,33} or attempt == 3:
+                raise
+            time.sleep((.05,.15,.3)[attempt])
 
 
 def relative_file(name: str):
@@ -111,6 +126,28 @@ class Manager:
             record.update(state="interrupted", worker_completed=False,
                           error="Owning supervisor exited; task was not automatically resubmitted")
             atomic_json(path, record)
+        spec_path = self.directory(task_id)/'spec.json'
+        audit = self.directory(task_id)/'audit.jsonl'
+        if spec_path.is_file():
+            spec=json.loads(spec_path.read_text('utf-8'))
+            attempts=[]
+            session_calls={}
+            latest_session=None
+            if audit.is_file():
+                for line in audit.read_text('utf-8').splitlines():
+                    try:
+                        row=json.loads(line)
+                        session=row.get('session')
+                        if row.get('type') in {'agent.created','session.resumed'}:
+                            session_calls[session]=0;latest_session=session
+                        if row.get('type')=='tool.attempt':
+                            attempts.append(row);latest_session=session
+                            session_calls[session]=session_calls.get(session,0)+1
+                    except ValueError: pass
+            used=session_calls.get(latest_session,0);limit=spec.get('max_tool_calls',200)
+            record['budget']={'limit':limit,'used_total':len(attempts),'used_current':used,'remaining':max(0,limit-used),'near_limit':used>=.8*limit}
+            if record.get('state') != 'worker_completed' and used > limit and any('limit' in row.get('reason','').lower() for row in attempts if row.get('denied') and row.get('session')==latest_session):
+                record['failure_category']='tool_budget_exhausted'
         return record
 
     def save(self, task_id, **updates):
@@ -134,39 +171,82 @@ class Manager:
                 raise ValueError("Submission exists but initialization was interrupted; inspect its directory before recovery")
             if json.loads(previous.read_text(encoding="utf-8")) != spec.model_dump():
                 raise ValueError("request_id already belongs to a different task specification")
-            return self.status(task_id)
-        candidate = directory / "workspace"
-        directory.mkdir(parents=True, exist_ok=False)
-        candidate.mkdir()
-        if spec.profile == "sc2":
-            (candidate / ".sc2-mcp").mkdir()
+            old = self.status(task_id)
+            if old.get('phase') not in {'input_validation','model_configuration','copy_inputs'} or old['state'] != 'failed': return old
+            directory.rename(directory.with_name(directory.name+'.failed-'+uuid.uuid4().hex))
         source = Path(spec.workspace)
-        inputs = list(spec.input_files)
-        # Explicitly allowed existing files are also copied; no unrelated directory traversal.
-        inputs += [name for name in spec.allowed_files if (source / name).is_file()]
-        if (source / "AGENTS.md").is_file() and "AGENTS.md" not in inputs:
-            inputs.append("AGENTS.md")
+        inputs = list(dict.fromkeys(spec.input_files + [n for n in spec.allowed_files if (source/n).is_file()]
+                                   + (['AGENTS.md'] if (source/'AGENTS.md').is_file() else [])))
+        # Validate every path before allocating a candidate or launching a worker.
+        phase = 'input_validation'
+        try:
+            for name in dict.fromkeys(inputs + spec.allowed_files):
+                origin = checked_path(source, name)
+                if name in inputs and not origin.is_file():
+                    raise ValueError(f'Missing input file: {name}')
+            phase = 'model_configuration'
+            provider_definition(spec.provider,spec.model)
+        except Exception as exc:
+            directory.mkdir(parents=True, exist_ok=True)
+            atomic_json(directory/'spec.json', spec.model_dump())
+            atomic_json(directory/'baseline.json', {})
+            self.save(task_id,state='failed',worker_completed=False,reviewed=False,
+                phase=phase,created_at=time.time(),
+                error={'code':phase,'message':str(exc),'task_id':task_id,
+                       'recovery':('Correct saved model settings, or use a new request_id for a changed specification' if phase=='model_configuration' else 'Restore missing inputs and retry the same specification')})
+            raise
+        stage = directory.with_name(directory.name + '.initializing-' + uuid.uuid4().hex)
+        stage.mkdir(parents=True,exist_ok=False)
+        candidate = stage/'workspace'
+        candidate.mkdir()
+        if spec.profile == 'sc2': (candidate/'.sc2-mcp').mkdir()
         baseline = {}
-        for name in dict.fromkeys(inputs + spec.allowed_files):
-            origin = checked_path(source, name)
-            baseline[name] = digest(origin)
-            if name in inputs:
-                if not origin.is_file():
-                    raise ValueError(f"Missing input file: {name}")
-                destination = checked_path(candidate, name)
-                destination.parent.mkdir(parents=True, exist_ok=True)
-                shutil.copy2(origin, destination)
-                baseline[name] = digest(destination)
-                saved = directory / "original" / name
-                saved.parent.mkdir(parents=True, exist_ok=True)
-                shutil.copy2(destination, saved)
-        atomic_json(directory / "spec.json", spec.model_dump())
-        atomic_json(directory / "baseline.json", baseline)
-        self.save(task_id, state="queued", owner=self.owner, worker_completed=False,
-                  reviewed=False, created_at=time.time(), goal=spec.goal, model=spec.model, provider=spec.provider,
-                  profile=spec.profile,
-                  owner_pid=os.getpid(), owner_identity=self.owner_identity)
-        self._schedule(task_id, self._execute(task_id, spec))
+        missing_imports=[]
+        for name in inputs:
+            if not name.endswith('.py'): continue
+            try:
+                tree=ast.parse((source/name).read_text('utf-8-sig'))
+                for node in ast.walk(tree):
+                    if isinstance(node,ast.ImportFrom) and node.level and node.module:
+                        parent=Path(name).parent
+                        for _ in range(node.level-1): parent=parent.parent
+                        relative=(parent/Path(*node.module.split('.'))).with_suffix('.py').as_posix()
+                        if (source/relative).is_file() and relative not in inputs: missing_imports.append(relative)
+            except (ValueError,SyntaxError,UnicodeError): pass
+        try:
+            for name in dict.fromkeys(inputs + spec.allowed_files):
+                origin = checked_path(source,name)
+                baseline[name] = digest(origin)
+                if name in inputs:
+                    destination = checked_path(candidate,name)
+                    destination.parent.mkdir(parents=True,exist_ok=True)
+                    shutil.copy2(origin,destination)
+                    baseline[name] = digest(destination)
+                    if digest(origin) != baseline[name]: raise ValueError('Input changed during initialization: '+name)
+                    saved=stage/'original'/name
+                    saved.parent.mkdir(parents=True,exist_ok=True)
+                    shutil.copy2(destination,saved)
+            atomic_json(stage/'spec.json',spec.model_dump())
+            atomic_json(stage/'baseline.json',baseline)
+            publish_initialization(stage,directory)
+        except BaseException as exc:
+            failure={'code':'initialization_failed','task_id':task_id,'phase':'copy_inputs',
+                'message':str(exc),'partial_directory':str(stage),
+                'recovery':'Candidate never launched; restore inputs and retry the same specification'}
+            atomic_json(stage/'initialization-error.json',failure)
+            directory.mkdir(parents=True,exist_ok=True)
+            atomic_json(directory/'spec.json',spec.model_dump())
+            atomic_json(directory/'baseline.json',{})
+            self.save(task_id,state='failed',worker_completed=False,reviewed=False,
+                phase='copy_inputs',created_at=time.time(),error=failure)
+            raise
+        self.save(task_id,state='queued',owner=self.owner,worker_completed=False,reviewed=False,
+            created_at=time.time(),goal=spec.goal,model=spec.model,provider=spec.provider,profile=spec.profile,
+            owner_pid=os.getpid(),owner_identity=self.owner_identity,
+            input_environment={'isolated_files':len(inputs),'tests_executed':False,'test_execution_available':False,
+                'verification_owner':'primary_agent','missing_local_imports':sorted(set(missing_imports)),
+                'note':'Only declared inputs are copied; include test imports or use the primary verification environment'})
+        self._schedule(task_id,self._execute(task_id,spec))
         return self.status(task_id)
 
     def _schedule(self, task_id, coroutine):
@@ -264,7 +344,7 @@ class Manager:
                       error={'code': 'task_timeout', 'message': 'Worker exceeded the configured task timeout'})
         except Exception as error:
             self.save(task_id, state="failed", worker_completed=False,
-                      error={"type": type(error).__name__, "message": str(error)[:2000]})
+                      error={"type": type(error).__name__, "code": 'protocol_error' if 'input_text' in str(error) else 'worker_error', "message": str(error)[:2000]})
         finally:
             if bridge:
                 await bridge.stop()
@@ -305,7 +385,9 @@ class Manager:
         await asyncio.gather(*self.cancellation_monitors.values(), return_exceptions=True)
 
     def list_tasks(self, limit=20):
-        paths = sorted(self.state_root.glob("*/status.json"), key=lambda p: p.stat().st_mtime, reverse=True)
+        paths = sorted((p for p in self.state_root.glob("*/status.json")
+                        if len(p.parent.name)==32 and all(c in '0123456789abcdef' for c in p.parent.name)),
+                       key=lambda p: p.stat().st_mtime, reverse=True)
         return [self.status(p.parent.name) for p in paths[:limit]]
 
     def result(self, task_id):
@@ -357,6 +439,9 @@ class Manager:
                   "denial_reasons": sorted({a["reason"] for a in attempts if a.get("denied")}),
                   "log_directory": str(directory), "review_required": True,
                   "worker_profile": spec.profile}
+        output['budget'] = output['status'].get('budget',{})
+        if output['status'].get('failure_category'):
+            output['failure_category']=output['status']['failure_category']
         if spec.profile == "sc2":
             bridge_log = directory / "sc2-bridge-events.jsonl"
             output["sc2_bridge"] = {

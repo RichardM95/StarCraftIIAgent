@@ -7,6 +7,7 @@ Designed for AI coding agents and developers to run before committing any change
 from __future__ import annotations
 
 import argparse
+import os
 import subprocess
 import sys
 import tempfile
@@ -77,12 +78,12 @@ def dependency_validation_targets(
     return targets, problems
 
 
-def run_step(name: str, cmd: list[str], verbose: bool) -> bool:
+def run_step(name: str, cmd: list[str], verbose: bool, *, extra_env=None) -> bool:
     name = render(name)
     print(tr('--> Running {p0}...', p0=name))
     start = time.time()
     res = subprocess.run(cmd, cwd=str(REPO_ROOT), capture_output=True, text=True, encoding="utf-8", errors="replace",
-                         env=child_env(language="en" if "unittest" in cmd else None))
+                         env={**child_env(language="en" if "unittest" in cmd else None), **(extra_env or {})})
     elapsed = time.time() - start
     if res.returncode == 0:
         print(f"    [PASS] {name} ({elapsed:.2f}s)")
@@ -105,15 +106,26 @@ def run_integrations(args):
     if not python.is_file():
         print("Install the sc2-editor-mcp isolated environment first", file=sys.stderr)
         return 2
-    command = [str(python), "-m", "pytest", "-q"]
+    from sc2_integration_runtime import runtime_command
+    command = runtime_command("sc2-editor-mcp", "pytest", ["-q"])
+    runtime = REPO_ROOT/'.runtime'
+    runtime.mkdir(exist_ok=True)
+    base = Path(tempfile.mkdtemp(prefix='integration-tests-',dir=runtime))
+    paths = [suite/'src', suite/'.venv/Lib/site-packages', REPO_ROOT/'tools']
+    environment = {'PYTHONPATH':os.pathsep.join(map(str,paths))}
+    counter = 0
+    def integration_step(label, arguments, verbose):
+        nonlocal counter
+        counter += 1
+        return run_step(label,[*arguments,'--basetemp',str(base/str(counter))],verbose,extra_env=environment)
     tests = suite / "tests"
-    if not run_step("Integration collection", [*command, "--collect-only", str(tests)], args.verbose):
+    if not integration_step("Integration collection", [*command, "--collect-only", str(tests)], args.verbose):
         return 1
     core = sorted(tests.glob("test_catalog*.py")) + [tests / "test_agent_integration.py"]
     remaining = [str(tests), *("--ignore=" + str(path) for path in core)]
     groups = [("Catalog and routing", core), ("Other integrations", remaining)]
     if not args.retry_symlink_elevated:
-        return 0 if all([run_step(label, [*command, *map(str, group)], args.verbose)
+        return 0 if all([integration_step(label, [*command, *map(str, group)], args.verbose)
                          for label, group in groups]) else 1
     from sc2_symlink_retry import finish_retry
     with tempfile.TemporaryDirectory(prefix="sc2-integration-") as directory:
@@ -121,7 +133,7 @@ def run_integrations(args):
         for index, (label, group) in enumerate(groups):
             report = Path(directory) / f"group-{index}.xml"
             reports.append(report)
-            results.append(run_step(label, [*command, "--junitxml", str(report), *map(str, group)], args.verbose))
+            results.append(integration_step(label, [*command, "--junitxml", str(report), *map(str, group)], args.verbose))
         if not all(results):
             print(tr("Ordinary regression failed; elevation was not requested."))
             return 1

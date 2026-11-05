@@ -37,13 +37,17 @@ class TaskRouter:
             spec = spec.model_copy(update={'request_id': uuid.uuid4().hex})
         task_id = uuid.uuid5(uuid.NAMESPACE_URL, 'deepseek-supervisor:' + spec.request_id).hex
         state = project_runtime(spec.workspace) / 'deepseek/tasks'
-        with process_lock(self.root / 'routing.lock', timeout=2):
-            index = self._index()
-            if task_id in index and index[task_id] != str(state):
-                raise ValueError('request_id already belongs to a different project')
-            index[task_id] = str(state)
-            atomic_json(self.root / 'routing.json', index)
-        return await self._manager(state).submit(spec)
+        with process_lock(self.root/'routing.lock',timeout=2):
+            index=self._index()
+            existing=index.get(task_id)
+            if existing and existing != str(state): raise ValueError('request_id already belongs to a different project')
+            manager=self._manager(state)
+            try:
+                return await manager.submit(spec)
+            finally:
+                if (manager.directory(task_id)/'status.json').is_file():
+                    index[task_id]=str(state)
+                    atomic_json(self.root/'routing.json',index)
 
     async def continue_task(self, task_id, prompt):
         return await self.for_task(task_id).continue_task(task_id, prompt)

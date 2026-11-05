@@ -68,6 +68,9 @@ Initialization runs `tools/init-project.py`, checks recursive dependencies and g
 | Developer strings | Player string keys, locale files and missing anchors | Object, text surface and data locale | Check in-game text; whole-project translation is outside scope |
 | Terrain and scenes | Map investigation, isolated copies, placement and supported terrain changes | Valid map base, output path, layout and preservation constraints | Query capability per operation; verify visuals, traversal and save/reopen separately |
 | Unit migration and layer merges | Providers, chains, conflicts and assets, followed by explicitly planned import | Sources, target and unit list or layer precedence | Test production, abilities and presentation; layer merging alone is not full migration |
+| Icon creation and checks | Create or redraw icons using identity, gameplay and faction references; check small-size readability and the required DDS profile | Original image or purpose, dimensions/compression and visual references; format checks need Pillow | Decode compressed candidates and check the actual UI after replacement |
+| Roguelike mechanics | Design and diagnose talents, draws, shops, rewards, stacking and cross-map restoration | Project rules, an entry or a reproducible problem | Test acquisition, caps, repeated actions and save restoration separately |
+| Talent-list export | Inspect UserData and static GUI registrations, export bilingual Excel through project mappings and resolve base values in descriptions | Mod path, field and rarity mappings; Excel export needs openpyxl | Read back the workbook and report missing, ambiguous and unresolved data; test runtime bonuses separately |
 | Checks, deployment and project records | Static checks, log diagnosis, deployment previews and authorized deployment, design and issue records | Explicit target, scope or reproduction evidence | Static checks cannot replace Editor and packaged runtime acceptance |
 
 The basic workflow uses local rules, skills and Python tools. Shared CLI/MCP, model delegation and Harness2 are optional extensions with separate local environments and connections. Workflows independent of them remain available without installation.
@@ -90,6 +93,9 @@ The agent reads [AGENTS.md](AGENTS.en.md), current configuration and [wiki/index
 | Validation/deployment / Editor handoff | `sc2-tools-validation` / `sc2-editor-handoff` |
 | Terrain / Unit migration / Official assets | `sc2-terrain-editing` / `sc2-unit-migration` / `sc2-official-assets` |
 | Shared tools / Bounded model delegation | `sc2-shared-tools` / `sc2-deepseek-tasks` |
+| Icon creation and small-size review | [sc2-icon-art](skills/sc2-icon-art/SKILL.md) |
+| Roguelike mechanics and restoration audits | [sc2-roguelike-mechanics](skills/sc2-roguelike-mechanics/SKILL.md) |
+| Bilingual talent Excel export | [sc2-roguelike-talent-export](skills/sc2-roguelike-talent-export/SKILL.md) |
 
 ### File structure and project records
 
@@ -171,4 +177,4 @@ Never open Blizzard maps with a project mod active as an external override. Add 
 - `os error 206` or replacement failures: narrow operations using the [recovery guide](wiki/implementation/agent-context-efficiency.md), preserve encoding/line endings and run relevant checks.
 - Runtime problems: provide the actual map/mod, reproduction steps, Editor version, logs and screenshots; follow the [runtime diagnosis guide](wiki/implementation/runtime-diagnostics.en.md).
 
-<!-- translation-source: README.md; sha256: e94db60db87eac74ec1a9c1d3cbb7ed77ee7ce2461368866502549f04c76d594 -->
+<!-- translation-source: README.md; sha256: 4683053e77f290cec00a480a32b7504dd1920afdfcd6b7ecfeaa31cbb8be4f64 -->

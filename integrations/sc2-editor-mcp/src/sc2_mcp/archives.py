@@ -96,7 +96,7 @@ def _try_import(name: str):
         return None
 
 
-def backend_capabilities() -> dict:
+def _legacy_backend_capabilities() -> dict:
     """惰性探测已安装的 MPQ 后端及其能力。
 
     只根据真实存在的模块/符号报告能力，不猜测缺失接口。``can_export`` 额外要求
@@ -153,6 +153,23 @@ def backend_capabilities() -> dict:
         caps["can_export"] = True
 
     return caps
+
+
+def _native_enabled():
+    return os.name == 'nt'
+
+
+def backend_capabilities() -> dict:
+    if not _native_enabled():
+        return _legacy_backend_capabilities()
+    try:
+        from .storm_adapter import capabilities
+        info = capabilities()
+        return dict(read_backend='bundled_stormlib', create_backend='bundled_stormlib',
+                    can_read=True, can_export=True, missing=[], dll=info)
+    except (OSError, ValueError, ImportError) as exc:
+        return dict(read_backend=None, create_backend=None, can_read=False,
+                    can_export=False, missing=['bundled_stormlib'], reason=str(exc))
 
 
 class _MpyqReader:
@@ -327,6 +344,12 @@ def _coerce_name(name) -> str:
 
 
 def _open_reader(path: Path):
+    if _native_enabled():
+        try:
+            from .storm_adapter import Reader
+            return Reader(path)
+        except (OSError, ValueError, ImportError) as exc:
+            raise SC2Error('stormlib_unavailable', '内置 StormLib 无法读取归档', reason=str(exc)) from exc
     errors: list[str] = []
 
     mpyq = _try_import("mpyq")
@@ -802,6 +825,10 @@ def _create_archive(destination: Path, entries: list[tuple[str, Path]], cancel=N
     """通过 pympq 创建 MPQ。仅使用运行时探测到的真实接口/常量。"""
 
     _check_cancel(cancel)
+    if _native_enabled():
+        from .storm_adapter import create
+        create(destination, entries, cancel)
+        return
     pympq = _try_import("pympq")
     if pympq is None:
         raise SC2Error("backend_unavailable", "pympq is not installed; cannot create MPQ.")
@@ -910,7 +937,7 @@ def export_archive(root: Path, destination: Path, cancel=None) -> dict:
             "backend_unavailable",
             "A verifiable MPQ export backend (pympq create + mpyq read) is unavailable.",
             missing=caps["missing"],
-            mpyq_read=caps["mpyq_read"],
+            reason=caps.get("reason"),
         )
 
     # 记录源文件摘要，供创建后回读校验。

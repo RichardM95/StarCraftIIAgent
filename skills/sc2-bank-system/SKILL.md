@@ -21,6 +21,10 @@ Prefer editable GUI actions for new persistence work. For existing Galaxy mainte
 
 ## Progress appears lost
 
+For persisted catalog selections (such as ordinary and frozen shop slots), trace a full load → open/use → save → reload round trip. Check absent key, empty string, stored empty marker, unknown former ID, out-of-range index and a valid old ID. Compare the lookup failure value with the slot's empty marker. Normalize at the storage boundary and validate the index before any instance lookup. Preserve valid IDs and frozen state within actual capacity. Assert zero invalid accesses throughout the round trip, even if the final file looks correct.
+
+For rewards, distinguish restoring held counts, rebuilding this map's persistent effects and granting a one-time benefit. Check whether all prerequisites have been restored before derived effects run. Compare a fresh map and repeated initialization on the same map at identical held counts; assert the actual resources, unit counts or final levels as well as the stored keys.
+
 Use the [Bank diagnostic](../../wiki/implementation/bank-system.md). Compare the disk file, loaded handle/player, in-memory variables and destination map application chain before changing data. An ordinary save can restore existing runtime state while a transition starts another map that must read/apply its own state.
 
 ## API lookup

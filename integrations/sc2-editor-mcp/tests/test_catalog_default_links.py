@@ -1,5 +1,7 @@
 import pytest
 
+from copy import deepcopy
+
 from sc2_mcp.catalog import _Library, trace_references
 from sc2_mcp.catalog_explain import catalog_explain
 from sc2_mcp.catalog_impact import inspect_patch_impact
@@ -104,3 +106,89 @@ def test_explanation_with_references_matches_independent_queries(roots):
     joined = catalog_explain(roots, "Effect", "Foo", ["Behavior"], include_references=True)
     assert joined.pop("references") == trace_references(roots, "Effect", "Foo")
     assert joined == catalog_explain(roots, "Effect", "Foo", ["Behavior"])
+
+
+def _reference_fixture(tmp_path):
+    # Defaults, inherited parent, missing parent, real class change (Unit ->
+    # ActorAction) and global merge warnings (text/expression) in one fixture.
+    base = component(tmp_path / "base", '''
+      <CActorAction default="1" id="GraphDefault">
+        <LaunchAssets Model="##id##Launch"/>
+        <ImpactMap index="None" Model="##id##Impact"/>
+      </CActorAction>
+      <CModel id="FooLaunch"/><CModel id="FooImpact"/>
+      <CActorAction id="Foo" parent="GraphDefault"/>
+      <CActorUnit id="Changed"/>
+      <CEffectApplyBehavior id="MissingParent" parent="Absent"><Behavior value="Foo"/></CEffectApplyBehavior>
+      <CBehaviorBuff id="Foo"/>
+    ''')
+    component(tmp_path / "local", '''
+      <CActorAction id="Changed" parent="Foo"/>
+      <CActorAction id="Noisy"><ImpactMap index="None">ignored</ImpactMap></CActorAction>
+    ''')
+    return [base, tmp_path / "local"]
+
+
+def test_reference_graph_matches_old_deepcopy_and_rescan_semantics(tmp_path, monkeypatch):
+    """Compare the patched graph with the pre-patch warning semantics.
+
+    Old inspect deep-copied global warnings *before* merging; the wrapper instead
+    runs the current (shallow, append-only) inspect and deep-copies the result
+    warnings *after* merging. _effective/_merge/_effective_link only append new
+    warning dicts, so the post-copy values equal the old pre-copy values; the
+    wrapper only restores the old deepcopy and per-field warning scan.
+    """
+    import sc2_mcp.catalog as catalog
+    roots = _reference_fixture(tmp_path)
+
+    def graph_with_old_semantics(complete):
+        original_inspect = catalog._Library.inspect
+        original_link = catalog._effective_link
+
+        def old_inspect(self, *args, **kwargs):
+            result = original_inspect(self, *args, **kwargs)
+            result["warnings"] = deepcopy(result["warnings"])
+            return result
+
+        def old_link(*args, **kwargs):
+            # Force the pre-patch per-field owner-warning scan.
+            kwargs.pop("inheritance_incomplete", None)
+            return original_link(*args, **kwargs)
+
+        library = catalog._Library(roots)
+        library.warnings.extend({"code": "bulk_global", "n": index} for index in range(500))
+        before = deepcopy(library.warnings)
+        with monkeypatch.context() as scope:
+            scope.setattr(catalog._Library, "inspect", old_inspect)
+            scope.setattr(catalog, "_effective_link", old_link)
+            result = catalog.reference_graph(library, complete)
+        assert library.warnings == before
+        return result, before
+
+    for complete in (True, False):
+        baseline, baseline_warnings = graph_with_old_semantics(complete)
+        library = catalog._Library(roots)
+        library.warnings.extend({"code": "bulk_global", "n": index} for index in range(500))
+        assert catalog.reference_graph(library, complete) == baseline
+        assert library.warnings == baseline_warnings
+    edges, missing, warnings = graph_with_old_semantics(True)[0]
+    for owner in ("MissingParent", "Changed"):
+        assert any(w["code"] == "catalog_link_unknown" and w.get("object_id") == owner
+                   and w.get("reference", {}).get("reason") == "inheritance_incomplete" for w in warnings)
+    assert any(edge["from"]["object_id"] == "Foo" and edge.get("reference", {}).get("status") == "resolved"
+               for edge in edges)
+
+
+def test_owner_edges_warning_slice_and_public_inspect_isolation(tmp_path):
+    import sc2_mcp.catalog as catalog
+    library = catalog._Library(_reference_fixture(tmp_path))
+    library.warnings.extend({"code": "bulk_global", "n": index} for index in range(500))
+    before = deepcopy(library.warnings)
+    *_, appended = catalog._owner_edges(library, ("Effect", "MissingParent"), catalog._id_index(library), True,
+                                        include_warnings=True)
+    assert appended == [{"code": "missing_catalog_parent", "object_id": "MissingParent", "parent": "Absent"}]
+    assert library.warnings == before
+    result = library.inspect("Effect", "MissingParent")
+    result["warnings"][0]["mutated"] = True
+    result["warnings"].append({"code": "external"})
+    assert library.warnings == before

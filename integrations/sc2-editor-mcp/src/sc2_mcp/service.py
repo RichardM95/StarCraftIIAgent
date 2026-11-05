@@ -1,5 +1,6 @@
 """Application layer: project-scoped tools, transaction routing and evidence."""
 from __future__ import annotations
+from .measurement import timed, profiled
 
 import json
 import os
@@ -13,6 +14,7 @@ from pathlib import Path
 from . import __version__, archives, assets, catalog, data_warnings, dependencies, editor, localization, map_shell, script, spatial, terrain_capability
 from .errors import SC2Error
 from .jobs import Jobs
+from .progress import current
 from .reports import write_report
 from .projects import Projects
 from .storage import atomic_write, digest, file_lock, map_files, safe_path, snapshot, write_json
@@ -37,6 +39,7 @@ class Service:
 
     def capabilities(self):
         return {
+            'archive_backend': archives.backend_capabilities(),
             'name':'sc2-editor','version':__version__,'transport':'stdio','model_required':False,
             'state':str(self.state),'mouse_keyboard_control':False,
             'modules':{
@@ -145,13 +148,19 @@ class Service:
         report['source_context_id']=context['source_context_id']
         return [Path(p) for p in context['roots']],report
 
+    def _source_cache(self, record):
+        from .agent_bridge import WORKSPACE, runtime_base
+        base = runtime_base() if os.environ.get('SC2_AGENT_RUNTIME_ROOT') else WORKSPACE.with_name(WORKSPACE.name + '-data') / 'runtime'
+        return base / 'source-cache' / digest(str(Path(record['root']).resolve()).casefold().encode())
+
+    @timed('source_resolution')
     def _prepare_context(self,record,dependency_values=None,options=None,*,defer_final_check=False):
         from .source_context import prepare_source_context
         path=self.state/'source-selections'/(record['project_id']+'.json')
         selected=json.loads(path.read_text('utf-8')) if path.is_file() else {}
         if options is not None:selected=options
         return prepare_source_context(Path(record['root']),[Path(p) for p in record['search_roots']],
-            self.state/'source-cache',Path(selected['installation']) if selected.get('installation') else None,
+            self._source_cache(record),Path(selected['installation']) if selected.get('installation') else None,
             selected.get('locale','zhCN'),selected.get('product'),selected.get('branch'),dependency_values=dependency_values,
             official_cache=selected.get('official_cache'),_defer_final_check=defer_final_check)
 
@@ -239,7 +248,7 @@ class Service:
             self.source_context(project_id,context['source_context_id'])
             return result
         result=self.transactions.run(root,plan,label='candidate_import',validator=validate,preview_only=True,
-            backup_root=None)
+            backup_root=None,cancel=current.get())
         if result.get('change_id'):
             manifest=self.transactions.read(result['change_id'])
             manifest['source_context_id']=context['source_context_id']
@@ -368,12 +377,15 @@ class Service:
         if root not in roots: roots.append(root)
         return roots
 
+    @profiled
     def _validate_candidate(self,record,root,changes,domain):
         validation=validate_changes(root,changes,record['profile'],domain)
         if not any(rel in ('Objects','Regions','DocumentInfo') or rel.endswith('.galaxy') or
                    (rel.endswith('.xml') and '.sc2data/' in rel.casefold()) for rel in changes):
             return validation
         from .cross_validation import validate_references
+        from .progress import report
+        report('source_resolution')
         before_context=self._prepare_context(record)
         before=before_context['dependency_report']
         after=before
@@ -386,12 +398,25 @@ class Service:
         coverage = {side: {'complete': ctx['complete'], 'source_context_id': ctx['source_context_id'],
                            'missing': ctx['dependency_report']['missing']}
                     for side,ctx in [('before',before_context),('after',after_context)]}
-        report=validate_references(root,changes,context,self.state/'reference-checks',coverage=coverage)
+        from .reference_receipts import reference_validation
+        report=reference_validation(self.state, record, changes, before_context, after_context,
+            lambda:validate_references(root,changes,context,self.state/'reference-checks',coverage=coverage))
         if report['static'] == 'partial':
-            raise SC2Error('reference_dependencies_incomplete','引用待核实，请先补齐活动依赖',report=report)
+            raise SC2Error('reference_dependencies_incomplete','来源上下文未完整确认；请查看缺失项和身份诊断',report=report, diagnostics=before_context.get('unknown',[]))
         report['dependencies_complete']={'before':before_context['complete'],'after':after_context['complete']}
         report['source_context_id']={'before':before_context['source_context_id'],'after':after_context['source_context_id']}
         report['missing_dependencies']={'before':before['missing'],'after':after['missing']}
+        unresolved = report.get('unresolved', [])
+        if len(unresolved) > 200:
+            from .reference_receipts import canonical
+            name = digest(canonical(report)) + '.json'
+            destination = self.state/'reports'/name
+            expected = json.dumps(report,ensure_ascii=False,indent=2,allow_nan=False).encode('utf-8')
+            if not destination.is_file() or digest(destination.read_bytes()) != digest(expected):
+                write_report(destination,report)
+            report = {**report, 'unresolved': [], 'unresolved_count':len(unresolved),
+                      'unresolved_external':True,'report_name':name,
+                      'report_sha256':digest(destination.read_bytes())}
         validation['references']=report
         return validation
 
@@ -610,7 +635,7 @@ class Service:
             if self.editor_conflict():raise SC2Error('editor_started_during_plan','检查期间启动了编辑器，候选保持未提交')
             return result
         return self.transactions.run(root,plan,label='apply_'+manifest['label'],validator=validate,
-            candidate_id=change_id)
+            candidate_id=change_id,cancel=current.get())
 
     def validate(self,project_id,cancel=None):
         record,root=self.record(project_id)

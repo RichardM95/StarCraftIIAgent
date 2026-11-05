@@ -8,6 +8,7 @@ count alone. Actor event strings, binary M3 references and dynamic Galaxy remain
 outside this validator's proof boundary.
 """
 from __future__ import annotations
+from .measurement import timed, profiled
 
 import re
 import uuid
@@ -72,6 +73,7 @@ def _edge_key(edge):
             edge["to"]["catalog"], edge["to"]["object_id"])
 
 
+@timed('reference_graph')
 def _catalog_graph(session, complete=True):
     identifiers = [(kind, identifier) for kind in session.catalog_names() for identifier in session.object_ids(kind)]
     cycles = {}
@@ -299,7 +301,7 @@ def validate_references(root: Path, changes: dict[str, bytes | None], dependency
             else:redirected_roots.append(path)
         return redirected_roots
     before_session = CatalogSession(redirected(before_roots, before_stage))
-    after_session = CatalogSession(redirected(after_roots, after_stage))
+    after_session = CatalogSession(redirected(after_roots, after_stage), previous=before_session)
     before_missing, before_cycles, before_unknown, before_ids = _catalog_graph(before_session, coverage["before"]["complete"] if coverage else True)
     after_missing, after_cycles, after_unknown, after_ids = _catalog_graph(after_session, coverage["after"]["complete"] if coverage else True)
     new_missing = [edge for key, edge in after_missing.items() if key not in before_missing]

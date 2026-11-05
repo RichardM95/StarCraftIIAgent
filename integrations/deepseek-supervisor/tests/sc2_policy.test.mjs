@@ -5,7 +5,7 @@ import os from 'node:os';
 import path from 'node:path';
 import {apply} from '../plugins/sc2-worker-policy.mjs';
 
-async function fixture(body) {
+async function fixture(body, options = {}) {
   const base = fs.mkdtempSync(path.join(os.tmpdir(), 'sc2-worker-policy-'));
   const root = path.join(base, 'workspace');
   fs.mkdirSync(path.join(root, '.sc2-mcp'), {recursive: true});
@@ -18,7 +18,7 @@ async function fixture(body) {
   config.enhanced = true;
   fs.writeFileSync(config.contractPath, JSON.stringify({workspace: root, profile: 'sc2',
     allowed_files: ['.sc2-mcp/request.json', '.sc2-mcp/response.json', 'sample.SC2Map', 'MapInfo'], max_tool_calls: 20, goal: 'sc2 worker',
-    constraints: [], acceptance: 'preserve component bytes'}));
+    constraints: [], acceptance: 'preserve component bytes', ...options}));
   const agent = {id: 'task', ctx: {tools: {restrict() {}}}};
   apply({on(name, callback) {hooks.set(name, callback);}, tools: {guard(callback) {guard = callback;}},
     effect(callback) {dispose.push(callback());}}, config);
@@ -44,4 +44,13 @@ test('SC2 profile validates bridge requests and blocks cliff operations', async 
     assert.match(attempt('write', '.sc2-mcp/request.json', {content: cliff}), /blocked/);
     assert.match(attempt('write', '.sc2-mcp/response.json', {content: '{}'}), /Only/);
   });
+});
+
+
+test('existing GameStrings BOM is preserved rather than stripped', async () => {
+  await fixture(async ({attempt}) => {
+    assert.equal(attempt('write', 'GameStrings.txt', {content:'\ufeffA=B'}), undefined);
+    assert.match(attempt('write', 'GameStrings.txt', {content:'A=B'}), /encoding/);
+    assert.match(attempt('write', 'GameStrings.txt', {content:'\ufeffA=\u0000'}), /NUL/);
+  }, {allowed_files:['GameStrings.txt'], string_bom:{'GameStrings.txt':true}});
 });

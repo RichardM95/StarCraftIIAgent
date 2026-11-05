@@ -557,6 +557,7 @@ def test_extract_rejects_file_directory_prefix_collision_before_creating_destina
 
 
 def test_mpyq_constructor_failure_closes_input_stream(monkeypatch, tmp_path):
+    monkeypatch.setattr(archives, "_native_enabled", lambda: False)
     archive = _fake_mpq(tmp_path / 'test.SC2Map')
     streams = []
 
@@ -743,6 +744,7 @@ def test_hash_cancellation_stops_before_next_block_and_closes_stream(monkeypatch
 
 
 def test_export_member_write_cancellation_closes_native_archive_and_retains_staging(monkeypatch, tmp_path):
+    monkeypatch.setattr(archives, "_native_enabled", lambda: False)
     root = tmp_path / 'source'
     payloads = {'First': b'first', 'Second': b'second'}
     for name, data in payloads.items():

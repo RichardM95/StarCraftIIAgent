@@ -6,6 +6,7 @@ files are immutable candidates: every reuse verifies their complete inventory.
 ``complete`` describes source/metadata closure, not native engine equivalence.
 """
 from __future__ import annotations
+from .measurement import timed, profiled
 
 from contextlib import contextmanager
 import hashlib
@@ -22,14 +23,21 @@ from .catalog import _CATALOGS
 from .errors import SC2Error
 from .storage import file_lock, guard_absolute_path, map_files
 
-PARSER_VERSION = "source-context-3"
+PARSER_VERSION = "source-context-4"
 RULES_VERSION = "catalog-rules-1"
 
 
+@timed('hashing')
 def _hash_file(path: Path) -> str:
     guard_absolute_path(path)
     with path.open("rb") as stream:
-        return hashlib.file_digest(stream, "sha256").hexdigest()
+        from .progress import current
+        token = current.get()
+        hashed = hashlib.sha256()
+        while chunk := stream.read(1024*1024):
+            if token is not None and token.is_set(): raise SC2Error('cancelled','来源哈希检查已取消')
+            hashed.update(chunk)
+        return hashed.hexdigest()
 
 
 def _canonical(value) -> bytes:
@@ -70,6 +78,41 @@ def _find_install_component(relative: str, installation: Path | None) -> tuple[P
                 return candidate.resolve(), None
             return None, candidate.resolve()
     return None, None
+
+
+# Shipped components use these stems directly below Mods/, and campaign roots
+# live below Campaigns/. Only these names are recognizable official paths; any
+# other Mods/Maps Component is custom source by location, not an override claim.
+_OFFICIAL_COMPONENT_STEMS = frozenset(name.casefold() for name in (
+    "Core", "Liberty", "LibertyMulti", "LibertyCampaign", "Swarm", "SwarmMulti",
+    "SwarmCampaign", "Void", "VoidMulti", "VoidCampaign", "SwarmStoryUtil"))
+
+
+def _official_install_component(actual: Path, install: Path, published) -> str:
+    """Classify an editable Component under the installation, never certifying it.
+
+    component_fingerprint_only: custom source merely stored below the install;
+    official_install_component: a known official path still not bound to the
+    selected build; unrecognized: no store/name evidence in either direction.
+    MPQ archives never reach this function, so overrides are never evidence.
+    """
+    relative = actual.relative_to(install).as_posix()
+    stem = PurePosixPath(relative).name.rpartition(".")[0].casefold()
+    recognized = (stem in _OFFICIAL_COMPONENT_STEMS
+                  or bool(re.fullmatch(r"Campaigns/[^/]+\.SC2Campaign", relative, re.I)))
+    if published is not None:
+        try:
+            recognized = recognized or published.component(_relative(relative)) is not None
+        except SC2Error:
+            raise
+        except Exception as exc:
+            raise SC2Error("official_component_unrecognized", "官方缓存组件识别失败，保留来源为未验证",
+                           component=relative, reason=str(exc)) from exc
+    if recognized:
+        return "official_install_component"
+    if re.match(r"(?:Mods|Maps)/", relative, re.I):
+        return "component_fingerprint_only"
+    return "unrecognized"
 
 
 def _xml(raw: bytes, path: str) -> ET.Element:
@@ -376,6 +419,7 @@ def prepare_source_context(root: Path, search_roots: list[Path], cache_root: Pat
     else:
         unknown.append({"code": "client_build_not_selected"})
     nodes, edges, order, missing, cycles, incomplete = [], [], [], [], [], []
+    nodes_by_key = {}
     components, inventories, fingerprints = {}, {}, {}
     published = None
     if official_cache and not install:
@@ -545,13 +589,23 @@ def prepare_source_context(root: Path, search_roots: list[Path], cache_root: Pat
                 "dependencies": values, "resolved_dependencies": [], "metadata_source": str(metadata) if metadata else key + "!DocumentInfo",
                 "metadata_complete": metadata_complete, "cache_readonly": source_kind != "component"}
         node["build_identity"] = "selected_casc_build" if source_kind == "casc" else "component_fingerprint_only"
-        if actual and install and actual.is_relative_to(install):
+        if source_kind == "component" and install and actual.is_relative_to(install):
+            relative = actual.relative_to(install).as_posix()
+            node["build_identity"] = _official_install_component(actual, install, published)
+            node["install_relative"] = relative
+            if node["build_identity"] == "official_install_component":
+                unknown.append({"code": "installation_component_build_unverified", "path": str(actual), "relative": relative})
+            elif node["build_identity"] == "unrecognized":
+                unknown.append({"code": "installation_component_unrecognized", "path": str(actual), "relative": relative})
+        elif actual and install and actual.is_relative_to(install):
+            # An archive stored under the install, active or not, stays unverified.
             node["build_identity"] = "unknown_install_component"
             unknown.append({"code": "installation_component_build_unverified", "path": str(actual)})
         if source_kind == "official_cache":
             node["dependency_evidence"] = meta["dependency_evidence"]
             node["build_identity"] = "verified_official_cache"
         nodes.append(node)
+        nodes_by_key[key] = node
         for reference, declaration in zip(values, declarations, strict=True):
             parts = dependencies._reference_parts(reference)
             edge = {"from": key, "to": None, "reference": reference, "resolved": False, "declared_sources": parts,
@@ -570,8 +624,25 @@ def prepare_source_context(root: Path, search_roots: list[Path], cache_root: Pat
             else:
                 target_key = visit(target, casc_name, "dependency")
                 edge.update({"to": target_key, "resolved": target_key in components, "resolved_via": "file" if target else "official_cache" if published else "casc"})
+                # A Battle.net component that the client also stores locally is
+                # read from that local source; its bytes are fingerprinted but
+                # neither identity nor remote version equality is established.
+                local_node = nodes_by_key.get(target_key) or {}
+                local_component = (target is not None and target_key in components
+                                   and local_node.get("source_kind") == "component"
+                                   and local_node.get("metadata_complete") is True
+                                   and local_node.get("build_identity") == "component_fingerprint_only")
+                if local_component and "bnet" in parts:
+                    edge.update({"local_source_resolution": True, "remote_identity_verified": False})
                 if "bnet" in parts and not (published and casc_name and edge["resolved"]):
-                    unknown.append({"code":"battle_net_identity_not_verified","reference":reference,"requested_by":key})
+                    if local_component:
+                        warning = {"code": "local_source_bnet_identity_unverified",
+                                   "reference": reference, "requested_by": key,
+                                   "local_source": target_key, "remote_identity_verified": False}
+                        node.setdefault("local_source_warnings", []).append(warning)
+                        unknown.append(warning)
+                    else:
+                        unknown.append({"code":"battle_net_identity_not_verified","reference":reference,"requested_by":key})
                 if edge["resolved"]:
                     node["resolved_dependencies"].append(target_key)
                 else:
@@ -601,7 +672,7 @@ def prepare_source_context(root: Path, search_roots: list[Path], cache_root: Pat
                "branch": build["branch"] if build else branch, "build": build_info, **parser,
                "dependency_report": graph, "fingerprints": fingerprints, "inventories": inventories,
                "resolution_checks": resolution_checks, "proposed_dependencies": dependency_values,
-               "complete": graph["complete"] and not any(item["code"] in {"battle_net_identity_not_verified", "installation_component_build_unverified"} for item in unknown),
+               "complete": graph["complete"] and not any(item["code"] in {"battle_net_identity_not_verified", "installation_component_build_unverified", "installation_component_unrecognized"} for item in unknown),
                "unknown": unknown, "engine_parity": False}
     if published:
         context["official_cache"] = {"manifest":str(published.manifest_path),"identity":published.identity}

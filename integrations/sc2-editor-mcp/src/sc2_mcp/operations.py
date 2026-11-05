@@ -20,6 +20,15 @@ def create_operations(service):
             return fn
         return decorate
 
+    def wait_job(job):
+        import time
+        while job['state'] in {'queued','running','cancelling'}:
+            time.sleep(.1)
+            job = service.jobs.status(job['job_id'])
+        if job['state'] == 'completed': return job['result']
+        error = job.get('error', {})
+        raise SC2Error(error.get('code','interrupted'), error.get('message','任务中断'), job_id=job['job_id'])
+
     @register(True)
     def sc2_capabilities() -> dict:
         """返回真实支持范围、实验功能、未完成项、版本与验证层级。"""
@@ -593,9 +602,16 @@ def create_operations(service):
 
 
     @register(False)
-    def sc2_changes_prepare(project_id: str, patches: list[dict], source_context_id: str|None=None) -> dict:
+    def sc2_changes_prepare(project_id: str, patches: list[dict], source_context_id: str|None=None, background: bool=False, request_id: str|None=None) -> dict:
         """导入相对路径/基准及候选 SHA-256 明确的隔离补丁，仍由统一事务提交。"""
-        return service.prepare_changes(project_id,patches,source_context_id)
+        action = lambda cancel: service.prepare_changes(project_id,patches,source_context_id)
+        if background or request_id:
+            import uuid
+            job = service.jobs.submit_once('changes_prepare', request_id or uuid.uuid4().hex,
+                dict(project_id=project_id,patches=patches,source_context_id=source_context_id), action)
+            if background: return job
+            return wait_job(job)
+        return action(None)
 
 
     @register(False)
@@ -636,8 +652,11 @@ def create_operations(service):
 
 
     @register(False)
-    def sc2_changes_apply(project_id: str, change_id: str, experimental_write: bool=False) -> dict:
+    def sc2_changes_apply(project_id: str, change_id: str, experimental_write: bool=False, background: bool=False) -> dict:
         """重新校验并提交候选；地形仅独立测试图可显式experimental_write，正式图拒绝。"""
+        if background:
+            return service.jobs.submit_once('changes_apply', project_id+':'+change_id,
+                dict(experimental_write=experimental_write),lambda cancel:service.apply_candidate(project_id,change_id,experimental_write))
         return service.apply_candidate(project_id,change_id,experimental_write)
 
 

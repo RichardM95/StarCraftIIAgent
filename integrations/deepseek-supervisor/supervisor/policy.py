@@ -14,6 +14,12 @@ def make_policy(run_dir: Path, workspace: Path, *, goal: str, allowed_files: lis
     contract = {"workspace": str(workspace.resolve()), "goal": goal, "allowed_files": allowed_files,
                 "constraints": constraints or [], "acceptance": acceptance, "max_tool_calls": max_tool_calls,
                 "profile": profile}
+    contract['string_bom'] = {}
+    for name in allowed_files:
+        if name.endswith('GameStrings.txt'):
+            original = run_dir/'original'/name
+            source = original if original.is_file() else workspace/name
+            if source.is_file(): contract['string_bom'][name] = source.read_bytes().startswith(b'\xef\xbb\xbf')
     (run_dir / "contract.json").write_text(json.dumps(contract, ensure_ascii=False, indent=2), encoding="utf-8")
     plugin_copy = run_dir / "task-policy.mjs"
     if plugin is not None:

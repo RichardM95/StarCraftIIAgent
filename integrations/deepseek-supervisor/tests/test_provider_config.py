@@ -43,6 +43,24 @@ def test_inline_secret_is_refused(provider_config):
         provider_definition('local', 'local-one')
 
 
+def test_reasoning_off_is_a_string_key_and_boolean_values_stay_boolean(provider_config):
+    patch, _ = provider_config
+    patch.write_text('''- id: llm-pi-ai
+  config:
+    providers:
+      local:
+        models:
+          - id: local-one
+            reasoning: true
+            reasoningEfforts:
+              off: false
+              high: true
+''', encoding='utf-8')
+    model = provider_definition('local', 'local-one')['models'][0]
+    assert model['reasoning'] is True
+    assert model['reasoningEfforts'] == {'off': False, 'high': True}
+
+
 @pytest.mark.asyncio
 async def test_custom_model_does_not_inherit_official_reasoning_and_keeps_keys_out_of_tools(tmp_path, monkeypatch, provider_config):
     import supervisor.runtime as runtime

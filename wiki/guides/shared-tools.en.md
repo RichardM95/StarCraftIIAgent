@@ -102,4 +102,20 @@ The integration lock pins NumPy 2.5.4 and retains the original upstream lock as 
 
 The launcher uses the normal interpreter with `-E -S` and the selected environment's site-packages, preserving dependency isolation while avoiding Windows venv-redirector directory restrictions. CLI, MCP and the file bridge share this launcher.
 
-<!-- translation-source: wiki/guides/shared-tools.md; sha256: 8c593a379a879ec0dbb554402460fd5b2eac9d1b2fda3150eafc7ec29af112b9 -->
+<!-- translation-source: wiki/guides/shared-tools.md; sha256: e26b4ba42427f4e58963f90bfd3fe696c1343c8e404ec74e06ce7ad8b5e56764 -->
+
+## Long operations and source diagnostics
+
+Inspect current capabilities and the selected backend before concluding that a capability is unavailable. Windows MPQ operations use the bundled, hash-pinned StormLib child-process adapter. Format conversion remains available through `tools/sc2-archive.py`; external toolbox DLLs are not required.
+
+Distinguish missing local files, unverified official provenance and unverified Battle.net identity. A resolved combined local reference does not become a missing dependency because its remote identity is unverified. Source materialization uses per-project partitions outside source/search trees; project reports and transaction backups retain their existing locations. Historical records are not automatically migrated.
+
+Candidate preparation accepts `background=true` and a stable `request_id`; application accepts `background=true`. Synchronous calls remain compatible. Job status exposes the measured stage, processed/total objects, elapsed time and last progress timestamp. The CLI owns asynchronous work until completion; MCP clients poll the original job ID. Losing a client or owner process does not prove commitment.
+
+After an uncertain response, inspect the original candidate application, owner identity and source fingerprints. Resume that candidate only after confirming that the old process exited without committing. Repeated application of a committed candidate returns its existing record. Late cancellation does not imply rollback.
+
+Reference receipts bind complete source and candidate content, loading context and validator implementation. Application still checks structure, permissions, editor occupancy and fingerprints. Matching receipts reuse reference computation; invalid receipts cause recomputation or conflicts. Large unresolved-reference lists are external reports with hashes and an explicit `unresolved_external` flag.
+
+Progress updates report stage changes, measured counts, failures or actionable findings. Diagnose absent progress through job records; CPU activity is not evidence of completion or an ETA. Existing write authorization persists across routine polling.
+
+Project-specific runtime reports, performance measurements and acceptance records stay in local project data. The repository distributes general recovery rules and regression tests.

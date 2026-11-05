@@ -14,7 +14,16 @@ def configured_providers():
     path = Path(config.get('provider_config', Path.home() / '.dsh/profiles/desktop/cordis.patch.yml'))
     if not path.exists():
         return {}
-    rows = yaml.safe_load(path.read_text(encoding='utf-8-sig')) or []
+    class ProviderLoader(yaml.SafeLoader):
+        pass
+    ProviderLoader.yaml_implicit_resolvers = {
+        char: [(tag, pattern) for tag, pattern in rules
+               if tag != 'tag:yaml.org,2002:bool']
+        for char, rules in yaml.SafeLoader.yaml_implicit_resolvers.items()
+    }
+    ProviderLoader.add_implicit_resolver('tag:yaml.org,2002:bool',
+        re.compile(r'^(?:true|false|True|False|TRUE|FALSE)$'), list('tTfF'))
+    rows = yaml.load(path.read_text(encoding='utf-8-sig'), Loader=ProviderLoader) or []
     providers = {}
     for row in rows:
         if isinstance(row, dict) and row.get('id') == 'llm-pi-ai':

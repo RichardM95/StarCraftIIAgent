@@ -85,6 +85,10 @@ export function apply(ctx, config) {
     const session = exec.agent?.id ?? 'unknown';
     const count = (counts.get(session) ?? 0) + 1;
     counts.set(session, count);
+    if (count === Math.max(1, Math.ceil(contract.max_tool_calls * .8))) {
+      checkpoint.progress_warning = `${Math.max(0, contract.max_tool_calls-count)} tool calls remain; reserve calls for verification and final evidence.`;
+      audit({type:'progress.warning',session,reason:'tool-budget-near-limit',remaining:contract.max_tool_calls-count});
+    }
     let denial;
     let absolute;
     try {
@@ -119,9 +123,12 @@ export function apply(ctx, config) {
             if (bridgeError) throw new Error(bridgeError);
           }
           const content = typeof args.content === 'string' ? args.content : (typeof args.new === 'string' ? args.new : null);
-          if (content !== null && (relative.toLowerCase().endsWith('.galaxy') || relative.endsWith('GameStrings.txt'))
-              && (content.startsWith('\ufeff') || content.includes('\u0000'))) {
-            throw new Error('Galaxy/GameStrings must remain UTF-8 without BOM or NUL');
+          if (content !== null && (relative.toLowerCase().endsWith('.galaxy') || relative.endsWith('GameStrings.txt'))) {
+            const permitted = relative.endsWith('GameStrings.txt') && contract.string_bom?.[relative] === true;
+            if (content.includes('\u0000') || (content.startsWith('\ufeff') && !permitted)
+                || (exec.name === 'write' && relative.endsWith('GameStrings.txt') && content.startsWith('\ufeff') !== permitted)) {
+              throw new Error('Preserve the baseline UTF-8 encoding/BOM; NUL is forbidden');
+            }
           }
         }
       }
@@ -153,7 +160,9 @@ export function apply(ctx, config) {
           const relative = relativeTo(root, absolute);
           if (relative.toLowerCase().endsWith('.galaxy') || relative.endsWith('GameStrings.txt')) {
             const bytes = fs.readFileSync(absolute);
-            if (bytes.includes(0) || (bytes[0] === 0xef && bytes[1] === 0xbb && bytes[2] === 0xbf)) {
+            const hasBom = bytes[0] === 0xef && bytes[1] === 0xbb && bytes[2] === 0xbf;
+            const expectedBom = relative.endsWith('GameStrings.txt') && contract.string_bom?.[relative] === true;
+            if (bytes.includes(0) || hasBom !== expectedBom) {
               stopped.add(exec.agent?.id);
               checkpoint.sc2_violation = {path: relative, reason: 'post-write encoding guard detected BOM or NUL'};
               fs.writeFileSync(config.checkpointPath + '.tmp', JSON.stringify(checkpoint));
