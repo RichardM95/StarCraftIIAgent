@@ -1,0 +1,526 @@
+{
+  "locale": "zhCN",
+  "scope": "local declarations; reference only",
+  "cases": [
+    {
+      "package": "SCORE-Purifier.SC2Mod",
+      "catalog": "Button",
+      "id": "AdeptP",
+      "role": "招募",
+      "parent": null,
+      "source": "Base.SC2Data/GameData/ButtonData.xml",
+      "source_sha256": "8406b33275c250b6d112e400d9af6789300d7a1fc81c95b5faa7cdec452cb2d4",
+      "declaration": "<CButton id=\"AdeptP\">\n    <Icon value=\"Assets\\Textures\\btn-unit-collection-adept-collectoredition.dds\" />\n    <AlertIcon value=\"Assets\\Textures\\btn-unit-collection-adept-collectoredition.dds\" />\n    <EditorCategories value=\"Race:Protoss\" />\n    <HidesForSimpleText value=\"0\" />\n  </CButton>\n  ",
+      "name": "折跃<c val=\"#ColorAttackInfo\">使徒</c>",
+      "tooltip": "净化者远程特种单位。可以使用相位变换技能。<n/><n/><c val=\"#ColorAttackInfo\">可以对地和对空。</c>",
+      "editor_name": null,
+      "editor_prefix": "- Purifier",
+      "editor_suffix": "使徒",
+      "consumption": "local declarations and keys only; resolve inheritance and consuming fields in target before edits",
+      "localization_sources": [
+        {
+          "path": "zhCN.SC2Data/LocalizedData/GameStrings.txt",
+          "sha256": "d25bf6099c18ed676eb924fea3b997e2aadcde889a6a4d0522fd7160c58e2caf"
+        },
+        {
+          "path": "zhCN.SC2Data/LocalizedData/ObjectStrings.txt",
+          "sha256": "558b6585bffe37da63388698dda37e729d163c869012dcde2f8db7bfece70193"
+        }
+      ]
+    },
+    {
+      "package": "SCORE-Golden.SC2Mod",
+      "catalog": "Button",
+      "id": "ActivateStasisWardG",
+      "role": "主动技能",
+      "parent": null,
+      "source": "Base.SC2Data/GameData/ButtonData.xml",
+      "source_sha256": "231a86215a725a64099376a2c56e464583a856ad370fca69c18903dcdeaf1885",
+      "declaration": "<CButton id=\"ActivateStasisWardG\">\n    <Icon value=\"Assets\\Textures\\btn-ability-protoss-stasistrap.dds\" />\n    <AlertIcon value=\"Assets\\Textures\\btn-ability-protoss-stasistrap.dds\" />\n    <EditorCategories value=\"Race:Protoss\" />\n    <HidesForSimpleText value=\"0\" />\n  </CButton>\n  ",
+      "name": "<c val=\"#ColorAttackInfo\">静滞</c>",
+      "tooltip": "使附近的敌人陷入静滞状态，持续<d ref=\"Behavior,OracleStasisTrapTarget,Duration\"/>秒。被困住的单位无法被攻击或受技能影响。",
+      "editor_name": null,
+      "editor_prefix": "- Golden",
+      "editor_suffix": "先知",
+      "consumption": "local declarations and keys only; resolve inheritance and consuming fields in target before edits",
+      "localization_sources": [
+        {
+          "path": "zhCN.SC2Data/LocalizedData/GameStrings.txt",
+          "sha256": "c346ca1c2308460ae78c76504d811dacaecfbe3e1374573dc1890c938b7928cc"
+        },
+        {
+          "path": "zhCN.SC2Data/LocalizedData/ObjectStrings.txt",
+          "sha256": "d9519d7185a18da605ae20db3e01eb555039ab7869332b54a6e66cd84e73ef03"
+        }
+      ]
+    },
+    {
+      "package": "SCORE-Umojan.SC2Mod",
+      "catalog": "Button",
+      "id": "AD20U",
+      "role": "被动",
+      "parent": null,
+      "source": "Base.SC2Data/GameData/ButtonData.xml",
+      "source_sha256": "27058fd298446f3cc00cfd340f26ea1524ecfe339b4c2c78bc3fae12c7073d65",
+      "declaration": "<CButton id=\"AD20U\">\n    <Icon value=\"Assets\\Textures\\btn-techupgrade-terran-tomahawkpowercell.dds\" />\n    <AlertIcon value=\"Assets\\Textures\\btn-techupgrade-terran-tomahawkpowercell.dds\" />\n    <EditorCategories value=\"Race:Terran\" />\n    <HidesForSimpleText value=\"0\" />\n  </CButton>\n  ",
+      "name": "AD-20防御系统",
+      "tooltip": "<c val=\"#ColorAttackInfo\">战地屏卫</c>能够使用能量抵消伤害。",
+      "editor_name": null,
+      "editor_prefix": "- Umojan",
+      "editor_suffix": "医疗兵",
+      "consumption": "local declarations and keys only; resolve inheritance and consuming fields in target before edits",
+      "localization_sources": [
+        {
+          "path": "zhCN.SC2Data/LocalizedData/GameStrings.txt",
+          "sha256": "2e6851113f897ea282e3ea46bf152bfbf7dae5fef557adf92aa516526163f031"
+        },
+        {
+          "path": "zhCN.SC2Data/LocalizedData/ObjectStrings.txt",
+          "sha256": "1c307d68267a2e6d83558f76ae2ee3ecef84d0d67f3298bfbe832e08f020a159"
+        }
+      ]
+    },
+    {
+      "package": "SCORE-Moebius.SC2Mod",
+      "catalog": "Button",
+      "id": "AblativeScalesM",
+      "role": "升级",
+      "parent": null,
+      "source": "Base.SC2Data/GameData/ButtonData.xml",
+      "source_sha256": "7aab482f7c2cc63e21af268669d5186ead9eb6187679a855e1b1daaf687ad16d",
+      "declaration": "<CButton id=\"AblativeScalesM\">\n    <Icon value=\"Assets\\Textures\\btn-techupgrade-terran-kineticfoam.dds\" />\n    <AlertIcon value=\"Assets\\Textures\\btn-techupgrade-terran-kineticfoam.dds\" />\n    <EditorCategories value=\"Race:Terran\" />\n  </CButton>\n  ",
+      "name": "抗动能防护服",
+      "tooltip": "<c val=\"#ColorAttackInfo\">地狱重锤</c>的生命值提高<c val=\"#ColorAttackInfo\">25</c>点并拥有护盾。",
+      "editor_name": null,
+      "editor_prefix": "- Moebius",
+      "editor_suffix": "劫掠者",
+      "consumption": "local declarations and keys only; resolve inheritance and consuming fields in target before edits",
+      "localization_sources": [
+        {
+          "path": "zhCN.SC2Data/LocalizedData/GameStrings.txt",
+          "sha256": "108cfcfd9dd7d45decad48e3dd99d329a863867f538337da69efa621d4c8c2ad"
+        },
+        {
+          "path": "zhCN.SC2Data/LocalizedData/ObjectStrings.txt",
+          "sha256": "d2ed0f70bf67f99d37b89cfdb9f34a71f4f17d719736fb02ba307dc11760b2b5"
+        }
+      ]
+    },
+    {
+      "package": "SCORE-Purifier.SC2Mod",
+      "catalog": "Behavior",
+      "id": "ChargingBarrierP",
+      "role": "正面状态",
+      "parent": null,
+      "source": "Base.SC2Data/GameData/BehaviorData.xml",
+      "source_sha256": "4aeed8e6001c861f5bf88f0a96033b51541a314832618ad596dec7d28ff4a5e0",
+      "declaration": "<CBehaviorBuff id=\"ChargingBarrierP\">\n    <InfoIcon value=\"Assets\\Textures\\btn-ability-protoss-charge-colorP.dds\" />\n    <EditorCategories value=\"Race:Protoss,AbilityorEffectType:Units\" />\n    <Duration value=\"5\" />\n    <Modification>\n      <VitalMaxArray index=\"Shields\" value=\"25\" />\n    </Modification>\n  </CBehaviorBuff>\n  ",
+      "name": "拦截屏障",
+      "tooltip": "获得<c val=\"#ColorAttackInfo\">25</c>点护盾。",
+      "editor_name": null,
+      "editor_prefix": "- Purifier",
+      "editor_suffix": "狂热者",
+      "consumption": "local declarations and keys only; resolve inheritance and consuming fields in target before edits",
+      "localization_sources": [
+        {
+          "path": "zhCN.SC2Data/LocalizedData/GameStrings.txt",
+          "sha256": "d25bf6099c18ed676eb924fea3b997e2aadcde889a6a4d0522fd7160c58e2caf"
+        },
+        {
+          "path": "zhCN.SC2Data/LocalizedData/ObjectStrings.txt",
+          "sha256": "558b6585bffe37da63388698dda37e729d163c869012dcde2f8db7bfece70193"
+        }
+      ]
+    },
+    {
+      "package": "SCORE-Primal.SC2Mod",
+      "catalog": "Behavior",
+      "id": "CoopMurvarPukePuddleDisablePZ",
+      "role": "负面状态",
+      "parent": null,
+      "source": "Base.SC2Data/GameData/BehaviorData.xml",
+      "source_sha256": "3733d644bcb1a65276f1f98db0b639b123ec5f0db78e2ea80ee41180280ab212",
+      "declaration": "<CBehaviorBuff id=\"CoopMurvarPukePuddleDisablePZ\">\n    <Alignment value=\"Negative\" />\n    <InfoIcon value=\"Assets\\Textures\\btn-ability-zerg-slivan-disablingcloud.dds\" />\n    <EditorCategories value=\"Race:Zerg,AbilityorEffectType:Units\" />\n    <TimeScaleSource Value=\"Global\" />\n    <Duration value=\"0.625\" />\n    <Modification MoveSpeedMultiplier=\"0.5\">\n      <ModifyFlags index=\"DisableWeapons\" value=\"1\" />\n      <AbilClassDisableArray index=\"CAbilEffectInstant\" value=\"1\" />\n      <AbilClassDisableArray index=\"CAbilEffectTarget\" value=\"1\" />\n    </Modification>\n  </CBehaviorBuff>\n  ",
+      "name": "压制恶臭",
+      "tooltip": "移动速度降低<c val=\"#ColorAttackInfo\">50%</c>，并无法攻击与使用主动技能。",
+      "editor_name": null,
+      "editor_prefix": "- Primal",
+      "editor_suffix": "穆尔瓦",
+      "consumption": "local declarations and keys only; resolve inheritance and consuming fields in target before edits",
+      "localization_sources": [
+        {
+          "path": "zhCN.SC2Data/LocalizedData/GameStrings.txt",
+          "sha256": "07be72b302f136828725b2e5fc738d5cf1ac2839253da6bd1f190dc3c6ea23a1"
+        },
+        {
+          "path": "zhCN.SC2Data/LocalizedData/ObjectStrings.txt",
+          "sha256": "4897008975e12f548f97f6c64c1513b35c17c48fac743afed5efdd5c32401815"
+        }
+      ]
+    },
+    {
+      "package": "SCORE-Webby.SC2Mod",
+      "catalog": "Behavior",
+      "id": "DefilerPlagueW",
+      "role": "叠层状态",
+      "parent": null,
+      "source": "Base.SC2Data/GameData/BehaviorData.xml",
+      "source_sha256": "b54ddfae199a2188bfaade770a31a82ca5c2630e3989e5c4f65b83aa65bc2acd",
+      "declaration": "<CBehaviorBuff id=\"DefilerPlagueW\">\n    <Alignment value=\"Negative\" />\n    <InfoIcon value=\"Assets\\Textures\\btn-ability-zerg-defilerplague.dds\" />\n    <EditorCategories value=\"Race:Zerg,AbilityorEffectType:Units\" />\n    <Duration value=\"20\" />\n    <Period value=\"0.125\" />\n    <PeriodicEffect value=\"DefilerPlagueDamageW\" />\n    <Modification>\n      <ModifyFlags index=\"Reveal\" value=\"1\" />\n      <ModifyFlags index=\"Detected\" value=\"1\" />\n    </Modification>\n    <MaxStackCount value=\"999\" />\n  </CBehaviorBuff>\n  ",
+      "name": "死疫",
+      "tooltip": "该单位或建筑已暴露，其生命值正在不断耗尽。",
+      "editor_name": null,
+      "editor_prefix": "- Webby",
+      "editor_suffix": "蝎虫",
+      "consumption": "local declarations and keys only; resolve inheritance and consuming fields in target before edits",
+      "localization_sources": [
+        {
+          "path": "zhCN.SC2Data/LocalizedData/GameStrings.txt",
+          "sha256": "cc31fe02e9dff09b5bbd4365411fdc13b587fc3933f4e1ea24ea4ba4fdc99c9b"
+        },
+        {
+          "path": "zhCN.SC2Data/LocalizedData/ObjectStrings.txt",
+          "sha256": "2fd7c506f25c09ffee52cae8a342b20b3cb9f3762349a39c697bdd9289748c24"
+        }
+      ]
+    },
+    {
+      "package": "SCORE-Ihanrii.SC2Mod",
+      "catalog": "Behavior",
+      "id": "AdeptDeathCheckI",
+      "role": "内部辅助对象",
+      "parent": null,
+      "source": "Base.SC2Data/GameData/BehaviorData.xml",
+      "source_sha256": "54f4c67debcfd07ee6f6a23c15af340414f4e672f2899113eca9208576ea8946",
+      "declaration": "<CBehaviorBuff id=\"AdeptDeathCheckI\">\n    <InfoIcon value=\"BTN\\btn-upgrade-protoss-resonatingglaivesI.dds\" />\n    <EditorCategories value=\"Race:Protoss,AbilityorEffectType:Units\" />\n    <Duration value=\"10\" />\n    <Modification>\n      <DeathResponse Chance=\"1\" Effect=\"UpgradeDeathCPI\" />\n    </Modification>\n    <MaxStackCount value=\"999\" />\n    <InfoFlags index=\"Hidden\" value=\"1\" />\n    <BuffFlags index=\"RefreshStack\" value=\"1\" />\n  </CBehaviorBuff>\n  ",
+      "name": null,
+      "tooltip": null,
+      "editor_name": "虚空之刃",
+      "editor_prefix": "- Ihanrii",
+      "editor_suffix": "使徒",
+      "consumption": "local declarations and keys only; resolve inheritance and consuming fields in target before edits",
+      "localization_sources": [
+        {
+          "path": "zhCN.SC2Data/LocalizedData/GameStrings.txt",
+          "sha256": "63ed2fe84dfa49046628ea247f084aaec6559cff089e3f1ac41c4a2087f972a7"
+        },
+        {
+          "path": "zhCN.SC2Data/LocalizedData/ObjectStrings.txt",
+          "sha256": "549db883574590f3223b0f26cbe0416999cf05b864cda69cacca98b1ccbec0a3"
+        }
+      ]
+    },
+    {
+      "package": "SCORE-Other.SC2Mod",
+      "catalog": "Button",
+      "id": "LoadNearbyO",
+      "role": "待核对文本",
+      "parent": null,
+      "source": "Base.SC2Data/GameData/ButtonData.xml",
+      "source_sha256": "c1db383ea091ada1a73786a85196c4357e4c7e1c9ceea2f284a3d7c4baca4d8c",
+      "declaration": "<CButton id=\"LoadNearbyO\">\n    <Icon value=\"Assets\\Textures\\btn-techupgrade-terran-expandedhull.dds\" />\n    <AlertIcon value=\"Assets\\Textures\\btn-techupgrade-terran-expandedhull.dds\" />\n    <EditorCategories value=\"Race:Terran\" />\n    <TintRacially value=\"1\" />\n    <Universal value=\"1\" />\n    <HidesForSimpleText value=\"0\" />\n  </CButton>\n  ",
+      "name": "装载附近单位",
+      "tooltip": "将单位装载进。",
+      "editor_name": null,
+      "editor_prefix": "- Other",
+      "editor_suffix": null,
+      "consumption": "local declarations and keys only; resolve inheritance and consuming fields in target before edits",
+      "localization_sources": [
+        {
+          "path": "zhCN.SC2Data/LocalizedData/GameStrings.txt",
+          "sha256": "338475281445f787d90f5a35bb5567d42665f034195bd4c818f9e4fe8fce0d0c"
+        },
+        {
+          "path": "zhCN.SC2Data/LocalizedData/ObjectStrings.txt",
+          "sha256": "a2c0a60437f7a81313cc7279d25f094f087a7e382dcabb903294601ec57cdd38"
+        }
+      ]
+    },
+    {
+      "package": "SCORE-Other.SC2Mod",
+      "catalog": "Behavior",
+      "id": "NetEaseShieldO",
+      "role": "待核对文本",
+      "parent": null,
+      "source": "Base.SC2Data/GameData/GameData/BehaviorData.xml",
+      "source_sha256": "1b5a4e8cbe07a8c79cc783ea8c60df9bbc55a7acbf6190e8191a40cf6ecc416a",
+      "declaration": "<CBehaviorBuff id=\"NetEaseShieldO\">\n    <InfoIcon value=\"Assets\\Textures\\btn-NetEase.dds\" />\n    <EditorCategories value=\"Race:Protoss,AbilityorEffectType:Units\" />\n    <DamageResponse ClampMinimum=\"163\">\n      <Chance value=\"1\" />\n    </DamageResponse>\n  </CBehaviorBuff>\n  ",
+      "name": "冈易护盾",
+      "tooltip": "该单位受到的所有伤害不会低于<c val=\"#ColorAttackInfo\">163</c>点。",
+      "editor_name": null,
+      "editor_prefix": "- Other",
+      "editor_suffix": null,
+      "consumption": "local declarations and keys only; resolve inheritance and consuming fields in target before edits",
+      "localization_sources": [
+        {
+          "path": "zhCN.SC2Data/LocalizedData/GameStrings.txt",
+          "sha256": "338475281445f787d90f5a35bb5567d42665f034195bd4c818f9e4fe8fce0d0c"
+        },
+        {
+          "path": "zhCN.SC2Data/LocalizedData/ObjectStrings.txt",
+          "sha256": "a2c0a60437f7a81313cc7279d25f094f087a7e382dcabb903294601ec57cdd38"
+        }
+      ]
+    },
+    {
+      "package": "SCORE-CovertOps.SC2Mod",
+      "catalog": "Button",
+      "id": "ATSArtilleryCGL",
+      "role": "来源包命名对照",
+      "parent": null,
+      "source": "Base.SC2Data/GameData/ButtonData.xml",
+      "source_sha256": "08bb7b3b0d515c7f99ebe969f01e8ca2fb769982667914a1f70e5e8fd472d5ae",
+      "declaration": "<CButton id=\"ATSArtilleryCGL\">\n    <Icon value=\"Assets\\Textures\\btn-ability-terran-bombardmentstrike-color.dds\" />\n    <AlertIcon value=\"Assets\\Textures\\btn-ability-terran-bombardmentstrike-color.dds\" />\n    <EditorCategories value=\"Race:Terran\" />\n    <HidesForSimpleText value=\"0\" />\n  </CButton>\n  ",
+      "name": "左舷火炮阵列",
+      "tooltip": "能够对<c val=\"#ColorAttackInfo\">左侧90度</c>，<c val=\"#ColorAttackInfo\">20</c>范围内的敌方单位造成<c val=\"#ColorAttackInfo\">6</c>x<c val=\"#ColorAttackInfo\">40</c>点范围伤害。<n/><n/><c val=\"#ColorAttackInfo\">可以对地。</c>",
+      "editor_name": null,
+      "editor_prefix": "- CovertOps",
+      "editor_suffix": "战列巡航舰 戈尔贡",
+      "consumption": "local declarations and keys only; resolve inheritance and consuming fields in target before edits",
+      "localization_sources": [
+        {
+          "path": "zhCN.SC2Data/LocalizedData/GameStrings.txt",
+          "sha256": "01a60872db3b319f6fa6b47a845a8befe31fce3a229606101521cccc17bd4eee"
+        },
+        {
+          "path": "zhCN.SC2Data/LocalizedData/ObjectStrings.txt",
+          "sha256": "4f0e048ed06fb1eeb56e400bd2244a3629e5553e1b986ca48393047bca552309"
+        }
+      ]
+    },
+    {
+      "package": "SCORE-Golden.SC2Mod",
+      "catalog": "Button",
+      "id": "AWrpGA",
+      "role": "来源包命名对照",
+      "parent": null,
+      "source": "Base.SC2Data/GameData/ButtonData.xml",
+      "source_sha256": "231a86215a725a64099376a2c56e464583a856ad370fca69c18903dcdeaf1885",
+      "declaration": "<CButton id=\"AWrpGA\">\n    <Icon value=\"Assets\\Textures\\btn-unit-protoss-archon-upgraded.dds\" />\n    <AlertIcon value=\"Assets\\Textures\\btn-unit-protoss-archon-upgraded.dds\" />\n    <EditorCategories value=\"Race:Protoss\" />\n    <Universal value=\"1\" />\n    <HidesForSimpleText value=\"0\" />\n  </CButton>\n  ",
+      "name": "<c val=\"#ColorAttackInfo\">新星执政官</c>融合",
+      "tooltip": "两名<c val=\"#ColorAttackInfo\">宗师圣堂武士</c>牺牲自身，融合为一名<c val=\"#ColorAttackInfo\">新星执政官</c>。<n/><n/><c val=\"ffff8a\">可以对地和对空。</c>",
+      "editor_name": null,
+      "editor_prefix": "- Golden",
+      "editor_suffix": "高阶圣堂武士 执政官",
+      "consumption": "local declarations and keys only; resolve inheritance and consuming fields in target before edits",
+      "localization_sources": [
+        {
+          "path": "zhCN.SC2Data/LocalizedData/GameStrings.txt",
+          "sha256": "c346ca1c2308460ae78c76504d811dacaecfbe3e1374573dc1890c938b7928cc"
+        },
+        {
+          "path": "zhCN.SC2Data/LocalizedData/ObjectStrings.txt",
+          "sha256": "d9519d7185a18da605ae20db3e01eb555039ab7869332b54a6e66cd84e73ef03"
+        }
+      ]
+    },
+    {
+      "package": "SCORE-Ihanrii.SC2Mod",
+      "catalog": "Button",
+      "id": "AWrpI",
+      "role": "来源包命名对照",
+      "parent": null,
+      "source": "Base.SC2Data/GameData/ButtonData.xml",
+      "source_sha256": "6a529e5935829aa267ed7ec62a7f44c47e86d8eeeb0ce02e8be4854befb8caaf",
+      "declaration": "<CButton id=\"AWrpI\">\n    <Icon value=\"Assets\\Textures\\btn-unit-protoss-archon-ihanrii.dds\" />\n    <AlertIcon value=\"Assets\\Textures\\btn-unit-protoss-archon-ihanrii.dds\" />\n    <EditorCategories value=\"Race:Protoss\" />\n    <Universal value=\"1\" />\n    <HidesForSimpleText value=\"0\" />\n  </CButton>\n  ",
+      "name": "执政官融合",
+      "tooltip": "两名<c val=\"#ColorAttackInfo\">宣教士</c>牺牲自身，融合为一名<c val=\"#ColorAttackInfo\">星界执政官</c>。<n/><n/><c val=\"ffff8a\">可以对地和对空。</c>",
+      "editor_name": null,
+      "editor_prefix": "- Ihanrii",
+      "editor_suffix": "执政官",
+      "consumption": "local declarations and keys only; resolve inheritance and consuming fields in target before edits",
+      "localization_sources": [
+        {
+          "path": "zhCN.SC2Data/LocalizedData/GameStrings.txt",
+          "sha256": "63ed2fe84dfa49046628ea247f084aaec6559cff089e3f1ac41c4a2087f972a7"
+        },
+        {
+          "path": "zhCN.SC2Data/LocalizedData/ObjectStrings.txt",
+          "sha256": "549db883574590f3223b0f26cbe0416999cf05b864cda69cacca98b1ccbec0a3"
+        }
+      ]
+    },
+    {
+      "package": "SCORE-Moebius.SC2Mod",
+      "catalog": "Button",
+      "id": "ArmorpiercingModeM",
+      "role": "来源包命名对照",
+      "parent": null,
+      "source": "Base.SC2Data/GameData/ButtonData.xml",
+      "source_sha256": "7aab482f7c2cc63e21af268669d5186ead9eb6187679a855e1b1daaf687ad16d",
+      "declaration": "<CButton id=\"ArmorpiercingModeM\">\n    <Icon value=\"BTN\\btn-unit-collection-thormorph-covertopsM.dds\" />\n    <AlertIcon value=\"BTN\\btn-unit-collection-thormorph-covertopsM.dds\" />\n    <EditorCategories value=\"Race:Terran\" />\n    <HotkeySet value=\"ThorModesM\" />\n    <Universal value=\"1\" />\n  </CButton>\n  ",
+      "name": "炮火覆盖",
+      "tooltip": "激活<c val=\"#ColorAttackInfo\">洛基MK.II</c>的四联根除者火炮，使其能够对目标区域中的敌方单位造成大量伤害。此模式下<c val=\"#ColorAttackInfo\">洛基MK.II</c>无法移动。",
+      "editor_name": null,
+      "editor_prefix": "- Moebius",
+      "editor_suffix": "雷神",
+      "consumption": "local declarations and keys only; resolve inheritance and consuming fields in target before edits",
+      "localization_sources": [
+        {
+          "path": "zhCN.SC2Data/LocalizedData/GameStrings.txt",
+          "sha256": "108cfcfd9dd7d45decad48e3dd99d329a863867f538337da69efa621d4c8c2ad"
+        },
+        {
+          "path": "zhCN.SC2Data/LocalizedData/ObjectStrings.txt",
+          "sha256": "d2ed0f70bf67f99d37b89cfdb9f34a71f4f17d719736fb02ba307dc11760b2b5"
+        }
+      ]
+    },
+    {
+      "package": "SCORE-Other.SC2Mod",
+      "catalog": "Button",
+      "id": "LoadNearbyO",
+      "role": "来源包命名对照",
+      "parent": null,
+      "source": "Base.SC2Data/GameData/ButtonData.xml",
+      "source_sha256": "c1db383ea091ada1a73786a85196c4357e4c7e1c9ceea2f284a3d7c4baca4d8c",
+      "declaration": "<CButton id=\"LoadNearbyO\">\n    <Icon value=\"Assets\\Textures\\btn-techupgrade-terran-expandedhull.dds\" />\n    <AlertIcon value=\"Assets\\Textures\\btn-techupgrade-terran-expandedhull.dds\" />\n    <EditorCategories value=\"Race:Terran\" />\n    <TintRacially value=\"1\" />\n    <Universal value=\"1\" />\n    <HidesForSimpleText value=\"0\" />\n  </CButton>\n  ",
+      "name": "装载附近单位",
+      "tooltip": "将单位装载进。",
+      "editor_name": null,
+      "editor_prefix": "- Other",
+      "editor_suffix": null,
+      "consumption": "local declarations and keys only; resolve inheritance and consuming fields in target before edits",
+      "localization_sources": [
+        {
+          "path": "zhCN.SC2Data/LocalizedData/GameStrings.txt",
+          "sha256": "338475281445f787d90f5a35bb5567d42665f034195bd4c818f9e4fe8fce0d0c"
+        },
+        {
+          "path": "zhCN.SC2Data/LocalizedData/ObjectStrings.txt",
+          "sha256": "a2c0a60437f7a81313cc7279d25f094f087a7e382dcabb903294601ec57cdd38"
+        }
+      ]
+    },
+    {
+      "package": "SCORE-Primal.SC2Mod",
+      "catalog": "Button",
+      "id": "AutomatedExtractorPZ",
+      "role": "来源包命名对照",
+      "parent": null,
+      "source": "Base.SC2Data/GameData/ButtonData.xml",
+      "source_sha256": "0547bf36da96a7eacfc51f2c859c8acaf49a27b37594b9f466791ccf9abe277f",
+      "declaration": "<CButton id=\"AutomatedExtractorPZ\">\n    <Icon value=\"Assets\\Textures\\btn-building-dehaka-extractor.dds\" />\n    <AlertIcon value=\"Assets\\Textures\\btn-building-dehaka-extractor.dds\" />\n    <Hotkey value=\"Button/Hotkey/Extractor\" />\n    <EditorCategories value=\"Race:Zerg\" />\n    <HotkeyAlias value=\"ExtractorPZ\" />\n    <HidesForSimpleText value=\"0\" />\n  </CButton>\n  ",
+      "name": "产下<c val=\"#ColorAttackInfo\">原始萃取房</c>",
+      "tooltip": "建造在瓦斯气泉上，用于自动采集高能瓦斯。",
+      "editor_name": null,
+      "editor_prefix": "- Primal",
+      "editor_suffix": "萃取房 自动",
+      "consumption": "local declarations and keys only; resolve inheritance and consuming fields in target before edits",
+      "localization_sources": [
+        {
+          "path": "zhCN.SC2Data/LocalizedData/GameStrings.txt",
+          "sha256": "07be72b302f136828725b2e5fc738d5cf1ac2839253da6bd1f190dc3c6ea23a1"
+        },
+        {
+          "path": "zhCN.SC2Data/LocalizedData/ObjectStrings.txt",
+          "sha256": "4897008975e12f548f97f6c64c1513b35c17c48fac743afed5efdd5c32401815"
+        }
+      ]
+    },
+    {
+      "package": "SCORE-Purifier.SC2Mod",
+      "catalog": "Button",
+      "id": "AdeptP",
+      "role": "来源包命名对照",
+      "parent": null,
+      "source": "Base.SC2Data/GameData/ButtonData.xml",
+      "source_sha256": "8406b33275c250b6d112e400d9af6789300d7a1fc81c95b5faa7cdec452cb2d4",
+      "declaration": "<CButton id=\"AdeptP\">\n    <Icon value=\"Assets\\Textures\\btn-unit-collection-adept-collectoredition.dds\" />\n    <AlertIcon value=\"Assets\\Textures\\btn-unit-collection-adept-collectoredition.dds\" />\n    <EditorCategories value=\"Race:Protoss\" />\n    <HidesForSimpleText value=\"0\" />\n  </CButton>\n  ",
+      "name": "折跃<c val=\"#ColorAttackInfo\">使徒</c>",
+      "tooltip": "净化者远程特种单位。可以使用相位变换技能。<n/><n/><c val=\"#ColorAttackInfo\">可以对地和对空。</c>",
+      "editor_name": null,
+      "editor_prefix": "- Purifier",
+      "editor_suffix": "使徒",
+      "consumption": "local declarations and keys only; resolve inheritance and consuming fields in target before edits",
+      "localization_sources": [
+        {
+          "path": "zhCN.SC2Data/LocalizedData/GameStrings.txt",
+          "sha256": "d25bf6099c18ed676eb924fea3b997e2aadcde889a6a4d0522fd7160c58e2caf"
+        },
+        {
+          "path": "zhCN.SC2Data/LocalizedData/ObjectStrings.txt",
+          "sha256": "558b6585bffe37da63388698dda37e729d163c869012dcde2f8db7bfece70193"
+        }
+      ]
+    },
+    {
+      "package": "SCORE-Taldarim.SC2Mod",
+      "catalog": "Button",
+      "id": "ByTheBloodD0",
+      "role": "来源包命名对照",
+      "parent": null,
+      "source": "Base.SC2Data/GameData/ButtonData.xml",
+      "source_sha256": "de916655500d4068ce3882f22694729f6abfea13baf7da33d621eec95415144a",
+      "declaration": "<CButton id=\"ByTheBloodD0\">\n    <Icon value=\"Assets\\Textures\\btn-upgrade-protoss-alarak-rangeweapon.dds\" />\n    <AlertIcon value=\"Assets\\Textures\\btn-upgrade-protoss-alarak-rangeweapon.dds\" />\n    <EditorCategories value=\"Race:Protoss\" />\n    <HidesForSimpleText value=\"0\" />\n  </CButton>\n  ",
+      "name": "以血之名",
+      "tooltip": "受到致命伤害时将在<c val=\"#ColorAttackInfo\">0.5</c>秒内免疫大量伤害，持续时间结束后死亡。",
+      "editor_name": null,
+      "editor_prefix": "- Taldarim",
+      "editor_suffix": "0 塔达林",
+      "consumption": "local declarations and keys only; resolve inheritance and consuming fields in target before edits",
+      "localization_sources": [
+        {
+          "path": "zhCN.SC2Data/LocalizedData/GameStrings.txt",
+          "sha256": "e37c7ca440d665d34dadbd4498018a92fabe781e89f69656106a581e82fa1156"
+        },
+        {
+          "path": "zhCN.SC2Data/LocalizedData/ObjectStrings.txt",
+          "sha256": "99bb96123958e88096075583710aceacd5b2acfe4cc233d339f7d01bd4aa1fed"
+        }
+      ]
+    },
+    {
+      "package": "SCORE-Umojan.SC2Mod",
+      "catalog": "Button",
+      "id": "AD20U2",
+      "role": "来源包命名对照",
+      "parent": null,
+      "source": "Base.SC2Data/GameData/ButtonData.xml",
+      "source_sha256": "27058fd298446f3cc00cfd340f26ea1524ecfe339b4c2c78bc3fae12c7073d65",
+      "declaration": "<CButton id=\"AD20U2\">\n    <Icon value=\"Assets\\Textures\\btn-upgrade-terran-caduceusreactor.dds\" />\n    <AlertIcon value=\"Assets\\Textures\\btn-upgrade-terran-caduceusreactor.dds\" />\n    <EditorCategories value=\"Race:Terran\" />\n    <HidesForSimpleText value=\"0\" />\n  </CButton>\n  ",
+      "name": "卡度休斯反应堆",
+      "tooltip": "<c val=\"#ColorAttackInfo\">战地屏卫</c>能量恢复速度增加，初始能量提升至最大。",
+      "editor_name": null,
+      "editor_prefix": "- Umojan",
+      "editor_suffix": "医疗兵",
+      "consumption": "local declarations and keys only; resolve inheritance and consuming fields in target before edits",
+      "localization_sources": [
+        {
+          "path": "zhCN.SC2Data/LocalizedData/GameStrings.txt",
+          "sha256": "2e6851113f897ea282e3ea46bf152bfbf7dae5fef557adf92aa516526163f031"
+        },
+        {
+          "path": "zhCN.SC2Data/LocalizedData/ObjectStrings.txt",
+          "sha256": "1c307d68267a2e6d83558f76ae2ee3ecef84d0d67f3298bfbe832e08f020a159"
+        }
+      ]
+    },
+    {
+      "package": "SCORE-Webby.SC2Mod",
+      "catalog": "Button",
+      "id": "AbominationShieldCapacitorW",
+      "role": "来源包命名对照",
+      "parent": null,
+      "source": "Base.SC2Data/GameData/ButtonData.xml",
+      "source_sha256": "789c1e561ec0daf512c4870b7268edf996389700943b809a66677c75d5877029",
+      "declaration": "<CButton id=\"AbominationShieldCapacitorW\">\n    <Icon value=\"Assets\\Textures\\btn-upgrade-zerg-adaptivecarapaceW.dds\" />\n    <AlertIcon value=\"Assets\\Textures\\btn-upgrade-zerg-adaptivecarapaceW.dds\" />\n    <EditorCategories value=\"Race:Zerg\" />\n    <HidesForSimpleText value=\"0\" />\n  </CButton>\n  ",
+      "name": "再生甲壳",
+      "tooltip": "在<c val=\"#ColorAttackInfo\">2</c>秒内为<c val=\"#ColorAttackInfo\">恶性畸变体</c>恢复<c val=\"#ColorAttackInfo\">200%</c>的护盾。",
+      "editor_name": null,
+      "editor_prefix": "- Webby",
+      "editor_suffix": "畸变体",
+      "consumption": "local declarations and keys only; resolve inheritance and consuming fields in target before edits",
+      "localization_sources": [
+        {
+          "path": "zhCN.SC2Data/LocalizedData/GameStrings.txt",
+          "sha256": "cc31fe02e9dff09b5bbd4365411fdc13b587fc3933f4e1ea24ea4ba4fdc99c9b"
+        },
+        {
+          "path": "zhCN.SC2Data/LocalizedData/ObjectStrings.txt",
+          "sha256": "2fd7c506f25c09ffee52cae8a342b20b3cb9f3762349a39c697bdd9289748c24"
+        }
+      ]
+    }
+  ]
+}

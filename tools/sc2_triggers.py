@@ -368,8 +368,8 @@ def validate_call(element: ET.Element, key: tuple, d: Document, resolve) -> list
     allowed = [ref_key(e, ref_key(definition_ref, key)) for e in definition.findall("SubFunctionType")]
     for c in element.findall("FunctionCall"):
         cd, child = resolve(ref_key(c, key), d)
-        subtype = child.find("SubFunctionType")
-        if subtype is None or ref_key(subtype, ref_key(c, key)) not in allowed:
+        subtypes = child.findall("SubFunctionType")
+        if len(subtypes) != 1 or ref_key(subtypes[0], ref_key(c, key)) not in allowed:
             problems.append(f"child {c.get('Id')} has an invalid SubFunctionType")
     return problems
 

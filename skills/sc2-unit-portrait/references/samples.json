@@ -1,0 +1,155 @@
+{
+  "source": "user-provided SCORE; individual authors unverified",
+  "samples": [
+    {
+      "mod": "SCORE-CovertOps.SC2Mod",
+      "id": "FirebatPortraitC",
+      "sha256": "eda2cbecd46846bd516d0fe2e582b0c5f74e349a42390d9334510e412cb9a676",
+      "source_relative_path": "Assets/Textures/BlackOpsFirebatPortrait_Static.dds",
+      "image": "samples/CovertOps-FirebatPortraitC.png",
+      "png_sha256": "cc22bffeb9e841ff4c5ee0b7e8ec051500e76114f242647650b81dbc912c8f9a",
+      "model_source": "Base.SC2Data/GameData/ModelData.xml",
+      "model_source_sha256": "54d16aebab5b3efc1d9e9695c069668cfe0d770f2f81a219d47c5495e9a3df6d"
+    },
+    {
+      "mod": "SCORE-CovertOps.SC2Mod",
+      "id": "MedicPortraitC",
+      "sha256": "f942e62b84ef6a35453bb79a4b7f6dacc6ea18ee3fa3ca448e82b2a874af0e65",
+      "source_relative_path": "Assets/Textures/medicportrait_alternate_static.dds",
+      "image": "samples/CovertOps-MedicPortraitC.png",
+      "png_sha256": "cdbe519684bf39d88c2fb4d944cbce50ffe87560f7e4cd5fbef90b60c1740de9",
+      "model_source": "Base.SC2Data/GameData/ModelData.xml",
+      "model_source_sha256": "54d16aebab5b3efc1d9e9695c069668cfe0d770f2f81a219d47c5495e9a3df6d"
+    },
+    {
+      "mod": "SCORE-Golden.SC2Mod",
+      "id": "NexusPortraitG",
+      "sha256": "561dc5fb1af5047501201401c6718b649dee876c82c379ece39bb842f41113d2",
+      "source_relative_path": "Assets/Textures/Executor_Golden_DS_Portrait_New_Static.dds",
+      "image": "samples/Golden-NexusPortraitG.png",
+      "png_sha256": "fc1071cbf9c0b48f68e7c6a86fd4fbae1290de9ca9f69db0d3bb19ffdcaa5de0",
+      "model_source": "Base.SC2Data/GameData/ModelData.xml",
+      "model_source_sha256": "be9794a0478261d910f09f6104027be971f6c89d451e18363f825b4088b99f53"
+    },
+    {
+      "mod": "SCORE-Ihanrii.SC2Mod",
+      "id": "ArbiterPortraitI",
+      "sha256": "7adcd540589505122a342d6fd509f771e0aaeebcf96672f281941fb2ac5c2014",
+      "source_relative_path": "Assets/Textures/Arbiter_IhanRii_Portrait_Static.dds",
+      "image": "samples/Ihanrii-ArbiterPortraitI.png",
+      "png_sha256": "d9859f8569bd486d74acf05461079d398d8a900b786231497b4936fe525e697b",
+      "model_source": "Base.SC2Data/GameData/ModelData.xml",
+      "model_source_sha256": "52eb6f41ab7510e64e7235ec573c59c0fe988a176e6007d0bea6d18d28a8709a"
+    },
+    {
+      "mod": "SCORE-Ihanrii.SC2Mod",
+      "id": "DragoonPortraitI",
+      "sha256": "b3df1c840bba7a082f6ce6c04398fef78844246ee5e99e986a5c71786d67972c",
+      "source_relative_path": "Assets/Textures/Dragoon_IhanRii_Portrait_Static.dds",
+      "image": "samples/Ihanrii-DragoonPortraitI.png",
+      "png_sha256": "e5101213740a1dd9e8bedc130dd5920852ed5cb9dda8a0bd61cf4be0f9dd4a87",
+      "model_source": "Base.SC2Data/GameData/ModelData.xml",
+      "model_source_sha256": "52eb6f41ab7510e64e7235ec573c59c0fe988a176e6007d0bea6d18d28a8709a"
+    },
+    {
+      "mod": "SCORE-Moebius.SC2Mod",
+      "id": "BattlecruiserPortraitM",
+      "sha256": "2a6f03e035ca8a14fd07459e117e42894da04a28131cbbd5a4b223d48a49d860",
+      "source_relative_path": "Assets/Textures/MoebiusCorpsBattleCruiserPortrait_Static.dds",
+      "image": "samples/Moebius-BattlecruiserPortraitM.png",
+      "png_sha256": "fd68d36f9026e86686bed51137832c329ac71ed60dca1eabeb8698ccb80fc274",
+      "model_source": "Base.SC2Data/GameData/ModelData.xml",
+      "model_source_sha256": "bac6071ea9bcdef9abeddabdf5c028d1f3a10d0b9987dea0c15a96374d626598"
+    },
+    {
+      "mod": "SCORE-Moebius.SC2Mod",
+      "id": "GoliathPortraitM",
+      "sha256": "28afabbedeaa1d826ce75e2e3b6d9ace7cbeba28a2b56329588a0352b110ae58",
+      "source_relative_path": "Assets/Textures/MoebiusCorpsGoliathPortrait_Static.dds",
+      "image": "samples/Moebius-GoliathPortraitM.png",
+      "png_sha256": "0c8187c00d312505796efae52e7c4d72b54ad7a71e77693afa79c408e1e13478",
+      "model_source": "Base.SC2Data/GameData/ModelData.xml",
+      "model_source_sha256": "bac6071ea9bcdef9abeddabdf5c028d1f3a10d0b9987dea0c15a96374d626598"
+    },
+    {
+      "mod": "SCORE-Primal.SC2Mod",
+      "id": "BanelingCocoonPortraitPZ",
+      "sha256": "37749afe13535b8f96a0282dbacb29376e9d87f5e10b1168d67dd6c86992ba38",
+      "source_relative_path": "Assets/Textures/CocoonPortrait_Glowy_Primal_Collection_DS_Static.dds",
+      "image": "samples/Primal-BanelingCocoonPortraitPZ.png",
+      "png_sha256": "23f157954f5f6b9b8410a5a6156fbba8d598de3930305031098d1a90191e820e",
+      "model_source": "Base.SC2Data/GameData/ModelData.xml",
+      "model_source_sha256": "9d530ed9be7f661a71674e00cc488af4c78b7932e602b14c0c1541b0f5b3c731"
+    },
+    {
+      "mod": "SCORE-Primal.SC2Mod",
+      "id": "CocoonPortraitPZ",
+      "sha256": "3d5f3f0bd032b961a879e92bc4557bc6cdfe7dc43ec4e700e6892057fc4431c1",
+      "source_relative_path": "Assets/Textures/CocoonPortrait_Primal_Collection_DS_Static.dds",
+      "image": "samples/Primal-CocoonPortraitPZ.png",
+      "png_sha256": "71cba9c4933fc837fb7a6cfd129ca130cb5e513f7f8903393810aafb920bc53d",
+      "model_source": "Base.SC2Data/GameData/ModelData.xml",
+      "model_source_sha256": "9d530ed9be7f661a71674e00cc488af4c78b7932e602b14c0c1541b0f5b3c731"
+    },
+    {
+      "mod": "SCORE-Taldarim.SC2Mod",
+      "id": "DarkTemplarPortraitDB",
+      "sha256": "6b94d2a000687103ec9b2383df0f5d719c5ae6d318273f6ca8862db528e373e0",
+      "source_relative_path": "Assets/Textures/BloodHunter_DS_01_Portrait_Static.dds",
+      "image": "samples/Taldarim-DarkTemplarPortraitDB.png",
+      "png_sha256": "412bc5f547cda3b64673117a4a6687a68f18b2029b19c51909629faf08dbd1be",
+      "model_source": "Base.SC2Data/GameData/ModelData.xml",
+      "model_source_sha256": "ca797a2aa86391ac2628eb5d07f1d26e5d51dc506317a8b50ebc4bae71e859f8"
+    },
+    {
+      "mod": "SCORE-Taldarim.SC2Mod",
+      "id": "ColossusPortraitD",
+      "sha256": "911742c48f4a1183b6afe1fdc6dc174591404679c9f9b67f3305e280b6f94543",
+      "source_relative_path": "Assets/Textures/Colossus_Taldarim_Collection_DSedit_Portrait_Static.dds",
+      "image": "samples/Taldarim-ColossusPortraitD.png",
+      "png_sha256": "a4acaec7d40bb4450980fa524422f9a64113ebe65ac6315f55632da689b23dfa",
+      "model_source": "Base.SC2Data/GameData/ModelData.xml",
+      "model_source_sha256": "ca797a2aa86391ac2628eb5d07f1d26e5d51dc506317a8b50ebc4bae71e859f8"
+    },
+    {
+      "mod": "SCORE-Umojan.SC2Mod",
+      "id": "MedicPortraitU",
+      "sha256": "ea0a82f591a1f4d9ddd4732df1ba62542e5c7997aaaf0d07ede96d146376e116",
+      "source_relative_path": "Assets/Textures/medic_umojan_ds_portrait_static.dds",
+      "image": "samples/Umojan-MedicPortraitU.png",
+      "png_sha256": "bb9cb6c9697f4138f00c74066de6b6193fd17c10475617c461fee10f435276e5",
+      "model_source": "Base.SC2Data/GameData/ModelData.xml",
+      "model_source_sha256": "6932f07bf476ea9d4d471283e026ccba8296929a6dc8911352d9ba759cee211f"
+    },
+    {
+      "mod": "SCORE-Umojan.SC2Mod",
+      "id": "HercPortraitU",
+      "sha256": "07beec3f027716bf6fda5e4e7cb22f7785e29e9d3dbd6e5b242dc8dfb35a45b6",
+      "source_relative_path": "Assets/Textures/HERC_Umojan_Portrait_Static.dds",
+      "image": "samples/Umojan-HercPortraitU.png",
+      "png_sha256": "94b3c78ea8e24236edbce0d3181459f0986d18e4a38ef88cbc6f122e8623f0a1",
+      "model_source": "Base.SC2Data/GameData/ModelData.xml",
+      "model_source_sha256": "6932f07bf476ea9d4d471283e026ccba8296929a6dc8911352d9ba759cee211f"
+    },
+    {
+      "mod": "SCORE-Webby.SC2Mod",
+      "id": "EggPortraitW",
+      "sha256": "dfc8d2c7a40b76ebb040bd846c3696d5be685950e6bcdda955b2ba3043a232c1",
+      "source_relative_path": "Assets/Textures/ZergEgg_Purple_Portrait_Static.dds",
+      "image": "samples/Webby-EggPortraitW.png",
+      "png_sha256": "8438cb08855ec98a03c507a86e585dd46dfd3f91e8d9deb80396ea51e6512eba",
+      "model_source": "Base.SC2Data/GameData/ModelData.xml",
+      "model_source_sha256": "9c5673bb31616f63786f794576cdc8b361c3892696d1c0388cf151d7bee581ae"
+    },
+    {
+      "mod": "SCORE-Webby.SC2Mod",
+      "id": "LurklingPortraitW",
+      "sha256": "600e3334d0dafda4260c60f4222e0261013e2c17dd9c99b839f7e94abb4197ac",
+      "source_relative_path": "Assets/Textures/lurkling_ds_collectionskin_webby_portrait_static.dds",
+      "image": "samples/Webby-LurklingPortraitW.png",
+      "png_sha256": "679ddb0e33bb1599df505f62b93d162e4477ed4e93e49d569286f1cfb910218f",
+      "model_source": "Base.SC2Data/GameData/ModelData.xml",
+      "model_source_sha256": "9c5673bb31616f63786f794576cdc8b361c3892696d1c0388cf151d7bee581ae"
+    }
+  ]
+}

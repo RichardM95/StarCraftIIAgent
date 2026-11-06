@@ -5,3 +5,4 @@
 *.SC2Components text eol=lf
 *.SC2Bank text eol=lf
 *.txt text eol=lf
+skills/sc2-icon-art/assets/icons/*.dds binary

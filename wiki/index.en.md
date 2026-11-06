@@ -3,6 +3,7 @@
 [中文](index.md)
 Read [workspace rules](../AGENTS.en.md). The local agent-config.json identifies the selected project. Initialize only on request with a primary Components path and tools/init-project.py.
 
+- Art: [SC2 art router](../skills/sc2-art/SKILL.md) for icons, portraits and unit appearance. Names and tooltip wording: [data text skill](../skills/sc2-data-naming-and-text/SKILL.md).
 - [Language and personal preferences](guides/agent-language.en.md).
 - [Unified skill entry (English original)](../skills/sc2-project-entry/SKILL.md): one English technical skill tree, explained in the chosen language.
 - Trigger/terrain entry: [task routing and mixed handoff](../skills/sc2-project-entry/SKILL.md#task-routing), GUI behavior through sc2-map-triggers and physical placement through sc2-terrain-editing.
@@ -30,4 +31,4 @@ Read [workspace rules](../AGENTS.en.md). The local agent-config.json identifies 
 
 - Offline triggers: [GUI writing, Galaxy generation and static compilation](guides/trigger-pipeline.md), [behavior authoring and bounded GUI modifications (Chinese)](guides/trigger-author.md).
 
-<!-- translation-source: wiki/index.md; sha256: bc04488d7baa240ef1de1e9fd5650c69f068dc9279ad2941f3878e09131e3a0f -->
+<!-- translation-source: wiki/index.md; sha256: 1d0047d3cbd76978d4136436eae800f300349c23256719b101f5903fcbfa1f6b -->

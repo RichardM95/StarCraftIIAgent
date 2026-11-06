@@ -734,9 +734,22 @@ class Author:
 
     def known_instance(self,key,path):
         allowed={'FunctionCall':{'FunctionDef','Parameter','FunctionCall','SubFunctionType','Disabled','Comment'},
-                 'Param':{'ParameterDef','Value','ValueType','ValueId','Variable','Parameter','Preset','FunctionCall','ValueElement','ValueGameType'}}
+                 'Param':{'ParameterDef','Value','ValueType','ValueId','Variable','Parameter','Preset','FunctionCall','ValueElement','ValueGameType','ValueContext'}}
+        if key[1]=='Param':self.known_context(key,path)
         unknown={c.tag for c in self.elements[key]}-allowed.get(key[1],set())
         if unknown:fail(path,'selected instance contains unknown XML; cannot rewrite',reference=list(key),fields=sorted(unknown))
+
+    def known_context(self,key,path):
+        # CatalogFieldValueGet keeps exactly '<ValueContext Value="CAbilTrain"/>' beside a catalogfieldpath value type.
+        e=self.elements[key];nodes=[c for c in e if c.tag=='ValueContext']
+        if len(nodes)>1:fail(path,'parameter has repeated value contexts; cannot rewrite',reference=list(key),fields=['ValueContext'])
+        if not nodes:return
+        ctx=nodes[0]
+        if list(ctx) or (ctx.text and ctx.text.strip()):fail(path,'value context has child or text; cannot rewrite',reference=list(key),fields=['ValueContext'])
+        if dict(ctx.attrib)!={'Value':'CAbilTrain'}:fail(path,'unsupported value context attributes; cannot rewrite',reference=list(key),fields=['ValueContext'])
+        types=[c for c in e if c.tag=='ValueType']
+        if len(types)!=1 or dict(types[0].attrib)!={'Type':'catalogfieldpath'} or list(types[0]) or (types[0].text and types[0].text.strip()):
+            fail(path,'value context requires exactly one catalog field path value type',reference=list(key),fields=['ValueType'])
 
     def closure(self,keys):
         pending=list(keys);found=set()

@@ -4,6 +4,7 @@
 
 先阅读 [工作区规则](../AGENTS.md)，当前选择以本机 `agent-config.json` 为准。用户提供主 Components 模组路径后运行 `python tools/init-project.py "<路径>"`。
 
+- 美术：[SC2 美术入口](../skills/sc2-art/SKILL.md)，包含图标、肖像和单位外观。命名与说明见[数据文本技能](../skills/sc2-data-naming-and-text/SKILL.md)。
 - 技能：[统一入口](../skills/sc2-project-entry/SKILL.md)，按任务加载专用技能及 Galaxy、SC2 Data 子技能。
 - 触发器与地形入口：[按任务分流与混合交接](../skills/sc2-project-entry/SKILL.md#task-routing)，任务行为进入 sc2-map-triggers，物理放置与区域创建进入 sc2-terrain-editing。
 - 日常开发请求：[36个开发场景](guides/development-conversations.md)，按单位、表现、触发器、对白、存档和验证分组。

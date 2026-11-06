@@ -275,6 +275,12 @@ class TriggerTests(unittest.TestCase):
         self.assertIn('expected int, got text',errors)
         self.assertIn('invalid SubFunctionType',errors)
 
+        # A valid first role must not hide an additional role rejected by Editor.
+        body = body.replace('Id="00000004"/>', 'Id="00000003"/><SubFunctionType Type="SubFuncType" Library="Fns" Id="00000004"/>')
+        (target / 'Triggers').write_text('<TriggerData>' + body + '</TriggerData>')
+        errors = str(check(Target(target, self.mods, self.campaigns))['errors'])
+        self.assertIn('invalid SubFunctionType', errors)
+
     def test_parameter_annotation_is_not_a_formal_argument(self):
         body = definition(extra='<Parameter Type="ParamDef" Id="00000002"/><Parameter Type="Comment" Id="00000003"/>')
         body += '<Element Type="ParamDef" Id="00000002"><ParameterType><Type Value="int"/></ParameterType></Element>'

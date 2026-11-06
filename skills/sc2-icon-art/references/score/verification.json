@@ -30,5 +30,6 @@
     "Webby-092"
   ],
   "review_mode": "primary-agent visual study and tabletop walkthrough",
-  "acceptance_scope": "offline visual analysis and documentation checks"
+  "acceptance_scope": "offline visual analysis and documentation checks",
+  "scope": "SCORE subset only; full bundled library at ../icon-library/inventory.json"
 }

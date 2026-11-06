@@ -1,0 +1,97 @@
+{
+  "date": "2026-11-06",
+  "source": "user-supplied Editor preview screenshots",
+  "assignment": "pairs assigned from user-provided order: FirebatC, DragoonI, HydraliskW, HydraliskPZ",
+  "scope": "Visible stills only. Cropped screenshots do not expose resource IDs, Editor build, camera or lighting parameter names.",
+  "images": [
+    {
+      "actor_id": "FirebatC",
+      "kind": "unit",
+      "path": "previews/FirebatC-unit.png",
+      "sha256": "af95e6ed8af8a08823645bf0cc90b49740a470969beafcf6997b01ed05e00c3e",
+      "width": 1076,
+      "height": 676
+    },
+    {
+      "actor_id": "FirebatC",
+      "kind": "portrait",
+      "path": "previews/FirebatC-portrait.png",
+      "sha256": "eb1c42a9c269a7a7988dd016e14d39d423e1b0e8e1e8fd1c79c1546f23ff576d",
+      "width": 1098,
+      "height": 694
+    },
+    {
+      "actor_id": "DragoonI",
+      "kind": "unit",
+      "path": "previews/DragoonI-unit.png",
+      "sha256": "1111d655447b5572bab609d9f5a0780217e49a175066ac196c417c16c3c4e818",
+      "width": 1086,
+      "height": 672
+    },
+    {
+      "actor_id": "DragoonI",
+      "kind": "portrait",
+      "path": "previews/DragoonI-portrait.png",
+      "sha256": "0b7e07165d0e86d42d6c3df0aa8f7fc451684ae2710df258561bee824262f3bd",
+      "width": 1094,
+      "height": 676
+    },
+    {
+      "actor_id": "HydraliskW",
+      "kind": "unit",
+      "path": "previews/HydraliskW-unit.png",
+      "sha256": "acd6ccac23365839f345ec0659eb11e60715345946dba85060ea857bd6938d41",
+      "width": 1074,
+      "height": 672
+    },
+    {
+      "actor_id": "HydraliskW",
+      "kind": "portrait",
+      "path": "previews/HydraliskW-portrait.png",
+      "sha256": "a0e10ef160e67873037ad2d3a72461ad277926fff17dd9c96d0a86df1ed89c01",
+      "width": 1096,
+      "height": 676
+    },
+    {
+      "actor_id": "HydraliskPZ",
+      "kind": "unit",
+      "path": "previews/HydraliskPZ-unit.png",
+      "sha256": "f77b08987143d5a160f8650b586c385ab008a934d2a751805b0209f5aa1e7d7f",
+      "width": 1086,
+      "height": 670
+    },
+    {
+      "actor_id": "HydraliskPZ",
+      "kind": "portrait",
+      "path": "previews/HydraliskPZ-portrait.png",
+      "sha256": "59fb756cde047bce1bd854643d7ee4080e90a00faf3db24195404c2d24edc08f",
+      "width": 1086,
+      "height": 698
+    }
+  ],
+  "observations": {
+    "FirebatC": {
+      "unit": "宽肩、双侧圆筒和中央头盔形成紧凑重装轮廓。装甲大块暗面与浅色面板相接，青色细条分散在面罩和身体上。",
+      "portrait": "头盔、肩甲和胸前组件占据画面，青色面罩与橙色栅格成为局部焦点。金属暗面、边缘磨损和接缝仍可辨认。",
+      "application": "重装身份由体块、面罩和圆筒共同维持；特写时让头部和肩部关系清楚，发光线沿实际结构安排。"
+    },
+    "DragoonI": {
+      "unit": "四肢围绕中央圆形核心展开，肢间留有明显负形。银灰外壳与青色核心、前端发光部件形成层次。",
+      "portrait": "中央圆形结构与尖形前部占主要面积，肢体向画面边缘延伸。青色线条沿壳体分界，背景为蓝色环境。",
+      "application": "机械肖像可围绕核心或传感器取景。保留圆核、前端及肢体的结构关系，裁切可以放大身份部件。"
+    },
+    "HydraliskW": {
+      "unit": "头部和背甲形成纵长轮廓，尖刺向两侧伸出，腹部浅色甲片与深紫外甲区分。",
+      "portrait": "长冠甲、细眼、张口与两侧口器成为识别点。暗紫甲壳以局部亮边分层，背景呈棕色环境。",
+      "application": "虫族身份通过冠甲、口器、尖刺和叠甲表达。近景保留厚暗缝与牙齿间隙，细纹服务于大结构。"
+    },
+    "HydraliskPZ": {
+      "unit": "中央浅色分节背甲与周围灰绿甲壳形成对比，头部向前下方伸出，两侧长肢分开。",
+      "portrait": "灰绿冠甲和长口器占画面，牙齿亮边、细小眼部与暗口腔形成局部对比。背景呈黄绿色环境。",
+      "application": "依据该主体保留中央叠甲、侧刺和口器，配色取自这一组预览；身体与肖像采用各自适合识别的角度。"
+    }
+  },
+  "unresolved_visual_detail": {
+    "DragoonI": "A cyan polygonal patch is visible on the right side of the portrait crop. Its identity as model part, background or overlay is not established by this image."
+  }
+}
