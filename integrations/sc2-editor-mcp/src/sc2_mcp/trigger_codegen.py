@@ -120,17 +120,45 @@ class Generator:
             t=e.find('ValueType'); t=t.get('Type') if t is not None else None; value=v.text or ''
             if t=='text':return 'StringExternal('+json.dumps(value)+')'
             if t in {'string','gamelink','anygamelink'}:return json.dumps(value,ensure_ascii=True)
+            if t=='catalogentry' and self.mapping().aliases.get(t)=='string':
+                if (set(c.tag for c in e)<={'ParameterDef','Value','ValueType','Comment'}
+                        and len(e.findall('Value'))==1 and len(e.findall('ValueType'))==1
+                        and len(e.findall('ParameterDef'))<=1 and not v.attrib and not len(v)
+                        and set(e.attrib)<={'Type','Id'} and e.get('Type') in {None,'Param'}
+                        and dict(value_type.attrib)=={'Type':'catalogentry'} and not len(value_type)
+                        and not (value_type.text or '').strip()):
+                    return json.dumps(value,ensure_ascii=True)
             if t in {'userfield','userinstance','catalogfieldpath'} and self.mapping().aliases.get(t)=='string':
                 vt=next((c for c in e if c.tag=='ValueType'),None); ctxs=e.findall('ValueContext')
                 if (sum(1 for c in e if c.tag=='Value')==1 and sum(1 for c in e if c.tag=='ValueType')==1
                         and sum(1 for c in e if c.tag=='ParameterDef')<=1
-                        and set(c.tag for c in e)<={'ParameterDef','Value','ValueType','ValueContext','Comment'}
+                        and all(c.tag in {'ParameterDef','Value','ValueType','ValueContext','Comment'}
+                                or (t=='catalogfieldpath' and c.tag=='ValueParam') for c in e)
                         and set(e.attrib)<={'Type','Id'} and e.get('Type') in {None,'Param'}
                         and vt is not None and set(vt.attrib)=={'Type'} and not len(vt) and not (vt.text or '').strip()
                         and not v.attrib and not len(v) and bool((v.text or '').strip())
                         and len(ctxs)==1 and set(ctxs[0].attrib)=={'Value'} and not len(ctxs[0])
                         and not (ctxs[0].text or '').strip() and bool(ctxs[0].get('Value','').strip())):
-                    return json.dumps(value,ensure_ascii=True)
+                    refs=e.findall('ValueParam')
+                    if not refs:return json.dumps(value,ensure_ascii=True)
+                    parts=re.split(r'\[[^\[\]]*\]',value)
+                    if len(parts)!=len(refs)+1 or any('[' in p or ']' in p for p in parts):
+                        self.error('catalog field index count does not match ValueParam references',d,key)
+                    identity=('catalog_field',str(d.path),key)
+                    if identity in self.stack:self.error('cyclic catalog field index',d,key)
+                    self.stack.add(identity)
+                    try:
+                        output=[json.dumps(parts[0]+'[',ensure_ascii=True)]
+                        for i,ref in enumerate(refs):
+                            if (set(ref.attrib)-{'Type','Library','Id'} or ref.get('Type')!='Param'
+                                    or not ref.get('Id') or len(ref) or (ref.text or '').strip()):
+                                self.error('invalid catalog field index reference',d,key)
+                            dd,kk,ee=self.resolve(ref,d,key)
+                            output.append('IntToString('+self.expr(dd,kk,ee)+')')
+                            output.append(json.dumps(']'+parts[i+1]+('[' if i+1<len(refs) else ''),ensure_ascii=True))
+                        return ' + '.join(output)
+                    finally:
+                        self.stack.remove(identity)
             if t=='bool' and value in {'true','false'}:return value
             if t=='unitfilter':
                 quoted=json.dumps(value,ensure_ascii=True);return self.mapping().bind('UnitFilterStr','unitfilter',['string'],[quoted],False,d,key,key)

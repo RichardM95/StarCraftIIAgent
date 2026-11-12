@@ -20,7 +20,7 @@ Collection first verifies all source content, inventories and dependency resolut
 
 ## Editor fallback
 
-Use the Editor only for unsupported offline structures, required native saves or specific Editor acceptance. Explain the concrete gap first and follow the Editor handoff checklist. Diagnose missing dependencies, compiler errors and environment failures before considering fallback; never hide these by silently launching the Editor.
+Use the Editor for required native saves or specific Editor acceptance, explaining the reason and following the Editor handoff checklist. For unsupported offline structures, diagnose and repair the generation gap first. Errors retain the file, node and reason, returning `editor_required=false` and `next_action=diagnose_offline_generation`. Hand off concrete Editor operations only after confirming that the current tools cannot complete a necessary step. Diagnose missing dependencies, compiler errors and environment failures first.
 
 ## Evidence
 
@@ -28,4 +28,4 @@ Keep existing status names. The offline route can advance from `static validatio
 
 Record `Validation Route: offline`, `Validation`, `Offline Validation` (build, archive and execution proof), and `Runtime Validation` (target, reproduction, observations and scope). The Editor route uses `editor`; old records default to `editor` and still require actual `Editor Validation`. Empty placeholders and skipped labels are not evidence.
 
-<!-- translation-source: wiki/guides/offline-testing.md; sha256: db8459d9a515c88b126787fc1bc7c8a687fdee70b71572ca492c06a581cf402f -->
+<!-- translation-source: wiki/guides/offline-testing.md; sha256: 63c8bd4a06914c52df19beda3d3532b5527d9b4cffd202017aba00181d9655df -->

@@ -124,7 +124,8 @@ def test_failure_paths_never_launch_editor_or_game(tmp_path, monkeypatch, failur
         if failure in {'generator','unsupported'}:
             detail=captured.value.as_dict()['details']
             assert detail['phase']=='generate'
-            assert detail['editor_required'] is (failure=='unsupported')
+            assert detail['editor_required'] is False
+            assert detail['next_action']==('diagnose_offline_generation' if failure=='unsupported' else 'diagnose_failure')
     assert calls == (['generate'] if failure in {'generator','unsupported'} else [])
 
 

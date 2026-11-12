@@ -126,7 +126,8 @@ def run_test(service, project_id, installation, product, sample_seconds, startup
             error=exc.as_dict()
             raise SC2Error(error['code'],error['message'],**{
                 **error.get('details',{}),'phase':phase,
-                'editor_required':error['code']=='trigger_generation_unsupported',
+                'editor_required':False,
+                'next_action':'diagnose_offline_generation' if error['code']=='trigger_generation_unsupported' else 'diagnose_failure',
                 'stage_seconds':{**timings,phase:round(time.perf_counter()-started,3)}}) from exc
         finally:
             timings[phase]=round(time.perf_counter()-started,3)

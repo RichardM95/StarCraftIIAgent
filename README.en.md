@@ -59,7 +59,10 @@ Initialization runs `tools/init-project.py`, checks recursive dependencies and g
 
 - **Queries, documentation and static checks:** launch neither the Editor nor the game.
 - **Map runtime checks:** prefer offline generation, type checking, independent MPQ packaging and direct game tests, collecting this run's Bank and logs automatically.
-- **Native operations and Editor acceptance:** explain the concrete need before using the Editor for unsupported GUI structures, required native saves or specific Editor acceptance.
+- **Generation diagnostics:** unsupported GUI structures report the file, node and reason so the agent can diagnose and repair the offline generation gap first.
+- **Native operations and Editor acceptance:** explain the concrete need before using the Editor for required native saves or specific Editor acceptance.
+
+Offline generation supports `catalogentry` with a confirmed string mapping and `catalogfieldpath` with `ValueParam` indices. Index-count mismatches, missing references and type-check failures block game startup.
 
 Ask: “Test this change in an independent copy of `<map-path>`, prefer skipping the Editor, and report scope and observed results.” See [offline testing](wiki/guides/offline-testing.en.md) for coverage, longer scenarios, background jobs and evidence.
 
@@ -188,4 +191,4 @@ Never open Blizzard maps with a project mod active as an external override. Add 
 - `os error 206` or replacement failures: narrow operations using the [recovery guide](wiki/implementation/agent-context-efficiency.md), preserve encoding/line endings and run relevant checks.
 - Runtime problems: provide the actual map/mod, reproduction steps, Editor version, logs and screenshots; follow the [runtime diagnosis guide](wiki/implementation/runtime-diagnostics.en.md).
 
-<!-- translation-source: README.md; sha256: 12fd3bd31b685885416f6d402d74c1c0b9b706070375ddf215168b9e6041fcb6 -->
+<!-- translation-source: README.md; sha256: d8799fb63593691fa7fcf198b9b494bb3047028b5107c4b04c3f29656df0f641 -->

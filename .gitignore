@@ -7,6 +7,9 @@ __pycache__/
 *.pyo
 *.pyd
 .pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
 .DS_Store
 Thumbs.db
 
@@ -78,6 +81,8 @@ integrations/**/config.json
 integrations/**/profiles/base.patch.yml
 integrations/**/state/
 integrations/**/.state/
+integrations/sc2-editor-mcp/build/
+integrations/sc2-editor-mcp/dist/
 pip-build-env-*/
 pip-build-tracker-*/
 pip-metadata-*/

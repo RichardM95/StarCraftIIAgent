@@ -25,3 +25,5 @@ For terrain, map expansion, scene composition and bridge/tunnel connections, [sc
 ## Offline-first routing
 
 Follow [offline testing](../../wiki/guides/offline-testing.md) before Editor handoff. Prefer `sc2_validate_run_test` for map runtime tests; ordinary static checks launch no application. Editor acceptance is optional and requires its own observed evidence.
+
+An unsupported offline generation error requires diagnosis of its file, node and structure. Repair bounded generator gaps before handing off compilation. Required native saves and explicit Editor reopen acceptance use the Editor workflow. Hand off only the necessary steps whose tool support is confirmed unavailable.
