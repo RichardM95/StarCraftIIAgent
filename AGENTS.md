@@ -1,6 +1,12 @@
 # AGENTS.md — 入口文件
 
 [English](AGENTS.en.md)
+## 离线优先验收
+
+普通检查不启动编辑器或游戏；地图运行测试默认使用 `sc2_validate_run_test`，自动离线生成、检查、打包并直接启动游戏收集 Bank 和增量日志。仅不支持的结构、原生保存或专项编辑器验收才说明原因后使用编辑器。具体流程与证据要求见 [offline testing](wiki/guides/offline-testing.md)。
+
+生命周期的 `Editor accepted` 是按需分支；离线运行可从 `static validation passed` 直接达到有范围的 `packaged runtime passed`，不冒充编辑器验收。账本 `Validation Route: offline` 需要 `Offline Validation` 和实际运行证据；旧账本缺省走 `editor`。
+
 
 **作者：扯蛋虾米。** 统一作者声明见 `AUTHORS.md`。
 
@@ -23,7 +29,7 @@
 >
 > **日志规则：** 记录决策和原因，而非实现摘要。链接到规范页面；不要添加冗余的文件列表、验证输出、问题详情或 commit hash。使用 Git 历史查看先前状态。
 >
-> **问题工作流规则：** 每个问题遵循 `reported` → `root cause confirmed` → `source fixed` → `static validation passed` → `Editor accepted` → `packaged runtime passed`。编辑前要求有效值证据：对于统计数据，记录本地单位、父对象、继承值和目标覆盖值；对于 UI 文本，识别文本类型是世界悬停、选择面板、命令卡按钮、tooltip 还是编辑器文本。交付结论必须使用上述精确状态：静态工具全绿只能报告 `static validation passed`；没有编辑器重载/保存证据时不得写 `Editor accepted`，没有游戏内复现步骤与结果时不得写 `packaged runtime passed`。
+> **问题工作流规则：** 原生编辑器路线的问题遵循 `reported` → `root cause confirmed` → `source fixed` → `static validation passed` → `Editor accepted` → `packaged runtime passed`。编辑前要求有效值证据：对于统计数据，记录本地单位、父对象、继承值和目标覆盖值；对于 UI 文本，识别文本类型是世界悬停、选择面板、命令卡按钮、tooltip 还是编辑器文本。交付结论必须使用上述精确状态：静态工具全绿只能报告 `static validation passed`；没有编辑器重载/保存证据时不得写 `Editor accepted`，没有游戏内复现步骤与结果时不得写 `packaged runtime passed`。
 >
 > **研究规则：** 需要帮助或澄清时向用户索取更多信息。若反复搜索未能缩小问题范围，停止并向用户总结当前发现。
 >

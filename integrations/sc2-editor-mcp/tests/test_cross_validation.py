@@ -234,6 +234,48 @@ def test_unit_group_literal_requires_unit_group_type(project):
     assert error.value.code == "new_missing_references"
 
 
+def test_group_has_its_own_numbering_namespace_in_objects(project):
+    root, _ = project
+    shared = (root / "Objects").read_bytes().replace(
+        b"</PlacedObjects>", b'<Group Id="8" Type="ObjectUnit"><GroupObject Id="8"/></Group></PlacedObjects>')
+    put(root, "Objects", shared)
+    put(root, "MapScript.galaxy", "void f(){UnitFromId(8);UnitGroupFromId(8);}")
+    baseline = snapshot(root)
+    path = "Base.SC2Data/GameData/UnitData.xml"
+    value = (root / path).read_bytes().replace(b'</CUnit>', b'<LifeMax value="100"/></CUnit>')
+    result = check(project, {path: value})
+    assert result["static"] == "passed"
+    assert snapshot(root) == baseline
+
+
+@pytest.mark.parametrize("component,value", [
+    ("Objects", b'<PlacedObjects><ObjectUnit Id="1" UnitType="Marine" Position="3,2,0"/><ObjectPoint Id="1" Type="Normal" Position="1,2,0"/></PlacedObjects>'),
+    ("Objects", b'<PlacedObjects><Group Id="1" Type="ObjectUnit"/><Group Id="1" Type="ObjectUnit"/></PlacedObjects>'),
+    ("Regions", b'<Regions><region id="1"><name value="a"/></region><region id="1"><name value="b"/></region></Regions>'),
+])
+def test_spatial_duplicate_ids_still_raise(project, component, value):
+    with pytest.raises(SC2Error) as error:
+        check(project, {component: value})
+    assert error.value.code == "ambiguous_spatial_id"
+
+
+def test_group_does_not_stand_in_for_removed_shared_unit(project):
+    root, _ = project
+    shared = (root / "Objects").read_bytes().replace(
+        b"</PlacedObjects>", b'<Group Id="8" Type="ObjectUnit"><GroupObject Id="8"/></Group></PlacedObjects>')
+    put(root, "Objects", shared)
+    put(root, "MapScript.galaxy", "void f(){UnitFromId(8);UnitGroupFromId(8);}")
+    candidate = shared.replace(b'<ObjectUnit Id="8" UnitType="Marine" Position="3,2,0"/>', b"")
+    with pytest.raises(SC2Error) as error:
+        check(project, {"Objects": candidate})
+    assert error.value.code == "new_missing_references"
+    new_missing = error.value.details["report"]["new_missing"]
+    assert any(edge["kind"] == "galaxy_spatial_reference" and edge["function"] == "UnitFromId"
+               and edge["object_id"] == 8 for edge in new_missing)
+    assert any(edge["kind"] == "group_member_reference" and edge["group_id"] == 8
+               and edge["object_id"] == 8 for edge in new_missing)
+
+
 @pytest.mark.parametrize("change", ["content", "include", "new_catalog", "delete"])
 def test_dependency_changes_during_validation_are_rejected(project, tmp_path, monkeypatch, change):
     from sc2_mcp import cross_validation

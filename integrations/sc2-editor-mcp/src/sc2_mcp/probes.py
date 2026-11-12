@@ -178,6 +178,13 @@ class Probes:
                     if result.get('verdict')!='failed':result['verdict']='partial'
                     result['termination_reason']=manifest['state']
                 manifest['verdict']=result['verdict']
+                if manifest.get('template') == 'offline_map_smoke':
+                    result['packaged_runtime_passed'] = bool(
+                        result.get('packaged_runtime_passed') and result['verdict']=='complete'
+                        and manifest['state'] in {'finished','recovered_finished'}
+                        and not result.get('source_stale')
+                        and result.get('evidence_status')=='bound_runtime'
+                        and manifest.get('logs_collected'))
                 if bank_raw is not None:atomic_write(area/'result.SC2Bank',bank_raw)
                 write_json(area/'result.json',result)
             write_json(path,manifest)
@@ -245,7 +252,7 @@ class Probes:
         try:
             process=psutil.Process(item['pid'])
             verified=(abs(process.create_time()-item['created'])<0.001 and
-                str(Path(process.exe()).resolve()).casefold()==item['executable'].casefold() and
+                str(Path(process.exe()).resolve()).casefold()==str(Path(item['executable']).resolve()).casefold() and
                 str(Path(manifest['archive']).resolve()).casefold() in [str(Path(arg).resolve()).casefold() for arg in process.cmdline()[1:] if not arg.startswith('-')])
             return process if verified else None
         except (psutil.Error,OSError,KeyError,ValueError):return None
@@ -257,9 +264,10 @@ class Probes:
     def discover_owned(self, manifest):
         expected=str(Path(manifest['launch']['selected_client']).resolve()).casefold()
         for process in editor.processes(Path(manifest['installation'])):
-            if (process.get('executable') or '').casefold()!=expected or process['created']<manifest['launched_at']-1:
+            executable=str(Path(process.get('executable') or '').resolve())
+            if executable.casefold()!=expected or process['created']<manifest['launched_at']-1:
                 continue
-            item={'pid':process['pid'],'created':process['created'],'executable':process['executable']}
+            item={'pid':process['pid'],'created':process['created'],'executable':executable}
             if self.verified_process(item,manifest) and item not in manifest['owned_processes']:
                 manifest['owned_processes'].append(item)
         self.save(manifest)
@@ -280,9 +288,12 @@ class Probes:
             'source_stale':snapshot(Path(manifest['source']))!=manifest['source_snapshot'],
             'archive':manifest['archive'],'archive_sha256':manifest['archive_sha256'],'visual':'not_reviewed'}
         result['run_state']=manifest['state']
+        context_verified=False
         if manifest.get('source_context'):
             from .source_context import assert_source_context_current
-            try:assert_source_context_current(manifest['source_context'])
+            try:
+                assert_source_context_current(manifest['source_context'])
+                context_verified=True
             except SC2Error as exc:
                 result['source_stale']=True
                 result['source_context_error']=exc.as_dict()
@@ -336,7 +347,11 @@ class Probes:
             manifest.update(state='interrupted',execution='partial',verdict='partial')
             result.update(run_state='interrupted',execution='partial',verdict='partial',evidence_status='no_bank',recovery='worker_exited_without_bank')
             self.save(manifest,result)
-        return result
+        from .offline_test import enrich_result
+        enriched = enrich_result(manifest, result, context_verified=context_verified)
+        if manifest.get('template') == 'offline_map_smoke':
+            self.save(manifest, enriched)
+        return enriched
 
     def run(self, probe_id, installation, product='s2_cn', startup_timeout=120, probe_timeout=120, cancel=None):
         from .agent_bridge import sc2_activity
@@ -423,7 +438,7 @@ class Probes:
                         target=self.folder(probe_id)/'logs'/(digest(str(path).encode())[:12]+'_'+path.name)
                         target.parent.mkdir(exist_ok=True);target.write_bytes(raw)
                         deltas.append({'source':str(path),'offset':offset,'file':str(target),'sha256':digest(raw)})
-                manifest['log_deltas']=deltas;self.save(manifest)
+                manifest['log_deltas']=deltas;manifest['logs_collected']=True;self.save(manifest)
             result=self.collect(probe_id)
             result['run_state']=manifest['state'];result['manifest']=str(self.folder(probe_id)/'manifest.json')
             return result

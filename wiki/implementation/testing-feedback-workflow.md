@@ -4,11 +4,17 @@
 
 Use this page to triage bug reports, playtest feedback, and editor warnings.
 
+## 离线优先验收
+
+普通检查不启动编辑器或游戏；地图运行测试默认使用 `sc2_validate_run_test`，自动离线生成、检查、打包并直接启动游戏收集 Bank 和增量日志。仅不支持的结构、原生保存或专项编辑器验收才说明原因后使用编辑器。具体流程与证据要求见 [offline testing](../guides/offline-testing.md)。
+
+生命周期的 `Editor accepted` 是按需分支；离线运行可从 `static validation passed` 直接达到有范围的 `packaged runtime passed`，不冒充编辑器验收。账本 `Validation Route: offline` 需要 `Offline Validation` 和实际运行证据；旧账本缺省走 `editor`。
+
 ---
 
 ## 6-Stage Issue Lifecycle
 
-Every reported bug or defect must strictly follow this lifecycle:
+The Editor route follows this lifecycle; the offline branch is defined above:
 
 ```mermaid
 graph LR
@@ -16,6 +22,7 @@ graph LR
     B --> C[3. source fixed]
     C --> D[4. static validation passed]
     D --> E[5. Editor accepted]
+    D --> F[6. packaged runtime passed: offline proof]
     E --> F[6. packaged runtime passed]
 ```
 
@@ -40,7 +47,7 @@ Every handoff and completion report must name the highest gate actually reached.
 
 `tools/audit-issue-lifecycle.py` enforces valid active-ledger status labels and the evidence fields required by each reached gate.
 
-`Validation` records static target/scope, checks and results. `Editor Validation` is required from `Editor accepted`; record the component and reload/compile/save outcome. `Runtime Validation` is required from `packaged runtime passed`; record the tested version/target, reproduction steps and observed outcome. The audit checks record completeness, not whether those actions actually occurred. Existing high-stage records missing evidence fail without automatic rewriting or demotion.
+`Validation` records static target/scope, checks and results. `Editor Validation` is required for the editor route from `Editor accepted`; offline runtime records require `Offline Validation`; record the component and reload/compile/save outcome. `Runtime Validation` is required from `packaged runtime passed`; record the tested version/target, reproduction steps and observed outcome. The audit checks record completeness, not whether those actions actually occurred. Existing high-stage records missing evidence fail without automatic rewriting or demotion.
 
 ---
 

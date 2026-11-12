@@ -42,6 +42,8 @@ If an apply response is lost, inspect the original candidate ID with `sc2_change
 
 When projects share a state directory, new transactions record the owning map in `owner.json`. Preserve corrupt manifests and check backups using the reported path. A corrupt manifest known to belong to another map does not block the current one. Ambiguous legacy records or conflicting ownership still block changes.
 
+Spatial references retain their type boundaries. In `Objects`, a `Group` and a placed object may share an ID: `UnitFromId(1)` and `UnitGroupFromId(1)` resolve different entities. Do not renumber map objects to silence this false positive. Duplicate IDs within a namespace remain rejected; group members must resolve to actual objects of the expected type, and a group cannot stand in for a missing unit. See the [reference regressions](../../integrations/sc2-editor-mcp/tests/test_cross_validation.py).
+
 Large results return a `report_name` and a body length in characters (`characters`). Start `sc2_report_read` at `offset=0` and pass each `next_offset` to the next call until it is `null`.
 
 ```powershell
@@ -61,6 +63,12 @@ Use the returned project_id for `sc2_official_assets_search`, `sc2_validate_map_
 CLI and MCP share business functions and parameter validation and return `ok/result`. CLI failures return `ok:false/error`; exit codes are 0 for success, 1 for business rejection and 2 for invalid requests. A CLI process owns and waits for its long jobs and can run in a managed exec session; MCP exposes job IDs for polling. Business results and acceptance rules are shared while delivery timing may differ.
 
 Global runtime indexes and process slots live under the suite's `.runtime/integrations/`, avoiding Windows packaged-app AppData write redirection. Project candidates, reports, transactions and DeepSeek tasks live under `runtime/integrations/` in project data resolved by `sc2_paths`. Independent test maps inside the workspace use a target-fingerprinted project directory in suite data. Explicit CLI `--state` or the testing override `SC2_AGENT_RUNTIME_ROOT` isolates state without migrating historical records.
+
+## Test Bank preloads
+
+After changing a Bank name in an independent test copy, inspect `DocumentInfo/Preload` and `BankList.xml`. `sc2_bank_preload_rename(project_id, old_name, new_name, source_context_id?)` prepares a normal transaction candidate for existing preloads; old and new entries for the same player are deduplicated only when their other attributes and content agree. Review with `sc2_changes_inspect`, then use `sc2_changes_apply` and the existing rollback mechanism.
+
+This operation covers preload metadata only; change actual Bank calls through GUI source. Dependencies, DocumentHeader, other preloads, player Bank files and generated scripts remain intact. Check source calls, preload lists and test-save names before and after committing. Generic candidate import continues to protect these components.
 
 ## DeepSeek
 
@@ -102,7 +110,7 @@ The integration lock pins NumPy 2.5.4 and retains the original upstream lock as 
 
 The launcher uses the normal interpreter with `-E -S` and the selected environment's site-packages, preserving dependency isolation while avoiding Windows venv-redirector directory restrictions. CLI, MCP and the file bridge share this launcher.
 
-<!-- translation-source: wiki/guides/shared-tools.md; sha256: e26b4ba42427f4e58963f90bfd3fe696c1343c8e404ec74e06ce7ad8b5e56764 -->
+<!-- translation-source: wiki/guides/shared-tools.md; sha256: 2abc371be42acfed3fa0e2a445eec12f21c1aa764723676ac55ef6d354273d11 -->
 
 ## Long operations and source diagnostics
 
@@ -119,3 +127,5 @@ Reference receipts bind complete source and candidate content, loading context a
 Progress updates report stage changes, measured counts, failures or actionable findings. Diagnose absent progress through job records; CPU activity is not evidence of completion or an ETA. Existing write authorization persists across routine polling.
 
 Project-specific runtime reports, performance measurements and acceptance records stay in local project data. The repository distributes general recovery rules and regression tests.
+
+- [Offline-first map smoke tests](offline-testing.en.md): `sc2_validate_run_test` builds new scripts and collects run-bound results without the Editor.

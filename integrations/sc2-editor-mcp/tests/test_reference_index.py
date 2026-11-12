@@ -1,5 +1,6 @@
 import hashlib
 import os
+import re
 
 import pytest
 
@@ -297,5 +298,101 @@ def test_direct_matches_full_for_inherited_id_and_budget(tmp_path, monkeypatch):
         )
         assert result["index_status"].startswith("uncached")
         assert result["incoming"] == legacy["incoming"]
+    finally:
+        service.jobs.shutdown()
+
+
+def test_requirement_node_index_version_retires_same_generation_cache(
+    tmp_path, monkeypatch
+):
+    from sc2_mcp import catalog as catalog_module
+
+    root = tmp_path / "map.SC2Map"
+    data = root / "Base.SC2Data/GameData"
+    data.mkdir(parents=True)
+    (root / "DocumentInfo").write_text("<DocInfo/>")
+    requirements = data / "RequirementData.xml"
+    requirements.write_text(
+        '<Catalog><CRequirement id="Req"><NodeArray index="Use" Link="UpNode"/>'
+        '<NodeArray index="Show" Link="AbsentNode"/></CRequirement></Catalog>'
+    )
+    nodes = data / "RequirementNodeData.xml"
+    nodes.write_text(
+        '<Catalog><CRequirementCountUpgrade id="UpNode">'
+        '<Count Link="TestUpgrade" State="CompleteOnly"/></CRequirementCountUpgrade></Catalog>'
+    )
+    upgrades = data / "UpgradeData.xml"
+    upgrades.write_text('<Catalog><CUpgrade id="TestUpgrade"/></Catalog>')
+    source_bytes = {
+        path: path.read_bytes() for path in (requirements, nodes, upgrades)
+    }
+    service = Service(tmp_path / "state")
+    try:
+        pid = service.projects.open(str(root))["project_id"]
+
+        def query():
+            return reference_index.query(service, pid, "Requirement", "Req", None, "full")
+
+        def targets(rows):
+            return {(row["catalog"], row["object_id"]) for row in rows}
+
+        # Pre-fix mapping (every CRequirement* tag was a Requirement) plus the
+        # pre-fix exact-slot rule, building a real on-disk v4 index from the
+        # unchanged sources.
+        old_type_catalog = catalog_module._type_catalog
+        old_reference_kind = catalog_module._reference_kind
+
+        def legacy_type_catalog(tag):
+            if tag.startswith("CRequirement"):
+                return "Requirement"
+            return old_type_catalog(tag)
+
+        def legacy_reference_kind(path, owner_class):
+            tags = [re.sub(r"\[[^\]]*\]", "", part) for part in path.split(".")]
+            if (
+                owner_class == "CRequirement"
+                and tags[-1] == "Link"
+                and len(tags) >= 2
+                and tags[-2] == "NodeArray"
+            ):
+                return None
+            return old_reference_kind(path, owner_class)
+
+        with monkeypatch.context() as patch:
+            patch.setattr(catalog_module, "_type_catalog", legacy_type_catalog)
+            patch.setattr(catalog_module, "_reference_kind", legacy_reference_kind)
+            patch.setattr(reference_index, "INDEX_VERSION", "4")
+            stale = query()
+        assert ("Requirement", "UpNode") in targets(stale["reachable"])
+        assert ("RequirementNode", "UpNode") not in targets(stale["reachable"])
+        assert stale["missing"] == []
+        generation = stale["source_context_id"]
+
+        # A real tool upgrade starts a fresh process, so the in-memory library
+        # built under the old rules must not be reused. _query_index is a
+        # process-level Service attribute that __init__ never clears, so reset
+        # it as a new process would. Restart on the same state directory and
+        # project record, leaving graph.sqlite, source_contexts and the sources
+        # untouched; this simulates an upgrade restart, not hot reload.
+        service.jobs.shutdown()
+        monkeypatch.setattr(Service, "_query_index", None)
+        service = Service(tmp_path / "state")
+
+        # Unchanged bytes and the same source_context: only the index version
+        # may retire the stale rows.
+        refreshed = query()
+        assert refreshed["index_status"] == "refreshed"
+        assert refreshed["source_context_id"] == generation
+        assert ("RequirementNode", "UpNode") in targets(refreshed["reachable"])
+        assert (
+            {(edge["to"]["catalog"], edge["to"]["object_id"]) for edge in refreshed["missing"]}
+            == {("RequirementNode", "AbsentNode")}
+        )
+        oracle = trace_references([root], "Requirement", "Req")
+        assert all(refreshed[k] == v for k, v in oracle.items())
+        hit = query()
+        assert hit["index_status"] == "hit"
+        assert all(hit[k] == v for k, v in oracle.items())
+        assert {path: path.read_bytes() for path in source_bytes} == source_bytes
     finally:
         service.jobs.shutdown()

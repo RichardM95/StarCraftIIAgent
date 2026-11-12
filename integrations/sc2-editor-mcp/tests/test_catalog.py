@@ -4,7 +4,7 @@ from xml.etree import ElementTree as ET
 
 import pytest
 
-from sc2_mcp.catalog import inspect_catalog, plan_catalog_set, search_catalog, trace_references
+from sc2_mcp.catalog import _type_catalog, inspect_catalog, plan_catalog_set, search_catalog, trace_references
 from sc2_mcp.errors import SC2Error
 
 
@@ -243,3 +243,74 @@ def test_reference_trace_uses_final_parent_and_reports_transitive_missing(tmp_pa
     result = trace_references([base, patch], 'Unit', 'A')
     assert {'catalog': 'Unit', 'object_id': 'Old'} not in result['reachable']
     assert any(item['from']['object_id'] == 'Gun' and item['to']['object_id'] == 'MissingDamage' for item in result['missing'])
+
+
+REQUIREMENT_NODES = (
+    '<CRequirementAnd id="AndNode"><OperandArray index="0" value="UpNode"/>'
+    '<OperandArray index="1" value="UnitNode"/></CRequirementAnd>'
+    '<CRequirementCountUpgrade id="UpNode"><Count Link="TestUpgrade" State="CompleteOnly"/></CRequirementCountUpgrade>'
+    '<CRequirementCountUnit id="UnitNode"><Count Link="Marine" State="CompleteOnly"/></CRequirementCountUnit>'
+    '<CRequirementNot id="NotNode"><OperandArray index="0" value="UnitNode"/></CRequirementNot>'
+    '<CRequirementEq id="EqNode"><OperandArray index="0" value="UpNode"/>'
+    '<OperandArray index="1" value="UnitNode"/></CRequirementEq>'
+)
+
+
+def test_requirement_nodes_load_from_standard_file_by_class(tmp_path):
+    cat(tmp_path, REQUIREMENT_NODES, 'RequirementNode')
+    assert inspect_catalog([tmp_path], 'RequirementNode', 'UpNode')['class'] == 'CRequirementCountUpgrade'
+    assert inspect_catalog([tmp_path], 'RequirementNode', 'UnitNode')['class'] == 'CRequirementCountUnit'
+    assert inspect_catalog([tmp_path], 'RequirementNode', 'NotNode')['class'] == 'CRequirementNot'
+    assert inspect_catalog([tmp_path], 'RequirementNode', 'EqNode')['class'] == 'CRequirementEq'
+    result = inspect_catalog([tmp_path], 'RequirementNode', 'AndNode')
+    assert result['class'] == 'CRequirementAnd'
+    assert val(result, 'OperandArray[0]') == 'UpNode'
+    # Nodes are not Requirements: the old misclassification must not remain.
+    with pytest.raises(SC2Error) as error:
+        inspect_catalog([tmp_path], 'Requirement', 'UpNode')
+    assert error.value.code == 'catalog_object_not_found'
+    catalogs = {entry['catalog'] for entry in search_catalog([tmp_path], 'RequirementNode')}
+    assert catalogs == {'RequirementNode'}
+    assert _type_catalog('CRequirement') == 'Requirement'
+    assert _type_catalog('CRequirementNode') == 'RequirementNode'
+    assert _type_catalog('CRequirementCountUpgrade') == 'RequirementNode'
+    assert _type_catalog('CRequirementCountUnit') == 'RequirementNode'
+    assert _type_catalog('CRequirementNot') == 'RequirementNode'
+    # Non-CRequirement longest-prefix behaviour is unchanged.
+    assert _type_catalog('CTerrainTex') == 'TerrainTex'
+    assert _type_catalog('CWeaponLegacy') == 'Weapon'
+
+
+def test_same_id_requirement_and_requirement_node_do_not_collide(tmp_path):
+    cat(tmp_path, '<CRequirement id="Shared"><NodeArray Link="Shared"/></CRequirement>')
+    cat(tmp_path, '<CRequirementCountUpgrade id="Shared"><Count Link="TestUpgrade" State="CompleteOnly"/></CRequirementCountUpgrade>',
+        'RequirementNode')
+    requirement = inspect_catalog([tmp_path], 'Requirement', 'Shared')
+    node = inspect_catalog([tmp_path], 'RequirementNode', 'Shared')
+    assert requirement['class'] == 'CRequirement'
+    assert node['class'] == 'CRequirementCountUpgrade'
+    assert val(node, 'Count.Link') == 'TestUpgrade'
+    assert 'Count.Link' not in requirement['fields']
+
+
+def test_requirement_node_array_resolves_real_node_and_reports_only_real_gap(tmp_path):
+    cat(tmp_path, '<CRequirement id="Req"><NodeArray Link="UpNode"/><NodeArray Link="AbsentNode"/></CRequirement>')
+    cat(tmp_path, REQUIREMENT_NODES, 'RequirementNode')
+    result = trace_references([tmp_path], 'Requirement', 'Req')
+    assert {'catalog': 'RequirementNode', 'object_id': 'UpNode'} in result['reachable']
+    assert not [item for item in result['missing'] if item['to']['object_id'] == 'UpNode']
+    assert [item['to'] for item in result['missing']] == [{'catalog': 'RequirementNode', 'object_id': 'AbsentNode'}]
+    incoming = trace_references([tmp_path], 'RequirementNode', 'UpNode')['incoming']
+    assert any(item['from'] == {'catalog': 'Requirement', 'object_id': 'Req'} for item in incoming)
+    json.dumps(result)
+
+
+def test_mixed_requirement_and_node_entries_are_read_by_type(tmp_path):
+    cat(tmp_path, '<CRequirement id="Req"><NodeArray Link="UpNode"/></CRequirement>' + REQUIREMENT_NODES
+        + '<CUnit id="Marine"/>')
+    assert inspect_catalog([tmp_path], 'Requirement', 'Req')['class'] == 'CRequirement'
+    assert inspect_catalog([tmp_path], 'RequirementNode', 'UpNode')['class'] == 'CRequirementCountUpgrade'
+    assert inspect_catalog([tmp_path], 'Unit', 'Marine')['class'] == 'CUnit'
+    result = trace_references([tmp_path], 'Requirement', 'Req')
+    assert result['missing'] == []
+    assert {'catalog': 'RequirementNode', 'object_id': 'UpNode'} in result['reachable']

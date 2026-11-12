@@ -1,7 +1,13 @@
 # Issue tracking
 
 [中文](issue-tracker.md)
-<!-- translation-source: docs/agents/issue-tracker.md; sha256: 7074ab8fffceefa0ce6258dbb6cc7ff08dee002c460a03a377f2cfb737209d9a -->
+<!-- translation-source: docs/agents/issue-tracker.md; sha256: 218c92fffe27a5bdc3e3995fdd36fc9504d57e0e63cd497ead136b0e1ff2a9c2 -->
+## Offline-first validation
+
+Ordinary checks launch neither the Editor nor the game. Map runtime tests prefer `sc2_validate_run_test`: offline generation, checking, packaging, direct game launch, Bank and incremental-log collection. Use the Editor only for unsupported structures, required native saves or specific Editor acceptance, explaining the reason first. See [offline testing](../../wiki/guides/offline-testing.en.md) for routing and evidence.
+
+`Editor accepted` is an optional branch. An offline run may advance from `static validation passed` directly to scoped `packaged runtime passed`, without claiming Editor acceptance. Ledgers with `Validation Route: offline` require `Offline Validation` and runtime evidence; legacy ledgers default to `editor`.
+
 
 Track cross-session issues in the active project data's docs/issues.md. Locate it with `python tools/project-paths.py`; use the [issue template (Chinese original)](../../wiki/implementation/bug-reports/latest.md) (English original). Complete small edits directly without mandatory bookkeeping.
 

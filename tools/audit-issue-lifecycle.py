@@ -65,8 +65,17 @@ def main() -> int:
         if stage >= STAGES.index("static validation passed"):
             if not fields.get("Validation"):
                 failures.append(f"{title}: static validation status requires an explicit Validation field")
+        route = fields.get("Validation Route", "editor")
+        if route not in ("offline", "editor"):
+            failures.append(f"{title}: invalid Validation Route {route!r}")
+        if status == "Editor accepted" and route == "offline":
+            failures.append(f"{title}: offline route cannot establish Editor accepted")
+        if status == "packaged runtime passed" and route == "offline" and not fields.get("Offline Validation"):
+            failures.append(f"{title}: offline runtime requires Offline Validation evidence")
         for gate, field in (("Editor accepted", "Editor Validation"),
                             ("packaged runtime passed", "Runtime Validation")):
+            if gate == "Editor accepted" and route == "offline" and status == "packaged runtime passed":
+                continue
             if stage >= STAGES.index(gate) and not fields.get(field):
                 failures.append(f"{title}: {gate} requires {field} evidence")
     if not sections and "当前无活动问题。" not in text:

@@ -1,7 +1,7 @@
 # Trigger queries, dependencies and examples
 
 [中文](trigger-knowledge.md)
-<!-- translation-source: wiki/reference/trigger-knowledge.md; sha256: 8af8126130a9f98b3b1eb3ffa6894417fe0a9fb5f17a08f1e9066dbd857d9f0d -->
+<!-- translation-source: wiki/reference/trigger-knowledge.md; sha256: 94607a5cfbc40a0ac32b717d23d56d47e19c0950c16c9318b9159b2ce5703681 -->
 
 This is the GUI-trigger query entry. Keep raw definitions, official cases and target availability separate: a reference hit does not prove loading. See [in-game dialogue cases](trigger-dialogue-examples.en.md) and [44 user scenarios](trigger-agent-dialogue-examples.en.md). There are 27 curated entries across 11 mechanisms; the seven original templates retain their own acceptance scope.
 
@@ -61,6 +61,10 @@ A definition's `Parameter` list may contain a `Type="Comment"` annotation. It is
 Remap local declaration/reference IDs before import, synchronizing TriggerStrings/GameStrings. tools/sc2_triggers.py remap_local_ids(raw, strings, occupied) returns XML/strings for map-local fragments; occupied includes all existing elements/anchor IDs. Mod Library import additionally requires explicit ownership.
 
 Global Variable declarations need Root/reachable Category Item registration. Local/structure fields need Variable declarations under their owner. Reads are not declarations. Allocate separate initializer Param and mutable FunctionCall/Param instances; FunctionDef/ParamDef/Preset and variable reads can be shared. See [retrospective S1](../../docs/agents/retrospective.en.md).
+
+Preserve an existing declaration's directory membership when updating it. In the observed B98370 case, registering the same library Trigger in both its Root and a Category's Item list generated duplicate globals and `e_expectedUnusedGlobalName`. Without an explicit `owner`, `sc2_trigger_write` preserves existing Category membership; a new top-level object still defaults to Root, and an existing Root reference missing its Library qualifier is still repaired. An explicit `owner` does not automatically move the object out of another directory. Layout validation rejects duplicate ownership rather than silently deleting user registrations. This check covers direct Root/Category Items within a library and does not replace full Editor compilation. See [writer and layout rules](../../integrations/sc2-editor-mcp/src/sc2_mcp/trigger_writer.py) and [membership regressions](../../integrations/sc2-editor-mcp/tests/test_trigger_membership_regression.py).
+
+When tool source changes after a long-lived MCP service starts, the on-disk version does not prove its imported functions were refreshed. Reload that service before using its write operations; use a fresh CLI process with the verified implementation in the meantime. Preserve the original transaction, source checks and Editor protection rather than creating another patch merely to change entry points.
 
 Target check adds these structural checks independently of missing external libraries, without exempting dependencies or deleting/copying nodes automatically. Rootless reference fragments do not imply global registration; ParamDef defaults are not owned execution instances. Inspect orphan calls/parameters before cleanup.
 

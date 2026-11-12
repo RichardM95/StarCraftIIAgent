@@ -63,6 +63,14 @@ class LifecycleTests(unittest.TestCase):
         self.assertEqual(self.run_audit('--ledger', self.ledger)[0], 1)
         self.assertEqual(before, self.ledger.read_bytes())
 
+    def test_offline_runtime_requires_its_own_proof(self):
+        self.issue('packaged runtime passed', **{'Validation Route': 'offline', 'Editor Validation': '', 'Offline Validation': 'build and run-bound Bank, hashes and scope'})
+        self.assertEqual(self.run_audit('--ledger', self.ledger)[0], 0)
+        self.issue('packaged runtime passed', **{'Validation Route': 'offline', 'Editor Validation': ''})
+        self.assertEqual(self.run_audit('--ledger', self.ledger)[0], 1)
+        self.issue('Editor accepted', **{'Validation Route': 'offline'})
+        self.assertEqual(self.run_audit('--ledger', self.ledger)[0], 1)
+
     def test_target_isolation_reselection_and_workspace_copy(self):
         mods = self.base / 'Mods'
         main, other = mods / 'Main.SC2Mod', mods / 'Other.SC2Mod'

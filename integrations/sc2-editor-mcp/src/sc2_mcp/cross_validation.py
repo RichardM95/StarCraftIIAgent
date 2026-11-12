@@ -140,9 +140,12 @@ def _spatial(files):
             if identifier is None or not identifier.isdigit():
                 continue
             key = int(identifier)
-            if key in seen:
+            # Groups have their own numbering namespace inside Objects; every
+            # other placed object keeps the existing shared numbering space.
+            namespace = "Group" if component == "Objects" and node.tag == "Group" else component
+            if (namespace, key) in seen:
                 raise SC2Error("ambiguous_spatial_id", "空间组件含重复编号", component=component, object_id=key)
-            seen.add(key)
+            seen.add((namespace, key))
             result.append((component, node.tag, key, node.attrib, list(node)))
     return result
 

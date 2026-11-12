@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='utf-8'?>
+<SwitchNativeEvidence><Element Type="FunctionDef" Id="91C49196">
+        <Identifier>Switch</Identifier>
+        <Label Type="Label" Library="Ntve" Id="00000002" />
+        <FlagAction />
+        <FlagSubFunctions />
+        <Parameter Type="ParamDef" Library="Ntve" Id="B4ACF12A" />
+        <SubFunctionType Type="SubFuncType" Library="Ntve" Id="AD43BC93" />
+        <SubFunctionType Type="SubFuncType" Library="Ntve" Id="3E7C4C40" />
+        <ScriptCode>
+            #INITAUTOVAR(val,value)
+            #SUBFUNCS(cases)
+            #IFHAVESUBFUNCS(cases,else ){
+                #SUBFUNCS(defaults)
+            }
+        </ScriptCode>
+    </Element>
+    <Element Type="FunctionDef" Id="3A1227AB">
+        <Identifier>SwitchCase</Identifier>
+        <Label Type="Label" Library="Ntve" Id="00000002" />
+        <FlagAction />
+        <FlagSubFunctions />
+        <FlagHidden />
+        <Parameter Type="ParamDef" Library="Ntve" Id="9A8F1093" />
+        <SubFunctionType Type="SubFuncType" Library="Ntve" Id="363CE97C" />
+        <ScriptCode>
+            #IFSUBFUNC(notfirst,else )if (#AUTOVAR(val,parent) == #PARAM(value)) {
+                #SUBFUNCS(actions)
+            }
+        </ScriptCode>
+    </Element>
+    <Element Type="ParamDef" Id="B4ACF12A">
+        <Identifier>value</Identifier>
+        <ParameterType>
+            <Type Value="anycompare" />
+        </ParameterType>
+    </Element>
+    <Element Type="ParamDef" Id="9A8F1093">
+        <Identifier>value</Identifier>
+        <ParameterType>
+            <Type Value="sameasparent" />
+        </ParameterType>
+    </Element>
+    <Element Type="SubFuncType" Id="AD43BC93">
+        <Identifier>cases</Identifier>
+        <Action />
+        <FunctionDef Type="FunctionDef" Library="Ntve" Id="3A1227AB" />
+    </Element>
+    <Element Type="SubFuncType" Id="3E7C4C40">
+        <Identifier>defaults</Identifier>
+        <Action />
+    </Element>
+    <Element Type="SubFuncType" Id="363CE97C">
+        <Identifier>actions</Identifier>
+        <Action />
+    </Element>
+    </SwitchNativeEvidence>

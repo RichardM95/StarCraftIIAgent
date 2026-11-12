@@ -67,6 +67,10 @@ python tools/sc2-trigger-query.py --target "<地图.SC2Map>" --mods-dir "<目标
 
 声明了 Variable 元素还不够：全局变量须通过 Root 或其可达 Category 的 Item 登记；局部变量和结构体字段由各自 FunctionDef、Trigger 或 Structure 的 Variable 引用声明。变量读取引用不能代替声明。多个变量的初始值 Param、多个动作的 FunctionCall/Param 实例分别分配 ID；FunctionDef、ParamDef、Preset 和 Variable 的读取可以复用。参见[归档证据 S1](../../docs/agents/retrospective.md)。
 
+更新已有声明时保留原目录归属。已在本机 B98370 复现：同一库的 Trigger 同时被库 Root 和 Category 的 Item 登记，编辑器会重复生成全局声明并报 `e_expectedUnusedGlobalName`。`sc2_trigger_write` 未指定 `owner` 时，已有分类对象不再追加到 Root；新建顶层对象仍默认登记到 Root，已有 Root 引用缺少 Library 时仍补齐。显式 `owner` 不代表自动从其他目录移走对象。布局门禁会拒绝重复归属，不静默删除用户登记；目前覆盖库内 Root/Category 的直接 Item，不能替代完整编辑器编译。[写入与布局规则](../../integrations/sc2-editor-mcp/src/sc2_mcp/trigger_writer.py) · [归属回归](../../integrations/sc2-editor-mcp/tests/test_trigger_membership_regression.py)
+
+工具源码在长驻 MCP 启动后更新时，不以磁盘版本证明已加载函数也已更新。重新加载服务后再使用该 MCP 的写入操作；过渡期间用新 CLI 进程加载已验证实现。当前事务、来源检查与编辑器保护仍沿用原记录，不为切换入口重复创建补丁。
+
 现有 `check` 对目标自身文档附加以上结构检查，独立于缺失的外部库定义；不会因此豁免依赖错误。没有 Root 的参考片段不推断全局登记；ParamDef 默认模板不当作执行实例所有权；不会自动删除或复制源节点。旧流程清理仍需核对孤立调用与参数，保留受调用图引用的节点。
 
 ## 验证范围

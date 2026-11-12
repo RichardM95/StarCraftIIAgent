@@ -17,6 +17,79 @@ _RECOVERABLE = {'committing', 'rolling_back', 'recovery_conflict'}
 _STATES = _RECOVERABLE | {'prepared', 'committed', 'reverted', 'rolled_back'}
 
 
+_DIFF_LINE_LIMIT = 100000
+
+
+def large_unified_diff(old_lines, new_lines, fromfile, tofile):
+    """Return a single-hunk unified diff (list[str]) between two line lists."""
+
+    def emit(out, prefix, payload):
+        if payload.endswith("\n"):
+            out.append(prefix + payload)
+        else:
+            out.append(prefix + payload + "\n")
+            out.append("\\ No newline at end of file\n")
+
+    old_len = len(old_lines)
+    new_len = len(new_lines)
+    limit = old_len if old_len < new_len else new_len
+
+    p = 0
+    while p < limit and old_lines[p] == new_lines[p]:
+        p += 1
+    if p == old_len and p == new_len:
+        return []
+
+    max_s = limit - p
+    s = 0
+    while s < max_s and old_lines[old_len - 1 - s] == new_lines[new_len - 1 - s]:
+        s += 1
+
+    L = p if p < 3 else 3
+    R = s if s < 3 else 3
+    old_start = p - L
+    new_start = p - L
+    old_tail = old_len - s
+    new_tail = new_len - s
+    old_count = old_tail + R - old_start
+    new_count = new_tail + R - new_start
+
+    def rng(start, count):
+        if count == 0:
+            return "%d,0" % start
+        return "%d,%d" % (start + 1, count)
+
+    out = [
+        "--- " + fromfile + "\n",
+        "+++ " + tofile + "\n",
+        "@@ -" + rng(old_start, old_count) + " +" + rng(new_start, new_count) + " @@\n",
+    ]
+    for line in old_lines[old_start:p]:
+        emit(out, " ", line)
+    for line in old_lines[p:old_tail]:
+        emit(out, "-", line)
+    for line in new_lines[p:new_tail]:
+        emit(out, "+", line)
+    for line in old_lines[old_tail:old_tail + R]:
+        emit(out, " ", line)
+    return out
+
+
+def _unified_diff(old_text, new_text, fromfile, tofile):
+    """Unified diff lines: byte-identical legacy output below _DIFF_LINE_LIMIT.
+
+    Larger inputs get a bounded, linear-time form instead of difflib: the exact
+    common line prefix and suffix are trimmed, up to _DIFF_CONTEXT of each is kept
+    as context, and every remaining old line is deleted and every remaining new
+    line inserted in one hunk. Nothing in the middle is omitted, and the hunk
+    carries absolute old/new coordinates so applying it reproduces new_text.
+    """
+    old_lines, new_lines = old_text.splitlines(True), new_text.splitlines(True)
+    if len(old_lines) + len(new_lines) < _DIFF_LINE_LIMIT:
+        return difflib.unified_diff(old_lines, new_lines, fromfile=fromfile, tofile=tofile)
+    return large_unified_diff(old_lines, new_lines, fromfile, tofile)
+
+
 class Transactions:
     """Optimistic transactions serialized across processes and state directories.
 
@@ -211,8 +284,7 @@ class Transactions:
                     old_text, new_text = (old or b'').decode('utf-8'), (content or b'').decode('utf-8')
                     if '\0' in old_text + new_text:
                         raise UnicodeError()
-                    diff.extend(difflib.unified_diff(old_text.splitlines(True), new_text.splitlines(True),
-                                                    fromfile='before/' + rel, tofile='after/' + rel))
+                    diff.extend(_unified_diff(old_text, new_text, 'before/' + rel, 'after/' + rel))
                 except UnicodeError:
                     diff.append(f'Binary {rel}: {len(old or b"")} -> {len(content or b"")} bytes\n')
             manifest = {'id': change_id, 'root': str(root), 'label': label, 'state': 'prepared',

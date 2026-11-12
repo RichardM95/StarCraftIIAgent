@@ -2,7 +2,13 @@
 
 [English](editor-handoff.en.md)
 
-智能体完成代码修改后、开始游戏测试前，使用本清单完成交接。智能体应在实现任务结束时给出与本次修改相关的步骤，不必重复整份编辑器说明。
+仅需要原生编辑器操作时，使用本清单完成交接。智能体应在实现任务结束时给出与本次修改相关的步骤，不必重复整份编辑器说明。
+
+## 离线优先验收
+
+普通检查不启动编辑器或游戏；地图运行测试默认使用 `sc2_validate_run_test`，自动离线生成、检查、打包并直接启动游戏收集 Bank 和增量日志。仅不支持的结构、原生保存或专项编辑器验收才说明原因后使用编辑器。具体流程与证据要求见 [offline testing](offline-testing.md)。
+
+生命周期的 `Editor accepted` 是按需分支；离线运行可从 `static validation passed` 直接达到有范围的 `packaged runtime passed`，不冒充编辑器验收。账本 `Validation Route: offline` 需要 `Offline Validation` 和实际运行证据；旧账本缺省走 `editor`。
 
 ---
 
@@ -10,7 +16,7 @@
 
 编辑器交接是问题生命周期的第五个门槛：`reported` → `root cause confirmed` → `source fixed` → `static validation passed` → **`Editor accepted`** → `packaged runtime passed`。
 
-静态测试全部通过，并不能让问题越过编辑器门槛。执行编辑器验证的人必须确认正确的模组/地图依赖配置、检查警告、保存为 Components，并记录测试场景与结果。
+仅静态测试通过不能证明游戏运行；离线路线按上文收集实际运行证据。原生路线中，执行编辑器验证的人必须确认正确的模组/地图依赖配置、检查警告、保存为 Components，并记录测试场景与结果。
 
 交接报告必须明确写出当前最高状态。例如：`static validation passed；等待 Editor accepted`。未实际执行游戏内验收时，不使用“彻底完成”或“已经完全修复”。
 
@@ -25,7 +31,7 @@
 
 ---
 
-## Galaxy 脚本修改后
+## 需要原生重新生成 Galaxy 时
 
 1. 保存手写脚本源码。`workspace_copy` 模式先运行 `python tools/deploy-mod.py --dry-run` 核对方向，再复制组件；`in_place` 模式跳过部署。
 2. 在 SC2 编辑器中打开 `<ModName>.SC2Mod`，确认触发器编辑器中的自定义脚本块或 `include` 引用指向预期源码。
@@ -33,7 +39,7 @@
 
 ---
 
-## Mod XML 或触发器 GUI 修改后
+## 需要 Mod XML 或 GUI 的编辑器验收时
 
 1. 在 SC2 编辑器中打开 `<ModName>.SC2Mod`。
 2. 检查编辑器输出面板中的 XML 警告；保存前解决 catalog 类型或 ID 问题。
@@ -42,7 +48,7 @@
 
 ---
 
-## 地图组件修改后
+## 需要地图组件原生验收时
 
 1. 在 SC2 编辑器中打开配置路径 `paths.campaign_maps_dir/<Category>/<MapName>.SC2Map/` 下的地图。
 2. 确认 **Modules → Dependencies** 中包含 `<ModName>.SC2Mod`。
@@ -58,6 +64,8 @@
 3. 在[活动问题账本](../implementation/bug-reports/latest.md)中记录并跟踪缺陷。
 
 ## 源码到运行时的核对
+
+通过命令启动 Components 文档时，将 `-loadfile` 指向目录内的 `ComponentList.SC2Components`，不要直接传 `.SC2Mod`／`.SC2Map` 文件夹。在 B98370 的独立模组实验中，直接传文件夹会被按归档目标打开，普通保存可能将其替换成失败的 MPQ；显式组件入口的保存则保留文件夹。缺少组件清单时先停止启动。首次使用新入口须在完整独立副本验证；仅“另存为”也可能保留旧生成库，仍按下文核对实际代码。
 
 外部编辑前关闭受影响的文档并备份，避免编辑器旧缓冲覆盖磁盘修改；用户已确认关闭且未重新打开时复用该确认。若重生成包含依赖模组，先重载、编译并保存受影响的依赖，再保存引用它的主模组及地图。
 

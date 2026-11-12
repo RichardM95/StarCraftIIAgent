@@ -464,6 +464,13 @@ def create_operations(service):
 
 
     @register(False)
+    def sc2_validate_run_test(project_id: str, installation: str, product: str='s2_cn', sample_seconds: float=5, startup_timeout: int=120, probe_timeout: int=120) -> dict:
+        """Offline build, package and background map smoke test; no Editor launch. Collect with job status and probe result."""
+        from .offline_test import run_test, validate_options
+        validate_options(sample_seconds, startup_timeout, probe_timeout)
+        return service.jobs.submit('offline_map_smoke', lambda cancel: run_test(service, project_id, installation, product, sample_seconds, startup_timeout, probe_timeout, cancel))
+
+    @register(False)
     def sc2_validate_launch_test(project_id: str, installation: str, product: str='s2_cn') -> dict:
         """先生成独立已回读归档，再程序化启动游戏测试；不控制输入。"""
         from .agent_bridge import sc2_activity
@@ -599,6 +606,20 @@ def create_operations(service):
         """受限Marauder/Warfield模板生成完整事务候选，公共伤害链不重复升级。"""
         from .unit_variant import plan_unit_variant
         return service.prepare_domain(project_id,'unit_variant',lambda root,roots,context:plan_unit_variant(root,roots,base_unit,new_id,visual_source,allowed_gameplay_differences),source_context_id)
+
+
+    @register(False)
+    def sc2_bank_preload_rename(project_id: str, old_name: str, new_name: str, source_context_id: str|None=None) -> dict:
+        """只重命名 DocInfo Preload 与 BankList 的既有 Bank 预载元数据，返回统一事务候选；不改 Triggers/MapScript 或源码 Bank API。"""
+        from .bank_preload import plan_bank_preload_rename
+        def plan(root,roots,context):
+            changes,report=plan_bank_preload_rename(root,roots,old_name,new_name)
+            reports.append(report)
+            return changes
+        reports=[]
+        result=service.prepare_domain(project_id,'bank_preload_rename',plan,source_context_id)
+        result['impact_report']=reports[0]
+        return result
 
 
     @register(False)

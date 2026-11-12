@@ -358,6 +358,9 @@ def test_cross_library_function_return_and_global_initializer(tmp_path):
     <Element Type="Param" Id="30000004"><ParameterDef Type="ParamDef" Library="ABCD1234" Id="20000002"/><Value>7</Value><ValueType Type="int"/></Element></TriggerData>''');p.write_text(s)
     generated=Generator(target_for(root,str(mods))).generate()
     assert 'libABCD1234_gf_Identity(7)' in generated['source']
+    assert 'int libABCD1234_gf_Identity(int lp_Input)' in generated['source']
+    assert 'return lp_Input;' in generated['source']
+    assert 'libABCD1234_lp_Input' not in generated['source']
     source='native trigger TriggerCreate(string func);\nnative void TriggerAddEventMapInit(trigger t);\n'+generated['source']
     checked=check_files({'test.galaxy':source},'test.galaxy')
     assert checked['status']=='static validation passed',checked

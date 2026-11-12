@@ -32,3 +32,5 @@
 
 - 共享工具与 MCP：[接入、能力归属与 DeepSeek](guides/shared-tools.md)、[统一路由技能](../skills/sc2-shared-tools/SKILL.md)。
 - Harness2：[项目内安装与本地递归 demo](guides/harness2.md)。
+
+- [Offline-first map smoke tests](guides/offline-testing.md): `sc2_validate_run_test` builds new scripts and collects run-bound results without the Editor.

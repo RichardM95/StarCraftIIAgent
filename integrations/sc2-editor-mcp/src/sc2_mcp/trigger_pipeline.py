@@ -71,17 +71,24 @@ def native_supplement(target, files):
     No unknown symbol or arbitrary GUI native is synthesized into a declaration.
     """
     names={'DataTableInstanceSetInt','DataTableInstanceGetInt','UnitSetInfoButtonTooltip',
-           'UnitClearInfoButtonTooltip','StringToDateTime','UnitLootDropPoint'}
+           'UnitClearInfoButtonTooltip','StringToDateTime','UnitLootDropPoint',
+           'CutsceneShow','CutsceneFade'}
     from .script import _strip_comments_strings
     declared=set()
     for text in files.values():
         masked,_=_strip_comments_strings(text)
         declared.update(re.findall(r'(?m)^\s*(?!return\b)(?:native\s+)?\w+\s+(\w+)\s*\(',masked))
     lines=[];evidence=[]
-    def typ(element,tag,default=None):
+    def typ(element,tag,document,key,default=None):
         child=element.find(tag+'/Type');value=child.get('Value') if child is not None else default
+        if value=='preset':
+            ref=element.find(tag+'/TypeElement')
+            if ref is None or ref.get('Type')!='Preset':
+                raise SC2Error('native_supplement_unsupported','official preset TypeElement is required')
+            _,preset=target.resolve((ref.get('Library',key[0]),'Preset',ref.get('Id')),document)
+            base=preset.find('BaseType');value=base.get('Value') if base is not None else None
         value={'gamelink':'string','datatable':'int'}.get(value,value)
-        if value not in {'void','int','string','text','unit','point','datetime'}:
+        if value not in {'void','int','string','text','unit','point','datetime','bool','fixed','color','playergroup'}:
             raise SC2Error('native_supplement_unsupported','unsupported official native signature',type=value)
         return value
     for d in target.documents:
@@ -93,14 +100,14 @@ def native_supplement(target, files):
             args=[]
             for i,ref in enumerate(e.findall('Parameter')):
                 pd,p=target.resolve((ref.get('Library',key[0]),ref.get('Type'),ref.get('Id')),d)
-                args.append(typ(p,'ParameterType')+' p'+str(i))
-            lines.append('native '+typ(e,'ReturnType','void')+' '+name+'('+', '.join(args)+');')
+                args.append(typ(p,'ParameterType',pd,key)+' p'+str(i))
+            lines.append('native '+typ(e,'ReturnType',d,key,'void')+' '+name+'('+', '.join(args)+');')
             evidence.append({'path':str(d.path),'sha256':d.sha256,'node':list(key),'name':name,
                              'scope':'GUI-derived static typing only; engine ABI unverified'})
     return '\n'.join(lines)+'\n',evidence
 
 
-def generate(service,project_id,mods_dir=None,runtime_probe=False):
+def generate(service,project_id,mods_dir=None,runtime_probe=False, sample_seconds=5, runtime_smoke=False):
     _,root=service.record(project_id)
     target=target_for(root,mods_dir)
     files,sources=controlled_files(target,skip_generated=True)
@@ -123,7 +130,7 @@ def generate(service,project_id,mods_dir=None,runtime_probe=False):
     headers=[p for p in ('triggerlibs/natives_missing.galaxy','triggerlibs/nativelib.galaxy') if p in files]+official_headers
     from .trigger_bindings import Bindings
     bindings=Bindings(target,files,headers)
-    generated=Generator(target,external,bindings).generate(proof_token=proof_token)
+    generated=Generator(target,external,bindings).generate(proof_token=proof_token, sample_seconds=sample_seconds, runtime_smoke=runtime_smoke)
     supplement,evidence=native_supplement(target,files)
     if evidence:
         files['agent_native_supplement.galaxy']=supplement
@@ -146,7 +153,7 @@ def generate(service,project_id,mods_dir=None,runtime_probe=False):
                                    'aliases':bindings.aliases,'unresolved_definitions':bindings.unresolved},
               'compile_only_files':['agent_native_supplement.galaxy'] if evidence else [],
               'runtime_marker':'GUI_OFFLINE_EXEC_'+proof_token if proof_token else None,
-              'status':'generated; compiler check pending'}
+              'runtime_smoke':runtime_smoke,'status':'generated; compiler check pending'}
     write_json(folder/'manifest.json',manifest)
     (folder/'AgentGenerated.galaxy').write_text(files[entry],encoding='utf-8')
     return {'build_id':folder.name,'manifest':str(folder/'manifest.json'),'complete':True,'status':manifest['status'],'runtime_marker':manifest['runtime_marker']}

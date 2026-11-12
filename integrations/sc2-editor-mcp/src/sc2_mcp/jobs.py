@@ -66,7 +66,19 @@ class Jobs:
             return False
 
     def _save(self, item):
-        write_json(self._path(item["job_id"]), item)
+        # A reader holding the state file open without FILE_SHARE_DELETE makes the
+        # atomic replace fail transiently on Windows (winerror 5/32/33). Retry that
+        # narrow case only, with bounded backoff; anything else fails immediately.
+        path = self._path(item["job_id"])
+        attempts = 5
+        for attempt in range(attempts):
+            try:
+                write_json(path, item)
+                return
+            except PermissionError as exc:
+                if getattr(exc, "winerror", None) not in (5, 32, 33) or attempt == attempts - 1:
+                    raise
+                time.sleep(0.02 * 2 ** attempt)
 
     def submit(self, operation, fn):
         if not isinstance(operation, str) or not operation.strip() or not callable(fn):

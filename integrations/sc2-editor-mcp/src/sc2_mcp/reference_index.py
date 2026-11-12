@@ -23,7 +23,11 @@ from .errors import SC2Error
 from .source_context import assert_source_context_current
 from .storage import guard_absolute_path
 
-INDEX_VERSION = "4"
+# Version 5 invalidates indexes built before CRequirement subclasses were
+# classified as RequirementNode and CRequirement.NodeArray[n].Link became a
+# typed edge. Same source bytes give the same generation, so only the version
+# can retire those stale owner rows and links.
+INDEX_VERSION = "5"
 BUDGET = 256 * 1024 * 1024
 
 

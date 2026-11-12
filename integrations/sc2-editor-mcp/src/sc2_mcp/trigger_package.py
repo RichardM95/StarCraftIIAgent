@@ -11,7 +11,7 @@ from .storage import digest, guard_absolute_path, write_json
 from .trigger_pipeline import check_build, controlled_files, target_for
 
 
-def package_build(service,project_id,build_id,installation=None):
+def package_build(service,project_id,build_id,installation=None,product="s2_cn"):
     _,root=service.record(project_id)
     from .dependencies import decode_declarations
     from .shell import header_dependencies
@@ -54,6 +54,13 @@ def package_build(service,project_id,build_id,installation=None):
         if p.exists() and p.read_bytes()!=text.encode('utf-8'):
             raise SC2Error('offline_virtual_collision','private compiler file collides with source',path=relative)
         p.parent.mkdir(parents=True,exist_ok=True);p.write_text(text,encoding='utf-8')
+    if manifest.get('runtime_smoke'):
+        from .offline_test import probe_identity
+        import xml.etree.ElementTree as ET
+        bank_list=assembly/'BankList.xml'
+        banks=ET.fromstring(bank_list.read_bytes()) if bank_list.is_file() else ET.Element('BankList')
+        ET.SubElement(banks,'Bank',Name='SC2MCPProbe_'+probe_identity(marker.removeprefix('GUI_OFFLINE_EXEC_')),Player='1')
+        bank_list.write_bytes(ET.tostring(banks,encoding='utf-8',xml_declaration=True))
     artifact=output/('GuiOffline_'+build_id[:12]+'.SC2Map')
     exported=archives.export_archive(assembly,artifact)
     verified=next((f for f in exported['files'] if f['path'].casefold()=='mapscript.galaxy'),None)
@@ -74,13 +81,13 @@ def package_build(service,project_id,build_id,installation=None):
             'source_generated_files_modified':False,'packaged_runtime_passed':False}
     if installation:
         from .editor import build_launch_command
-        plan=build_launch_command(artifact,Path(installation),'test','s2_cn')
+        plan=build_launch_command(artifact,Path(installation),'test',product)
         # Fixed, validated local paths only. Refuse cmd expansion characters.
         if any(any(c in str(arg) for c in '%!\r\n&|<>^') for arg in [*plan['argv'],plan['cwd']]):
             raise SC2Error('unsafe_launcher_path','launcher paths contain cmd expansion characters')
         launcher=output/'RunOfflineTest.cmd'
         from .editor import write_test_launcher
-        write_test_launcher(launcher, artifact, Path(installation))
+        write_test_launcher(launcher, artifact, Path(installation), product)
         result['launcher']=str(launcher);result['launch_plan']=plan
     write_json(output/'runtime-package.json',result)
     return result

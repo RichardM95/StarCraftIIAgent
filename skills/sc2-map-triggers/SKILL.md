@@ -30,3 +30,7 @@ Context supplies available libraries and definition details. Use the [dependency
 Check the low-level `sc2_trigger_write` contract when authoring lacks a required shape. Read [XML and wiring](references/xml-and-wiring.md) only for that work. Preserve unknown source and independent call/parameter instances. Generated MapScript.galaxy and Lib*.galaxy are read-only build evidence. New functionality uses GUI, with a small embedded Custom Script only where necessary. Explicit Galaxy requests and existing handwritten source route through sc2-galaxy-scripting.
 
 For speech, Conversation data, dialogs and cinematics, load [reviewed dialogue mechanisms](../../wiki/reference/trigger-dialogue-examples.md). Battle-wave conversion uses sc2-attack-wave-scaling. Examples and historical library IDs require rebinding to the actual target.
+
+## Offline-first routing
+
+Follow [offline testing](../../wiki/guides/offline-testing.md) before Editor handoff. Prefer `sc2_validate_run_test` for map runtime tests; ordinary static checks launch no application. Editor acceptance is optional and requires its own observed evidence.

@@ -109,7 +109,7 @@ Read-only, bounded search of `DataEditorXML/SC2GameDataComponents/`. Use `compon
 - Copies the `.SC2Mod` component folder to `paths.mods_dir` from `agent-config.json` (overridable with `--mods-dir`); it never rewrites generated `Lib*.galaxy`
 - Use `--dry-run` before deployment; a source already equal to the destination is treated as a safe no-op
 
-After a `workspace_copy` deployment, open and save the mod in the SC2 Editor to regenerate compiled libraries. In `in_place` mode, skip deployment and open the authoritative source directly.
+When native regeneration is required after a `workspace_copy` deployment, open and save the mod in the SC2 Editor to regenerate compiled libraries. In `in_place` mode, skip deployment and open the authoritative source directly.
 
 ## Playtest Bug Extraction
 
@@ -200,3 +200,7 @@ Disabling `project.resolve_dependencies_recursive` retains only primary-componen
 Index artifacts and manifests bind the same build_id; identity mismatch always stops. Every index path checks its recorded selection. Legacy history requires explicit permission and never overrides partial-dependency permission. Builds stage the complete output before publication; SQLite-only retains previous JSON/reports and manual extras.
 
 Deployment stages clean replacements or merge copies, checks source stability and copied bytes, and retains one owned previous version. Publication rollback failures preserve all surviving diagnostic paths; do not remove them automatically or treat the new version as accepted.
+
+## Offline-first routing
+
+Follow [offline testing](../../wiki/guides/offline-testing.md) before Editor handoff. Prefer `sc2_validate_run_test` for map runtime tests; ordinary static checks launch no application. Editor acceptance is optional and requires its own observed evidence.

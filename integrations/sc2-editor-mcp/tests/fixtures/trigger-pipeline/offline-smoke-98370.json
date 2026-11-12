@@ -1,0 +1,9 @@
+{
+  "engine": "B98370",
+  "scope": "Native script-error text for generic log-classification regression; per-run reports stay local.",
+  "intentional_runtime_failure": {
+    "error_lines": [
+      "Script runtime error: 除数为0"
+    ]
+  }
+}

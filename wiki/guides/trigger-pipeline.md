@@ -55,8 +55,10 @@ python tools/sc2-galaxy-frontend.py --node "<node.exe>" --pnpm "<pnpm.cmd>"
 支持标量变量、GUI 自定义动作/函数、显式参数、常见字面值与已解析预设、原生调用、
 Custom Script、初始化事件、条件、跨库函数、IfThenElse、While、RepeatForever、And/Or、
 SetVariable、Return、Comparison 与基本算术。控制流依据来源样例识别，不执行任意模板。
-未知控制流、数组/结构体、未支持的字面值、RunOnMapInit 调度和未知可执行字段明确失败。
+未知控制流、未支持的数组形状/结构体、未支持的字面值、RunOnMapInit 调度和未知可执行字段明确失败。
 官方 `FlagNative` 的声明本身不能证明引擎提供对应函数；静态前端还需解析真实 Galaxy 声明。
+
+文本组合仅支持已核对的 `Ntve/86E40471 CombineText`：两个 `text` 参数、返回类型、标志和来源模板必须匹配，按文本句柄相加，不经字符串转换。中文标签、格式标记和动态数值引用由原文本保留；界面中的最终排版仍需游戏验收。[文本组合回归](../../integrations/sc2-editor-mcp/tests/test_trigger_codegen_combine_text.py)覆盖嵌套、参数绑定顺序与变更模板的拒绝。
 
 依赖必须完整。按实际加载声明选择定义；参考摘录不证明游戏内加载。
 未修改节点字节保留；修改 owner 排序时该 owner 的 XML 会重新序列化。
@@ -214,3 +216,5 @@ GUI 元数据补出的六项原生签名仅供静态类型上下文使用：mani
 收录构建、归档/入口/截图哈希、前端版本、输入清单、失败对照和验收范围。
 此结论覆盖本例循环、禁用动作、分支、局部变量、函数返回值和重新生成的 Mod 动作/共享变量；
 不证明所有原生接口兼容，也不证明对编辑器库裁剪或加载机制的完整复刻。
+
+- [Offline-first map smoke tests](offline-testing.md): `sc2_validate_run_test` builds new scripts and collects run-bound results without the Editor.

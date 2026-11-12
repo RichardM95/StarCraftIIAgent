@@ -31,4 +31,6 @@ Read [workspace rules](../AGENTS.en.md). The local agent-config.json identifies 
 
 - Offline triggers: [GUI writing, Galaxy generation and static compilation](guides/trigger-pipeline.md), [behavior authoring and bounded GUI modifications (Chinese)](guides/trigger-author.md).
 
-<!-- translation-source: wiki/index.md; sha256: 1d0047d3cbd76978d4136436eae800f300349c23256719b101f5903fcbfa1f6b -->
+<!-- translation-source: wiki/index.md; sha256: 2960be637620a8e3c0b55bd07cc6b3789f00f5a23a6d967dc8e57550417be36f -->
+
+- [Offline-first map smoke tests](guides/offline-testing.en.md): `sc2_validate_run_test` builds new scripts and collects run-bound results without the Editor.

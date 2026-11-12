@@ -1,6 +1,7 @@
 """In-memory GUI edits. Only the transaction layer may commit these bytes."""
 from __future__ import annotations
 import re
+from bisect import bisect_right
 from xml.etree import ElementTree as ET
 from .errors import SC2Error
 from .storage import digest, safe_path
@@ -14,7 +15,15 @@ def _matches(pattern,text):
     # Comments/CDATA are opaque; local edits cannot enter nested libraries.
     opaque=[(m.start(),m.end()) for m in re.finditer(r'<!--.*?-->|<!\[CDATA\[.*?\]\]>',text,re.S)]
     nested=[] if text.lstrip().startswith('<Library') else [(m.start(),m.end()) for m in re.finditer(r'<Library\b[^>]*>.*?</Library>',text,re.S)]
-    return [m for m in re.finditer(pattern,text,re.S) if not any(a<=m.start()<b for a,b in opaque+nested)]
+    starts=[]
+    for a,b in sorted(opaque+nested):
+        if starts and a<=starts[-1][1]: starts[-1][1]=max(starts[-1][1],b)
+        else: starts.append([a,b])
+    starts=[(s[0],s[1]) for s in starts]
+    def opaque(pos):
+        i=bisect_right(starts,(pos,float('inf')))-1
+        return i>=0 and pos<starts[i][1]
+    return [m for m in re.finditer(pattern,text,re.S) if not opaque(m.start())]
 
 
 def fail(message, **details):
@@ -26,11 +35,27 @@ def validate_editor_library_layout(root):
     children=list(root)
     map_root=root.find('Root')
     for library in root.findall('Library'):
+        lib=library.get('Id')
         if map_root is not None and children.index(library)>children.index(map_root):
-            fail('unsupported Editor library layout: Library must precede map Root',library=library.get('Id'))
+            fail('unsupported Editor library layout: Library must precede map Root',library=lib)
         for item in library.findall('Root/Item'):
             if not item.get('Library'):
-                fail('unsupported Editor library registration: explicit Library required',library=library.get('Id'),id=item.get('Id'))
+                fail('unsupported Editor library registration: explicit Library required',library=lib,id=item.get('Id'))
+        # Report duplicates; never auto-delete user registrations. Key is the
+        # registration target (explicit Item Library, else this Library), so the
+        # same Type/Id referenced from different Libraries is not a duplicate.
+        entries=[('Library Root',item) for item in library.findall('Root/Item')]
+        for category in library.findall('Element'):
+            if category.get('Type')=='Category':
+                entries.extend(('Category:'+str(category.get('Id')),item) for item in category.findall('Item'))
+        by_key={}
+        for owner,item in entries:
+            key=(item.get('Library') or lib, item.get('Type'), item.get('Id'))
+            if None in key: continue
+            if key in by_key:
+                fail('unsupported Editor library registration: duplicate Item owner',library=lib,target=key[0],type=key[1],id=key[2],
+                     owners=[by_key[key],owner])
+            by_key[key]=owner
 
 
 def node(data):
@@ -58,12 +83,25 @@ def _replace_container(text, library, fn):
     return text[:m.start()] + fn(m.group()) + text[m.end():]
 
 
-def _upsert(text, typ, ident, xml, newline):
+def _identity(markup, cache=None):
+    # Cache (Type,Id) per Element opening header only; never mutable Element trees.
+    header=markup.partition('>')[0]
+    if cache is not None and header in cache: return cache[header]
+    e=ET.fromstring(markup); value=(e.get('Type'),e.get('Id'))
+    if cache is not None: cache[header]=value
+    return value
+
+
+def _upsert(text, typ, ident, xml, newline, cache=None, known=None):
     matches=[]
-    for m in _matches(r'<Element\b[^>]*?(?:/>|>.*?</Element>)', text):
-        e=ET.fromstring(m.group())
-        if (e.get('Type'),e.get('Id')) == (typ,ident): matches.append(m)
-    if len(matches)>1: fail('duplicate source ID', id=ident)
+    fresh=known is not None and (typ,ident) not in known
+    if fresh:
+        # Proven absent from this source scope: skip the scan; record existence.
+        known.add((typ,ident))
+    else:
+        for m in _matches(r'<Element\b[^>]*?(?:/>|>.*?</Element>)', text):
+            if _identity(m.group(),cache) == (typ,ident): matches.append(m)
+        if len(matches)>1: fail('duplicate source ID', id=ident)
     if matches:
         m=matches[0]; return text[:m.start()] + xml + text[m.end():]
     end=text.rfind('</Library>') if text.lstrip().startswith('<Library') else text.rfind('</TriggerData>')
@@ -80,7 +118,22 @@ def plan_write(root, operations, expected_sha256=None, locale='zhCN'):
     text=raw.decode('utf-8-sig'); newline='\r\n' if '\r\n' in text else '\n'
     tree=ET.fromstring(text)
     if tree.tag!='TriggerData': fail('expected TriggerData')
-    seen=set(); names={}; game_strings={}
+    seen=set(); names={}; game_strings={}; cache={}
+    # Existence-only (Type,Id) sets per Library scope from direct children; trees never cached.
+    known={(l.get('Id') or ''):{(e.get('Type'),e.get('Id')) for e in l.findall('Element')} for l in tree.findall('Library')}
+    known['']={(e.get('Type'),e.get('Id')) for e in tree.findall('Element')}
+    # Root Items of this Library whose Library is unset or this Library: a default
+    # owner must still re-register them so the qualifier gets repaired.
+    own_root={(l.get('Id') or ''):{(i.get('Type'),i.get('Id')) for i in l.findall('Root/Item') if not i.get('Library') or i.get('Library')==l.get('Id')} for l in tree.findall('Library')}
+    # Root-only/no membership, fresh (Type,Id): bodies can append later; Root refs need not wait.
+    fast=bool(operations) and all(
+        isinstance(op,dict) and not set(op)-{'type','id','library','children','name','owner','index','strings'}
+        and op.get('type') in TYPES and isinstance(op.get('id'),str) and ID.fullmatch(op['id'])
+        and isinstance(op.get('library',''),str) and op.get('library','') in known
+        and (op.get('type'),op.get('id')) not in known[op.get('library','')]
+        and (op.get('owner') in (False,None) or op.get('owner')=={'type':'Root'}) and 'index' not in op
+        for op in operations)
+    snippets={}
     for op in operations:
         if set(op)-{'type','id','library','children','name','owner','index','strings'}: fail('unknown operation fields')
         for anchor,value in op.get('strings',{}).items():
@@ -94,27 +147,38 @@ def plan_write(root, operations, expected_sha256=None, locale='zhCN'):
         key=(lib,typ,ident)
         if key in seen: fail('duplicate operation ID',id=ident)
         seen.add(key)
+        # Existence must be read before _upsert/known records the ID: only a new
+        # element, or one already on this Library's Root, gets a default Root (the
+        # latter to repair an unqualified Library). A Category member must not be
+        # re-registered on Root.
+        existed=(typ,ident) in known.setdefault(lib,set())
+        on_root=(typ,ident) in own_root.get(lib,set())
         element=ET.Element('Element',{'Type':typ,'Id':ident})
         for child in op.get('children',[]): element.append(node(child))
         xml=ET.tostring(element,encoding='unicode').replace('\n',newline)
-        text=_replace_container(text,lib,lambda t:_upsert(t,typ,ident,xml,newline))
+        if fast:
+            # Append later: one container pass per Library, insertion order kept.
+            snippets.setdefault(lib,[]).append(xml+newline)
+            known[lib].add((typ,ident))
+        else:
+            text=_replace_container(text,lib,lambda t:_upsert(t,typ,ident,xml,newline,cache,known.setdefault(lib,set())))
         if 'name' in op:
             name=op['name']
             if not isinstance(name,str) or any(c in name for c in '\r\n\x00'): fail('invalid name')
             names[f'{typ}/Name/'+(f'lib_{lib}_' if lib else '')+ident]=name
         # Declaration membership is explicit, except top-level GUI objects.
         owner=op.get('owner')
-        if owner is None and typ in {'Category','Trigger','FunctionDef','Variable'}:
+        if owner is None and typ in {'Category','Trigger','FunctionDef','Variable'} and (not existed or on_root):
             owner={'type':'Root'}
         if owner:
             owner_type=owner.get('type'); owner_id=owner.get('id')
             if owner_type not in {'Root','Category','Trigger','FunctionDef'}: fail('invalid owner')
             def register(t):
-                pattern=r'<Root\b[^>]*?(?:/>|>.*?</Root>)' if owner_type=='Root' else r'<Element\b[^>]*?(?:/>|>.*?</Element>)'
+                pattern=r'<Root\b[^>]*?(?:/>|>.*?</Root>)' if owner_type=='Root' else (r'<Element\b(?=[^>]*?\bType\s*=\s*[\"\']'+re.escape(owner_type)+r'[\"\'])(?=[^>]*?\bId\s*=\s*[\"\']'+re.escape(owner_id)+r'[\"\'])[^>]*?(?:/>|>.*?</Element>)')
                 found=[]
                 for m in _matches(pattern,t):
-                    e=ET.fromstring(m.group())
-                    if owner_type=='Root' or (e.get('Type'),e.get('Id'))==(owner_type,owner_id):found.append((m,e))
+                    if owner_type=='Root' or _identity(m.group(),cache)==(owner_type,owner_id):
+                        found.append((m,ET.fromstring(m.group())))
                 if len(found)!=1: fail('missing or ambiguous owner')
                 m,e=found[0]
                 tag='Item' if owner_type in {'Root','Category'} else ('Parameter' if typ=='ParamDef' else 'Variable')
@@ -139,7 +203,14 @@ def plan_write(root, operations, expected_sha256=None, locale='zhCN'):
                 else:
                     replacement=ET.tostring(e,encoding='unicode')
                 return t[:m.start()]+replacement+t[m.end():]
+            # Root refs update text directly; never depends on the pending Elements.
             text=_replace_container(text,lib,register)
+    for lib,chunks in snippets.items():
+        def append(t,chunks=chunks):
+            end=t.rfind('</Library>') if t.lstrip().startswith('<Library') else t.rfind('</TriggerData>')
+            if end<0: fail('unsupported trigger container')
+            return t[:end]+''.join(chunks)+t[end:]
+        text=_replace_container(text,lib,append)
     result={'Triggers':bom+text.encode('utf-8')}
     for filename,values in [('TriggerStrings.txt',names),('GameStrings.txt',game_strings)]:
         if not values:continue

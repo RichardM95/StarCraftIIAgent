@@ -15,6 +15,106 @@ from .errors import SC2Error
 
 _OWNED: dict[int, float] = {}
 _NAMES = {"sc2editor_x64.exe", "sc2editor.exe", "sc2_x64.exe", "sc2.exe", "sc2switcher_x64.exe"}
+# Test launches actually issued by this module: exact client exe, exact map argv, issue time.
+# Recorded only after a successful Popen; never seeded from callers or process listings.
+_ISSUED_TESTS: list[dict[str, Any]] = []
+_ISSUED_WINDOW = (0.0, 120.0)
+_ISSUED_NAMES = {"sc2_x64.exe", "sc2.exe"}
+
+
+def _path_identity(path: Any) -> str | None:
+    """One canonical identity for client/map paths; casefolded because Windows is."""
+    if not isinstance(path, (str, os.PathLike)):
+        return None
+    try:
+        text = os.fspath(path)
+        if not isinstance(text, str) or not text:
+            return None
+        return os.path.normcase(str(Path(text).resolve()))
+    except (OSError, ValueError, TypeError):
+        return None
+
+
+def _issued_run_target(args: Any) -> str | None:
+    """Return the single -run map argument; any repeated, dangling or stray -run rejects."""
+    if not isinstance(args, (list, tuple)) or len(args) < 3:
+        return None
+    tokens = list(args)
+    if any(not isinstance(token, str) for token in tokens):
+        return None
+    flags = [index for index, token in enumerate(tokens) if token == "-run"]
+    if len(flags) != 1:
+        return None
+    index = flags[0]
+    if index == 0 or index + 1 >= len(tokens):
+        return None
+    target = tokens[index + 1]
+    if not target or target.startswith("-") or "-run" in tokens[index + 2:]:
+        return None
+    return _path_identity(target)
+
+
+def _record_issued_test(plan: dict, issued: float, launcher: dict | None = None) -> None:
+    if plan.get("mode") != "test" or not isinstance(issued, (int, float)):
+        return
+    client = _path_identity(plan.get("selected_client"))
+    target = _path_identity(plan.get("map"))
+    if not client or not target:
+        return
+    launcher_pid = launcher.get("pid") if isinstance(launcher, dict) else None
+    launcher_created = launcher.get("created") if isinstance(launcher, dict) else None
+    if not isinstance(launcher_pid, int) or not isinstance(launcher_created, (int, float)):
+        launcher_pid, launcher_created = None, None
+    _ISSUED_TESTS.append({"client": client, "map": target, "issued": issued,
+                          "launcher_pid": launcher_pid, "launcher_created": launcher_created})
+    # Retire records too old to claim any client.
+    _ISSUED_TESTS[:] = [record for record in _ISSUED_TESTS
+                        if issued - record["issued"] <= _ISSUED_WINDOW[1]]
+
+
+def _consume_issued_tests(record: dict | None = None, launcher_pid: int | None = None,
+                          launcher_created: float | None = None) -> bool:
+    """Remove an issued record; True only when this call removed it.
+
+    A record already consumed by another query (or by parent discovery) makes
+    `list.remove` raise ValueError, which must count as "not consumed".
+    """
+    if record is not None:
+        try:
+            _ISSUED_TESTS.remove(record)
+        except ValueError:
+            return False
+        return True
+    if launcher_pid is None or not isinstance(launcher_created, (int, float)):
+        return False
+    for candidate in list(_ISSUED_TESTS):
+        if candidate["launcher_pid"] == launcher_pid and candidate["launcher_created"] is not None \
+                and abs(candidate["launcher_created"] - launcher_created) < 0.01:
+            return _consume_issued_tests(candidate)
+    return False
+
+
+def _issued_test_match(pid: int, name: str, exe: str | None, cmdline: list[str] | None, created: float | None) -> dict | None:
+    """Return the one issued record matching this exact process, or None.
+
+    The caller consumes the returned record after the live identity check, so each
+    issued test launch can claim at most one native client.
+    """
+    if not isinstance(name, str) or name.lower() not in _ISSUED_NAMES:
+        return None
+    if not isinstance(created, (int, float)):
+        return None
+    client = _path_identity(exe)
+    target = _issued_run_target(cmdline)
+    if not client or not target:
+        return None
+    for record in _ISSUED_TESTS:
+        if record["client"] != client or record["map"] != target:
+            continue
+        offset = created - record["issued"]
+        if _ISSUED_WINDOW[0] <= offset <= _ISSUED_WINDOW[1]:
+            return record
+    return None
 
 
 def _windows() -> None:
@@ -90,13 +190,35 @@ def processes(installation: Path | None = None) -> list[dict[str, Any]]:
             exe = Path(info["exe"]).resolve() if info["exe"] else None
             if root and (not exe or not exe.is_relative_to(root)):
                 continue
-            # Refresh owned children while their parent is still present.
+            # Refresh owned children while their parent is still present. A trusted parent
+            # that brings up a native client consumes its own issued launch record; this only
+            # tightens later claims and never grants new ownership.
             if _owned_process(proc.pid):
                 for child in proc.children(recursive=True):
                     if child.name().lower() in _NAMES:
                         _OWNED[child.pid] = child.create_time()
+                        if child.name().lower() in _ISSUED_NAMES:
+                            _consume_issued_tests(launcher_pid=proc.pid, launcher_created=_OWNED.get(proc.pid))
+            # Only an issued test launch may claim the native client after Switcher exits.
+            # An existing _OWNED entry is never overwritten: a mismatched create time fails closed.
+            if proc.pid not in _OWNED:
+                record = _issued_test_match(proc.pid, info["name"], info["exe"], info["cmdline"], info["create_time"])
+                if record is not None:
+                    try:
+                        live = psutil.Process(proc.pid).create_time()
+                    except (psutil.Error, OSError):
+                        live = None
+                    # Removal must succeed: a record consumed meanwhile cannot claim anything.
+                    if live is not None and info["create_time"] is not None \
+                            and abs(live - info["create_time"]) < 0.01 \
+                            and _consume_issued_tests(record):
+                        _OWNED[proc.pid] = info["create_time"]
+            # Only a fully string argv reaches redaction; a malformed listing stays unowned.
+            raw_args = info["cmdline"]
+            safe_args = isinstance(raw_args, (list, tuple)) and all(isinstance(arg, str) for arg in raw_args)
             result.append({"pid": proc.pid, "name": info["name"], "executable": str(exe) if exe else None,
-                           "arguments": _redacted_args(info["cmdline"] or []), "created": info["create_time"],
+                           "arguments": _redacted_args(list(raw_args)) if safe_args else [],
+                           "created": info["create_time"],
                            "status": info["status"], "owned": _owned_process(proc.pid)})
         except (psutil.Error, OSError):
             continue
@@ -414,9 +536,18 @@ def build_launch_command(map_path: Path, installation: Path, mode: str = "editor
     exe = root / "Support64" / ("SC2Editor_x64.exe" if mode == "editor" else "SC2Switcher_x64.exe")
     if not exe.is_file():
         raise SC2Error("EXECUTABLE_MISSING", "缺少指定安装内的官方启动程序。", path=str(exe))
+    target = path
     if mode == "editor":
         # Local HKCR\SC2.Map\shell\open\command uses -loadfile "%1" -product SC2.
-        args = [str(exe), "-loadfile", str(path), "-product", "SC2", "-uid", product]
+        if path.is_dir():
+            # A Components directory must be loaded through its descriptor; passing the
+            # directory itself was observed (this build) to make the Editor treat it as
+            # an archive, where Ctrl+S can replace the folder with an invalid MPQ.
+            descriptor = path / "ComponentList.SC2Components"
+            if not descriptor.is_file():
+                raise SC2Error("COMPONENTS_DESCRIPTOR_MISSING", "组件目录缺少 ComponentList.SC2Components。", path=str(path))
+            target = descriptor
+        args = [str(exe), "-loadfile", str(target), "-product", "SC2", "-uid", product]
     else:
         # Actual 98370 editor-launched game logs show -run <map>, display/preload/reloadcheck.
         args = [str(exe), "-run", str(path), "-displaymode", "0", "-preload", "1", "-NoUserCheats", "-reloadcheck", "-uid", product]
@@ -435,14 +566,19 @@ def _launch(plan: dict) -> dict:
     existing = [p for p in processes() if p["name"].lower() in names]
     if existing:
         raise SC2Error("APPLICATION_ALREADY_RUNNING", "已有同类程序运行，无法确认未保存文档或游戏状态；未发出启动请求。", processes=existing)
+    issued = time.time()
     try:
         child = subprocess.Popen(plan["argv"], cwd=plan["cwd"], shell=False, stdin=subprocess.DEVNULL,
                                  stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
                                  creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0))
+        launcher = {"pid": child.pid, "created": None}
         try:
-            _OWNED[child.pid] = psutil.Process(child.pid).create_time()
+            launcher["created"] = psutil.Process(child.pid).create_time()
+            _OWNED[child.pid] = launcher["created"]
         except psutil.Error:
             pass
+        # Publish the issued binding only after Popen succeeded.
+        _record_issued_test(plan, issued, launcher)
     except OSError as exc:
         raise SC2Error("LAUNCH_FAILED", "官方程序启动失败。", error=str(exc)) from exc
     return {**plan, "pid": child.pid, "requested_at": time.time(), "status": "launch_requested",

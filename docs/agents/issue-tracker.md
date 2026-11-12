@@ -1,10 +1,16 @@
 # 问题追踪
 
 [English](issue-tracker.en.md)
+## 离线优先验收
+
+普通检查不启动编辑器或游戏；地图运行测试默认使用 `sc2_validate_run_test`，自动离线生成、检查、打包并直接启动游戏收集 Bank 和增量日志。仅不支持的结构、原生保存或专项编辑器验收才说明原因后使用编辑器。具体流程与证据要求见 [offline testing](../../wiki/guides/offline-testing.md)。
+
+生命周期的 `Editor accepted` 是按需分支；离线运行可从 `static validation passed` 直接达到有范围的 `packaged runtime passed`，不冒充编辑器验收。账本 `Validation Route: offline` 需要 `Offline Validation` 和实际运行证据；旧账本缺省走 `editor`。
+
 
 需要跨次跟踪的问题保存到活动项目资料 docs/issues.md；用 `python tools/project-paths.py` 定位，模板见 [问题模板](../../wiki/implementation/bug-reports/latest.md)。简单修改直接完成，不强制建账。
 
-生命周期仍为 reported → root cause confirmed → source fixed → static validation passed → Editor accepted → packaged runtime passed。按阶段保存必要复现、原因、修改和验证证据；静态结果不能替代编辑器与游戏门槛。
+原生编辑器路线的生命周期为 reported → root cause confirmed → source fixed → static validation passed → Editor accepted → packaged runtime passed。按阶段保存必要复现、原因、修改和验证证据；静态结果不能替代编辑器与游戏门槛。
 
 修改数值前核对本地、父对象、依赖与目标覆盖；UI 文字先识别生效表面及键。长期机制约定更新项目主题，不将账本变成历史流水账。
 

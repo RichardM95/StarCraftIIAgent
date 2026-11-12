@@ -75,6 +75,10 @@ def _catalog_name(name: str) -> str:
 def _type_catalog(tag: str) -> str | None:
     if not tag.startswith("C"):
         return None
+    # CRequirementCountUpgrade, CRequirementNot, ... are Requirement *nodes*
+    # (RequirementNodeData.xml), not requirements; only bare CRequirement is.
+    if tag.startswith("CRequirement") and tag != "CRequirement":
+        return "RequirementNode"
     # Longest match avoids TerrainTex->Terrain, RequirementNode->Requirement.
     return next((name for name in sorted(_CATALOGS, key=len, reverse=True)
                  if tag.startswith("C" + name)), None)
@@ -497,6 +501,10 @@ def _reference_kind(path: str, owner_class: str) -> str | None:
     if leaf in {"LaunchEffect", "ImpactEffect", "InitialEffect", "FinalEffect", "PeriodicEffect", "CursorEffect", "ExpireEffect", "EffectOnDeath"}:
         return "Effect"
     if leaf == "NodeArray" and owner_class.startswith("CRequirement"):
+        return "RequirementNode"
+    # Real CRequirement.NodeArray uses a Link attribute, flattened as
+    # NodeArray[n].Link; only that exact slot maps to RequirementNode.
+    if owner_class == "CRequirement" and leaf == "Link" and len(tags) >= 2 and tags[-2] == "NodeArray":
         return "RequirementNode"
     return None
 

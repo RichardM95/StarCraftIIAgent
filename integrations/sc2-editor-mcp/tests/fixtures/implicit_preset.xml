@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='utf-8'?>
+<PresetIntegerEvidence><Element Type="Preset" Id="15CE809C">
+        <Label Type="Label" Library="Ntve" Id="C5092BE2" />
+        <PresetInteger />
+        <BaseType Value="int" />
+        <Item Type="PresetValue" Library="SwaC" Id="E65EFFD5" />
+        <Item Type="PresetValue" Library="SwaC" Id="859ED2A6" />
+        <Item Type="PresetValue" Library="SwaC" Id="28BFEC98" />
+    </Element>
+    <Element Type="PresetValue" Id="E65EFFD5">
+    </Element>
+    <Element Type="PresetValue" Id="859ED2A6">
+        <DefinesDefault />
+    </Element>
+    <Element Type="PresetValue" Id="28BFEC98">
+    </Element>
+    </PresetIntegerEvidence>

@@ -657,6 +657,18 @@ def plan_dependencies(root: Path, values: list[str]) -> dict[str, bytes | None]:
     return result
 
 
+def _context_declarations(context: dict) -> list[str]:
+    """Read explicit root declarations using their recorded metadata provenance."""
+    graph = context['dependency_report']
+    node = next(n for n in graph['nodes'] if n['kind'] == 'root')
+    edges = [e for e in graph['edges'] if e['from'] == node['path']]
+    if [e['reference'] for e in edges] != node['dependencies']:
+        raise SC2Error('source_context_declarations_mismatch', '来源图与依赖声明证据不一致')
+    # Official-cache bootstrap (for example Core) is needed for resolution, but
+    # was not declared in DocumentInfo. An explicitly declared Core stays here.
+    return [e['reference'] for e in edges if e['source']['file'] == node['metadata_source']]
+
+
 def analyze_dependency_impact(root: Path, values: list[str], search_roots: list[Path],
                               catalogs: list[str] | None = None, limit: int = 10000, *,
                               before_context: dict | None = None, after_context: dict | None = None) -> dict:
@@ -684,10 +696,10 @@ def analyze_dependency_impact(root: Path, values: list[str], search_roots: list[
             assert_source_context_current(context)
             if Path(context["root"]).resolve() != Path(root).resolve():
                 raise SC2Error("source_context_root_mismatch", "影响分析上下文不是目标图")
-        declared = next(node["dependencies"] for node in after_context["dependency_report"]["nodes"] if node["kind"] == "root")
+        declared = _context_declarations(after_context)
         if declared != normalized:
             raise SC2Error("source_context_declarations_mismatch", "after 上下文与请求依赖声明不一致")
-        before_declared = next(node["dependencies"] for node in before_context["dependency_report"]["nodes"] if node["kind"] == "root")
+        before_declared = _context_declarations(before_context)
         actual_info = _resolve_ci(Path(root), "DocumentInfo")
         if actual_info is None or before_declared != decode_declarations(actual_info.read_bytes()):
             raise SC2Error("source_context_declarations_mismatch", "before 上下文不是目标图的真实依赖声明")

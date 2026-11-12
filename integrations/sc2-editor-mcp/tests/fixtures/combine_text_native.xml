@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='utf-8'?>
+<NativeContract><Element Type="FunctionDef" Id="86E40471">
+        <Identifier>CombineText</Identifier>
+        <Label Type="Label" Library="Ntve" Id="00000005" />
+        <FlagCall />
+        <FlagOperator />
+        <ReturnType>
+            <Type Value="text" />
+        </ReturnType>
+        <Parameter Type="ParamDef" Library="Ntve" Id="174E8B8C" />
+        <Parameter Type="ParamDef" Library="Ntve" Id="BD48D330" />
+        <ScriptCode>
+            (#PARAM(text1) + #PARAM(text2))
+        </ScriptCode>
+    </Element>
+    <Element Type="ParamDef" Id="174E8B8C">
+        <Identifier>text1</Identifier>
+        <ParameterType>
+            <Type Value="text" />
+        </ParameterType>
+    </Element>
+    <Element Type="ParamDef" Id="BD48D330">
+        <Identifier>text2</Identifier>
+        <ParameterType>
+            <Type Value="text" />
+        </ParameterType>
+    </Element>
+    </NativeContract>

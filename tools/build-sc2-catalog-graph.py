@@ -383,7 +383,7 @@ def collect_references(defn: Definition, elem: ET.Element, object_id: str, edges
             if not value:
                 continue
 
-            if attr_name == "Reference" and "," in value:
+            if (attr_name == "Reference" or (child.tag == "Reference" and attr_name == "value")) and "," in value:
                 parts = value.split(",", 2)
                 family = parts[0].strip()
                 target_id = parts[1].strip() if len(parts) > 1 else ""

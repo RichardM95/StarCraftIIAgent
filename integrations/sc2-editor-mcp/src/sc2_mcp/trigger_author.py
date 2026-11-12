@@ -59,11 +59,17 @@ def rewrite_children(original,element):
     return b''.join(pieces).decode('utf-8')
 
 
+def _selected_elements(text,key):
+    # Same directed (Type,Id) lookahead as writer.register: any attribute order and either quote style.
+    pattern=(r'<Element\b(?=[^>]*?\bType\s*=\s*[\"\']'+re.escape(key[1])+r'[\"\'])(?=[^>]*?\bId\s*=\s*[\"\']'+re.escape(key[2])+r'[\"\'])[^>]*?(?:/>|>.*?</Element>)')
+    return _matches(pattern,text)
+
+
 class Author:
     def __init__(self, root, target, spec):
         self.root=root;self.target=target;self.doc=local_document(target);self.spec=spec
         self.library=spec.get('library','');self.elements=copy.deepcopy(self.doc.elements)
-        self.original=copy.deepcopy(self.elements);self.names={};self.scopes={};self.node_map={}
+        self.original=copy.deepcopy(self.elements);self.names={};self.scopes={};self._scope_lookup_cache={};self.node_map={}
         self.instances={};self.path_aliases={};self.recheck_parameters={}
         self.roots={(self.doc.standard,'Root',''):copy.deepcopy(self.doc.root.find('Root'))}
         self.roots.update({(lib.get('Id'),'Root',''):copy.deepcopy(lib.find('Root')) for lib in self.doc.root.findall('Library')})
@@ -91,7 +97,7 @@ class Author:
 
     def public_path(self,path):
         for _ in range(len(self.path_aliases)+1):
-            source=next((p for p in sorted(self.path_aliases,key=len,reverse=True) if path==p or path.startswith(p+'.') or path.startswith(p+'[')),None)
+            source=next((path[:i] for i in range(len(path),-1,-1) if (i==len(path) or path[i] in '.[') and path[:i] in self.path_aliases),None)
             if source is None:break
             path=self.path_aliases[source]+path[len(source):]
         return path
@@ -159,11 +165,16 @@ class Author:
         fail(path,'argument type mismatch',expected=expected,actual=actual)
 
     def check_scope(self,key,path):
-        owner=self.scopes.get(key)
-        if owner is None:
+        # self.scopes holds only declared locals (build relies on 'key in self.scopes'); global lookups cache separately.
+        cache=self._scope_lookup_cache
+        if key in self.scopes:owner=self.scopes[key]
+        elif key in cache:owner=cache[key]
+        else:
+            owner=None
             for parent,e in self.elements.items():
                 if parent[1] in {'FunctionDef','Trigger'} and any(self.ref_key(c,parent)==key for c in e if c.tag in {'Variable','Parameter'}):
                     owner=parent;break
+            cache[key]=owner
         if owner and owner!=self.current_scope:fail(path,'local reference crosses function scope',reference=list(key),owner=list(owner))
 
     def expression(self,value,path,expected=None):
@@ -172,9 +183,12 @@ class Author:
             result=[ET.Element('Value'),ET.Element('ValueType',Type=typ)]
             result[0].text=str(value).lower() if typ=='bool' else str(value)
         else:
-            fields(value,'var parameter preset call arguments compare left right arithmetic literal type game_type region',path)
+            fields(value,'var parameter preset call arguments compare left right arithmetic literal type game_type region data_context',path)
             forms=set(value)&{'var','parameter','preset','call','compare','arithmetic','literal','region'}
             if len(forms)!=1:fail(path,'expression needs exactly one value form')
+            user='literal' in value and isinstance(value['literal'],str)
+            if 'data_context' in value and not (user and value.get('type') in {'userfield','userinstance'}):
+                fail(path+'.data_context','data_context is only valid with a userfield or userinstance string literal')
             if 'var' in value or 'parameter' in value:
                 kind='Variable' if 'var' in value else 'ParamDef';field='var' if 'var' in value else 'parameter'
                 d,k,e=self.resolve(value[field],kind,path);self.check_scope(k,path)
@@ -211,6 +225,11 @@ class Author:
                 if typ=='text':
                     # Anchor is bound to the containing Param, assigned in param().
                     result=[ET.Element('Value'),ET.Element('ValueType',Type='text')];result[0].text=str(literal)
+                elif typ in {'userfield','userinstance'}:
+                    context=value.get('data_context')
+                    if not isinstance(literal,str) or not literal:fail(path,'user literal needs a nonempty string value')
+                    if not isinstance(context,str) or not context.strip() or not re.fullmatch(r'[ \x21-\x7e]+',context):fail(path+'.data_context','user literal needs a nonempty printable ASCII data_context')
+                    result=[ET.Element('Value'),ET.Element('ValueType',Type=typ),ET.Element('ValueContext',Value=context)];result[0].text=literal
                 elif typ in {'gamelink','anygamelink'}:
                     if not isinstance(literal,str):fail(path,'game link must be a string')
                     result=[ET.Element('Value'),ET.Element('ValueType',Type=typ)];result[0].text=literal
@@ -265,6 +284,8 @@ class Author:
             d,fk,f=self.resolve(list(self.ref_key(e.find('FunctionDef'),key)),'FunctionDef',path)
             return self.typ(d,fk,f,'ReturnType') if f.find('ReturnType') is not None else 'void'
         if key[1]=='PresetValue':return self.preset_type(key,path)
+        if key[1]=='Param' and (e.find('CustomType') is not None or e.find('ScriptCode') is not None):
+            self.known_instance(key,path);return 'filepath'
         value_type=e.find('ValueType')
         if value_type is not None:return value_type.get('Type')
         for c in e:
@@ -299,7 +320,7 @@ class Author:
         if key in seen:return None
         if key[1] in {'Trigger','FunctionDef'}:return key
         for pk,pe in self.elements.items():
-            if any(self.ref_key(c,pk)==key and c.tag in {'FunctionCall','Action','Condition','Event','Parameter','Variable','Value'} for c in pe):
+            if any(self.ref_key(c,pk)==key and c.tag in {'FunctionCall','Action','Condition','Event','Parameter','Variable','Value','Array'} for c in pe):
                 scope=self.owner_scope(pk,seen|{key})
                 if scope:return scope
         return None
@@ -696,7 +717,7 @@ class Author:
             if parent in self.closure([key]):fail(path,'cannot move a call into its own subtree')
             if tag=='Item' and key[1]!='Trigger':fail(path,'category moves support triggers only')
             if tag!='Item' and key[1]!='FunctionCall':fail(path,'body moves support call instances only')
-            owners=[(pk,pe,c) for pk,pe in {**self.elements,**self.roots}.items() for c in pe if c.tag in {'Item','Action','Condition','Event','FunctionCall'} and self.ref_key(c,pk)==key]
+            owners=[(pk,pe,c) for pk,pe in {**self.elements,**self.roots}.items() if pe is not None for c in pe if c.tag in {'Item','Action','Condition','Event','FunctionCall'} and self.ref_key(c,pk)==key]
             if len(owners)!=1:fail(path,'moving requires exactly one owning reference',references=[list(pk) for pk,_,_ in owners])
             impact.update(target=list(key),role=edit['role'],from_parent=self.review_node(owners[0][0]),to_parent=self.review_node(parent))
             review('before',[key])
@@ -724,6 +745,7 @@ class Author:
             # Detach only the unique owning declaration/body link. Value/call references remain blockers.
             tags={'Item','Action','Condition','Event','FunctionCall'} if key[1]!='Param' else set()
             for pk,pe in {**self.elements,**self.roots}.items():
+                if pe is None:continue
                 for c in list(pe):
                     declaration=key[1]=='Variable' and pk[1] in {'Trigger','FunctionDef'} and c.tag=='Variable'
                     if (c.tag in tags or declaration) and self.ref_key(c,pk)==key:pe.remove(c)
@@ -734,22 +756,37 @@ class Author:
 
     def known_instance(self,key,path):
         allowed={'FunctionCall':{'FunctionDef','Parameter','FunctionCall','SubFunctionType','Disabled','Comment'},
-                 'Param':{'ParameterDef','Value','ValueType','ValueId','Variable','Parameter','Preset','FunctionCall','ValueElement','ValueGameType','ValueContext'}}
-        if key[1]=='Param':self.known_context(key,path)
-        unknown={c.tag for c in self.elements[key]}-allowed.get(key[1],set())
+                 'Param':{'ParameterDef','Value','ValueType','ValueId','Variable','Parameter','Preset','FunctionCall','ValueElement','ValueGameType','ValueContext','Array','CustomType','ScriptCode','ValueTypeInfo'}}
+        e=self.elements[key];unknown={c.tag for c in e}-allowed.get(key[1],set())
         if unknown:fail(path,'selected instance contains unknown XML; cannot rewrite',reference=list(key),fields=sorted(unknown))
+        if key[1]!='Param':return
+        for c in e.findall('Array'):
+            if set(c.attrib)not in ({'Type','Id'},{'Type','Id','Library'}) or c.get('Type')!='Param' or not re.fullmatch(r'[0-9A-Fa-f]{8}',c.get('Id','')) or ('Library' in c.attrib and not re.fullmatch(r'[A-Za-z0-9_]+',c.get('Library',''))) or len(c) or (c.text and c.text.strip()):
+                fail(path,'unsupported legacy array; cannot rewrite',reference=list(key),fields=['Array'])
+        if e.find('CustomType') is not None or e.find('ScriptCode') is not None:
+            types=e.findall('CustomType');scripts=e.findall('ScriptCode')
+            if len(types)!=1 or len(scripts)!=1 or dict(types[0].attrib)!={'Type':'filepath'} or len(types[0]) or (types[0].text and types[0].text.strip()) or \
+               scripts[0].attrib or len(scripts[0]) or (scripts[0].text or '').strip()!='""' or {c.tag for c in e}-{'ParameterDef','CustomType','ScriptCode'}:
+                fail(path,'unsupported legacy custom type; cannot rewrite',reference=list(key),fields=['CustomType'])
+        if e.find('ValueTypeInfo') is not None:
+            infos=e.findall('ValueTypeInfo');types=e.findall('ValueType')
+            if len(infos)!=1 or dict(infos[0].attrib)!={'Value':'5'} or len(infos[0]) or (infos[0].text and infos[0].text.strip()) or \
+               len(types)!=1 or dict(types[0].attrib)!={'Type':'filepath'} or len(types[0]) or (types[0].text and types[0].text.strip()):
+                fail(path,'unsupported legacy value type info; cannot rewrite',reference=list(key),fields=['ValueTypeInfo'])
+        self.known_context(key,path)
 
     def known_context(self,key,path):
         # CatalogFieldValueGet keeps exactly '<ValueContext Value="CAbilTrain"/>' beside a catalogfieldpath value type.
+        # Legacy user literals keep one printable-ASCII '<ValueContext Value="..."/>' beside a userfield/userinstance value type.
         e=self.elements[key];nodes=[c for c in e if c.tag=='ValueContext']
         if len(nodes)>1:fail(path,'parameter has repeated value contexts; cannot rewrite',reference=list(key),fields=['ValueContext'])
         if not nodes:return
-        ctx=nodes[0]
-        if list(ctx) or (ctx.text and ctx.text.strip()):fail(path,'value context has child or text; cannot rewrite',reference=list(key),fields=['ValueContext'])
-        if dict(ctx.attrib)!={'Value':'CAbilTrain'}:fail(path,'unsupported value context attributes; cannot rewrite',reference=list(key),fields=['ValueContext'])
-        types=[c for c in e if c.tag=='ValueType']
-        if len(types)!=1 or dict(types[0].attrib)!={'Type':'catalogfieldpath'} or list(types[0]) or (types[0].text and types[0].text.strip()):
-            fail(path,'value context requires exactly one catalog field path value type',reference=list(key),fields=['ValueType'])
+        ctx=nodes[0];types=[c for c in e if c.tag=='ValueType']
+        if list(ctx) or (ctx.text and ctx.text.strip()) or set(ctx.attrib)!={'Value'}:
+            fail(path,'unsupported value context; cannot rewrite',reference=list(key),fields=['ValueContext'])
+        if ctx.get('Value')=='CAbilTrain' and len(types)==1 and dict(types[0].attrib)=={'Type':'catalogfieldpath'} and not len(types[0]) and not (types[0].text and types[0].text.strip()):return
+        if not ctx.get('Value','').strip() or not re.fullmatch(r'[ \x21-\x7e]+',ctx.get('Value','')) or len(types)!=1 or dict(types[0].attrib)not in ({'Type':'userfield'},{'Type':'userinstance'}) or len(types[0]) or (types[0].text and types[0].text.strip()):
+            fail(path,'value context is not a supported legacy user literal or catalog field path',reference=list(key),fields=['ValueContext'])
 
     def closure(self,keys):
         pending=list(keys);found=set()
@@ -768,6 +805,7 @@ class Author:
         containers=[(self.doc,k,e) for k,e in {**self.elements,**self.roots}.items()]
         containers.extend((d,k,e) for d in self.target.documents if d is not self.doc for k,e in d.elements.items())
         for d,key,e in containers:
+            if e is None:continue
             if d is self.doc and key in removing:continue
             for r in references(e,key):
                 if r in removing and (r[0] or d is self.doc):incoming.append({'source':str(d.path),'reference':list(key),'target':list(r)})
@@ -798,17 +836,15 @@ class Author:
         for key,e in self.elements.items():
             if key in self.original and ET.tostring(e)!=ET.tostring(self.original[key]):
                 def replace(t):
-                    found=[m for m in _matches(r'<Element\b[^>]*?(?:/>|>.*?</Element>)',t)
-                           if (ET.fromstring(m.group()).get('Type'),ET.fromstring(m.group()).get('Id'))==key[1:]]
+                    found=_selected_elements(t,key)
                     if len(found)!=1:fail('edits','missing or ambiguous selected element',reference=list(key))
                     m=found[0]
                     return t[:m.start()]+rewrite_children(m.group(),e)+t[m.end():]
                 text=_replace_container(text,key[0],replace)
         for key in self.deleted:
             def remove(t):
-                for m in _matches(r'<Element\b[^>]*?(?:/>|>.*?</Element>)',t):
-                    el=ET.fromstring(m.group())
-                    if (el.get('Type'),el.get('Id'))==key[1:]:return t[:m.start()]+t[m.end():]
+                for m in _selected_elements(t,key):
+                    return t[:m.start()]+t[m.end():]
                 return t
             text=_replace_container(text,key[0],remove)
         for key,e in self.roots.items():

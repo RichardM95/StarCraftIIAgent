@@ -44,6 +44,8 @@ CLI 等待本次提交的任务完成。执行成功返回退出码 `0`，任务
 
 项目共用状态目录时，新事务的 `owner.json` 记录地图归属。若清单损坏，保留现场并按诊断路径核对备份。能确认属于另一张地图的坏清单不阻断当前地图；旧记录归属不明或两份记录矛盾时仍会阻断。
 
+空间引用保留类型边界：`Objects` 中的 `Group` 与放置对象可以使用相同编号，例如 `UnitFromId(1)` 和 `UnitGroupFromId(1)` 分别指向单位与单位组。不要为消除这种误报重编号地图对象。同类重复编号仍会被拒绝，组成员必须指向对应类型的实际对象，单位组不能代替缺失单位。见[引用回归](../../integrations/sc2-editor-mcp/tests/test_cross_validation.py)。
+
 大结果返回 `report_name` 和正文字符数 `characters`。调用 `sc2_report_read` 时从 `offset=0` 开始，将每页的 `next_offset` 用作下一次偏移，直到它为 `null`。
 
 ```powershell
@@ -63,6 +65,12 @@ python tools/sc2-local.py --ui-language zh-CN call sc2_project_open --arguments-
 CLI 和 MCP 共用业务函数与参数校验，返回 `ok/result`；CLI 错误返回 `ok:false/error`，退出码 0 表示成功、1 表示业务拒绝、2 表示请求无效。CLI 的长任务由该命令进程持有并等待完成，可使用智能体 exec 会话；MCP 通过任务 ID 查询。数据结果与验收规则共用，交付时序可以不同。
 
 默认全局运行索引和进程槽位保存在套件 `.runtime/integrations/`，避免 Windows 打包应用的 AppData 写入重定向；项目候选、报告、事务和 DeepSeek 任务保存到按 `sc2_paths` 定位的项目资料 `runtime/integrations/`。工作区内独立测试地图使用套件数据目录下按目标指纹区分的项目目录。显式 CLI `--state` 或测试环境变量 `SC2_AGENT_RUNTIME_ROOT` 提供隔离状态，不迁移历史记录。
+
+## 测试 Bank 预载
+
+独立测试副本更换 Bank 名称后，核对 `DocumentInfo/Preload` 和 `BankList.xml`。`sc2_bank_preload_rename(project_id, old_name, new_name, source_context_id?)` 为既有预载生成统一事务候选；同一玩家的新旧条目只有在其余属性和内容相同时才去重。通过 `sc2_changes_inspect` 审查后，沿用 `sc2_changes_apply` 和原回滚机制。
+
+该入口仅处理预载元数据；实际 Bank 调用仍通过 GUI 源码修改。依赖、DocumentHeader、其他预载、玩家 Bank 文件和生成脚本保持原状。提交前后分别核对源码调用、预载清单和测试存档名称。普通候选导入对这些受保护组件的限制继续有效。
 
 ## DeepSeek
 
@@ -119,3 +127,5 @@ NumPy 在整合锁中固定为 2.5.4；原包锁文件作为来源保留。真�
 进度反馈使用阶段变化、处理数量、失败或需处理的事项。无新进度时检查任务状态与中断原因；CPU活动不能证明检查进度，也不能据此报告即将完成。已有写入授权持续有效，例行查询不重新索取确认。
 
 具体项目的运行报告、性能测量与验收记录保存在本机项目资料目录；仓库仅分发通用恢复规则和回归测试。
+
+- [Offline-first map smoke tests](offline-testing.md): `sc2_validate_run_test` builds new scripts and collects run-bound results without the Editor.

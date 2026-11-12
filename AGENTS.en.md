@@ -1,7 +1,13 @@
 # AGENTS.md — workspace entry
 
 [中文](AGENTS.md)
-<!-- translation-source: AGENTS.md; sha256: 6b576287da445bea11b8c5d659967cef2e0833f03fb05a44ae5e8c48cd7727dc -->
+<!-- translation-source: AGENTS.md; sha256: 6b0c931dbaf5e1d6d42eec37ac80af4c38fab22df74e76805666ccb0f70c5418 -->
+## Offline-first validation
+
+Ordinary checks launch neither the Editor nor the game. Map runtime tests prefer `sc2_validate_run_test`: offline generation, checking, packaging, direct game launch, Bank and incremental-log collection. Use the Editor only for unsupported structures, required native saves or specific Editor acceptance, explaining the reason first. See [offline testing](wiki/guides/offline-testing.en.md) for routing and evidence.
+
+`Editor accepted` is an optional branch. An offline run may advance from `static validation passed` directly to scoped `packaged runtime passed`, without claiming Editor acceptance. Ledgers with `Validation Route: offline` require `Offline Validation` and runtime evidence; legacy ledgers default to `editor`.
+
 
 **Author: 扯蛋虾米.** Unified attribution: [AUTHORS](AUTHORS.en.md).
 
@@ -23,7 +29,7 @@ Confirm hand-written Galaxy entry points/include order from current Triggers. Ed
 
 Suite wiki/ stores reusable rules/references. Project design, mechanisms and cross-session issues belong in project data located by tools/project-paths.py. Update current topic facts; record necessary decisions/reasons rather than change histories. Link canonical pages; omit redundant file lists, test output, issue details or commit hashes from decision logs. Git holds history.
 
-Every issue follows reported → root cause confirmed → source fixed → static validation passed → Editor accepted → packaged runtime passed. Before numeric changes record local object, parent, inherited value and intended override. Before text edits identify world hover, selection panel, command card, tooltip or Editor text. Report only the exact highest proven gate. Static checks cannot establish Editor accepted without reload/save evidence or packaged runtime passed without in-game steps/results.
+The Editor route follows reported → root cause confirmed → source fixed → static validation passed → Editor accepted → packaged runtime passed. Before numeric changes record local object, parent, inherited value and intended override. Before text edits identify world hover, selection panel, command card, tooltip or Editor text. Report only the exact highest proven gate. Static checks cannot establish Editor accepted without reload/save evidence or packaged runtime passed without in-game steps/results.
 
 Ask for missing information when needed. If repeated research no longer narrows the issue, stop and summarize findings. Ingest project design into docs/design/ with provenance in docs/sources.md after selecting a project. Only reusable findings with scope/evidence enter suite wiki/.
 

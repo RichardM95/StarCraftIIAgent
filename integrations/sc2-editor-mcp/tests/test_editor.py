@@ -21,14 +21,47 @@ def fixture(tmp_path):
     map_path = tmp_path / "地图 with spaces.SC2Map"
     map_path.mkdir()
     (map_path / "DocumentInfo").write_text("<DocInfo/>")
+    (map_path / "ComponentList.SC2Components").write_text("<?xml version=\"1.0\"?><Components/>")
     return root, map_path
 
 
 def test_editor_argv_is_structured_and_preserves_spaces(tmp_path):
     root, map_path = fixture(tmp_path)
     plan = editor.build_launch_command(map_path, root)
-    assert plan["argv"] == [str(root / "Support64/SC2Editor_x64.exe"), "-loadfile", str(map_path), "-product", "SC2", "-uid", "s2_cn"]
+    descriptor = map_path / "ComponentList.SC2Components"
+    assert plan["argv"] == [str(root / "Support64/SC2Editor_x64.exe"), "-loadfile", str(descriptor), "-product", "SC2", "-uid", "s2_cn"]
+    assert plan["map"] == str(map_path)
     assert plan["map_load_verified"] is False
+
+
+def test_editor_mod_directory_uses_component_list(tmp_path):
+    root, _ = fixture(tmp_path)
+    mod = tmp_path / "Mod 目录.SC2Mod"
+    mod.mkdir()
+    (mod / "DocumentInfo").write_text("<DocInfo/>")
+    (mod / "ComponentList.SC2Components").write_text("<?xml version=\"1.0\"?><Components/>")
+    plan = editor.build_launch_command(mod, root)
+    assert plan["argv"][2] == str(mod / "ComponentList.SC2Components")
+    assert plan["map"] == str(mod)
+
+
+def test_editor_components_directory_without_descriptor_rejected(tmp_path):
+    root, _ = fixture(tmp_path)
+    mod = tmp_path / "未知.SC2Mod"
+    mod.mkdir()
+    (mod / "DocumentInfo").write_text("<DocInfo/>")
+    with pytest.raises(SC2Error) as err:
+        editor.build_launch_command(mod, root)
+    assert err.value.code == "COMPONENTS_DESCRIPTOR_MISSING"
+
+
+def test_editor_file_archive_target_unchanged(tmp_path):
+    map_path = tmp_path / "打包.SC2Map"
+    map_path.write_bytes(b"not a real archive")
+    root, _ = fixture(tmp_path)
+    plan = editor.build_launch_command(map_path, root)
+    assert plan["argv"][2] == str(map_path)
+    assert plan["map"] == str(map_path)
 
 
 def test_test_launch_matches_product_build(tmp_path):

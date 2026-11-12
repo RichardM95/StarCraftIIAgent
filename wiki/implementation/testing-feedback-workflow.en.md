@@ -1,15 +1,21 @@
 # Testing Feedback and Issue Lifecycle
 
 [中文](testing-feedback-workflow.md)
-<!-- translation-source: wiki/implementation/testing-feedback-workflow.md; sha256: da0217e4212b5f2de1a74553195f5cb003baf255fbb15fd95af2101e6c1f8688 -->
+<!-- translation-source: wiki/implementation/testing-feedback-workflow.md; sha256: e3ed700c49f13135a63d7977faed8d14ec4e0782948f0f95c5c7a2ec4175436b -->
 
 Use this page to triage bug reports, playtest feedback, and editor warnings.
+
+## Offline-first validation
+
+Ordinary checks launch neither the Editor nor the game. Map runtime tests prefer `sc2_validate_run_test`: offline generation, checking, packaging, direct game launch, Bank and incremental-log collection. Use the Editor only for unsupported structures, required native saves or specific Editor acceptance, explaining the reason first. See [offline testing](../guides/offline-testing.en.md) for routing and evidence.
+
+`Editor accepted` is an optional branch. An offline run may advance from `static validation passed` directly to scoped `packaged runtime passed`, without claiming Editor acceptance. Ledgers with `Validation Route: offline` require `Offline Validation` and runtime evidence; legacy ledgers default to `editor`.
 
 ---
 
 ## 6-Stage Issue Lifecycle
 
-Every reported bug or defect must strictly follow this lifecycle:
+The Editor route follows this lifecycle; the offline branch is defined above:
 
 ```mermaid
 graph LR
@@ -17,6 +23,7 @@ graph LR
     B --> C[3. source fixed]
     C --> D[4. static validation passed]
     D --> E[5. Editor accepted]
+    D --> F[6. packaged runtime passed: offline proof]
     E --> F[6. packaged runtime passed]
 ```
 
@@ -41,7 +48,7 @@ Every handoff and completion report must name the highest gate actually reached.
 
 `tools/audit-issue-lifecycle.py` enforces valid active-ledger status labels and the evidence fields required by each reached gate.
 
-`Validation` records static target/scope, checks and results. `Editor Validation` is required from `Editor accepted`; record the component and reload/compile/save outcome. `Runtime Validation` is required from `packaged runtime passed`; record the tested version/target, reproduction steps and observed outcome. The audit checks record completeness, not whether those actions actually occurred. Existing high-stage records missing evidence fail without automatic rewriting or demotion.
+`Validation` records static target/scope, checks and results. `Editor Validation` is required for the editor route from `Editor accepted`; offline runtime records require `Offline Validation`; record the component and reload/compile/save outcome. `Runtime Validation` is required from `packaged runtime passed`; record the tested version/target, reproduction steps and observed outcome. The audit checks record completeness, not whether those actions actually occurred. Existing high-stage records missing evidence fail without automatic rewriting or demotion.
 
 ---
 

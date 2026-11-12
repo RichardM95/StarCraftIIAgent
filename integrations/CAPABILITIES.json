@@ -471,6 +471,16 @@
       "operation": "sc2_artifact_image",
       "ownership": "shared",
       "default_local_tool": null
+    },
+    {
+      "operation": "sc2_validate_run_test",
+      "ownership": "shared",
+      "default_local_tool": null
+    },
+    {
+      "operation": "sc2_bank_preload_rename",
+      "ownership": "shared",
+      "default_local_tool": null
     }
   ],
   "deepseek_entry": "connected MCP, otherwise deepseek-task run in an owned exec session"

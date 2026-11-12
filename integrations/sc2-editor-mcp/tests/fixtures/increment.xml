@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='utf-8'?>
+<IncrementIntegerEvidence><Element Type="FunctionDef" Id="A0F31305">
+        <Identifier>IncrementInteger</Identifier>
+        <Label Type="Label" Library="Ntve" Id="CE915C5A" />
+        <FlagAction />
+        <FlagOperator />
+        <Parameter Type="ParamDef" Library="Ntve" Id="7B3B0884" />
+        <Parameter Type="ParamDef" Library="Ntve" Id="5BFF7323" />
+        <Parameter Type="ParamDef" Library="Ntve" Id="6725C0EB" />
+        <ScriptCode>
+            #PARAM(var) #PARAM(operator)= #PARAM(val);
+        </ScriptCode>
+    </Element>
+    <Element Type="ParamDef" Id="7B3B0884">
+        <Identifier>var</Identifier>
+        <ParameterType>
+            <Type Value="anyvariable" />
+            <VariableType Value="int" />
+        </ParameterType>
+    </Element>
+    <Element Type="ParamDef" Id="5BFF7323">
+        <Identifier>operator</Identifier>
+        <ParameterType>
+            <Type Value="preset" />
+            <TypeElement Type="Preset" Library="Ntve" Id="00000027" />
+        </ParameterType>
+        <Default Type="Param" Library="Ntve" Id="D0C3FE9C" />
+    </Element>
+    <Element Type="ParamDef" Id="6725C0EB">
+        <Identifier>val</Identifier>
+        <ParameterType>
+            <Type Value="int" />
+        </ParameterType>
+        <Default Type="Param" Library="Ntve" Id="A15245E5" />
+    </Element>
+    </IncrementIntegerEvidence>

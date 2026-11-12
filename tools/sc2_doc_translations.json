@@ -127,6 +127,10 @@
     {
       "source": "wiki/guides/harness2.md",
       "english": "wiki/guides/harness2.en.md"
+    },
+    {
+      "source": "wiki/guides/offline-testing.md",
+      "english": "wiki/guides/offline-testing.en.md"
     }
   ]
 }
