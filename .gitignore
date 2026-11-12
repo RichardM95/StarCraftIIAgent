@@ -49,6 +49,11 @@ tmp*/
 /build_mission_design.py
 /runtime_mission_survey.py
 
+# 本机地图、模组副本与运行日志；通用 tests/fixtures/ 仍正常跟踪
+/editor-tests/
+/.SC2Mod/
+/casc.log
+
 # Local project acceptance records
 /integrations/RELIABILITY.md
 
@@ -93,7 +98,8 @@ integrations/galaxy-frontend/dist/
 /.codegraph/
 /pytest-of-*/
 
-# Project-specific worker receipt and historical tests
-/worker-final.md
+# Root-local worker receipts; keep reusable docs and tests tracked
+/worker-*.md
+/worker-*.jsonl
 /integrations/sc2-editor-mcp/project-tests/skyshield/test_historical_terrain.py
 /integrations/sc2-editor-mcp/project-tests/skyshield/test_skyshield_copy.py
