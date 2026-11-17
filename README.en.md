@@ -137,6 +137,12 @@ Use `python tools/project-paths.py --ui-language en` to locate project data. The
 
 Git distributes generic rules, skills, source, tests and references. It excludes `projects/`, `editor-tests/`, root `.SC2Mod/`, machine settings, `.runtime/`, environment variables, virtual environments, reports, credentials and personal model settings. Rebuild environments and indexes on a new machine. Local maps in `editor-tests/` are separate from versioned generic samples in `tests/fixtures/`. Keep logs and task receipts in `.runtime/`.
 
+### Cleanup and commits
+
+Keep one-off diagnostic scripts and investigation output in `.runtime/`. Move reusable implementations and regression samples into `tools/`, `integrations/` or test directories once reviewed. Check references and task ownership before cleanup, preserving maps, Banks, backups and runtime evidence still in use.
+
+Before committing, inspect scope with `git status --short` and `git diff --check`, then stage this task's files explicitly. When sessions share a workspace, commit their changes separately. `.gitignore` only affects untracked files; use `git ls-files -ci --exclude-standard` to find already tracked local artifacts. Avoid blanket exclusions for `.json`, `.log`, map archives or test directories, which can hide reusable samples, manifests and regression evidence.
+
 ### Tools and optional extensions
 
 | Need | Entry |
@@ -180,6 +186,8 @@ Usage pages are available in Chinese and English. Skills and deeper references r
 
 Query current capabilities before terrain edits, resizing or scene work. Supported operations can write isolated Components copies. Saving, reopening, visual checks, unsupported-operation experiments and cinematics require the actual Editor. The agent may perform authorized steps when GUI control is verified; hand off necessary unavailable steps to the user. Capture raw terrain save differences before anchor processing through the [handoff workflow](wiki/guides/editor-handoff.en.md).
 
+For desktop operations, agent-desktop is an optional separate installation. Read its version-matched guides with `skills get desktop` and `skills get platform`. A personally installed `$agent-desktop` skill is not distributed with this repository. Background screenshots do not prove that controls are actionable. Use foreground keyboard and mouse input within the current task's permission, and verify saved files and reopen results. Ordinary checks still prefer offline tools.
+
 Never open Blizzard maps with a project mod active as an external override. Add dependencies through Map → Modules → Dependencies. Opening and saving Blizzard maps require SC2 account login. Developer string support excludes whole-project translation, translation knowledge bases, automatic UI text extraction and encyclopedia products.
 
 ### Common problems
@@ -191,4 +199,4 @@ Never open Blizzard maps with a project mod active as an external override. Add 
 - `os error 206` or replacement failures: narrow operations using the [recovery guide](wiki/implementation/agent-context-efficiency.md), preserve encoding/line endings and run relevant checks.
 - Runtime problems: provide the actual map/mod, reproduction steps, Editor version, logs and screenshots; follow the [runtime diagnosis guide](wiki/implementation/runtime-diagnostics.en.md).
 
-<!-- translation-source: README.md; sha256: d8799fb63593691fa7fcf198b9b494bb3047028b5107c4b04c3f29656df0f641 -->
+<!-- translation-source: README.md; sha256: 0cb05ca7fe5cfe907f69a8634c5c894c82554df1a5cb4898389ddccc6f769626 -->

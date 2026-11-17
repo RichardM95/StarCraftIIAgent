@@ -3,15 +3,19 @@ publish/
 
 # 本地缓存与临时文件
 __pycache__/
-*.pyc
-*.pyo
-*.pyd
+*.py[cod]
 .pytest_cache/
+.mypy_cache/
+.ruff_cache/
 .coverage
 .coverage.*
 htmlcov/
 .DS_Store
 Thumbs.db
+Desktop.ini
+*.swp
+*.swo
+*~
 
 # 生成的 catalog 索引（可用 tools/build-sc2-catalog-graph.py 重建）
 sc2-catalog-graph-out/
@@ -24,11 +28,12 @@ backup/
 backups/
 temp/
 tmp/
-**/_backup/
-**/_backups/
-**/_tmp/
-**/_temp/
-tmp*/
+_backup/
+_backups/
+_tmp/
+_temp/
+# Only root-local scratch directories; do not hide nested source directories.
+/tmp*/
 *.bak
 *.tmp
 *.orig
@@ -98,6 +103,9 @@ integrations/harness2/dependencies/*/
 # Node dependencies at any depth; keep manifests and lockfiles tracked
 node_modules/
 integrations/galaxy-frontend/dist/
+
+# Keep diagnostic scripts under .runtime/, not beside reusable source.
+# Do not ignore source, test fixtures, manifests or lockfiles by extension.
 
 # Root-local CodeGraph and pytest workspaces
 /.codegraph/
